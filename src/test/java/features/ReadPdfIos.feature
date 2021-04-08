@@ -9,7 +9,7 @@ Feature: Read PDF IOS
       And I switch to 'LYRASIS' from side menu
       And I open search modal
 
-  @logout @cancelGet @tier1 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Open document
     When I search for 'Enterprise Pharo a Web Perspective'
       And I GET book by name 'Enterprise Pharo a Web Perspective' and save it as 'bookInfo'
@@ -19,7 +19,7 @@ Feature: Read PDF IOS
     Then Pdf book 'bookInfo' is present on screen
       And Pdf book page number is 1
 
-  @logout @cancelGet @tier1 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by page
     When I search for 'Fundamentals of Business'
       And I GET book by name 'Fundamentals of Business' and save it as 'bookInfo'
@@ -33,7 +33,7 @@ Feature: Read PDF IOS
     When I go to previous page in pdf book
     Then Pdf book page number is 1
 
-  @logout @cancelGet @tier1 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Table of Contents Menu
     When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners'
       And I GET book by name 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'
@@ -43,7 +43,7 @@ Feature: Read PDF IOS
     Then Pdf book 'bookInfo' is present on screen
       And Each chapter of pdf book can be opened from Table of Contents
 
-  @logout @cancelGet @tier1 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Open book to last page read
     When I search for 'Enterprise Pharo a Web Perspective'
       And I GET book by name 'Enterprise Pharo a Web Perspective' and save it as 'bookInfo'
@@ -65,7 +65,7 @@ Feature: Read PDF IOS
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct
 
-  @logout @cancelGet @tier1 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Gallery
     When I search for 'Fundamentals of Business'
       And I GET book by name 'Fundamentals of Business' and save it as 'bookInfo'
@@ -84,7 +84,7 @@ Feature: Read PDF IOS
     Then Current page number is bigger than number 'numberOfPage'
       And Pdf book 'bookInfo' is present on screen
 
-  @logout @cancelGet @tier1 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Search document
     When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners'
       And I GET book by name 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'
@@ -97,7 +97,7 @@ Feature: Read PDF IOS
     When I am typing 'vocabulary list' to the search field and apply search
     Then Found lines should contain 'vocabulary list' in themselves
 
-  @logout @cancelGet @tier1 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate to Search Term
     When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners'
       And I GET book by name 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'

@@ -108,7 +108,7 @@ Feature: Catalog Navigation
     When I change books visibility to show YOURS_TO_KEEP
     Then All books can be downloaded
 
-  @tier1 @exclude_ios
+  @tier1 @exclude_ios @ignore
   Scenario: View Book Details
     When I add 'The New York Public Library' account
       And I open Catalog
@@ -149,7 +149,7 @@ This series of adventure novels starring the genius boy inventor Tom Swift falls
     Then Current category name is 'Tom Swift'
       And Count of books in search result is more then 1
 
-  @tier1 @exclude_android
+  @tier1 @exclude_android @ignore
   Scenario: View Book Details (iOS)
     When I add 'The New York Public Library' account
       And I open Catalog

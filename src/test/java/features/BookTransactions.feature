@@ -3,22 +3,23 @@ Feature: Book Transactions
   Background:
     Given Application is opened
 
-  @logout @cancelHold @tier2
+  @logout @returnBooks @tier2
   Scenario: Hold from Book Detail View
-    When I add 'The New York Public Library' account
-      And I enter credentials for 'The New York Public Library' account
+    When I add 'LYRASIS' account
+      And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'The New York Public Library' from side menu
+      And I switch to 'LYRASIS' from side menu
       And I open category by chain:
-        | Binge-worthy Series |
+        | Nonfiction         |
+        | Biography & Memoir |
       And Change books visibility to show ALL
       And I open the book details for the subsequent RESERVE and save it as 'bookInfo'
     Then I check that opened book contains CANCEL button at book details screen
     When I open Holds
     Then Book 'bookInfo' is present in Holds List
 
-  @logout @cancelHold @tier2 @exclude_ios @ignore
+  @logout @returnBooks @tier2 @exclude_ios @ignore
   Scenario Outline: Hold from Book Detail View (feed)
     When I add custom '<feedName>' opds feed
       And I open <bookType> book from '<laneName>' lane and save book info as 'bookInfo'
@@ -36,15 +37,16 @@ Feature: Book Transactions
       | New York Public Library - QA Server - reservation only | Overdrive   | EBOOK     |
       | New York Public Library - QA Server - reservation only | Overdrive   | AUDIOBOOK |
 
-  @logout @cancelHold @tier2
+  @logout @returnBooks @tier2
   Scenario: Hold from Bookshelf list
-    When I add 'The New York Public Library' account
-      And I enter credentials for 'The New York Public Library' account
+    When I add 'LYRASIS' account
+      And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'The New York Public Library' from side menu
+      And I switch to 'LYRASIS' from side menu
       And I open category by chain:
-        | Binge-worthy Series |
+        | Nonfiction         |
+        | Biography & Memoir |
       And Change books visibility to show ALL
       And RESERVE book and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain CANCEL button at catalog books screen
@@ -95,7 +97,7 @@ Feature: Book Transactions
       And I open Books
     Then Book 'bookInfo' is not present in Books List
 
-  @logout @cancelGet @tier2 @exclude_android
+  @logout @returnBooks @tier2 @exclude_android
   Scenario: Check out from Book Detail View
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
@@ -108,7 +110,7 @@ Feature: Book Transactions
     When I open the book details for the subsequent GET and save it as 'bookInfo'
     Then I check that opened book contains READ button at book details screen
 
-  @logout @cancelGet @tier2 @logout @exclude_ios @ignore
+  @logout @returnBooks @tier2 @exclude_ios @ignore
   Scenario Outline: Check out from Book Detail View (feed)
     When I add custom '<feedName>' opds feed
       And I open <bookType> book from '<laneName>' lane and save book info as 'bookInfo'
@@ -137,7 +139,7 @@ Feature: Book Transactions
       | LYRASIS                             | Bibliotheca                                   | EBOOK     |
       | LYRASIS                             | Bibliotheca                                   | AUDIOBOOK |
 
-  @logout @cancelGet @tier2 @exclude_android
+  @logout @returnBooks @tier2 @exclude_android
   Scenario: Return book
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
@@ -158,7 +160,7 @@ Feature: Book Transactions
     When I open Books
     Then Book 'bookInfo' is not present in Books List
 
-  @logout @cancelGet @tier2 @exclude_ios @ignore
+  @logout @returnBooks @tier2 @exclude_ios @ignore
   Scenario Outline: Return book (feed)
     When I add custom '<feedName>' opds feed
       And I open <bookType> book from '<laneName>' lane and save book info as 'bookInfo'
@@ -187,46 +189,49 @@ Feature: Book Transactions
       | LYRASIS                             | Bibliotheca                                   | EBOOK     |
       | LYRASIS                             | Bibliotheca                                   | AUDIOBOOK |
 
-  @logout @cancelHold @tier2
+  @logout @returnBooks @tier2
   Scenario: Remove a Reserved Book from Bookshelf list
-    When I add 'The New York Public Library' account
-      And I enter credentials for 'The New York Public Library' account
+    When I add 'LYRASIS' account
+      And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'The New York Public Library' from side menu
+      And I switch to 'LYRASIS' from side menu
       And I open Catalog
       And I open category by chain:
-        | Best Sellers |
+        | Nonfiction         |
+        | Biography & Memoir |
       And RESERVE book and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain CANCEL button at catalog books screen
     When I click on the book 'bookInfo' button CANCEL on catalog books screen
     Then Book saved as 'bookInfo' should contain RESERVE button at catalog books screen
 
-  @logout @cancelHold @tier2
+  @logout @returnBooks @tier2
   Scenario: Remove a Reserved Book from Book Detail View
-    When I add 'The New York Public Library' account
-      And I enter credentials for 'The New York Public Library' account
+    When I add 'LYRASIS' account
+      And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'The New York Public Library' from side menu
+      And I switch to 'LYRASIS' from side menu
       And I open Catalog
       And I open category by chain:
-        | Best Sellers |
+        | Nonfiction         |
+        | Biography & Memoir |
     When I open the book details for the subsequent RESERVE and save it as 'bookInfo'
     Then I check that opened book contains CANCEL button at book details screen
     When Press on the book details screen at the action button CANCEL
     Then I check that the action button text equal to the RESERVE
 
-  @logout @cancelHold @tier2 @exclude_ios
+  @logout @returnBooks @tier2 @exclude_ios
   Scenario: Remove a Reserved Book from Holds screen
-    When I add 'The New York Public Library' account
-      And I enter credentials for 'The New York Public Library' account
+    When I add 'LYRASIS' account
+      And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'The New York Public Library' from side menu
+      And I switch to 'LYRASIS' from side menu
       And I open Catalog
       And I open category by chain:
-        | Best Sellers |
+        | Nonfiction         |
+        | Biography & Memoir |
     When I open the book details for the subsequent RESERVE and save it as 'bookInfo'
     Then I check that opened book contains CANCEL button at book details screen
     When I open Holds
@@ -234,16 +239,17 @@ Feature: Book Transactions
     When I click on the book 'bookInfo' button CANCEL on the holds screen
     Then Book saved as 'bookInfo' should contain RESERVE button at the hold screen
 
-  @logout @cancelHold @tier2 @exclude_android
+  @logout @returnBooks @tier2 @exclude_android
   Scenario: Remove a Reserved Book from Holds screen (iOS)
-    When I add 'The New York Public Library' account
-      And I enter credentials for 'The New York Public Library' account
+    When I add 'LYRASIS' account
+      And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'The New York Public Library' from side menu
+      And I switch to 'LYRASIS' from side menu
       And I open Catalog
       And I open category by chain:
-        | Best Sellers |
+        | Nonfiction         |
+        | Biography & Memoir |
     When I open the book details for the subsequent RESERVE and save it as 'bookInfo'
     Then I check that opened book contains CANCEL button at book details screen
     When I open Holds
@@ -251,15 +257,16 @@ Feature: Book Transactions
     When I click on the book 'bookInfo' button CANCEL on the holds screen
     Then Book 'bookInfo' is not present in Holds List
 
-  @logout @cancelHold @tier3 @exclude_android
+  @logout @returnBooks @tier3 @exclude_android
   Scenario: Cancel remove
-    When I add 'The New York Public Library' account
-      And I enter credentials for 'The New York Public Library' account
+    When I add 'LYRASIS' account
+      And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'The New York Public Library' from side menu
+      And I switch to 'LYRASIS' from side menu
       And I open category by chain:
-        | Binge-worthy Series |
+        | Nonfiction         |
+        | Biography & Memoir |
       And Change books visibility to show ALL
       And I open the book details for the subsequent RESERVE and save it as 'bookInfo'
     Then I check that opened book contains CANCEL button at book details screen

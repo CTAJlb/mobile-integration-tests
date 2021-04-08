@@ -6,6 +6,7 @@ import constants.context.ContextLibrariesKeys;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
 import hooks.logout.components.AbstractLogoutHooks;
+import io.appium.java_client.appmanagement.ApplicationState;
 import screens.alert.AlertScreen;
 import screens.bottommenu.BottomMenu;
 import screens.notifications.NotificationModal;
@@ -24,8 +25,12 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
     }
 
     @Override
-    public void closeApplication() {
-        alertScreen.closeModalIfPresent();
+    public void logout() {
+        if (AqualityServices.getApplication().getDriver().queryAppState(context.get(ContextLibrariesKeys.APP_BUNDLE_ID.getKey())) == ApplicationState.NOT_RUNNING) {
+            startAppIfCrashed();
+        }else {
+            alertScreen.closeModalIfPresent();
+        }
         navigateBackIfBottomMenuIsNotVisibleUntilItIs();
         List<String> listOfLibraries = context.get(ContextLibrariesKeys.LOG_OUT.getKey());
         for (String library : listOfLibraries) {
