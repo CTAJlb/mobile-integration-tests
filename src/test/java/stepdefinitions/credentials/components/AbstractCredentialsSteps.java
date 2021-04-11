@@ -5,6 +5,7 @@ import constants.context.ScenarioContextKey;
 import framework.configuration.Configuration;
 import framework.configuration.Credentials;
 import framework.utilities.ScenarioContext;
+import framework.utilities.apiUtil.APIUtil;
 import org.testng.Assert;
 import screens.account.AccountScreen;
 import screens.accounts.AccountsScreen;
@@ -45,6 +46,8 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
     private void storeCredentials(Credentials credentials) {
         String barcode = credentials.getBarcode();
         String pin = credentials.getPin();
+        AqualityServices.getLogger().info("There are books on the account: ");
+        APIUtil.enterBookAfterOpeningAccount(barcode, pin);
         if (context.get(ScenarioContextKey.lIST_OF_CREDENTIALS_KEY) == null) {
             Map<String, String> hashMap = new HashMap<>();
             context.add(ScenarioContextKey.lIST_OF_CREDENTIALS_KEY, hashMap);

@@ -21,6 +21,26 @@ public class APIPageXMLModel {
 
 class Entry {
     private List<Link> links;
+    private String title;
+    private Distributor distributor;
+
+    public Distributor getDistributor() {
+        return distributor;
+    }
+
+    @XmlElement(name = "distribution")
+    public void setDistributor(Distributor distributor) {
+        this.distributor = distributor;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    @XmlElement(name = "title")
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public List<Link> getLinks() {
         return links;
@@ -29,6 +49,19 @@ class Entry {
     @XmlElement(name = "link")
     public void setLinks(List<Link> links) {
         this.links = links;
+    }
+}
+
+class Distributor {
+    private String distributorName;
+
+    public String getDistributorName() {
+        return distributorName;
+    }
+
+    @XmlAttribute(name = "ProviderName", namespace = "http://bibframe.org/vocab/")
+    public void setDistributorName(String distributorName) {
+        this.distributorName = distributorName;
     }
 }
 
