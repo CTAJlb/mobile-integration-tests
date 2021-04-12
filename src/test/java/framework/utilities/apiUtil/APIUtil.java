@@ -17,10 +17,8 @@ public class APIUtil {
         String authHeader = getAuthHeader(barcode, pin);
         AqualityServices.getLogger().info("There are books on the account for returning: ");
         ArrayList<String> booksForReturning = getListOfBooksInAccount(authHeader);
-        AqualityServices.getLogger().info("Count of books for returning: " + booksForReturning.size());
+        AqualityServices.getLogger().info("Count of books on the account for returning: " + booksForReturning.size());
         sendRequestsForReturningBooks(authHeader, booksForReturning);
-        AqualityServices.getLogger().info("There are books on the account after returning books: ");
-        enterBooksAfterReturningBooks(authHeader);
     }
 
     private static ArrayList<String> getListOfBooksInAccount(String authHeader) {
@@ -37,15 +35,16 @@ public class APIUtil {
 
         APIPageXMLModel apiPageXMLModel = response.body();
 
-        boolean isRefWithRevokePresent = apiPageXMLModel.getEntries().stream().anyMatch(entry -> entry.getLinks().
-                stream().filter(link -> link.getHref().toLowerCase().contains("revoke")).count() > 0);
+        boolean isEntryPresentInXml = response.body().getEntries() == null;
 
-        if (isRefWithRevokePresent) {
+        if(!isEntryPresentInXml){
             for (Entry entry : apiPageXMLModel.getEntries()) {
                 AqualityServices.getLogger().info("bookName: " + entry.getTitle() + " Distributor: " + entry.getDistributor().getDistributorName());
                 String link = entry.getLinks().stream().filter(ref -> ref.getHref().toLowerCase().contains("revoke")).findFirst().get().getHref();
                 booksForReturning.add(link);
             }
+        }else {
+            AqualityServices.getLogger().info("There is not books on the account.");
         }
 
         return booksForReturning;
@@ -53,13 +52,16 @@ public class APIUtil {
 
     public static void enterBookAfterOpeningAccount(String barcode, String pin) {
         String authHeader = getAuthHeader(barcode, pin);
+        AqualityServices.getLogger().info("There are books on the account after opening account: ");
         ArrayList<String> listOfBooksAfterOpeningAccount = getListOfBooksInAccount(authHeader);
-        AqualityServices.getLogger().info("Count of books after opening account: " + listOfBooksAfterOpeningAccount.size());
+        AqualityServices.getLogger().info("Count of books on the account after opening account: " + listOfBooksAfterOpeningAccount.size());
     }
 
-    private static void enterBooksAfterReturningBooks(String authHeader) {
+    public static void enterBooksAfterReturningBooks(String barcode, String pin) {
+        String authHeader = getAuthHeader(barcode, pin);
+        AqualityServices.getLogger().info("There are books on the account after returning books: ");
         ArrayList<String> listOfBooksAfterReturningBooks = getListOfBooksInAccount(authHeader);
-        AqualityServices.getLogger().info("Count of books after returning books: " + listOfBooksAfterReturningBooks.size());
+        AqualityServices.getLogger().info("Count of books on the account after returning books: " + listOfBooksAfterReturningBooks.size());
     }
 
     private static void sendRequestsForReturningBooks(String authHeader, ArrayList<String> booksForReturning) {

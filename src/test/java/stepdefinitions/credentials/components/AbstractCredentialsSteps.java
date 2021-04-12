@@ -46,7 +46,6 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
     private void storeCredentials(Credentials credentials) {
         String barcode = credentials.getBarcode();
         String pin = credentials.getPin();
-        AqualityServices.getLogger().info("There are books on the account: ");
         APIUtil.enterBookAfterOpeningAccount(barcode, pin);
         if (context.get(ScenarioContextKey.lIST_OF_CREDENTIALS_KEY) == null) {
             Map<String, String> hashMap = new HashMap<>();
