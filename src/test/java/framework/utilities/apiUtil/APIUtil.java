@@ -15,14 +15,15 @@ public class APIUtil {
 
     public static void returnBooks(String barcode, String pin) {
         String authHeader = getAuthHeader(barcode, pin);
-        ArrayList<String> booksForReturning = getBooksForReturning(authHeader);
+        AqualityServices.getLogger().info("There are books on the account for returning: ");
+        ArrayList<String> booksForReturning = getListOfBooksInAccount(authHeader);
         AqualityServices.getLogger().info("Count of books for returning: " + booksForReturning.size());
         sendRequestsForReturningBooks(authHeader, booksForReturning);
         AqualityServices.getLogger().info("There are books on the account after returning books: ");
         enterBooksAfterReturningBooks(authHeader);
     }
 
-    private static ArrayList<String> getBooksForReturning(String authHeader) {
+    private static ArrayList<String> getListOfBooksInAccount(String authHeader) {
         ArrayList<String> booksForReturning = new ArrayList<>();
         GetBooksAPIMethods getBooksAPIMethods = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(JaxbConverterFactory.create()).
                 client(new OkHttpClient()).build().create(GetBooksAPIMethods.class);
@@ -52,12 +53,12 @@ public class APIUtil {
 
     public static void enterBookAfterOpeningAccount(String barcode, String pin) {
         String authHeader = getAuthHeader(barcode, pin);
-        ArrayList<String> listOfBooksAfterOpeningAccount = getBooksForReturning(authHeader);
+        ArrayList<String> listOfBooksAfterOpeningAccount = getListOfBooksInAccount(authHeader);
         AqualityServices.getLogger().info("Count of books after opening account: " + listOfBooksAfterOpeningAccount.size());
     }
 
     private static void enterBooksAfterReturningBooks(String authHeader) {
-        ArrayList<String> listOfBooksAfterReturningBooks = getBooksForReturning(authHeader);
+        ArrayList<String> listOfBooksAfterReturningBooks = getListOfBooksInAccount(authHeader);
         AqualityServices.getLogger().info("Count of books after returning books: " + listOfBooksAfterReturningBooks.size());
     }
 
