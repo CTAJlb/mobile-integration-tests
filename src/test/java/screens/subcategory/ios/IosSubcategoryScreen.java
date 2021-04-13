@@ -25,6 +25,7 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     private static final String BOOK_NAME_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String AUTHOR_LABEL_LOCATOR_PATTERN = "//following-sibling::XCUIElementTypeStaticText";
     private static final int COUNT_OF_ITEMS_TO_WAIT_FOR = 5;
+    private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
 
     private final ILabel lblFirstBookName =
             getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR + BOOK_NAME_XPATH), "First book name");
@@ -70,6 +71,13 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
 
     @Override
     public CatalogBookModel openBookByName(String bookName) {
+        AqualityServices.getLogger().info("Started Thread.sleep");
+        try {
+            Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
+        } catch (InterruptedException e) {
+            AqualityServices.getLogger().debug("Thread.sleep issue happened. " + e.getLocalizedMessage());
+        }
+        AqualityServices.getLogger().info("Finished Thread.sleep");
         ILabel lblBookName = getElementFactory().getLabel(MobileBy.AccessibilityId(bookName), bookName);
         lblBookName.state().waitForDisplayed();
         waitForPageLoading();
