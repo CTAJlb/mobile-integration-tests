@@ -4,16 +4,16 @@ import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
 import constants.context.ScenarioContextKey;
 import framework.utilities.ScenarioContext;
-import framework.utilities.apiUtil.APIUtil;
+import framework.utilities.returningBooksUtil.APIUtil;
 import io.cucumber.java.After;
 
 import java.util.Map;
 
-public class ApiHooks {
+public class ReturningBooksHooks {
     private ScenarioContext context;
 
     @Inject
-    public ApiHooks(ScenarioContext scenarioContext) {
+    public ReturningBooksHooks(ScenarioContext scenarioContext) {
         context = scenarioContext;
     }
 

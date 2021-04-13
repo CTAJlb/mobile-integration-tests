@@ -37,6 +37,28 @@ Feature: Book Transactions
       | New York Public Library - QA Server - reservation only | Overdrive   | EBOOK     |
       | New York Public Library - QA Server - reservation only | Overdrive   | AUDIOBOOK |
 
+  @logout @returnBooks @tier2 @train3 @xml
+  Scenario Outline: Hold from Book Detail View (feed) XML
+    When I add 'LYRASIS' account
+      And I enter credentials for 'LYRASIS' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I switch to 'LYRASIS' from side menu
+      And I open search modal
+      And I search 'unavailable' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
+      And I switch to '<tabName>' catalog tab
+    Then Subcategory screen is present
+    When I open book 'bookNameInfo' and save it as 'bookInfo'
+    Then Book 'bookInfo' is opened
+      And I press on the book details screen at the action button RESERVE
+    Then I check that opened book contains CANCEL button at book details screen
+    When I open Holds
+    Then Book 'bookInfo' is present in Holds List
+
+    Scenarios:
+      | distributor | bookType  | tabName    |
+      | Bibliotheca | EBOOK     | eBooks     |
+
   @logout @returnBooks @tier2
   Scenario: Hold from Bookshelf list
     When I add 'LYRASIS' account
@@ -139,6 +161,32 @@ Feature: Book Transactions
       | LYRASIS                             | Bibliotheca                                   | EBOOK     |
       | LYRASIS                             | Bibliotheca                                   | AUDIOBOOK |
 
+  @logout @returnBooks @tier2 @train @xml
+  Scenario Outline: Check out from Book Detail View (feed) XML
+    When I add 'LYRASIS' account
+      And I enter credentials for 'LYRASIS' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I switch to 'LYRASIS' from side menu
+      And I open search modal
+      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
+      And I switch to '<tabName>' catalog tab
+    Then Subcategory screen is present
+    When I open book 'bookNameInfo' and save it as 'bookInfo'
+    Then Book 'bookInfo' is opened
+      And Get book on the book details screen
+    Then Opened book contains read button at book details screen
+    When I open Books
+    Then Book 'bookInfo' is present in Books List
+    When I open book 'bookInfo' details by clicking on cover
+    Then Opened book contains read button at book details screen
+    When I read <bookType> book
+    Then Reader screen for <bookType> type book 'bookInfo' is present
+
+    Scenarios:
+      | distributor | bookType  | tabName    |
+      | Bibliotheca | EBOOK     | eBooks     |
+
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Return book
     When I add 'LYRASIS' account
@@ -188,6 +236,33 @@ Feature: Book Transactions
       | LYRASIS                             | Johns Hopkins University Press                | EBOOK     |
       | LYRASIS                             | Bibliotheca                                   | EBOOK     |
       | LYRASIS                             | Bibliotheca                                   | AUDIOBOOK |
+
+  @logout @returnBooks @tier2 @train2 @xml
+  Scenario Outline: Return book (feed) XML
+    When I add 'LYRASIS' account
+    And I enter credentials for 'LYRASIS' account
+    Then Login is performed successfully
+    When I open Catalog
+    And I switch to 'LYRASIS' from side menu
+    And I open search modal
+    And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
+    And I switch to '<tabName>' catalog tab
+    Then Subcategory screen is present
+    When I open book 'bookNameInfo' and save it as 'bookInfo'
+    Then Book 'bookInfo' is opened
+    And Get book on the book details screen
+    Then Opened book contains read button at book details screen
+    When I open Books
+    Then Book 'bookInfo' is present in Books List
+    When I open book 'bookInfo' details by clicking on cover
+    And Press on the book details screen at the action button RETURN
+    Then I check that the action button text equal to the GET
+    When I open Books
+    Then Book 'bookInfo' is not present in Books List
+
+    Scenarios:
+      | distributor | bookType  | tabName    |
+      | Bibliotheca | EBOOK     | eBooks     |
 
   @logout @returnBooks @tier2
   Scenario: Remove a Reserved Book from Bookshelf list

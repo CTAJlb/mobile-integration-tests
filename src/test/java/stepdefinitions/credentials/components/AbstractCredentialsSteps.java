@@ -5,7 +5,7 @@ import constants.context.ScenarioContextKey;
 import framework.configuration.Configuration;
 import framework.configuration.Credentials;
 import framework.utilities.ScenarioContext;
-import framework.utilities.apiUtil.APIUtil;
+import framework.utilities.returningBooksUtil.APIUtil;
 import org.testng.Assert;
 import screens.account.AccountScreen;
 import screens.accounts.AccountsScreen;
