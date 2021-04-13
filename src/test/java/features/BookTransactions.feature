@@ -161,7 +161,7 @@ Feature: Book Transactions
       | LYRASIS                             | Bibliotheca                                   | EBOOK     |
       | LYRASIS                             | Bibliotheca                                   | AUDIOBOOK |
 
-  @logout @returnBooks @tier2 @train @xml
+  @logout @returnBooks @tier2 @train @xml @removeAfter
   Scenario Outline: Check out from Book Detail View (feed) XML
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
