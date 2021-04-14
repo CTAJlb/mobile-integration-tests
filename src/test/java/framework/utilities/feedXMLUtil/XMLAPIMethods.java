@@ -6,5 +6,5 @@ import retrofit2.http.Url;
 
 public interface XMLAPIMethods {
     @GET
-    Call<FeedModel> getFeedModel(@Url String path);
+    Call<FeedModel> getFeed(@Url String path);
 }

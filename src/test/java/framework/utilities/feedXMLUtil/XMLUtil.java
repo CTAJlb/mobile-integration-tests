@@ -1,5 +1,6 @@
 package framework.utilities.feedXMLUtil;
 
+import aquality.appium.mobile.application.AqualityServices;
 import okhttp3.OkHttpClient;
 import org.apache.commons.lang3.RandomUtils;
 import retrofit2.Response;
@@ -52,7 +53,7 @@ public class XMLUtil {
 
         LocalTime localTime = LocalTime.now();
         while (true) {
-            FeedModel feedModel = getFeedModel(url);
+            FeedModel feedModel = supportMethod(url);
             boolean isNextXMLPresent = feedModel.getLinksFromFeed().stream().anyMatch(link -> link.getConditionForNextXML().equals("next"));
             if (!isNextXMLPresent) {
                 break;
@@ -125,6 +126,31 @@ public class XMLUtil {
         return bookName;
     }
 
+    private FeedModel supportMethod(String url) {
+        FeedModel feedModel = null;
+        int sch = 1;
+
+        while (sch < 4) {
+            sch++;
+            feedModel = getFeedModel(url);
+            if (feedModel == null) {
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                break;
+            }
+        }
+
+        if (sch == 3) {
+            throw new RuntimeException("Bad Response, problem with server");
+        }
+
+        return feedModel;
+    }
+
     //1
     private void setHashMapsForEBooksAndAudioBooks() {
         setListAvailableAndUnavailableBooksAnyTypeMayBeWithRepeat();
@@ -152,15 +178,20 @@ public class XMLUtil {
 
     //1
     private FeedModel getFeedModel(String url) {
-        OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(240, TimeUnit.SECONDS).readTimeout(120, TimeUnit.SECONDS).writeTimeout(120, TimeUnit.SECONDS).build();
+        OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(120, TimeUnit.SECONDS).readTimeout(120, TimeUnit.SECONDS).writeTimeout(120, TimeUnit.SECONDS).build();
         XMLAPIMethods xmlapiMethods = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(JaxbConverterFactory.create()).
                 client(client).build().create(XMLAPIMethods.class);
 
         Response<FeedModel> response = null;
         try {
-            response = xmlapiMethods.getFeedModel(url).execute();
+            response = xmlapiMethods.getFeed(url).execute();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        if(response.body() == null){
+            AqualityServices.getLogger().info("ResponseCode: " + response.code());
+            AqualityServices.getLogger().info("ResponseToString: " + response.toString());
         }
 
         return response.body();
