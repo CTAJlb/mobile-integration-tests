@@ -3,7 +3,7 @@ Feature: Book Transactions
   Background:
     Given Application is opened
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @ignore
   Scenario: Hold from Book Detail View
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
@@ -37,7 +37,7 @@ Feature: Book Transactions
       | New York Public Library - QA Server - reservation only | Overdrive   | EBOOK     |
       | New York Public Library - QA Server - reservation only | Overdrive   | AUDIOBOOK |
 
-  @logout @returnBooks @tier2 @train3 @xml
+  @logout @returnBooks @tier2 @xml
   Scenario Outline: Hold from Book Detail View (feed) XML
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
@@ -58,8 +58,11 @@ Feature: Book Transactions
     Scenarios:
       | distributor | bookType  | tabName    |
       | Bibliotheca | EBOOK     | eBooks     |
+      | Bibliotheca | AUDIOBOOK | Audiobooks |
+      | Axis 360    | EBOOK     | eBooks     |
+      | Axis 360    | AUDIOBOOK | Audiobooks |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @ignore
   Scenario: Hold from Bookshelf list
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
@@ -161,7 +164,7 @@ Feature: Book Transactions
       | LYRASIS                             | Bibliotheca                                   | EBOOK     |
       | LYRASIS                             | Bibliotheca                                   | AUDIOBOOK |
 
-  @logout @returnBooks @tier2 @train @xml @removeAfter
+  @logout @returnBooks @tier2 @xml
   Scenario Outline: Check out from Book Detail View (feed) XML
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
@@ -186,6 +189,9 @@ Feature: Book Transactions
     Scenarios:
       | distributor | bookType  | tabName    |
       | Bibliotheca | EBOOK     | eBooks     |
+      | Bibliotheca | AUDIOBOOK | Audiobooks |
+      | Axis 360    | EBOOK     | eBooks     |
+      | Axis 360    | AUDIOBOOK | Audiobooks |
 
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Return book
@@ -237,7 +243,7 @@ Feature: Book Transactions
       | LYRASIS                             | Bibliotheca                                   | EBOOK     |
       | LYRASIS                             | Bibliotheca                                   | AUDIOBOOK |
 
-  @logout @returnBooks @tier2 @train2 @xml
+  @logout @returnBooks @tier2 @xml
   Scenario Outline: Return book (feed) XML
     When I add 'LYRASIS' account
     And I enter credentials for 'LYRASIS' account
@@ -263,8 +269,9 @@ Feature: Book Transactions
     Scenarios:
       | distributor | bookType  | tabName    |
       | Bibliotheca | EBOOK     | eBooks     |
+      | Bibliotheca | AUDIOBOOK | Audiobooks |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @ignore
   Scenario: Remove a Reserved Book from Bookshelf list
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
@@ -280,7 +287,7 @@ Feature: Book Transactions
     When I click on the book 'bookInfo' button CANCEL on catalog books screen
     Then Book saved as 'bookInfo' should contain RESERVE button at catalog books screen
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @ignore
   Scenario: Remove a Reserved Book from Book Detail View
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
@@ -296,7 +303,7 @@ Feature: Book Transactions
     When Press on the book details screen at the action button CANCEL
     Then I check that the action button text equal to the RESERVE
 
-  @logout @returnBooks @tier2 @exclude_ios
+  @logout @returnBooks @tier2 @exclude_ios @ignore
   Scenario: Remove a Reserved Book from Holds screen
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
@@ -314,7 +321,7 @@ Feature: Book Transactions
     When I click on the book 'bookInfo' button CANCEL on the holds screen
     Then Book saved as 'bookInfo' should contain RESERVE button at the hold screen
 
-  @logout @returnBooks @tier2 @exclude_android
+  @logout @returnBooks @tier2 @exclude_android @ignore
   Scenario: Remove a Reserved Book from Holds screen (iOS)
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
@@ -332,7 +339,7 @@ Feature: Book Transactions
     When I click on the book 'bookInfo' button CANCEL on the holds screen
     Then Book 'bookInfo' is not present in Holds List
 
-  @logout @returnBooks @tier3 @exclude_android
+  @logout @returnBooks @tier3 @exclude_android @ignore
   Scenario: Cancel remove
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
