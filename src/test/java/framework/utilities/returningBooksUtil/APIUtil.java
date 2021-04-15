@@ -37,13 +37,13 @@ public class APIUtil {
 
         boolean isEntryPresentInXml = response.body().getEntries() == null;
 
-        if(!isEntryPresentInXml){
+        if (!isEntryPresentInXml) {
             for (Entry entry : apiPageXMLModel.getEntries()) {
                 AqualityServices.getLogger().info("bookName: " + entry.getTitle() + " Distributor: " + entry.getDistributor().getDistributorName());
                 String link = entry.getLinks().stream().filter(ref -> ref.getHref().toLowerCase().contains("revoke")).findFirst().get().getHref();
                 booksForReturning.add(link);
             }
-        }else {
+        } else {
             AqualityServices.getLogger().info("There is not books on the account.");
         }
 
@@ -70,7 +70,7 @@ public class APIUtil {
 
         if (booksForReturning.size() != 0) {
             for (String bookUrl : booksForReturning) {
-                String path = bookUrl.replace("https://demo.lyrasistechnology.org/", "");
+                String path = bookUrl.replace(BASE_URL + "/", "");
                 try {
                     getBooksAPIMethods.returnBooks(authHeader, path).execute();
                 } catch (IOException e) {

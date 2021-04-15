@@ -1,6 +1,7 @@
 package framework.utilities.feedXMLUtil;
 
 import aquality.appium.mobile.application.AqualityServices;
+import constants.util.UtilConstants;
 import okhttp3.OkHttpClient;
 import org.apache.commons.lang3.RandomUtils;
 import retrofit2.Response;
@@ -8,7 +9,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.jaxb.JaxbConverterFactory;
 
 import java.io.IOException;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,15 +18,18 @@ import java.util.stream.Collectors;
 
 public class XMLUtil {
     private static final String BASE_URL = "https://demo.lyrasistechnology.org";
-
+    private static final String partOfURL = "lyrasis/crawlable";
     private HashMap<String, List<BookModel>> hashMapAvailableEbooks;
     private HashMap<String, List<BookModel>> hashMapAvailableAudiobooks;
     private HashMap<String, List<BookModel>> hashMapUnavailableEbooks;
     private HashMap<String, List<BookModel>> hashMapUnavailableAudiobooks;
-
     private ArrayList<BookModel> availableBooksAnyType;
     private ArrayList<BookModel> unavailableBooksAnyType;
     private static XMLUtil xmlUtil;
+    private final int connectTimeout = 120;
+    private final int readTimeout = 120;
+    private final int writeTimeout = 120;
+    private final int threadSleepTime = 3000;
 
     private XMLUtil() {
         setHashMapsForEBooksAndAudioBooks();
@@ -45,16 +48,14 @@ public class XMLUtil {
         }
     }
 
-    //1
     private void setListAvailableAndUnavailableBooksAnyTypeMayBeWithRepeat() {
-        String url = "lyrasis/crawlable";
+        String url = partOfURL;
         ArrayList<BookModel> listAvailableBooksAnyType = new ArrayList<>();
         ArrayList<BookModel> listUnavailableBooksAnyType = new ArrayList<>();
 
-        LocalTime localTime = LocalTime.now();
         while (true) {
             FeedModel feedModel = supportMethod(url);
-            boolean isNextXMLPresent = feedModel.getLinksFromFeed().stream().anyMatch(link -> link.getConditionForNextXML().equals("next"));
+            boolean isNextXMLPresent = feedModel.getLinksFromFeed().stream().anyMatch(link -> link.getConditionForNextXML().equals(UtilConstants.NEXT.toLowerCase()));
             if (!isNextXMLPresent) {
                 break;
             }
@@ -78,29 +79,25 @@ public class XMLUtil {
             }
 
             String nextUrl = feedModel.getLinksFromFeed().stream().filter(link -> link.getConditionForNextXML().equals("next")).findFirst().get().getNextURLForXML();
-            url = nextUrl.replace("https://demo.lyrasistechnology.org/", "");
+            url = nextUrl.replace(BASE_URL + "/", "");
         }
-        LocalTime localTime2 = LocalTime.now();
-        int dif = localTime2.getMinute() - localTime.getMinute();
-        System.out.println("dif: " + dif);
 
         availableBooksAnyType = listAvailableBooksAnyType;
         unavailableBooksAnyType = listUnavailableBooksAnyType;
     }
 
-    //2
     public String getRandomBook(String availabilityType, String bookType, String distributor) {
         HashMap<String, List<BookModel>> hashMap = null;
-        if (availabilityType.toLowerCase().equals("available")) {
-            if (bookType.toLowerCase().equals("ebook")) {
+        if (availabilityType.toLowerCase().equals(UtilConstants.AVAILABLE.toLowerCase())) {
+            if (bookType.toLowerCase().equals(UtilConstants.EBOOK.toLowerCase())) {
                 hashMap = hashMapAvailableEbooks;
-            } else if (bookType.toLowerCase().equals("audiobook")) {
+            } else if (bookType.toLowerCase().equals(UtilConstants.AUDIOBOOK.toLowerCase())) {
                 hashMap = hashMapAvailableAudiobooks;
             }
-        } else if (availabilityType.toLowerCase().equals("unavailable")) {
-            if (bookType.toLowerCase().equals("ebook")) {
+        } else if (availabilityType.toLowerCase().equals(UtilConstants.UNAVAILABLE.toLowerCase())) {
+            if (bookType.toLowerCase().equals(UtilConstants.EBOOK.toLowerCase())) {
                 hashMap = hashMapUnavailableEbooks;
-            } else if (bookType.toLowerCase().equals("audiobook")) {
+            } else if (bookType.toLowerCase().equals(UtilConstants.AUDIOBOOK.toLowerCase())) {
                 hashMap = hashMapUnavailableAudiobooks;
             }
         }
@@ -114,7 +111,7 @@ public class XMLUtil {
 
         String bookName = hashMap.get(distributor.toLowerCase()).get(RandomUtils.nextInt(0, hashMap.get(distributor.toLowerCase()).size())).getBookName();
 
-       /* List<BookModel> list = hashMap.get(distributor.toLowerCase());
+        List<BookModel> list = hashMap.get(distributor.toLowerCase());
         for (int i = 0; i < list.size(); i++) {
             BookModel bookModel = list.get(i);
             if (bookModel.getBookName().toLowerCase().equals(bookName.toLowerCase())) {
@@ -122,7 +119,8 @@ public class XMLUtil {
                 hashMap.put(distributor.toLowerCase(), list);
                 break;
             }
-        }*/
+        }
+
         return bookName;
     }
 
@@ -135,7 +133,7 @@ public class XMLUtil {
             feedModel = getFeedModel(url);
             if (feedModel == null) {
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(threadSleepTime);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -151,16 +149,14 @@ public class XMLUtil {
         return feedModel;
     }
 
-    //1
     private void setHashMapsForEBooksAndAudioBooks() {
         setListAvailableAndUnavailableBooksAnyTypeMayBeWithRepeat();
-        hashMapAvailableEbooks = getHashMapForAvailableAndUnavailableBooksWithSpecificType(availableBooksAnyType, "ebook");
-        hashMapAvailableAudiobooks = getHashMapForAvailableAndUnavailableBooksWithSpecificType(availableBooksAnyType, "audiobook");
-        hashMapUnavailableEbooks = getHashMapForAvailableAndUnavailableBooksWithSpecificType(unavailableBooksAnyType, "ebook");
-        hashMapUnavailableAudiobooks = getHashMapForAvailableAndUnavailableBooksWithSpecificType(unavailableBooksAnyType, "audiobook");
+        hashMapAvailableEbooks = getHashMapForAvailableAndUnavailableBooksWithSpecificType(availableBooksAnyType, UtilConstants.EBOOK.toLowerCase());
+        hashMapAvailableAudiobooks = getHashMapForAvailableAndUnavailableBooksWithSpecificType(availableBooksAnyType, UtilConstants.AUDIOBOOK.toLowerCase());
+        hashMapUnavailableEbooks = getHashMapForAvailableAndUnavailableBooksWithSpecificType(unavailableBooksAnyType, UtilConstants.EBOOK.toLowerCase());
+        hashMapUnavailableAudiobooks = getHashMapForAvailableAndUnavailableBooksWithSpecificType(unavailableBooksAnyType, UtilConstants.AUDIOBOOK.toLowerCase());
     }
 
-    //1
     private HashMap<String, List<BookModel>> getHashMapForAvailableAndUnavailableBooksWithSpecificType(ArrayList<BookModel> arrayList, String bookType) {
 
         Set<String> setDistributors = arrayList.stream().map(book -> book.getDistributorName()).collect(Collectors.toSet());
@@ -176,9 +172,8 @@ public class XMLUtil {
         return hashMap;
     }
 
-    //1
     private FeedModel getFeedModel(String url) {
-        OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(120, TimeUnit.SECONDS).readTimeout(120, TimeUnit.SECONDS).writeTimeout(120, TimeUnit.SECONDS).build();
+        OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(connectTimeout, TimeUnit.SECONDS).readTimeout(readTimeout, TimeUnit.SECONDS).writeTimeout(writeTimeout, TimeUnit.SECONDS).build();
         XMLAPIMethods xmlapiMethods = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(JaxbConverterFactory.create()).
                 client(client).build().create(XMLAPIMethods.class);
 
