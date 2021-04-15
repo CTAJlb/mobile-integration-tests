@@ -105,11 +105,11 @@ public class XMLUtil {
             }
         }
         if (!hashMap.containsKey(distributor.toLowerCase())) {
-            throw new RuntimeException("There is not " + availabilityType + " books for distributor: " + distributor);
+            throw new RuntimeException("There are not any type books for distributor: " + distributor);
         }
 
         if (hashMap.get(distributor.toLowerCase()).size() == 0) {
-            throw new RuntimeException("hashMap.get(distributor.toLowerCase()).size() == 0 and distributor: " + distributor + " bookType: " + bookType);
+            throw new RuntimeException("Count of  " + availabilityType + " books == 0 for distributor: " + distributor);
         }
 
         String bookName = hashMap.get(distributor.toLowerCase()).get(RandomUtils.nextInt(0, hashMap.get(distributor.toLowerCase()).size())).getBookName();
