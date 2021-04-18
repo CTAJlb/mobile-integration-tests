@@ -72,13 +72,17 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     @Override
     public CatalogBookModel openBookByName(String bookName) {
         ILabel lblBookName = getElementFactory().getLabel(MobileBy.AccessibilityId(bookName), bookName);
+        String bookTitle = lblBookName.getAttribute("name");
+        if (bookTitle.contains(". Audiobook.")){
+            bookTitle.replace(". Audiobook.", "");
+        }
         lblBookName.state().waitForDisplayed();
         waitForPageLoading();
         ILabel lblAuthor =
                 getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_LOCATOR_PATTERN, bookName) + AUTHOR_LABEL_LOCATOR_PATTERN), bookName);
         lblAuthor.state().waitForDisplayed();
         CatalogBookModel bookInfo = new CatalogBookModel()
-                .setTitle(bookName)
+                .setTitle(bookTitle)
                 .setAuthor(lblAuthor.getText());
         lblBookName.click();
         return bookInfo;

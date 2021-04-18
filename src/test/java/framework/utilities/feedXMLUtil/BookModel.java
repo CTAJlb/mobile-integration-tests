@@ -31,6 +31,10 @@ public class BookModel {
         return countAvailableCopies;
     }
 
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
