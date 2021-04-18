@@ -166,6 +166,9 @@ public class XMLUtil {
         for (String distributor : setDistributors) {
             Set<BookModel> setBooks = arrayList.stream().filter(book -> book.getDistributorName().toLowerCase().equals(distributor.toLowerCase())).collect(Collectors.toSet());
             Set<BookModel> setBooksSpecificBookType = setBooks.stream().filter(book -> book.getBookType().toLowerCase().equals(bookType.toLowerCase())).collect(Collectors.toSet());
+            if(bookType.toLowerCase().equals(UtilConstants.AUDIOBOOK.toLowerCase())){
+                setBooksSpecificBookType.stream().forEach(book -> book.setBookName(book.getBookName() + ". Audiobook."));
+            }
             hashMap.put(distributor.toLowerCase(), new ArrayList<>(setBooksSpecificBookType));
         }
 
