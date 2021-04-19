@@ -39,6 +39,11 @@ public class APIUtil {
 
         if (!isEntryPresentInXml) {
             for (Entry entry : apiPageXMLModel.getEntries()) {
+                boolean isRevokePresentInLink = entry.getLinks().stream().anyMatch(link -> link.getHref().toLowerCase().contains("revoke"));
+                if(!isRevokePresentInLink){
+                    AqualityServices.getLogger().info("Books without revoke in link. BookName: " + entry.getTitle() + " Distributor: " + entry.getDistributor());
+                    continue;
+                }
                 AqualityServices.getLogger().info("bookName: " + entry.getTitle() + " Distributor: " + entry.getDistributor().getDistributorName());
                 String link = entry.getLinks().stream().filter(ref -> ref.getHref().toLowerCase().contains("revoke")).findFirst().get().getHref();
                 booksForReturning.add(link);
