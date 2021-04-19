@@ -33,8 +33,18 @@ public class FeedModel {
 class EntryXML {
     private String bookName;
     private String bookType;
+    private String language;
     private Distribution distributor;
     private List<LinkFromEntry> linksFromEntry;
+
+    public String getLanguage() {
+        return language;
+    }
+
+    @XmlElement(name = "language", namespace = "http://purl.org/dc/terms/")
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 
     public String getBookName() {
         return bookName;

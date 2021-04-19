@@ -65,7 +65,8 @@ public class XMLUtil {
                 boolean isPdfPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition().getInternalIndirectAcquisition().getType().toLowerCase().contains("pdf"));
                 boolean isVndAdobeAdeptPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition().getType().toLowerCase().contains("vnd.adobe.adept"));
                 boolean isLibrarySimplifiedPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition().getType().toLowerCase().contains("librarysimplified"));
-                if (!isCopiesPresent) {
+                boolean isEnLanguagePresent = entry.getLanguage().toLowerCase().equals("en");
+                if (!isCopiesPresent || !isEnLanguagePresent) {
                     continue;
                 }
 
