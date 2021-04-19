@@ -9,9 +9,13 @@ import retrofit2.converter.jaxb.JaxbConverterFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.concurrent.TimeUnit;
 
 public class APIUtil {
     private static final String BASE_URL = "https://demo.lyrasistechnology.org";
+    private static final int connectTimeout = 120;
+    private static final int readTimeout = 120;
+    private static final int writeTimeout = 120;
 
     public static void returnBooks(String barcode, String pin) {
         String authHeader = getAuthHeader(barcode, pin);
@@ -23,8 +27,9 @@ public class APIUtil {
 
     private static ArrayList<String> getListOfBooksInAccount(String authHeader) {
         ArrayList<String> booksForReturning = new ArrayList<>();
+        OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(connectTimeout, TimeUnit.SECONDS).readTimeout(readTimeout, TimeUnit.SECONDS).writeTimeout(writeTimeout, TimeUnit.SECONDS).build();
         GetBooksAPIMethods getBooksAPIMethods = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(JaxbConverterFactory.create()).
-                client(new OkHttpClient()).build().create(GetBooksAPIMethods.class);
+                client(client).build().create(GetBooksAPIMethods.class);
         Response<APIPageXMLModel> response = null;
 
         try {
@@ -70,7 +75,8 @@ public class APIUtil {
     }
 
     private static void sendRequestsForReturningBooks(String authHeader, ArrayList<String> booksForReturning) {
-        ReturnBooksAPIMethods getBooksAPIMethods = new Retrofit.Builder().baseUrl(BASE_URL).client(new OkHttpClient()).build().
+        OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(connectTimeout, TimeUnit.SECONDS).readTimeout(readTimeout, TimeUnit.SECONDS).writeTimeout(writeTimeout, TimeUnit.SECONDS).build();
+        ReturnBooksAPIMethods getBooksAPIMethods = new Retrofit.Builder().baseUrl(BASE_URL).client(client).build().
                 create(ReturnBooksAPIMethods.class);
 
         if (booksForReturning.size() != 0) {
