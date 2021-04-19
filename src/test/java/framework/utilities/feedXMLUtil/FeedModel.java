@@ -88,6 +88,7 @@ class Distribution {
 
 class LinkFromEntry {
     private Copies copies;
+    private IndirectAcquisition indirectAcquisition;
 
     public Copies getCopies() {
         return copies;
@@ -96,6 +97,15 @@ class LinkFromEntry {
     @XmlElement(name = "copies")
     public void setCopies(Copies copies) {
         this.copies = copies;
+    }
+
+    public IndirectAcquisition getIndirectAcquisition() {
+        return indirectAcquisition;
+    }
+
+    @XmlElement(name = "indirectAcquisition", namespace = "http://opds-spec.org/2010/catalog")
+    public void setIndirectAcquisition(IndirectAcquisition indirectAcquisition) {
+        this.indirectAcquisition = indirectAcquisition;
     }
 }
 
@@ -132,5 +142,41 @@ class Copies {
     @XmlAttribute(name = "available")
     public void setCountAvailableCopies(int countAvailableCopies) {
         this.countAvailableCopies = countAvailableCopies;
+    }
+}
+
+class IndirectAcquisition{
+    private String type;
+    private InternalIndirectAcquisition indirectAcquisition;
+
+    public String getType() {
+        return type;
+    }
+
+    @XmlAttribute(name = "type")
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public InternalIndirectAcquisition getInternalIndirectAcquisition() {
+        return indirectAcquisition;
+    }
+
+    @XmlElement(name = "indirectAcquisition", namespace = "http://opds-spec.org/2010/catalog")
+    public void setInternalIndirectAcquisition(InternalIndirectAcquisition indirectAcquisition) {
+        this.indirectAcquisition = indirectAcquisition;
+    }
+}
+
+class InternalIndirectAcquisition{
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    @XmlAttribute(name = "type")
+    public void setType(String type) {
+        this.type = type;
     }
 }

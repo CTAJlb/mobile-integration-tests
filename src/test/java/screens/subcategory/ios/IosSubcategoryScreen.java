@@ -24,7 +24,7 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
             "//XCUIElementTypeStaticText[@name and not(.//ancestor::XCUIElementTypeButton)][1]";
     private static final String BOOK_NAME_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String AUTHOR_LABEL_LOCATOR_PATTERN = "/parent::XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
-    private static final int COUNT_OF_ITEMS_TO_WAIT_FOR = 5;
+    private static final int COUNT_OF_ITEMS_TO_WAIT_FOR = 3;
     private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
 
     private final ILabel lblFirstBookName =
@@ -77,11 +77,12 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
         ILabel lblAuthor =
                 getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_LOCATOR_PATTERN, bookName) + AUTHOR_LABEL_LOCATOR_PATTERN), bookName);
         lblAuthor.state().waitForDisplayed();
+        String bookTitle = null;
         if (bookName.contains(". Audiobook.")){
-            bookName = bookName.replace(". Audiobook.", "");
+            bookTitle = bookName.replace(". Audiobook.", "");
         }
         CatalogBookModel bookInfo = new CatalogBookModel()
-                .setTitle(bookName)
+                .setTitle(bookTitle)
                 .setAuthor(lblAuthor.getText());
         lblBookName.click();
         return bookInfo;
