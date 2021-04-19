@@ -80,8 +80,8 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
         ILabel lblAuthor =
                 getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_LOCATOR_PATTERN, bookName) + AUTHOR_LABEL_LOCATOR_PATTERN), bookName);
         String bookTitle = null;
-        if (bookName.contains(". Audiobook.")){
-            bookTitle = bookName.replace(". Audiobook.", "");
+        if (bookName.toLowerCase().contains(". Audiobook.".toLowerCase())){
+            bookTitle = bookName.replaceAll(". Audiobook.", "");
         }
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(bookTitle)

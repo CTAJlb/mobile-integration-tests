@@ -62,17 +62,17 @@ public class XMLUtil {
 
             for (EntryXML entry : feedModel.getEntries()) {
                 boolean isCopiesPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getCopies() != null);
-                boolean isPdfPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition().getInternalIndirectAcquisition().getType().toLowerCase().contains("pdf"));
+               /* boolean isPdfPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition().getInternalIndirectAcquisition().getType().toLowerCase().contains("pdf"));
                 boolean isVndAdobeAdeptPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition().getType().toLowerCase().contains("vnd.adobe.adept"));
                 boolean isLibrarySimplifiedPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition().getType().toLowerCase().contains("librarysimplified"));
-                boolean isEnLanguagePresent = entry.getLanguage().toLowerCase().equals("en");
+             */   boolean isEnLanguagePresent = entry.getLanguage().toLowerCase().equals("en");
                 if (!isCopiesPresent || !isEnLanguagePresent) {
                     continue;
                 }
 
-                if ((isPdfPresent && isVndAdobeAdeptPresent) || isLibrarySimplifiedPresent) {
+                /*if ((isPdfPresent && isVndAdobeAdeptPresent) || isLibrarySimplifiedPresent) {
                     continue;
-                }
+                }*/
 
                 int countAvailableCopies = entry.getLinksFromEntry().stream().filter(link -> link.getCopies() != null).findFirst().get().getCopies().getCountAvailableCopies();
 
