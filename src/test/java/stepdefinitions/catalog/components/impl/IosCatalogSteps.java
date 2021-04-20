@@ -25,7 +25,6 @@ public class IosCatalogSteps extends AbstractCatalogSteps {
         }
         catalogScreen.state().waitForDisplayed();
         AqualityServices.getConditionalWait().waitFor(() -> catalogBooksScreen.getFoundBooksCount() > 0);
-
     }
 
     @Override
