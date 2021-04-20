@@ -25,7 +25,6 @@ public class AndroidCatalogSteps extends AbstractCatalogSteps {
         }
         catalogScreen.state().waitForDisplayed();
         AqualityServices.getConditionalWait().waitFor(() -> catalogBooksScreen.getFoundBooksCount() > 0);
-        alertScreen.accept();
     }
 
     @Override
