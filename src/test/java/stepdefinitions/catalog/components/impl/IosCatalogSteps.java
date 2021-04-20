@@ -5,12 +5,27 @@ import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
 import org.testng.Assert;
+import screens.bottommenu.BottomMenu;
 import stepdefinitions.catalog.components.AbstractCatalogSteps;
 
 @StepsType(platform = PlatformName.IOS)
 public class IosCatalogSteps extends AbstractCatalogSteps {
     public IosCatalogSteps(ScenarioContext context) {
         super(context);
+    }
+
+    @Override
+    public void openLibraryFromSideMenu(String libraryName) {
+        bottomMenuForm.open(BottomMenu.CATALOG);
+        mainCatalogToolbarForm.chooseAnotherLibrary();
+        catalogScreen.openLibrary(libraryName);
+        if (notificationModal.isModalPresent()) {
+            notificationModal.closeCannotAddBookModalIfDisplayed();
+            catalogScreen.openLibrary(libraryName);
+        }
+        catalogScreen.state().waitForDisplayed();
+        AqualityServices.getConditionalWait().waitFor(() -> catalogBooksScreen.getFoundBooksCount() > 0);
+
     }
 
     @Override
