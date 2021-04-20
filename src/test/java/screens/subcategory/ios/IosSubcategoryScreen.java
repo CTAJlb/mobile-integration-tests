@@ -79,7 +79,7 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
         ILabel lblBookName = getElementFactory().getLabel(MobileBy.AccessibilityId(bookName), bookName);
         ILabel lblAuthor =
                 getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_LOCATOR_PATTERN, bookName) + AUTHOR_LABEL_LOCATOR_PATTERN), bookName);
-        String bookTitle = null;
+        String bookTitle = bookName;
         if (bookName.toLowerCase().contains(". Audiobook.".toLowerCase())){
             bookTitle = bookName.replaceAll(". Audiobook.", "");
         }
