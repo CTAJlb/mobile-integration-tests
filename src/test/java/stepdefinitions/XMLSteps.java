@@ -25,11 +25,16 @@ public class XMLSteps {
     @And("I search {string} book of distributor {string} and bookType {string} and save as {string}")
     public void searchFor(String availabilityType, String distributor, String bookType, String bookNameInfoKey) {
         String bookName = XMLUtil.getInstance().getRandomBook(availabilityType.toLowerCase(), bookType.toLowerCase(), distributor.toLowerCase());
+        if(AqualityServices.getApplicationProfile().getPlatformName().name().toLowerCase().equals("android")){
+            bookName = bookName.replace(". Audiobook.", "");
+        }
         context.add(bookNameInfoKey, bookName);
         AqualityServices.getLogger().info("randomBookName: " + bookName);
-        String bookNameForSearch = bookName.replace(". Audiobook.", "");
+        if(bookName.toLowerCase().contains(". Audiobook.".toLowerCase())){
+            bookName = bookName.replace(". Audiobook.", "");
+        }
         Assert.assertTrue(searchModal.state().waitForDisplayed(), "Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage());
-        searchModal.setSearchedText(bookNameForSearch);
+        searchModal.setSearchedText(bookName);
         searchModal.applySearch();
         Assert.assertTrue(searchModal.state().waitForNotDisplayed(), "Search modal is not disappear");
         Assert.assertTrue(subcategoryScreen.state().waitForDisplayed(), String.format("Search results page for value '%s' is not present. Error (if present) - %s", bookName, subcategoryScreen.getErrorMessage()));
