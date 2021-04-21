@@ -115,28 +115,26 @@ Feature: Catalog Navigation
       And I switch to 'LYRASIS' from side menu
     When I open search modal
     Then Search modal is opened
-    When I search for 'A Pocket Full of Rye'
+    When I search for 'Sullivan\'s Promise'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When I open book with name 'A Pocket Full of Rye' and save it as 'bookInfo'
+    When I open book with name 'Sullivan\'s Promise' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And The following values in the information block are present:
-        | key         | value                     |
-        | PUBLISHED   | 2021-03-05                |
-        | PUBLISHER   | William Morrow Paperbacks |
-        | DISTRIBUTOR | Bibliotheca               |
-        | CATEGORIES  | Women Detectives          |
+        | key         | value                                           |
+        | PUBLISHED   | 2021-03-05                                      |
+        | PUBLISHER   | Random House Publishing Group                   |
+        | DISTRIBUTOR | Bibliotheca                                     |
+        | CATEGORIES  | Westerns, Western Romance, Contemporary Romance |
       And Description has text
     """
-    In Agatha Christie’s classic, A Pocket Full of Rye, the bizarre death of a financial tycoon has Miss Marple investigating a very odd case of crime by rhyme.
-    Rex Fortescue, king of a financial empire, was sipping tea in his “counting house” when he suffered an agonizing and sudden death. On later inspection, the pockets of the deceased were found to contain traces of cereals.
-    Yet, it was the incident in the parlor which confirmed Miss Marple’s suspicion that here she was looking at a case of crime by rhyme. . . .
+    Two unforgiving lovers reunite for the sake of their child in this fiery contemporary romance from the New York Times bestselling author of Surrender.
     """
     When I open related books
     Then Current category name is 'Related books…'
-      And Count of books in subcategory 'Christie, Agatha' lane is more then 1
-    When I open 'Christie, Agatha' subcategory
-    Then Current category name is 'Christie, Agatha'
+      And Count of books in subcategory 'Johnston, Joan' lane is more then 1
+    When I open 'Johnston, Joan' subcategory
+    Then Current category name is 'Johnston, Joan'
       And Count of books in search result is more then 1
 
   @tier1 @exclude_android @fixed
