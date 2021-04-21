@@ -15,19 +15,6 @@ public class AndroidCatalogSteps extends AbstractCatalogSteps {
     }
 
     @Override
-    public void openLibraryFromSideMenu(String libraryName) {
-        bottomMenuForm.open(BottomMenu.CATALOG);
-        mainCatalogToolbarForm.chooseAnotherLibrary();
-        catalogScreen.openLibrary(libraryName);
-        if (notificationModal.isModalPresent()) {
-            notificationModal.closeCannotAddBookModalIfDisplayed();
-            catalogScreen.openLibrary(libraryName);
-        }
-        catalogScreen.state().waitForDisplayed();
-        AqualityServices.getConditionalWait().waitFor(() -> catalogBooksScreen.getFoundBooksCount() > 0);
-    }
-
-    @Override
     public void checkCurrentCategoryName(String expectedCategoryName) {
         Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(() -> mainCatalogToolbarForm.getCategoryName().equals(expectedCategoryName), "Wait while category become correct."),
                 String.format("Current category name is not correct. Expected '%1$s' but found '%2$s'", expectedCategoryName, mainCatalogToolbarForm.getCategoryName()));

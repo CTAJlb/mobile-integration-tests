@@ -47,7 +47,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     protected final FacetedSearchScreen facetedSearchScreen;
     protected final ScenarioContext context;
     protected final NotificationModal notificationModal;
-    protected final AlertScreen alertScreen;
+    private final AlertScreen alertScreen;
 
     public AbstractCatalogSteps(ScenarioContext context) {
         this.context = context;
@@ -86,7 +86,18 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
                 "Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")));
     }
 
-    public abstract void openLibraryFromSideMenu(String libraryName);
+    @Override
+    public void openLibraryFromSideMenu(String libraryName) {
+        bottomMenuForm.open(BottomMenu.CATALOG);
+        mainCatalogToolbarForm.chooseAnotherLibrary();
+        catalogScreen.openLibrary(libraryName);
+        if (notificationModal.isModalPresent()) {
+            notificationModal.closeCannotAddBookModalIfDisplayed();
+            catalogScreen.openLibrary(libraryName);
+        }
+        catalogScreen.state().waitForDisplayed();
+        AqualityServices.getConditionalWait().waitFor(() -> catalogBooksScreen.getFoundBooksCount() > 0);
+    }
 
     @Override
     public void openCatalogWithAgeCheck() {

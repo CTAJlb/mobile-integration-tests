@@ -15,19 +15,6 @@ public class IosCatalogSteps extends AbstractCatalogSteps {
     }
 
     @Override
-    public void openLibraryFromSideMenu(String libraryName) {
-        bottomMenuForm.open(BottomMenu.CATALOG);
-        mainCatalogToolbarForm.chooseAnotherLibrary();
-        catalogScreen.openLibrary(libraryName);
-        if (notificationModal.isModalPresent()) {
-            notificationModal.closeCannotAddBookModalIfDisplayed();
-            catalogScreen.openLibrary(libraryName);
-        }
-        catalogScreen.state().waitForDisplayed();
-        AqualityServices.getConditionalWait().waitFor(() -> catalogBooksScreen.getFoundBooksCount() > 0);
-    }
-
-    @Override
     public void checkCurrentCategoryName(String expectedCategoryName) {
         if (expectedCategoryName.equals("Related Books")) {
             Assert.assertTrue(bookDetailsScreen.isRelatedBooksVisible(), "Related books are not visible");
