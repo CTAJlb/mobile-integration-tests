@@ -62,17 +62,33 @@ public class XMLUtil {
 
             for (EntryXML entry : feedModel.getEntries()) {
                 boolean isCopiesPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getCopies() != null);
-               /* boolean isPdfPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition().getInternalIndirectAcquisition().getType().toLowerCase().contains("pdf"));
-                boolean isVndAdobeAdeptPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition().getType().toLowerCase().contains("vnd.adobe.adept"));
-                boolean isLibrarySimplifiedPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition().getType().toLowerCase().contains("librarysimplified"));
-             */   boolean isEnLanguagePresent = entry.getLanguage().toLowerCase().equals("en");
+
+                 boolean isEnLanguagePresent = entry.getLanguage().toLowerCase().equals("en");
                 if (!isCopiesPresent || !isEnLanguagePresent) {
                     continue;
                 }
+                boolean isPdfAndVndAdobeAdeptPresent = false;
+                boolean isPdfPresent = false;
+                boolean isIndirectAcquisitionTagPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition() != null);
+                if (isIndirectAcquisitionTagPresent) {
+                    LinkFromEntry linkFromEntry = entry.getLinksFromEntry().stream().filter(link -> link.getIndirectAcquisition() != null).findFirst().get();
+                    if (linkFromEntry.getIndirectAcquisition().getType().toLowerCase().equals("vnd.adobe.adept")) {
+                        isPdfPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition().getInternalIndirectAcquisition().getType().toLowerCase().contains("pdf"));
+                        if (isPdfPresent) {
+                            isPdfAndVndAdobeAdeptPresent = true;
+                        }
+                    }
+                }
 
-                /*if ((isPdfPresent && isVndAdobeAdeptPresent) || isLibrarySimplifiedPresent) {
+                boolean isLibrarySimplifiedPresent = false;
+                if (isIndirectAcquisitionTagPresent) {
+                    LinkFromEntry linkFromEntry = entry.getLinksFromEntry().stream().filter(link -> link.getIndirectAcquisition() != null).findFirst().get();
+                    isLibrarySimplifiedPresent = linkFromEntry.getIndirectAcquisition().getType().toLowerCase().contains("librarysimplified");
+                }
+
+                if (isPdfAndVndAdobeAdeptPresent || isLibrarySimplifiedPresent) {
                     continue;
-                }*/
+                }
 
                 int countAvailableCopies = entry.getLinksFromEntry().stream().filter(link -> link.getCopies() != null).findFirst().get().getCopies().getCountAvailableCopies();
 

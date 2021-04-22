@@ -108,7 +108,7 @@ Feature: Catalog Navigation
     When I change books visibility to show YOURS_TO_KEEP
     Then All books can be downloaded
 
-  @tier1 @exclude_ios @fixed
+  @tier1 @exclude_ios @fixed @ignore
   Scenario: View Book Details
     When I add 'LYRASIS' account
       And I open Catalog
@@ -137,7 +137,7 @@ Feature: Catalog Navigation
     Then Current category name is 'Johnston, Joan'
       And Count of books in search result is more then 1
 
-  @tier1 @exclude_android @fixed
+  @tier1 @exclude_android @fixed @ignore
   Scenario: View Book Details (iOS)
     When I add 'LYRASIS' account
       And I open Catalog
