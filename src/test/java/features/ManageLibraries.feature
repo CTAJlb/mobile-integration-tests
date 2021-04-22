@@ -50,7 +50,7 @@ Feature: Manage Libraries
       And I switch to 'LYRASIS' from side menu
       And I open search modal
     When I search for 'This Is the Fire'
-      And I open book with name 'This Is the Fire' and save it as 'bookInfo'
+      And I open 'EBOOK' book with name 'This Is the Fire' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And I press on the book details screen at the action button RESERVE
     Then I check that opened book contains CANCEL button at book details screen

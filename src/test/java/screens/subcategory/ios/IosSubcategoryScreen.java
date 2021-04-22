@@ -70,21 +70,21 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
-    public CatalogBookModel openBookByName(String bookName) {
+    public CatalogBookModel openBookByName(String bookName, String bookType) {
+        String titleForLocator = "";
+        if(bookType.toLowerCase().equals("audiobook") && AqualityServices.getApplicationProfile().getPlatformName().name().toLowerCase().equals("ios")){
+            titleForLocator = bookName + ". Audiobook.";
+        }
         try {
             Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        ILabel lblBookName = getElementFactory().getLabel(MobileBy.AccessibilityId(bookName), bookName);
+        ILabel lblBookName = getElementFactory().getLabel(MobileBy.AccessibilityId(titleForLocator), bookName);
         ILabel lblAuthor =
-                getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_LOCATOR_PATTERN, bookName) + AUTHOR_LABEL_LOCATOR_PATTERN), bookName);
-        String bookTitle = bookName;
-        if (bookName.toLowerCase().contains(". Audiobook.".toLowerCase())){
-            bookTitle = bookName.replaceAll(". Audiobook.", "");
-        }
+                getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_LOCATOR_PATTERN, titleForLocator) + AUTHOR_LABEL_LOCATOR_PATTERN), bookName);
         CatalogBookModel bookInfo = new CatalogBookModel()
-                .setTitle(bookTitle)
+                .setTitle(bookName)
                 .setAuthor(lblAuthor.getText());
         lblBookName.click();
         return bookInfo;

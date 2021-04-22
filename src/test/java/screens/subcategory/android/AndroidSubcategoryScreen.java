@@ -89,7 +89,7 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
-    public CatalogBookModel openBookByName(String bookName) {
+    public CatalogBookModel openBookByName(String bookName, String bookType) {
         String locator = String.format(BOOK_WITH_GIVEN_NAME_LOCATOR_PATTERN, bookName);
 
         CatalogBookModel bookInfo = new CatalogBookModel()

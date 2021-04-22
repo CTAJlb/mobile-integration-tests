@@ -32,7 +32,7 @@ Feature: Book Transactions
       And I search 'unavailable' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
     Then Subcategory screen is present
-    When I open book 'bookNameInfo' and save it as 'bookInfo'
+    When I open '<bookType>' book 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And I press on the book details screen at the action button RESERVE
     Then I check that opened book contains CANCEL button at book details screen
@@ -157,7 +157,7 @@ Feature: Book Transactions
       And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
     Then Subcategory screen is present
-    When I open book 'bookNameInfo' and save it as 'bookInfo'
+    When I open '<bookType>' book 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And Get book on the book details screen
     Then Opened book contains read button at book details screen
@@ -236,7 +236,7 @@ Feature: Book Transactions
     And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
     And I switch to '<tabName>' catalog tab
     Then Subcategory screen is present
-    When I open book 'bookNameInfo' and save it as 'bookInfo'
+    When I open '<bookType>' book 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
     And Get book on the book details screen
     Then Opened book contains read button at book details screen
@@ -276,7 +276,7 @@ Feature: Book Transactions
       And I switch to 'LYRASIS' from side menu
       And I open search modal
     When I search for 'Imagine You Are An Aluminum Atom'
-      And I open book with name 'Imagine You Are An Aluminum Atom' and save it as 'bookInfo'
+      And I open '<bookType>' book with name 'Imagine You Are An Aluminum Atom' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And I press on the book details screen at the action button RESERVE
     Then I check that opened book contains CANCEL button at book details screen
@@ -292,7 +292,7 @@ Feature: Book Transactions
       And I switch to 'LYRASIS' from side menu
       And I open search modal
     When I search for 'The Land of Stories Complete Gift Set'
-      And I open book with name 'The Land of Stories Complete Gift Set' and save it as 'bookInfo'
+      And I open 'EBOOK' book with name 'The Land of Stories Complete Gift Set' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And I press on the book details screen at the action button RESERVE
     Then I check that opened book contains CANCEL button at book details screen
@@ -310,7 +310,7 @@ Feature: Book Transactions
       And I switch to 'LYRASIS' from side menu
       And I open search modal
     When I search for 'Song of Spider-Man'
-      And I open book with name 'Song of Spider-Man' and save it as 'bookInfo'
+      And I open 'EBOOK' book with name 'Song of Spider-Man' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And I press on the book details screen at the action button RESERVE
     Then I check that opened book contains CANCEL button at book details screen
@@ -328,7 +328,7 @@ Feature: Book Transactions
       And I switch to 'LYRASIS' from side menu
       And I open search modal
     When I search for 'Sesame Street 5-Minute Stories (Sesame Street)'
-      And I open book with name 'Sesame Street 5-Minute Stories (Sesame Street)' and save it as 'bookInfo'
+      And I open 'EBOOK' book with name 'Sesame Street 5-Minute Stories (Sesame Street)' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And I press on the book details screen at the action button RESERVE
     Then I check that opened book contains CANCEL button at book details screen
