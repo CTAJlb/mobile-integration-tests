@@ -71,9 +71,9 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
 
     @Override
     public CatalogBookModel openBookByName(String bookName, String bookType) {
-        String titleForLocator = "";
+        String titleForLocator = bookName;
         if(bookType.toLowerCase().equals("audiobook") && AqualityServices.getApplicationProfile().getPlatformName().name().toLowerCase().equals("ios")){
-            titleForLocator = bookName + ". Audiobook.";
+            titleForLocator = titleForLocator + ". Audiobook.";
         }
         try {
             Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
