@@ -9,10 +9,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.jaxb.JaxbConverterFactory;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -48,6 +45,24 @@ public class XMLUtil {
         }
     }
 
+    public void getStatistics() {
+        HashMap<String, HashMap<String, List<BookModel>>> hashMap = new HashMap<>();
+        hashMap.put("AvailableEbooks".toLowerCase(), hashMapAvailableEbooks);
+        hashMap.put("AvailableAudiobooks".toLowerCase(), hashMapAvailableAudiobooks);
+        hashMap.put("UnavailableEbooks".toLowerCase(), hashMapUnavailableEbooks);
+        hashMap.put("UnavailableAudiobooks".toLowerCase(), hashMapUnavailableAudiobooks);
+        for (Map.Entry<String, HashMap<String, List<BookModel>>> mapOfSpecificType : hashMap.entrySet()) {
+            String typeAndAvailabilityOfBooks = mapOfSpecificType.getKey();
+            AqualityServices.getLogger().info("typeAndAvailabilityOfBooks: " + typeAndAvailabilityOfBooks);
+            for (Map.Entry<String, List<BookModel>> map : mapOfSpecificType.getValue().entrySet()) {
+                AqualityServices.getLogger().info("Statistics: ");
+                AqualityServices.getLogger().info("Distributor: " + map.getKey());
+                AqualityServices.getLogger().info("CountOfBooks: " + map.getValue().size());
+                AqualityServices.getLogger().info("+++++++++++++++++++++++++++++++++++++++++++++++");
+            }
+        }
+    }
+
     private void setListAvailableAndUnavailableBooksAnyTypeMayBeWithRepeat() {
         String url = partOfURL;
         ArrayList<BookModel> listAvailableBooksAnyType = new ArrayList<>();
@@ -63,7 +78,7 @@ public class XMLUtil {
             for (EntryXML entry : feedModel.getEntries()) {
                 boolean isCopiesPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getCopies() != null);
 
-                 boolean isEnLanguagePresent = entry.getLanguage().toLowerCase().equals("en");
+                boolean isEnLanguagePresent = entry.getLanguage().toLowerCase().equals("en");
                 if (!isCopiesPresent || !isEnLanguagePresent) {
                     continue;
                 }
@@ -210,7 +225,7 @@ public class XMLUtil {
             e.printStackTrace();
         }
 
-        if(response.body() == null){
+        if (response.body() == null) {
             AqualityServices.getLogger().info("ResponseCode: " + response.code());
             AqualityServices.getLogger().info("ResponseToString: " + response.toString());
         }
