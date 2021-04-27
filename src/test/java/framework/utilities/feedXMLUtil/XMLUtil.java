@@ -83,12 +83,11 @@ public class XMLUtil {
                     continue;
                 }
                 boolean isPdfAndVndAdobeAdeptPresent = false;
-                boolean isPdfPresent = false;
                 boolean isIndirectAcquisitionTagPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition() != null);
                 if (isIndirectAcquisitionTagPresent) {
                     LinkFromEntry linkFromEntry = entry.getLinksFromEntry().stream().filter(link -> link.getIndirectAcquisition() != null).findFirst().get();
-                    if (linkFromEntry.getIndirectAcquisition().getType().toLowerCase().equals("vnd.adobe.adept")) {
-                        isPdfPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition().getInternalIndirectAcquisition().getType().toLowerCase().contains("pdf"));
+                    if (linkFromEntry.getIndirectAcquisition().getType().toLowerCase().contains("vnd.adobe.adept".toLowerCase())) {
+                        boolean isPdfPresent = linkFromEntry.getIndirectAcquisition().getInternalIndirectAcquisition().getType().toLowerCase().contains("pdf".toLowerCase());
                         if (isPdfPresent) {
                             isPdfAndVndAdobeAdeptPresent = true;
                         }
@@ -98,7 +97,7 @@ public class XMLUtil {
                 boolean isLibrarySimplifiedPresent = false;
                 if (isIndirectAcquisitionTagPresent) {
                     LinkFromEntry linkFromEntry = entry.getLinksFromEntry().stream().filter(link -> link.getIndirectAcquisition() != null).findFirst().get();
-                    isLibrarySimplifiedPresent = linkFromEntry.getIndirectAcquisition().getType().toLowerCase().contains("librarysimplified");
+                    isLibrarySimplifiedPresent = linkFromEntry.getIndirectAcquisition().getType().toLowerCase().contains("librarysimplified".toLowerCase());
                 }
 
                 if (isPdfAndVndAdobeAdeptPresent || isLibrarySimplifiedPresent) {
