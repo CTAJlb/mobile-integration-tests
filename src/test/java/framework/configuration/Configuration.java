@@ -32,17 +32,4 @@ public class Configuration {
         ConfigurationStorage.lockCredentials(randomCredentialsKey);
         return credentials;
     }
-
-    public static String getOpds(String libraryName) {
-        Properties systemEnvironments = System.getProperties();
-        ArrayList<String> listOfCredentials = new ArrayList<>();
-        String variableNameBeginning = "feed.";
-        if (systemEnvironments.keySet().stream().anyMatch(x -> ((String) x).startsWith(variableNameBeginning))) {
-            Stream<Object> foundVariables = systemEnvironments.keySet().stream().filter(x -> x.equals(variableNameBeginning + libraryName));
-            foundVariables.forEach(x -> listOfCredentials.add((String) systemEnvironments.get(x)));
-        } else {
-            listOfCredentials.add((String) Environment.getEnvironment().getMap("/feed").get(libraryName));
-        }
-        return listOfCredentials.get(RandomUtils.nextInt(0, listOfCredentials.size()));
-    }
 }

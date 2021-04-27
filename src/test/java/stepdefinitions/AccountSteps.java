@@ -40,14 +40,6 @@ public class AccountSteps {
     private final CatalogScreen catalogScreen;
     private final NotificationModal notificationModal;
     private ScenarioContext context;
-    public final static HashMap<String, String> libraryNamesList;
-
-    static {
-        libraryNamesList = new HashMap<>();
-        libraryNamesList.put("New York Public Library - QA Server - reservation only", "New York Public Library - QA Server");
-        libraryNamesList.put("New York Public Library - QA Server", "New York Public Library - QA Server");
-        libraryNamesList.put("LYRASIS", "LYRASIS");
-    }
 
     @Inject
     public AccountSteps(ScenarioContext context) {
@@ -105,38 +97,6 @@ public class AccountSteps {
         bottomMenuForm.open(BottomMenu.SETTINGS);
         openAccounts();
         accountsScreen.openAccount(libraryName);
-    }
-
-    @When("I add custom {string} opds feed")
-    public void addCustomOpdsFeed(String feedName) {
-        String libraryName = libraryNamesList.get(feedName);
-        if (ageGateScreen.state().waitForDisplayed()) {
-            ageGateScreen.approveAge();
-        }
-        bottomMenuForm.open(BottomMenu.SETTINGS);
-        Assert.assertTrue(settingsScreen.openDebugButton(), "Feed menu wasn't opened");
-        settingsScreen.openDebugMode();
-        debugOptionsScreen.addCustomOpds();
-        addCustomOpdsScreen.enterOpds(Configuration.getOpds(feedName));
-        Assert.assertTrue(addCustomOpdsScreen.isFeedAdded(), "Opds feed is not added");
-        bottomMenuForm.open(BottomMenu.SETTINGS);
-        bottomMenuForm.open(BottomMenu.CATALOG);
-        mainCatalogToolbarForm.chooseAnotherLibrary();
-        catalogScreen.openLibrary(libraryName);
-        if (notificationModal.isModalPresent()) {
-            notificationModal.closeCannotAddBookModalIfDisplayed();
-            catalogScreen.openLibrary(libraryName);
-        }
-        accountScreen.enterCredentials(Configuration.getCredentials(feedName));
-        if (!settingsScreen.state().waitForDisplayed()) {
-            Assert.assertTrue(accountScreen.isLogoutRequired() || catalogScreen.state().waitForDisplayed(),
-                    "Login failed. Message: " + accountScreen.getLoginFailedMessage() + catalogScreen.getErrorDetails());
-        }
-        bottomMenuForm.open(BottomMenu.CATALOG);
-
-        saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
-        saveLibraryInContext(ContextLibrariesKeys.CANCEL_GET.getKey(), libraryName);
-        saveLibraryInContext(ContextLibrariesKeys.CANCEL_HOLD.getKey(), libraryName);
     }
 
     private void saveLibraryInContext(String key, String libraryName) {

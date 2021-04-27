@@ -3,24 +3,6 @@ Feature: Book Transactions
   Background:
     Given Application is opened
 
-  @logout @returnBooks @tier2 @exclude_ios @ignore
-  Scenario Outline: Hold from Book Detail View (feed)
-    When I add custom '<feedName>' opds feed
-      And I open <bookType> book from '<laneName>' lane and save book info as 'bookInfo'
-      And I press on the book details screen at the action button RESERVE
-    Then I check that opened book contains CANCEL button at book details screen
-    When I open Holds
-    Then Book 'bookInfo' is present in Holds List
-
-    Scenarios:
-      | feedName                                               | laneName    | bookType  |
-      | New York Public Library - QA Server - reservation only | Axis 360    | EBOOK     |
-      | New York Public Library - QA Server - reservation only | Axis 360    | AUDIOBOOK |
-      | New York Public Library - QA Server - reservation only | Bibliotheca | EBOOK     |
-      | New York Public Library - QA Server - reservation only | Bibliotheca | AUDIOBOOK |
-      | New York Public Library - QA Server - reservation only | Overdrive   | EBOOK     |
-      | New York Public Library - QA Server - reservation only | Overdrive   | AUDIOBOOK |
-
   @logout @returnBooks @tier2 @xml
   Scenario Outline: Hold from Book Detail View (feed) XML
     When I add 'LYRASIS' account
@@ -117,35 +99,6 @@ Feature: Book Transactions
     When I open the book details for the subsequent GET and save it as 'bookInfo'
     Then I check that opened book contains READ button at book details screen
 
-  @logout @returnBooks @tier2 @exclude_ios @ignore
-  Scenario Outline: Check out from Book Detail View (feed)
-    When I add custom '<feedName>' opds feed
-      And I open <bookType> book from '<laneName>' lane and save book info as 'bookInfo'
-      And Get book on the book details screen
-    Then Opened book contains read button at book details screen
-    When I open Books
-    Then Book 'bookInfo' is present in Books List
-    When I open book 'bookInfo' details by clicking on cover
-    Then Opened book contains read button at book details screen
-    When I read <bookType> book
-    Then Reader screen for <bookType> type book 'bookInfo' is present
-
-    Scenarios:
-      | feedName                            | laneName                                      | bookType  |
-      | New York Public Library - QA Server | Axis 360                                      | AUDIOBOOK |
-      | New York Public Library - QA Server | Axis 360                                      | EBOOK     |
-      | New York Public Library - QA Server | Plympton                                      | EBOOK     |
-      | New York Public Library - QA Server | Bibliotheca                                   | EBOOK     |
-      | New York Public Library - QA Server | Bibliotheca                                   | AUDIOBOOK |
-      | New York Public Library - QA Server | Library Simplified Open Access Content Server | EBOOK     |
-      | New York Public Library - QA Server | Overdrive                                     | EBOOK     |
-      | New York Public Library - QA Server | Overdrive                                     | AUDIOBOOK |
-      | LYRASIS                             | DPLA Exchange                                 | EBOOK     |
-      | LYRASIS                             | DPLA Exchange                                 | AUDIOBOOK |
-      | LYRASIS                             | Johns Hopkins University Press                | EBOOK     |
-      | LYRASIS                             | Bibliotheca                                   | EBOOK     |
-      | LYRASIS                             | Bibliotheca                                   | AUDIOBOOK |
-
   @logout @returnBooks @tier2 @xml
   Scenario Outline: Check out from Book Detail View (feed) XML
     When I add 'LYRASIS' account
@@ -195,35 +148,6 @@ Feature: Book Transactions
     Then I check that the action button text equal to the GET
     When I open Books
     Then Book 'bookInfo' is not present in Books List
-
-  @logout @returnBooks @tier2 @exclude_ios @ignore
-  Scenario Outline: Return book (feed)
-    When I add custom '<feedName>' opds feed
-      And I open <bookType> book from '<laneName>' lane and save book info as 'bookInfo'
-      And Get book on the book details screen
-    Then Opened book contains read button at book details screen
-    When I open Books
-      And I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button RETURN
-    Then I check that the action button text equal to the GET
-    When I open Books
-    Then Book 'bookInfo' is not present in Books List
-
-    Scenarios:
-      | feedName                            | laneName                                      | bookType  |
-      | New York Public Library - QA Server | Axis 360                                      | AUDIOBOOK |
-      | New York Public Library - QA Server | Axis 360                                      | EBOOK     |
-      | New York Public Library - QA Server | Plympton                                      | EBOOK     |
-      | New York Public Library - QA Server | Bibliotheca                                   | EBOOK     |
-      | New York Public Library - QA Server | Bibliotheca                                   | AUDIOBOOK |
-      | New York Public Library - QA Server | Library Simplified Open Access Content Server | EBOOK     |
-      | New York Public Library - QA Server | Overdrive                                     | EBOOK     |
-      | New York Public Library - QA Server | Overdrive                                     | AUDIOBOOK |
-      | LYRASIS                             | DPLA Exchange                                 | EBOOK     |
-      | LYRASIS                             | DPLA Exchange                                 | AUDIOBOOK |
-      | LYRASIS                             | Johns Hopkins University Press                | EBOOK     |
-      | LYRASIS                             | Bibliotheca                                   | EBOOK     |
-      | LYRASIS                             | Bibliotheca                                   | AUDIOBOOK |
 
   @logout @returnBooks @tier2 @xml
   Scenario Outline: Return book (feed) XML

@@ -308,11 +308,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openTypeBookReader(readerType);
     }
 
-    @And("I open {} book from {string} lane and save book info as {string}")
-    public void openBookTypeBookFromLaneAndSaveBookInfoAs(ReaderType readerType, String laneName, String bookInfoKey) {
-        catalogSteps.openBookFromLane(readerType, laneName, bookInfoKey);
-    }
-
     @Then("Opened book contains read button at book details screen")
     public void checkBookWasBorrowedSuccessfully() {
         catalogSteps.checkBookWasBorrowedSuccessfully();
