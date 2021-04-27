@@ -118,19 +118,6 @@ public class AndroidCatalogScreen extends CatalogScreen {
     }
 
     @Override
-    public void openFirstBookFromLane(ReaderType readerType, String laneName) {
-        IButton label = getBookFromLaneLabel(readerType, laneName);
-        label.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        label.click();
-    }
-
-    @Override
-    public boolean isAnyBookPresentInLane(ReaderType readerType, String laneName) {
-        Set<String> allCategoriesNames = getAllCategoriesNames();
-        return allCategoriesNames.stream().anyMatch(x -> x.contains(String.format("{%s} - Medium {%s}", laneName, readerType.toString())));
-    }
-
-    @Override
     public void openFirstBookOfType(ReaderType readerType) {
         IButton button =
                 //todo temp workaround for skipping axis360 books
@@ -176,10 +163,6 @@ public class AndroidCatalogScreen extends CatalogScreen {
 
     @Override
     public void openFirstCategory() {
-    }
-
-    private IButton getBookFromLaneLabel(ReaderType readerType, String laneName) {
-        return getElementFactory().getButton(By.xpath(String.format(BOOK_IN_LANE_LOCATOR_PATTERN, laneName, readerType.toString())), laneName);
     }
 
     private List<String> getListOfVisibleBooksNamesInSubcategoryLane(String lineName) {

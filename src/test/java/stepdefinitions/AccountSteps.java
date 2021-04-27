@@ -3,7 +3,6 @@ package stepdefinitions;
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
 import constants.context.ContextLibrariesKeys;
-import framework.configuration.Configuration;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -11,19 +10,16 @@ import org.testng.Assert;
 import screens.account.AccountScreen;
 import screens.accounts.AccountsScreen;
 import screens.addaccount.AddAccountScreen;
-import screens.addcustomopdsfeed.AddCustomOpdsFeedScreen;
 import screens.agegate.AgeGateScreen;
 import screens.alert.AlertScreen;
 import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
 import screens.catalog.form.MainCatalogToolbarForm;
 import screens.catalog.screen.catalog.CatalogScreen;
-import screens.debugoptionsscreen.DebugOptionsScreen;
 import screens.notifications.NotificationModal;
 import screens.settings.SettingsScreen;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class AccountSteps {
@@ -33,8 +29,6 @@ public class AccountSteps {
     private final AddAccountScreen addAccountScreen;
     private final AlertScreen alertScreen;
     private final AccountScreen accountScreen;
-    private final DebugOptionsScreen debugOptionsScreen;
-    private final AddCustomOpdsFeedScreen addCustomOpdsScreen;
     private final AgeGateScreen ageGateScreen;
     private final MainCatalogToolbarForm mainCatalogToolbarForm;
     private final CatalogScreen catalogScreen;
@@ -50,8 +44,6 @@ public class AccountSteps {
         addAccountScreen = AqualityServices.getScreenFactory().getScreen(AddAccountScreen.class);
         alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
         accountScreen = AqualityServices.getScreenFactory().getScreen(AccountScreen.class);
-        debugOptionsScreen = AqualityServices.getScreenFactory().getScreen(DebugOptionsScreen.class);
-        addCustomOpdsScreen = AqualityServices.getScreenFactory().getScreen(AddCustomOpdsFeedScreen.class);
         ageGateScreen = AqualityServices.getScreenFactory().getScreen(AgeGateScreen.class);
         mainCatalogToolbarForm = AqualityServices.getScreenFactory().getScreen(MainCatalogToolbarForm.class);
         catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);

@@ -30,10 +30,6 @@ public abstract class CatalogScreen extends Screen {
 
     public abstract Set<String> getListOfAllBooksNamesInSubcategoryLane(String lineName);
 
-    public abstract void openFirstBookFromLane(ReaderType readerType, String laneName);
-
-    public abstract boolean isAnyBookPresentInLane(ReaderType readerType, String laneName);
-
     public abstract void openFirstBookOfType(ReaderType readerType);
 
     public abstract void swipeScreenUp();

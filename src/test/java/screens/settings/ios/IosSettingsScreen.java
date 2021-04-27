@@ -32,13 +32,4 @@ public class IosSettingsScreen extends SettingsScreen {
             AqualityServices.getLogger().info("Account page was opened");
         }
     }
-
-    @Override
-    public void openDebugMode() {
-    }
-
-    @Override
-    public boolean openDebugButton() {
-        return false;
-    }
 }

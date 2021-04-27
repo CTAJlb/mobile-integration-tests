@@ -127,15 +127,6 @@ public class IosCatalogScreen extends CatalogScreen {
     }
 
     @Override
-    public void openFirstBookFromLane(ReaderType readerType, String laneName) {
-    }
-
-    @Override
-    public boolean isAnyBookPresentInLane(ReaderType readerType, String laneName) {
-        return false;
-    }
-
-    @Override
     public void openFirstBookOfType(ReaderType readerType) {
     }
 
