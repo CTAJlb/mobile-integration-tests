@@ -27,7 +27,6 @@ import java.util.stream.IntStream;
 
 public abstract class AbstractLogoutHooks extends BaseSteps implements ILogoutHooks {
 
-    public static final int COUNT_OF_RETRIES = 5;
     protected final AccountScreen accountScreen;
     protected final AccountsScreen accountsScreen;
     protected final BottomMenuForm bottomMenuForm;
@@ -57,9 +56,8 @@ public abstract class AbstractLogoutHooks extends BaseSteps implements ILogoutHo
         alertScreen.closeNotNowModalIfPresent();
     }
 
-    protected void navigateBackIfBottomMenuIsNotVisibleUntilItIs() {
-        IntStream.range(0, COUNT_OF_RETRIES)
-                .filter(i -> !bottomMenuForm.state().waitForDisplayed())
-                .forEach(i -> applicationSteps.returnToPreviousPage());
+    protected void restartApp() {
+        AqualityServices.getApplication().getDriver().closeApp();
+        AqualityServices.getApplication().getDriver().launchApp();
     }
 }

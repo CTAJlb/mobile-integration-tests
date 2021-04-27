@@ -28,10 +28,11 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
     public void logout() {
         if (AqualityServices.getApplication().getDriver().queryAppState(context.get(ContextLibrariesKeys.APP_BUNDLE_ID.getKey())) == ApplicationState.NOT_RUNNING) {
             startAppIfCrashed();
-        }else {
+            alertScreen.closeModalIfPresent();
+        } else {
+            restartApp();
             alertScreen.closeModalIfPresent();
         }
-        navigateBackIfBottomMenuIsNotVisibleUntilItIs();
         List<String> listOfLibraries = context.get(ContextLibrariesKeys.LOG_OUT.getKey());
         for (String library : listOfLibraries) {
             if (!accountScreen.state().isDisplayed()) {
