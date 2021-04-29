@@ -49,13 +49,6 @@ public abstract class AbstractLogoutHooks extends BaseSteps implements ILogoutHo
 
     public abstract void logout();
 
-    protected void startAppIfCrashed() {
-        AqualityServices.getLogger().info("App crashed - restarting");
-        AqualityServices.getApplication().getDriver().launchApp();
-        alertScreen.closeModalIfPresent();
-        alertScreen.closeNotNowModalIfPresent();
-    }
-
     protected void restartApp() {
         AqualityServices.getApplication().getDriver().closeApp();
         AqualityServices.getApplication().getDriver().launchApp();

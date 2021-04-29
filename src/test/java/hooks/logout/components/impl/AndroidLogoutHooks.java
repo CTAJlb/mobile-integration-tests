@@ -20,11 +20,7 @@ public class AndroidLogoutHooks extends AbstractLogoutHooks {
 
     @Override
     public void logout() {
-        if (AqualityServices.getApplication().getDriver().queryAppState(context.get(ContextLibrariesKeys.APP_BUNDLE_ID.getKey())) == ApplicationState.NOT_RUNNING) {
-            startAppIfCrashed();
-        } else {
-            restartApp();
-        }
+        restartApp();
         List<String> listOfLibraries = context.get(ContextLibrariesKeys.LOG_OUT.getKey());
         for (String library : listOfLibraries) {
             if (!accountScreen.state().waitForDisplayed()) {
