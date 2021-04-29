@@ -86,7 +86,7 @@ public class XMLUtil {
                 boolean isIndirectAcquisitionTagPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition() != null);
                 if (isIndirectAcquisitionTagPresent) {
                     LinkFromEntry linkFromEntry = entry.getLinksFromEntry().stream().filter(link -> link.getIndirectAcquisition() != null).findFirst().get();
-                    if (linkFromEntry.getIndirectAcquisition().getType().toLowerCase().contains("vnd.adobe.adept".toLowerCase())) {
+                    if (linkFromEntry.getIndirectAcquisition().getType().toLowerCase().contains("vnd.adobe.adept+xml".toLowerCase())) {
                         boolean isPdfPresent = linkFromEntry.getIndirectAcquisition().getInternalIndirectAcquisition().getType().toLowerCase().contains("pdf".toLowerCase());
                         if (isPdfPresent) {
                             isPdfAndVndAdobeAdeptPresent = true;
@@ -97,7 +97,7 @@ public class XMLUtil {
                 boolean isLibrarySimplifiedPresent = false;
                 if (isIndirectAcquisitionTagPresent) {
                     LinkFromEntry linkFromEntry = entry.getLinksFromEntry().stream().filter(link -> link.getIndirectAcquisition() != null).findFirst().get();
-                    isLibrarySimplifiedPresent = linkFromEntry.getIndirectAcquisition().getType().toLowerCase().contains("librarysimplified".toLowerCase());
+                    isLibrarySimplifiedPresent = linkFromEntry.getIndirectAcquisition().getType().toLowerCase().contains("vnd.librarysimplified.axisnow+json".toLowerCase());
                 }
 
                 if (isPdfAndVndAdobeAdeptPresent || isLibrarySimplifiedPresent) {

@@ -24,7 +24,6 @@ public class LoggerHooks {
         Logger.getInstance().createAppender(scenario.getName());
         AqualityServices.getLogger().info(format("Scenario '%s' start", scenario.getName()));
         AqualityServices.getLogger().info("Session id - " + application.getDriver().getSessionId().toString());
-        XMLUtil.getInstance().getStatistics();
     }
 
     @After(order = 1)

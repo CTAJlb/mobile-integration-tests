@@ -384,6 +384,12 @@ public class ReaderSteps {
     }
 
     private void assertBookName(CatalogBookModel catalogBookModel) {
+        // TODO: 29.04.2021 deleted ThreadSleep
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         String expectedBookName = prepareBookName(catalogBookModel.getTitle());
         String actualBookName = prepareBookName(epubReaderScreen.getBookName());
         Assert.assertTrue(actualBookName.contains(expectedBookName),
