@@ -4,8 +4,11 @@ import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
 import constants.context.ContextLibrariesKeys;
 import framework.utilities.ScenarioContext;
+import io.appium.java_client.AppiumDriver;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 import screens.account.AccountScreen;
 import screens.accounts.AccountsScreen;
@@ -21,6 +24,7 @@ import screens.settings.SettingsScreen;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class AccountSteps {
     private final AccountsScreen accountsScreen;
@@ -57,6 +61,7 @@ public class AccountSteps {
         }
         openAccounts();
         accountsScreen.addAccount();
+        AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
         Assert.assertTrue(addAccountScreen.state().waitForDisplayed(),
                 "Checking that add accounts screen visible");
         addAccountScreen.selectLibrary(libraryName);
