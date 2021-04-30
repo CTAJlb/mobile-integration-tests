@@ -168,7 +168,6 @@ public class XMLUtil {
         int sch = 1;
 
         while (sch < 4) {
-            sch++;
             feedModel = getFeedModel(url);
             if (feedModel == null) {
                 try {
@@ -179,10 +178,15 @@ public class XMLUtil {
             } else {
                 break;
             }
+            sch++;
         }
 
         if (sch == 3) {
-            throw new RuntimeException("Bad Response, problem with server");
+            throw new RuntimeException("Bad Response, problem with server, Count of attempts: " + sch);
+        }
+
+        if(feedModel == null){
+            throw new RuntimeException("Bad Response, problem with server, feedModel == null");
         }
 
         return feedModel;
