@@ -4,7 +4,7 @@ public interface IApplicationSteps {
 
     void openApplication();
 
-    void returnToPreviousPage(String bookName);
+    void returnToPreviousPage();
 
     void restartApp();
 }

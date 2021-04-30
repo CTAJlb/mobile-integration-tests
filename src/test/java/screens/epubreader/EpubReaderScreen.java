@@ -42,5 +42,5 @@ public abstract class EpubReaderScreen extends Screen {
 
     public abstract void waitForBookLoading();
 
-    public abstract void returnToPreviousScreen(String bookName);
+    public abstract void returnToPreviousScreen();
 }

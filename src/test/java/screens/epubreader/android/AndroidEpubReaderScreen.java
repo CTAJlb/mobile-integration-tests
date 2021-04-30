@@ -160,7 +160,7 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public void returnToPreviousScreen(String bookName) {
+    public void returnToPreviousScreen() {
 
     }
 

@@ -32,7 +32,7 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Navigate View options
-    When I return to previous screen from 'Flower Fables'
+    When I return to previous screen
       And Press on the book details screen at the action button READ
     Then Book 'bookInfo' is present on screen
     When I open font choices for book
@@ -66,7 +66,7 @@ Feature: Read EPUB
   Scenario: Return to Page (Bookmarking)
     When I scroll page forward from 10 to 20 times
       And I save page info as 'pageInfo'
-      And I return to previous screen from 'Flower Fables'
+      And I return to previous screen
       And Press on the book details screen at the action button READ
     Then Book 'bookInfo' is present on screen
       And Page info 'pageInfo' is correct

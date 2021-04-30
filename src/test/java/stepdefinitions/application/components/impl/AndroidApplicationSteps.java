@@ -9,7 +9,7 @@ import stepdefinitions.application.components.AbstractApplicationSteps;
 public class AndroidApplicationSteps extends AbstractApplicationSteps {
 
     @Override
-    public void returnToPreviousPage(String bookName) {
+    public void returnToPreviousPage() {
         AqualityServices.getApplication().getDriver().navigate().back();
     }
 

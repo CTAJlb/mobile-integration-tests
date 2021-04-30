@@ -183,11 +183,11 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public void returnToPreviousScreen(String bookName) {
+    public void returnToPreviousScreen() {
         if (!btnFontSettings.state().isDisplayed()) {
             CoordinatesClickUtils.clickAtCenterOfScreen();
         }
-        AqualityServices.getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeButton[@name = \"%s\"]", bookName)), "arrowForComeBack").click();
+        AqualityServices.getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeButton[1]")), "arrowForComeBack").click();
     }
 
     private String getReaderInfo(String regex) {

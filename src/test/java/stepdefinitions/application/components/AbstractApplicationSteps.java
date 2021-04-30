@@ -16,7 +16,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     public abstract void openApplication();
 
-    public abstract void returnToPreviousPage(String bookName);
+    public abstract void returnToPreviousPage();
 
     @Override
     public void restartApp() {

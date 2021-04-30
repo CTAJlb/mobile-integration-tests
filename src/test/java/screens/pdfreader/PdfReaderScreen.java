@@ -29,4 +29,6 @@ public abstract class PdfReaderScreen extends Screen {
     public abstract void closeReader();
 
     public abstract void openTableOfContents();
+
+    public abstract void returnToPreviousScreen();
 }

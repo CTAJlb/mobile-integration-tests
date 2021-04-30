@@ -73,4 +73,9 @@ public class AndroidPdfReaderScreen extends PdfReaderScreen {
     public void openTableOfContents() {
         btnChapters.click();
     }
+
+    @Override
+    public void returnToPreviousScreen() {
+
+    }
 }

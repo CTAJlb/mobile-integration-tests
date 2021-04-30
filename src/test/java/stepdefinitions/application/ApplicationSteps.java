@@ -31,9 +31,9 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         context.add(ContextLibrariesKeys.APP_BUNDLE_ID.getKey(), getBundleId());
     }
 
-    @And("I return to previous screen from {string}")
-    public void returnToPreviousPage(String bookName) {
-        applicationSteps.returnToPreviousPage(bookName);
+    @And("I return to previous screen")
+    public void returnToPreviousPage() {
+        applicationSteps.returnToPreviousPage();
     }
 
     @When("I restart app")
