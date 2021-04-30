@@ -16,10 +16,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     public abstract void openApplication();
 
-    @Override
-    public void returnToPreviousPage() {
-        AqualityServices.getApplication().getDriver().navigate().back();
-    }
+    public abstract void returnToPreviousPage(String bookName);
 
     @Override
     public void restartApp() {

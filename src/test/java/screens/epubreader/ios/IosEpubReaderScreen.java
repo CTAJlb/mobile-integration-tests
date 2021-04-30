@@ -92,12 +92,6 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public String getPageNumberInfo() {
-        //state().waitForDisplayed();
-        /*try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
         if (btnFontSettings.state().isDisplayed()) {
             CoordinatesClickUtils.clickAtCenterOfScreen();
         }
@@ -186,6 +180,14 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public void waitForBookLoading() {
+    }
+
+    @Override
+    public void returnToPreviousScreen(String bookName) {
+        if (!btnFontSettings.state().isDisplayed()) {
+            CoordinatesClickUtils.clickAtCenterOfScreen();
+        }
+        AqualityServices.getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeButton[@name = \"%s\"]", bookName)), "arrowForComeBack").click();
     }
 
     private String getReaderInfo(String regex) {

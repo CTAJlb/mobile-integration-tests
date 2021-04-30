@@ -159,6 +159,11 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
         lblPageNumber.state().waitForDisplayed(Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getTimeoutMillis()));
     }
 
+    @Override
+    public void returnToPreviousScreen(String bookName) {
+
+    }
+
     private String getReaderInfo(String regex) {
         return RegExUtil.getStringFromFirstGroup(getBookSource(), regex);
     }
