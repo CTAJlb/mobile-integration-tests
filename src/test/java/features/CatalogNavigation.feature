@@ -108,77 +108,63 @@ Feature: Catalog Navigation
     When I change books visibility to show YOURS_TO_KEEP
     Then All books can be downloaded
 
-  @tier1 @exclude_ios
+  @tier1 @exclude_ios @fixed @ignore
   Scenario: View Book Details
-    When I add 'The New York Public Library' account
+    When I add 'LYRASIS' account
       And I open Catalog
-      And I switch to 'The New York Public Library' from side menu
+      And I switch to 'LYRASIS' from side menu
     When I open search modal
     Then Search modal is opened
-    When I search for 'Tom Swift and His War Tank: Or, Doing His Bit for Uncle Sam'
+    When I search for 'Sullivan\'s Promise'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When I open book with name 'Tom Swift and His War Tank: Or, Doing His Bit for Uncle Sam' and save it as 'bookInfo'
+    When I open 'EBOOK' book with name 'Sullivan\'s Promise' and save it as 'bookInfo'
+    Then Book 'bookInfo' is opened
+      And The following values in the information block are present:
+        | key         | value                                           |
+        | PUBLISHED   | 2021-03-05                                      |
+        | PUBLISHER   | Random House Publishing Group                   |
+        | DISTRIBUTOR | Bibliotheca                                     |
+        | CATEGORIES  | Westerns, Western Romance, Contemporary Romance |
+      And Description has text
+    """
+    Two unforgiving lovers reunite for the sake of their child in this fiery contemporary romance from the New York Times bestselling author of Surrender.
+    """
+    When I open related books
+    Then Current category name is 'Related books…'
+      And Count of books in subcategory 'Johnston, Joan' lane is more then 1
+    When I open 'Johnston, Joan' subcategory
+    Then Current category name is 'Johnston, Joan'
+      And Count of books in search result is more then 1
+
+  @tier1 @exclude_android @fixed @ignore
+  Scenario: View Book Details (iOS)
+    When I add 'LYRASIS' account
+      And I open Catalog
+      And I switch to 'LYRASIS' from side menu
+    When I open search modal
+    Then Search modal is opened
+    When I search for 'UnEnchanted'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+    When I open 'EBOOK' book with name 'UnEnchanted' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And The following values in the information block are present:
         | key         | value                     |
-        | PUBLISHED   | 2020-09-28                |
-        | PUBLISHER   | Duke Classics             |
-        | DISTRIBUTOR | Overdrive                 |
-        | CATEGORIES  | Classics, Science Fiction |
+        | PUBLISHED   | 29. December 2011         |
+        | PUBLISHER   | Chanda Hahn               |
+        | DISTRIBUTOR | Bibliotheca               |
+        | CATEGORIES  | Fantasy; Folklore; Horror |
       And Description has text
     """
-    	Tom Swift and His War Tank is the 21st book in the original Tom Swift series.
-
-"Every boy possesses some form of inventive genius. Tom Swift is a bright, ingenious boy and his inventions and adventures make the most interesting kind of reading."
-
-"These spirited tales convey in a realistic way, the wonderful advances in land and sea locomotion and other successful inventions. Stories like these are impressed upon the memory and their reading is productive only of good."
-
-This series of adventure novels starring the genius boy inventor Tom Swift falls into the genre of "invention fiction" or "Edisonade".
-    """
+    	Mina Grime is unlucky, unpopular and uncoordinated, that is until she saves her crush's life on a field trip, changing her High School status from loser to hero overnight.
+    	But with her new found fame brings misfortune in the form of an old family curse come to light.
+    	For Mina is descended from the Brothers Grimm and has inherited all of their unfinished fairy tale business. Which includes
+    	trying to outwit a powerful Story from making her its next fairytale victim.To break the fairy tale curse on her family and make these deadly
+    	occurrences stop, Mina must finish the tales until the very Grimm end.
+     """
     When I open related books
-    Then Current category name is 'Related books…'
-      And Count of books in subcategory 'Victor Appleton' lane is more then 1
-    When I open 'Victor Appleton' subcategory
-    Then Current category name is 'Victor Appleton'
-      And Count of books in search result is more then 1
-    When I return to previous screen
-    Then Current category name is 'Related books…'
-      And Count of books in subcategory 'Tom Swift' lane is more then 1
-    When I open 'Tom Swift' subcategory
-    Then Current category name is 'Tom Swift'
-      And Count of books in search result is more then 1
-
-  @tier1 @exclude_android
-  Scenario: View Book Details (iOS)
-    When I add 'The New York Public Library' account
-      And I open Catalog
-      And I switch to 'The New York Public Library' from side menu
-    When I open search modal
-    Then Search modal is opened
-    When I search for 'Harry Potter and the Order of the Phoenix'
-      And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    When I open book with name 'Harry Potter and the Order of the Phoenix' and save it as 'bookInfo'
-    Then Book 'bookInfo' is opened
-      And The following values in the information block are present:
-        | key         | value                 |
-        | PUBLISHED   | 2015-12-08            |
-        | PUBLISHER   | Pottermore Publishing |
-        | DISTRIBUTOR | Overdrive             |
-        | CATEGORIES  | Fantasy               |
-      And Description has text
-    """
-    'You are sharing the Dark Lord's thoughts and emotions. The Headmaster thinks it inadvisable for this to continue. He wishes me to teach you how to close your mind to the Dark Lord.'
-Dark times have come to Hogwarts. After the Dementors' attack on his cousin Dudley, Harry Potter knows that Voldemort will stop at nothing to find him. There are many who deny the Dark Lord's return, but Harry is not alone: a secret order gathers at Grimmauld Place to fight against the Dark forces. Harry must allow Professor Snape to teach him how to protect himself from Voldemort's savage assaults on his mind. But they are growing stronger by the day and Harry is running out of time...
-    """
-    When I open related books
-    Then Count of books in subcategory 'J. K. Rowling' lane is up to 12
-    When I open 'J. K. Rowling' subcategory
-    Then Current category name is 'J. K. Rowling'
-      And Count of books in search result is up to 12
-    When I return to previous screen
-    Then Count of books in subcategory 'Harry Potter' lane is up to 12
-    When I open 'Harry Potter' subcategory
-    Then Current category name is 'Harry Potter'
-      And Count of books in search result is up to 12
+    Then Count of books in subcategory 'Chanda Hahn' lane is up to 3
+    When I open 'Chanda Hahn' subcategory
+    Then Current category name is 'Chanda Hahn'
+      And Count of books in search result is up to 3

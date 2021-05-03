@@ -14,10 +14,6 @@ import java.time.Duration;
 public class AndroidSettingsScreen extends SettingsScreen {
     private final IButton accountsBtn =
             getElementFactory().getButton(By.xpath("//android.widget.RelativeLayout/android.widget.TextView[contains(@text, \"Accounts\")]"), "Accounts");
-    private final IButton buildBtn =
-            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@text, \"Build\")]"), "Build");
-    private final IButton btnDebugOptions =
-            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@text, \"Debug options\")]"), "Debug options");
 
     public AndroidSettingsScreen() {
         super(By.xpath("//android.widget.TextView[contains(@text, \"App info\")]"));
@@ -26,18 +22,5 @@ public class AndroidSettingsScreen extends SettingsScreen {
     @Override
     public void openAccounts() {
         accountsBtn.click();
-    }
-
-    @Override
-    public boolean openDebugButton() {
-        return AqualityServices.getConditionalWait().waitFor(() -> {
-            buildBtn.click();
-            return btnDebugOptions.state().isDisplayed();
-        }, Duration.ofMillis(AuthorizationTimeouts.DEBUG_MENU_IS_OPENED.getTimeoutMillis()));
-    }
-
-    @Override
-    public void openDebugMode() {
-        btnDebugOptions.click();
     }
 }

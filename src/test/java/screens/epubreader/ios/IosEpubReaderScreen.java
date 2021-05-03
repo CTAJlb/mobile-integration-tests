@@ -32,11 +32,11 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     private static final String CHAPTER_ITEM_LOC = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[@name=\"%1$s\"]";
 
     private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar"), "Book Cover", ElementState.EXISTS_IN_ANY_STATE);
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]"), "Book Cover", ElementState.EXISTS_IN_ANY_STATE);
     private final ILabel lblPageNumber =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeProgressIndicator/following-sibling::XCUIElementTypeStaticText"), "Page Number");
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeStaticText"), "Page Number");
     private final ILabel lblPage =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/following-sibling::XCUIElementTypeOther"), "Page View");
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "Page View");
     private final IButton btnFontSettings = getElementFactory().getButton(
             By.xpath("//XCUIElementTypeButton[@name=\"Toggle reader settings\"]"), "Chapters");
     private final IButton btnChapters =
@@ -55,7 +55,6 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public String getBookName() {
-        checkThatBookOpenedAndOpenMenus();
         String text = lblBookName.getAttribute(IosAttributes.NAME);
         AqualityServices.getLogger().info("Book name - " + text);
         return text;
@@ -63,7 +62,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public boolean isBookNamePresent() {
-        return false;
+        return lblBookName.state().waitForDisplayed();
     }
 
     @Override
@@ -93,12 +92,18 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public String getPageNumberInfo() {
-        state().waitForDisplayed();
-        return lblPageNumber.getText();
+        if (btnFontSettings.state().isDisplayed()) {
+            CoordinatesClickUtils.clickAtCenterOfScreen();
+        }
+        lblPageNumber.state().waitForDisplayed();
+        return lblPageNumber.getAttribute(IosAttributes.NAME);
     }
 
     @Override
     public Set<String> getListOfChapters() {
+        if (!btnFontSettings.state().isDisplayed()) {
+            CoordinatesClickUtils.clickAtCenterOfScreen();
+        }
         btnChapters.click();
         EpubTableOfContentsScreen epubTableOfContentsScreen = AqualityServices.getScreenFactory().getScreen(EpubTableOfContentsScreen.class);
         epubTableOfContentsScreen.state().waitForExist();
@@ -110,6 +115,9 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public void openChapter(String chapter) {
+        if (!btnFontSettings.state().isDisplayed()) {
+            CoordinatesClickUtils.clickAtCenterOfScreen();
+        }
         btnChapters.click();
         IButton button = getElementFactory().getButton(By.xpath(String.format(CHAPTER_ITEM_LOC, chapter)), chapter);
         button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
@@ -172,6 +180,14 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public void waitForBookLoading() {
+    }
+
+    @Override
+    public void returnToPreviousScreen() {
+        if (!btnFontSettings.state().isDisplayed()) {
+            CoordinatesClickUtils.clickAtCenterOfScreen();
+        }
+        AqualityServices.getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeButton[1]")), "arrowForComeBack").click();
     }
 
     private String getReaderInfo(String regex) {

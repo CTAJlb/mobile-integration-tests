@@ -5,6 +5,7 @@ import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
 import org.testng.Assert;
+import screens.bottommenu.BottomMenu;
 import stepdefinitions.catalog.components.AbstractCatalogSteps;
 
 @StepsType(platform = PlatformName.ANDROID)

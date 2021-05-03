@@ -1,7 +1,9 @@
 package hooks;
 
+import aquality.appium.mobile.application.Application;
 import aquality.appium.mobile.application.AqualityServices;
 import framework.utilities.Logger;
+import framework.utilities.feedXMLUtil.XMLUtil;
 import io.cucumber.core.backend.TestCaseState;
 import io.cucumber.java.*;
 import io.cucumber.plugin.event.PickleStepTestStep;
@@ -18,9 +20,10 @@ public class LoggerHooks {
 
     @Before(order = 0)
     public void startScenarioLogger(Scenario scenario) {
+        Application application = AqualityServices.getApplication();
         Logger.getInstance().createAppender(scenario.getName());
         AqualityServices.getLogger().info(format("Scenario '%s' start", scenario.getName()));
-        AqualityServices.getLogger().info("Session id - " + AqualityServices.getApplication().getDriver().getSessionId().toString());
+        AqualityServices.getLogger().info("Session id - " + application.getDriver().getSessionId().toString());
     }
 
     @After(order = 1)

@@ -23,9 +23,11 @@ import java.util.List;
 
 public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     private AbstractCatalogSteps catalogSteps;
+    private ScenarioContext context;
 
     @Inject
     public CatalogSteps(ScenarioContext context) {
+        this.context = context;
         catalogSteps = stepsFactory.getSteps(AbstractCatalogSteps.class, context);
     }
 
@@ -135,9 +137,15 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.performActionOnBookByNameAndSaveIt(actionButtonKey, bookName, bookInfoKey);
     }
 
-    @When("I open book with name {string} and save it as {string}")
-    public void openBookWithNameAndSaveIt(String bookName, String bookInfoKey) {
-        catalogSteps.openBookWithGivenName(bookName, bookInfoKey);
+    @When("I open {string} book with name {string} and save it as {string}")
+    public void openBookWithNameAndSaveIt(String bookType, String bookName, String bookInfoKey) {
+        catalogSteps.openBookWithGivenName(bookName, bookInfoKey, bookType);
+    }
+
+    @When("I open {string} book {string} and save it as {string}")
+    public void getBookNameAndOpenBookAndSaveIt(String bookType, String bookNameKey, String bookInfoKey) {
+        String bookName = context.get(bookNameKey);
+        catalogSteps.openBookWithGivenName(bookName, bookInfoKey, bookType);
     }
 
     @When("I click on the book {string} button {} on catalog books screen")
@@ -298,11 +306,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     @When("I read {} book")
     public void openGivenTypeBookReader(ReaderType readerType) {
         catalogSteps.openTypeBookReader(readerType);
-    }
-
-    @And("I open {} book from {string} lane and save book info as {string}")
-    public void openBookTypeBookFromLaneAndSaveBookInfoAs(ReaderType readerType, String laneName, String bookInfoKey) {
-        catalogSteps.openBookFromLane(readerType, laneName, bookInfoKey);
     }
 
     @Then("Opened book contains read button at book details screen")

@@ -16,7 +16,7 @@ Feature: Audiobook
       And I open the book details for the subsequent GET and save it as 'bookInfo'
     Then I check that opened book contains LISTEN button at book details screen
 
-  @logout @cancelGet @tier2 @exclude_ios
+  @logout @returnBooks @tier2 @exclude_ios
   Scenario: Navigate by Table of Contents Menu
     When Press on the book details screen at the action button LISTEN
       And Remember current book chapter in 'defaultChapter'
@@ -26,7 +26,7 @@ Feature: Audiobook
     When I select the chapter not equal to remembered 'defaultChapter' and remember selected chapter as 'newChapter'
     Then I check that current chapter equal to remembered 'newChapter'
 
-  @logout @cancelGet @tier2 @exclude_ios
+  @logout @returnBooks @tier2 @exclude_ios
   Scenario: Return to Chapter (Bookmarking/Syncing)
     When Press on the book details screen at the action button LISTEN
       And Remember current book chapter in 'defaultChapter'
@@ -43,7 +43,7 @@ Feature: Audiobook
       And Press on the book details screen at the action button LISTEN
     Then I check that current chapter equal to remembered 'newChapter'
 
-  @logout @cancelGet @tier2 @exclude_ios
+  @logout @returnBooks @tier2 @exclude_ios
   Scenario: Play Audiobook
     When Press on the book details screen at the action button LISTEN
       And I click play button on player screen
@@ -53,7 +53,7 @@ Feature: Audiobook
     Then Play button is present
       And Book is not playing
 
-  @logout @cancelGet @tier2 @exclude_ios
+  @logout @returnBooks @tier2 @exclude_ios
   Scenario: Navigate Audiobook
     When Press on the book details screen at the action button LISTEN
       And I click play button on player screen
@@ -68,7 +68,7 @@ Feature: Audiobook
     When I move to middle part of chapter
     Then Play time is close to middle part of chapter
 
-  @logout @cancelGet @tier2 @exclude_ios
+  @logout @returnBooks @tier2 @exclude_ios
   Scenario: Navigate playback options
     When Press on the book details screen at the action button LISTEN
       And I click play button on player screen

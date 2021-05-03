@@ -40,18 +40,19 @@ Feature: Manage Libraries
       And I open Books
     Then No books are present in Books list
 
-  @logout @cancelHold @tier2
+  @logout @returnBooks @tier2 @fixed
   Scenario: Switch Library Reservations
     When I add 'Alameda County Library' account
-    When I add 'The New York Public Library' account
-      And I enter credentials for 'The New York Public Library' account
+    When I add 'LYRASIS' account
+      And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'The New York Public Library' from side menu
-      And I open category by chain:
-        | Binge-worthy Series |
-      And Change books visibility to show ALL
-      And I open the book details for the subsequent RESERVE and save it as 'bookInfo'
+      And I switch to 'LYRASIS' from side menu
+      And I open search modal
+    When I search for 'This Is the Fire'
+      And I open 'EBOOK' book with name 'This Is the Fire' and save it as 'bookInfo'
+    Then Book 'bookInfo' is opened
+      And I press on the book details screen at the action button RESERVE
     Then I check that opened book contains CANCEL button at book details screen
     When I open Holds
     Then Holds feed is loaded

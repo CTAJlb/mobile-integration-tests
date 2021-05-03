@@ -23,8 +23,9 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     private static final String BOOK_NAME_XPATH =
             "//XCUIElementTypeStaticText[@name and not(.//ancestor::XCUIElementTypeButton)][1]";
     private static final String BOOK_NAME_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@name=\"%s\"]";
-    private static final String AUTHOR_LABEL_LOCATOR_PATTERN = "//following-sibling::XCUIElementTypeStaticText";
-    private static final int COUNT_OF_ITEMS_TO_WAIT_FOR = 5;
+    private static final String AUTHOR_LABEL_LOCATOR_PATTERN = "/parent::XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
+    private static final int COUNT_OF_ITEMS_TO_WAIT_FOR = 3;
+    private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
 
     private final ILabel lblFirstBookName =
             getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR + BOOK_NAME_XPATH), "First book name");
@@ -69,13 +70,19 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
-    public CatalogBookModel openBookByName(String bookName) {
-        ILabel lblBookName = getElementFactory().getLabel(MobileBy.AccessibilityId(bookName), bookName);
-        lblBookName.state().waitForDisplayed();
-        waitForPageLoading();
+    public CatalogBookModel openBookByName(String bookName, String bookType) {
+        String titleForLocator = bookName;
+        if(bookType.toLowerCase().equals("audiobook") && AqualityServices.getApplicationProfile().getPlatformName().name().toLowerCase().equals("ios")){
+            titleForLocator = titleForLocator + ". Audiobook.";
+        }
+        try {
+            Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ILabel lblBookName = getElementFactory().getLabel(MobileBy.AccessibilityId(titleForLocator), bookName);
         ILabel lblAuthor =
-                getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_LOCATOR_PATTERN, bookName) + AUTHOR_LABEL_LOCATOR_PATTERN), bookName);
-        lblAuthor.state().waitForDisplayed();
+                getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_LOCATOR_PATTERN, titleForLocator) + AUTHOR_LABEL_LOCATOR_PATTERN), bookName);
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(bookName)
                 .setAuthor(lblAuthor.getText());

@@ -9,8 +9,4 @@ public abstract class SettingsScreen extends Screen {
     }
 
     public abstract void openAccounts();
-
-    public abstract void openDebugMode();
-
-    public abstract boolean openDebugButton();
 }

@@ -19,22 +19,8 @@ public class LogoutHooks extends BaseSteps implements ILogoutHooks {
 
     @Override
     @After(value = "@logout", order = 2)
-    public void closeApplication() {
+    public void logout() {
         AqualityServices.getLogger().info("Test finished - logging out");
-        abstractLogoutHooks.closeApplication();
-    }
-
-    @Override
-    @After(value = "@cancelHold", order = 3)
-    public void cancelHold() {
-        AqualityServices.getLogger().info("Test finished - canceling hold");
-        abstractLogoutHooks.cancelHold();
-    }
-
-    @Override
-    @After(value = "@cancelGet", order = 3)
-    public void cancelGet() {
-        AqualityServices.getLogger().info("Test finished - canceling get");
-        abstractLogoutHooks.cancelGet();
+        abstractLogoutHooks.logout();
     }
 }

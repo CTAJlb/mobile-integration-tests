@@ -41,6 +41,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     private final ILabel lblBookTitleInfo = getElementFactory().getLabel(By.xpath("(//XCUIElementTypeOther//XCUIElementTypeStaticText[@name])[1]"), "Book title");
     private final IButton btnDownload = getActionButton(BookActionButtonKeys.DOWNLOAD);
     private final IButton btnRead = getActionButton(BookActionButtonKeys.READ);
+    private final IButton btnListen = getActionButton(BookActionButtonKeys.LISTEN);
     private final IButton btnRelatedBooks =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Information\"]/following-sibling::XCUIElementTypeTable"), "Related books");
     private final IButton btnMore =
@@ -169,7 +170,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
 
     @Override
     public boolean isBookReadyToRead() {
-        return false;
+        return btnRead.state().isDisplayed() || btnListen.state().isDisplayed();
     }
 
     private IButton getActionButton(BookActionButtonKeys buttonKey) {

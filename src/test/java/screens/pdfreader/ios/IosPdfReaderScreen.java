@@ -98,4 +98,9 @@ public class IosPdfReaderScreen extends PdfReaderScreen {
     public void openTableOfContents() {
         btnTableOfContents.click();
     }
+
+    @Override
+    public void returnToPreviousScreen() {
+
+    }
 }
