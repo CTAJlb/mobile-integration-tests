@@ -41,6 +41,11 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         applicationSteps.restartApp();
     }
 
+    @Given("I find {string} library")
+    public void openApplicationVar2(String libraryName) {
+        applicationSteps.openApplicationVar2(libraryName);
+    }
+
     private String getBundleId() {
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
             return (String) AqualityServices.getApplication().getDriver().execute(GET_CURRENT_PACKAGE_COMMAND).getValue();

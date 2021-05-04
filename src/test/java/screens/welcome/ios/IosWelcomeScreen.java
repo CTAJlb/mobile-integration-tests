@@ -14,6 +14,7 @@ public class IosWelcomeScreen extends WelcomeScreen {
 
     private final IButton addLibraryLater = getElementFactory().getButton(
             By.xpath("//XCUIElementTypeButton[@name=\"Add a Library Later\"]"), "Add a Library Later");
+    private final IButton findLibraryBtn = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton"), "Find Your Library");
 
     public IosWelcomeScreen() {
         super(By.xpath(MAIN_ELEMENT));
@@ -22,5 +23,12 @@ public class IosWelcomeScreen extends WelcomeScreen {
     @Override
     public void addALibraryLater() {
         addLibraryLater.click();
+    }
+
+    @Override
+    public void findLibrary() {
+        // TODO: 03.05.2021 добавить реализацию для ios
+        findLibraryBtn.state().waitForDisplayed();
+        findLibraryBtn.click();
     }
 }

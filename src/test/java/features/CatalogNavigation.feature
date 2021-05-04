@@ -1,7 +1,7 @@
 Feature: Catalog Navigation
 
   Background:
-    Given Application is opened
+    Given I find "Digital Public Library of America" library
 
   @tier1
   Scenario: Return to last library catalog
@@ -18,35 +18,37 @@ Feature: Catalog Navigation
     When I open Catalog
     Then Books feed is loaded
     When I get names of books on screen and save them as 'listOfBooksOnMainPage'
-      And I open 'Nonfiction' category
-    Then Current category name is 'Nonfiction'
-      And Books feed is loaded
-      And Following subcategories are present:
-        | History                 |
-        | Philosophy              |
-        | Science & Technology    |
-        | Religion & Spirituality |
-        | All Nonfiction          |
-      And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
-    When I return to previous screen
       And I open 'Fiction' category
     Then Current category name is 'Fiction'
       And Books feed is loaded
       And Following subcategories are present:
-        | Literary Fiction   |
-        | Science Fiction    |
-        | Historical Fiction |
-        | Horror             |
-        | Drama              |
-        | Fantasy            |
-        | Poetry             |
-        | Mysteries          |
-        | Romance            |
-        | All Fiction        |
+        | Classics                  |
+        | Science Fiction & Fantasy |
+        | Historical Fiction        |
+        | Mystery                   |
+        | Drama                     |
+        | Short Stories             |
+        | Poetry                    |
+        | All Fiction               |
+    And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
+    When I return to previous screen
+      And I open 'Nonfiction' category
+    Then Current category name is 'Nonfiction'
+      And Books feed is loaded
+      And Following subcategories are present:
+        | Biography & Memoir    |
+        | Textbooks             |
+        | Government & Politics |
+        | Science & Technology  |
+        | History               |
+        | Self Help             |
+        | Food & Health         |
+        | Academic Press        |
+        | All Nonfiction        |
       And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
-    When I open 'Drama' subcategory
+    When I open 'All Nonfiction' subcategory
     Then Subcategory screen is present
-      And Subcategory name is 'Drama'
+      And Subcategory name is 'All Nonfiction'
 
   @tier1
   Scenario: Browse Lanes/Categories
@@ -56,19 +58,17 @@ Feature: Catalog Navigation
     When I open 'Fiction' category
     Then Current category name is 'Fiction'
       And Following subcategories are present:
-        | Literary Fiction   |
-        | Science Fiction    |
-        | Mysteries          |
-        | Romance            |
-        | Historical Fiction |
-        | Horror             |
-        | Poetry             |
-        | Drama              |
-        | Fantasy            |
-        | All Fiction        |
-    When I open 'Drama' subcategory
+        | Classics                  |
+        | Science Fiction & Fantasy |
+        | Historical Fiction        |
+        | Mystery                   |
+        | Drama                     |
+        | Short Stories             |
+        | Poetry                    |
+        | All Fiction               |
+    When I open 'Poetry' subcategory
     Then Subcategory screen is present
-      And Subcategory name is 'Drama'
+      And Subcategory name is 'Poetry'
     When I open first book in subcategory list and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
 

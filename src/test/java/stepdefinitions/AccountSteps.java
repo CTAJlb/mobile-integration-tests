@@ -1,11 +1,13 @@
 package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.context.ContextLibrariesKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import screens.account.AccountScreen;
 import screens.accounts.AccountsScreen;
@@ -19,6 +21,7 @@ import screens.catalog.screen.catalog.CatalogScreen;
 import screens.notifications.NotificationModal;
 import screens.settings.SettingsScreen;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,18 +55,20 @@ public class AccountSteps {
 
     @When("I add {string} account")
     public void addAccount(String libraryName) {
-        if (ageGateScreen.state().isDisplayed()) {
+        /*if (ageGateScreen.state().isDisplayed()) {
             ageGateScreen.approveAge();
-        }
+        }*/
         openAccounts();
         accountsScreen.addAccount();
-        AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+        if (AqualityServices.getElementFactory().getButton(By.xpath("//android.widget.Button[@text = \"Deny\"]"), "DENYButton").state().waitForDisplayed()) {
+            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+        }
         Assert.assertTrue(addAccountScreen.state().waitForDisplayed(),
                 "Checking that add accounts screen visible");
         addAccountScreen.selectLibrary(libraryName);
 
-        saveLibraryInContext(ContextLibrariesKeys.CANCEL_GET.getKey(), libraryName);
-        saveLibraryInContext(ContextLibrariesKeys.CANCEL_HOLD.getKey(), libraryName);
+        /*saveLibraryInContext(ContextLibrariesKeys.CANCEL_GET.getKey(), libraryName);
+        saveLibraryInContext(ContextLibrariesKeys.CANCEL_HOLD.getKey(), libraryName);*/
         saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
     }
 

@@ -7,4 +7,6 @@ public interface IApplicationSteps {
     void returnToPreviousPage();
 
     void restartApp();
+
+    void openApplicationVar2(String libraryName);
 }

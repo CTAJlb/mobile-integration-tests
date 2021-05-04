@@ -1,7 +1,7 @@
 Feature: Read PDF
 
   Background:
-    Given Application is opened
+    Given I find "Digital Public Library of America" library
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
