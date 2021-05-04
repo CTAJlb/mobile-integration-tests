@@ -21,8 +21,7 @@ import org.testng.annotations.Test;
                         "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm",
                         //todo Aquality Tracking is temporary turned off until AqualityTrackingCucumber6Jvm is released
                         //"aquality.tracking.integrations.cucumber5jvm.AqualityTrackingCucumber5Jvm",
-                },
-                tags = "(@tier1 and not @ignore) and not @exclude_ios"
+                }
         ))
 public class TestRunner extends TestNGCourgette {
 }
