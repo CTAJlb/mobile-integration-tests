@@ -32,8 +32,8 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
     }
 
     @And("I return to previous screen")
-    public void returnToPreviousPage() {
-        applicationSteps.returnToPreviousPage();
+    public void returnToPreviousScreen() {
+        applicationSteps.returnToPreviousScreen();
     }
 
     @When("I restart app")

@@ -18,20 +18,16 @@ Feature: Catalog Navigation
     When I open Catalog
     Then Books feed is loaded
     When I get names of books on screen and save them as 'listOfBooksOnMainPage'
-      And I open 'Fiction' category
-    Then Current category name is 'Fiction'
+      And I open 'Children\'s Books' category
+    Then Current category name is 'Children\'s Books'
       And Books feed is loaded
       And Following subcategories are present:
-        | Classics                  |
-        | Science Fiction & Fantasy |
-        | Historical Fiction        |
-        | Mystery                   |
-        | Drama                     |
-        | Short Stories             |
-        | Poetry                    |
-        | All Fiction               |
+        | Classics             |
+        | Fiction              |
+        | Nonfiction           |
+        | All Children's Books |
     And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
-    When I return to previous screen
+    When I return to previous category screen
       And I open 'Nonfiction' category
     Then Current category name is 'Nonfiction'
       And Books feed is loaded
@@ -55,20 +51,21 @@ Feature: Catalog Navigation
     When I open Catalog
     Then Books feed is loaded
       And Count of books in first lane is more than 1
-    When I open 'Fiction' category
-    Then Current category name is 'Fiction'
+    When I open 'Nonfiction' category
+    Then Current category name is 'Nonfiction'
       And Following subcategories are present:
-        | Classics                  |
-        | Science Fiction & Fantasy |
-        | Historical Fiction        |
-        | Mystery                   |
-        | Drama                     |
-        | Short Stories             |
-        | Poetry                    |
-        | All Fiction               |
-    When I open 'Poetry' subcategory
+        | Biography & Memoir    |
+        | Textbooks             |
+        | Government & Politics |
+        | Science & Technology  |
+        | History               |
+        | Self Help             |
+        | Food & Health         |
+        | Academic Press        |
+        | All Nonfiction        |
+    When I open 'Self Help' subcategory
     Then Subcategory screen is present
-      And Subcategory name is 'Poetry'
+      And Subcategory name is 'Self Help'
     When I open first book in subcategory list and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
 

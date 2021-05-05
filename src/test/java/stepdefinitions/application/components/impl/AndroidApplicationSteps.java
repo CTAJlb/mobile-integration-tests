@@ -11,7 +11,7 @@ import stepdefinitions.application.components.AbstractApplicationSteps;
 public class AndroidApplicationSteps extends AbstractApplicationSteps {
 
     @Override
-    public void returnToPreviousPage() {
+    public void returnToPreviousScreen() {
         AqualityServices.getApplication().getDriver().navigate().back();
     }
 

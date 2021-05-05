@@ -22,7 +22,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     public abstract void openApplication();
 
-    public abstract void returnToPreviousPage();
+    public abstract void returnToPreviousScreen();
 
     public abstract void openApplicationVar2(String libraryName);
 
