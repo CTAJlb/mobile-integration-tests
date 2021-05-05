@@ -35,7 +35,7 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
             eulaAgreementScreen.clickAgree();
         }
         welcomeScreen.addALibraryLater();
-        if (ageGateScreen.state().isDisplayed()) {
+        if (ageGateScreen.state().waitForDisplayed()) {
             ageGateScreen.approveAge();
         }
     }
