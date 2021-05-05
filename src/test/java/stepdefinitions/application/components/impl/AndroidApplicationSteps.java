@@ -2,15 +2,10 @@ package stepdefinitions.application.components.impl;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
-import com.google.inject.Inject;
-import constants.context.ContextLibrariesKeys;
 import factories.steps.StepsType;
-import framework.utilities.ScenarioContext;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import stepdefinitions.application.components.AbstractApplicationSteps;
-
-import java.time.Duration;
 
 @StepsType(platform = PlatformName.ANDROID)
 public class AndroidApplicationSteps extends AbstractApplicationSteps {
@@ -40,5 +35,8 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
             eulaAgreementScreen.clickAgree();
         }
         welcomeScreen.addALibraryLater();
+        if (ageGateScreen.state().isDisplayed()) {
+            ageGateScreen.approveAge();
+        }
     }
 }

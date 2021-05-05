@@ -1,7 +1,6 @@
 package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.context.ContextLibrariesKeys;
 import framework.utilities.ScenarioContext;
@@ -21,7 +20,6 @@ import screens.catalog.screen.catalog.CatalogScreen;
 import screens.notifications.NotificationModal;
 import screens.settings.SettingsScreen;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,9 +53,6 @@ public class AccountSteps {
 
     @When("I add {string} account")
     public void addAccount(String libraryName) {
-        /*if (ageGateScreen.state().isDisplayed()) {
-            ageGateScreen.approveAge();
-        }*/
         openAccounts();
         accountsScreen.addAccount();
         if (AqualityServices.getElementFactory().getButton(By.xpath("//android.widget.Button[@text = \"Deny\"]"), "DENYButton").state().waitForDisplayed()) {
