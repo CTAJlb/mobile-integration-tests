@@ -1,7 +1,7 @@
 Feature: Book Transactions
 
   Background:
-    Given Application is opened
+    Given I find "Digital Public Library of America" library
 
   @logout @returnBooks @tier2 @xml
   Scenario Outline: Hold from Book Detail View (feed) XML
@@ -46,8 +46,8 @@ Feature: Book Transactions
   Scenario: Download from Book detail view
     When I open Catalog
       And I open category by chain:
-        | Fiction   |
-        | Mysteries |
+        | Fiction |
+        | Drama   |
     When I open the book details for the subsequent DOWNLOAD and save it as 'bookInfo'
     Then I check that opened book contains READ button at book details screen
 

@@ -1,7 +1,7 @@
 Feature: Audiobook
 
   Background:
-    Given Application is opened
+    Given I find "Digital Public Library of America" library
     When I add 'LYRASIS' account
     Then Account 'LYRASIS' is present on Accounts screen
     When I enter credentials for 'LYRASIS' account
