@@ -36,8 +36,8 @@ Feature: Book Transactions
     When I open Catalog
       And I switch to 'LYRASIS' from side menu
       And I open search modal
-    When I search for 'The Land of Stories: A Grimm Warning'
-      And I RESERVE book by name 'The Land of Stories: A Grimm Warning' and save it as 'bookInfo'
+    When I search for 'The Land of Stories Complete Gift Set'
+      And I RESERVE book by name 'The Land of Stories Complete Gift Set' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain CANCEL button at catalog books screen
     When I open Holds
     Then Book 'bookInfo' is present in Holds List

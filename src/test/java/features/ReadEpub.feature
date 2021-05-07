@@ -4,7 +4,7 @@ Feature: Read EPUB
     Given I find "Digital Public Library of America" library
     When I open Catalog
       And I open search modal
-      And I search for 'Jane Eyre'
+      And I search for 'Flower Fables'
       And DOWNLOAD book and save it as 'bookInfo'
       And I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ

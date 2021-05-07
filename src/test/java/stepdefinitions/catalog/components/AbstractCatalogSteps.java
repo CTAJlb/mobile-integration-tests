@@ -346,6 +346,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
             final String bookInfoKey, final BookActionButtonKeys key) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         String title = catalogBookModel.getTitle();
+        alertScreen.closeDoNotAllowIfPresent();
         boolean isButtonPresent = catalogBooksScreen.isBookAddButtonTextEqualTo(title, key);
         if (!isButtonPresent && catalogBooksScreen.isErrorButtonPresent()) {
             Scenario scenario = context.get(ScenarioContextKey.SCENARIO_KEY);

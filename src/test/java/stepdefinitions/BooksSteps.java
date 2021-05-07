@@ -35,7 +35,6 @@ public class BooksSteps {
         booksScreen.state().waitForDisplayed();
         AqualityServices.getConditionalWait().waitFor(() -> booksScreen.isNoBooksMessagePresent() || booksScreen.getCountOfBooks() > 0);
         Assert.assertTrue(booksScreen.isBookPresent(bookInfo), String.format("Book '%s' is not present in Books List", bookInfo));
-        bottomMenuForm.open(BottomMenu.BOOKS);
     }
 
     @Then("Book {string} is not present in Books List")

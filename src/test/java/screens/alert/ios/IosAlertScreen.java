@@ -13,6 +13,8 @@ public class IosAlertScreen extends AlertScreen {
             getElementFactory().getButton(By.xpath("//XCUIElementTypeAlert//XCUIElementTypeButton[@name=\"OK\"]"), "OK");
     private final IButton btnNotNow =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeAlert//XCUIElementTypeButton[@name=\"Not Now\"]"), "Not Now");
+    private final IButton btnDoNotAllow =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Don’t Allow\"]"), "Don’t Allow");
 
     public IosAlertScreen() {
         super(By.xpath(MAIN_ELEMENT));
@@ -34,6 +36,13 @@ public class IosAlertScreen extends AlertScreen {
     public void closeNotNowModalIfPresent() {
         if (btnNotNow.state().waitForDisplayed()) {
             btnNotNow.click();
+        }
+    }
+
+    @Override
+    public void closeDoNotAllowIfPresent() {
+        if (btnDoNotAllow.state().waitForDisplayed()) {
+            btnDoNotAllow.click();
         }
     }
 }

@@ -64,7 +64,9 @@ public class AccountSteps {
 
         /*saveLibraryInContext(ContextLibrariesKeys.CANCEL_GET.getKey(), libraryName);
         saveLibraryInContext(ContextLibrariesKeys.CANCEL_HOLD.getKey(), libraryName);*/
-        saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
+        if(libraryName.toLowerCase().equals("LYRASIS".toLowerCase())){
+            saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
+        }
     }
 
     @Then("Account {string} is present on Accounts screen")
