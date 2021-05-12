@@ -1,11 +1,8 @@
 Feature: Catalog Navigation
 
-  Background:
-    Given I add "Digital Public Library of America" account from welcomeScreen
-
   @tier1
   Scenario: Return to last library catalog
-    When I add 'Alameda County Library' account
+    When I add "Alameda County Library" account from welcomeScreen
       And I open Catalog
       And I switch to 'Alameda County Library' from side menu
     Then Books feed is loaded
@@ -15,7 +12,8 @@ Feature: Catalog Navigation
 
   @tier1
   Scenario: Navigate Lists
-    When I open Catalog
+    When I add "Digital Public Library of America" account from welcomeScreen
+      And I open Catalog
     Then Books feed is loaded
     When I get names of books on screen and save them as 'listOfBooksOnMainPage'
       And I open 'Children\'s Books' category
@@ -48,7 +46,8 @@ Feature: Catalog Navigation
 
   @tier1
   Scenario: Browse Lanes/Categories
-    When I open Catalog
+    When I add "Digital Public Library of America" account from welcomeScreen
+      And I open Catalog
     Then Books feed is loaded
       And Count of books in first lane is more than 1
     When I open 'Nonfiction' category
@@ -71,7 +70,7 @@ Feature: Catalog Navigation
 
   @tier1
   Scenario: Sort Lists
-    When I add 'Alameda County Library' account
+    When I add "Alameda County Library" account from welcomeScreen
       And I open Catalog
       And I switch to 'Alameda County Library' from side menu
     Then Books feed is loaded
@@ -107,7 +106,7 @@ Feature: Catalog Navigation
 
   @tier1 @exclude_ios @fixed @ignore
   Scenario: View Book Details
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I open Catalog
       And I switch to 'LYRASIS' from side menu
     When I open search modal
@@ -136,7 +135,7 @@ Feature: Catalog Navigation
 
   @tier1 @exclude_android @fixed @ignore
   Scenario: View Book Details (iOS)
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I open Catalog
       And I switch to 'LYRASIS' from side menu
     When I open search modal

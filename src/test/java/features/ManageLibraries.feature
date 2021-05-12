@@ -1,16 +1,13 @@
 Feature: Manage Libraries
 
-  Background:
-    Given I add "Digital Public Library of America" account from welcomeScreen
-
   @tier1
   Scenario: Add Library
-    When I add 'Alameda County Library' account
+    When I add "Alameda County Library" account from welcomeScreen
     Then Account 'Alameda County Library' is present on Accounts screen
 
   @tier1
   Scenario: Switch Library Catalogs
-    When I add 'Alameda County Library' account
+    When I add "Alameda County Library" account from welcomeScreen
       And Catalog is opened
       And I get names of books on screen and save them as 'nameOfBooks'
       And I switch to 'Alameda County Library' from side menu
@@ -19,13 +16,13 @@ Feature: Manage Libraries
 
   @tier1
   Scenario: Remove library
-    When I add 'Alameda County Library' account
+    When I add "Alameda County Library" account from welcomeScreen
       And I remove 'Alameda County Library' account
     Then Account 'Alameda County Library' is not present on Accounts screen
 
   @tier2
   Scenario: Switch library bookshelf
-    When I add 'Alameda County Library' account
+    When I add "Alameda County Library" account from welcomeScreen
       And Catalog is opened
       And I switch to 'Digital Public Library of America' from side menu
       And I open category by chain:
@@ -42,7 +39,7 @@ Feature: Manage Libraries
 
   @logout @returnBooks @tier2 @fixed
   Scenario: Switch Library Reservations
-    When I add 'Alameda County Library' account
+    When I add "Alameda County Library" account from welcomeScreen
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -66,7 +63,7 @@ Feature: Manage Libraries
 
   @logout @tier2
   Scenario: Store library card
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
     Then Account 'LYRASIS' is present on Accounts screen
     When I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
