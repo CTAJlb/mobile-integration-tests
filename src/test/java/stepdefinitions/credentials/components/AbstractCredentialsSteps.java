@@ -9,6 +9,7 @@ import framework.utilities.returningBooksUtil.APIUtil;
 import org.testng.Assert;
 import screens.account.AccountScreen;
 import screens.accounts.AccountsScreen;
+import screens.alert.AlertScreen;
 import screens.catalog.screen.catalog.CatalogScreen;
 import screens.subcategory.SubcategoryScreen;
 import stepdefinitions.BaseSteps;
@@ -21,6 +22,7 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
     private final AccountsScreen accountsScreen;
     protected final SubcategoryScreen subcategoryScreen;
     protected final CatalogScreen catalogScreen;
+    protected final AlertScreen alertScreen;
     private ScenarioContext context;
 
     public AbstractCredentialsSteps(ScenarioContext context) {
@@ -29,6 +31,7 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
         accountsScreen = AqualityServices.getScreenFactory().getScreen(AccountsScreen.class);
         subcategoryScreen = AqualityServices.getScreenFactory().getScreen(SubcategoryScreen.class);
         catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
+        alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
     }
 
     public void textOnLogoutButtonIsChangedToLogInOnAccountScreen() {
