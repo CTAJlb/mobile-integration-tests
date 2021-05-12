@@ -8,5 +8,5 @@ public interface IApplicationSteps {
 
     void restartApp();
 
-    void openApplicationVar2(String libraryName);
+    void addAccountFromWelcomeScreen(String libraryName);
 }

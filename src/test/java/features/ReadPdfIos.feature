@@ -1,8 +1,7 @@
 Feature: Read PDF IOS
 
   Background:
-    Given I find "Digital Public Library of America" library
-    When I add 'LYRASIS' account
+    Given I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog

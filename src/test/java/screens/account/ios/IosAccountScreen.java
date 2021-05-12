@@ -41,6 +41,7 @@ public class IosAccountScreen extends AccountScreen {
     public void enterCredentials(Credentials credentials) {
         AqualityServices.getConditionalWait().waitFor(() -> btnLogin.state().isDisplayed() || btnLogout.state().isDisplayed());
         if (!btnLogout.state().isDisplayed()) {
+            txbCard.state().waitForDisplayed();
             txbCard.click();
             txbCard.clearAndType(credentials.getBarcode());
             txbPin.clearAndTypeSecret(credentials.getPin());

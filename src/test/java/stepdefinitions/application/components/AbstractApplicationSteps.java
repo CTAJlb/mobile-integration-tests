@@ -24,7 +24,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     public abstract void returnToPreviousScreen();
 
-    public abstract void openApplicationVar2(String libraryName);
+    public abstract void addAccountFromWelcomeScreen(String libraryName);
 
     @Override
     public void restartApp() {

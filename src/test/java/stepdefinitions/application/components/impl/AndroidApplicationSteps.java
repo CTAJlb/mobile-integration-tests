@@ -16,7 +16,7 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
     }
 
     @Override
-    public void openApplicationVar2(String libraryName) {
+    public void addAccountFromWelcomeScreen(String libraryName) {
         if (!eulaAgreementScreen.isVanillaApp()) {
             eulaAgreementScreen.clickAgree();
         }

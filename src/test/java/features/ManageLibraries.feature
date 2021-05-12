@@ -1,7 +1,7 @@
 Feature: Manage Libraries
 
   Background:
-    Given I find "Digital Public Library of America" library
+    Given I add "Digital Public Library of America" account from welcomeScreen
 
   @tier1
   Scenario: Add Library

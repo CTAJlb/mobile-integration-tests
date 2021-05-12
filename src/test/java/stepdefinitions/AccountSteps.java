@@ -71,9 +71,7 @@ public class AccountSteps {
 
     @Then("Account {string} is present on Accounts screen")
     public void checkAccountIsPresent(String libraryName) {
-        if (accountScreen.state().isDisplayed()) {
-            AqualityServices.getApplication().getDriver().navigate().back();
-        }
+        openAccounts();
         Assert.assertTrue(accountsScreen.isLibraryPresent(libraryName), libraryName + " is not present on Accounts screen");
     }
 
