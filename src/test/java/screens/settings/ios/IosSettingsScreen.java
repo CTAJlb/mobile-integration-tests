@@ -22,7 +22,8 @@ public class IosSettingsScreen extends SettingsScreen {
 
     @Override
     public void openAccounts() {
-        AqualityServices.getConditionalWait().waitFor(() ->
+        accountsBtn.click();
+        /*AqualityServices.getConditionalWait().waitFor(() ->
                 accountsBtn.state().isDisplayed() || cancelSyncAgree.state().isDisplayed());
         if (accountsBtn.state().isDisplayed()) {
             accountsBtn.click();
@@ -30,6 +31,6 @@ public class IosSettingsScreen extends SettingsScreen {
             cancelSyncAgree.click();
         } else {
             AqualityServices.getLogger().info("Account page was opened");
-        }
+        }*/
     }
 }

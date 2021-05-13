@@ -82,12 +82,12 @@ public class AccountSteps {
 
     @When("I remove {string} account")
     public void removeAccount(String libraryName) {
+        openAccounts();
         accountsScreen.deleteLibrary(libraryName);
     }
 
     @When("I open account {string}")
     public void openAccount(String libraryName) {
-        bottomMenuForm.open(BottomMenu.SETTINGS);
         openAccounts();
         accountsScreen.openAccount(libraryName);
     }
