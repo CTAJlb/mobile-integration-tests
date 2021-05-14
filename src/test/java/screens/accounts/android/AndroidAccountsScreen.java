@@ -13,8 +13,6 @@ public class AndroidAccountsScreen extends AccountsScreen {
     public static final String DELETE_LIBRARY_BUTTON_LOCATOR_PATTERN =
             "//androidx.recyclerview.widget.RecyclerView//android.widget.TextView[contains(@text, \"%s\")]//parent::android.widget.LinearLayout//following-sibling::android.widget.ImageButton";
     private final IButton addBtn = getElementFactory().getButton(By.id("accountsMenuActionAccountAdd"), "Add account");
-    private IButton btnFirstLibrary =
-            getElementFactory().getButton(By.xpath("//androidx.recyclerview.widget.RecyclerView//android.widget.TextView[1]"), "First library");
     private IButton btnDelete =
             getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@text,'Delete')]"), "Delete");
 
@@ -41,11 +39,6 @@ public class AndroidAccountsScreen extends AccountsScreen {
     @Override
     public void addAccount() {
         addBtn.click();
-    }
-
-    @Override
-    public void openFirstLibrary() {
-        btnFirstLibrary.click();
     }
 
     @Override
