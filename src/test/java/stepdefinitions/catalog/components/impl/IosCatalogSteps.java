@@ -15,6 +15,11 @@ public class IosCatalogSteps extends AbstractCatalogSteps {
     }
 
     @Override
+    public void openPreviousCategoryScreen() {
+        mainCatalogToolbarForm.goBack();
+    }
+
+    @Override
     public void checkCurrentCategoryName(String expectedCategoryName) {
         if (expectedCategoryName.equals("Related Books")) {
             Assert.assertTrue(bookDetailsScreen.isRelatedBooksVisible(), "Related books are not visible");

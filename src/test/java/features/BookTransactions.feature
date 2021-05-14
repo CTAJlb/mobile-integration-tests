@@ -1,11 +1,8 @@
 Feature: Book Transactions
 
-  Background:
-    Given Application is opened
-
   @logout @returnBooks @tier2 @xml
   Scenario Outline: Hold from Book Detail View (feed) XML
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
@@ -30,30 +27,32 @@ Feature: Book Transactions
 
   @logout @returnBooks @tier2 @fixed
   Scenario: Hold from Bookshelf list
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
       And I switch to 'LYRASIS' from side menu
       And I open search modal
-    When I search for 'The Land of Stories: A Grimm Warning'
-      And I RESERVE book by name 'The Land of Stories: A Grimm Warning' and save it as 'bookInfo'
+    When I search for 'The Land of Stories Complete Gift Set'
+      And I RESERVE book by name 'The Land of Stories Complete Gift Set' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain CANCEL button at catalog books screen
     When I open Holds
     Then Book 'bookInfo' is present in Holds List
 
   @tier2
   Scenario: Download from Book detail view
-    When I open Catalog
+    When I add "Digital Public Library of America" account from welcomeScreen
+      And I open Catalog
       And I open category by chain:
-        | Fiction   |
-        | Mysteries |
+        | Fiction |
+        | Drama   |
     When I open the book details for the subsequent DOWNLOAD and save it as 'bookInfo'
     Then I check that opened book contains READ button at book details screen
 
   @tier2
   Scenario: Download from Bookshelf list
-    When I open Catalog
+    When I add "Digital Public Library of America" account from welcomeScreen
+      And I open Catalog
       And I open category by chain:
         | Fiction |
         | Drama   |
@@ -62,7 +61,8 @@ Feature: Book Transactions
 
   @tier2
   Scenario: Read from Bookshelf list
-    When I open Catalog
+    When I add "Digital Public Library of America" account from welcomeScreen
+      And I open Catalog
       And I open category by chain:
         | Fiction |
         | Drama   |
@@ -74,7 +74,8 @@ Feature: Book Transactions
 
   @tier2
   Scenario: Delete book
-    When I open Catalog
+    When I add "Digital Public Library of America" account from welcomeScreen
+      And I open Catalog
       And I open category by chain:
         | Fiction |
         | Drama   |
@@ -88,7 +89,7 @@ Feature: Book Transactions
 
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Check out from Book Detail View
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
@@ -101,7 +102,7 @@ Feature: Book Transactions
 
   @logout @returnBooks @tier2 @xml
   Scenario Outline: Check out from Book Detail View (feed) XML
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
@@ -130,7 +131,7 @@ Feature: Book Transactions
 
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Return book
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
@@ -151,8 +152,8 @@ Feature: Book Transactions
 
   @logout @returnBooks @tier2 @xml
   Scenario Outline: Return book (feed) XML
-    When I add 'LYRASIS' account
-    And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
+      And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
     And I switch to 'LYRASIS' from side menu
@@ -179,7 +180,7 @@ Feature: Book Transactions
 
   @logout @returnBooks @tier2 @fixed
   Scenario: Remove a Reserved Book from Bookshelf list
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
@@ -193,7 +194,7 @@ Feature: Book Transactions
 
   @logout @returnBooks @tier2 @fixed
   Scenario: Remove a Reserved Book from Book Detail View
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
@@ -209,7 +210,7 @@ Feature: Book Transactions
 
   @logout @returnBooks @tier2 @exclude_ios @fixed
   Scenario: Remove a Reserved Book from Holds screen
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
@@ -227,7 +228,7 @@ Feature: Book Transactions
 
   @logout @returnBooks @tier2 @exclude_android @fixed
   Scenario: Remove a Reserved Book from Holds screen (iOS)
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
@@ -245,7 +246,7 @@ Feature: Book Transactions
 
   @logout @returnBooks @tier3 @exclude_android @fixed
   Scenario: Cancel remove
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog

@@ -34,6 +34,11 @@ public class AndroidAddAccountScreen extends AddAccountScreen {
         getLibraryButton(libraryName).click();
     }
 
+    @Override
+    public void selectLibraryWelcomeScreen(String libraryName) {
+        //android works well without this
+    }
+
     private IButton getLibraryButton(String libraryName) {
         return getElementFactory().getButton(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_PATTERN, libraryName)), libraryName);
     }

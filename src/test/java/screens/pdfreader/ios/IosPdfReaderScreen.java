@@ -7,7 +7,6 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.RegEx;
-import constants.localization.application.reader.PdfButtons;
 import framework.utilities.CoordinatesClickUtils;
 import framework.utilities.RegExUtil;
 import framework.utilities.swipe.SwipeElementUtils;
@@ -97,10 +96,5 @@ public class IosPdfReaderScreen extends PdfReaderScreen {
     @Override
     public void openTableOfContents() {
         btnTableOfContents.click();
-    }
-
-    @Override
-    public void returnToPreviousScreen() {
-
     }
 }

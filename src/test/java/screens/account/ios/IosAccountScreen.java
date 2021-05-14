@@ -41,6 +41,8 @@ public class IosAccountScreen extends AccountScreen {
     public void enterCredentials(Credentials credentials) {
         AqualityServices.getConditionalWait().waitFor(() -> btnLogin.state().isDisplayed() || btnLogout.state().isDisplayed());
         if (!btnLogout.state().isDisplayed()) {
+            txbCard.state().waitForDisplayed();
+            txbCard.state().waitForDisplayed();
             txbCard.click();
             txbCard.clearAndType(credentials.getBarcode());
             txbPin.clearAndTypeSecret(credentials.getPin());
@@ -70,6 +72,7 @@ public class IosAccountScreen extends AccountScreen {
 
     @Override
     public boolean isLoginSuccessful() {
+        btnLogout.state().waitForDisplayed();
         return AqualityServices.getConditionalWait().waitFor(() ->
                 btnLogout.getText().equals(AccountScreenLoginStatus.LOG_OUT.i18n()));
     }

@@ -106,6 +106,7 @@ public class AndroidBooksScreen extends BooksScreen {
     }
 
     private List<IElement> getBooks() {
+        getElementFactory().getLabel(By.xpath(BOOKS_LABELS_XPATH), "LABELForWaiting").state().waitForDisplayed();
         return getElementFactory().findElements(By.xpath(BOOKS_LABELS_XPATH), ElementType.LABEL);
     }
 

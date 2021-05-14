@@ -1,11 +1,8 @@
 Feature: Catalog Navigation
 
-  Background:
-    Given Application is opened
-
   @tier1
   Scenario: Return to last library catalog
-    When I add 'Alameda County Library' account
+    When I add "Alameda County Library" account from welcomeScreen
       And I open Catalog
       And I switch to 'Alameda County Library' from side menu
     Then Books feed is loaded
@@ -15,66 +12,65 @@ Feature: Catalog Navigation
 
   @tier1
   Scenario: Navigate Lists
-    When I open Catalog
+    When I add "Digital Public Library of America" account from welcomeScreen
+      And I open Catalog
     Then Books feed is loaded
     When I get names of books on screen and save them as 'listOfBooksOnMainPage'
+      And I open 'Children\'s Books' category
+    Then Current category name is 'Children\'s Books'
+      And Books feed is loaded
+      And Following subcategories are present:
+        | Classics             |
+        | Fiction              |
+        | Nonfiction           |
+        | All Children's Books |
+    And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
+    When I return to previous category screen
       And I open 'Nonfiction' category
     Then Current category name is 'Nonfiction'
       And Books feed is loaded
       And Following subcategories are present:
-        | History                 |
-        | Philosophy              |
-        | Science & Technology    |
-        | Religion & Spirituality |
-        | All Nonfiction          |
+        | Biography & Memoir    |
+        | Textbooks             |
+        | Government & Politics |
+        | Science & Technology  |
+        | History               |
+        | Self Help             |
+        | Food & Health         |
+        | Academic Press        |
+        | All Nonfiction        |
       And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
-    When I return to previous screen
-      And I open 'Fiction' category
-    Then Current category name is 'Fiction'
-      And Books feed is loaded
-      And Following subcategories are present:
-        | Literary Fiction   |
-        | Science Fiction    |
-        | Historical Fiction |
-        | Horror             |
-        | Drama              |
-        | Fantasy            |
-        | Poetry             |
-        | Mysteries          |
-        | Romance            |
-        | All Fiction        |
-      And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
-    When I open 'Drama' subcategory
+    When I open 'All Nonfiction' subcategory
     Then Subcategory screen is present
-      And Subcategory name is 'Drama'
+      And Subcategory name is 'All Nonfiction'
 
   @tier1
   Scenario: Browse Lanes/Categories
-    When I open Catalog
+    When I add "Digital Public Library of America" account from welcomeScreen
+      And I open Catalog
     Then Books feed is loaded
       And Count of books in first lane is more than 1
-    When I open 'Fiction' category
-    Then Current category name is 'Fiction'
+    When I open 'Nonfiction' category
+    Then Current category name is 'Nonfiction'
       And Following subcategories are present:
-        | Literary Fiction   |
-        | Science Fiction    |
-        | Mysteries          |
-        | Romance            |
-        | Historical Fiction |
-        | Horror             |
-        | Poetry             |
-        | Drama              |
-        | Fantasy            |
-        | All Fiction        |
-    When I open 'Drama' subcategory
+        | Biography & Memoir    |
+        | Textbooks             |
+        | Government & Politics |
+        | Science & Technology  |
+        | History               |
+        | Self Help             |
+        | Food & Health         |
+        | Academic Press        |
+        | All Nonfiction        |
+    When I open 'Self Help' subcategory
     Then Subcategory screen is present
-      And Subcategory name is 'Drama'
+      And Subcategory name is 'Self Help'
     When I open first book in subcategory list and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
 
   @tier1
   Scenario: Sort Lists
-    When I add 'Alameda County Library' account
+    When I add "Alameda County Library" account from welcomeScreen
       And I open Catalog
       And I switch to 'Alameda County Library' from side menu
     Then Books feed is loaded
@@ -110,7 +106,7 @@ Feature: Catalog Navigation
 
   @tier1 @exclude_ios @fixed @ignore
   Scenario: View Book Details
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I open Catalog
       And I switch to 'LYRASIS' from side menu
     When I open search modal
@@ -139,7 +135,7 @@ Feature: Catalog Navigation
 
   @tier1 @exclude_android @fixed @ignore
   Scenario: View Book Details (iOS)
-    When I add 'LYRASIS' account
+    When I add "LYRASIS" account from welcomeScreen
       And I open Catalog
       And I switch to 'LYRASIS' from side menu
     When I open search modal

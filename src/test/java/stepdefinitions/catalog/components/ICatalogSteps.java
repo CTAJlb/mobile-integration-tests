@@ -13,6 +13,8 @@ public interface ICatalogSteps {
 
     void booksFeedIsLoaded();
 
+    void openPreviousCategoryScreen();
+
     void getNamesOfBooksAndSaveThem(String booksNamesListKey);
 
     void checkListOfBooksIsNotEqualToSavedListOfBooks(String booksNamesListKey);

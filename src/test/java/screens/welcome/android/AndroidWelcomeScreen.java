@@ -10,6 +10,7 @@ import screens.welcome.WelcomeScreen;
 public class AndroidWelcomeScreen extends WelcomeScreen {
     private static final By PAGE_LOCATOR = By.id("selectionAlternateButton");
     private final IButton agreeBtn = getElementFactory().getButton(PAGE_LOCATOR, "Add a Library Later");
+    private final IButton findLibraryBtn = getElementFactory().getButton(By.xpath("//android.widget.Button"), "Find Your Library");
 
     public AndroidWelcomeScreen() {
         super(PAGE_LOCATOR);
@@ -19,5 +20,11 @@ public class AndroidWelcomeScreen extends WelcomeScreen {
     public void addALibraryLater() {
         agreeBtn.state().waitForDisplayed();
         agreeBtn.click();
+    }
+
+    @Override
+    public void findLibrary() {
+        findLibraryBtn.state().waitForDisplayed();
+        findLibraryBtn.click();
     }
 }

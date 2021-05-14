@@ -6,6 +6,7 @@ import constants.context.ContextLibrariesKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import screens.account.AccountScreen;
 import screens.accounts.AccountsScreen;
@@ -52,26 +53,25 @@ public class AccountSteps {
 
     @When("I add {string} account")
     public void addAccount(String libraryName) {
-        if (ageGateScreen.state().isDisplayed()) {
-            ageGateScreen.approveAge();
-        }
         openAccounts();
         accountsScreen.addAccount();
-        AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+        if (AqualityServices.getElementFactory().getButton(By.xpath("//android.widget.Button[@text = \"Deny\"]"), "DENYButton").state().waitForDisplayed()) {
+            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+        }
         Assert.assertTrue(addAccountScreen.state().waitForDisplayed(),
                 "Checking that add accounts screen visible");
         addAccountScreen.selectLibrary(libraryName);
 
-        saveLibraryInContext(ContextLibrariesKeys.CANCEL_GET.getKey(), libraryName);
-        saveLibraryInContext(ContextLibrariesKeys.CANCEL_HOLD.getKey(), libraryName);
-        saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
+        /*saveLibraryInContext(ContextLibrariesKeys.CANCEL_GET.getKey(), libraryName);
+        saveLibraryInContext(ContextLibrariesKeys.CANCEL_HOLD.getKey(), libraryName);*/
+        if(libraryName.toLowerCase().equals("LYRASIS".toLowerCase())){
+            saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
+        }
     }
 
     @Then("Account {string} is present on Accounts screen")
     public void checkAccountIsPresent(String libraryName) {
-        if (accountScreen.state().isDisplayed()) {
-            AqualityServices.getApplication().getDriver().navigate().back();
-        }
+        openAccounts();
         Assert.assertTrue(accountsScreen.isLibraryPresent(libraryName), libraryName + " is not present on Accounts screen");
     }
 
@@ -82,12 +82,12 @@ public class AccountSteps {
 
     @When("I remove {string} account")
     public void removeAccount(String libraryName) {
+        openAccounts();
         accountsScreen.deleteLibrary(libraryName);
     }
 
     @When("I open account {string}")
     public void openAccount(String libraryName) {
-        bottomMenuForm.open(BottomMenu.SETTINGS);
         openAccounts();
         accountsScreen.openAccount(libraryName);
     }
