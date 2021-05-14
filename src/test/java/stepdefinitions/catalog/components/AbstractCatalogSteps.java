@@ -418,12 +418,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
                 String.format("Opened book page does not contain button %1$s or %2$s. Error message - %3$s", BookActionButtonKeys.READ.i18n(), BookActionButtonKeys.LISTEN.i18n(), getErrorDetails()));
     }
 
-    public void openFirstBookAndSaveBookInfoAs(ReaderType readerType, String bookInfoKey) {
-        catalogScreen.openFirstBookOfType(readerType);
-        bookDetailsScreen.state().waitForDisplayed();
-        context.add(bookInfoKey, bookDetailsScreen.getBookInfo());
-    }
-
     private void addScreenshotIfErrorPresent(boolean isButtonPresent) {
         if (!isButtonPresent && bookDetailsScreen.isErrorButtonPresent()) {
             addScreenshot();

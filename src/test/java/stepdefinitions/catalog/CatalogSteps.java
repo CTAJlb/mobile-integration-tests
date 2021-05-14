@@ -313,11 +313,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.checkBookWasBorrowedSuccessfully();
     }
 
-    @When("I open first {} book and save book info as {string}")
-    public void openFirstBookAndSaveBookInfoAs(ReaderType readerType, String bookInfoKey) {
-        catalogSteps.openFirstBookAndSaveBookInfoAs(readerType, bookInfoKey);
-    }
-
     @When("I open first present category")
     public void openFirstPresentCategory() {
         catalogSteps.openFirstCategory();

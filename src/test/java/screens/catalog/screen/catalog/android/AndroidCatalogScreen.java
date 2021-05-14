@@ -66,21 +66,6 @@ public class AndroidCatalogScreen extends CatalogScreen {
     }
 
     @Override
-    public String getBookName(int index) {
-        return getBookWithGivenIndex(index).getAttribute(AndroidAttributes.CONTENT_DESC);
-    }
-
-    private IButton getBookWithGivenIndex(int index) {
-        return getElementFactory().getButton(By.xpath(String.format("(%s)[%d]", BOOKS_LOCATOR, index)),
-                "Book no" + index);
-    }
-
-    @Override
-    public void clickBook(int index) {
-        getBookWithGivenIndex(index).click();
-    }
-
-    @Override
     public void openCategory(String categoryName) {
         IButton categoryButton = getCategoryButton(categoryName);
         categoryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
@@ -115,16 +100,6 @@ public class AndroidCatalogScreen extends CatalogScreen {
             currentBooksNames = getListOfVisibleBooksNamesInSubcategoryLane(lineName);
         } while (!bookNames.containsAll(currentBooksNames));
         return bookNames;
-    }
-
-    @Override
-    public void openFirstBookOfType(ReaderType readerType) {
-        IButton button =
-                //todo temp workaround for skipping axis360 books
-                //getElementFactory().getButton(By.xpath(String.format(BOOK_OF_TYPE_LOCATOR_PATTERN, readerType.toString().toLowerCase())), "First book of " + readerType.toString() + " type in catalog");
-                getElementFactory().getButton(By.xpath(String.format("//android.widget.TextView[not(contains(@text, 'Axis 360'))]//following-sibling::androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[contains(@content-desc,'%s')]", readerType.toString().toLowerCase())), "First book of " + readerType.toString() + " type in catalog");
-        button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        button.click();
     }
 
     @Override
