@@ -16,8 +16,6 @@ import java.time.Duration;
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidHoldsScreen extends HoldsScreen {
     private final ILabel lblNoBooks = getElementFactory().getLabel(By.id("feedEmptyText"), "No Books Present");
-    private final IButton btnCancel =
-            getElementFactory().getButton(By.xpath("//android.widget.Button[@text=\"Cancel Reservation\"]"), "Cancel");
     private final String BOOK_INFO_LOCATOR_PATTERN = "//android.widget.ImageView[@content-desc=\"%s\"]";
 
     private static final String BOOK_BLOCK_BY_TITLE_LOC =
@@ -46,12 +44,6 @@ public class AndroidHoldsScreen extends HoldsScreen {
     }
 
     @Override
-    public void cancelReservations() {
-        btnCancel.click();
-        btnCancel.state().waitForNotDisplayed();
-    }
-
-    @Override
     public void clickBookByTitleButtonWithKey(String title, BookActionButtonKeys key) {
         clickOnSpecificBookElement(getActionButton(key, getBookTitleLocator(title)));
     }
@@ -60,11 +52,6 @@ public class AndroidHoldsScreen extends HoldsScreen {
     public boolean isBookAddButtonTextEqualTo(String bookTitle, BookActionButtonKeys key) {
         IButton btnBookAction = getActionButton(key, getBookTitleLocator(bookTitle));
         return btnBookAction.state().waitForDisplayed(Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
-    }
-
-    @Override
-    public boolean isBookForCancelPresent() {
-        return btnCancel.state().waitForDisplayed();
     }
 
     private void clickOnSpecificBookElement(IElement bookWithSpecificAddBtn) {
