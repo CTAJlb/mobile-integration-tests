@@ -244,12 +244,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.goBackToPreviousCatalogScreen();
     }
 
-    @When("I open first found book from the search result and save as {string}")
-    @And("Open first found book from the search result and save as {string}")
-    public CatalogBookModel selectFirstFoundBookAndSaveAs(String bookInfoKey) {
-        return catalogSteps.selectFirstFoundBookAndSaveAs(bookInfoKey);
-    }
-
     @And("Count of books in search result is up to {int}")
     public void checkCountOfBooksInSearchResultIsUpTo(int countOfBooks) {
         catalogSteps.checkCountOfBooksInSearchResultIsUpTo(countOfBooks);

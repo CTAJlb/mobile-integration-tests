@@ -36,19 +36,8 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
 
-    private final ILabel lblFirstFoundBook = getElementFactory().getLabel(
-            By.xpath(BOOKS_LOC), "First found book");
-
-
     public IosCatalogBooksScreen() {
         super(By.xpath(MAIN_ELEMENT));
-    }
-
-    @Override
-    public CatalogBookModel selectFirstFoundBook() {
-        CatalogBookModel catalogBookModel = getBookModel(BOOKS_LOC);
-        lblFirstFoundBook.click();
-        return catalogBookModel;
     }
 
     private List<ILabel> getFoundBooks() {

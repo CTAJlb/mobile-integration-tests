@@ -319,13 +319,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public CatalogBookModel selectFirstFoundBookAndSaveAs(String bookInfoKey) {
-        CatalogBookModel catalogBookModel = catalogBooksScreen.selectFirstFoundBook();
-        context.add(bookInfoKey, catalogBookModel);
-        return catalogBookModel;
-    }
-
-    @Override
     public void checkCountOfBooksInSearchResultIsUpTo(int countOfBooks) {
         int foundBooksCount = catalogBooksScreen.getFoundBooksCount();
         Assert.assertTrue(countOfBooks >= foundBooksCount,

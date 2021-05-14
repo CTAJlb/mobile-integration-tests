@@ -51,13 +51,6 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
-    public CatalogBookModel selectFirstFoundBook() {
-        CatalogBookModel catalogBookModel = getBookModel(BOOKS_LOC);
-        lblFirstFoundBook.click();
-        return catalogBookModel;
-    }
-
-    @Override
     public int getFoundBooksCount() {
         return getFoundBooks().size();
     }
