@@ -51,23 +51,8 @@ public class IosAccountScreen extends AccountScreen {
     }
 
     @Override
-    public void enterCredentialsViaKeyboard(Credentials credentials) {
-        enterDataViaKeyboard(txbCard, credentials.getBarcode());
-        enterDataViaKeyboard(txbPin, credentials.getPin());
-        KeyboardUtils.hideKeyboard();
-        btnLogin.click();
-    }
-
-    @Override
     public String getLoginFailedMessage() {
         return "";
-    }
-
-    private void enterDataViaKeyboard(ITextBox textBox, String value) {
-        textBox.click();
-        Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(KeyboardUtils::isKeyboardVisible),
-                "Checking that keyboard is shown");
-        textBox.sendKeys(value);
     }
 
     @Override

@@ -51,16 +51,6 @@ public class AndroidAccountScreen extends AccountScreen {
     }
 
     @Override
-    public void enterCredentialsViaKeyboard(Credentials credentials) {
-        enterDataViaKeyboard(txbCard, credentials.getBarcode());
-        enterDataViaKeyboard(txbPin, credentials.getPin());
-        KeyboardUtils.hideKeyboard();
-        Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(() -> !KeyboardUtils.isKeyboardVisible()),
-                "Checking that keyboard is not shown");
-        btnLogin.click();
-    }
-
-    @Override
     public String getLoginFailedMessage() {
         return lblLoginFailed.state().isDisplayed() ? lblLoginFailed.getText() : "";
     }
@@ -101,12 +91,5 @@ public class AndroidAccountScreen extends AccountScreen {
 
     private String getLoginButtonText() {
         return btnLoginAction.state().waitForDisplayed() ? btnLoginAction.getText() : "";
-    }
-
-    private void enterDataViaKeyboard(ITextBox textBox, String value) {
-        textBox.click();
-        Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(KeyboardUtils::isKeyboardVisible),
-                "Checking that keyboard is shown");
-        textBox.sendKeys(value);
     }
 }
