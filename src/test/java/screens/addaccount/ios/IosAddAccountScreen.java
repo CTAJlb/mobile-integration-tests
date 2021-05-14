@@ -1,5 +1,6 @@
 package screens.addaccount.ios;
 
+import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
@@ -23,21 +24,23 @@ public class IosAddAccountScreen extends AddAccountScreen {
         IButton libraryButton = getLibraryButton(libraryName, LIBRARY_BUTTON_PATTERN_NOT_WELCOME_SCREEN);
         int sch = 0;
         if (libraryName.toLowerCase().equals("LYRASIS".toLowerCase())) {
-            while (sch < 10) {
+            while (sch < 9) {
                 Point startPoint = new Point(10, 130);
-                Point endPoint = new Point(10, 640);
+                Point endPoint = new Point(10, 700);
                 AqualityServices.getTouchActions().swipeWithLongPress(endPoint, startPoint);
                 sch++;
             }
         } else if (libraryName.toLowerCase().equals("Digital Public Library of America".toLowerCase())) {
-            while (sch < 5) {
+            while (sch < 4) {
                 Point startPoint = new Point(10, 130);
-                Point endPoint = new Point(10, 600);
+                Point endPoint = new Point(10, 700);
                 AqualityServices.getTouchActions().swipeWithLongPress(endPoint, startPoint);
                 sch++;
             }
         }
 
+        libraryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+        libraryButton.state().waitForDisplayed();
         libraryButton.click();
     }
 
@@ -46,14 +49,14 @@ public class IosAddAccountScreen extends AddAccountScreen {
         IButton libraryButton = getLibraryButton(libraryName, LIBRARY_BUTTON_PATTERN_WELCOME_SCREEN);
         int sch = 0;
         if (libraryName.toLowerCase().equals("Digital Public Library of America".toLowerCase())) {
-            while (sch < 7) {
+            while (sch < 6) {
                 Point startPoint = new Point(10, 50);
-                Point endPoint = new Point(10, 800);
+                Point endPoint = new Point(10, 910);
                 AqualityServices.getTouchActions().swipeWithLongPress(endPoint, startPoint);
                 sch++;
             }
         } else if (libraryName.toLowerCase().equals("LYRASIS".toLowerCase())) {
-            while (sch < 12) {
+            while (sch < 11) {
                 Point startPoint = new Point(10, 35);
                 Point endPoint = new Point(10, 910);
                 AqualityServices.getTouchActions().swipeWithLongPress(endPoint, startPoint);
@@ -61,6 +64,8 @@ public class IosAddAccountScreen extends AddAccountScreen {
             }
         }
 
+        libraryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+        libraryButton.state().waitForDisplayed();
         libraryButton.click();
     }
 

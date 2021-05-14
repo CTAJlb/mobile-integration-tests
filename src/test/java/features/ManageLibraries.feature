@@ -8,7 +8,7 @@ Feature: Manage Libraries
   @tier1
   Scenario: Switch Library Catalogs
     When I add "Digital Public Library of America" account from welcomeScreen
-      And I add "Alameda County Library" account from welcomeScreen
+      And I add 'Alameda County Library' account
       And Catalog is opened
       And I get names of books on screen and save them as 'nameOfBooks'
       And I switch to 'Alameda County Library' from side menu
