@@ -25,8 +25,6 @@ public interface ICatalogSteps {
 
     void openBooks();
 
-    void getBookFromShelfAndSaveItAsBookInfo(String bookInfoKey);
-
     void checkCurrentLibraryIsCorrect(String expectedLibraryName);
 
     void openCategory(String categoryName);

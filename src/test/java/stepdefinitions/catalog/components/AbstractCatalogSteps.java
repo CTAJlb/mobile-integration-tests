@@ -114,15 +114,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void getBookFromShelfAndSaveItAsBookInfo(String bookInfoKey) {
-        CatalogBookModel bookModel = new CatalogBookModel();
-        bookModel.setImageTitle(catalogScreen.getBookName(1));
-        context.add(bookInfoKey, bookModel);
-        catalogScreen.clickBook(1);
-        bookDetailsScreen.downloadBook();
-    }
-
-    @Override
     public void checkCurrentLibraryIsCorrect(String expectedLibraryName) {
         Assert.assertEquals(mainCatalogToolbarForm.getCatalogName(), expectedLibraryName,
                 "Current library name is not correct");

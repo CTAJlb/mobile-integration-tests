@@ -67,11 +67,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openBooks();
     }
 
-    @And("I Download first book from shelf and save it as {string}")
-    public void getBookFromShelfAndSaveItAsBookInfo(String bookInfoKey) {
-        catalogSteps.getBookFromShelfAndSaveItAsBookInfo(bookInfoKey);
-    }
-
     @And("Current library is {string} in Catalog")
     public void checkCurrentLibraryIsCorrect(String expectedLibraryName) {
         catalogSteps.checkCurrentLibraryIsCorrect(expectedLibraryName);

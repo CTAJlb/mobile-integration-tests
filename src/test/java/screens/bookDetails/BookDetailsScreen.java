@@ -11,8 +11,6 @@ public abstract class BookDetailsScreen extends Screen {
         super(locator, "Book details");
     }
 
-    public abstract void downloadBook();
-
     public abstract CatalogBookModel getBookInfo();
 
     public abstract boolean isValuePresentInInformationBlock(
