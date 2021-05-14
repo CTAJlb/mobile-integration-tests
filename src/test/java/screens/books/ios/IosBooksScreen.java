@@ -63,21 +63,6 @@ public class IosBooksScreen extends BooksScreen {
     }
 
     @Override
-    public int getCountOfBooksWithAction(BookActionButtonKeys actionKey) {
-        List<String> listOfButtonNames =
-                getElementFactory().findElements(By.xpath(ACTION_BUTTON_XPATH_LOCATOR), ElementType.LABEL).stream().map(x -> x.getAttribute(IosAttributes.NAME)).collect(Collectors.toList());
-        return (int) listOfButtonNames.stream().filter(x -> x.contains(actionKey.i18n())).count();
-    }
-
-    @Override
-    public void openBookPage(int index, BookActionButtonKeys actionKey) {
-        getElementFactory()
-                .findElements(By.xpath(String.format(BOOKS_WITH_ACTION_LOC, actionKey.i18n())), ElementType.BUTTON)
-                .get(index)
-                .click();
-    }
-
-    @Override
     public void refreshList() {
         SwipeElementUtils.swipeElementDown(mainBooksElementCollection);
     }
@@ -89,32 +74,6 @@ public class IosBooksScreen extends BooksScreen {
                 getElementFactory().getButton(By.xpath(String.format(BOOKS_BY_TITLE_LOC, bookInfo.getTitle())), "The book " + bookInfo.getTitle());
         btnBookName.state().waitForDisplayed();
         btnBookName.findChildElement(By.xpath(String.format(BOOK_ACTION_BUTTON_LOCATOR, readButtonName)), ElementType.BUTTON).click();
-    }
-
-    @Override
-    public void scrollForButtonWithAction(BookActionButtonKeys actionButton) {
-        String buttonName = actionButton.i18n();
-        ILabel label = getElementFactory().getLabel(By.xpath(String.format(BOOKS_WITH_ACTION_LOC, buttonName)), buttonName);
-        if (!label.state().isDisplayed()) {
-            List<String> currentBooksNames = getBookNames();
-            Set<String> bookNames = new HashSet<>();
-            do {
-                bookNames.addAll(currentBooksNames);
-                SwipeElementUtils.swipeElementUp(lblScreen);
-                currentBooksNames = getBookNames();
-            } while (!bookNames.containsAll(currentBooksNames));
-        }
-    }
-
-    @Override
-    public void scrollUp() {
-        if (mainBooksElementCollection.state().isDisplayed()) {
-            SwipeElementUtils.swipeElementDown(mainBooksElementCollection);
-        }
-    }
-
-    private List<String> getBookNames() {
-        return getBooks().stream().map(aquality.selenium.core.elements.interfaces.IElement::getText).collect(Collectors.toList());
     }
 
     private List<IElement> getBooks() {

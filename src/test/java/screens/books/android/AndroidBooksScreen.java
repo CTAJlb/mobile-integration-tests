@@ -57,18 +57,6 @@ public class AndroidBooksScreen extends BooksScreen {
     }
 
     @Override
-    public int getCountOfBooksWithAction(BookActionButtonKeys actionKey) {
-        return getBooksWithAction(actionKey).size();
-    }
-
-    @Override
-    public void openBookPage(int index, BookActionButtonKeys actionKey) {
-        getListOfElements(actionKey, BOOKS_WITH_ACTION_LOC, ElementType.BUTTON)
-                .get(index)
-                .click();
-    }
-
-    @Override
     public void refreshList() {
         btnMenu.click();
         btnRefresh.click();
@@ -80,29 +68,8 @@ public class AndroidBooksScreen extends BooksScreen {
         getElementFactory().getButton(By.xpath(String.format(BOOK_INFO_BUTTON_PATTERN, String.format(BOOK_INFO_LOCATOR_PATTERN, bookInfo.getImageTitle()), readButtonName)), readButtonName).click();
     }
 
-    @Override
-    public void scrollForButtonWithAction(BookActionButtonKeys actionButton) {
-        IButton button = getElementFactory().getButton(By.xpath(String.format(BOOK_ACTION_BUTTON_LOC, actionButton.i18n())), actionButton.i18n());
-        if (!button.state().isDisplayed()) {
-            getAllBooksTitles();
-        }
-    }
-
-    @Override
-    public void scrollUp() {
-    }
-
     private List<String> getBookNames() {
         return getBooks().stream().map(x -> x.getAttribute(AndroidAttributes.CONTENT_DESC)).collect(Collectors.toList());
-    }
-
-    private List<IElement> getBooksWithAction(BookActionButtonKeys actionKey) {
-        return getListOfElements(actionKey, BOOK_ACTION_BUTTON_LOC, ElementType.LABEL);
-    }
-
-    private List<IElement> getListOfElements(BookActionButtonKeys actionKey, String bookActionButtonLoc, ElementType label) {
-        return getElementFactory().findElements(
-                By.xpath(String.format(bookActionButtonLoc, actionKey.i18n())), label);
     }
 
     private List<IElement> getBooks() {
