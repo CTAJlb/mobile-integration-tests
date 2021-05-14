@@ -46,9 +46,9 @@ public class IosAddAccountScreen extends AddAccountScreen {
         IButton libraryButton = getLibraryButton(libraryName, LIBRARY_BUTTON_PATTERN_WELCOME_SCREEN);
         int sch = 0;
         if (libraryName.toLowerCase().equals("Digital Public Library of America".toLowerCase())) {
-            while (sch < 6) {
+            while (sch < 7) {
                 Point startPoint = new Point(10, 50);
-                Point endPoint = new Point(10, 900);
+                Point endPoint = new Point(10, 800);
                 AqualityServices.getTouchActions().swipeWithLongPress(endPoint, startPoint);
                 sch++;
             }
