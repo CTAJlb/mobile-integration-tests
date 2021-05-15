@@ -15,6 +15,8 @@ public interface ICatalogSteps {
 
     void openPreviousCategoryScreen();
 
+    void performActionOnBookFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey);
+
     void getNamesOfBooksAndSaveThem(String booksNamesListKey);
 
     void checkListOfBooksIsNotEqualToSavedListOfBooks(String booksNamesListKey);
