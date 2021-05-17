@@ -22,6 +22,7 @@ public class XMLUtil {
     private HashMap<String, List<BookModel>> hashMapUnavailableAudiobooks;
     private ArrayList<BookModel> availableBooksAnyType;
     private ArrayList<BookModel> unavailableBooksAnyType;
+    private ArrayList<BookModel> availablePdf;
     private static XMLUtil xmlUtil;
     private final int connectTimeout = 120;
     private final int readTimeout = 120;
@@ -68,6 +69,7 @@ public class XMLUtil {
         String url = partOfURL;
         ArrayList<BookModel> listAvailableBooksAnyType = new ArrayList<>();
         ArrayList<BookModel> listUnavailableBooksAnyType = new ArrayList<>();
+        ArrayList<BookModel> listAvailablePdf = new ArrayList<>();
 
         while (true) {
             FeedModel feedModel = supportMethod(url);
@@ -77,12 +79,34 @@ public class XMLUtil {
             }
 
             for (EntryXML entry : feedModel.getEntries()) {
-                boolean isCopiesPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getCopies() != null);
-
                 boolean isEnLanguagePresent = entry.getLanguage().toLowerCase().equals("en");
-                if (!isCopiesPresent || !isEnLanguagePresent) {
+                if (!isEnLanguagePresent) {
                     continue;
                 }
+
+                boolean isPdfTypePresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition() != null);
+                boolean isPdfAvailabilityPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getAvailabilityPDF() != null);
+
+                if (isPdfTypePresent && isPdfAvailabilityPresent) {
+                    String pdfType = entry.getLinksFromEntry().stream().filter(link -> link.getAvailabilityPDF() != null).findFirst().get().getIndirectAcquisition().getType();
+                    String pdfAvailability = entry.getLinksFromEntry().stream().filter(link -> link.getAvailabilityPDF() != null).findFirst().get().getAvailabilityPDF().getStatus();
+
+                    if (pdfType.toLowerCase().equals("application/pdf".toLowerCase()) && pdfAvailability.toLowerCase().equals("available".toLowerCase())) {
+                        String[] arrayBookType = entry.getBookType().split("/");
+                        String bookType = arrayBookType[arrayBookType.length - 1];
+                        BookModel bookModel = new BookModel(entry.getDistributor().getDistributorName().toLowerCase(), bookType.toLowerCase(), entry.getBookName(), 0);//todo countAvailableCopies is not zero status == available
+                        listAvailablePdf.add(bookModel);
+                    }
+
+                    continue;
+                }
+
+                boolean isCopiesPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getCopies() != null);
+
+                if (!isCopiesPresent) {
+                    continue;
+                }
+
                 boolean isPdfAndVndAdobeAdeptPresent = false;
                 boolean isIndirectAcquisitionTagPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition() != null);
                 if (isIndirectAcquisitionTagPresent) {
@@ -124,6 +148,27 @@ public class XMLUtil {
 
         availableBooksAnyType = listAvailableBooksAnyType;
         unavailableBooksAnyType = listUnavailableBooksAnyType;
+        availablePdf = getListAvailablePdfWithoutRepetitions(listAvailablePdf);
+    }
+
+    private ArrayList<BookModel> getListAvailablePdfWithoutRepetitions(ArrayList<BookModel> arrayList) {
+        Set<BookModel> setAvailablePdf = arrayList.stream().collect(Collectors.toSet());
+        ArrayList<BookModel> arrayListAvailablePdf = new ArrayList<>(setAvailablePdf);
+
+        return arrayListAvailablePdf;
+    }
+
+    public synchronized String getRandomPdf() {
+        if (availablePdf.size() == 0) {
+            throw new RuntimeException("availablePdf.size() == 0, There is not available pdf");
+        }
+
+        BookModel randomBookModel = availablePdf.get(RandomUtils.nextInt(0, availablePdf.size()));
+        String pdf = randomBookModel.getBookName();
+
+        availablePdf.remove(randomBookModel);
+
+        return pdf;
     }
 
     public synchronized String getRandomBook(String availabilityType, String bookType, String distributor) {
@@ -186,7 +231,7 @@ public class XMLUtil {
             throw new RuntimeException("Bad Response, problem with server, Count of attempts: " + sch);
         }
 
-        if(feedModel == null){
+        if (feedModel == null) {
             throw new RuntimeException("Bad Response, problem with server, feedModel == null");
         }
 

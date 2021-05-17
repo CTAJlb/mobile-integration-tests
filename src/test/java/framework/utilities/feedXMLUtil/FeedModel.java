@@ -99,6 +99,16 @@ class Distribution {
 class LinkFromEntry {
     private Copies copies;
     private IndirectAcquisition indirectAcquisition;
+    private AvailabilityPDF availabilityPDF;
+
+    public AvailabilityPDF getAvailabilityPDF() {
+        return availabilityPDF;
+    }
+
+    @XmlElement(name = "availability", namespace = "http://opds-spec.org/2010/catalog")
+    public void setAvailabilityPDF(AvailabilityPDF availabilityPDF) {
+        this.availabilityPDF = availabilityPDF;
+    }
 
     public Copies getCopies() {
         return copies;
@@ -116,6 +126,19 @@ class LinkFromEntry {
     @XmlElement(name = "indirectAcquisition", namespace = "http://opds-spec.org/2010/catalog")
     public void setIndirectAcquisition(IndirectAcquisition indirectAcquisition) {
         this.indirectAcquisition = indirectAcquisition;
+    }
+}
+
+class AvailabilityPDF{
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    @XmlAttribute(name = "status")
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
 
