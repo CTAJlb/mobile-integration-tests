@@ -40,7 +40,7 @@ Feature: Manage Libraries
       And I open Books
     Then No books are present in Books list
 
-  @logout @returnBooks @tier2 @fixed
+  @logout @returnBooks @tier2 @fixed @xml
   Scenario: Switch Library Reservations
     When I add "Alameda County Library" account from welcomeScreen
     When I add 'LYRASIS' account
