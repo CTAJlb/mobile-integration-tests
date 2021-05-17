@@ -9,19 +9,15 @@ import io.cucumber.java.en.When;
 import models.android.CatalogBookModel;
 import org.testng.Assert;
 import screens.books.BooksScreen;
-import screens.bottommenu.BottomMenu;
-import screens.bottommenu.BottomMenuForm;
 
 public class BooksSteps {
     private final BooksScreen booksScreen;
-    private final BottomMenuForm bottomMenuForm;
     private ScenarioContext context;
 
     @Inject
     public BooksSteps(ScenarioContext context) {
         this.context = context;
         booksScreen = AqualityServices.getScreenFactory().getScreen(BooksScreen.class);
-        bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
     }
 
     @Then("No books are present in Books list")
