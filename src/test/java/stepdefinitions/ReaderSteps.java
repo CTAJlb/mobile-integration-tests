@@ -100,11 +100,11 @@ public class ReaderSteps {
                 (actualPageNumber == 1 && !getChapterName(expectedBookInfo).equals(getChapterName(actualBookInfo))), String.format("Page number is not correct (actual - %d, expected - %d)", actualPageNumber, expectedPageNumber));
     }
 
-    public int getPageNumber(String text) {
+    private int getPageNumber(String text) {
         return RegExUtil.getIntFromFirstGroup(text, RegEx.PAGE_NUMBER_REGEX);
     }
 
-    public String getChapterName(String text) {
+    private String getChapterName(String text) {
         Matcher matcher = getMatcher(text);
         return matcher.find() ? matcher.group(3) : "";
     }
