@@ -127,11 +127,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public abstract void checkCurrentCategoryName(String expectedCategoryName);
 
     @Override
-    public void checkCurrentCategoryNameByLocalization(CategoriesNamesKeys categoriesNamesKeys) {
-        checkCurrentCategoryName(categoriesNamesKeys.i18n());
-    }
-
-    @Override
     public void checkSubcategoryScreenIsPresent() {
         boolean isScreenPresent = subcategoryScreen.state().waitForDisplayed(Duration.ofMillis(AuthorizationTimeouts.DEBUG_MENU_IS_OPENED.getTimeoutMillis()));
         if (!isScreenPresent && subcategoryScreen.isErrorButtonPresent()) {
@@ -318,11 +313,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void openRelatedBooks() {
         bookDetailsScreen.clickRelatedBooks();
-    }
-
-    @Override
-    public void goBackToPreviousCatalogScreen() {
-        mainCatalogToolbarForm.goBack();
     }
 
     @Override

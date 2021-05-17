@@ -84,12 +84,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.checkCurrentCategoryName(expectedCategoryName);
     }
 
-    @Then("Current category name by localization is {}")
-    @And("Subcategory name by localization  is {}")
-    public void checkCurrentCategoryNameByLocalization(CategoriesNamesKeys categoriesNamesKeys) {
-        catalogSteps.checkCurrentCategoryNameByLocalization(categoriesNamesKeys);
-    }
-
     @Then("Subcategory screen is present")
     public void checkSubcategoryScreenIsPresent() {
         catalogSteps.checkSubcategoryScreenIsPresent();
@@ -243,11 +237,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     @When("I open related books")
     public void openRelatedBooks() {
         catalogSteps.openRelatedBooks();
-    }
-
-    @When("I go back to the previous catalog screen")
-    public void goBackToPreviousCatalogScreen() {
-        catalogSteps.goBackToPreviousCatalogScreen();
     }
 
     @And("Count of books in search result is up to {int}")

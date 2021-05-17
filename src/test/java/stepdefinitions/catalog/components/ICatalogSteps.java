@@ -33,8 +33,6 @@ public interface ICatalogSteps {
 
     void checkCurrentCategoryName(String expectedCategoryName);
 
-    void checkCurrentCategoryNameByLocalization(CategoriesNamesKeys categoriesNamesKeys);
-
     void checkSubcategoryScreenIsPresent();
 
     void checkFollowingSubcategoriesArePresent(List<String> expectedValuesList);
@@ -83,8 +81,6 @@ public interface ICatalogSteps {
     void checkDescriptionHasText(final String description);
 
     void openRelatedBooks();
-
-    void goBackToPreviousCatalogScreen();
 
     void checkCountOfBooksInSearchResultIsUpTo(int countOfBooks);
 
