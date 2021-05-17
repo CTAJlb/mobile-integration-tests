@@ -8,16 +8,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import screens.account.AccountScreen;
 import screens.accounts.AccountsScreen;
 import screens.addaccount.AddAccountScreen;
-import screens.agegate.AgeGateScreen;
-import screens.alert.AlertScreen;
 import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
-import screens.catalog.form.MainCatalogToolbarForm;
-import screens.catalog.screen.catalog.CatalogScreen;
-import screens.notifications.NotificationModal;
 import screens.settings.SettingsScreen;
 
 import java.util.ArrayList;
@@ -28,12 +22,6 @@ public class AccountSteps {
     private final BottomMenuForm bottomMenuForm;
     private final SettingsScreen settingsScreen;
     private final AddAccountScreen addAccountScreen;
-    private final AlertScreen alertScreen;
-    private final AccountScreen accountScreen;
-    private final AgeGateScreen ageGateScreen;
-    private final MainCatalogToolbarForm mainCatalogToolbarForm;
-    private final CatalogScreen catalogScreen;
-    private final NotificationModal notificationModal;
     private ScenarioContext context;
 
     @Inject
@@ -43,12 +31,6 @@ public class AccountSteps {
         bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
         settingsScreen = AqualityServices.getScreenFactory().getScreen(SettingsScreen.class);
         addAccountScreen = AqualityServices.getScreenFactory().getScreen(AddAccountScreen.class);
-        alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
-        accountScreen = AqualityServices.getScreenFactory().getScreen(AccountScreen.class);
-        ageGateScreen = AqualityServices.getScreenFactory().getScreen(AgeGateScreen.class);
-        mainCatalogToolbarForm = AqualityServices.getScreenFactory().getScreen(MainCatalogToolbarForm.class);
-        catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
-        notificationModal = AqualityServices.getScreenFactory().getScreen(NotificationModal.class);
     }
 
     @When("I add {string} account")
