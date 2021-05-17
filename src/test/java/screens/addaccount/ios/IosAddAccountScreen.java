@@ -24,7 +24,7 @@ public class IosAddAccountScreen extends AddAccountScreen {
         IButton libraryButton = getLibraryButton(libraryName, LIBRARY_BUTTON_PATTERN_NOT_WELCOME_SCREEN);
         int sch = 0;
         if (libraryName.toLowerCase().equals("LYRASIS".toLowerCase())) {
-            while (sch < 9) {
+            while (sch < 8) {
                 Point startPoint = new Point(10, 130);
                 Point endPoint = new Point(10, 700);
                 AqualityServices.getTouchActions().swipeWithLongPress(endPoint, startPoint);

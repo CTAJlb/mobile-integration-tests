@@ -32,19 +32,20 @@ public class XMLUtil {
         setHashMapsForEBooksAndAudioBooks();
     }
 
-    public static XMLUtil getInstance() {
+    public static synchronized XMLUtil getInstance() {
         if (xmlUtil == null) {
             xmlUtil = new XMLUtil();
         }
         return xmlUtil;
     }
 
-    public static void instanceInitialization() {
+    public static synchronized void instanceInitialization() {
         if (xmlUtil == null) {
             xmlUtil = new XMLUtil();
         }
     }
 
+    //todo method does not use
     public void getStatistics() {
         HashMap<String, HashMap<String, List<BookModel>>> hashMap = new HashMap<>();
         hashMap.put("AvailableEbooks".toLowerCase(), hashMapAvailableEbooks);
@@ -125,7 +126,7 @@ public class XMLUtil {
         unavailableBooksAnyType = listUnavailableBooksAnyType;
     }
 
-    public String getRandomBook(String availabilityType, String bookType, String distributor) {
+    public synchronized String getRandomBook(String availabilityType, String bookType, String distributor) {
         HashMap<String, List<BookModel>> hashMap = null;
         if (availabilityType.toLowerCase().equals(UtilConstants.AVAILABLE.toLowerCase())) {
             if (bookType.toLowerCase().equals(UtilConstants.EBOOK.toLowerCase())) {

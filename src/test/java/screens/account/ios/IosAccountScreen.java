@@ -8,11 +8,11 @@ import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.application.timeouts.AuthorizationTimeouts;
 import constants.localization.application.account.AccountScreenLoginStatus;
 import framework.configuration.Credentials;
-import framework.utilities.keyboard.KeyboardUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.testng.Assert;
 import screens.account.AccountScreen;
+import screens.alert.AlertScreen;
+import screens.alert.ios.IosAlertScreen;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -42,7 +42,7 @@ public class IosAccountScreen extends AccountScreen {
         AqualityServices.getConditionalWait().waitFor(() -> btnLogin.state().isDisplayed() || btnLogout.state().isDisplayed());
         if (!btnLogout.state().isDisplayed()) {
             txbCard.state().waitForDisplayed();
-            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();//todo Do this help?
+            new IosAlertScreen().closeNotNowModalIfPresent();
             txbCard.state().waitForDisplayed();
             txbCard.click();
             txbCard.clearAndType(credentials.getBarcode());
