@@ -20,8 +20,6 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
         ageGateScreen = AqualityServices.getScreenFactory().getScreen(AgeGateScreen.class);
     }
 
-    public abstract void openApplication();
-
     public abstract void returnToPreviousScreen();
 
     public abstract void addAccountFromWelcomeScreen(String libraryName);

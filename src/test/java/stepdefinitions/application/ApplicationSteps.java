@@ -27,14 +27,6 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         this.applicationSteps = stepsFactory.getSteps(AbstractApplicationSteps.class);
     }
 
-    @When("I open application")
-    @Given("Application is opened")
-    public void openApplication() {
-        // TODO: 12.05.2021 check
-        applicationSteps.openApplication();
-        context.add(ContextLibrariesKeys.APP_BUNDLE_ID.getKey(), getBundleId());
-    }
-
     @And("I return to previous screen")
     public void returnToPreviousScreen() {
         applicationSteps.returnToPreviousScreen();

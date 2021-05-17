@@ -17,13 +17,6 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
         pdfReaderScreen = screenFactory.getScreen(PdfReaderScreen.class);
     }
 
-    public void openApplication() {
-        welcomeScreen.addALibraryLater();
-        if (ageGateScreen.state().waitForDisplayed()) {
-            ageGateScreen.approveAge();
-        }
-    }
-
     @Override
     public void returnToPreviousScreen() {
         if (epubReaderScreen.state().isDisplayed()) {

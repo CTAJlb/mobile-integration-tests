@@ -29,14 +29,4 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
                 "Checking that add accounts screen visible");
         addAccountScreen.selectLibrary(libraryName);
     }
-
-    public void openApplication() {
-        if (!eulaAgreementScreen.isVanillaApp()) {
-            eulaAgreementScreen.clickAgree();
-        }
-        welcomeScreen.addALibraryLater();
-        if (ageGateScreen.state().waitForDisplayed()) {
-            ageGateScreen.approveAge();
-        }
-    }
 }
