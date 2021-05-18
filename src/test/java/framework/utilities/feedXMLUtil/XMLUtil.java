@@ -96,9 +96,8 @@ public class XMLUtil {
                         String bookType = arrayBookType[arrayBookType.length - 1];
                         BookModel bookModel = new BookModel(entry.getDistributor().getDistributorName().toLowerCase(), bookType.toLowerCase(), entry.getBookName(), 0);//todo countAvailableCopies is not zero status == available
                         listAvailablePdf.add(bookModel);
+                        continue;
                     }
-
-                    continue;
                 }
 
                 boolean isCopiesPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getCopies() != null);
