@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 @Test
 @CourgetteOptions(
-        threads = 2,
+        threads = 1,
         runLevel = CourgetteRunLevel.FEATURE,
         cucumberOptions = @CucumberOptions(
                 features = {"src/test/java/features"},
