@@ -5,7 +5,6 @@ import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.application.ReaderType;
 import constants.localization.application.catalog.BookActionButtonKeys;
-import constants.localization.application.catalog.CategoriesNamesKeys;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
 import constants.localization.application.facetedSearch.FacetSortByKeys;
 import framework.utilities.ScenarioContext;
@@ -14,7 +13,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.android.BookDetailsScreenInformationBlockModel;
-import models.android.CatalogBookModel;
 import stepdefinitions.BaseSteps;
 import stepdefinitions.catalog.components.AbstractCatalogSteps;
 import stepdefinitions.catalog.components.ICatalogSteps;
@@ -125,10 +123,9 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.performActionOnBookOfTypeAndSaveIt(actionButtonKey, bookType, bookInfoKey);
     }
 
-    @When("I {} book by name {string} and save it as {string}")
-    @And("{} book by name {string} type and save it as {string}")
-    public void performActionOnBookByNameAndSaveIt(BookActionButtonKeys actionButtonKey, String bookName, String bookInfoKey) {
-        catalogSteps.performActionOnBookByNameAndSaveIt(actionButtonKey, bookName, bookInfoKey);
+    @When("I {} or {} book by name {string} and save it as {string}")
+    public void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey1, BookActionButtonKeys actionButtonKey2, String bookName, String bookInfoKey) {
+        catalogSteps.performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(actionButtonKey1, actionButtonKey2, bookName, bookInfoKey);
     }
 
     //new

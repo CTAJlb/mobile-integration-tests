@@ -26,6 +26,8 @@ public abstract class CatalogBooksScreen extends Screen {
 
     public abstract CatalogBookModel scrollToBookByNameAndClickActionButton(BookActionButtonKeys actionButtonKey, String bookName);
 
+    public abstract CatalogBookModel scrollToBookByNameAndClickGetOrDownloadActionButton(BookActionButtonKeys actionButtonKey1, BookActionButtonKeys actionButtonKey2, String bookName);
+
     public abstract String getErrorMessage();
 
     public abstract boolean isErrorButtonPresent();

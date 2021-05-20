@@ -117,6 +117,12 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
+    public CatalogBookModel scrollToBookByNameAndClickGetOrDownloadActionButton(BookActionButtonKeys actionButtonKey1, BookActionButtonKeys actionButtonKey2, String bookName) {
+        //this does not use for ios
+        return null;
+    }
+
+    @Override
     public String getErrorMessage() {
         return null;
     }
