@@ -58,14 +58,6 @@ public class LoggerHooks {
 
     @AfterStep
     public void afterStep(Scenario scenario) {
-        AqualityServices.getLogger().info("++++++++++++++++++++++++++++");
-        AqualityServices.getLogger().info("countActive: " + Thread.activeCount());
-        AqualityServices.getLogger().info("ThreadName: " + Thread.currentThread().getName() + " ThreadId: " + Thread.currentThread().getId());
-        AqualityServices.getLogger().info("xmlUtil: " + XMLUtil.getInstance());
-        AqualityServices.getLogger().info("sch: " + TestRunner.getSch());
-        AqualityServices.getLogger().info("RandomNumberXMLUtil: " + XMLUtil.getRandomNumber());
-        AqualityServices.getLogger().info("RandomNumberTestRunner: " + TestRunner.getRandomNumber());
-        AqualityServices.getLogger().info("++++++++++++++++++++++++++++");
         counter.set(counter.get() + 1);
     }
 

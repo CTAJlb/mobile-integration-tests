@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 @Test
 @CourgetteOptions(
-        threads = 1,
+        threads = 2,
         runLevel = CourgetteRunLevel.FEATURE,
         cucumberOptions = @CucumberOptions(
                 features = {"src/test/java/features"},
@@ -25,29 +25,4 @@ import org.testng.annotations.Test;
                 }
         ))
 public class TestRunner extends TestNGCourgette {
-    public static final XMLUtil xmlUtil;
-    public static int sch = 0;
-    public static int randomNumber = 0;
-
-    static {
-        xmlUtil = new XMLUtil();
-        xmlUtil.getHashMapsForEBooksAndAudioBooks();
-        randomNumber = xmlUtil.getRandomNumber();
-    }
-
-    public static synchronized int getRandomNumber(){
-        return randomNumber;
-    }
-
-    public static synchronized XMLUtil get(){
-        return xmlUtil;
-    }
-
-    public static synchronized void improveSch(){
-        sch++;
-    }
-
-    public static synchronized int getSch(){
-        return sch;
-    }
 }

@@ -7,7 +7,6 @@ import org.apache.commons.lang3.RandomUtils;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jaxb.JaxbConverterFactory;
-import runners.TestRunner;
 
 import java.io.IOException;
 import java.util.*;
@@ -24,28 +23,27 @@ public class XMLUtil {
     private ArrayList<BookModel> availableBooksAnyType;
     private ArrayList<BookModel> unavailableBooksAnyType;
     private ArrayList<BookModel> availablePdf;
-    private static final XMLUtil xmlUtil = TestRunner.get();
+    private static XMLUtil xmlUtil;
     private final int connectTimeout = 120;
     private final int readTimeout = 120;
     private final int writeTimeout = 120;
     private final int threadSleepTime = 3000;
-    private static int randomNumber;
 
-    public XMLUtil() {
-        randomNumber = RandomUtils.nextInt(0, 10);
-    }
-
-    public static synchronized int getRandomNumber(){
-        return randomNumber;
-    }
-
-    public synchronized void getHashMapsForEBooksAndAudioBooks(){
-        TestRunner.improveSch();
+    private XMLUtil() {
         setHashMapsForEBooksAndAudioBooks();
     }
 
     public static synchronized XMLUtil getInstance() {
+        if (xmlUtil == null) {
+            xmlUtil = new XMLUtil();
+        }
         return xmlUtil;
+    }
+
+    public static synchronized void instanceInitialization() {
+        if (xmlUtil == null) {
+            xmlUtil = new XMLUtil();
+        }
     }
 
     //todo method does not use
