@@ -10,12 +10,12 @@ import org.testng.annotations.DataProvider;
                 "hooks",
                 "transformers",
                 "stepdefinitions"
-        },
-        plugin = {
-                "io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm",
+        }
+        /*plugin = {
+                //"io.qameta.allure.cucumber6jvm.AllureCucumber6Jvm",
                 //todo Aquality Tracking is temporary turned off until AqualityTrackingCucumber6Jvm is released
                 //"aquality.tracking.integrations.cucumber5jvm.AqualityTrackingCucumber5Jvm",
-        }
+        }*/
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
 

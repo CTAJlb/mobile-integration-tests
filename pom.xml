@@ -91,7 +91,7 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-cucumber5-jvm</artifactId>
-            <version>2.13.3</version>
+            <version>2.13.2</version>
         </dependency>
 
         <dependency>
