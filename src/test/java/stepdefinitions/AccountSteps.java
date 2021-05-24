@@ -6,8 +6,8 @@ import constants.context.ContextLibrariesKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import screens.accounts.AccountsScreen;
 import screens.addaccount.AddAccountScreen;
 import screens.bottommenu.BottomMenu;
@@ -40,8 +40,7 @@ public class AccountSteps {
         if (AqualityServices.getElementFactory().getButton(By.xpath("//android.widget.Button[@text = \"Deny\"]"), "DENYButton").state().waitForDisplayed()) {
             AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
         }
-        Assert.assertTrue(addAccountScreen.state().waitForDisplayed(),
-                "Checking that add accounts screen visible");
+        Assert.assertTrue("Checking that add accounts screen visible", addAccountScreen.state().waitForDisplayed());
         addAccountScreen.selectLibrary(libraryName);
 
         /*saveLibraryInContext(ContextLibrariesKeys.CANCEL_GET.getKey(), libraryName);
@@ -54,12 +53,12 @@ public class AccountSteps {
     @Then("Account {string} is present on Accounts screen")
     public void checkAccountIsPresent(String libraryName) {
         openAccounts();
-        Assert.assertTrue(accountsScreen.isLibraryPresent(libraryName), libraryName + " is not present on Accounts screen");
+        Assert.assertTrue(libraryName + " is not present on Accounts screen", accountsScreen.isLibraryPresent(libraryName));
     }
 
     @Then("Account {string} is not present on Accounts screen")
     public void checkAccountIsNotPresent(String libraryName) {
-        Assert.assertFalse(accountsScreen.isLibraryPresent(libraryName), libraryName + " is present on Accounts screen");
+        Assert.assertFalse(libraryName + " is present on Accounts screen", accountsScreen.isLibraryPresent(libraryName));
     }
 
     @When("I remove {string} account")

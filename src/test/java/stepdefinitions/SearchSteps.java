@@ -5,7 +5,7 @@ import framework.utilities.ScenarioContext;
 import framework.utilities.feedXMLUtil.XMLUtil;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.testng.Assert;
+import org.junit.Assert;
 import screens.catalog.form.MainCatalogToolbarForm;
 import screens.search.modal.SearchModal;
 import screens.subcategory.SubcategoryScreen;
@@ -34,16 +34,16 @@ public class SearchSteps {
 
     @Then("Search modal is opened")
     public void checkSearchModalIsOpened() {
-        Assert.assertTrue(searchModal.state().waitForDisplayed(), "Search modal is not loaded");
+        Assert.assertTrue("Search modal is not loaded", searchModal.state().waitForDisplayed());
     }
 
     @When("I search for {string}")
     public void searchFor(String searchedText) {
-        Assert.assertTrue(searchModal.state().waitForDisplayed(), "Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage());
+        Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().waitForDisplayed());
         searchModal.setSearchedText(searchedText);
         searchModal.applySearch();
-        Assert.assertTrue(searchModal.state().waitForNotDisplayed(), "Search modal is not disappear");
-        Assert.assertTrue(subcategoryScreen.state().waitForDisplayed(), String.format("Search results page for value '%s' is not present. Error (if present) - %s", searchedText, subcategoryScreen.getErrorMessage()));
+        Assert.assertTrue("Search modal is not disappear", searchModal.state().waitForNotDisplayed());
+        Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", searchedText, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
     }
 
     @When("I search for pdf and save as {string}")
@@ -52,10 +52,10 @@ public class SearchSteps {
         AqualityServices.getLogger().info("randomPdf: " + pdfForSearching);
         context.add(bookNameInfoKey, pdfForSearching);
 
-        Assert.assertTrue(searchModal.state().waitForDisplayed(), "Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage());
+        Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().waitForDisplayed());
         searchModal.setSearchedText(pdfForSearching);
         searchModal.applySearch();
-        Assert.assertTrue(searchModal.state().waitForNotDisplayed(), "Search modal is not disappear");
-        Assert.assertTrue(subcategoryScreen.state().waitForDisplayed(), String.format("Search results page for value '%s' is not present. Error (if present) - %s", pdfForSearching, subcategoryScreen.getErrorMessage()));
+        Assert.assertTrue("Search modal is not disappear", searchModal.state().waitForNotDisplayed());
+        Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", pdfForSearching, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
     }
 }

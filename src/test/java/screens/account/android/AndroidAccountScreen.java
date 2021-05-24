@@ -10,10 +10,8 @@ import constants.application.timeouts.AuthorizationTimeouts;
 import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.account.AccountScreenLoginStatus;
 import framework.configuration.Credentials;
-import framework.utilities.keyboard.KeyboardUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.testng.Assert;
 import screens.account.AccountScreen;
 
 import java.time.Duration;

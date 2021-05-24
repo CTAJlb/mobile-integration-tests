@@ -3,7 +3,7 @@ package stepdefinitions.credentials.components.impl;
 import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
-import org.testng.Assert;
+import org.junit.Assert;
 import stepdefinitions.credentials.components.AbstractCredentialsSteps;
 
 @StepsType(platform = PlatformName.ANDROID)
@@ -14,6 +14,6 @@ public class AndroidCredentialsSteps extends AbstractCredentialsSteps {
 
     @Override
     public void checkLoginIsPerformedSuccessfully() {
-        Assert.assertTrue(accountScreen.isLoginSuccessful(), "Login failed. Message: " + accountScreen.getLoginFailedMessage());
+        Assert.assertTrue("Login failed. Message: " + accountScreen.getLoginFailedMessage(), accountScreen.isLoginSuccessful());
     }
 }

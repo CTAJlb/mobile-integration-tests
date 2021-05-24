@@ -4,8 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
-import org.testng.Assert;
-import screens.bottommenu.BottomMenu;
+import org.junit.Assert;
 import stepdefinitions.catalog.components.AbstractCatalogSteps;
 
 @StepsType(platform = PlatformName.IOS)
@@ -22,10 +21,9 @@ public class IosCatalogSteps extends AbstractCatalogSteps {
     @Override
     public void checkCurrentCategoryName(String expectedCategoryName) {
         if (expectedCategoryName.equals("Related Books")) {
-            Assert.assertTrue(bookDetailsScreen.isRelatedBooksVisible(), "Related books are not visible");
+            Assert.assertTrue("Related books are not visible", bookDetailsScreen.isRelatedBooksVisible());
         } else {
-            Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(() -> mainCatalogToolbarForm.getCategoryName().equals(expectedCategoryName), "Wait while category become correct."),
-                    String.format("Current category name is not correct. Expected '%1$s' but found '%2$s'", expectedCategoryName, mainCatalogToolbarForm.getCategoryName()));
+            Assert.assertTrue(String.format("Current category name is not correct. Expected '%1$s' but found '%2$s'", expectedCategoryName, mainCatalogToolbarForm.getCategoryName()), AqualityServices.getConditionalWait().waitFor(() -> mainCatalogToolbarForm.getCategoryName().equals(expectedCategoryName), "Wait while category become correct."));
         }
     }
 }

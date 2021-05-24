@@ -16,8 +16,7 @@ import io.cucumber.java.Scenario;
 import models.android.BookDetailsScreenInformationBlockModel;
 import models.android.CatalogBookModel;
 import org.apache.commons.lang3.StringUtils;
-import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
+import org.junit.Assert;
 import screens.agegate.AgeGateScreen;
 import screens.alert.AlertScreen;
 import screens.bookDetails.BookDetailsScreen;
@@ -70,8 +69,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         if (!isPagePresent && catalogScreen.isErrorButtonPresent()) {
             addScreenshot();
         }
-        Assert.assertTrue(isPagePresent,
-                "Books feed is not loaded. Error message (if present) - " + catalogScreen.getErrorDetails());
+        Assert.assertTrue("Books feed is not loaded. Error message (if present) - " + catalogScreen.getErrorDetails(), isPagePresent);
     }
 
     @Override
@@ -82,8 +80,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void checkListOfBooksIsNotEqualToSavedListOfBooks(String booksNamesListKey) {
         List<String> expectedList = context.get(booksNamesListKey);
-        Assert.assertNotEquals(catalogScreen.getListOfBooksNames(), expectedList,
-                "Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")));
+        Assert.assertNotEquals("Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")), catalogScreen.getListOfBooksNames(), expectedList);
     }
 
     @Override
@@ -133,15 +130,14 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
             Scenario scenario = context.get(ScenarioContextKey.SCENARIO_KEY);
             scenario.attach(ScreenshotUtils.getScreenshot(), "image/png", "error_screenshot.png");
         }
-        Assert.assertTrue(isScreenPresent, "Subcategory screen is not present. Error (if present) - " + subcategoryScreen.getErrorMessage());
+        Assert.assertTrue("Subcategory screen is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), isScreenPresent);
     }
 
     @Override
     public void checkFollowingSubcategoriesArePresent(List<String> expectedValuesList) {
         catalogScreen.state().waitForDisplayed();
         catalogScreen.swipeScreenUp();
-        Assert.assertEquals(catalogScreen.getAllCategoriesNames(), new HashSet<>(expectedValuesList),
-                "List of categories is not completely present");
+        Assert.assertEquals("List of categories is not completely present", catalogScreen.getAllCategoriesNames(), new HashSet<>(expectedValuesList));
     }
 
     @Override
@@ -149,7 +145,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         IntStream.range(0, categoriesChain.size()).forEach(index -> {
             openCategory(categoriesChain.get(index));
             if (index != categoriesChain.size() - 1) {
-                Assert.assertTrue(catalogScreen.isCategoryPageLoad(), "Category page is not loaded. Error (if present) - " + catalogScreen.getErrorDetails());
+                Assert.assertTrue("Category page is not loaded. Error (if present) - " + catalogScreen.getErrorDetails(), catalogScreen.isCategoryPageLoad());
             }
         });
     }
@@ -197,8 +193,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks) {
-        Assert.assertTrue(countOfBooks <= catalogScreen.getListOfAllBooksNamesInFirstLane().size(),
-                "Count of books is smaller than " + countOfBooks);
+        Assert.assertTrue("Count of books is smaller than " + countOfBooks, countOfBooks <= catalogScreen.getListOfAllBooksNamesInFirstLane().size());
     }
 
     @Override
@@ -206,15 +201,14 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         int foundCountOfBooks = catalogScreen
                 .getListOfAllBooksNamesInSubcategoryLane(lineName)
                 .size();
-        Assert.assertTrue(countOfBooks >= foundCountOfBooks,
-                String.format("Expected count of books bigger or equal to %1$s but found %2$s", countOfBooks,
-                        foundCountOfBooks));
+        Assert.assertTrue(String.format("Expected count of books bigger or equal to %1$s but found %2$s", countOfBooks,
+                foundCountOfBooks), countOfBooks >= foundCountOfBooks);
     }
 
     @Override
     public void checkBookInfoIsOpened(String bookInfoKey) {
-        Assert.assertEquals(bookDetailsScreen.getBookInfo(),
-                Optional.ofNullable(context.get(bookInfoKey)).orElse(bookInfoKey), "Expected book is not opened");
+        Assert.assertEquals("Expected book is not opened", bookDetailsScreen.getBookInfo(),
+                Optional.ofNullable(context.get(bookInfoKey)).orElse(bookInfoKey));
     }
 
     @Override
@@ -230,8 +224,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void checkAllPresentBooksAreAudiobooks() {
-        Assert.assertTrue(catalogScreen.getListOfBooksNames().stream().allMatch(x -> x.toLowerCase().contains("audiobook")),
-                "Not all present books are audiobooks");
+        Assert.assertTrue("Not all present books are audiobooks", catalogScreen.getListOfBooksNames().stream().allMatch(x -> x.toLowerCase().contains("audiobook")));
     }
 
     @Override
@@ -247,40 +240,35 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void checkAllBooksCanBeDownloaded() {
-        Assert.assertTrue(subcategoryScreen.getAllButtonsNames()
+        Assert.assertTrue("Not all present books can be downloaded", subcategoryScreen.getAllButtonsNames()
                         .stream()
-                        .allMatch(x -> x.equals(BookActionButtonNames.DOWNLOAD_BUTTON_NAME)),
-                "Not all present books can be downloaded");
+                        .allMatch(x -> x.equals(BookActionButtonNames.DOWNLOAD_BUTTON_NAME)));
     }
 
     @Override
     public void checkAllBooksCanBeLoanedOrDownloaded() {
-        Assert.assertTrue(subcategoryScreen.getAllButtonsNames()
+        Assert.assertTrue("Not all present books can be loaned or downloaded", subcategoryScreen.getAllButtonsNames()
                         .stream()
-                        .allMatch(x -> x.equals(BookActionButtonNames.GET_BUTTON_NAME) || x.equals(BookActionButtonNames.DOWNLOAD_BUTTON_NAME)),
-                "Not all present books can be loaned or downloaded");
+                        .allMatch(x -> x.equals(BookActionButtonNames.GET_BUTTON_NAME) || x.equals(BookActionButtonNames.DOWNLOAD_BUTTON_NAME)));
     }
 
     @Override
     public void checkListOfBooksOnSubcategoryScreenIsNotEqualToListOfSavedBooks(String booksNamesListKey) {
         List<String> expectedList = context.get(booksNamesListKey);
-        Assert.assertNotEquals(subcategoryScreen.getBooksInfo(), expectedList,
-                "Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")));
+        Assert.assertNotEquals("Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")), subcategoryScreen.getBooksInfo(), expectedList);
     }
 
     @Override
     public void checkBooksAreSortedByAuthorAscending() {
         List<String> list = subcategoryScreen.getAuthorsInfo();
         List<String> listOfSurnames = getSurnames(list);
-        Assert.assertEquals(listOfSurnames, getSurnames(listOfSurnames.stream().sorted().collect(Collectors.toList())),
-                "Lists of authors is not sorted properly " + list.stream().map(Object::toString).collect(Collectors.joining(", ")));
+        Assert.assertEquals("Lists of authors is not sorted properly " + list.stream().map(Object::toString).collect(Collectors.joining(", ")), listOfSurnames, getSurnames(listOfSurnames.stream().sorted().collect(Collectors.toList())));
     }
 
     @Override
     public void booksAreSortedByTitleAscending() {
         List<String> list = subcategoryScreen.getTitlesInfo();
-        Assert.assertEquals(list, list.stream().sorted().collect(Collectors.toList()),
-                "Lists of authors is not sorted properly" + list.stream().map(Object::toString).collect(Collectors.joining(", ")));
+        Assert.assertEquals("Lists of authors is not sorted properly" + list.stream().map(Object::toString).collect(Collectors.joining(", ")), list, list.stream().sorted().collect(Collectors.toList()));
     }
 
     protected List<String> getSurnames(List<String> list) {
@@ -296,19 +284,17 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void checkFollowingValuesInInformationBlockArePresent(
             List<BookDetailsScreenInformationBlockModel> expectedValuesList) {
-        Assert.assertTrue(expectedValuesList.stream().allMatch(listElement ->
+        Assert.assertTrue("Not all information block values are correct (or present)", expectedValuesList.stream().allMatch(listElement ->
                         bookDetailsScreen.isValuePresentInInformationBlock(listElement.getKey(),
-                                listElement.getValue())),
-                "Not all information block values are correct (or present)");
+                                listElement.getValue())));
     }
 
     @Override
     public void checkDescriptionHasText(final String description) {
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(bookDetailsScreen.isDescriptionPresent(), "Description does not present");
-        softAssert.assertTrue(StringUtils.trim(bookDetailsScreen.getDescriptionText()).contains(StringUtils.trim(description)),
-                "Description has not correct text");
-        softAssert.assertAll();
+        //SoftAssert softAssert = new SoftAssert();
+        Assert.assertTrue("Description does not present", bookDetailsScreen.isDescriptionPresent());
+        Assert.assertTrue("Description has not correct text", StringUtils.trim(bookDetailsScreen.getDescriptionText()).contains(StringUtils.trim(description)));
+        //softAssert.assertAll();
     }
 
     @Override
@@ -319,8 +305,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void checkCountOfBooksInSearchResultIsUpTo(int countOfBooks) {
         int foundBooksCount = catalogBooksScreen.getFoundBooksCount();
-        Assert.assertTrue(countOfBooks >= foundBooksCount,
-                String.format("Found count of books (%d) is bigger than expected - %d", foundBooksCount, countOfBooks));
+        Assert.assertTrue(String.format("Found count of books (%d) is bigger than expected - %d", foundBooksCount, countOfBooks), countOfBooks >= foundBooksCount);
     }
 
     @Override
@@ -334,16 +319,14 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
             Scenario scenario = context.get(ScenarioContextKey.SCENARIO_KEY);
             scenario.attach(ScreenshotUtils.getScreenshot(), "image/png", "error_screenshot.png");
         }
-        Assert.assertTrue(isButtonPresent,
-                String.format("Book's with title '%1$s' button does not contain text '%2$s'. Error message (if present) - '%3$s'", title, key.i18n(), catalogBooksScreen.getErrorMessage()));
+        Assert.assertTrue(String.format("Book's with title '%1$s' button does not contain text '%2$s'. Error message (if present) - '%3$s'", title, key.i18n(), catalogBooksScreen.getErrorMessage()), isButtonPresent);
     }
 
     @Override
     public void checkThatSavedBookContainButtonAtBookDetailsScreen(final BookActionButtonKeys key) {
         boolean isButtonPresent = bookDetailsScreen.isBookAddButtonTextEqualTo(key);
         addScreenshotIfErrorPresent(isButtonPresent);
-        Assert.assertTrue(isButtonPresent,
-                String.format("Button '%1$s' is not present on book details screen. Error (if present) - %2$s", key.i18n(), getErrorDetails()));
+        Assert.assertTrue(String.format("Button '%1$s' is not present on book details screen. Error (if present) - %2$s", key.i18n(), getErrorDetails()), isButtonPresent);
     }
 
     @Override
@@ -405,8 +388,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void checkBookWasBorrowedSuccessfully() {
         boolean isButtonPresent = AqualityServices.getConditionalWait().waitFor(bookDetailsScreen::isBookReadyToRead);
         addScreenshotIfErrorPresent(isButtonPresent);
-        Assert.assertTrue(isButtonPresent,
-                String.format("Opened book page does not contain button %1$s or %2$s. Error message - %3$s", BookActionButtonKeys.READ.i18n(), BookActionButtonKeys.LISTEN.i18n(), getErrorDetails()));
+        Assert.assertTrue(String.format("Opened book page does not contain button %1$s or %2$s. Error message - %3$s", BookActionButtonKeys.READ.i18n(), BookActionButtonKeys.LISTEN.i18n(), getErrorDetails()), isButtonPresent);
     }
 
     private void addScreenshotIfErrorPresent(boolean isButtonPresent) {
@@ -421,14 +403,12 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     public void checkCountOfBooksInSearchResultIsMoreThen(int countOfBooks) {
-        Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(() -> countOfBooks <= catalogBooksScreen.getFoundBooksCount()),
-                String.format("Found count of books (%d) is less than expected - %d", catalogBooksScreen.getFoundBooksCount(), countOfBooks));
+        Assert.assertTrue(String.format("Found count of books (%d) is less than expected - %d", catalogBooksScreen.getFoundBooksCount(), countOfBooks), AqualityServices.getConditionalWait().waitFor(() -> countOfBooks <= catalogBooksScreen.getFoundBooksCount()));
     }
 
     public void checkCountOfBooksInSubcategoryLaneIsMoreThen(String lineName, int countOfBooks) {
         int foundCountOfBooks = catalogScreen.getListOfAllBooksNamesInSubcategoryLane(lineName).size();
-        Assert.assertTrue(countOfBooks <= foundCountOfBooks,
-                String.format("Expected count of books bigger or equal to %1$s but found %2$s", countOfBooks, foundCountOfBooks));
+        Assert.assertTrue(String.format("Expected count of books bigger or equal to %1$s but found %2$s", countOfBooks, foundCountOfBooks), countOfBooks <= foundCountOfBooks);
     }
 
     public void openFirstCategory() {

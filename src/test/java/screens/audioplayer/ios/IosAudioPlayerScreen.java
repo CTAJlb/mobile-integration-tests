@@ -14,9 +14,8 @@ import constants.application.timeouts.BooksTimeouts;
 import constants.application.timeouts.CategoriesTimeouts;
 import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
+import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
 import screens.audioplayer.AudioPlayerScreen;
 
 import java.time.Duration;
@@ -71,20 +70,18 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public void checkThatChaptersVisible() {
-        Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(() -> getChapters().size() > 0),
-                "Checking that count of chapters greater than zero");
+        Assert.assertTrue("Checking that count of chapters greater than zero", AqualityServices.getConditionalWait().waitFor(() -> getChapters().size() > 0));
     }
 
     @Override
     public void waitAndCheckAllLoadersDisappeared() {
         checkThatChaptersVisible();
-        SoftAssert softAssert = new SoftAssert();
+        //SoftAssert softAssert = new SoftAssert();
         getChapters().forEach(chapter ->
-                softAssert.assertTrue(chapter.findChildElement(By.xpath(CHAPTERS_TIMERS), ElementType.LABEL).state()
-                                .waitForDisplayed(Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis())),
-                        "Loader did not disappear from the chapter block")
+                Assert.assertTrue("Loader did not disappear from the chapter block", chapter.findChildElement(By.xpath(CHAPTERS_TIMERS), ElementType.LABEL).state()
+                                .waitForDisplayed(Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis())))
         );
-        softAssert.assertAll("Checking that all loaders are disappeared");
+        //softAssert.assertAll("Checking that all loaders are disappeared");
     }
 
     @Override

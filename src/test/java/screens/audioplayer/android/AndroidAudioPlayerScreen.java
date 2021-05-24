@@ -11,8 +11,8 @@ import aquality.selenium.core.elements.ElementState;
 import constants.application.timeouts.AudioBookTimeouts;
 import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
+import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import screens.audioplayer.AudioPlayerScreen;
 
 import java.time.Duration;
@@ -52,15 +52,13 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public void checkThatChaptersVisible() {
-        Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(() -> getChapters().size() > 0),
-                "Checking that count of chapters greater than zero");
+        Assert.assertTrue("Checking that count of chapters greater than zero", AqualityServices.getConditionalWait().waitFor(() -> getChapters().size() > 0));
     }
 
     @Override
     public void waitAndCheckAllLoadersDisappeared() {
         checkThatChaptersVisible();
-        Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(() -> getElementFactory().findElements(By.xpath(LOADING_SCREEN_XPATH), ElementType.LABEL).size() == 0, Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis())),
-                "Book loading wasn't finished");
+        Assert.assertTrue("Book loading wasn't finished", AqualityServices.getConditionalWait().waitFor(() -> getElementFactory().findElements(By.xpath(LOADING_SCREEN_XPATH), ElementType.LABEL).size() == 0, Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis())));
     }
 
     @Override

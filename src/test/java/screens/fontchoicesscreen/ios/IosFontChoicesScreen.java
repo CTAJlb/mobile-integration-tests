@@ -5,8 +5,8 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.localization.application.reader.ReaderSettingKeys;
 import framework.utilities.CoordinatesClickUtils;
+import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import screens.fontchoicesscreen.FontChoicesScreen;
 
 @ScreenType(platform = PlatformName.IOS)
@@ -29,7 +29,7 @@ public class IosFontChoicesScreen extends FontChoicesScreen {
     @Override
     public void closeFontChoices() {
         CoordinatesClickUtils.clickOutOfElement(fontChoicesScreen);
-        Assert.assertTrue(super.state().waitForNotDisplayed(), "Font choices screen is not closed");
+        Assert.assertTrue("Font choices screen is not closed", super.state().waitForNotDisplayed());
         CoordinatesClickUtils.clickAtCenterOfScreen();
     }
 }

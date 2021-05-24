@@ -3,7 +3,7 @@ package stepdefinitions.credentials.components.impl;
 import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
-import org.testng.Assert;
+import org.junit.Assert;
 import stepdefinitions.credentials.components.AbstractCredentialsSteps;
 
 @StepsType(platform = PlatformName.IOS)
@@ -15,6 +15,6 @@ public class IosCredentialsSteps extends AbstractCredentialsSteps {
     @Override
     public void checkLoginIsPerformedSuccessfully() {
         alertScreen.closeNotNowModalIfPresent();
-        Assert.assertTrue(catalogScreen.state().waitForDisplayed() || accountScreen.isLoginSuccessful(), "Log in is not completed");
+        Assert.assertTrue("Log in is not completed", catalogScreen.state().waitForDisplayed() || accountScreen.isLoginSuccessful());
     }
 }

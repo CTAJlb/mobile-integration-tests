@@ -6,7 +6,7 @@ import framework.configuration.Configuration;
 import framework.configuration.Credentials;
 import framework.utilities.ScenarioContext;
 import framework.utilities.returningBooksUtil.APIUtil;
-import org.testng.Assert;
+import org.junit.Assert;
 import screens.account.AccountScreen;
 import screens.accounts.AccountsScreen;
 import screens.alert.AlertScreen;
@@ -42,7 +42,7 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
     }
 
     public void textOnLogoutButtonIsChangedToLogInOnAccountScreen() {
-        Assert.assertTrue(accountScreen.isLogoutSuccessful(), "Text on Login button is not changed to Log out on Account screen");
+        Assert.assertTrue("Text on Login button is not changed to Log out on Account screen", accountScreen.isLogoutSuccessful());
     }
 
     public void clickLogOut() {
