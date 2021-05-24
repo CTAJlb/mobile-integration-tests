@@ -23,14 +23,24 @@ public class XMLUtil {
     private ArrayList<BookModel> availableBooksAnyType;
     private ArrayList<BookModel> unavailableBooksAnyType;
     private ArrayList<BookModel> availablePdf;
-    private static XMLUtil xmlUtil;
+    //private static XMLUtil xmlUtil;
+    private final int randomValue;
     private final int connectTimeout = 120;
     private final int readTimeout = 120;
     private final int writeTimeout = 120;
     private final int threadSleepTime = 3000;
 
-    private XMLUtil() {
+    public XMLUtil() {
+        randomValue = RandomUtils.nextInt(0, 10);
         setHashMapsForEBooksAndAudioBooks();
+    }
+
+    public int getRandomValue(){
+        return randomValue;
+    }
+
+    /*public static void setXmlUtil(XMLUtil xml){
+        xmlUtil = xml;
     }
 
     public static synchronized XMLUtil getInstance() {
@@ -44,7 +54,7 @@ public class XMLUtil {
         if (xmlUtil == null) {
             xmlUtil = new XMLUtil();
         }
-    }
+    }*/
 
     //todo method does not use
     public void getStatistics() {

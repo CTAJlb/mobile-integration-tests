@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
 import framework.utilities.ScenarioContext;
+import framework.utilities.feedXMLUtil.GettingBookUtil;
 import framework.utilities.feedXMLUtil.XMLUtil;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -48,7 +49,7 @@ public class SearchSteps {
 
     @When("I search for pdf and save as {string}")
     public void searchForPdf(String bookNameInfoKey) {
-        String pdfForSearching = XMLUtil.getInstance().getRandomPdf();
+        String pdfForSearching = GettingBookUtil.getRandomPdf();
         AqualityServices.getLogger().info("randomPdf: " + pdfForSearching);
         context.add(bookNameInfoKey, pdfForSearching);
 

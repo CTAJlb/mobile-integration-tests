@@ -5,6 +5,7 @@ import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.context.ContextLibrariesKeys;
 import framework.utilities.ScenarioContext;
+import framework.utilities.feedXMLUtil.GettingBookUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -41,6 +42,11 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
     public void addAccountFromWelcomeScreen(String libraryName) {
         saveLibraryForLogOut(libraryName);
         applicationSteps.addAccountFromWelcomeScreen(libraryName);
+        AqualityServices.getLogger().info("+++++++++++++++++++++++++++++++++");
+        AqualityServices.getLogger().info("ThreadName: " + Thread.currentThread().getName());
+        AqualityServices.getLogger().info("ThreadId: " + Thread.currentThread().getId());
+        AqualityServices.getLogger().info("RandomValue: " + GettingBookUtil.getRandomValue());
+        AqualityServices.getLogger().info("+++++++++++++++++++++++++++++++++");
     }
 
     private String getBundleId() {
