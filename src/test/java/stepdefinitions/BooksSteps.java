@@ -41,7 +41,7 @@ public class BooksSteps {
 
     @And("Count of books is equal to {int}")
     public void checkCountOfBooksIsEqualTo(int expectedCountOfBooks) {
-        Assert.assertEquals("Count of books is not correct", booksScreen.getCountOfBooks(), expectedCountOfBooks);
+        Assert.assertEquals("Count of books is not correct", expectedCountOfBooks, booksScreen.getCountOfBooks());
     }
 
     @When("I refresh list of books")

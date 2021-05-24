@@ -1,6 +1,5 @@
 package runners;
 
-
 import framework.utilities.feedXMLUtil.GettingBookUtil;
 import framework.utilities.feedXMLUtil.XMLUtil;
 import io.cucumber.junit.Cucumber;
@@ -29,5 +28,4 @@ public class TestRunner{
                 XMLUtil xmlUtil = new XMLUtil();
                 GettingBookUtil.setXmlUtil(xmlUtil);
         }
-
 }

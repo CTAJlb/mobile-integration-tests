@@ -16,6 +16,7 @@ import io.cucumber.java.Scenario;
 import models.android.BookDetailsScreenInformationBlockModel;
 import models.android.CatalogBookModel;
 import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.agegate.AgeGateScreen;
 import screens.alert.AlertScreen;
@@ -80,7 +81,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void checkListOfBooksIsNotEqualToSavedListOfBooks(String booksNamesListKey) {
         List<String> expectedList = context.get(booksNamesListKey);
-        Assert.assertNotEquals("Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")), catalogScreen.getListOfBooksNames(), expectedList);
+        Assert.assertNotEquals("Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")), expectedList, catalogScreen.getListOfBooksNames());
     }
 
     @Override
@@ -112,8 +113,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void checkCurrentLibraryIsCorrect(String expectedLibraryName) {
-        Assert.assertEquals(mainCatalogToolbarForm.getCatalogName(), expectedLibraryName,
-                "Current library name is not correct");
+        Assert.assertEquals("Current library name is not correct", expectedLibraryName, mainCatalogToolbarForm.getCatalogName());
     }
 
     @Override
@@ -137,7 +137,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void checkFollowingSubcategoriesArePresent(List<String> expectedValuesList) {
         catalogScreen.state().waitForDisplayed();
         catalogScreen.swipeScreenUp();
-        Assert.assertEquals("List of categories is not completely present", catalogScreen.getAllCategoriesNames(), new HashSet<>(expectedValuesList));
+        Assert.assertEquals("List of categories is not completely present", new HashSet<>(expectedValuesList), catalogScreen.getAllCategoriesNames());
     }
 
     @Override
@@ -207,8 +207,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void checkBookInfoIsOpened(String bookInfoKey) {
-        Assert.assertEquals("Expected book is not opened", bookDetailsScreen.getBookInfo(),
-                Optional.ofNullable(context.get(bookInfoKey)).orElse(bookInfoKey));
+        Assert.assertEquals("Expected book is not opened", Optional.ofNullable(context.get(bookInfoKey)).orElse(bookInfoKey), bookDetailsScreen.getBookInfo());
     }
 
     @Override
@@ -255,20 +254,20 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void checkListOfBooksOnSubcategoryScreenIsNotEqualToListOfSavedBooks(String booksNamesListKey) {
         List<String> expectedList = context.get(booksNamesListKey);
-        Assert.assertNotEquals("Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")), subcategoryScreen.getBooksInfo(), expectedList);
+        Assert.assertNotEquals("Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")), expectedList, subcategoryScreen.getBooksInfo());
     }
 
     @Override
     public void checkBooksAreSortedByAuthorAscending() {
         List<String> list = subcategoryScreen.getAuthorsInfo();
         List<String> listOfSurnames = getSurnames(list);
-        Assert.assertEquals("Lists of authors is not sorted properly " + list.stream().map(Object::toString).collect(Collectors.joining(", ")), listOfSurnames, getSurnames(listOfSurnames.stream().sorted().collect(Collectors.toList())));
+        Assert.assertEquals("Lists of authors is not sorted properly " + list.stream().map(Object::toString).collect(Collectors.joining(", ")), getSurnames(listOfSurnames.stream().sorted().collect(Collectors.toList())), listOfSurnames);
     }
 
     @Override
     public void booksAreSortedByTitleAscending() {
         List<String> list = subcategoryScreen.getTitlesInfo();
-        Assert.assertEquals("Lists of authors is not sorted properly" + list.stream().map(Object::toString).collect(Collectors.joining(", ")), list, list.stream().sorted().collect(Collectors.toList()));
+        Assert.assertEquals("Lists of authors is not sorted properly" + list.stream().map(Object::toString).collect(Collectors.joining(", ")), list.stream().sorted().collect(Collectors.toList()), list);
     }
 
     protected List<String> getSurnames(List<String> list) {
@@ -291,10 +290,11 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void checkDescriptionHasText(final String description) {
-        //SoftAssert softAssert = new SoftAssert();
-        Assert.assertTrue("Description does not present", bookDetailsScreen.isDescriptionPresent());
-        Assert.assertTrue("Description has not correct text", StringUtils.trim(bookDetailsScreen.getDescriptionText()).contains(StringUtils.trim(description)));
-        //softAssert.assertAll();
+        //todo softAssert
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(bookDetailsScreen.isDescriptionPresent()).as("Description does not present").isTrue();
+        softAssertions.assertThat(StringUtils.trim(bookDetailsScreen.getDescriptionText()).contains(StringUtils.trim(description))).as("Description has not correct text").isTrue();
+        softAssertions.assertAll();
     }
 
     @Override

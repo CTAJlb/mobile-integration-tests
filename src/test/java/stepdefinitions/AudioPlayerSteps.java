@@ -105,7 +105,7 @@ public class AudioPlayerSteps {
     @And("Book is not playing")
     public void checkBookIsNotPlaying() {
         Duration firstTiming = audioPlayerScreen.getCurrentPlayTime();
-        Assert.assertEquals("Book is still playing", audioPlayerScreen.getCurrentPlayTime(), firstTiming);
+        Assert.assertEquals("Book is still playing", firstTiming, audioPlayerScreen.getCurrentPlayTime());
     }
 
     @When("I save book play time as {string}")

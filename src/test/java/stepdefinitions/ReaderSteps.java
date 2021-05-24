@@ -16,6 +16,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.android.CatalogBookModel;
 import org.apache.commons.lang3.RandomUtils;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.audioplayer.AudioPlayerScreen;
 import screens.epubreader.EpubReaderScreen;
@@ -125,14 +126,15 @@ public class ReaderSteps {
 
     @And("Each chapter can be opened from Table of Contents")
     public void checkEachChapterCanBeOpenedFromTableOfContents() {
-        //SoftAssert softAssert = new SoftAssert();
+        //todo softAssert
+        SoftAssertions softAssertions = new SoftAssertions();
         Set<String> chapters = epubReaderScreen.getListOfChapters();
         for (String chapter :
                 chapters) {
             epubReaderScreen.openChapter(chapter);
-            Assert.assertEquals("Chapter name is not correct", getChapterName(epubReaderScreen.getPageNumberInfo()), chapter);
+            softAssertions.assertThat(getChapterName(epubReaderScreen.getPageNumberInfo())).as("Chapter name is not correct").isEqualTo(chapter);
         }
-        //softAssert.assertAll();
+        softAssertions.assertAll();
     }
 
     @When("I open font choices for book")
@@ -249,7 +251,8 @@ public class ReaderSteps {
 
     @And("Each chapter of pdf book can be opened from Table of Contents")
     public void checkEachChapterOfPdfBookCanBeOpenedFromTableOfContents() {
-        //SoftAssert softAssert = new SoftAssert();
+        //todo softAssert
+        SoftAssertions softAssertions = new SoftAssertions();
         pdfReaderScreen.openTableOfContents();
         pdfTableOfContentsScreen.switchToChaptersListView();
         Set<String> chapters = pdfTableOfContentsScreen.getListOfBookChapters();
@@ -259,9 +262,9 @@ public class ReaderSteps {
             pdfTableOfContentsScreen.state().waitForDisplayed();
             int pageNumber = pdfTableOfContentsScreen.getChapterPageNumber(chapter);
             pdfTableOfContentsScreen.openChapter(chapter);
-            Assert.assertEquals("Chapter name is not correct", pdfReaderScreen.getPageNumber(), pageNumber);
+            softAssertions.assertThat(pdfReaderScreen.getPageNumber()).as("Chapter name is not correct").isEqualTo(pageNumber);
         }
-        //softAssert.assertAll();
+        softAssertions.assertAll();
     }
 
     @And("Pdf page number {string} is correct")
@@ -345,10 +348,11 @@ public class ReaderSteps {
 
     @Then("Found lines should contain {string} in themselves")
     public void checkThatPdfFoundLinesContainText(String textToBeContained) {
-        //SoftAssert softAssert = new SoftAssert();
+        //todo softAssert
+        SoftAssertions softAssertions = new SoftAssertions();
         pdfSearchScreen.getListOfFoundItems()
-                .forEach(line -> Assert.assertTrue(String.format("Line '%1$s' does not contain text '%2$s'", line, textToBeContained), line.toLowerCase(Locale.ROOT).contains(textToBeContained.toLowerCase(Locale.ROOT))));
-        //softAssert.assertAll("Checking that all lines contain text");
+                .forEach(line -> softAssertions.assertThat(line.toLowerCase(Locale.ROOT).contains(textToBeContained.toLowerCase(Locale.ROOT))).as(String.format("Line '%1$s' does not contain text '%2$s'", line, textToBeContained)).isTrue());
+        softAssertions.assertAll();
     }
 
     @When("I open the first found item")
@@ -403,11 +407,11 @@ public class ReaderSteps {
     }
 
     private void checkPageNumberIsEqualTo(int pageNumber) {
-        Assert.assertEquals("Page number is not correct", pdfReaderScreen.getPageNumber(), pageNumber);
+        Assert.assertEquals("Page number is not correct", pageNumber, pdfReaderScreen.getPageNumber());
     }
 
     private void checkPageNumberIsNotEqualTo(int pageNumber) {
-        Assert.assertNotEquals("Page number is not correct", pdfReaderScreen.getPageNumber(), pageNumber);
+        Assert.assertNotEquals("Page number is not correct", pageNumber, pdfReaderScreen.getPageNumber());
     }
 
     private void changeSetting(ReaderSettingKeys settingName) {
@@ -417,14 +421,15 @@ public class ReaderSteps {
     }
 
     private void assertFontAndBackground(ColorKeys fontColor, ColorKeys backgroundColor) {
-        //SoftAssert softAssert = new SoftAssert();
-        Assert.assertEquals("Font color is not correct", epubReaderScreen.getFontColor(), fontColor.i18n());
-        Assert.assertEquals("Background color is not correct", epubReaderScreen.getBackgroundColor(), backgroundColor.i18n());
-        //softAssert.assertAll();
+        //todo softAssert
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(epubReaderScreen.getFontColor()).as("Font color is not correct").isEqualTo(fontColor.i18n());
+        softAssertions.assertThat(epubReaderScreen.getBackgroundColor()).as("Background color is not correct").isEqualTo(backgroundColor.i18n());
+        softAssertions.assertAll();
     }
 
     private void assertFontName(String fontName) {
-        Assert.assertEquals(epubReaderScreen.getFontName(), fontName, "Book font is not correct");
+        Assert.assertEquals("Book font is not correct", fontName, epubReaderScreen.getFontName());
     }
 
     private String getTrimmedBookName() {
