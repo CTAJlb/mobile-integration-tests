@@ -46,6 +46,7 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         AqualityServices.getLogger().info("ThreadName: " + Thread.currentThread().getName());
         AqualityServices.getLogger().info("ThreadId: " + Thread.currentThread().getId());
         AqualityServices.getLogger().info("RandomValue: " + GettingBookUtil.getRandomValue());
+        AqualityServices.getLogger().info("XmlUtil: " + GettingBookUtil.getXmlUtil());
         AqualityServices.getLogger().info("+++++++++++++++++++++++++++++++++");
     }
 

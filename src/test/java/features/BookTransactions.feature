@@ -180,7 +180,7 @@ Feature: Book Transactions
       | Bibliotheca | EBOOK     | eBooks     |
       | Bibliotheca | AUDIOBOOK | Audiobooks |
 
-  @logout @returnBooks @tier2 @fixed @xml
+  @logout @returnBooks @tier2 @fixed @xml @go
   Scenario: Remove a Reserved Book from Bookshelf list
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -214,7 +214,7 @@ Feature: Book Transactions
     When Press on the book details screen at the action button CANCEL
     Then I check that the action button text equal to the RESERVE
 
-  @logout @returnBooks @tier2 @exclude_ios @fixed @xml
+  @logout @returnBooks @tier2 @exclude_ios @fixed @xml @go
   Scenario: Remove a Reserved Book from Holds screen
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account

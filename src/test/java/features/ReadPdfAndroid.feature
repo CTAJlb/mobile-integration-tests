@@ -32,7 +32,7 @@ Feature: Read PDF
   Scenario: Navigate by Table of Contents Menu
       And Each chapter of pdf book can be opened from Table of Contents
 
-  @logout @returnBooks @tier1 @exclude_ios @xml
+  @logout @returnBooks @tier1 @exclude_ios @xml @go
   Scenario: Open book to last page read
     When I scroll pdf page forward from 10 to 20 times
       And I save pdf page number as 'pageNumber'
@@ -48,7 +48,7 @@ Feature: Read PDF
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct
 
-  @logout @returnBooks @tier1 @exclude_ios @xml
+  @logout @returnBooks @tier1 @exclude_ios @xml @go
   Scenario: Close book
     When I return to previous screen
     Then I check that opened book contains READ button at book details screen

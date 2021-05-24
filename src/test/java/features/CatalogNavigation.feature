@@ -1,6 +1,6 @@
 Feature: Catalog Navigation
 
-  @tier1
+  @tier1 @go
   Scenario: Return to last library catalog
     When I add "Alameda County Library" account from welcomeScreen
       And I open Catalog

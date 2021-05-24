@@ -18,4 +18,8 @@ public class GettingBookUtil {
     public static int getRandomValue(){
         return xmlUtil.getRandomValue();
     }
+
+    public static XMLUtil getXmlUtil(){
+        return xmlUtil;
+    }
 }
