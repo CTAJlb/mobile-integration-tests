@@ -20,8 +20,7 @@ import org.junit.runner.RunWith;
                 "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
                 //todo Aquality Tracking is temporary turned off until AqualityTrackingCucumber6Jvm is released
                 //"aquality.tracking.integrations.cucumber5jvm.AqualityTrackingCucumber5Jvm",
-        },
-        tags = "@go1"
+        }
 )
 public class TestRunner{
 
