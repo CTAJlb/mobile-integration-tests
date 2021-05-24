@@ -25,7 +25,7 @@ Feature: Book Transactions
       | Axis 360    | EBOOK     | eBooks     |
       | Axis 360    | AUDIOBOOK | Audiobooks |
 
-  @logout @returnBooks @tier2 @fixed @xml
+  @logout @returnBooks @tier2 @fixed @xml @go
   Scenario: Hold from Bookshelf list
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
