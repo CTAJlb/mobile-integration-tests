@@ -44,6 +44,11 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.getNamesOfBooksAndSaveThem(booksNamesListKey);
     }
 
+    @When("I {} book by name {string} and save it as {string}")
+    public void performActionOnBookByNameAndSaveIt(BookActionButtonKeys actionButtonKey, String bookName, String bookInfoKey) {
+        catalogSteps.performActionOnBookByNameAndSaveIt(actionButtonKey, bookName, bookInfoKey);
+    }
+
     @Then("List of books on screen is not equal to list of books saved as {string}")
     public void checkListOfBooksIsNotEqualToSavedListOfBooks(String booksNamesListKey) {
         catalogSteps.checkListOfBooksIsNotEqualToSavedListOfBooks(booksNamesListKey);

@@ -7,6 +7,9 @@ Feature: Read PDF IOS
     When I open Catalog
       And I switch to 'LYRASIS' from side menu
       And I open search modal
+
+  @logout @returnBooks @tier1 @exclude_android @xml
+  Scenario: Open document
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
@@ -15,13 +18,18 @@ Feature: Read PDF IOS
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
     Then Pdf book 'bookInfo' is present on screen
-
-  @logout @returnBooks @tier1 @exclude_android @xml
-  Scenario: Open document
       And Pdf book page number is 1
 
   @logout @returnBooks @tier1 @exclude_android @xml
   Scenario: Navigate by page
+    When I search for pdf and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+    When I open book 'bookInfo' details by clicking on cover
+      And Press on the book details screen at the action button READ
+    Then Pdf book 'bookInfo' is present on screen
       And Pdf book page number is 1
     When I go to next page in pdf book
     Then Pdf book page number is 2
@@ -30,10 +38,26 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android @xml
   Scenario: Navigate by Table of Contents Menu
+    When I search for pdf and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+    When I open book 'bookInfo' details by clicking on cover
+      And Press on the book details screen at the action button READ
+    Then Pdf book 'bookInfo' is present on screen
       And Each chapter of pdf book can be opened from Table of Contents
 
   @logout @returnBooks @tier1 @exclude_android @xml
   Scenario: Open book to last page read
+    When I search for pdf and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+    When I open book 'bookInfo' details by clicking on cover
+      And Press on the book details screen at the action button READ
+    Then Pdf book 'bookInfo' is present on screen
     When I scroll pdf page forward from 10 to 20 times
       And I save pdf page number as 'pageNumber'
       And I return to previous screen
@@ -50,6 +74,14 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android @xml
   Scenario: Navigate by Gallery
+    When I search for pdf and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+    When I open book 'bookInfo' details by clicking on cover
+      And Press on the book details screen at the action button READ
+    Then Pdf book 'bookInfo' is present on screen
     When I open gallery menu
     Then Gallery is opened
       And I open last page on the gallery
@@ -63,6 +95,14 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android @xml
   Scenario: Search document
+    When I search for pdf and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+    When I open book 'bookInfo' details by clicking on cover
+      And Press on the book details screen at the action button READ
+    Then Pdf book 'bookInfo' is present on screen
     When I click the search in the pdf button
     Then The search in the pdf page opened
     When I am typing 'vocabulary list' to the search field and apply search
@@ -70,6 +110,12 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android @xml
   Scenario: Navigate to Search Term
+    When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners'
+      And I GET book by name 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+    When I open book 'bookInfo' details by clicking on cover
+      And Press on the book details screen at the action button READ
+    Then Pdf book 'bookInfo' is present on screen
     When I click the search in the pdf button
       And I am typing 'vocabulary list' to the search field and apply search
       And I save page number as 'pageNumber' of the first item
