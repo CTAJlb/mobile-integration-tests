@@ -44,7 +44,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.getNamesOfBooksAndSaveThem(booksNamesListKey);
     }
 
-    @When("I {} book by name {string} and save it as {string}")
+    @When("I {} book with title {string} and save it as {string}")
     public void performActionOnBookByNameAndSaveIt(BookActionButtonKeys actionButtonKey, String bookName, String bookInfoKey) {
         catalogSteps.performActionOnBookByNameAndSaveIt(actionButtonKey, bookName, bookInfoKey);
     }
