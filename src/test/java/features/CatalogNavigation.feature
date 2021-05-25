@@ -2,7 +2,8 @@ Feature: Catalog Navigation
 
   @tier1 @go
   Scenario: Return to last library catalog
-    When I add "Alameda County Library" account from welcomeScreen
+    When I add "Digital Public Library of America" account from welcomeScreen
+      And I add 'Alameda County Library' account
       And I open Catalog
       And I switch to 'Alameda County Library' from side menu
     Then Books feed is loaded
