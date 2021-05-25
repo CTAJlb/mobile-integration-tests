@@ -3,7 +3,7 @@ package framework.utilities.feedXMLUtil;
 public class GettingBookUtil {
     private static XMLUtil xmlUtil;
 
-    public static void setXmlUtil(XMLUtil xml){
+    public static synchronized void setXmlUtil(XMLUtil xml){
         xmlUtil = xml;
     }
 
@@ -15,11 +15,11 @@ public class GettingBookUtil {
         return xmlUtil.getRandomPdf();
     }
 
-    public static int getRandomValue(){
+    public static synchronized int getRandomValue(){
         return xmlUtil.getRandomValue();
     }
 
-    public static XMLUtil getXmlUtil(){
+    public static synchronized XMLUtil getXmlUtil(){
         return xmlUtil;
     }
 }
