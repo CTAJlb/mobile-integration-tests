@@ -230,8 +230,8 @@ public class ReaderSteps {
 
     private void assertPdfBookName(CatalogBookModel catalogBookModel) {
         Assert.assertTrue(String.format("Book name is not correct. Expected that name ['%1$s'] would contains in ['%2$s']",
-                catalogBookModel.getTitle(), getTrimmedBookName()), AqualityServices.getConditionalWait().waitFor(() ->
-                        getTrimmedBookName().replace(" ", "").contains(catalogBookModel.getTitle().replace(" ", ""))));
+                catalogBookModel.getTitle().replace(" ", "").toLowerCase(), getTrimmedBookName().replace(" ", "").toLowerCase()), AqualityServices.getConditionalWait().waitFor(() ->
+                        getTrimmedBookName().replace(" ", "").toLowerCase().contains(catalogBookModel.getTitle().replace(" ", "").toLowerCase())));
     }
 
     @Then("Pdf book page number is {int}")
