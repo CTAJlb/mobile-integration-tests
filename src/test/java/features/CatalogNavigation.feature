@@ -1,6 +1,6 @@
 Feature: Catalog Navigation
 
-  @tier1 @go
+  @tier1
   Scenario: Return to last library catalog
     When I add "Digital Public Library of America" account from welcomeScreen
       And I add 'Alameda County Library' account
@@ -105,7 +105,7 @@ Feature: Catalog Navigation
     When I change books visibility to show YOURS_TO_KEEP
     Then All books can be downloaded
 
-  @tier1 @exclude_ios @fixed @ignore
+  @tier1 @exclude_ios @ignore
   Scenario: View Book Details
     When I add "LYRASIS" account from welcomeScreen
       And I open Catalog
@@ -134,7 +134,7 @@ Feature: Catalog Navigation
     Then Current category name is 'Johnston, Joan'
       And Count of books in search result is more then 1
 
-  @tier1 @exclude_android @fixed @ignore
+  @tier1 @exclude_android @ignore
   Scenario: View Book Details (iOS)
     When I add "LYRASIS" account from welcomeScreen
       And I open Catalog

@@ -1,6 +1,6 @@
 Feature: Book Transactions
 
-  @logout @returnBooks @tier2 @xml
+  @logout @returnBooks @tier2
   Scenario Outline: Hold from Book Detail View (feed) XML
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -25,7 +25,7 @@ Feature: Book Transactions
       | Axis 360    | EBOOK     | eBooks     |
       | Axis 360    | AUDIOBOOK | Audiobooks |
 
-  @logout @returnBooks @tier2 @fixed @xml @go
+  @logout @returnBooks @tier2
   Scenario: Hold from Bookshelf list
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -102,7 +102,7 @@ Feature: Book Transactions
     When I open the book details for the subsequent GET and save it as 'bookInfo'
     Then I check that opened book contains READ button at book details screen
 
-  @logout @returnBooks @tier2 @xml
+  @logout @returnBooks @tier2
   Scenario Outline: Check out from Book Detail View (feed) XML
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -152,7 +152,7 @@ Feature: Book Transactions
     When I open Books
     Then Book 'bookInfo' is not present in Books List
 
-  @logout @returnBooks @tier2 @xml
+  @logout @returnBooks @tier2
   Scenario Outline: Return book (feed) XML
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -180,7 +180,7 @@ Feature: Book Transactions
       | Bibliotheca | EBOOK     | eBooks     |
       | Bibliotheca | AUDIOBOOK | Audiobooks |
 
-  @logout @returnBooks @tier2 @fixed @xml @go
+  @logout @returnBooks @tier2
   Scenario: Remove a Reserved Book from Bookshelf list
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -196,7 +196,7 @@ Feature: Book Transactions
     When I click on the book 'bookInfo' button CANCEL on catalog books screen
     Then Book saved as 'bookInfo' should contain RESERVE button at catalog books screen
 
-  @logout @returnBooks @tier2 @fixed @xml
+  @logout @returnBooks @tier2
   Scenario: Remove a Reserved Book from Book Detail View
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -214,7 +214,7 @@ Feature: Book Transactions
     When Press on the book details screen at the action button CANCEL
     Then I check that the action button text equal to the RESERVE
 
-  @logout @returnBooks @tier2 @exclude_ios @fixed @xml @go
+  @logout @returnBooks @tier2 @exclude_ios
   Scenario: Remove a Reserved Book from Holds screen
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -234,7 +234,7 @@ Feature: Book Transactions
     When I click on the book 'bookInfo' button CANCEL on the holds screen
     Then Book saved as 'bookInfo' should contain RESERVE button at the hold screen
 
-  @logout @returnBooks @tier2 @exclude_android @fixed @xml
+  @logout @returnBooks @tier2 @exclude_android
   Scenario: Remove a Reserved Book from Holds screen (iOS)
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -254,7 +254,7 @@ Feature: Book Transactions
     When I click on the book 'bookInfo' button CANCEL on the holds screen
     Then Book 'bookInfo' is not present in Holds List
 
-  @logout @returnBooks @tier3 @exclude_android @fixed @xml
+  @logout @returnBooks @tier3 @exclude_android
   Scenario: Cancel remove
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account

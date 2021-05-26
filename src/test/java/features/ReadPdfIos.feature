@@ -8,7 +8,7 @@ Feature: Read PDF IOS
       And I switch to 'LYRASIS' from side menu
       And I open search modal
 
-  @logout @returnBooks @tier1 @exclude_android @xml
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Open document
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -20,7 +20,7 @@ Feature: Read PDF IOS
     Then Pdf book 'bookInfo' is present on screen
       And Pdf book page number is 1
 
-  @logout @returnBooks @tier1 @exclude_android @xml
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by page
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -36,7 +36,7 @@ Feature: Read PDF IOS
     When I go to previous page in pdf book
     Then Pdf book page number is 1
 
-  @logout @returnBooks @tier1 @exclude_android @xml
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Table of Contents Menu
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -48,7 +48,7 @@ Feature: Read PDF IOS
     Then Pdf book 'bookInfo' is present on screen
       And Each chapter of pdf book can be opened from Table of Contents
 
-  @logout @returnBooks @tier1 @exclude_android @xml
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Open book to last page read
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -72,7 +72,7 @@ Feature: Read PDF IOS
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct
 
-  @logout @returnBooks @tier1 @exclude_android @xml
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Gallery
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -93,7 +93,7 @@ Feature: Read PDF IOS
     Then Current page number is bigger than number 'numberOfPage'
       And Pdf book 'bookInfo' is present on screen
 
-  @logout @returnBooks @tier1 @exclude_android @xml
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Search document
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -108,7 +108,7 @@ Feature: Read PDF IOS
     When I am typing 'vocabulary list' to the search field and apply search
     Then Found lines should contain 'vocabulary list' in themselves
 
-  @logout @returnBooks @tier1 @exclude_android @xml
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate to Search Term
     When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners'
       And I GET book with title 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'

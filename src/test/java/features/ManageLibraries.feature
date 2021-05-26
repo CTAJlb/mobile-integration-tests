@@ -1,6 +1,6 @@
 Feature: Manage Libraries
 
-  @tier1 @go
+  @tier1
   Scenario: Add Library
     When I add "Alameda County Library" account from welcomeScreen
     Then Account 'Alameda County Library' is present on Accounts screen
@@ -40,7 +40,7 @@ Feature: Manage Libraries
       And I open Books
     Then No books are present in Books list
 
-  @logout @returnBooks @tier2 @fixed @xml @go
+  @logout @returnBooks @tier2
   Scenario: Switch Library Reservations
     When I add "Alameda County Library" account from welcomeScreen
     When I add 'LYRASIS' account
@@ -66,7 +66,7 @@ Feature: Manage Libraries
     Then Holds feed is loaded
       And No books are present in Holds list
 
-  @logout @tier2 @go
+  @logout @tier2
   Scenario: Store library card
     When I add "LYRASIS" account from welcomeScreen
     Then Account 'LYRASIS' is present on Accounts screen
