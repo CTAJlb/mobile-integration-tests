@@ -1,6 +1,7 @@
 package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.RegEx;
 import constants.application.ReaderType;
@@ -256,7 +257,11 @@ public class ReaderSteps {
         pdfReaderScreen.openTableOfContents();
         pdfTableOfContentsScreen.switchToChaptersListView();
         Set<String> chapters = pdfTableOfContentsScreen.getListOfBookChapters();
-        AqualityServices.getApplication().getDriver().navigate().back();
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
+            AqualityServices.getApplication().getDriver().navigate().back();
+        } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            pdfTableOfContentsScreen.clickResumeButton();
+        }
         for (String chapter : chapters.stream().limit(5).collect(Collectors.toList())) {
             pdfReaderScreen.openTableOfContents();
             pdfTableOfContentsScreen.state().waitForDisplayed();

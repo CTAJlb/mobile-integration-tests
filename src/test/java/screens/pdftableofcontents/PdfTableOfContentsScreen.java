@@ -17,6 +17,8 @@ public abstract class PdfTableOfContentsScreen extends Screen {
 
     public abstract void openChapter(String chapter);
 
+    public abstract void clickResumeButton();
+
     public abstract int getChapterPageNumber(String chapter);
 
     public abstract boolean isGalleryPagesLoaded();
