@@ -23,7 +23,7 @@ public interface ICatalogSteps {
 
     void openLibraryFromSideMenu(String libraryName);
 
-    void performActionOnBookByNameAndSaveIt(BookActionButtonKeys actionButtonKey, String bookName, String bookInfoKey);
+    void performActionOnHardcodeBookByNameAndSaveIt(BookActionButtonKeys actionButtonKey, String bookName, String bookInfoKey);
 
     void openCatalogWithAgeCheck();
 

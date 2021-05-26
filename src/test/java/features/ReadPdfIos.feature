@@ -25,7 +25,7 @@ Feature: Read PDF IOS
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
+      And I GET hardcode book 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
