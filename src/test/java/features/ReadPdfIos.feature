@@ -20,7 +20,7 @@ Feature: Read PDF IOS
     Then Pdf book 'bookInfo' is present on screen
       And Pdf book page number is 1
 
-  @logout @returnBooks @tier1 @exclude_android @go2
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by page
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -108,7 +108,7 @@ Feature: Read PDF IOS
     When I am typing 'vocabulary list' to the search field and apply search
     Then Found lines should contain 'vocabulary list' in themselves
 
-  @logout @returnBooks @tier1 @exclude_android @go2
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate to Search Term
     When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners'
       And I GET hardcode book 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'
