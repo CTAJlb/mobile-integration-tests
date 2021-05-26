@@ -20,12 +20,12 @@ Feature: Read PDF IOS
     Then Pdf book 'bookInfo' is present on screen
       And Pdf book page number is 1
 
-  @logout @returnBooks @tier1 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android @go2
   Scenario: Navigate by page
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET hardcode book 'bookNameInfo' and save it as 'bookInfo'
+      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
@@ -108,10 +108,10 @@ Feature: Read PDF IOS
     When I am typing 'vocabulary list' to the search field and apply search
     Then Found lines should contain 'vocabulary list' in themselves
 
-  @logout @returnBooks @tier1 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android @go2
   Scenario: Navigate to Search Term
     When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners'
-      And I GET book with title 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'
+      And I GET hardcode book 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ

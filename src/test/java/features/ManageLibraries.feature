@@ -5,7 +5,7 @@ Feature: Manage Libraries
     When I add "Alameda County Library" account from welcomeScreen
     Then Account 'Alameda County Library' is present on Accounts screen
 
-  @tier1 @go
+  @tier1
   Scenario: Switch Library Catalogs
     When I add "Digital Public Library of America" account from welcomeScreen
       And I add 'Alameda County Library' account
