@@ -13,6 +13,8 @@
         "browserstack.networkLogs": true,
         "automationName": "UiAutomator2",
         "browserstack.appium_version": "1.17.0",
+        "browserstack.user": "",
+        "browserstack.key": "",
         "deviceOrientation": "portrait",
         "adbExecTimeout": 10000
       }
@@ -24,6 +26,8 @@
         "app": "",
         "noReset": "true",
         "browserstack.appium_version": "1.17.0",
+        "browserstack.user": "",
+        "browserstack.key": "",
         "browserstack.networkLogs": true,
         "automationName": "XCUITest",
         "deviceOrientation": "portrait",
