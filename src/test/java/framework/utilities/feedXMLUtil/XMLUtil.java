@@ -271,8 +271,8 @@ public class XMLUtil {
         }
 
         if (response.body() == null) {
-            AqualityServices.getLogger().info("ResponseCode: " + response.code());
-            AqualityServices.getLogger().info("ResponseToString: " + response.toString());
+            AqualityServices.getLogger().info("XMLUtilResponseCode: " + response.code());
+            AqualityServices.getLogger().info("XMLUtilResponseToString: " + response.toString());
         }
 
         return response.body();
