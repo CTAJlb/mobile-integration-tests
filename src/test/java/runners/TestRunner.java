@@ -16,9 +16,9 @@ import org.junit.runner.RunWith;
                 "stepdefinitions"
         },
         plugin = {
-                "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"
+                "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm",
                 //todo Aquality Tracking is temporary turned off until AqualityTrackingCucumber6Jvm is released
-                //"aquality.tracking.integrations.cucumber5jvm.AqualityTrackingCucumber5Jvm",
+                "aquality.tracking.integrations.cucumber5jvm.AqualityTrackingCucumber5Jvm",
         }
 )
 public class TestRunner{
