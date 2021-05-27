@@ -98,7 +98,7 @@ class Distribution {
 
 class LinkFromEntry {
     private Copies copies;
-    private IndirectAcquisition indirectAcquisition;
+    private List<IndirectAcquisition> listOfIndirectAcquisition;
     private AvailabilityPDF availabilityPDF;
 
     public AvailabilityPDF getAvailabilityPDF() {
@@ -119,13 +119,13 @@ class LinkFromEntry {
         this.copies = copies;
     }
 
-    public IndirectAcquisition getIndirectAcquisition() {
-        return indirectAcquisition;
+    public List<IndirectAcquisition> getListOfIndirectAcquisition() {
+        return listOfIndirectAcquisition;
     }
 
     @XmlElement(name = "indirectAcquisition", namespace = "http://opds-spec.org/2010/catalog")
-    public void setIndirectAcquisition(IndirectAcquisition indirectAcquisition) {
-        this.indirectAcquisition = indirectAcquisition;
+    public void setListOfIndirectAcquisition(List<IndirectAcquisition> listOfIndirectAcquisition) {
+        this.listOfIndirectAcquisition = listOfIndirectAcquisition;
     }
 }
 

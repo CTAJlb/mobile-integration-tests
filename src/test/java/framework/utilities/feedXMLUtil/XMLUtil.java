@@ -76,17 +76,19 @@ public class XMLUtil {
                     continue;
                 }
 
-                boolean isPdfTypePresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition() != null);
-                boolean isPdfAvailabilityPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getAvailabilityPDF() != null);
+                boolean isPdfTypePresentAndPdfAvailabilityPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getListOfIndirectAcquisition() != null && link.getAvailabilityPDF() != null);
 
-                if (isPdfTypePresent && isPdfAvailabilityPresent) {
-                    String pdfType = entry.getLinksFromEntry().stream().filter(link -> link.getAvailabilityPDF() != null).findFirst().get().getIndirectAcquisition().getType();
-                    String pdfAvailability = entry.getLinksFromEntry().stream().filter(link -> link.getAvailabilityPDF() != null).findFirst().get().getAvailabilityPDF().getStatus();
+                if (isPdfTypePresentAndPdfAvailabilityPresent) {
+                    LinkFromEntry link = entry.getLinksFromEntry().stream().filter(filterlink -> filterlink.getAvailabilityPDF() != null && filterlink.getListOfIndirectAcquisition() != null).findFirst().get();
+                    List<String> listApplicationTypes = link.getListOfIndirectAcquisition().stream().map(indirectAcquisition -> indirectAcquisition.getType()).collect(Collectors.toList());
+                    String pdfAvailability = link.getAvailabilityPDF().getStatus();
 
-                    if (pdfType.toLowerCase().equals("application/pdf".toLowerCase()) && pdfAvailability.toLowerCase().equals("available".toLowerCase())) {
+                    if (listApplicationTypes.stream().anyMatch(applicationType -> applicationType.toLowerCase().equals("application/pdf".toLowerCase()))
+                            && !listApplicationTypes.stream().anyMatch(applicationType -> applicationType.toLowerCase().equals("application/epub+zip".toLowerCase()))
+                            && pdfAvailability.toLowerCase().equals("available".toLowerCase())) {
                         String[] arrayBookType = entry.getBookType().split("/");
                         String bookType = arrayBookType[arrayBookType.length - 1];
-                        BookModel bookModel = new BookModel(entry.getDistributor().getDistributorName().toLowerCase(), bookType.toLowerCase(), entry.getBookName(), 0);//todo countAvailableCopies is not zero status == available
+                        BookModel bookModel = new BookModel(entry.getDistributor().getDistributorName().toLowerCase(), bookType.toLowerCase(), entry.getBookName(), 0);//todo countAvailableCopies is not zero and status == available
                         listAvailablePdf.add(bookModel);
                         continue;
                     }
@@ -99,11 +101,14 @@ public class XMLUtil {
                 }
 
                 boolean isPdfAndVndAdobeAdeptPresent = false;
-                boolean isIndirectAcquisitionTagPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getIndirectAcquisition() != null);
+                boolean isIndirectAcquisitionTagPresent = entry.getLinksFromEntry().stream().anyMatch(link -> link.getListOfIndirectAcquisition() != null);
                 if (isIndirectAcquisitionTagPresent) {
-                    LinkFromEntry linkFromEntry = entry.getLinksFromEntry().stream().filter(link -> link.getIndirectAcquisition() != null).findFirst().get();
-                    if (linkFromEntry.getIndirectAcquisition().getType().toLowerCase().contains("vnd.adobe.adept+xml".toLowerCase())) {
-                        boolean isPdfPresent = linkFromEntry.getIndirectAcquisition().getInternalIndirectAcquisition().getType().toLowerCase().contains("pdf".toLowerCase());
+                    LinkFromEntry linkFromEntry = entry.getLinksFromEntry().stream().filter(link -> link.getListOfIndirectAcquisition() != null).findFirst().get();
+
+                    boolean isVndAdobeAdeptPresent = linkFromEntry.getListOfIndirectAcquisition().stream().anyMatch(indirectAcquisition -> indirectAcquisition.getType().toLowerCase().contains("vnd.adobe.adept+xml".toLowerCase()));
+                    if (isVndAdobeAdeptPresent) {
+                        IndirectAcquisition vndAdobeAdeptIndirectAcquisition = linkFromEntry.getListOfIndirectAcquisition().stream().filter(indirectAcquisition -> indirectAcquisition.getType().toLowerCase().contains("vnd.adobe.adept+xml".toLowerCase())).findFirst().get();
+                        boolean isPdfPresent = vndAdobeAdeptIndirectAcquisition.getInternalIndirectAcquisition().getType().toLowerCase().contains("pdf".toLowerCase());
                         if (isPdfPresent) {
                             isPdfAndVndAdobeAdeptPresent = true;
                         }
@@ -112,8 +117,8 @@ public class XMLUtil {
 
                 boolean isLibrarySimplifiedPresent = false;
                 if (isIndirectAcquisitionTagPresent) {
-                    LinkFromEntry linkFromEntry = entry.getLinksFromEntry().stream().filter(link -> link.getIndirectAcquisition() != null).findFirst().get();
-                    isLibrarySimplifiedPresent = linkFromEntry.getIndirectAcquisition().getType().toLowerCase().contains("vnd.librarysimplified.axisnow+json".toLowerCase());
+                    LinkFromEntry linkFromEntry = entry.getLinksFromEntry().stream().filter(link -> link.getListOfIndirectAcquisition() != null).findFirst().get();
+                    isLibrarySimplifiedPresent = linkFromEntry.getListOfIndirectAcquisition().stream().anyMatch(indirectAcquisition -> indirectAcquisition.getType().toLowerCase().contains("vnd.librarysimplified.axisnow+json".toLowerCase()));
                 }
 
                 if (isPdfAndVndAdobeAdeptPresent || isLibrarySimplifiedPresent) {
