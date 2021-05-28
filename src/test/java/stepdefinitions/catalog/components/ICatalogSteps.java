@@ -13,25 +13,27 @@ public interface ICatalogSteps {
 
     void booksFeedIsLoaded();
 
+    void openPreviousCategoryScreen();
+
+    void performActionOnBookFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey);
+
     void getNamesOfBooksAndSaveThem(String booksNamesListKey);
 
     void checkListOfBooksIsNotEqualToSavedListOfBooks(String booksNamesListKey);
 
     void openLibraryFromSideMenu(String libraryName);
 
+    void performActionOnHardcodeBookByNameAndSaveIt(BookActionButtonKeys actionButtonKey, String bookName, String bookInfoKey);
+
     void openCatalogWithAgeCheck();
 
     void openBooks();
-
-    void getBookFromShelfAndSaveItAsBookInfo(String bookInfoKey);
 
     void checkCurrentLibraryIsCorrect(String expectedLibraryName);
 
     void openCategory(String categoryName);
 
     void checkCurrentCategoryName(String expectedCategoryName);
-
-    void checkCurrentCategoryNameByLocalization(CategoriesNamesKeys categoriesNamesKeys);
 
     void checkSubcategoryScreenIsPresent();
 
@@ -46,7 +48,7 @@ public interface ICatalogSteps {
 
     void performActionOnBookOfTypeAndSaveIt(BookActionButtonKeys actionButtonKey, String bookType, String bookInfoKey);
 
-    void performActionOnBookByNameAndSaveIt(BookActionButtonKeys actionButtonKey, String bookName, String bookInfoKey);
+    void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey1, BookActionButtonKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey);
 
     void clickOnBookAddButtonOnCatalogBooksScreen(String bookInfoKey, BookActionButtonKeys key);
 
@@ -81,10 +83,6 @@ public interface ICatalogSteps {
     void checkDescriptionHasText(final String description);
 
     void openRelatedBooks();
-
-    void goBackToPreviousCatalogScreen();
-
-    CatalogBookModel selectFirstFoundBookAndSaveAs(String bookInfoKey);
 
     void checkCountOfBooksInSearchResultIsUpTo(int countOfBooks);
 

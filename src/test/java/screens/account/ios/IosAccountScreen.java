@@ -8,11 +8,11 @@ import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.application.timeouts.AuthorizationTimeouts;
 import constants.localization.application.account.AccountScreenLoginStatus;
 import framework.configuration.Credentials;
-import framework.utilities.keyboard.KeyboardUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.testng.Assert;
 import screens.account.AccountScreen;
+import screens.alert.AlertScreen;
+import screens.alert.ios.IosAlertScreen;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -41,6 +41,9 @@ public class IosAccountScreen extends AccountScreen {
     public void enterCredentials(Credentials credentials) {
         AqualityServices.getConditionalWait().waitFor(() -> btnLogin.state().isDisplayed() || btnLogout.state().isDisplayed());
         if (!btnLogout.state().isDisplayed()) {
+            txbCard.state().waitForDisplayed();
+            new IosAlertScreen().closeNotNowModalIfPresent();
+            txbCard.state().waitForDisplayed();
             txbCard.click();
             txbCard.clearAndType(credentials.getBarcode());
             txbPin.clearAndTypeSecret(credentials.getPin());
@@ -49,27 +52,13 @@ public class IosAccountScreen extends AccountScreen {
     }
 
     @Override
-    public void enterCredentialsViaKeyboard(Credentials credentials) {
-        enterDataViaKeyboard(txbCard, credentials.getBarcode());
-        enterDataViaKeyboard(txbPin, credentials.getPin());
-        KeyboardUtils.hideKeyboard();
-        btnLogin.click();
-    }
-
-    @Override
     public String getLoginFailedMessage() {
         return "";
     }
 
-    private void enterDataViaKeyboard(ITextBox textBox, String value) {
-        textBox.click();
-        Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(KeyboardUtils::isKeyboardVisible),
-                "Checking that keyboard is shown");
-        textBox.sendKeys(value);
-    }
-
     @Override
     public boolean isLoginSuccessful() {
+        btnLogout.state().waitForDisplayed();
         return AqualityServices.getConditionalWait().waitFor(() ->
                 btnLogout.getText().equals(AccountScreenLoginStatus.LOG_OUT.i18n()));
     }

@@ -27,21 +27,18 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>2.22.0</version>
                 <configuration>
-                    <properties>
-                        <property>
-                            <name>dataproviderthreadcount</name>
-                            <value>2</value>
-                        </property>
-                    </properties>
+                    <parallel>methods</parallel>
+                    <threadCount>4</threadCount>
+                    <perCoreThreadCount>false</perCoreThreadCount>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
     <properties>
-        <cucumber.version>6.9.1</cucumber.version>
+        <cucumber.version>5.7.0</cucumber.version>
     </properties>
 
     <dependencies>
@@ -64,6 +61,33 @@
         </dependency>
 
         <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.19.0</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>${cucumber.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.16</version>
@@ -78,20 +102,14 @@
 
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber6-jvm</artifactId>
-            <version>2.13.8</version>
+            <artifactId>allure-cucumber5-jvm</artifactId>
+            <version>2.13.2</version>
         </dependency>
 
         <dependency>
             <groupId>com.github.aquality-automation</groupId>
             <artifactId>aquality-tracking-cucumber5-jvm</artifactId>
             <version>1.3.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.prashant-ramcharan</groupId>
-            <artifactId>courgette-jvm</artifactId>
-            <version>5.9.2</version>
         </dependency>
 
         <dependency>

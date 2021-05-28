@@ -1,7 +1,7 @@
 Feature: Read EPUB
 
   Background:
-    Given Application is opened
+    Given I add "Digital Public Library of America" account from welcomeScreen
     When I open Catalog
       And I open search modal
       And I search for 'Flower Fables'

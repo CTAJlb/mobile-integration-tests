@@ -1,15 +1,16 @@
 Feature: Read PDF
 
   Background:
-    Given Application is opened
-    When I add 'LYRASIS' account
+    Given I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
       And I switch to 'LYRASIS' from side menu
       And I open search modal
-      And I search for 'PDF'
-      And DOWNLOAD book of 'PDF' type and save it as 'bookInfo'
+    When I search for pdf and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+      And I GET or DOWNLOAD book by name 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ

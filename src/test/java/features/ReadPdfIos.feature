@@ -1,8 +1,7 @@
 Feature: Read PDF IOS
 
   Background:
-    Given Application is opened
-    When I add 'LYRASIS' account
+    Given I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
@@ -11,8 +10,10 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Open document
-    When I search for 'Enterprise Pharo a Web Perspective'
-      And I GET book by name 'Enterprise Pharo a Web Perspective' and save it as 'bookInfo'
+    When I search for pdf and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
@@ -21,8 +22,10 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by page
-    When I search for 'Fundamentals of Business'
-      And I GET book by name 'Fundamentals of Business' and save it as 'bookInfo'
+    When I search for pdf and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
@@ -35,8 +38,10 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Table of Contents Menu
-    When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners'
-      And I GET book by name 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'
+    When I search for pdf and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
@@ -45,8 +50,10 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Open book to last page read
-    When I search for 'Enterprise Pharo a Web Perspective'
-      And I GET book by name 'Enterprise Pharo a Web Perspective' and save it as 'bookInfo'
+    When I search for pdf and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
@@ -67,8 +74,10 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Gallery
-    When I search for 'Fundamentals of Business'
-      And I GET book by name 'Fundamentals of Business' and save it as 'bookInfo'
+    When I search for pdf and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
@@ -86,8 +95,10 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Search document
-    When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners'
-      And I GET book by name 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'
+    When I search for pdf and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
@@ -100,7 +111,7 @@ Feature: Read PDF IOS
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate to Search Term
     When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners'
-      And I GET book by name 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'
+      And I GET hardcode book 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ

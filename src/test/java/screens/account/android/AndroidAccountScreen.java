@@ -10,10 +10,8 @@ import constants.application.timeouts.AuthorizationTimeouts;
 import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.account.AccountScreenLoginStatus;
 import framework.configuration.Credentials;
-import framework.utilities.keyboard.KeyboardUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.testng.Assert;
 import screens.account.AccountScreen;
 
 import java.time.Duration;
@@ -47,16 +45,6 @@ public class AndroidAccountScreen extends AccountScreen {
     public void enterCredentials(Credentials credentials) {
         txbCard.clearAndType(credentials.getBarcode());
         txbPin.clearAndTypeSecret(credentials.getPin());
-        btnLogin.click();
-    }
-
-    @Override
-    public void enterCredentialsViaKeyboard(Credentials credentials) {
-        enterDataViaKeyboard(txbCard, credentials.getBarcode());
-        enterDataViaKeyboard(txbPin, credentials.getPin());
-        KeyboardUtils.hideKeyboard();
-        Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(() -> !KeyboardUtils.isKeyboardVisible()),
-                "Checking that keyboard is not shown");
         btnLogin.click();
     }
 
@@ -101,12 +89,5 @@ public class AndroidAccountScreen extends AccountScreen {
 
     private String getLoginButtonText() {
         return btnLoginAction.state().waitForDisplayed() ? btnLoginAction.getText() : "";
-    }
-
-    private void enterDataViaKeyboard(ITextBox textBox, String value) {
-        textBox.click();
-        Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(KeyboardUtils::isKeyboardVisible),
-                "Checking that keyboard is shown");
-        textBox.sendKeys(value);
     }
 }

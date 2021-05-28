@@ -25,10 +25,6 @@ public class IosHoldsScreen extends HoldsScreen {
 
     private final ILabel lblNoBooks = getElementFactory().getLabel(By.xpath(LBL_NO_BOOKS_LOC),
             "No Books Present");
-    private final IButton btnRemove =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Remove\"]"), "Remove");
-    private final IButton btnApproveRemove =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Remove\"]"), "Approve Removal");
 
     public IosHoldsScreen() {
         super(By.xpath(MAIN_ELEMENT_EXISTING_BOOKS_IN_HOLDS + "|" + LBL_NO_BOOKS_LOC));
@@ -50,12 +46,6 @@ public class IosHoldsScreen extends HoldsScreen {
     }
 
     @Override
-    public void cancelReservations() {
-        btnRemove.click();
-        btnApproveRemove.click();
-    }
-
-    @Override
     public void clickBookByTitleButtonWithKey(String title, BookActionButtonKeys key) {
         clickOnSpecificBookElement(getBookActionButton(key, getBookBlockLocator(title)));
     }
@@ -64,11 +54,6 @@ public class IosHoldsScreen extends HoldsScreen {
     public boolean isBookAddButtonTextEqualTo(String bookTitle, BookActionButtonKeys key) {
         IButton btnBookAdd = getBookActionButton(key, getBookBlockLocator(bookTitle));
         return btnBookAdd.state().waitForDisplayed(Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
-    }
-
-    @Override
-    public boolean isBookForCancelPresent() {
-        return btnRemove.state().isDisplayed();
     }
 
     private void clickOnSpecificBookElement(IElement bookWithSpecificAddBtn) {

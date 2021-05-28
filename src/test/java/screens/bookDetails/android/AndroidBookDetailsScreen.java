@@ -34,7 +34,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
             getElementFactory().getLabel(By.xpath("//*[contains(@resource-id,\"bookDetailDescriptionText\")]"), "Description");
     private final ILabel lblErrorMessage = getElementFactory().getLabel(By.id("errorDetails"), "Error message");
 
-    private final IButton btnDownload = getActionButton(BookActionButtonKeys.DOWNLOAD);
     private final IButton btnRead = getActionButton(BookActionButtonKeys.READ);
     private final IButton btnDelete = getActionButton(BookActionButtonKeys.DELETE);
     private final IButton btnListen = getActionButton(BookActionButtonKeys.LISTEN);
@@ -45,12 +44,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
 
     public AndroidBookDetailsScreen() {
         super(By.id("bookDetailCover"));
-    }
-
-    @Override
-    public void downloadBook() {
-        btnDownload.click();
-        btnRead.state().waitForDisplayed();
     }
 
     @Override

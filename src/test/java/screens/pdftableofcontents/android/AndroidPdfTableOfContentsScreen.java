@@ -30,6 +30,11 @@ public class AndroidPdfTableOfContentsScreen extends PdfTableOfContentsScreen {
     }
 
     @Override
+    public void clickResumeButton() {
+        // not implemented on Android
+    }
+
+    @Override
     public void switchToChaptersListView() {
         // not implemented on Android
     }

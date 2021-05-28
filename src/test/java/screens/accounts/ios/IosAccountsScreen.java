@@ -14,8 +14,6 @@ public class IosAccountsScreen extends AccountsScreen {
 
     private final IButton btnAdd = getElementFactory().getButton(
             By.xpath("//XCUIElementTypeButton[@name=\"Add Library\"]"), "Add library");
-    private final IButton btnFirstLibrary =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeCell[2]"), "First library");
     private final IButton btnDelete =
             getElementFactory().getButton(By.name("Delete"), "Delete library");
 
@@ -40,12 +38,6 @@ public class IosAccountsScreen extends AccountsScreen {
     @Override
     public void addAccount() {
         btnAdd.click();
-    }
-
-    @Override
-    public void openFirstLibrary() {
-        btnFirstLibrary.state().waitForDisplayed();
-        btnFirstLibrary.click();
     }
 
     @Override

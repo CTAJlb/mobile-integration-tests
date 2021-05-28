@@ -14,9 +14,9 @@ import constants.application.timeouts.BooksTimeouts;
 import constants.application.timeouts.CategoriesTimeouts;
 import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
+import org.assertj.core.api.SoftAssertions;
+import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.testng.Assert;
-import org.testng.asserts.SoftAssert;
 import screens.audioplayer.AudioPlayerScreen;
 
 import java.time.Duration;
@@ -71,20 +71,18 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public void checkThatChaptersVisible() {
-        Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(() -> getChapters().size() > 0),
-                "Checking that count of chapters greater than zero");
+        Assert.assertTrue("Checking that count of chapters greater than zero", AqualityServices.getConditionalWait().waitFor(() -> getChapters().size() > 0));
     }
 
     @Override
     public void waitAndCheckAllLoadersDisappeared() {
         checkThatChaptersVisible();
-        SoftAssert softAssert = new SoftAssert();
-        getChapters().forEach(chapter ->
-                softAssert.assertTrue(chapter.findChildElement(By.xpath(CHAPTERS_TIMERS), ElementType.LABEL).state()
-                                .waitForDisplayed(Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis())),
-                        "Loader did not disappear from the chapter block")
+        //todo softAssert
+        SoftAssertions softAssertions = new SoftAssertions();
+        getChapters().forEach(chapter -> softAssertions.assertThat(chapter.findChildElement(By.xpath(CHAPTERS_TIMERS), ElementType.LABEL).state()
+                        .waitForDisplayed(Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis()))).as("Loader did not disappear from the chapter block").isTrue()
         );
-        softAssert.assertAll("Checking that all loaders are disappeared");
+        softAssertions.assertAll();
     }
 
     @Override

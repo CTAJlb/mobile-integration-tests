@@ -6,17 +6,12 @@ import constants.context.ContextLibrariesKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.testng.Assert;
-import screens.account.AccountScreen;
+import org.junit.Assert;
+import org.openqa.selenium.By;
 import screens.accounts.AccountsScreen;
 import screens.addaccount.AddAccountScreen;
-import screens.agegate.AgeGateScreen;
-import screens.alert.AlertScreen;
 import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
-import screens.catalog.form.MainCatalogToolbarForm;
-import screens.catalog.screen.catalog.CatalogScreen;
-import screens.notifications.NotificationModal;
 import screens.settings.SettingsScreen;
 
 import java.util.ArrayList;
@@ -27,12 +22,6 @@ public class AccountSteps {
     private final BottomMenuForm bottomMenuForm;
     private final SettingsScreen settingsScreen;
     private final AddAccountScreen addAccountScreen;
-    private final AlertScreen alertScreen;
-    private final AccountScreen accountScreen;
-    private final AgeGateScreen ageGateScreen;
-    private final MainCatalogToolbarForm mainCatalogToolbarForm;
-    private final CatalogScreen catalogScreen;
-    private final NotificationModal notificationModal;
     private ScenarioContext context;
 
     @Inject
@@ -42,52 +31,44 @@ public class AccountSteps {
         bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
         settingsScreen = AqualityServices.getScreenFactory().getScreen(SettingsScreen.class);
         addAccountScreen = AqualityServices.getScreenFactory().getScreen(AddAccountScreen.class);
-        alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
-        accountScreen = AqualityServices.getScreenFactory().getScreen(AccountScreen.class);
-        ageGateScreen = AqualityServices.getScreenFactory().getScreen(AgeGateScreen.class);
-        mainCatalogToolbarForm = AqualityServices.getScreenFactory().getScreen(MainCatalogToolbarForm.class);
-        catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
-        notificationModal = AqualityServices.getScreenFactory().getScreen(NotificationModal.class);
     }
 
     @When("I add {string} account")
     public void addAccount(String libraryName) {
-        if (ageGateScreen.state().isDisplayed()) {
-            ageGateScreen.approveAge();
-        }
         openAccounts();
         accountsScreen.addAccount();
-        AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
-        Assert.assertTrue(addAccountScreen.state().waitForDisplayed(),
-                "Checking that add accounts screen visible");
+        if (AqualityServices.getElementFactory().getButton(By.xpath("//android.widget.Button[@text = \"Deny\"]"), "DENYButton").state().waitForDisplayed()) {
+            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+        }
+        Assert.assertTrue("Checking that add accounts screen visible", addAccountScreen.state().waitForDisplayed());
         addAccountScreen.selectLibrary(libraryName);
 
-        saveLibraryInContext(ContextLibrariesKeys.CANCEL_GET.getKey(), libraryName);
-        saveLibraryInContext(ContextLibrariesKeys.CANCEL_HOLD.getKey(), libraryName);
-        saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
+        /*saveLibraryInContext(ContextLibrariesKeys.CANCEL_GET.getKey(), libraryName);
+        saveLibraryInContext(ContextLibrariesKeys.CANCEL_HOLD.getKey(), libraryName);*/
+        if(libraryName.toLowerCase().equals("LYRASIS".toLowerCase())){
+            saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
+        }
     }
 
     @Then("Account {string} is present on Accounts screen")
     public void checkAccountIsPresent(String libraryName) {
-        if (accountScreen.state().isDisplayed()) {
-            AqualityServices.getApplication().getDriver().navigate().back();
-        }
-        Assert.assertTrue(accountsScreen.isLibraryPresent(libraryName), libraryName + " is not present on Accounts screen");
+        openAccounts();
+        Assert.assertTrue(libraryName + " is not present on Accounts screen", accountsScreen.isLibraryPresent(libraryName));
     }
 
     @Then("Account {string} is not present on Accounts screen")
     public void checkAccountIsNotPresent(String libraryName) {
-        Assert.assertFalse(accountsScreen.isLibraryPresent(libraryName), libraryName + " is present on Accounts screen");
+        Assert.assertFalse(libraryName + " is present on Accounts screen", accountsScreen.isLibraryPresent(libraryName));
     }
 
     @When("I remove {string} account")
     public void removeAccount(String libraryName) {
+        openAccounts();
         accountsScreen.deleteLibrary(libraryName);
     }
 
     @When("I open account {string}")
     public void openAccount(String libraryName) {
-        bottomMenuForm.open(BottomMenu.SETTINGS);
         openAccounts();
         accountsScreen.openAccount(libraryName);
     }

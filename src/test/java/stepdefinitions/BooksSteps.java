@@ -7,26 +7,22 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.android.CatalogBookModel;
-import org.testng.Assert;
+import org.junit.Assert;
 import screens.books.BooksScreen;
-import screens.bottommenu.BottomMenu;
-import screens.bottommenu.BottomMenuForm;
 
 public class BooksSteps {
     private final BooksScreen booksScreen;
-    private final BottomMenuForm bottomMenuForm;
     private ScenarioContext context;
 
     @Inject
     public BooksSteps(ScenarioContext context) {
         this.context = context;
         booksScreen = AqualityServices.getScreenFactory().getScreen(BooksScreen.class);
-        bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
     }
 
     @Then("No books are present in Books list")
     public void checkNoBooksArePresentInBooksList() {
-        Assert.assertTrue(booksScreen.isNoBooksMessagePresent(), "Books are present in Books list");
+        Assert.assertTrue("Books are present in Books list", booksScreen.isNoBooksMessagePresent());
     }
 
     @Then("Book {string} is present in Books List")
@@ -34,19 +30,18 @@ public class BooksSteps {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         booksScreen.state().waitForDisplayed();
         AqualityServices.getConditionalWait().waitFor(() -> booksScreen.isNoBooksMessagePresent() || booksScreen.getCountOfBooks() > 0);
-        Assert.assertTrue(booksScreen.isBookPresent(bookInfo), String.format("Book '%s' is not present in Books List", bookInfo));
-        bottomMenuForm.open(BottomMenu.BOOKS);
+        Assert.assertTrue(String.format("Book '%s' is not present in Books List", bookInfo), booksScreen.isBookPresent(bookInfo));
     }
 
     @Then("Book {string} is not present in Books List")
     public void checkBookInfoIsNotPresentInBooksList(String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
-        Assert.assertFalse(booksScreen.isBookPresent(bookInfo), String.format("Book '%s' is present in Books List", bookInfo));
+        Assert.assertFalse(String.format("Book '%s' is present in Books List", bookInfo), booksScreen.isBookPresent(bookInfo));
     }
 
     @And("Count of books is equal to {int}")
     public void checkCountOfBooksIsEqualTo(int expectedCountOfBooks) {
-        Assert.assertEquals(booksScreen.getCountOfBooks(), expectedCountOfBooks, "Count of books is not correct");
+        Assert.assertEquals("Count of books is not correct", expectedCountOfBooks, booksScreen.getCountOfBooks());
     }
 
     @When("I refresh list of books")

@@ -6,9 +6,14 @@ import framework.configuration.Configuration;
 import framework.configuration.Credentials;
 import framework.utilities.ScenarioContext;
 import framework.utilities.returningBooksUtil.APIUtil;
-import org.testng.Assert;
+import org.junit.Assert;
 import screens.account.AccountScreen;
 import screens.accounts.AccountsScreen;
+import screens.alert.AlertScreen;
+import screens.bottommenu.BottomMenu;
+import screens.bottommenu.BottomMenuForm;
+import screens.catalog.screen.catalog.CatalogScreen;
+import screens.settings.SettingsScreen;
 import screens.subcategory.SubcategoryScreen;
 import stepdefinitions.BaseSteps;
 
@@ -19,6 +24,10 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
     protected final AccountScreen accountScreen;
     private final AccountsScreen accountsScreen;
     protected final SubcategoryScreen subcategoryScreen;
+    protected final CatalogScreen catalogScreen;
+    protected final AlertScreen alertScreen;
+    private final BottomMenuForm bottomMenuForm;
+    private final SettingsScreen settingsScreen;
     private ScenarioContext context;
 
     public AbstractCredentialsSteps(ScenarioContext context) {
@@ -26,10 +35,14 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
         accountScreen = AqualityServices.getScreenFactory().getScreen(AccountScreen.class);
         accountsScreen = AqualityServices.getScreenFactory().getScreen(AccountsScreen.class);
         subcategoryScreen = AqualityServices.getScreenFactory().getScreen(SubcategoryScreen.class);
+        catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
+        alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
+        bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
+        settingsScreen = AqualityServices.getScreenFactory().getScreen(SettingsScreen.class);
     }
 
     public void textOnLogoutButtonIsChangedToLogInOnAccountScreen() {
-        Assert.assertTrue(accountScreen.isLogoutSuccessful(), "Text on Login button is not changed to Log out on Account screen");
+        Assert.assertTrue("Text on Login button is not changed to Log out on Account screen", accountScreen.isLogoutSuccessful());
     }
 
     public void clickLogOut() {
@@ -37,10 +50,16 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
     }
 
     public void enterCredentialsForLibraryAccount(String libraryName) {
+        openAccounts();
         accountsScreen.openAccount(libraryName);
         Credentials credentials = Configuration.getCredentials(libraryName);
         storeCredentials(credentials);
         accountScreen.enterCredentials(credentials);
+    }
+
+    private void openAccounts() {
+        bottomMenuForm.open(BottomMenu.SETTINGS);
+        settingsScreen.openAccounts();
     }
 
     private void storeCredentials(Credentials credentials) {

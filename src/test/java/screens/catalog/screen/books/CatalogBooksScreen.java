@@ -10,8 +10,6 @@ public abstract class CatalogBooksScreen extends Screen {
         super(locator, "Catalog Books");
     }
 
-    public abstract CatalogBookModel selectFirstFoundBook();
-
     public abstract int getFoundBooksCount();
 
     public abstract CatalogBookModel getBookInfo(String title);
@@ -27,6 +25,8 @@ public abstract class CatalogBooksScreen extends Screen {
     public abstract CatalogBookModel scrollToBookByTypeAndClickActionButton(BookActionButtonKeys actionButtonKey, String bookType);
 
     public abstract CatalogBookModel scrollToBookByNameAndClickActionButton(BookActionButtonKeys actionButtonKey, String bookName);
+
+    public abstract CatalogBookModel scrollToBookByNameAndClickGetOrDownloadActionButton(BookActionButtonKeys actionButtonKey1, BookActionButtonKeys actionButtonKey2, String bookName);
 
     public abstract String getErrorMessage();
 

@@ -16,15 +16,7 @@ public abstract class BooksScreen extends Screen {
 
     public abstract int getCountOfBooks();
 
-    public abstract int getCountOfBooksWithAction(BookActionButtonKeys actionKey);
-
-    public abstract void openBookPage(int index, BookActionButtonKeys actionKey);
-
     public abstract void refreshList();
 
     public abstract void readBook(CatalogBookModel bookInfo);
-
-    public abstract void scrollForButtonWithAction(BookActionButtonKeys actionButton);
-
-    public abstract void scrollUp();
 }

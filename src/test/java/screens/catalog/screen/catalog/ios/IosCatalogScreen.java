@@ -73,21 +73,6 @@ public class IosCatalogScreen extends CatalogScreen {
     }
 
     @Override
-    public String getBookName(int index) {
-        return getBookWithGivenIndex(index).getAttribute(IosAttributes.NAME);
-    }
-
-    private IButton getBookWithGivenIndex(int index) {
-        return getElementFactory().getButton(By.xpath(String.format("(%s)[%d]", BOOKS_LOCATOR, index)),
-                "Book no" + index);
-    }
-
-    @Override
-    public void clickBook(int index) {
-        getBookWithGivenIndex(index).click();
-    }
-
-    @Override
     public void openCategory(String categoryName) {
         IButton categoryButton = getCategoryButton(categoryName);
         categoryButton.state().waitForDisplayed();
@@ -124,10 +109,6 @@ public class IosCatalogScreen extends CatalogScreen {
             currentBooksNames = getListOfVisibleBooksNamesInSubcategoryLane(lineName);
         } while (!bookNames.containsAll(currentBooksNames));
         return bookNames;
-    }
-
-    @Override
-    public void openFirstBookOfType(ReaderType readerType) {
     }
 
     @Override

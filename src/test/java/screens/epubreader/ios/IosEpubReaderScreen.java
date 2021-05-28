@@ -16,10 +16,10 @@ import framework.utilities.swipe.SwipeElementUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
-import org.testng.Assert;
 import screens.epubreader.EpubReaderScreen;
 import screens.epubtableofcontents.EpubTableOfContentsScreen;
 
@@ -47,7 +47,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     }
 
     private void checkThatBookOpenedAndOpenMenus() {
-        Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(() -> state().isDisplayed() || btnFontSettings.state().isDisplayed()), "Book page does not displayed");
+        Assert.assertTrue("Book page does not displayed", AqualityServices.getConditionalWait().waitFor(() -> state().isDisplayed() || btnFontSettings.state().isDisplayed()));
         if (!btnFontSettings.state().isDisplayed()) {
             CoordinatesClickUtils.clickAtCenterOfScreen();
         }

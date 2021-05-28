@@ -51,13 +51,6 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
-    public CatalogBookModel selectFirstFoundBook() {
-        CatalogBookModel catalogBookModel = getBookModel(BOOKS_LOC);
-        lblFirstFoundBook.click();
-        return catalogBookModel;
-    }
-
-    @Override
     public int getFoundBooksCount() {
         return getFoundBooks().size();
     }
@@ -114,6 +107,24 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
         IButton button = getElementFactory().getButton(By.xpath(bookAddButtonLocator), actionButtonKey.i18n());
         button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         return openBook(button, bookName);
+    }
+
+    @Override
+    public CatalogBookModel scrollToBookByNameAndClickGetOrDownloadActionButton(BookActionButtonKeys actionButtonKey1, BookActionButtonKeys actionButtonKey2, String bookName) {
+        String bookAddButtonLocator1 = getBookActionButtonLocatorWithGivenName(actionButtonKey1, bookName);
+        String bookAddButtonLocator2 = getBookActionButtonLocatorWithGivenName(actionButtonKey2, bookName);
+        IButton button1 = getElementFactory().getButton(By.xpath(bookAddButtonLocator1), actionButtonKey1.i18n());
+        IButton button2 = getElementFactory().getButton(By.xpath(bookAddButtonLocator2), actionButtonKey2.i18n());
+        IButton buttonForClick = null;
+        if(button1.state().waitForDisplayed()){
+            buttonForClick = button1;
+            button1.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+        }else if(button2.state().waitForDisplayed()){
+            button2.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+            buttonForClick = button2;
+        }
+
+        return openBook(buttonForClick, bookName);
     }
 
     @Override

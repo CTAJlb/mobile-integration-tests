@@ -5,7 +5,6 @@ import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.application.ReaderType;
 import constants.localization.application.catalog.BookActionButtonKeys;
-import constants.localization.application.catalog.CategoriesNamesKeys;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
 import constants.localization.application.facetedSearch.FacetSortByKeys;
 import framework.utilities.ScenarioContext;
@@ -14,7 +13,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.android.BookDetailsScreenInformationBlockModel;
-import models.android.CatalogBookModel;
 import stepdefinitions.BaseSteps;
 import stepdefinitions.catalog.components.AbstractCatalogSteps;
 import stepdefinitions.catalog.components.ICatalogSteps;
@@ -36,9 +34,19 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.booksFeedIsLoaded();
     }
 
+    @When("I return to previous category screen")
+    public void openPreviousCategoryScreen() {
+        catalogSteps.openPreviousCategoryScreen();
+    }
+
     @When("I get names of books on screen and save them as {string}")
     public void getNamesOfBooksAndSaveThem(String booksNamesListKey) {
         catalogSteps.getNamesOfBooksAndSaveThem(booksNamesListKey);
+    }
+
+    @When("I {} hardcode book {string} and save it as {string}")
+    public void performActionOnHardcodeBookByNameAndSaveIt(BookActionButtonKeys actionButtonKey, String bookName, String bookInfoKey) {
+        catalogSteps.performActionOnHardcodeBookByNameAndSaveIt(actionButtonKey, bookName, bookInfoKey);
     }
 
     @Then("List of books on screen is not equal to list of books saved as {string}")
@@ -62,11 +70,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openBooks();
     }
 
-    @And("I Download first book from shelf and save it as {string}")
-    public void getBookFromShelfAndSaveItAsBookInfo(String bookInfoKey) {
-        catalogSteps.getBookFromShelfAndSaveItAsBookInfo(bookInfoKey);
-    }
-
     @And("Current library is {string} in Catalog")
     public void checkCurrentLibraryIsCorrect(String expectedLibraryName) {
         catalogSteps.checkCurrentLibraryIsCorrect(expectedLibraryName);
@@ -82,12 +85,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     @And("Subcategory name is {string}")
     public void checkCurrentCategoryName(String expectedCategoryName) {
         catalogSteps.checkCurrentCategoryName(expectedCategoryName);
-    }
-
-    @Then("Current category name by localization is {}")
-    @And("Subcategory name by localization  is {}")
-    public void checkCurrentCategoryNameByLocalization(CategoriesNamesKeys categoriesNamesKeys) {
-        catalogSteps.checkCurrentCategoryNameByLocalization(categoriesNamesKeys);
     }
 
     @Then("Subcategory screen is present")
@@ -131,10 +128,15 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.performActionOnBookOfTypeAndSaveIt(actionButtonKey, bookType, bookInfoKey);
     }
 
-    @When("I {} book by name {string} and save it as {string}")
-    @And("{} book by name {string} type and save it as {string}")
-    public void performActionOnBookByNameAndSaveIt(BookActionButtonKeys actionButtonKey, String bookName, String bookInfoKey) {
-        catalogSteps.performActionOnBookByNameAndSaveIt(actionButtonKey, bookName, bookInfoKey);
+    @When("I {} or {} book by name {string} and save it as {string}")
+    public void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey1, BookActionButtonKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey) {
+        catalogSteps.performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(actionButtonKey1, actionButtonKey2, bookNameInfoKey, bookInfoKey);
+    }
+
+    //new
+    @When("I {} book with title {string} and save it as {string}")
+    public void performActionOnBookFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey) {
+        catalogSteps.performActionOnBookFromAPIAndSaveIt(actionButtonKey, bookNameInfoKey, bookInfoKey);
     }
 
     @When("I open {string} book with name {string} and save it as {string}")
@@ -239,17 +241,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openRelatedBooks();
     }
 
-    @When("I go back to the previous catalog screen")
-    public void goBackToPreviousCatalogScreen() {
-        catalogSteps.goBackToPreviousCatalogScreen();
-    }
-
-    @When("I open first found book from the search result and save as {string}")
-    @And("Open first found book from the search result and save as {string}")
-    public CatalogBookModel selectFirstFoundBookAndSaveAs(String bookInfoKey) {
-        return catalogSteps.selectFirstFoundBookAndSaveAs(bookInfoKey);
-    }
-
     @And("Count of books in search result is up to {int}")
     public void checkCountOfBooksInSearchResultIsUpTo(int countOfBooks) {
         catalogSteps.checkCountOfBooksInSearchResultIsUpTo(countOfBooks);
@@ -311,11 +302,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     @Then("Opened book contains read button at book details screen")
     public void checkBookWasBorrowedSuccessfully() {
         catalogSteps.checkBookWasBorrowedSuccessfully();
-    }
-
-    @When("I open first {} book and save book info as {string}")
-    public void openFirstBookAndSaveBookInfoAs(ReaderType readerType, String bookInfoKey) {
-        catalogSteps.openFirstBookAndSaveBookInfoAs(readerType, bookInfoKey);
     }
 
     @When("I open first present category")

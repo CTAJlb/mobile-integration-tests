@@ -40,6 +40,12 @@ public class APIUtil {
 
         APIPageXMLModel apiPageXMLModel = response.body();
 
+        if (response.body() == null){
+            AqualityServices.getLogger().info("APIUtilResponseCode: " + response.code());
+            AqualityServices.getLogger().info("APIUtilResponseToString: " + response.toString());
+            throw new RuntimeException("Bad Response, problem with server");
+        }
+
         boolean isEntryPresentInXml = response.body().getEntries() == null;
 
         if (!isEntryPresentInXml) {

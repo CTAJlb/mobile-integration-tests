@@ -9,4 +9,6 @@ public abstract class WelcomeScreen extends Screen {
     }
 
     public abstract void addALibraryLater();
+
+    public abstract void findLibrary();
 }

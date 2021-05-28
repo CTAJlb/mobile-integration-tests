@@ -5,7 +5,7 @@ import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
 import models.android.CatalogBookModel;
-import org.testng.Assert;
+import org.junit.Assert;
 import stepdefinitions.holds.components.AbstractHoldsSteps;
 
 @StepsType(platform = PlatformName.IOS)
@@ -22,13 +22,12 @@ public class IosHoldsSteps extends AbstractHoldsSteps {
         if (!isBookPresent) {
             AqualityServices.getLogger().info(AqualityServices.getApplication().getDriver().getPageSource());
         }
-        Assert.assertTrue(isBookPresent, String.format("Book '%s' is not present in Books List", bookInfo));
+        Assert.assertTrue(String.format("Book '%s' is not present in Books List", bookInfo), isBookPresent);
     }
 
     @Override
     public void checkBookBookInfoIsNotPresentInHoldsList(String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
-        Assert.assertTrue(holdsScreen.isBookNotPresent(bookInfo.getTitle()),
-                String.format("Book '%s' is not present in Books List", bookInfo));
+        Assert.assertTrue(String.format("Book '%s' is not present in Books List", bookInfo), holdsScreen.isBookNotPresent(bookInfo.getTitle()));
     }
 }

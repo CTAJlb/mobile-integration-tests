@@ -15,8 +15,8 @@ import constants.localization.application.catalog.BookActionButtonKeys;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import models.android.CatalogBookModel;
+import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import screens.bookDetails.BookDetailsScreen;
 
 import java.time.Duration;
@@ -39,7 +39,6 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
             "//XCUIElementTypeStaticText[@name=\"Description\"]/following-sibling::XCUIElementTypeTextView/*";
 
     private final ILabel lblBookTitleInfo = getElementFactory().getLabel(By.xpath("(//XCUIElementTypeOther//XCUIElementTypeStaticText[@name])[1]"), "Book title");
-    private final IButton btnDownload = getActionButton(BookActionButtonKeys.DOWNLOAD);
     private final IButton btnRead = getActionButton(BookActionButtonKeys.READ);
     private final IButton btnListen = getActionButton(BookActionButtonKeys.LISTEN);
     private final IButton btnRelatedBooks =
@@ -62,17 +61,10 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public void downloadBook() {
-        btnDownload.click();
-        btnRead.state().waitForDisplayed();
-    }
-
-    @Override
     public CatalogBookModel getBookInfo() {
-        Assert.assertTrue(AqualityServices.getConditionalWait().waitFor(() ->
+        Assert.assertTrue("Book info was not loaded", AqualityServices.getConditionalWait().waitFor(() ->
                         getBookMainInfo().size() > 0,
-                Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_PAGE_LOADED.getTimeoutMillis())),
-                "Book info was not loaded");
+                Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_PAGE_LOADED.getTimeoutMillis())));
         return new CatalogBookModel()
                 .setTitle(lblBookTitleInfo.getText())
                 .setAuthor(getElementFactory().getLabel(By.xpath(String.format(LBL_BOOK_AUTHORS_INFO,

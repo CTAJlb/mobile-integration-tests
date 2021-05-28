@@ -35,8 +35,16 @@ public class IosPdfTableOfContentsScreen extends PdfTableOfContentsScreen {
     private final IButton btnListView =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"List\"]"), "Chapters list view");
 
+private final IButton btnResume =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name = \"Resume\"]"), "Resume Button");
+
     public IosPdfTableOfContentsScreen() {
         super(By.xpath("//XCUIElementTypeTable"));
+    }
+
+    @Override
+    public void clickResumeButton() {
+        btnResume.click();
     }
 
     @Override

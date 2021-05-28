@@ -4,7 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import constants.localization.application.catalog.BookActionButtonKeys;
 import framework.utilities.ScenarioContext;
 import models.android.CatalogBookModel;
-import org.testng.Assert;
+import org.junit.Assert;
 import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
 import screens.holds.HoldsScreen;
@@ -31,12 +31,12 @@ public abstract class AbstractHoldsSteps extends BaseSteps implements IHoldsStep
 
     @Override
     public void checkHoldsFeedIsLoaded() {
-        Assert.assertTrue(holdsScreen.state().waitForDisplayed(), "Holds feed is not loaded");
+        Assert.assertTrue("Holds feed is not loaded", holdsScreen.state().waitForDisplayed());
     }
 
     @Override
     public void checkNoBooksArePresentInHoldsList() {
-        Assert.assertTrue(holdsScreen.isNoBooksMessagePresent(), "Books are present in Holds list");
+        Assert.assertTrue("Books are present in Holds list", holdsScreen.isNoBooksMessagePresent());
     }
 
     public abstract void checkBookBookInfoIsPresentInHoldsList(String bookInfoKey);
@@ -61,8 +61,7 @@ public abstract class AbstractHoldsSteps extends BaseSteps implements IHoldsStep
             final String bookInfoKey, final BookActionButtonKeys key) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         String title = catalogBookModel.getTitle();
-        Assert.assertTrue(holdsScreen.isBookAddButtonTextEqualTo(title, key),
-                String.format("Book with title '%1$s' button does not contain text '%2$s'", title, key.i18n()));
+        Assert.assertTrue(String.format("Book with title '%1$s' button does not contain text '%2$s'", title, key.i18n()), holdsScreen.isBookAddButtonTextEqualTo(title, key));
     }
 
     public abstract void checkBookBookInfoIsNotPresentInHoldsList(String bookInfoKey);

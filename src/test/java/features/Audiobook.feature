@@ -1,8 +1,7 @@
 Feature: Audiobook
 
   Background:
-    Given Application is opened
-    When I add 'LYRASIS' account
+    Given I add "LYRASIS" account from welcomeScreen
     Then Account 'LYRASIS' is present on Accounts screen
     When I enter credentials for 'LYRASIS' account
     Then Login is performed successfully

@@ -7,8 +7,8 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 import screens.pdfsearch.PdfSearchScreen;
 
 import java.util.Collections;
@@ -65,7 +65,7 @@ public class IosPdfSearchScreen extends PdfSearchScreen {
     }
 
     private ILabel getSearchedItemByName(final String itemName) {
-        Assert.assertTrue(isFoundItemsExist(), "No items were found");
+        Assert.assertTrue("No items were found", isFoundItemsExist());
         ILabel targetItem = getSearchedElements()
                 .stream()
                 .filter(element -> element
@@ -74,7 +74,7 @@ public class IosPdfSearchScreen extends PdfSearchScreen {
                         .equals(itemName))
                 .findFirst()
                 .orElse(null);
-        Assert.assertNotNull(targetItem, "The item that was tried to find does not exist");
+        Assert.assertNotNull("The item that was tried to find does not exist", targetItem);
         return targetItem;
     }
 
