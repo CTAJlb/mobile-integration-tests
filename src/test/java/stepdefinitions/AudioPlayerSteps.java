@@ -8,10 +8,10 @@ import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
 import framework.utilities.RegExUtil;
 import framework.utilities.ScenarioContext;
-import framework.utilities.SmartRandomUtils;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
 import screens.audioplayer.AudioPlayerScreen;
 
@@ -54,11 +54,9 @@ public class AudioPlayerSteps {
     public void selectChapterIsNotEqualToSavedInContextByKeyAndSaveSelectedChapter(String keySavedChapter, String keySelectedChapter) {
         int savedChapterNumber = context.get(keySavedChapter);
         int totalChapterCount = audioPlayerScreen.getCountOfChapters();
-        int chapterToSelect =
-                SmartRandomUtils.getRandomWithExclusion(0, totalChapterCount, savedChapterNumber - 1, totalChapterCount);
-
+        int chapterToSelect = RandomUtils.nextInt(savedChapterNumber + 1, totalChapterCount + 1);
         audioPlayerScreen.selectChapterNumber(chapterToSelect);
-        context.add(keySelectedChapter, chapterToSelect + 1);
+        context.add(keySelectedChapter, chapterToSelect);
     }
 
     @When("I select {int} chapter and remember selected chapter as {string}")
@@ -69,7 +67,7 @@ public class AudioPlayerSteps {
     }
 
     @Then("I check that current chapter equal to remembered {string}")
-    public void selectChapterIsNotEqualToSavedInContextByKeyAndSaveSelectedChapter(String keyCurrentChapter) {
+    public void checkThatCurrentChapterEqualSavedChapter(String keyCurrentChapter) {
         int expectedChapterName = context.get(keyCurrentChapter);
         Assert.assertTrue(String.format("Current chapter number is not correct. Expected - %d; actual - %d", expectedChapterName, getChapterNumber()), AqualityServices.getConditionalWait().waitFor(() -> getChapterNumber() == expectedChapterName));
         AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofMillis(BooksTimeouts.SYSTEM_CHANGES_STATUS.getTimeoutMillis()));
