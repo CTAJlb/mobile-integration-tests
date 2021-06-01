@@ -95,6 +95,12 @@ public class AudioPlayerSteps {
     @And("Book is not playing")
     public void checkBookIsNotPlaying() {
         Duration firstTiming = audioPlayerScreen.getCurrentPlayTime();
+        //todo tread sleep
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Assert.assertEquals("Book is still playing", firstTiming, audioPlayerScreen.getCurrentPlayTime());
     }
 
