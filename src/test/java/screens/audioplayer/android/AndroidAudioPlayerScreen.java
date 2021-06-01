@@ -22,6 +22,7 @@ import java.util.List;
 public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     private static final String MAIN_ELEMENT = "player_cover";
     private static final String CHAPTERS_LOC = "//android.widget.RelativeLayout[.//*[contains(@resource-id, \"player_toc_item_view_title\")]]";
+    private static final String CHAPTERS_TEXT = "//android.widget.RelativeLayout//android.widget.TextView[contains(@resource-id, \"player_toc_item_view_title\")]";
     private static final String LOADING_SCREEN_XPATH = "//*[contains(@resource-id,\"player_toc_item_downloading_progress\")]";
     private static final String SPEED_OPTION_XPATH_LOCATOR_PATTERN = "//*[contains(@resource-id, \"player_menu_playback_rate_text\") and @text=\"%sx\"]";
     private static final String TIMER_XPATH_PATTERN_LOCATOR = "//*[contains(@resource-id, \"player_sleep_item_view_name\") and @text=\"%s\"]";
@@ -50,6 +51,10 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
         return getElementFactory().findElements(By.xpath(CHAPTERS_LOC), ElementType.LABEL);
     }
 
+    public List<ILabel> getChaptersText() {
+        return getElementFactory().findElements(By.xpath(CHAPTERS_TEXT), ElementType.LABEL);
+    }
+
     @Override
     public void checkThatChaptersVisible() {
         Assert.assertTrue("Checking that count of chapters greater than zero", AqualityServices.getConditionalWait().waitFor(() -> getChapters().size() > 0));
@@ -67,10 +72,12 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void selectChapterNumber(int chapterNumber) {
-        ILabel chapter = getChapters().get(chapterNumber);
+    public String selectChapterAndGetText(int chapterNumber) {
+        ILabel chapter = getChaptersText().get(chapterNumber - 1);
+        String chapterText = chapter.getAttribute("text");
         chapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         chapter.click();
+        return chapterText;
     }
 
     @Override

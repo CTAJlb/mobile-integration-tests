@@ -18,29 +18,22 @@ Feature: Audiobook
   @logout @returnBooks @tier2 @exclude_ios
   Scenario: Navigate by Table of Contents Menu
     When Press on the book details screen at the action button LISTEN
-      And Remember current book chapter in 'defaultChapter'
-      And Open the menu-based position in the audiobook
+      And Open chapter list for an audiobook
     Then I check that chapters are visible
       And Wait and check that all loaders are disappeared
-    When I select the chapter not equal to remembered 'defaultChapter' and remember selected chapter as 'newChapter'
-    Then I check that current chapter equal to remembered 'newChapter'
+    When I select the chapter not equal to first chapter and remember selected chapter text as 'newChapterText'
+    Then I check that current chapter text equal to remembered 'newChapterText'
 
   @logout @returnBooks @tier2 @exclude_ios
   Scenario: Return to Chapter (Bookmarking/Syncing)
     When Press on the book details screen at the action button LISTEN
-      And Remember current book chapter in 'defaultChapter'
-      And Open the menu-based position in the audiobook
-    Then I check that chapters are visible
-      And Wait and check that all loaders are disappeared
-    When I select the chapter not equal to remembered 'defaultChapter' and remember selected chapter as 'newChapter'
-    Then I check that current chapter equal to remembered 'newChapter'
+      And Open chapter list for an audiobook
+    When I select the chapter not equal to first chapter and remember selected chapter text as 'newChapterText'
     When I restart app
-      And I open Catalog
-      And I switch to 'LYRASIS' from side menu
       And I open Books
       And I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button LISTEN
-    Then I check that current chapter equal to remembered 'newChapter'
+    Then I check that current chapter text equal to remembered 'newChapterText'
 
   @logout @returnBooks @tier2 @exclude_ios
   Scenario: Play Audiobook

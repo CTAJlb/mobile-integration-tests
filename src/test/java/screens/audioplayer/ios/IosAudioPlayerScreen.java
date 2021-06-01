@@ -29,6 +29,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeImage[@name=\"cover_art\"]";
     private static final String CHAPTERS_TIMERS = ".//XCUIElementTypeStaticText[@name]";
     private static final String CHAPTERS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell";
+    private static final String CHAPTERS_TEXT = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[1]";
     private static final String LOADED_CHAPTERS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeOther[@visible=\"false\"]";
     private static final int COUNT_OF_CHAPTERS_TO_WAIT_FOR = 3;
     private static final String PLAYBACK_OPTION_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%s\"]";
@@ -69,6 +70,10 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
         return getElementFactory().findElements(By.xpath(CHAPTERS_LOCATOR), ElementType.LABEL);
     }
 
+    public List<ILabel> getChaptersText() {
+        return getElementFactory().findElements(By.xpath(CHAPTERS_TEXT), ElementType.LABEL);
+    }
+
     @Override
     public void checkThatChaptersVisible() {
         Assert.assertTrue("Checking that count of chapters greater than zero", AqualityServices.getConditionalWait().waitFor(() -> getChapters().size() > 0));
@@ -91,16 +96,18 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void selectChapterNumber(int chapterNumber) {
+    public String selectChapterAndGetText(int chapterNumber) {
         AqualityServices.getConditionalWait().waitFor(() -> getElementFactory().findElements(By.xpath(LOADED_CHAPTERS_LOCATOR), ElementType.LABEL).size() >= chapterNumber, Duration.ofMillis(CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis()));
-        ILabel chapter = getChapters().get(chapterNumber - 1);
+        ILabel chapter = getChaptersText().get(chapterNumber - 1);
+        String chapterText = chapter.getAttribute("name");
         chapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         chapter.click();
+        return chapterText;
     }
 
     @Override
     public String getCurrentChapterInfo() {
-        return lblCurrentChapter.getText();
+        return lblCurrentChapter.getAttribute("value");
     }
 
     @Override

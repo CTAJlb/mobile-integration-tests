@@ -28,14 +28,7 @@ public class AudioPlayerSteps {
         this.context = context;
     }
 
-    @And("Remember current book chapter in {string}")
-    public void saveCurrentBookChapterInContextByKey(String key) {
-        audioPlayerScreen.waitForLoadingDisappearing();
-        context.add(key, getChapterNumber());
-    }
-
-    @And("Open the menu-based position in the audiobook")
-    @When("I open the menu-based position in the audiobook")
+    @And("Open chapter list for an audiobook")
     public void openMenuBasedPositionInAudiobook() {
         audioPlayerScreen.openMenu();
     }
@@ -50,26 +43,25 @@ public class AudioPlayerSteps {
         audioPlayerScreen.waitAndCheckAllLoadersDisappeared();
     }
 
-    @When("I select the chapter not equal to remembered {string} and remember selected chapter as {string}")
-    public void selectChapterIsNotEqualToSavedInContextByKeyAndSaveSelectedChapter(String keySavedChapter, String keySelectedChapter) {
-        int savedChapterNumber = context.get(keySavedChapter);
+    @When("I select the chapter not equal to first chapter and remember selected chapter text as {string}")
+    public void selectChapterIsNotEqualToSavedInContextByKeyAndSaveSelectedChapter(String keySelectedChapterText) {
         int totalChapterCount = audioPlayerScreen.getCountOfChapters();
-        int chapterToSelect = RandomUtils.nextInt(savedChapterNumber + 1, totalChapterCount + 1);
-        audioPlayerScreen.selectChapterNumber(chapterToSelect);
-        context.add(keySelectedChapter, chapterToSelect);
+        int chapterToSelect = RandomUtils.nextInt(2, totalChapterCount + 1);
+        String chapterText = audioPlayerScreen.selectChapterAndGetText(chapterToSelect);
+        context.add(keySelectedChapterText, chapterText);
     }
 
     @When("I select {int} chapter and remember selected chapter as {string}")
     public void selectSecondChapterAndSaveSelectedChapter(int chapterToSelect, String keySelectedChapter) {
-        audioPlayerScreen.selectChapterNumber(chapterToSelect);
+        audioPlayerScreen.selectChapterAndGetText(chapterToSelect);
         audioPlayerScreen.waitForLoadingDisappearing();
         context.add(keySelectedChapter, chapterToSelect);
     }
 
-    @Then("I check that current chapter equal to remembered {string}")
-    public void checkThatCurrentChapterEqualSavedChapter(String keyCurrentChapter) {
-        int expectedChapterName = context.get(keyCurrentChapter);
-        Assert.assertTrue(String.format("Current chapter number is not correct. Expected - %d; actual - %d", expectedChapterName, getChapterNumber()), AqualityServices.getConditionalWait().waitFor(() -> getChapterNumber() == expectedChapterName));
+    @Then("I check that current chapter text equal to remembered {string}")
+    public void checkThatCurrentChapterEqualSavedChapter(String keySelectedChapterText) {
+        String expectedChapterText = context.get(keySelectedChapterText);
+        Assert.assertTrue(String.format("Current chapter text is not correct. Expected - %s; actual - %s", expectedChapterText, getChapterText()), AqualityServices.getConditionalWait().waitFor(() -> getChapterText().toLowerCase().equals(expectedChapterText.toLowerCase())));
         AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofMillis(BooksTimeouts.SYSTEM_CHANGES_STATUS.getTimeoutMillis()));
     }
 
@@ -209,7 +201,7 @@ public class AudioPlayerSteps {
         Assert.assertTrue("Timer value is not correct", audioPlayerScreen.isTimerSetTo(timerSetting));
     }
 
-    private int getChapterNumber() {
-        return Integer.parseInt(RegExUtil.getStringFromFirstGroup(audioPlayerScreen.getCurrentChapterInfo(), RegEx.AUDIO_BOOK_CURRENT_CHAPTER_REGEX));
+    private String getChapterText() {
+        return RegExUtil.getStringFromFirstGroup(audioPlayerScreen.getCurrentChapterInfo(), RegEx.AUDIO_BOOK_CURRENT_CHAPTER_TEXT_REGEX);
     }
 }
