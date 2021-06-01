@@ -44,7 +44,7 @@ Feature: Audiobook
     When Press on the book details screen at the action button LISTEN
       And I click play button on player screen
     Then Pause button is present
-      And Book is playing
+    Then Book is playing
     When I click pause button on player screen
     Then Play button is present
       And Book is not playing
@@ -55,7 +55,7 @@ Feature: Audiobook
       And I click play button on player screen
       And I save chapter length as 'chapterLength'
     Then Pause button is present
-      And Book is playing
+    Then Book is playing
     When I move to middle part of chapter
     Then Saved play time 'chapterLength' is close to middle part of chapter
     When I save book play time as 'timeAhead'
@@ -70,7 +70,7 @@ Feature: Audiobook
     When Press on the book details screen at the action button LISTEN
       And I click play button on player screen
     Then Pause button is present
-      And Book is playing
+    Then Book is playing
     When I select playback speed 2X
       And I save book play time as 'timeAhead'
       And I wait for 5 seconds

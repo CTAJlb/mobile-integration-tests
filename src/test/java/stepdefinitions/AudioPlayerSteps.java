@@ -85,7 +85,7 @@ public class AudioPlayerSteps {
         Assert.assertTrue("Play button is not present", audioPlayerScreen.isPlayButtonPresent());
     }
 
-    @And("Book is playing")
+    @Then("Book is playing")
     public void checkBookIsPlaying() {
         audioPlayerScreen.waitForBookLoading();
         Duration firstTiming = audioPlayerScreen.getCurrentPlayTime();
