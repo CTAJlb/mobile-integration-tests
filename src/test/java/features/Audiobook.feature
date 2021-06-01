@@ -19,8 +19,8 @@ Feature: Audiobook
   Scenario: Navigate by Table of Contents Menu
     When Press on the book details screen at the action button LISTEN
       And Open chapter list for an audiobook
-    Then I check that chapters are visible
-      And Wait and check that all loaders are disappeared
+    #Then I check that chapters are visible
+      #And Wait and check that all loaders are disappeared
     When I select the chapter not equal to first chapter and remember selected chapter text as 'newChapterText'
     Then I check that current chapter text equal to remembered 'newChapterText'
 
@@ -29,6 +29,8 @@ Feature: Audiobook
     When Press on the book details screen at the action button LISTEN
       And Open chapter list for an audiobook
     When I select the chapter not equal to first chapter and remember selected chapter text as 'newChapterText'
+      And I return to previous audiobook screen
+      And Press on the book details screen at the action button LISTEN
     When I restart app
       And I open Books
       And I open book 'bookInfo' details by clicking on cover

@@ -14,6 +14,6 @@ public class AndroidCredentialsSteps extends AbstractCredentialsSteps {
 
     @Override
     public void checkLoginIsPerformedSuccessfully() {
-        Assert.assertTrue("Login failed. Message: " + accountScreen.getLoginFailedMessage(), accountScreen.isLoginSuccessful());
+        Assert.assertTrue("Log in is not completed", accountScreen.isLoginSuccessful());
     }
 }

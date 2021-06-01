@@ -72,6 +72,11 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
+    public void goBack() {
+        AqualityServices.getApplication().getDriver().navigate().back();
+    }
+
+    @Override
     public String selectChapterAndGetText(int chapterNumber) {
         ILabel chapter = getChaptersText().get(chapterNumber - 1);
         String chapterText = chapter.getAttribute("text");

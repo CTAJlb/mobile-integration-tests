@@ -47,6 +47,8 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private final IButton btnAhead = getElementFactory().getButton(By.name("skip_forward"), "Ahead");
     private final IButton btnPlaybackSpeed =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton"), "Playback speed");
+   private final IButton btnGoBack =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeButton[1]"), "Go Back");
     private final IButton btnTimer =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton[3]"), "Timer");
     private final ILabel lblCurrentChapter =
@@ -93,6 +95,11 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public void openMenu() {
         btnMenu.click();
+    }
+
+    @Override
+    public void goBack() {
+        btnGoBack.click();
     }
 
     @Override

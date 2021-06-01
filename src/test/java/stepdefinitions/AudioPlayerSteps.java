@@ -113,6 +113,11 @@ public class AudioPlayerSteps {
         audioPlayerScreen.skipBehind();
     }
 
+    @And("I return to previous audiobook screen")
+    public void returnToPreviousScreen(){
+        audioPlayerScreen.goBack();
+    }
+
     @Then("Playback {string} moves forward by {int} seconds increment")
     public void checkPlaybackTimeAheadMovesForwardBySecondsIncrement(String timeKey, int secondsDiff) {
         Duration savedDate = context.get(timeKey);

@@ -17,6 +17,8 @@ public abstract class AudioPlayerScreen extends Screen {
 
     public abstract void openMenu();
 
+    public abstract void goBack();
+
     public abstract String selectChapterAndGetText(int chapterNumber);
 
     public abstract String getCurrentChapterInfo();
