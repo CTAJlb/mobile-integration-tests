@@ -113,7 +113,7 @@ public class AudioPlayerSteps {
         audioPlayerScreen.skipBehind();
     }
 
-    @And("I return to previous audiobook screen")
+    @And("I return to previous screen for audiobook")
     public void returnToPreviousScreen(){
         audioPlayerScreen.goBack();
     }

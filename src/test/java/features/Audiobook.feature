@@ -29,7 +29,7 @@ Feature: Audiobook
     When Press on the book details screen at the action button LISTEN
       And Open chapter list for an audiobook
     When I select the chapter not equal to first chapter and remember selected chapter text as 'newChapterText'
-      And I return to previous audiobook screen
+      And I return to previous screen for audiobook
       And Press on the book details screen at the action button LISTEN
     When I restart app
       And I open Books
