@@ -3,7 +3,6 @@ package stepdefinitions;
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
 import constants.RegEx;
-import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
 import framework.utilities.RegExUtil;
@@ -21,6 +20,8 @@ public class AudioPlayerSteps {
     private static final int PING_COUNT_OF_SECONDS = 6;
     private final AudioPlayerScreen audioPlayerScreen;
     private final ScenarioContext context;
+    private long diffBetweenTimePointsWhenForward;
+    private long diffBetweenTimePointsWhenBehind;
 
     @Inject
     public AudioPlayerSteps(ScenarioContext context) {
@@ -62,7 +63,6 @@ public class AudioPlayerSteps {
     public void checkThatCurrentChapterEqualSavedChapter(String keySelectedChapterText) {
         String expectedChapterText = context.get(keySelectedChapterText);
         Assert.assertTrue(String.format("Current chapter text is not correct. Expected - %s; actual - %s", expectedChapterText, getChapterText()), AqualityServices.getConditionalWait().waitFor(() -> getChapterText().toLowerCase().equals(expectedChapterText.toLowerCase())));
-        AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofMillis(BooksTimeouts.SYSTEM_CHANGES_STATUS.getTimeoutMillis()));
     }
 
     @And("I click play button on player screen")
@@ -120,33 +120,49 @@ public class AudioPlayerSteps {
     }
 
     @And("I return to previous screen for audiobook")
-    public void returnToPreviousScreen(){
+    public void returnToPreviousScreen() {
         audioPlayerScreen.goBack();
     }
 
     @Then("Playback {string} moves forward by {int} seconds increment")
-    public void checkPlaybackTimeAheadMovesForwardBySecondsIncrement(String timeKey, int secondsDiff) {
+    public void checkPlaybackTimeAheadMovesForwardBySecondsIncrement(String timeKey, int secondsForward) {
         Duration savedDate = context.get(timeKey);
         long secondsBefore = savedDate.getSeconds();
-        AqualityServices.getConditionalWait().waitFor(() -> {
+        boolean isResultTrue = false;
+        isResultTrue = AqualityServices.getConditionalWait().waitFor(() -> {
             long diffInSeconds = audioPlayerScreen.getCurrentPlayTime().getSeconds() - secondsBefore;
-            return diffInSeconds >= secondsDiff && diffInSeconds <= secondsDiff + PING_COUNT_OF_SECONDS;
-        });
-        long diffInSeconds = audioPlayerScreen.getCurrentPlayTime().getSeconds() - secondsBefore;
-        AqualityServices.getLogger().info("diff between times - " + diffInSeconds);
-        Assert.assertTrue("Date is not moved forward by " + secondsDiff + " seconds", diffInSeconds >= secondsDiff && diffInSeconds <= secondsDiff + PING_COUNT_OF_SECONDS);
+            boolean isConditionTrue = diffInSeconds >= secondsForward && diffInSeconds <= secondsForward + PING_COUNT_OF_SECONDS;
+            setDiffBetweenTimePointsWhenForward(diffInSeconds);
+
+            return isConditionTrue;
+        }, Duration.ofSeconds(6));
+        AqualityServices.getLogger().info("diff between times - " + diffBetweenTimePointsWhenForward);
+        Assert.assertTrue("Date is not moved forward by " + secondsForward + " seconds, Date is moved forward by " + diffBetweenTimePointsWhenForward, isResultTrue);
+    }
+
+    private void setDiffBetweenTimePointsWhenForward(long diff) {
+        diffBetweenTimePointsWhenForward = diff;
+    }
+
+    private void setDiffBetweenTimePointsWhenBehind(long diff) {
+        diffBetweenTimePointsWhenBehind = diff;
     }
 
     @Then("Playback {string} moves behind by {int} seconds increment")
-    public void checkPlaybackTimeAheadMovesBehindBySecondsIncrement(String timeKey, int secondsDiff) {
+    public void checkPlaybackTimeAheadMovesBehindBySecondsIncrement(String timeKey, int secondsBehind) {
         Duration savedDate = context.get(timeKey);
-        AqualityServices.getConditionalWait().waitFor(() -> {
-            long diffInSec = savedDate.getSeconds() - audioPlayerScreen.getCurrentPlayTime().getSeconds();
-            return diffInSec > secondsDiff - PING_COUNT_OF_SECONDS && diffInSec <= secondsDiff;
-        });
-        long diffInSec = savedDate.getSeconds() - audioPlayerScreen.getCurrentPlayTime().getSeconds();
-        AqualityServices.getLogger().info("diff between times - " + diffInSec);
-        Assert.assertTrue("Date is not moved behind by " + secondsDiff + " seconds", diffInSec > secondsDiff - PING_COUNT_OF_SECONDS && diffInSec <= secondsDiff);
+        long secondsBefore = savedDate.getSeconds();
+        boolean isResultTrue = AqualityServices.getConditionalWait().waitFor(() -> {
+            long diffInSeconds = secondsBefore - audioPlayerScreen.getCurrentPlayTime().getSeconds();
+            boolean isConditionTrue = false;
+            isConditionTrue = diffInSeconds <= secondsBehind && diffInSeconds >= secondsBehind - PING_COUNT_OF_SECONDS;
+            setDiffBetweenTimePointsWhenBehind(diffInSeconds);
+
+            return isConditionTrue;
+        }, Duration.ofSeconds(6));
+
+        AqualityServices.getLogger().info("diff between times - " + diffBetweenTimePointsWhenBehind);
+        Assert.assertTrue("Date is not moved behind by " + secondsBehind + " seconds, Date is moved behind by " + diffBetweenTimePointsWhenBehind, isResultTrue);
     }
 
     @And("I move to middle part of chapter")
