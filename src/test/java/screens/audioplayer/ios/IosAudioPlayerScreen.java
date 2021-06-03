@@ -62,6 +62,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     private static Map<Double, String> speedName = new HashMap<Double, String>() {{
         put(2.0, "Two times normal speed. Fastest.");
+        put(0.75, "Three quarters of normal speed. Slower.");
     }};
 
     public IosAudioPlayerScreen() {

@@ -15,7 +15,7 @@ Feature: Audiobook
       And I open the book details for the subsequent GET and save it as 'bookInfo'
     Then I check that opened book contains LISTEN button at book details screen
 
-  @logout @returnBooks @tier2 @exclude_ios
+  @logout @returnBooks @tier2
   Scenario: Navigate by Table of Contents Menu
     When Press on the book details screen at the action button LISTEN
       And Open chapter list for an audiobook
@@ -24,7 +24,7 @@ Feature: Audiobook
     When I select the chapter not equal to first chapter and remember selected chapter text as 'newChapterText'
     Then I check that current chapter text equal to remembered 'newChapterText'
 
-  @logout @returnBooks @tier2 @exclude_ios
+  @logout @returnBooks @tier2
   Scenario: Return to Chapter (Bookmarking/Syncing)
     When Press on the book details screen at the action button LISTEN
       And Open chapter list for an audiobook
@@ -37,7 +37,7 @@ Feature: Audiobook
       And Press on the book details screen at the action button LISTEN
     Then I check that current chapter text equal to remembered 'newChapterText'
 
-  @logout @returnBooks @tier2 @exclude_ios
+  @logout @returnBooks @tier2
   Scenario: Play Audiobook
     When Press on the book details screen at the action button LISTEN
       And I click play button on player screen
@@ -47,10 +47,11 @@ Feature: Audiobook
     Then Play button is present
       And Book is not playing
 
-  @logout @returnBooks @tier2 @exclude_ios
+  @logout @returnBooks @tier2
   Scenario: Navigate Audiobook
     When Press on the book details screen at the action button LISTEN
       And I click play button on player screen
+      And I save chapter length as 'chapterLength'
     When I save book play time as 'timeAhead'
       And I skip ahead 15 seconds
     Then Playback 'timeAhead' moves forward by 15 seconds increment
@@ -58,18 +59,22 @@ Feature: Audiobook
       And I skip behind 15 seconds
     Then Playback 'timeBehind' moves behind by 15 seconds increment
     When I move to middle part of chapter
-    Then Play time is close to middle part of chapter
+    Then Saved play time 'chapterLength' is close to middle part of chapter
 
-  @logout @returnBooks @tier2 @exclude_ios
-  Scenario: Navigate playback options
+  @logout @returnBooks @tier2
+  Scenario Outline: Navigate playback options
     When Press on the book details screen at the action button LISTEN
       And I click play button on player screen
-    Then Pause button is present
-    Then Book is playing
-    When I select playback speed 2X
+    When I select playback speed '<speed>'X
       And I save book play time as 'timeAhead'
-      And I wait for 5 seconds
-    Then Playback 'timeAhead' moves forward by 10 seconds increment
-      And Current playback speed value is 2X
+      And I wait for '<secondsForWaiting>' seconds
+    Then Playback 'timeAhead' moves forward by '<moveForwardSeconds>' seconds increment
+      And Current playback speed value is '<speed>'X
+    When I click pause button on player screen
     When I set sleep timer as END_OF_CHAPTER
-    Then Sleep timer is set to END_OF_CHAPTER
+    Then Sleep timer is set to endOfChapter
+
+    Scenarios:
+      | speed | secondsForWaiting | moveForwardSeconds |
+      | 2     | 5                 | 10                 |
+      | 0.75  | 6                 | 8                  |
