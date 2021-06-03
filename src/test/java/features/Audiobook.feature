@@ -65,11 +65,11 @@ Feature: Audiobook
   Scenario Outline: Navigate playback options
     When Press on the book details screen at the action button LISTEN
       And I click play button on player screen
-    When I select playback speed '<speed>'X
+    When I select playback speed <speed>X
       And I save book play time as 'timeAhead'
-      And I wait for '<secondsForWaiting>' seconds
-    Then Playback 'timeAhead' moves forward by '<moveForwardSeconds>' seconds increment
-      And Current playback speed value is '<speed>'X
+      And I wait for <secondsForWaiting> seconds
+    Then Playback 'timeAhead' moves forward by <moveForwardSeconds> seconds increment
+      And Current playback speed value is <speed>X
     When I click pause button on player screen
     When I set sleep timer as END_OF_CHAPTER
     Then Sleep timer is set to endOfChapter

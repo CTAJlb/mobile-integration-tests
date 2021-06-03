@@ -129,9 +129,8 @@ public class AudioPlayerSteps {
         audioPlayerScreen.goBack();
     }
 
-    @Then("Playback {string} moves forward by {string} seconds increment")
-    public void checkPlaybackTimeAheadMovesForwardBySecondsIncrement(String timeKey, String secondsForwardInString) {
-        int secondsForward = Integer.parseInt(secondsForwardInString);
+    @Then("Playback {string} moves forward by {int} seconds increment")
+    public void checkPlaybackTimeAheadMovesForwardBySecondsIncrement(String timeKey, Integer secondsForward) {
         Duration savedDate = context.get(timeKey);
         long secondsBefore = savedDate.getSeconds();
         boolean isResultTrue = false;
@@ -180,21 +179,18 @@ public class AudioPlayerSteps {
         diffForMiddleOfChapter = diff;
     }
 
-    @And("I wait for {string} seconds")
-    public void waitForSeconds(String secondsCountInString) {
-        int secondsCount = Integer.parseInt(secondsCountInString);
+    @And("I wait for {int} seconds")
+    public void waitForSeconds(Integer secondsCount) {
         AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount));
     }
 
-    @And("I select playback speed {string}X")
-    public void selectPlaybackSpeed(String playbackSpeedInString) {
-        double playbackSpeed = Double.parseDouble(playbackSpeedInString);
+    @And("I select playback speed {double}X")
+    public void selectPlaybackSpeed(Double playbackSpeed) {
         audioPlayerScreen.selectPlaybackSpeed(playbackSpeed);
     }
 
-    @And("Current playback speed value is {string}X")
-    public void checkCurrentPlaybackSpeedValueIs(String playbackSpeedInString) {
-        double playbackSpeed = Double.parseDouble(playbackSpeedInString);
+    @And("Current playback speed value is {double}X")
+    public void checkCurrentPlaybackSpeedValueIs(Double playbackSpeed) {
         Assert.assertTrue("Current playback speed value is not correct", audioPlayerScreen.isSpeedOptionSelected(playbackSpeed));
     }
 
