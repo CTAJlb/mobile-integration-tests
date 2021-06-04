@@ -90,7 +90,7 @@ public class AudioPlayerSteps {
         Assert.assertTrue("Play button is not present", audioPlayerScreen.isPlayButtonPresent());
     }
 
-    @Then("Book is playing")
+    @And("Book is playing")
     public void checkBookIsPlaying() {
         audioPlayerScreen.waitForBookLoading();
         Duration firstTiming = audioPlayerScreen.getCurrentPlayTime();
@@ -109,7 +109,7 @@ public class AudioPlayerSteps {
         Assert.assertEquals("Book is still playing", firstTiming, audioPlayerScreen.getCurrentPlayTime());
     }
 
-    @When("I save book play time as {string}")
+    @And("I save book play time as {string}")
     public void saveBookPlayTimeAs(String dateKey) {
         context.add(dateKey, audioPlayerScreen.getCurrentPlayTime());
     }
