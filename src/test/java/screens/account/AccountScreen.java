@@ -18,6 +18,4 @@ public abstract class AccountScreen extends Screen {
     public abstract void logOut();
 
     public abstract boolean isLogoutRequired();
-
-    public abstract String getLoginFailedMessage();
 }

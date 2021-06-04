@@ -31,6 +31,7 @@ Feature: Audiobook
     When I select the chapter not equal to first chapter and remember selected chapter text as 'newChapterText'
       And I return to previous screen for audiobook
       And Press on the book details screen at the action button LISTEN
+    Then I check that current chapter text equal to remembered 'newChapterText'
     When I restart app
       And I open Books
       And I open book 'bookInfo' details by clicking on cover

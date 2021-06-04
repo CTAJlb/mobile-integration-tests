@@ -32,8 +32,6 @@ public class AndroidAccountScreen extends AccountScreen {
     private final IButton btnLogInError = getElementFactory().getButton(By.id("accountLoginButtonErrorDetails"), "Error info");
     private final ITextBox txbCard = getElementFactory().getTextBox(By.id("authBasicUserField"), "Card");
     private final ITextBox txbPin = getElementFactory().getTextBox(By.id("authBasicPassField"), "Pin");
-    private final ILabel lblLoginFailed =
-            getElementFactory().getLabel(By.id("accountLoginProgressText"), "Login Failed Message");
     private final ILabel lblLoading =
             getElementFactory().getLabel(By.id("accountLoginProgressBar"), "Login loading status bar");
 
@@ -46,11 +44,6 @@ public class AndroidAccountScreen extends AccountScreen {
         txbCard.clearAndType(credentials.getBarcode());
         txbPin.clearAndTypeSecret(credentials.getPin());
         btnLogin.click();
-    }
-
-    @Override
-    public String getLoginFailedMessage() {
-        return lblLoginFailed.state().isDisplayed() ? lblLoginFailed.getText() : "";
     }
 
     @Override

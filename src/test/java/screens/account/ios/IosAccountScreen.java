@@ -52,11 +52,6 @@ public class IosAccountScreen extends AccountScreen {
     }
 
     @Override
-    public String getLoginFailedMessage() {
-        return "";
-    }
-
-    @Override
     public boolean isLoginSuccessful() {
         btnLogout.state().waitForDisplayed();
         return AqualityServices.getConditionalWait().waitFor(() ->
