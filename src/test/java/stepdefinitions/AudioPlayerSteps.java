@@ -37,12 +37,7 @@ public class AudioPlayerSteps {
         audioPlayerScreen.openMenu();
     }
 
-    @Then("I check that chapters are visible")
-    public void checkThatChaptersAreVisible() {
-        audioPlayerScreen.checkThatChaptersVisible();
-    }
-
-    @And("Wait and check that all loaders are disappeared")
+    @And("I check that chapters are visible and check that all loaders are disappeared")
     public void waitAndCheckAllLoadersDisappeared() {
         audioPlayerScreen.waitAndCheckAllLoadersDisappeared();
     }

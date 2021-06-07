@@ -27,7 +27,7 @@ import java.util.Map;
 @ScreenType(platform = PlatformName.IOS)
 public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeImage[@name=\"cover_art\"]";
-    private static final String CHAPTERS_TIMERS = ".//XCUIElementTypeStaticText[@name]";
+    private static final String CHAPTERS_TIMERS = ".//XCUIElementTypeStaticText[2]";
     private static final String CHAPTERS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell";
     private static final String CHAPTERS_TEXT = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[1]";
     private static final String LOADED_CHAPTERS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeOther[@visible=\"false\"]";

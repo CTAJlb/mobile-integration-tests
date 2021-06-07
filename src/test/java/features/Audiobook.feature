@@ -8,21 +8,23 @@ Feature: Audiobook
     When I open Catalog
       And I switch to 'LYRASIS' from side menu
       And I switch to 'Audiobooks' catalog tab
-    Then Books feed is loaded
     When I open category by chain:
       | Fiction     |
       | All Fiction |
       And I open the book details for the subsequent GET and save it as 'bookInfo'
-    Then I check that opened book contains LISTEN button at book details screen
 
   @logout @returnBooks @tier2
   Scenario: Navigate by Table of Contents Menu
     When Press on the book details screen at the action button LISTEN
       And Open chapter list for an audiobook
-    #Then I check that chapters are visible
-      #And Wait and check that all loaders are disappeared
     When I select the chapter not equal to first chapter and remember selected chapter text as 'newChapterText'
     Then I check that current chapter text equal to remembered 'newChapterText'
+
+  @logout @returnBooks @tier2
+  Scenario: Loading chapters
+    When Press on the book details screen at the action button LISTEN
+      And Open chapter list for an audiobook
+    Then I check that chapters are visible and check that all loaders are disappeared
 
   @logout @returnBooks @tier2
   Scenario: Return to Chapter (Bookmarking/Syncing)
@@ -40,6 +42,7 @@ Feature: Audiobook
 
   @logout @returnBooks @tier2
   Scenario: Play Audiobook
+    Then I check that opened book contains LISTEN button at book details screen
     When Press on the book details screen at the action button LISTEN
       And I click play button on player screen
     Then Pause button is present
