@@ -19,6 +19,9 @@ Feature: Audiobook
       And Open chapter list for an audiobook
     When I select the chapter not equal to first chapter and remember selected chapter text as 'newChapterText'
     Then I check that current chapter text equal to remembered 'newChapterText'
+      And Pause button is present
+      And Book is playing
+
 
   @logout @returnBooks @tier2
   Scenario: Loading chapters
