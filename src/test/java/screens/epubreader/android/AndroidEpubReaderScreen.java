@@ -29,9 +29,9 @@ import java.util.stream.Collectors;
 public class AndroidEpubReaderScreen extends EpubReaderScreen {
     public static final String EPUB_CONTENT_IFRAME = "epubContentIframe";
     private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader_title_text\")]"), "Book Cover");
+            getElementFactory().getLabel(By.xpath("//android.widget.TextView[1]"), "Book Cover");
     private final ILabel lblPageNumber =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader_position_text\")]"), "Page Number");
+            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_page\")]"), "Page Number");
     private final ILabel lblPage =
             getElementFactory().getLabel(By.xpath("//android.webkit.WebView"), "Page View");
     private final IButton btnFontSettings = getElementFactory().getButton(By.id("reader_settings"), "Chapters");

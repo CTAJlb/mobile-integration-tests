@@ -32,9 +32,9 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     private static final String CHAPTER_ITEM_LOC = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[@name=\"%1$s\"]";
 
     private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]"), "Book Cover", ElementState.EXISTS_IN_ANY_STATE);
+            getElementFactory().getLabel(By.xpath("//android.widget.TextView[1]"), "Book Cover", ElementState.EXISTS_IN_ANY_STATE);
     private final ILabel lblPageNumber =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeStaticText"), "Page Number");
+            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_page\")]"), "Page Number");
     private final ILabel lblPage =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "Page View");
     private final IButton btnFontSettings = getElementFactory().getButton(
@@ -55,7 +55,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public String getBookName() {
-        String text = lblBookName.getAttribute(IosAttributes.NAME);
+        String text = lblBookName.getText();
         AqualityServices.getLogger().info("Book name - " + text);
         return text;
     }
