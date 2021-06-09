@@ -86,19 +86,22 @@ public class ReaderSteps {
         epubReaderScreen.clickRightCorner();
     }
 
-    @When("I save page info as {string}")
-    public void savePageInfoAsPageInfo(String pageNumberInfo) {
+    @When("I save page info as {string} and {string}")
+    public void savePageInfoAsPageInfo(String pageNumberInfo, String chapterNameInfo) {
         context.add(pageNumberInfo, epubReaderScreen.getPageNumberInfo());
+        context.add(chapterNameInfo, epubReaderScreen.getChapterName());
     }
 
-    @Then("Book page number is bigger then previous {string}")
-    public void checkBookPageNumberIsBiggerThenPreviousPageInfo(String pageNumberInfo) {
-        String actualBookInfo = epubReaderScreen.getPageNumberInfo();
-        String expectedBookInfo = context.get(pageNumberInfo);
-        int expectedPageNumber = getPageNumber(expectedBookInfo) + 1;
-        int actualPageNumber = getPageNumber(actualBookInfo);
+    @Then("Navigated to the next page and old page {string} and {string}")
+    public void checkBookPageNumberIsBiggerThenPreviousPageInfo(String pageNumberInfo, String chapterNameInfo) {
+        String actualPageNumberString = epubReaderScreen.getPageNumberInfo();
+        String expectedPageNumberString = context.get(pageNumberInfo);
+        int actualPageNumber = getPageNumber(actualPageNumberString);
+        int expectedPageNumber = getPageNumber(expectedPageNumberString) + 1;
+        String actualChapterName = epubReaderScreen.getChapterName();
+        String expectedChapterName = context.get(chapterNameInfo);
         Assert.assertTrue(String.format("Page number is not correct (actual - %d, expected - %d)", actualPageNumber, expectedPageNumber), expectedPageNumber == actualPageNumber ||
-                (actualPageNumber == 1 && !getChapterName(expectedBookInfo).equals(getChapterName(actualBookInfo))));
+                (actualPageNumber == 1 && !actualChapterName.toLowerCase().equals(expectedChapterName.toLowerCase())));
     }
 
     private int getPageNumber(String text) {
@@ -110,15 +113,25 @@ public class ReaderSteps {
         return matcher.find() ? matcher.group(3) : "";
     }
 
-    @Then("Book page number is smaller then previous {string}")
-    public void bookPageNumberIsSmallerThenPreviousPageInfo(String pageNumberInfo) {
-        String expectedBookInfo = context.get(pageNumberInfo);
+    @Then("Navigated to the previous page and old page {string} and {string}")
+    public void bookPageNumberIsSmallerThenPreviousPageInfo(String pageNumberInfo, String chapterNameInfo) {
+        /*String expectedBookInfo = context.get(pageNumberInfo);
         AqualityServices.getConditionalWait().waitFor(() -> !expectedBookInfo.equals(epubReaderScreen.getPageNumberInfo()));
         String actualBookInfo = epubReaderScreen.getPageNumberInfo();
         int expectedPageNumber = getPageNumber(expectedBookInfo) - 1;
         int actualPageNumber = getPageNumber(actualBookInfo);
         Assert.assertTrue(String.format("Page number is not correct (actual - %d, expected - %d)", actualPageNumber, expectedPageNumber), expectedPageNumber == actualPageNumber ||
                 (!getChapterName(expectedBookInfo).equals(getChapterName(actualBookInfo))));
+  */
+        String actualPageNumberString = epubReaderScreen.getPageNumberInfo();
+        String expectedPageNumberString = context.get(pageNumberInfo);
+        int actualPageNumber = getPageNumber(actualPageNumberString);
+        int expectedPageNumber = getPageNumber(expectedPageNumberString) - 1;
+        String actualChapterName = epubReaderScreen.getChapterName();
+        String expectedChapterName = context.get(chapterNameInfo);
+        Assert.assertTrue(String.format("Page number is not correct (actual - %d, expected - %d)", actualPageNumber, expectedPageNumber), expectedPageNumber == actualPageNumber ||
+                (actualPageNumber == 1 && !actualChapterName.toLowerCase().equals(expectedChapterName.toLowerCase())));
+
     }
 
     private Matcher getMatcher(String text) {
@@ -133,7 +146,7 @@ public class ReaderSteps {
         for (String chapter :
                 chapters) {
             epubReaderScreen.openChapter(chapter);
-            softAssertions.assertThat(getChapterName(epubReaderScreen.getPageNumberInfo())).as("Chapter name is not correct").isEqualTo(chapter);
+            softAssertions.assertThat(chapter.toLowerCase().contains(epubReaderScreen.getChapterName().toLowerCase())).as("Chapter name is not correct. ExpectedName-" + chapter.toLowerCase() + " , ActualName-" + epubReaderScreen.getChapterName().toLowerCase()).isTrue();
         }
         softAssertions.assertAll();
     }
@@ -232,7 +245,7 @@ public class ReaderSteps {
     private void assertPdfBookName(CatalogBookModel catalogBookModel) {
         Assert.assertTrue(String.format("Book name is not correct. Expected that name ['%1$s'] would contains in ['%2$s']",
                 catalogBookModel.getTitle().replace(" ", "").replace(":", "").toLowerCase(), getTrimmedBookName().replace(" ", "").replace(":", "").toLowerCase()), AqualityServices.getConditionalWait().waitFor(() ->
-                        getTrimmedBookName().replace(" ", "").replace(":", "").toLowerCase().contains(catalogBookModel.getTitle().replace(" ", "").replace(":", "").toLowerCase())));
+                getTrimmedBookName().replace(" ", "").replace(":", "").toLowerCase().contains(catalogBookModel.getTitle().replace(" ", "").replace(":", "").toLowerCase())));
     }
 
     @Then("Pdf book page number is {int}")

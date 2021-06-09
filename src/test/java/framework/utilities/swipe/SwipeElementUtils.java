@@ -1,6 +1,7 @@
 package framework.utilities.swipe;
 
 import aquality.appium.mobile.actions.ITouchActions;
+import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;

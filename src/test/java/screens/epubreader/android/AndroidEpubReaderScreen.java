@@ -36,7 +36,9 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
             getElementFactory().getLabel(By.xpath("//android.webkit.WebView"), "Page View");
     private final IButton btnFontSettings = getElementFactory().getButton(By.id("reader_settings"), "Chapters");
     private final IButton btnChapters =
-            getElementFactory().getButton(By.xpath("//android.widget.ImageView[@content-desc=\"Show table of contents\"]"), "Chapters");
+            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuTOC\")]"), "Chapters");
+    private final ILabel lblChapterName =
+            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_title\")]"), "Chapter Name");
 
     public AndroidEpubReaderScreen() {
         super(By.id("//android.view.View[@resource-id=\"reflowable-book-frame\"]"));
@@ -47,6 +49,11 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
         String text = lblBookName.getText();
         AqualityServices.getLogger().info("Book name - " + text);
         return text;
+    }
+
+    @Override
+    public String getChapterName() {
+        return lblChapterName.getText();
     }
 
     @Override
@@ -99,7 +106,7 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     @Override
     public void openChapter(String chapter) {
         btnChapters.click();
-        IButton button = getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader_toc_element_text\") and @text=\"" + chapter + "\"]"), chapter);
+        IButton button = getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"chapterTitle\") and @text=\"" + chapter + "\"]"), chapter);
         button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         button.click();
     }

@@ -37,6 +37,8 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
             getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_page\")]"), "Page Number");
     private final ILabel lblPage =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "Page View");
+    private final ILabel lblMainPart =
+            getElementFactory().getLabel(By.xpath("//android.webkit.WebView[contains(@resource-id,\"readerWebView\")]"), "Page View");
     private final IButton btnFontSettings = getElementFactory().getButton(
             By.xpath("//XCUIElementTypeButton[@name=\"Toggle reader settings\"]"), "Chapters");
     private final IButton btnChapters =
@@ -61,6 +63,12 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
+    public String getChapterName() {
+        //only for android
+        return null;
+    }
+
+    @Override
     public boolean isBookNamePresent() {
         return lblBookName.state().waitForDisplayed();
     }
@@ -72,7 +80,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public void swipeFromRightToLeft() {
-        SwipeElementUtils.swipeFromRightToLeft(lblPage);
+        SwipeElementUtils.swipeFromRightToLeft(lblMainPart);
     }
 
     @Override

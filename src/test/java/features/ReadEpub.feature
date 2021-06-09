@@ -13,16 +13,16 @@ Feature: Read EPUB
   @tier1
   Scenario: Navigate by Page
       And Book page number is 1
-    When I save page info as 'pageInfo'
+    When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       And I click on right book corner
-    Then Book page number is bigger then previous 'pageInfo'
-    When I save page info as 'pageInfo'
+    Then Navigated to the next page and old page 'pageNumberInfo' and 'chapterNameInfo'
+    When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       And I swipe from right to left book corner
-    Then Book page number is bigger then previous 'pageInfo'
-    When I save page info as 'pageInfo'
+    Then Navigated to the next page and old page 'pageNumberInfo' and 'chapterNameInfo'
+    When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       And I click on left book corner
-    Then Book page number is smaller then previous 'pageInfo'
-    When I save page info as 'pageInfo'
+    Then Navigated to the previous page and old page 'pageNumberInfo' and 'chapterNameInfo'
+    When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       And I swipe from left to right book corner
     Then Book page number is 1
 
@@ -65,7 +65,8 @@ Feature: Read EPUB
   @tier1
   Scenario: Return to Page (Bookmarking)
     When I scroll page forward from 10 to 20 times
-      And I save page info as 'pageInfo'
+    #разобраться
+      And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       And I return to previous screen
       And Press on the book details screen at the action button READ
     Then Book 'bookInfo' is present on screen
