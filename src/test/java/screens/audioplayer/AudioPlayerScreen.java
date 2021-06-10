@@ -51,9 +51,9 @@ public abstract class AudioPlayerScreen extends Screen {
 
     public abstract void waitForLoadingDisappearing();
 
-    public abstract void selectPlaybackSpeed(double playbackSpeed);
+    public abstract void selectPlaybackSpeed(String playbackSpeed);
 
-    public abstract boolean isSpeedOptionSelected(double playbackSpeed);
+    public abstract boolean isSpeedOptionSelected(String playbackSpeed);
 
     public abstract void setTimer(TimerKeys timerSetting);
 

@@ -62,9 +62,9 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private final ILabel lblDownloadingStatus =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@value=\"Downloading\"]"), "Downloading");
 
-    private static Map<Double, String> speedName = new HashMap<Double, String>() {{
-        put(2.0, "Two times normal speed. Fastest.");
-        put(0.75, "Three quarters of normal speed. Slower.");
+    private static Map<String, String> speedName = new HashMap<String, String>() {{
+        put("2.0", "Two times normal speed. Fastest.");
+        put("0.75", "Three quarters of normal speed. Slower.");
     }};
 
     public IosAudioPlayerScreen() {
@@ -199,14 +199,14 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void selectPlaybackSpeed(double playbackSpeed) {
+    public void selectPlaybackSpeed(String playbackSpeed) {
         btnPlaybackSpeed.click();
         String speedOptionName = speedName.get(playbackSpeed);
         getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"" + speedOptionName + "\"]"), speedOptionName).click();
     }
 
     @Override
-    public boolean isSpeedOptionSelected(double playbackSpeed) {
+    public boolean isSpeedOptionSelected(String playbackSpeed) {
         String speedOptionName = speedName.get(playbackSpeed);
         return getElementFactory().getButton(By.xpath(String.format(PLAYBACK_OPTION_XPATH_LOCATOR, speedOptionName)), speedOptionName).state().waitForDisplayed();
     }

@@ -189,12 +189,14 @@ public class AudioPlayerSteps {
     }
 
     @And("I select playback speed {double}X")
-    public void selectPlaybackSpeed(Double playbackSpeed) {
+    public void selectPlaybackSpeed(Double playbackSpeedDouble) {
+        String playbackSpeed = String.valueOf(playbackSpeedDouble);
         audioPlayerScreen.selectPlaybackSpeed(playbackSpeed);
     }
 
     @And("Current playback speed value is {double}X")
-    public void checkCurrentPlaybackSpeedValueIs(Double playbackSpeed) {
+    public void checkCurrentPlaybackSpeedValueIs(Double playbackSpeedDouble) {
+        String playbackSpeed = String.valueOf(playbackSpeedDouble);
         Assert.assertTrue("Current playback speed value is not correct", audioPlayerScreen.isSpeedOptionSelected(playbackSpeed));
     }
 

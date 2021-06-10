@@ -142,14 +142,14 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void selectPlaybackSpeed(double playbackSpeed) {
+    public void selectPlaybackSpeed(String playbackSpeed) {
         btnPlaybackSpeed.click();
-        getElementFactory().getButton(By.xpath("//*[@text=\"" + String.format("%.1f", playbackSpeed) + "x\"]"), "Playback speed").click();
+        getElementFactory().getButton(By.xpath("//*[@text=\"" + playbackSpeed + "x\"]"), "Playback speed").click();
     }
 
     @Override
-    public boolean isSpeedOptionSelected(double playbackSpeed) {
-        return getElementFactory().getButton(By.xpath(String.format(SPEED_OPTION_XPATH_LOCATOR_PATTERN, String.format("%.1f", playbackSpeed))), "Playback speed").state().waitForDisplayed();
+    public boolean isSpeedOptionSelected(String playbackSpeed) {
+        return getElementFactory().getButton(By.xpath(String.format(SPEED_OPTION_XPATH_LOCATOR_PATTERN, playbackSpeed)), "Playback speed").state().waitForDisplayed();
     }
 
     @Override
