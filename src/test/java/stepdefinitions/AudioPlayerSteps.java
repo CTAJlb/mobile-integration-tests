@@ -79,9 +79,7 @@ public class AudioPlayerSteps {
 
     @When("I click pause button on player screen")
     public void clickPauseButtonOnPlayerScreen() {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
             audioPlayerScreen.pauseBook();
-        }
     }
 
     @Then("Pause button is present")
