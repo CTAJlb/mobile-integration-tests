@@ -53,6 +53,8 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
             getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton[3]"), "Timer");
     private final ILabel lblCurrentChapter =
             getElementFactory().getLabel(By.xpath("(//XCUIElementTypeStaticText[@name=\"progress_rightLabel\"])[1]"), "Current chapter");
+   private final ILabel lblPercentageValue =
+            getElementFactory().getLabel(By.xpath("(//XCUIElementTypeProgressIndicator/following-sibling::XCUIElementTypeStaticText"), "Percentage Value");
     private final ILabel lblChapterTime =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"progress_rightLabel\" and contains(@value,\":\")]"), "Chapter time", ElementState.EXISTS_IN_ANY_STATE);
     private final ILabel lblCurrentTime =
@@ -101,6 +103,15 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public void goBack() {
         btnGoBack.click();
+    }
+
+    @Override
+    public Integer getPercentageValue() {
+
+        lblPercentageValue.state().waitForDisplayed(Duration.ofMillis(40000));
+        String percentageValueString = lblPercentageValue.getAttribute("name");
+        percentageValueString = percentageValueString.replace("%", "");
+        return Integer.valueOf(percentageValueString);
     }
 
     @Override

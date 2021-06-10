@@ -77,6 +77,12 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
+    public Integer getPercentageValue() {
+        //only for ios
+        return null;
+    }
+
+    @Override
     public String selectChapterAndGetText(int chapterNumber) {
         ILabel chapter = getChaptersText().get(chapterNumber - 1);
         String chapterText = chapter.getAttribute("text");

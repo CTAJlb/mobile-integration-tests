@@ -37,6 +37,15 @@ public class AudioPlayerSteps {
         audioPlayerScreen.openMenu();
     }
 
+    @Then("Download has started and percentage value increased")
+    public void downloadHasStarted() {
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            Integer percentageValue = audioPlayerScreen.getPercentageValue();
+            boolean isPercentageValueNew = AqualityServices.getConditionalWait().waitFor(() -> percentageValue != 0, Duration.ofMillis(5000));
+            Assert.assertTrue("percentageValue did not change", isPercentageValueNew);
+        }
+    }
+
     @And("I check that chapters are visible and check that all loaders are disappeared")
     public void waitAndCheckAllLoadersDisappeared() {
         audioPlayerScreen.waitAndCheckAllLoadersDisappeared();

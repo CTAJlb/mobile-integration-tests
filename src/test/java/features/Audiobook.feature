@@ -26,7 +26,8 @@ Feature: Audiobook
   @logout @returnBooks @tier2
   Scenario: Loading chapters
     When Press on the book details screen at the action button LISTEN
-      And Open chapter list for an audiobook
+    Then Download has started and percentage value increased
+    When Open chapter list for an audiobook
     Then I check that chapters are visible and check that all loaders are disappeared
 
   @logout @returnBooks @tier2
