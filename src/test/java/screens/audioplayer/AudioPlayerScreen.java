@@ -13,7 +13,7 @@ public abstract class AudioPlayerScreen extends Screen {
 
     public abstract void checkThatChaptersVisible();
 
-    public abstract void waitAndCheckAllLoadersDisappeared();
+    public abstract void waitAndCheckAllChaptersLoaded();
 
     public abstract void openMenu();
 

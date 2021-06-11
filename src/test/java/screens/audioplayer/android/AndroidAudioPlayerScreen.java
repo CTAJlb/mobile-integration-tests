@@ -61,7 +61,7 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void waitAndCheckAllLoadersDisappeared() {
+    public void waitAndCheckAllChaptersLoaded() {
         checkThatChaptersVisible();
         Assert.assertTrue("Book loading wasn't finished", AqualityServices.getConditionalWait().waitFor(() -> getElementFactory().findElements(By.xpath(LOADING_SCREEN_XPATH), ElementType.LABEL).size() == 0, Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis())));
     }

@@ -14,7 +14,6 @@ import constants.application.timeouts.BooksTimeouts;
 import constants.application.timeouts.CategoriesTimeouts;
 import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
-import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import screens.audioplayer.AudioPlayerScreen;
@@ -27,7 +26,7 @@ import java.util.Map;
 @ScreenType(platform = PlatformName.IOS)
 public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeImage[@name=\"cover_art\"]";
-    private static final String CHAPTERS_TIMERS = ".//XCUIElementTypeStaticText[2]";
+    private static final String CHECKING_DOWNLOAD = "//XCUIElementTypeAny";
     private static final String CHAPTERS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell";
     private static final String CHAPTERS_TEXT = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[1]";
     private static final String LOADED_CHAPTERS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeOther[@visible=\"false\"]";
@@ -47,13 +46,13 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private final IButton btnAhead = getElementFactory().getButton(By.name("skip_forward"), "Ahead");
     private final IButton btnPlaybackSpeed =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton"), "Playback speed");
-   private final IButton btnGoBack =
+    private final IButton btnGoBack =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeButton[1]"), "Go Back");
     private final IButton btnTimer =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton[3]"), "Timer");
     private final ILabel lblCurrentChapter =
             getElementFactory().getLabel(By.xpath("(//XCUIElementTypeStaticText[@name=\"progress_rightLabel\"])[1]"), "Current chapter");
-   private final ILabel lblPercentageValue =
+    private final ILabel lblPercentageValue =
             getElementFactory().getLabel(By.xpath("(//XCUIElementTypeProgressIndicator/following-sibling::XCUIElementTypeStaticText"), "Percentage Value");
     private final ILabel lblChapterTime =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"progress_rightLabel\" and contains(@value,\":\")]"), "Chapter time", ElementState.EXISTS_IN_ANY_STATE);
@@ -85,14 +84,15 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void waitAndCheckAllLoadersDisappeared() {
+    public void waitAndCheckAllChaptersLoaded() {
         checkThatChaptersVisible();
-        //todo softAssert
-        SoftAssertions softAssertions = new SoftAssertions();
-        getChapters().forEach(chapter -> softAssertions.assertThat(chapter.findChildElement(By.xpath(CHAPTERS_TIMERS), ElementType.LABEL).state()
-                        .waitForDisplayed(Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis()))).as("Loader did not disappear from the chapter block").isTrue()
-        );
-        softAssertions.assertAll();
+
+        boolean isAllLoadersDisappeared = AqualityServices.getConditionalWait().waitFor(() -> getLabelsForCheckingDownload().size() == 0, Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis()));
+        Assert.assertTrue("Not all chapters loaded", isAllLoadersDisappeared);
+    }
+
+    private List<ILabel> getLabelsForCheckingDownload() {
+        return getElementFactory().findElements(By.xpath(CHECKING_DOWNLOAD), ElementType.LABEL);
     }
 
     @Override

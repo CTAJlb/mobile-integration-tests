@@ -46,15 +46,16 @@ public class AudioPlayerSteps {
         }
     }
 
-    @And("I check that chapters are visible and check that all loaders are disappeared")
-    public void waitAndCheckAllLoadersDisappeared() {
-        audioPlayerScreen.waitAndCheckAllLoadersDisappeared();
+    @And("I check that chapters are visible and check that all chapters loaded")
+    public void waitAndCheckAllChaptersLoaded() {
+        audioPlayerScreen.waitAndCheckAllChaptersLoaded();
     }
 
-    @When("I select the chapter not equal to first chapter and remember selected chapter text as {string}")
-    public void selectChapterIsNotEqualToSavedInContextByKeyAndSaveSelectedChapter(String keySelectedChapterText) {
+    @When("I select the chapter not equal to the first {int} chapters and remember selected chapter text as {string}")
+    public void selectChapterIsNotEqualToSavedInContextByKeyAndSaveSelectedChapter(Integer countChapters, String keySelectedChapterText) {
         int totalChapterCount = audioPlayerScreen.getCountOfChapters();
-        int chapterToSelect = RandomUtils.nextInt(2, totalChapterCount + 1);
+        int chapterToSelect = RandomUtils.nextInt(countChapters + 1, totalChapterCount + 1);
+        AqualityServices.getLogger().info("chapterToSelect: " + chapterToSelect);
         String chapterText = audioPlayerScreen.selectChapterAndGetText(chapterToSelect);
         context.add(keySelectedChapterText, chapterText);
     }
