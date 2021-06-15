@@ -9,16 +9,15 @@ import screens.fontchoicesscreen.FontChoicesScreen;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidFontChoicesScreen extends FontChoicesScreen {
-    private static final String MAIN_ELEMENT_ID = "reader_settings_container";
 
     public AndroidFontChoicesScreen() {
-        super(By.id(MAIN_ELEMENT_ID));
+        super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"setFontSans\")]"));
     }
 
     @Override
     public void setSetting(ReaderSettingKeys increaseFontSettings) {
         String setting = increaseFontSettings.i18n();
-        getElementFactory().getButton(By.id(setting), setting).click();
+        getElementFactory().getButton(By.xpath(String.format("//android.view.ViewGroup[contains(@resource-id,\"%s\")]", setting)), setting).click();
     }
 
     @Override

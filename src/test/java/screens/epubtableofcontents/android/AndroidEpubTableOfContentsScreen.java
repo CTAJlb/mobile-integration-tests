@@ -24,7 +24,7 @@ public class AndroidEpubTableOfContentsScreen extends EpubTableOfContentsScreen 
     }
 
     public AndroidEpubTableOfContentsScreen() {
-        super(By.id("reader_toc_list"));
+        super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"tocLayout\")]"));
     }
 
     public Set<String> getListOfBookChapters() {

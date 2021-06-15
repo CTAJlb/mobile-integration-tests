@@ -34,7 +34,7 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
             getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_page\")]"), "Page Number");
     private final ILabel lblPage =
             getElementFactory().getLabel(By.xpath("//android.webkit.WebView"), "Page View");
-    private final IButton btnFontSettings = getElementFactory().getButton(By.id("reader_settings"), "Chapters");
+    private final IButton btnFontSettings = getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuSettings\")]"), "FontSettings");
     private final IButton btnChapters =
             getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuTOC\")]"), "Chapters");
     private final ILabel lblChapterName =
@@ -80,10 +80,13 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     @Override
     public void clickRightCorner() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        Point upperLeftCorner = lblPage.getElement().getLocation();
+        int height = lblPage.getElement().getSize().height;
+        int width =  lblPage.getElement().getSize().width;
+        /*Point upperLeftCorner = lblPage.getElement().getLocation();
         Point center = lblPage.getElement().getCenter();
         Dimension dimensions = lblPage.getElement().getSize();
-        action.tap(PointOption.point(upperLeftCorner.x + dimensions.width - 1, center.y)).perform();
+        action.tap(PointOption.point(upperLeftCorner.x + dimensions.width - 1, center.y)).perform();*/
+        action.tap(PointOption.point(width - 10, height/2)).perform();
     }
 
     @Override
@@ -137,13 +140,32 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
             return contextNames.size() > 1;
         });
         Set<String> contextNames = driver.getContextHandles();
+        /////
+        logger.info("11111+++++++++++++++++++++++++");
+        String te1 = driver.getPageSource();
+        logger.info(te1);
+        logger.info("+++++++++++++++++++++++++");
+        /////
         driver.context((String) contextNames.toArray()[1]);
-        driver.switchTo().frame(EPUB_CONTENT_IFRAME);
+        /////
+        logger.info("222+++++++++++++++++++++++++");
+        String te2 = driver.getPageSource();
+        logger.info(te2);
+        logger.info("+++++++++++++++++++++++++");
+        /////
+       /* driver.switchTo().frame(EPUB_CONTENT_IFRAME);
         String frameSource = driver.getPageSource();
         logger.info(frameSource);
-        driver.switchTo().defaultContent();
+        driver.switchTo().defaultContent();*/
         driver.context((String) contextNames.toArray()[0]);
-        return frameSource;
+        /////
+        logger.info("3333+++++++++++++++++++++++++");
+        String te3 = driver.getPageSource();
+        logger.info(te3);
+        logger.info("+++++++++++++++++++++++++");
+        /////
+        //return frameSource;
+        return "";
     }
 
     @Override

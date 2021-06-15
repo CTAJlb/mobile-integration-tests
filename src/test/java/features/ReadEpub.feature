@@ -43,8 +43,10 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Change, View Font and Contrast Settings
+    When I scroll page forward from 7 to 8 times
+    #When I save font size as 'fontSize'
+    And I INCREASE_FONT of text
     When I save font size as 'fontSize'
-      And I INCREASE_FONT of text
     Then Font size 'fontSize' is increased
     When I save font size as 'fontSize'
       And I DECREASE_FONT of text
