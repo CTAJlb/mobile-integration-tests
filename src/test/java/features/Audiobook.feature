@@ -40,7 +40,8 @@ Feature: Audiobook
     Then I check that current chapter text equal to remembered 'newChapterText'
       And Open chapter list for an audiobook
     When I select the chapter not equal to the first 2 chapters and remember selected chapter text as 'newChapterText2'
-    When I restart app
+      And I wait for 3 seconds
+      And I restart app
       And I open Books
       And I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button LISTEN
