@@ -13,11 +13,15 @@ public abstract class AudioPlayerScreen extends Screen {
 
     public abstract void checkThatChaptersVisible();
 
-    public abstract void waitAndCheckAllLoadersDisappeared();
+    public abstract void waitAndCheckAllChaptersLoaded();
 
     public abstract void openMenu();
 
-    public abstract void selectChapterNumber(int chapterNumber);
+    public abstract void goBack();
+
+    public abstract Integer getPercentageValue();
+
+    public abstract String selectChapterAndGetText(int chapterNumber);
 
     public abstract String getCurrentChapterInfo();
 
@@ -47,9 +51,9 @@ public abstract class AudioPlayerScreen extends Screen {
 
     public abstract void waitForLoadingDisappearing();
 
-    public abstract void selectPlaybackSpeed(double playbackSpeed);
+    public abstract void selectPlaybackSpeed(String playbackSpeed);
 
-    public abstract boolean isSpeedOptionSelected(double playbackSpeed);
+    public abstract boolean isSpeedOptionSelected(String playbackSpeed);
 
     public abstract void setTimer(TimerKeys timerSetting);
 

@@ -6,6 +6,8 @@ import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import org.openqa.selenium.By;
 import screens.alert.AlertScreen;
 
+import java.time.Duration;
+
 @ScreenType(platform = PlatformName.IOS)
 public class IosAlertScreen extends AlertScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeButton[contains(@name, \"trailing\")]";
@@ -34,7 +36,7 @@ public class IosAlertScreen extends AlertScreen {
 
     @Override
     public void closeNotNowModalIfPresent() {
-        if (btnNotNow.state().waitForDisplayed()) {
+        if (btnNotNow.state().waitForDisplayed(Duration.ofMillis(10000))) {
             btnNotNow.click();
         }
     }

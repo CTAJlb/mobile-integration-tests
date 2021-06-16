@@ -22,6 +22,7 @@ import java.util.List;
 public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     private static final String MAIN_ELEMENT = "player_cover";
     private static final String CHAPTERS_LOC = "//android.widget.RelativeLayout[.//*[contains(@resource-id, \"player_toc_item_view_title\")]]";
+    private static final String CHAPTERS_TEXT = "//android.widget.RelativeLayout//android.widget.TextView[contains(@resource-id, \"player_toc_item_view_title\")]";
     private static final String LOADING_SCREEN_XPATH = "//*[contains(@resource-id,\"player_toc_item_downloading_progress\")]";
     private static final String SPEED_OPTION_XPATH_LOCATOR_PATTERN = "//*[contains(@resource-id, \"player_menu_playback_rate_text\") and @text=\"%sx\"]";
     private static final String TIMER_XPATH_PATTERN_LOCATOR = "//*[contains(@resource-id, \"player_sleep_item_view_name\") and @text=\"%s\"]";
@@ -50,13 +51,17 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
         return getElementFactory().findElements(By.xpath(CHAPTERS_LOC), ElementType.LABEL);
     }
 
+    public List<ILabel> getChaptersText() {
+        return getElementFactory().findElements(By.xpath(CHAPTERS_TEXT), ElementType.LABEL);
+    }
+
     @Override
     public void checkThatChaptersVisible() {
         Assert.assertTrue("Checking that count of chapters greater than zero", AqualityServices.getConditionalWait().waitFor(() -> getChapters().size() > 0));
     }
 
     @Override
-    public void waitAndCheckAllLoadersDisappeared() {
+    public void waitAndCheckAllChaptersLoaded() {
         checkThatChaptersVisible();
         Assert.assertTrue("Book loading wasn't finished", AqualityServices.getConditionalWait().waitFor(() -> getElementFactory().findElements(By.xpath(LOADING_SCREEN_XPATH), ElementType.LABEL).size() == 0, Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis())));
     }
@@ -67,10 +72,23 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void selectChapterNumber(int chapterNumber) {
-        ILabel chapter = getChapters().get(chapterNumber);
+    public void goBack() {
+        AqualityServices.getApplication().getDriver().navigate().back();
+    }
+
+    @Override
+    public Integer getPercentageValue() {
+        //only for ios
+        return null;
+    }
+
+    @Override
+    public String selectChapterAndGetText(int chapterNumber) {
+        ILabel chapter = getChaptersText().get(chapterNumber - 1);
+        String chapterText = chapter.getAttribute("text");
         chapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         chapter.click();
+        return chapterText;
     }
 
     @Override
@@ -124,14 +142,14 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void selectPlaybackSpeed(double playbackSpeed) {
+    public void selectPlaybackSpeed(String playbackSpeed) {
         btnPlaybackSpeed.click();
-        getElementFactory().getButton(By.xpath("//*[@text=\"" + String.format("%.1f", playbackSpeed) + "x\"]"), "Playback speed").click();
+        getElementFactory().getButton(By.xpath("//*[@text=\"" + playbackSpeed + "x\"]"), "Playback speed").click();
     }
 
     @Override
-    public boolean isSpeedOptionSelected(double playbackSpeed) {
-        return getElementFactory().getButton(By.xpath(String.format(SPEED_OPTION_XPATH_LOCATOR_PATTERN, String.format("%.1f", playbackSpeed))), "Playback speed").state().waitForDisplayed();
+    public boolean isSpeedOptionSelected(String playbackSpeed) {
+        return getElementFactory().getButton(By.xpath(String.format(SPEED_OPTION_XPATH_LOCATOR_PATTERN, playbackSpeed)), "Playback speed").state().waitForDisplayed();
     }
 
     @Override

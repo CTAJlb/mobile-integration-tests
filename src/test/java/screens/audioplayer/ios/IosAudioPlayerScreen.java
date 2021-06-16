@@ -14,7 +14,6 @@ import constants.application.timeouts.BooksTimeouts;
 import constants.application.timeouts.CategoriesTimeouts;
 import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
-import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import screens.audioplayer.AudioPlayerScreen;
@@ -27,8 +26,9 @@ import java.util.Map;
 @ScreenType(platform = PlatformName.IOS)
 public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeImage[@name=\"cover_art\"]";
-    private static final String CHAPTERS_TIMERS = ".//XCUIElementTypeStaticText[@name]";
+    private static final String CHECKING_DOWNLOAD = "//XCUIElementTypeAny";
     private static final String CHAPTERS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell";
+    private static final String CHAPTERS_TEXT = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[1]";
     private static final String LOADED_CHAPTERS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeOther[@visible=\"false\"]";
     private static final int COUNT_OF_CHAPTERS_TO_WAIT_FOR = 3;
     private static final String PLAYBACK_OPTION_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%s\"]";
@@ -46,10 +46,14 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private final IButton btnAhead = getElementFactory().getButton(By.name("skip_forward"), "Ahead");
     private final IButton btnPlaybackSpeed =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton"), "Playback speed");
+    private final IButton btnGoBack =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeButton[1]"), "Go Back");
     private final IButton btnTimer =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton[3]"), "Timer");
     private final ILabel lblCurrentChapter =
             getElementFactory().getLabel(By.xpath("(//XCUIElementTypeStaticText[@name=\"progress_rightLabel\"])[1]"), "Current chapter");
+    private final ILabel lblPercentageValue =
+            getElementFactory().getLabel(By.xpath("(//XCUIElementTypeProgressIndicator/following-sibling::XCUIElementTypeStaticText"), "Percentage Value");
     private final ILabel lblChapterTime =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"progress_rightLabel\" and contains(@value,\":\")]"), "Chapter time", ElementState.EXISTS_IN_ANY_STATE);
     private final ILabel lblCurrentTime =
@@ -57,8 +61,9 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private final ILabel lblDownloadingStatus =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@value=\"Downloading\"]"), "Downloading");
 
-    private static Map<Double, String> speedName = new HashMap<Double, String>() {{
-        put(2.0, "Two times normal speed. Fastest.");
+    private static Map<String, String> speedName = new HashMap<String, String>() {{
+        put("2.0", "Two times normal speed. Fastest.");
+        put("0.75", "Three quarters of normal speed. Slower.");
     }};
 
     public IosAudioPlayerScreen() {
@@ -69,20 +74,25 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
         return getElementFactory().findElements(By.xpath(CHAPTERS_LOCATOR), ElementType.LABEL);
     }
 
+    public List<ILabel> getChaptersText() {
+        return getElementFactory().findElements(By.xpath(CHAPTERS_TEXT), ElementType.LABEL);
+    }
+
     @Override
     public void checkThatChaptersVisible() {
         Assert.assertTrue("Checking that count of chapters greater than zero", AqualityServices.getConditionalWait().waitFor(() -> getChapters().size() > 0));
     }
 
     @Override
-    public void waitAndCheckAllLoadersDisappeared() {
+    public void waitAndCheckAllChaptersLoaded() {
         checkThatChaptersVisible();
-        //todo softAssert
-        SoftAssertions softAssertions = new SoftAssertions();
-        getChapters().forEach(chapter -> softAssertions.assertThat(chapter.findChildElement(By.xpath(CHAPTERS_TIMERS), ElementType.LABEL).state()
-                        .waitForDisplayed(Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis()))).as("Loader did not disappear from the chapter block").isTrue()
-        );
-        softAssertions.assertAll();
+
+        boolean isAllLoadersDisappeared = AqualityServices.getConditionalWait().waitFor(() -> getLabelsForCheckingDownload().size() == 0, Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis()));
+        Assert.assertTrue("Not all chapters loaded", isAllLoadersDisappeared);
+    }
+
+    private List<ILabel> getLabelsForCheckingDownload() {
+        return getElementFactory().findElements(By.xpath(CHECKING_DOWNLOAD), ElementType.LABEL);
     }
 
     @Override
@@ -91,16 +101,32 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void selectChapterNumber(int chapterNumber) {
+    public void goBack() {
+        btnGoBack.click();
+    }
+
+    @Override
+    public Integer getPercentageValue() {
+
+        lblPercentageValue.state().waitForDisplayed(Duration.ofMillis(40000));
+        String percentageValueString = lblPercentageValue.getAttribute("name");
+        percentageValueString = percentageValueString.replace("%", "");
+        return Integer.valueOf(percentageValueString);
+    }
+
+    @Override
+    public String selectChapterAndGetText(int chapterNumber) {
         AqualityServices.getConditionalWait().waitFor(() -> getElementFactory().findElements(By.xpath(LOADED_CHAPTERS_LOCATOR), ElementType.LABEL).size() >= chapterNumber, Duration.ofMillis(CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis()));
-        ILabel chapter = getChapters().get(chapterNumber - 1);
+        ILabel chapter = getChaptersText().get(chapterNumber - 1);
+        String chapterText = chapter.getAttribute("name");
         chapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         chapter.click();
+        return chapterText;
     }
 
     @Override
     public String getCurrentChapterInfo() {
-        return lblCurrentChapter.getText();
+        return lblCurrentChapter.getAttribute("value");
     }
 
     @Override
@@ -173,14 +199,14 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void selectPlaybackSpeed(double playbackSpeed) {
+    public void selectPlaybackSpeed(String playbackSpeed) {
         btnPlaybackSpeed.click();
         String speedOptionName = speedName.get(playbackSpeed);
         getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"" + speedOptionName + "\"]"), speedOptionName).click();
     }
 
     @Override
-    public boolean isSpeedOptionSelected(double playbackSpeed) {
+    public boolean isSpeedOptionSelected(String playbackSpeed) {
         String speedOptionName = speedName.get(playbackSpeed);
         return getElementFactory().getButton(By.xpath(String.format(PLAYBACK_OPTION_XPATH_LOCATOR, speedOptionName)), speedOptionName).state().waitForDisplayed();
     }
