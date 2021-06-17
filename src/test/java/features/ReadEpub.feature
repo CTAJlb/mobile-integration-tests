@@ -43,26 +43,24 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Change, View Font and Contrast Settings
-    When I scroll page forward from 7 to 8 times
-    #When I save font size as 'fontSize'
-    And I INCREASE_FONT of text
     When I save font size as 'fontSize'
+    And I INCREASE_FONT of text
     Then Font size 'fontSize' is increased
     When I save font size as 'fontSize'
-      And I DECREASE_FONT of text
+    And I DECREASE_FONT of text
     Then Font size 'fontSize' is decreased
-    When I change font style to SERIF
-    Then Book text displays in SERIF font
-    When I change font style to SANS_SERIF_ARIAL
-    Then Book text displays in SANS_SERIF_ARIAL font
-    When I change font style to ALTERNATIVE_SANS
-    Then Book text displays in ALTERNATIVE_SANS font
+    When I change font style to FONT_SERIF
+    Then Book text displays in FONT_SERIF font
+    When I change font style to FONT_SANS
+    Then Book text displays in FONT_SANS font
+    When I change font style to FONT_DYSLEXIC
+    Then Book text displays in FONT_DYSLEXIC font
     When I change contrast to WHITE_TEXT_ON_BLACK
-    Then Book text displays WHITE on BLACK
+    Then Book text displays as WHITE_TEXT_ON_BLACK
     When I change contrast to BLACK_TEXT_ON_WHITE
-    Then Book text displays BLACK on WHITE
+    Then Book text displays as BLACK_TEXT_ON_WHITE
     When I change contrast to BLACK_TEXT_ON_SEPIA
-    Then Book text displays BLACK on SEPIA
+    Then Book text displays as BLACK_TEXT_ON_SEPIA
 
   @tier1
   Scenario: Return to Page (Bookmarking)

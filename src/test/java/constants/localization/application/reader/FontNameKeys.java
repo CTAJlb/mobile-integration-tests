@@ -8,6 +8,7 @@ import lombok.NonNull;
 import java.util.Locale;
 
 public enum FontNameKeys implements LocalizedValue {
+    //todo delete this class
     SERIF("serif"),
     SANS_SERIF_ARIAL("sans-serif"),
     ALTERNATIVE_SANS("openDyslexic3");

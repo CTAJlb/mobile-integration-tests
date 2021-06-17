@@ -5,8 +5,6 @@ import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.RegEx;
 import constants.application.ReaderType;
-import constants.localization.application.reader.ColorKeys;
-import constants.localization.application.reader.FontNameKeys;
 import constants.localization.application.reader.ReaderSettingKeys;
 import framework.utilities.RegExUtil;
 import framework.utilities.ScenarioContext;
@@ -183,16 +181,16 @@ public class ReaderSteps {
 
     @Then("Font size {string} is increased")
     public void checkFontSizeIsIncreased(String fontSizeKey) {
-        double actualFontSize = epubReaderScreen.getFontSize();
-        double expectedFontSize = context.get(fontSizeKey);
-        Assert.assertTrue("Font size is not increased actual - " + actualFontSize + ", expected - " + expectedFontSize, actualFontSize > expectedFontSize);
+        double newFontSize = epubReaderScreen.getFontSize();
+        double oldFontSize = context.get(fontSizeKey);
+        Assert.assertTrue("Font size is not increased newFontSize - " + newFontSize + ", oldFontSize - " + oldFontSize, newFontSize > oldFontSize);
     }
 
     @Then("Font size {string} is decreased")
     public void checkFontSizeIsDecreased(String fontSizeKey) {
-        double actualFontSize = epubReaderScreen.getFontSize();
-        double expectedFontSize = context.get(fontSizeKey);
-        Assert.assertTrue("Font size is not decreased actual - " + actualFontSize + ", expected - " + expectedFontSize, actualFontSize < expectedFontSize);
+        double newFontSize = epubReaderScreen.getFontSize();
+        double oldFontSize = context.get(fontSizeKey);
+        Assert.assertTrue("Font size is not decreased newFontSize - " + newFontSize + ", oldFontSize - " + oldFontSize, newFontSize < oldFontSize);
     }
 
     @When("I {} of text")
@@ -202,14 +200,14 @@ public class ReaderSteps {
         changeSetting(readerSettingKey);
     }
 
-    @Then("Book text displays {} on {}")
-    public void checkBookTextDisplaysWhiteTextOnBlack(ColorKeys text, ColorKeys background) {
-        assertFontAndBackground(text, background);
+    @Then("Book text displays as {}")
+    public void checkBookTextDisplaysWhiteTextOnBlack(ReaderSettingKeys key) {
+        assertFontAndBackground(key);
     }
 
     @Then("Book text displays in {} font")
-    public void bookTextDisplaysInSerifFont(FontNameKeys key) {
-        assertFontName(key.i18n());
+    public void bookTextDisplaysInSerifFont(ReaderSettingKeys key) {
+        assertFontName(key);
     }
 
     @And("Page info {string} is correct")
@@ -438,16 +436,35 @@ public class ReaderSteps {
         fontChoicesScreen.closeFontChoices();
     }
 
-    private void assertFontAndBackground(ColorKeys fontColor, ColorKeys backgroundColor) {
-        //todo softAssert
+    private void assertFontAndBackground(ReaderSettingKeys key) {
+        String expectedFontAndBackground = "";
+        if(key == ReaderSettingKeys.BLACK_TEXT_ON_WHITE){
+            expectedFontAndBackground = "readium-default-on";
+        }else if(key == ReaderSettingKeys.WHITE_TEXT_ON_BLACK){
+            expectedFontAndBackground = "readium-night-on";
+        }else if(key == ReaderSettingKeys.BLACK_TEXT_ON_SEPIA){
+            expectedFontAndBackground = "readium-sepia-on";
+        }
+        String actualFontAndBackground = epubReaderScreen.getFontAndBackgroundColor();
+        Assert.assertTrue("BackgroundAndFont is not correct actualFontAndBackground-" + actualFontAndBackground + " expectedFontAndBackground-" + expectedFontAndBackground, actualFontAndBackground.toLowerCase().equals(expectedFontAndBackground.toLowerCase()));
+        /*//todo softAssert
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(epubReaderScreen.getFontColor()).as("Font color is not correct").isEqualTo(fontColor.i18n());
-        softAssertions.assertThat(epubReaderScreen.getBackgroundColor()).as("Background color is not correct").isEqualTo(backgroundColor.i18n());
-        softAssertions.assertAll();
+        softAssertions.assertThat(epubReaderScreen.getFontAndBackgroundColor()).as("Background color is not correct").isEqualTo(backgroundColor.i18n());
+        softAssertions.assertAll();*/
     }
 
-    private void assertFontName(String fontName) {
-        Assert.assertEquals("Book font is not correct", fontName, epubReaderScreen.getFontName());
+    private void assertFontName(ReaderSettingKeys key) {
+        String expectedBookFont = "";
+        if(key == ReaderSettingKeys.FONT_SERIF){
+            expectedBookFont = "serif";
+        }else if (key == ReaderSettingKeys.FONT_SANS){
+            expectedBookFont = "sans-serif";
+        }else if (key == ReaderSettingKeys.FONT_DYSLEXIC){
+            expectedBookFont = "OpenDyslexic";
+        }
+        String actualFontName = epubReaderScreen.getFontName();
+        Assert.assertTrue("Book font is not correct actualFontName-" + actualFontName + " expectedFontName-" + expectedBookFont, actualFontName.toLowerCase().equals(expectedBookFont.toLowerCase()));
     }
 
     private String getTrimmedBookName() {

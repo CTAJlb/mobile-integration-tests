@@ -182,8 +182,8 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public String getBackgroundColor() {
-        return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX);
+    public String getFontAndBackgroundColor() {
+        return getReaderInfo(RegEx.FONT_AND_BACKGROUND);
     }
 
     @Override

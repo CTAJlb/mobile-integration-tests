@@ -16,8 +16,6 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
 import screens.epubreader.EpubReaderScreen;
 import screens.epubtableofcontents.EpubTableOfContentsScreen;
 
@@ -140,32 +138,14 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
             return contextNames.size() > 1;
         });
         Set<String> contextNames = driver.getContextHandles();
-        /////
-        logger.info("11111+++++++++++++++++++++++++");
-        String te1 = driver.getPageSource();
-        logger.info(te1);
-        logger.info("+++++++++++++++++++++++++");
-        /////
         driver.context((String) contextNames.toArray()[1]);
-        /////
-        logger.info("222+++++++++++++++++++++++++");
-        String te2 = driver.getPageSource();
-        logger.info(te2);
-        logger.info("+++++++++++++++++++++++++");
-        /////
-       /* driver.switchTo().frame(EPUB_CONTENT_IFRAME);
-        String frameSource = driver.getPageSource();
-        logger.info(frameSource);
-        driver.switchTo().defaultContent();*/
+        logger.info("pageSourceWithSettingsStart+++++++++++++++++++++++++");
+        String pageSourceWithSettings = driver.getPageSource();
+        logger.info(pageSourceWithSettings);
+        logger.info("pageSourceWithSettingsEnd+++++++++++++++++++++++++");
+        driver.switchTo().defaultContent();
         driver.context((String) contextNames.toArray()[0]);
-        /////
-        logger.info("3333+++++++++++++++++++++++++");
-        String te3 = driver.getPageSource();
-        logger.info(te3);
-        logger.info("+++++++++++++++++++++++++");
-        /////
-        //return frameSource;
-        return "";
+        return pageSourceWithSettings;
     }
 
     @Override
@@ -179,8 +159,8 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public String getBackgroundColor() {
-        return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX);
+    public String getFontAndBackgroundColor() {
+        return getReaderInfo(RegEx.FONT_AND_BACKGROUND);
     }
 
     @Override
