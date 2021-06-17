@@ -56,11 +56,11 @@ Feature: Read EPUB
     When I change font style to FONT_DYSLEXIC
     Then Book text displays in FONT_DYSLEXIC font
     When I change contrast to WHITE_TEXT_ON_BLACK
-    Then Book text displays as WHITE_TEXT_ON_BLACK
+    Then Book text displays WHITE on BLACK
     When I change contrast to BLACK_TEXT_ON_WHITE
-    Then Book text displays as BLACK_TEXT_ON_WHITE
+    Then Book text displays BLACK on WHITE
     When I change contrast to BLACK_TEXT_ON_SEPIA
-    Then Book text displays as BLACK_TEXT_ON_SEPIA
+    Then Book text displays BLACK on SEPIA
 
   @tier1
   Scenario: Return to Page (Bookmarking)

@@ -148,7 +148,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public double getFontSize() {
-        return RegExUtil.getDoubleFromFirstMatchGroup(getBookSource(), RegEx.FONT_SIZE_REGEX);
+        return RegExUtil.getDoubleFromFirstMatchGroup(getBookSource(), RegEx.FONT_SIZE_REGEX_IOS);
     }
 
     private String getBookSource() {
@@ -173,7 +173,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public String getFontName() {
-        return getReaderInfo(RegEx.FONT_NAME_REGEX);
+        return getReaderInfo(RegEx.FONT_NAME_REGEX_IOS);
     }
 
     @Override
@@ -183,7 +183,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public String getFontAndBackgroundColor() {
-        return getReaderInfo(RegEx.FONT_AND_BACKGROUND);
+        return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX_IOS);
     }
 
     @Override
