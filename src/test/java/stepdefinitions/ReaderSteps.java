@@ -107,21 +107,8 @@ public class ReaderSteps {
         return RegExUtil.getIntFromFirstGroup(text, RegEx.PAGE_NUMBER_REGEX);
     }
 
-    private String getChapterName(String text) {
-        Matcher matcher = getMatcher(text);
-        return matcher.find() ? matcher.group(3) : "";
-    }
-
     @Then("Navigated to the previous page and old page {string} and {string}")
     public void bookPageNumberIsSmallerThenPreviousPageInfo(String pageNumberInfo, String chapterNameInfo) {
-        /*String expectedBookInfo = context.get(pageNumberInfo);
-        AqualityServices.getConditionalWait().waitFor(() -> !expectedBookInfo.equals(epubReaderScreen.getPageNumberInfo()));
-        String actualBookInfo = epubReaderScreen.getPageNumberInfo();
-        int expectedPageNumber = getPageNumber(expectedBookInfo) - 1;
-        int actualPageNumber = getPageNumber(actualBookInfo);
-        Assert.assertTrue(String.format("Page number is not correct (actual - %d, expected - %d)", actualPageNumber, expectedPageNumber), expectedPageNumber == actualPageNumber ||
-                (!getChapterName(expectedBookInfo).equals(getChapterName(actualBookInfo))));
-  */
         String actualPageNumberString = epubReaderScreen.getPageNumberInfo();
         String expectedPageNumberString = context.get(pageNumberInfo);
         int actualPageNumber = getPageNumber(actualPageNumberString);
@@ -130,11 +117,6 @@ public class ReaderSteps {
         String expectedChapterName = context.get(chapterNameInfo);
         Assert.assertTrue(String.format("Page number is not correct (actual - %d, expected - %d)", actualPageNumber, expectedPageNumber), expectedPageNumber == actualPageNumber ||
                 (actualPageNumber == 1 && !actualChapterName.toLowerCase().equals(expectedChapterName.toLowerCase())));
-
-    }
-
-    private Matcher getMatcher(String text) {
-        return RegExUtil.getMatcher(text, RegEx.PAGE_NUMBER_REGEX);
     }
 
     @And("Each chapter can be opened from Table of Contents")
@@ -145,7 +127,11 @@ public class ReaderSteps {
         for (String chapter :
                 chapters) {
             epubReaderScreen.openChapter(chapter);
-            softAssertions.assertThat(chapter.toLowerCase().contains(epubReaderScreen.getChapterName().toLowerCase())).as("Chapter name is not correct. ExpectedName-" + chapter.toLowerCase() + " , ActualName-" + epubReaderScreen.getChapterName().toLowerCase()).isTrue();
+            if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
+                softAssertions.assertThat(chapter.toLowerCase().contains(epubReaderScreen.getChapterName().toLowerCase())).as("Chapter name is not correct. ExpectedName-" + chapter.toLowerCase() + " , ActualName-" + epubReaderScreen.getChapterName().toLowerCase()).isTrue();
+            }else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS){
+                softAssertions.assertThat(epubReaderScreen.getPageNumberInfo().toLowerCase().contains(chapter.toLowerCase())).as("Chapter name is not correct. ExpectedName-" + chapter.toLowerCase() + " , ActualName-" + epubReaderScreen.getPageNumberInfo().toLowerCase()).isTrue();
+            }
         }
         softAssertions.assertAll();
     }
