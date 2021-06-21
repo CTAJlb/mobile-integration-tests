@@ -32,14 +32,14 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     private static final String CHAPTER_ITEM_LOC = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[@name=\"%1$s\"]";
 
     private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[1]"), "Book Cover", ElementState.EXISTS_IN_ANY_STATE);
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]"), "Book Cover", ElementState.EXISTS_IN_ANY_STATE);
     private final ILabel lblPageNumber =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_page\")]"), "Page Number");
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeStaticText"), "Page Number");
     private final ILabel lblPage =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "Page View");
-    private final ILabel lblMainPart =
+    /*private final ILabel lblMainPart =
             getElementFactory().getLabel(By.xpath("//android.webkit.WebView[contains(@resource-id,\"readerWebView\")]"), "Page View");
-    private final IButton btnFontSettings = getElementFactory().getButton(
+    */private final IButton btnFontSettings = getElementFactory().getButton(
             By.xpath("//XCUIElementTypeButton[@name=\"Toggle reader settings\"]"), "Chapters");
     private final IButton btnChapters =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Table of contents\"]"), "Chapters");
@@ -80,7 +80,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public void swipeFromRightToLeft() {
-        SwipeElementUtils.swipeFromRightToLeft(lblMainPart);
+        SwipeElementUtils.swipeFromRightToLeft(lblPage);
     }
 
     @Override

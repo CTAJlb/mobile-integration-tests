@@ -225,7 +225,7 @@ public class ReaderSteps {
         IntStream.range(0, randomScrollsCount).forEachOrdered(i -> {
             String pageNumber = epubReaderScreen.getPageNumberInfo();
             epubReaderScreen.clickRightCorner();
-            AqualityServices.getConditionalWait().waitFor(() -> !isPageNumberEqual(pageNumber));
+            //AqualityServices.getConditionalWait().waitFor(() -> !isPageNumberEqual(pageNumber));
         });
         //todo added waiting
         try {
@@ -420,7 +420,11 @@ public class ReaderSteps {
     }
 
     private boolean isPageNumberEqual(String pageNumber) {
-        return epubReaderScreen.getPageNumberInfo().equals(pageNumber);
+        AqualityServices.getLogger().info("--------------------------");
+        AqualityServices.getLogger().info("pageNumber: " + pageNumber);
+        AqualityServices.getLogger().info("epubReaderScreen.getPageNumberInfo(): " + epubReaderScreen.getPageNumberInfo());
+        AqualityServices.getLogger().info("--------------------------");
+        return epubReaderScreen.getPageNumberInfo().toLowerCase().equals(pageNumber.toLowerCase());
     }
 
     private void checkPageNumberIsEqualTo(int pageNumber) {
@@ -469,7 +473,13 @@ public class ReaderSteps {
                 expectedBookFont = "OpenDyslexic";
             }
         } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            expectedBookFont = key.i18n();
+            if (key == ReaderSettingKeys.FONT_SERIF) {
+                expectedBookFont = "Georgia !important";
+            } else if (key == ReaderSettingKeys.FONT_SANS) {
+                expectedBookFont = "Helvetica !important";
+            } else if (key == ReaderSettingKeys.FONT_DYSLEXIC) {
+                expectedBookFont = "OpenDyslexic3 !important";
+            }
         }
         String actualFontName = epubReaderScreen.getFontName();
         Assert.assertTrue("Book font is not correct actualFontName-" + actualFontName + " expectedFontName-" + expectedBookFont, actualFontName.toLowerCase().equals(expectedBookFont.toLowerCase()));
