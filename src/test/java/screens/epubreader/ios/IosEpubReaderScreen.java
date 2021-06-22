@@ -23,6 +23,7 @@ import org.openqa.selenium.Point;
 import screens.epubreader.EpubReaderScreen;
 import screens.epubtableofcontents.EpubTableOfContentsScreen;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -108,14 +109,14 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public Set<String> getListOfChapters() {
+    public List<String> getListOfChapters() {
         if (!btnFontSettings.state().isDisplayed()) {
             CoordinatesClickUtils.clickAtCenterOfScreen();
         }
         btnChapters.click();
         EpubTableOfContentsScreen epubTableOfContentsScreen = AqualityServices.getScreenFactory().getScreen(EpubTableOfContentsScreen.class);
         epubTableOfContentsScreen.state().waitForExist();
-        Set<String> bookNames = epubTableOfContentsScreen.getListOfBookChapters();
+        List<String> bookNames = epubTableOfContentsScreen.getListOfBookChapters();
         AqualityServices.getApplication().getDriver().navigate().back();
         AqualityServices.getLogger().info("Found chapters - " + bookNames.stream().map(Object::toString).collect(Collectors.joining(", ")));
         return bookNames;

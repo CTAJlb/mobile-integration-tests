@@ -27,14 +27,17 @@ public class AndroidEpubTableOfContentsScreen extends EpubTableOfContentsScreen 
         super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"tocLayout\")]"));
     }
 
-    public Set<String> getListOfBookChapters() {
-        List<String> listOfChapters = getChapters().stream().map(IElement::getText).collect(Collectors.toList());
-        Set<String> bookNames = new HashSet<>();
+    public List<String> getListOfBookChapters() {
+        List<String> listOfChapters = null;
+        int oldSize = 0;
+        int newSize = 0;
         do {
-            bookNames.addAll(listOfChapters);
+            listOfChapters = getChapters().stream().map(IElement::getText).collect(Collectors.toList());
+            oldSize = listOfChapters.size();
             SwipeElementUtils.swipeThroughEntireElementUp(lblTable);
             listOfChapters = getChapters().stream().map(IElement::getText).collect(Collectors.toList());
-        } while (!bookNames.containsAll(listOfChapters));
-        return bookNames;
+            newSize = listOfChapters.size();
+        } while (oldSize != newSize);
+        return listOfChapters;
     }
 }

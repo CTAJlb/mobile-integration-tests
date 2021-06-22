@@ -3,6 +3,7 @@ package screens.epubtableofcontents;
 import aquality.appium.mobile.screens.Screen;
 import org.openqa.selenium.By;
 
+import java.util.List;
 import java.util.Set;
 
 public abstract class EpubTableOfContentsScreen extends Screen {
@@ -10,5 +11,5 @@ public abstract class EpubTableOfContentsScreen extends Screen {
         super(locator, "Table of Contents");
     }
 
-    public abstract Set<String> getListOfBookChapters();
+    public abstract List<String> getListOfBookChapters();
 }

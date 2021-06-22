@@ -26,6 +26,7 @@ import screens.pdfreader.PdfReaderScreen;
 import screens.pdfsearch.PdfSearchScreen;
 import screens.pdftableofcontents.PdfTableOfContentsScreen;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -123,7 +124,7 @@ public class ReaderSteps {
     public void checkEachChapterCanBeOpenedFromTableOfContents() {
         //todo softAssert
         SoftAssertions softAssertions = new SoftAssertions();
-        Set<String> chapters = epubReaderScreen.getListOfChapters();
+        List<String> chapters = epubReaderScreen.getListOfChapters();
         for (String chapter :
                 chapters) {
             epubReaderScreen.openChapter(chapter);
