@@ -1,7 +1,7 @@
 Feature: Book Transactions
 
   @logout @returnBooks @tier2
-  Scenario: Hold from Bookshelf list
+  Scenario: Hold from subcategory list
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -27,7 +27,7 @@ Feature: Book Transactions
     Then I check that opened book contains READ button at book details screen
 
   @tier2
-  Scenario: Download from Bookshelf list
+  Scenario: Download from subcategory screen
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
       And I open category by chain:
@@ -37,7 +37,8 @@ Feature: Book Transactions
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
 
   @tier2
-  Scenario: Read from Bookshelf list
+  Scenario: Read from subcategory screen
+   #is there such a thing for Book detail view?
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
       And I open category by chain:
@@ -50,7 +51,7 @@ Feature: Book Transactions
     Then Book 'bookInfo' is present on screen
 
   @tier2
-  Scenario: Delete book
+  Scenario: Delete book from books tab
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
       And I open category by chain:
@@ -78,7 +79,7 @@ Feature: Book Transactions
     Then I check that opened book contains READ button at book details screen
 
   @logout @returnBooks @tier2 @exclude_android
-  Scenario: Return book
+  Scenario: Return book from books tab
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -99,7 +100,7 @@ Feature: Book Transactions
     Then Book 'bookInfo' is not present in Books List
 
   @logout @returnBooks @tier2
-  Scenario: Remove a Reserved Book from Bookshelf list
+  Scenario: Remove a Reserved Book from subcategory list
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -133,7 +134,7 @@ Feature: Book Transactions
     Then I check that the action button text equal to the RESERVE
 
   @logout @returnBooks @tier2 @exclude_ios
-  Scenario: Remove a Reserved Book from Holds screen
+  Scenario: Remove a Reserved Book from Holds tab
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -153,7 +154,7 @@ Feature: Book Transactions
     Then Book saved as 'bookInfo' should contain RESERVE button at the hold screen
 
   @logout @returnBooks @tier2 @exclude_android
-  Scenario: Remove a Reserved Book from Holds screen (iOS)
+  Scenario: Remove a Reserved Book from Holds tab (iOS)
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -173,7 +174,7 @@ Feature: Book Transactions
     Then Book 'bookInfo' is not present in Holds List
 
   @logout @returnBooks @tier3 @exclude_android
-  Scenario: Cancel remove
+  Scenario: Cancel remove from holds tab
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
