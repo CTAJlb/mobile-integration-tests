@@ -335,6 +335,12 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
+    public void returnBookFromBookDetailsScreen() {
+        bookDetailsScreen.deleteBook();
+        notificationModal.handleBookActionsAndNotificationPopups(BookActionButtonKeys.RETURN);
+    }
+
+    @Override
     public void deleteBookFromBookDetailsScreen() {
         bookDetailsScreen.deleteBook();
         notificationModal.handleBookActionsAndNotificationPopups(BookActionButtonKeys.DELETE);

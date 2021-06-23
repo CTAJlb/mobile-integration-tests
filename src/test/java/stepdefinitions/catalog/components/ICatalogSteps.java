@@ -93,6 +93,8 @@ public interface ICatalogSteps {
 
     void deleteBookFromBookDetailsScreen();
 
+    void returnBookFromBookDetailsScreen();
+
     void openBookDetailsByClickingOnCover(String bookInfoKey);
 
     void pressOnBookDetailsScreenAtActionButton(BookActionButtonKeys actionButton);

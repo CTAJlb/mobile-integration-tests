@@ -120,6 +120,11 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
+    public void returnBook() {
+        clickActionButton(BookActionButtonKeys.RETURN);
+    }
+
+    @Override
     public void deleteBook() {
         clickActionButton(BookActionButtonKeys.DELETE);
     }

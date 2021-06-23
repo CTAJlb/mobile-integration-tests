@@ -262,6 +262,11 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.checkThatSavedBookContainButtonAtBookDetailsScreen(key);
     }
 
+    @And("I return book from book details screen")
+    public void returnBookFromBookDetailsScreen() {
+        catalogSteps.returnBookFromBookDetailsScreen();
+    }
+
     @And("I delete book from book details screen")
     public void deleteBookFromBookDetailsScreen() {
         catalogSteps.deleteBookFromBookDetailsScreen();

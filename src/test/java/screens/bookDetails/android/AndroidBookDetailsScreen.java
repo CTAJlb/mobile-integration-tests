@@ -36,6 +36,7 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
 
     private final IButton btnRead = getActionButton(BookActionButtonKeys.READ);
     private final IButton btnDelete = getActionButton(BookActionButtonKeys.DELETE);
+    private final IButton btnReturn = getActionButton(BookActionButtonKeys.RETURN);
     private final IButton btnListen = getActionButton(BookActionButtonKeys.LISTEN);
     private final IButton btnRelatedBooks =
             getElementFactory().getButton(By.xpath("//*[contains(@resource-id,\"bookDetailRelated\")]"), "Related books");
@@ -89,6 +90,11 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
         IButton button = getActionButton(key);
         AqualityServices.getConditionalWait().waitFor(() -> button.state().isDisplayed() || isErrorButtonPresent(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         return button.state().isDisplayed();
+    }
+
+    @Override
+    public void returnBook() {
+        btnReturn.click();
     }
 
     @Override
