@@ -113,7 +113,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         }
     }
 
-    @And("{} book and save it as {string}")
+    @And("{} book from subcategory screen and save it as {string}")
     public void executeBookActionAndSaveItToContextAndLibraryCancel(BookActionButtonKeys actionButtonKey, String bookInfoKey) {
         if (actionButtonKey == BookActionButtonKeys.DOWNLOAD && AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
             catalogSteps.executeBookActionAndSaveItToContextAndLibraryCancel(BookActionButtonKeys.GET, bookInfoKey);

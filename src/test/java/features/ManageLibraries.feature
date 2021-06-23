@@ -31,7 +31,7 @@ Feature: Manage Libraries
       And I open category by chain:
         | Fiction |
         | Drama   |
-      And DOWNLOAD book and save it as 'bookInfo'
+      And DOWNLOAD book from subcategory screen and save it as 'bookInfo'
       And I open Books
     Then Book 'bookInfo' is present in Books List
     When I open Catalog

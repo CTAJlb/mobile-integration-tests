@@ -5,7 +5,7 @@ Feature: Read EPUB
     When I open Catalog
       And I open search modal
       And I search for 'Flower Fables'
-      And DOWNLOAD book and save it as 'bookInfo'
+      And DOWNLOAD book from subcategory screen and save it as 'bookInfo'
       And I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
     Then Book 'bookInfo' is present on screen

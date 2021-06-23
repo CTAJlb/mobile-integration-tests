@@ -33,7 +33,7 @@ Feature: Book Transactions
       And I open category by chain:
         | Fiction |
         | Drama   |
-      And DOWNLOAD book and save it as 'bookInfo'
+      And DOWNLOAD book from subcategory screen and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
 
   @tier2
@@ -43,7 +43,7 @@ Feature: Book Transactions
       And I open category by chain:
         | Fiction |
         | Drama   |
-      And DOWNLOAD book and save it as 'bookInfo'
+      And DOWNLOAD book from subcategory screen and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
     When I open Books
       And I Read book 'bookInfo'
@@ -56,7 +56,7 @@ Feature: Book Transactions
       And I open category by chain:
         | Fiction |
         | Drama   |
-      And DOWNLOAD book and save it as 'bookInfo'
+      And DOWNLOAD book from subcategory screen and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button at catalog books screen
     When I open Books
       And I open book 'bookInfo' details by clicking on cover
