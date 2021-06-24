@@ -54,11 +54,7 @@ public final class SwipeElementUtils {
 
     public static void swipeFromRightToLeft(IElement element) {
         Point point = element.getElement().getCenter();
-        /*int height = element.getElement().getSize().height;
-        int width =  element.getElement().getSize().width;
-        AqualityServices.getTouchActions().swipe(new Point(10, height/2), new Point(width/2, height/2));*/
         AqualityServices.getTouchActions().swipe(new Point(0, element.getElement().getCenter().y), point);
-        //element.getTouchActions().swipe(new Point(0, element.getElement().getCenter().y));
     }
 
     /**

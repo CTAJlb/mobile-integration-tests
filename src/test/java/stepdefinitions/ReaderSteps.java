@@ -212,7 +212,6 @@ public class ReaderSteps {
         IntStream.range(0, randomScrollsCount).forEachOrdered(i -> {
             String pageNumber = epubReaderScreen.getPageNumberInfo();
             epubReaderScreen.clickRightCorner();
-            //AqualityServices.getConditionalWait().waitFor(() -> !isPageNumberEqual(pageNumber));
         });
         //todo added waiting
         try {
@@ -407,10 +406,6 @@ public class ReaderSteps {
     }
 
     private boolean isPageNumberEqual(String pageNumber) {
-        AqualityServices.getLogger().info("--------------------------");
-        AqualityServices.getLogger().info("pageNumber: " + pageNumber);
-        AqualityServices.getLogger().info("epubReaderScreen.getPageNumberInfo(): " + epubReaderScreen.getPageNumberInfo());
-        AqualityServices.getLogger().info("--------------------------");
         return epubReaderScreen.getPageNumberInfo().toLowerCase().equals(pageNumber.toLowerCase());
     }
 

@@ -10,7 +10,7 @@ Feature: Read EPUB
       And Press on the book details screen at the action button READ
     Then Book 'bookInfo' is present on screen
 
-  @tier1 @go
+  @tier1
   Scenario: Navigate by Page
       And Book page number is 1
     When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
@@ -19,18 +19,18 @@ Feature: Read EPUB
     When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       #And I swipe from right to left book corner
     #Then Navigated to the next page and old page 'pageNumberInfo' and 'chapterNameInfo'
-    When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
+    #When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       And I click on left book corner
     Then Navigated to the previous page and old page 'pageNumberInfo' and 'chapterNameInfo'
     #When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       #And I swipe from left to right book corner
     #Then Book page number is 1
 
-  @tier1 @go
+  @tier1
   Scenario: Navigate by Table of Contents Menu
       And Each chapter can be opened from Table of Contents
 
-  @tier1 @go
+  @tier1
   Scenario: Navigate View options
     When I return to previous screen
       And Press on the book details screen at the action button READ
@@ -41,7 +41,7 @@ Feature: Read EPUB
       And I open Table of Contents
     Then Table of Contents is opened
 
-  @tier1 @go
+  @tier1
   Scenario: Change, View Font and Contrast Settings
     When I save font size as 'fontSize'
     And I INCREASE_FONT of text
@@ -62,7 +62,7 @@ Feature: Read EPUB
     When I change contrast to BLACK_TEXT_ON_SEPIA
     Then Book text displays BLACK on SEPIA
 
-  @tier1 @go
+  @tier1
   Scenario: Return to Page (Bookmarking)
     When I scroll page forward from 10 to 20 times
     #chapterNameInfo does not check in Assert for ios we check pageNumber and chapterName fot android only pageNumber
@@ -71,7 +71,10 @@ Feature: Read EPUB
       And Press on the book details screen at the action button READ
     Then Book 'bookInfo' is present on screen
       And Page info 'pageNumberInfo' is correct
-    When I restart app
+    When I click on right book corner
+      And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
+      And I wait for 3 seconds
+      And I restart app
       And I open Books
     Then Book 'bookInfo' is present in Books List
     When I open book 'bookInfo' details by clicking on cover
