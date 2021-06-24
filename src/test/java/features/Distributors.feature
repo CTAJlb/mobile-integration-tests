@@ -3,20 +3,16 @@ Feature: Distributors
   @logout @returnBooks @tier2
   Scenario Outline: Hold from Book Detail View
     When I add "LYRASIS" account from welcomeScreen
-    And I enter credentials for 'LYRASIS' account
+      And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-    And I switch to 'LYRASIS' from side menu
-    And I open search modal
-    And I search 'unavailable' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
-    And I switch to '<tabName>' catalog tab
-    Then Subcategory screen is present
-    When I open '<bookType>' book 'bookNameInfo' and save it as 'bookInfo'
-    Then Book 'bookInfo' is opened
-    And I press on the book details screen at the action button RESERVE
+      And I switch to 'LYRASIS' from side menu
+      And I open search modal
+      And I search 'unavailable' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
+      And I switch to '<tabName>' catalog tab
+      And I open '<bookType>' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+      And I press on the book details screen at the action button RESERVE
     Then I check that opened book contains CANCEL button at book details screen
-    When I open Holds
-    Then Book 'bookInfo' is present in Holds List
 
     Scenarios:
       | distributor | bookType  | tabName    |
@@ -36,7 +32,7 @@ Feature: Distributors
     And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
     And I switch to '<tabName>' catalog tab
     Then Subcategory screen is present
-    When I open '<bookType>' book 'bookNameInfo' and save it as 'bookInfo'
+    When I open '<bookType>' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
     And Get book on the book details screen
     Then Opened book contains read button at book details screen
@@ -65,7 +61,7 @@ Feature: Distributors
     And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
     And I switch to '<tabName>' catalog tab
     Then Subcategory screen is present
-    When I open '<bookType>' book 'bookNameInfo' and save it as 'bookInfo'
+    When I open '<bookType>' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
     And Get book on the book details screen
     Then Opened book contains read button at book details screen

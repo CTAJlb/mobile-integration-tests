@@ -1,7 +1,22 @@
 Feature: Book Transactions
 
-  @logout @returnBooks @tier2
-  Scenario: Hold from subcategory list
+  @logout @returnBooks @tier2 @go
+  Scenario: Hold from Subcategory List View and check in Holds
+    When I add "LYRASIS" account from welcomeScreen
+      And I enter credentials for 'LYRASIS' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I switch to 'LYRASIS' from side menu
+      And I open search modal
+      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+      And I RESERVE book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain CANCEL button on Subcategory List View
+    When I open Holds
+    Then Book 'bookInfo' is present in Holds List
+
+  @logout @returnBooks @tier2 @go
+  Scenario: Hold from Book Detail View and check in Holds
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -11,9 +26,10 @@ Feature: Book Transactions
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I RESERVE book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain CANCEL button at catalog books screen
-    When I open Holds
+    When I open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book 'bookInfo' is opened
+    When I press on the book details screen at the action button RESERVE
+      And I open Holds
     Then Book 'bookInfo' is present in Holds List
 
   @tier2
@@ -34,7 +50,7 @@ Feature: Book Transactions
         | Fiction |
         | Drama   |
       And DOWNLOAD book from subcategory screen and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
 
   @tier2
   Scenario: Read from subcategory screen
@@ -45,7 +61,7 @@ Feature: Book Transactions
         | Fiction |
         | Drama   |
       And DOWNLOAD book from subcategory screen and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open Books
       And I Read book 'bookInfo'
     Then Book 'bookInfo' is present on screen
@@ -58,7 +74,7 @@ Feature: Book Transactions
         | Fiction |
         | Drama   |
       And DOWNLOAD book from subcategory screen and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open Books
       And I open book 'bookInfo' details by clicking on cover
       And I delete book from book details screen
@@ -110,10 +126,10 @@ Feature: Book Transactions
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       Then Subcategory screen is present
-      And I RESERVE book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain CANCEL button at catalog books screen
+      And I RESERVE book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain CANCEL button on Subcategory List View
     When I click on the book 'bookInfo' button CANCEL on catalog books screen
-    Then Book saved as 'bookInfo' should contain RESERVE button at catalog books screen
+    Then Book saved as 'bookInfo' should contain RESERVE button on Subcategory List View
 
   @logout @returnBooks @tier2
   Scenario: Remove a Reserved Book from Book Detail View
@@ -126,7 +142,7 @@ Feature: Book Transactions
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When I open 'EBOOK' book 'bookNameInfo' and save it as 'bookInfo'
+    When I open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And I press on the book details screen at the action button RESERVE
     Then I check that opened book contains CANCEL button at book details screen
@@ -144,7 +160,7 @@ Feature: Book Transactions
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When I open 'EBOOK' book 'bookNameInfo' and save it as 'bookInfo'
+    When I open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And I press on the book details screen at the action button RESERVE
     Then I check that opened book contains CANCEL button at book details screen
@@ -164,7 +180,7 @@ Feature: Book Transactions
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When I open 'EBOOK' book 'bookNameInfo' and save it as 'bookInfo'
+    When I open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And I press on the book details screen at the action button RESERVE
     Then I check that opened book contains CANCEL button at book details screen
@@ -184,7 +200,7 @@ Feature: Book Transactions
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When I open 'EBOOK' book 'bookNameInfo' and save it as 'bookInfo'
+    When I open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And I press on the book details screen at the action button RESERVE
     Then I check that opened book contains CANCEL button at book details screen

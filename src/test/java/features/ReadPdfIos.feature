@@ -13,8 +13,8 @@ Feature: Read PDF IOS
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
     Then Pdf book 'bookInfo' is present on screen
@@ -25,8 +25,8 @@ Feature: Read PDF IOS
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
     Then Pdf book 'bookInfo' is present on screen
@@ -41,8 +41,8 @@ Feature: Read PDF IOS
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
     Then Pdf book 'bookInfo' is present on screen
@@ -53,8 +53,8 @@ Feature: Read PDF IOS
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
     Then Pdf book 'bookInfo' is present on screen
@@ -77,8 +77,8 @@ Feature: Read PDF IOS
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
     Then Pdf book 'bookInfo' is present on screen
@@ -98,8 +98,8 @@ Feature: Read PDF IOS
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
     Then Pdf book 'bookInfo' is present on screen
@@ -112,7 +112,7 @@ Feature: Read PDF IOS
   Scenario: Navigate to Search Term
     When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners'
       And I GET hardcode book 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
     Then Pdf book 'bookInfo' is present on screen

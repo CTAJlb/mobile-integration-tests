@@ -11,7 +11,7 @@ Feature: Read PDF
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET or DOWNLOAD book by name 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
     Then Pdf book 'bookInfo' is present on screen

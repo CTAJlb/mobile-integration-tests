@@ -134,7 +134,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     }
 
     //new
-    @When("I {} book with title {string} and save it as {string}")
+    @When("I {} book from Subcategory List View with title {string} and save it as {string}")
     public void performActionOnBookFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey) {
         catalogSteps.performActionOnBookFromAPIAndSaveIt(actionButtonKey, bookNameInfoKey, bookInfoKey);
     }
@@ -144,7 +144,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openBookWithGivenName(bookName, bookInfoKey, bookType);
     }
 
-    @When("I open {string} book {string} and save it as {string}")
+    @When("I open {string} book from Subcategory List View with title {string} and save it as {string}")
     public void getBookNameAndOpenBookAndSaveIt(String bookType, String bookNameKey, String bookInfoKey) {
         String bookName = context.get(bookNameKey);
         catalogSteps.openBookWithGivenName(bookName, bookInfoKey, bookType);
@@ -251,7 +251,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.checkCountOfBooksInSearchResultIsMoreThen(countOfBooks);
     }
 
-    @Then("Book saved as {string} should contain {} button at catalog books screen")
+    @Then("Book saved as {string} should contain {} button on Subcategory List View")
     public void checkThatSavedBookContainButtonAtCatalogBooksScreen(
             final String bookInfoKey, final BookActionButtonKeys key) {
         catalogSteps.checkThatSavedBookContainButtonAtCatalogBooksScreen(bookInfoKey, key);
