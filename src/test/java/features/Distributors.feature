@@ -34,6 +34,8 @@ Feature: Distributors
       And Open '<bookType>' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
       And Get book on the book details screen
     Then Opened book contains read button at book details screen
+    When Press on the book details screen at the action button READ
+    Then Book 'bookInfo' is present on screen
 
     Scenarios:
       | distributor | bookType  | tabName    |

@@ -1,7 +1,7 @@
 Feature: Book Transactions
 
-  @logout @returnBooks @tier2 @go
-  Scenario: Hold from Subcategory List View and check in Holds
+  @logout @returnBooks @tier2 @go2
+  Scenario: Hold from Subcategory List View and Remove a Reserved Book from Holds
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -14,9 +14,11 @@ Feature: Book Transactions
     Then Book saved as 'bookInfo' should contain CANCEL button on Subcategory List View
     When I open Holds
     Then Book 'bookInfo' is present in Holds List
+    When I click on the book 'bookInfo' button CANCEL on the holds screen
+    Then Book 'bookInfo' is not present in Holds List
 
-  @logout @returnBooks @tier2 @go
-  Scenario: Hold from Book Detail View and check in Holds
+  @logout @returnBooks @tier2 @go2
+  Scenario: Hold from Book Detail View and and Remove a Reserved Book from Holds
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -31,6 +33,8 @@ Feature: Book Transactions
     When I press on the book details screen at the action button RESERVE
       And I open Holds
     Then Book 'bookInfo' is present in Holds List
+    When I click on the book 'bookInfo' button CANCEL on the holds screen
+    Then Book 'bookInfo' is not present in Holds List
 
   @logout @returnBooks @tier2 @go
   Scenario: Check out from Book Detail View and check in Books
@@ -198,46 +202,6 @@ Feature: Book Transactions
     Then I check that opened book contains CANCEL button at book details screen
     When Press on the book details screen at the action button CANCEL
     Then I check that the action button text equal to the RESERVE
-
-  @logout @returnBooks @tier2 @exclude_ios
-  Scenario: Remove a Reserved Book from Holds tab
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
-    Then Login is performed successfully
-    When I open Catalog
-      And I switch to 'LYRASIS' from side menu
-      And I open search modal
-      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
-      And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    When I open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book 'bookInfo' is opened
-      And I press on the book details screen at the action button RESERVE
-    Then I check that opened book contains CANCEL button at book details screen
-    When I open Holds
-    Then Book 'bookInfo' is present in Holds List
-    When I click on the book 'bookInfo' button CANCEL on the holds screen
-    Then Book saved as 'bookInfo' should contain RESERVE button at the hold screen
-
-  @logout @returnBooks @tier2 @exclude_android
-  Scenario: Remove a Reserved Book from Holds tab (iOS)
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
-    Then Login is performed successfully
-    When I open Catalog
-      And I switch to 'LYRASIS' from side menu
-      And I open search modal
-      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
-      And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    When I open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book 'bookInfo' is opened
-      And I press on the book details screen at the action button RESERVE
-    Then I check that opened book contains CANCEL button at book details screen
-    When I open Holds
-    Then Book 'bookInfo' is present in Holds List
-    When I click on the book 'bookInfo' button CANCEL on the holds screen
-    Then Book 'bookInfo' is not present in Holds List
 
   @logout @returnBooks @tier3 @exclude_android
   Scenario: Cancel remove from holds tab
