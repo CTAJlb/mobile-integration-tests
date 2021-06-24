@@ -67,6 +67,20 @@ Feature: Book Transactions
     When I open Books
     Then Book 'bookInfo' is present in Books List
 
+  @logout @returnBooks @tier2 @go1
+  Scenario: Return book from Subcategory List View
+    When I add "LYRASIS" account from welcomeScreen
+      And I enter credentials for 'LYRASIS' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I switch to 'LYRASIS' from side menu
+      And I open search modal
+      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+      And I RETURN book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain GET button on Subcategory List View
+
   @tier2
   Scenario: Download from Book detail view
     When I add "Digital Public Library of America" account from welcomeScreen
