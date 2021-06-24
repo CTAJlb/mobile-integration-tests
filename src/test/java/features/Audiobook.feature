@@ -17,7 +17,7 @@ Feature: Audiobook
   Scenario: Navigate by Table of Contents Menu
     When Press on the book details screen at the action button LISTEN
       And Open chapter list for an audiobook
-    When I select the chapter not equal to first chapter and remember selected chapter text as 'newChapterText'
+    When I select the chapter not equal to the first 1 chapters and remember selected chapter text as 'newChapterText'
     Then I check that current chapter text equal to remembered 'newChapterText'
       And Pause button is present
       And Book is playing
@@ -26,22 +26,26 @@ Feature: Audiobook
   @logout @returnBooks @tier2
   Scenario: Loading chapters
     When Press on the book details screen at the action button LISTEN
-      And Open chapter list for an audiobook
-    Then I check that chapters are visible and check that all loaders are disappeared
+    Then Download has started and percentage value increased
+    When Open chapter list for an audiobook
+    Then I check that chapters are visible and check that all chapters loaded
 
   @logout @returnBooks @tier2
   Scenario: Return to Chapter (Bookmarking/Syncing)
     When Press on the book details screen at the action button LISTEN
       And Open chapter list for an audiobook
-    When I select the chapter not equal to first chapter and remember selected chapter text as 'newChapterText'
+    When I select the chapter not equal to the first 1 chapters and remember selected chapter text as 'newChapterText'
       And I return to previous screen for audiobook
       And Press on the book details screen at the action button LISTEN
     Then I check that current chapter text equal to remembered 'newChapterText'
-    When I restart app
+      And Open chapter list for an audiobook
+    When I select the chapter not equal to the first 2 chapters and remember selected chapter text as 'newChapterText2'
+      And I wait for 3 seconds
+      And I restart app
       And I open Books
       And I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button LISTEN
-    Then I check that current chapter text equal to remembered 'newChapterText'
+    Then I check that current chapter text equal to remembered 'newChapterText2'
 
   @logout @returnBooks @tier2
   Scenario: Play Audiobook

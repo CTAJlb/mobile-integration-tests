@@ -61,7 +61,7 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void waitAndCheckAllLoadersDisappeared() {
+    public void waitAndCheckAllChaptersLoaded() {
         checkThatChaptersVisible();
         Assert.assertTrue("Book loading wasn't finished", AqualityServices.getConditionalWait().waitFor(() -> getElementFactory().findElements(By.xpath(LOADING_SCREEN_XPATH), ElementType.LABEL).size() == 0, Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis())));
     }
@@ -74,6 +74,12 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public void goBack() {
         AqualityServices.getApplication().getDriver().navigate().back();
+    }
+
+    @Override
+    public Integer getPercentageValue() {
+        //only for ios
+        return null;
     }
 
     @Override
@@ -136,14 +142,14 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void selectPlaybackSpeed(double playbackSpeed) {
+    public void selectPlaybackSpeed(String playbackSpeed) {
         btnPlaybackSpeed.click();
-        getElementFactory().getButton(By.xpath("//*[@text=\"" + String.format("%.1f", playbackSpeed) + "x\"]"), "Playback speed").click();
+        getElementFactory().getButton(By.xpath("//*[@text=\"" + playbackSpeed + "x\"]"), "Playback speed").click();
     }
 
     @Override
-    public boolean isSpeedOptionSelected(double playbackSpeed) {
-        return getElementFactory().getButton(By.xpath(String.format(SPEED_OPTION_XPATH_LOCATOR_PATTERN, String.format("%.1f", playbackSpeed))), "Playback speed").state().waitForDisplayed();
+    public boolean isSpeedOptionSelected(String playbackSpeed) {
+        return getElementFactory().getButton(By.xpath(String.format(SPEED_OPTION_XPATH_LOCATOR_PATTERN, playbackSpeed)), "Playback speed").state().waitForDisplayed();
     }
 
     @Override

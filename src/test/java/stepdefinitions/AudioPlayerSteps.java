@@ -37,15 +37,25 @@ public class AudioPlayerSteps {
         audioPlayerScreen.openMenu();
     }
 
-    @And("I check that chapters are visible and check that all loaders are disappeared")
-    public void waitAndCheckAllLoadersDisappeared() {
-        audioPlayerScreen.waitAndCheckAllLoadersDisappeared();
+    @Then("Download has started and percentage value increased")
+    public void downloadHasStarted() {
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            Integer percentageValue = audioPlayerScreen.getPercentageValue();
+            boolean isPercentageValueNew = AqualityServices.getConditionalWait().waitFor(() -> percentageValue != 0, Duration.ofMillis(5000));
+            Assert.assertTrue("percentageValue did not change", isPercentageValueNew);
+        }
     }
 
-    @When("I select the chapter not equal to first chapter and remember selected chapter text as {string}")
-    public void selectChapterIsNotEqualToSavedInContextByKeyAndSaveSelectedChapter(String keySelectedChapterText) {
+    @And("I check that chapters are visible and check that all chapters loaded")
+    public void waitAndCheckAllChaptersLoaded() {
+        audioPlayerScreen.waitAndCheckAllChaptersLoaded();
+    }
+
+    @When("I select the chapter not equal to the first {int} chapters and remember selected chapter text as {string}")
+    public void selectChapterIsNotEqualToSavedInContextByKeyAndSaveSelectedChapter(Integer countChapters, String keySelectedChapterText) {
         int totalChapterCount = audioPlayerScreen.getCountOfChapters();
-        int chapterToSelect = RandomUtils.nextInt(2, totalChapterCount + 1);
+        int chapterToSelect = RandomUtils.nextInt(countChapters + 1, totalChapterCount + 1);
+        AqualityServices.getLogger().info("chapterToSelect: " + chapterToSelect);
         String chapterText = audioPlayerScreen.selectChapterAndGetText(chapterToSelect);
         context.add(keySelectedChapterText, chapterText);
     }
@@ -70,9 +80,7 @@ public class AudioPlayerSteps {
 
     @When("I click pause button on player screen")
     public void clickPauseButtonOnPlayerScreen() {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
             audioPlayerScreen.pauseBook();
-        }
     }
 
     @Then("Pause button is present")
@@ -180,12 +188,14 @@ public class AudioPlayerSteps {
     }
 
     @And("I select playback speed {double}X")
-    public void selectPlaybackSpeed(Double playbackSpeed) {
+    public void selectPlaybackSpeed(Double playbackSpeedDouble) {
+        String playbackSpeed = String.valueOf(playbackSpeedDouble);
         audioPlayerScreen.selectPlaybackSpeed(playbackSpeed);
     }
 
     @And("Current playback speed value is {double}X")
-    public void checkCurrentPlaybackSpeedValueIs(Double playbackSpeed) {
+    public void checkCurrentPlaybackSpeedValueIs(Double playbackSpeedDouble) {
+        String playbackSpeed = String.valueOf(playbackSpeedDouble);
         Assert.assertTrue("Current playback speed value is not correct", audioPlayerScreen.isSpeedOptionSelected(playbackSpeed));
     }
 

@@ -232,7 +232,7 @@ Feature: Book Transactions
     When I open Holds
     Then Book 'bookInfo' is present in Holds List
     When I click on the book 'bookInfo' button CANCEL on the holds screen
-    Then Book saved as 'bookInfo' should contain RESERVE button at the hold screen
+    Then Book 'bookInfo' is not present in Holds List
 
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Remove a Reserved Book from Holds screen (iOS)
