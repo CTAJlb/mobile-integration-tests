@@ -85,7 +85,6 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public void waitAndCheckAllLoadersDisappeared() {
         checkThatChaptersVisible();
-        //todo softAssert
         SoftAssertions softAssertions = new SoftAssertions();
         getChapters().forEach(chapter -> softAssertions.assertThat(chapter.findChildElement(By.xpath(CHAPTERS_TIMERS), ElementType.LABEL).state()
                         .waitForDisplayed(Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis()))).as("Loader did not disappear from the chapter block").isTrue()

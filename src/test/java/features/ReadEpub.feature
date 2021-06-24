@@ -12,19 +12,13 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Navigate by Page
-      And Book page number is 1
-    When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
+      When Book page number is 1
+      And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       And I click on right book corner
     Then Navigated to the next page and old page 'pageNumberInfo' and 'chapterNameInfo'
     When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
-      #And I swipe from right to left book corner
-    #Then Navigated to the next page and old page 'pageNumberInfo' and 'chapterNameInfo'
-    #When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       And I click on left book corner
     Then Navigated to the previous page and old page 'pageNumberInfo' and 'chapterNameInfo'
-    #When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
-      #And I swipe from left to right book corner
-    #Then Book page number is 1
 
   @tier1
   Scenario: Navigate by Table of Contents Menu

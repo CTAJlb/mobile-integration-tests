@@ -122,7 +122,6 @@ public class ReaderSteps {
 
     @And("Each chapter can be opened from Table of Contents")
     public void checkEachChapterCanBeOpenedFromTableOfContents() {
-        //todo softAssert
         SoftAssertions softAssertions = new SoftAssertions();
         List<String> chapters = epubReaderScreen.getListOfChapters();
         for (String chapter :
@@ -250,7 +249,6 @@ public class ReaderSteps {
 
     @And("Each chapter of pdf book can be opened from Table of Contents")
     public void checkEachChapterOfPdfBookCanBeOpenedFromTableOfContents() {
-        //todo softAssert
         SoftAssertions softAssertions = new SoftAssertions();
         pdfReaderScreen.openTableOfContents();
         pdfTableOfContentsScreen.switchToChaptersListView();
@@ -351,7 +349,6 @@ public class ReaderSteps {
 
     @Then("Found lines should contain {string} in themselves")
     public void checkThatPdfFoundLinesContainText(String textToBeContained) {
-        //todo softAssert
         SoftAssertions softAssertions = new SoftAssertions();
         pdfSearchScreen.getListOfFoundItems()
                 .forEach(line -> softAssertions.assertThat(line.toLowerCase(Locale.ROOT).contains(textToBeContained.toLowerCase(Locale.ROOT))).as(String.format("Line '%1$s' does not contain text '%2$s'", line, textToBeContained)).isTrue());
@@ -436,7 +433,6 @@ public class ReaderSteps {
             String actualFontAndBackground = epubReaderScreen.getFontAndBackgroundColor();
             Assert.assertTrue("BackgroundAndFont is not correct actualFontAndBackground-" + actualFontAndBackground + " expectedFontAndBackground-" + expectedFontAndBackground, actualFontAndBackground.toLowerCase().equals(expectedFontAndBackground.toLowerCase()));
         } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            //todo softAssert
             SoftAssertions softAssertions = new SoftAssertions();
             softAssertions.assertThat(epubReaderScreen.getFontColor()).as("Font color is not correct").isEqualTo(fontColor.i18n());
             softAssertions.assertThat(epubReaderScreen.getFontAndBackgroundColor()).as("Background color is not correct").isEqualTo(backgroundColor.i18n());
