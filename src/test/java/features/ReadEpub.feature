@@ -12,19 +12,13 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Navigate by Page
-      And Book page number is 1
-    When I save page info as 'pageInfo'
+      When Book page number is 1
+      And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       And I click on right book corner
-    Then Book page number is bigger then previous 'pageInfo'
-    When I save page info as 'pageInfo'
-      And I swipe from right to left book corner
-    Then Book page number is bigger then previous 'pageInfo'
-    When I save page info as 'pageInfo'
+    Then Navigated to the next page and old page 'pageNumberInfo' and 'chapterNameInfo'
+    When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       And I click on left book corner
-    Then Book page number is smaller then previous 'pageInfo'
-    When I save page info as 'pageInfo'
-      And I swipe from left to right book corner
-    Then Book page number is 1
+    Then Navigated to the previous page and old page 'pageNumberInfo' and 'chapterNameInfo'
 
   @tier1
   Scenario: Navigate by Table of Contents Menu
@@ -44,17 +38,17 @@ Feature: Read EPUB
   @tier1
   Scenario: Change, View Font and Contrast Settings
     When I save font size as 'fontSize'
-      And I INCREASE_FONT of text
+    And I INCREASE_FONT of text
     Then Font size 'fontSize' is increased
     When I save font size as 'fontSize'
-      And I DECREASE_FONT of text
+    And I DECREASE_FONT of text
     Then Font size 'fontSize' is decreased
-    When I change font style to SERIF
-    Then Book text displays in SERIF font
-    When I change font style to SANS_SERIF_ARIAL
-    Then Book text displays in SANS_SERIF_ARIAL font
-    When I change font style to ALTERNATIVE_SANS
-    Then Book text displays in ALTERNATIVE_SANS font
+    When I change font style to FONT_SERIF
+    Then Book text displays in FONT_SERIF font
+    When I change font style to FONT_SANS
+    Then Book text displays in FONT_SANS font
+    When I change font style to FONT_DYSLEXIC
+    Then Book text displays in FONT_DYSLEXIC font
     When I change contrast to WHITE_TEXT_ON_BLACK
     Then Book text displays WHITE on BLACK
     When I change contrast to BLACK_TEXT_ON_WHITE
@@ -65,15 +59,19 @@ Feature: Read EPUB
   @tier1
   Scenario: Return to Page (Bookmarking)
     When I scroll page forward from 10 to 20 times
-      And I save page info as 'pageInfo'
+    #chapterNameInfo does not check in Assert for ios we check pageNumber and chapterName fot android only pageNumber
+      And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       And I return to previous screen
       And Press on the book details screen at the action button READ
     Then Book 'bookInfo' is present on screen
-      And Page info 'pageInfo' is correct
-    When I restart app
+      And Page info 'pageNumberInfo' is correct
+    When I click on right book corner
+      And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
+      And I wait for 3 seconds
+      And I restart app
       And I open Books
     Then Book 'bookInfo' is present in Books List
     When I open book 'bookInfo' details by clicking on cover
       And Press on the book details screen at the action button READ
     Then Book 'bookInfo' is present on screen
-      And Page info 'pageInfo' is correct
+      And Page info 'pageNumberInfo' is correct

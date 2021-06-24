@@ -16,12 +16,11 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
 import screens.epubreader.EpubReaderScreen;
 import screens.epubtableofcontents.EpubTableOfContentsScreen;
 
 import java.time.Duration;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,14 +28,16 @@ import java.util.stream.Collectors;
 public class AndroidEpubReaderScreen extends EpubReaderScreen {
     public static final String EPUB_CONTENT_IFRAME = "epubContentIframe";
     private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader_title_text\")]"), "Book Cover");
+            getElementFactory().getLabel(By.xpath("//android.widget.TextView[1]"), "Book Cover");
     private final ILabel lblPageNumber =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader_position_text\")]"), "Page Number");
+            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_page\")]"), "Page Number");
     private final ILabel lblPage =
             getElementFactory().getLabel(By.xpath("//android.webkit.WebView"), "Page View");
-    private final IButton btnFontSettings = getElementFactory().getButton(By.id("reader_settings"), "Chapters");
+    private final IButton btnFontSettings = getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuSettings\")]"), "FontSettings");
     private final IButton btnChapters =
-            getElementFactory().getButton(By.xpath("//android.widget.ImageView[@content-desc=\"Show table of contents\"]"), "Chapters");
+            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuTOC\")]"), "Chapters");
+    private final ILabel lblChapterName =
+            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_title\")]"), "Chapter Name");
 
     public AndroidEpubReaderScreen() {
         super(By.id("//android.view.View[@resource-id=\"reflowable-book-frame\"]"));
@@ -47,6 +48,11 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
         String text = lblBookName.getText();
         AqualityServices.getLogger().info("Book name - " + text);
         return text;
+    }
+
+    @Override
+    public String getChapterName() {
+        return lblChapterName.getText();
     }
 
     @Override
@@ -73,10 +79,9 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     @Override
     public void clickRightCorner() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        Point upperLeftCorner = lblPage.getElement().getLocation();
-        Point center = lblPage.getElement().getCenter();
-        Dimension dimensions = lblPage.getElement().getSize();
-        action.tap(PointOption.point(upperLeftCorner.x + dimensions.width - 1, center.y)).perform();
+        int height = lblPage.getElement().getSize().height;
+        int width =  lblPage.getElement().getSize().width;
+        action.tap(PointOption.point(width - 10, height/2)).perform();
     }
 
     @Override
@@ -86,11 +91,11 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public Set<String> getListOfChapters() {
+    public List<String> getListOfChapters() {
         btnChapters.click();
         EpubTableOfContentsScreen epubTableOfContentsScreen = AqualityServices.getScreenFactory().getScreen(EpubTableOfContentsScreen.class);
         epubTableOfContentsScreen.state().waitForExist();
-        Set<String> bookNames = epubTableOfContentsScreen.getListOfBookChapters();
+        List<String> bookNames = epubTableOfContentsScreen.getListOfBookChapters();
         AqualityServices.getApplication().getDriver().navigate().back();
         AqualityServices.getLogger().info("Found chapters - " + bookNames.stream().map(Object::toString).collect(Collectors.joining(", ")));
         return bookNames;
@@ -99,7 +104,8 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     @Override
     public void openChapter(String chapter) {
         btnChapters.click();
-        IButton button = getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader_toc_element_text\") and @text=\"" + chapter + "\"]"), chapter);
+        IButton button = getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"chapterTitle\") and @text=\"" + chapter + "\"]"), chapter);
+        button.state().waitForDisplayed();
         button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         button.click();
     }
@@ -116,7 +122,7 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public double getFontSize() {
-        return RegExUtil.getDoubleFromFirstMatchGroup(getBookSource(), RegEx.FONT_SIZE_REGEX);
+        return RegExUtil.getDoubleFromFirstMatchGroup(getBookSource(), RegEx.FONT_SIZE_REGEX_ANDROID);
     }
 
     private String getBookSource() {
@@ -131,27 +137,29 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
         });
         Set<String> contextNames = driver.getContextHandles();
         driver.context((String) contextNames.toArray()[1]);
-        driver.switchTo().frame(EPUB_CONTENT_IFRAME);
-        String frameSource = driver.getPageSource();
-        logger.info(frameSource);
+        logger.info("pageSourceWithSettingsStart+++++++++++++++++++++++++");
+        String pageSourceWithSettings = driver.getPageSource();
+        logger.info(pageSourceWithSettings);
+        logger.info("pageSourceWithSettingsEnd+++++++++++++++++++++++++");
         driver.switchTo().defaultContent();
         driver.context((String) contextNames.toArray()[0]);
-        return frameSource;
+        return pageSourceWithSettings;
     }
 
     @Override
     public String getFontName() {
-        return getReaderInfo(RegEx.FONT_NAME_REGEX);
+        return getReaderInfo(RegEx.FONT_NAME_REGEX_ANDROID);
     }
 
     @Override
     public String getFontColor() {
-        return getReaderInfo(RegEx.FONT_COLOR_REGEX);
+        //only for IOS
+        return "";
     }
 
     @Override
-    public String getBackgroundColor() {
-        return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX);
+    public String getFontAndBackgroundColor() {
+        return getReaderInfo(RegEx.FONT_AND_BACKGROUND_ANDROID);
     }
 
     @Override

@@ -23,6 +23,7 @@ import org.openqa.selenium.Point;
 import screens.epubreader.EpubReaderScreen;
 import screens.epubtableofcontents.EpubTableOfContentsScreen;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -55,9 +56,15 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public String getBookName() {
-        String text = lblBookName.getAttribute(IosAttributes.NAME);
+        String text = lblBookName.getText();
         AqualityServices.getLogger().info("Book name - " + text);
         return text;
+    }
+
+    @Override
+    public String getChapterName() {
+        //only for android
+        return null;
     }
 
     @Override
@@ -100,14 +107,14 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public Set<String> getListOfChapters() {
+    public List<String> getListOfChapters() {
         if (!btnFontSettings.state().isDisplayed()) {
             CoordinatesClickUtils.clickAtCenterOfScreen();
         }
         btnChapters.click();
         EpubTableOfContentsScreen epubTableOfContentsScreen = AqualityServices.getScreenFactory().getScreen(EpubTableOfContentsScreen.class);
         epubTableOfContentsScreen.state().waitForExist();
-        Set<String> bookNames = epubTableOfContentsScreen.getListOfBookChapters();
+        List<String> bookNames = epubTableOfContentsScreen.getListOfBookChapters();
         AqualityServices.getApplication().getDriver().navigate().back();
         AqualityServices.getLogger().info("Found chapters - " + bookNames.stream().map(Object::toString).collect(Collectors.joining(", ")));
         return bookNames;
@@ -140,7 +147,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public double getFontSize() {
-        return RegExUtil.getDoubleFromFirstMatchGroup(getBookSource(), RegEx.FONT_SIZE_REGEX);
+        return RegExUtil.getDoubleFromFirstMatchGroup(getBookSource(), RegEx.FONT_SIZE_REGEX_IOS);
     }
 
     private String getBookSource() {
@@ -165,7 +172,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public String getFontName() {
-        return getReaderInfo(RegEx.FONT_NAME_REGEX);
+        return getReaderInfo(RegEx.FONT_NAME_REGEX_IOS);
     }
 
     @Override
@@ -174,8 +181,8 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public String getBackgroundColor() {
-        return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX);
+    public String getFontAndBackgroundColor() {
+        return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX_IOS);
     }
 
     @Override

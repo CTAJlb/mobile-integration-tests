@@ -17,24 +17,27 @@ import java.util.stream.Collectors;
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidEpubTableOfContentsScreen extends EpubTableOfContentsScreen {
     private final ILabel lblTable =
-            getElementFactory().getLabel(By.id("reader_toc_list"), "Table");
+            getElementFactory().getLabel(By.xpath("//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"tocChaptersList\")]"), "Table");
 
     private List<ILabel> getChapters() {
-        return getElementFactory().findElements(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader_toc_element_text\")]"), ElementType.LABEL);
+        return getElementFactory().findElements(By.xpath("//android.widget.TextView[contains(@resource-id,\"chapterTitle\")]"), ElementType.LABEL);
     }
 
     public AndroidEpubTableOfContentsScreen() {
-        super(By.id("reader_toc_list"));
+        super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"tocLayout\")]"));
     }
 
-    public Set<String> getListOfBookChapters() {
-        List<String> listOfChapters = getChapters().stream().map(IElement::getText).collect(Collectors.toList());
-        Set<String> bookNames = new HashSet<>();
+    public List<String> getListOfBookChapters() {
+        List<String> listOfChapters = null;
+        int oldSize = 0;
+        int newSize = 0;
         do {
-            bookNames.addAll(listOfChapters);
+            listOfChapters = getChapters().stream().map(IElement::getText).collect(Collectors.toList());
+            oldSize = listOfChapters.size();
             SwipeElementUtils.swipeThroughEntireElementUp(lblTable);
             listOfChapters = getChapters().stream().map(IElement::getText).collect(Collectors.toList());
-        } while (!bookNames.containsAll(listOfChapters));
-        return bookNames;
+            newSize = listOfChapters.size();
+        } while (oldSize != newSize);
+        return listOfChapters;
     }
 }

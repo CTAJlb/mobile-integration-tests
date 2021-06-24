@@ -3,6 +3,7 @@ package screens.epubreader;
 import aquality.appium.mobile.screens.Screen;
 import org.openqa.selenium.By;
 
+import java.util.List;
 import java.util.Set;
 
 public abstract class EpubReaderScreen extends Screen {
@@ -11,6 +12,8 @@ public abstract class EpubReaderScreen extends Screen {
     }
 
     public abstract String getBookName();
+
+    public abstract String getChapterName();
 
     public abstract boolean isBookNamePresent();
 
@@ -24,7 +27,7 @@ public abstract class EpubReaderScreen extends Screen {
 
     public abstract String getPageNumberInfo();
 
-    public abstract Set<String> getListOfChapters();
+    public abstract List<String> getListOfChapters();
 
     public abstract void openChapter(String chapter);
 
@@ -38,7 +41,7 @@ public abstract class EpubReaderScreen extends Screen {
 
     public abstract String getFontColor();
 
-    public abstract String getBackgroundColor();
+    public abstract String getFontAndBackgroundColor();
 
     public abstract void waitForBookLoading();
 
