@@ -133,7 +133,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(actionButtonKey1, actionButtonKey2, bookNameInfoKey, bookInfoKey);
     }
 
-    //new
     @When("I {} book from Subcategory List View with title {string} and save it as {string}")
     public void performActionOnBookFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey) {
         catalogSteps.performActionOnBookFromAPIAndSaveIt(actionButtonKey, bookNameInfoKey, bookInfoKey);
@@ -144,7 +143,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openBookWithGivenName(bookName, bookInfoKey, bookType);
     }
 
-    @When("I open {string} book from Subcategory List View with title {string} and save it as {string}")
+    @When("Open {string} book from Subcategory List View with title {string} and save it as {string}")
     public void getBookNameAndOpenBookAndSaveIt(String bookType, String bookNameKey, String bookInfoKey) {
         String bookName = context.get(bookNameKey);
         catalogSteps.openBookWithGivenName(bookName, bookInfoKey, bookType);

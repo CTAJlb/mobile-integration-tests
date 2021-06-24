@@ -26,11 +26,46 @@ Feature: Book Transactions
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When I open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    When Open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
     When I press on the book details screen at the action button RESERVE
       And I open Holds
     Then Book 'bookInfo' is present in Holds List
+
+  @logout @returnBooks @tier2 @go
+  Scenario: Check out from Book Detail View and check in Books
+    When I add "LYRASIS" account from welcomeScreen
+      And I enter credentials for 'LYRASIS' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I switch to 'LYRASIS' from side menu
+      And I open search modal
+      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+      And Open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+      And Get book on the book details screen
+    Then I check that opened book contains READ button at book details screen
+    When I open Books
+    Then Book 'bookInfo' is present in Books List
+    #When I open book 'bookInfo' details by clicking on cover
+    #Then Opened book contains read button at book details screen
+    #When I read <bookType> book
+    #Then Reader screen for <bookType> type book 'bookInfo' is present
+
+  @logout @returnBooks @tier2 @go
+  Scenario: Check out from Subcategory List View and check in Books
+    When I add "LYRASIS" account from welcomeScreen
+      And I enter credentials for 'LYRASIS' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I switch to 'LYRASIS' from side menu
+      And I open search modal
+      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
+    When I open Books
+    Then Book 'bookInfo' is present in Books List
 
   @tier2
   Scenario: Download from Book detail view
