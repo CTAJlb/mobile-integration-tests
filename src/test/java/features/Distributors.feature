@@ -34,8 +34,8 @@ Feature: Distributors
       And Open '<bookType>' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
       And Get book on the book details screen
     Then Opened book contains read button at book details screen
-    When Press on the book details screen at the action button READ
-    Then Book 'bookInfo' is present on screen
+    When I read <bookType> book
+    Then Reader screen for <bookType> type book 'bookInfo' is present
 
     Scenarios:
       | distributor | bookType  | tabName    |
@@ -56,7 +56,8 @@ Feature: Distributors
       And I switch to '<tabName>' catalog tab
       And Open '<bookType>' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
       And Get book on the book details screen
-      And I return book from book details screen
+      And I wait for 3 seconds
+      And Press on the book details screen at the action button RETURN
     Then I check that opened book contains GET button at book details screen
 
     Scenarios:

@@ -36,8 +36,8 @@ Feature: Book Transactions
     When I click on the book 'bookInfo' button CANCEL on the holds screen
     Then Book 'bookInfo' is not present in Holds List
 
-  @logout @returnBooks @tier2 @go
-  Scenario: Check out from Book Detail View and check in Books
+  @logout @returnBooks @tier2 @go3
+  Scenario: Check out from Book Detail View and return from Books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -51,13 +51,14 @@ Feature: Book Transactions
     Then I check that opened book contains READ button at book details screen
     When I open Books
     Then Book 'bookInfo' is present in Books List
-    #When I open book 'bookInfo' details by clicking on cover
-    #Then Opened book contains read button at book details screen
-    #When I read <bookType> book
-    #Then Reader screen for <bookType> type book 'bookInfo' is present
+    When I open book 'bookInfo' details by clicking on cover
+      And Press on the book details screen at the action button RETURN
+    Then I check that the action button text equal to the GET
+    When I open Books
+    Then Book 'bookInfo' is not present in Books List
 
   @logout @returnBooks @tier2 @go
-  Scenario: Check out from Subcategory List View and check in Books
+  Scenario: Check out from Subcategory List View and return from Books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -70,6 +71,11 @@ Feature: Book Transactions
     Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open Books
     Then Book 'bookInfo' is present in Books List
+    When I open book 'bookInfo' details by clicking on cover
+      And Press on the book details screen at the action button RETURN
+    Then I check that the action button text equal to the GET
+    When I open Books
+    Then Book 'bookInfo' is not present in Books List
 
   @logout @returnBooks @tier2 @go1
   Scenario: Return book from Subcategory List View
