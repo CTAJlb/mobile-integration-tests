@@ -104,6 +104,7 @@ Feature: Book Transactions
     Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I click on the book 'bookInfo' button READ on catalog books screen
     Then Book 'bookInfo' is present on screen
+    And I return to previous screen
     When I open Books
     Then Book 'bookInfo' is present in Books List
     When I open book 'bookInfo' details by clicking on cover
@@ -112,7 +113,7 @@ Feature: Book Transactions
     When I open Books
     Then Book 'bookInfo' is not present in Books List
 
-  @logout @returnBooks @tier2 @go
+  @logout @returnBooks @tier2 @exclude_android @go
   Scenario: Check out from Subcategory List View and Return from Subcategory List View
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
