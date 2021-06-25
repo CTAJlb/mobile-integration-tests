@@ -1,6 +1,6 @@
 Feature: Book Transactions
 
-  @logout @returnBooks @tier2 @go2
+  @logout @returnBooks @tier2 @go
   Scenario: Hold from Subcategory List View and Remove a Reserved Book from Holds
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -17,7 +17,22 @@ Feature: Book Transactions
     When I click on the book 'bookInfo' button CANCEL on the holds screen
     Then Book 'bookInfo' is not present in Holds List
 
-  @logout @returnBooks @tier2 @go2
+  @logout @returnBooks @tier2 @go
+  Scenario: Hold from Subcategory List View and Remove a Reserved Book from Subcategory List View
+    When I add "LYRASIS" account from welcomeScreen
+      And I enter credentials for 'LYRASIS' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I switch to 'LYRASIS' from side menu
+      And I open search modal
+      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+      And I RESERVE book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain CANCEL button on Subcategory List View
+    When I click on the book 'bookInfo' button CANCEL on catalog books screen
+    Then Book saved as 'bookInfo' should contain RESERVE button on Subcategory List View
+
+  @logout @returnBooks @tier2 @go
   Scenario: Hold from Book Detail View and and Remove a Reserved Book from Holds
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -36,8 +51,26 @@ Feature: Book Transactions
     When I click on the book 'bookInfo' button CANCEL on the holds screen
     Then Book 'bookInfo' is not present in Holds List
 
-  @logout @returnBooks @tier2 @go3
-  Scenario: Check out from Book Detail View and return from Books
+  @logout @returnBooks @tier2 @go
+  Scenario: Hold from Book Detail View and Remove a Reserved Book from Book Detail View
+    When I add "LYRASIS" account from welcomeScreen
+    And I enter credentials for 'LYRASIS' account
+    Then Login is performed successfully
+    When I open Catalog
+    And I switch to 'LYRASIS' from side menu
+    And I open search modal
+    And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+    And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+    When Open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book 'bookInfo' is opened
+    When I press on the book details screen at the action button RESERVE
+    Then I check that opened book contains CANCEL button at book details screen
+    When Press on the book details screen at the action button CANCEL
+    Then I check that the action button text equal to the RESERVE
+
+  @logout @returnBooks @tier2 @go
+  Scenario: Check out from Book Detail View and Return from Books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -58,7 +91,7 @@ Feature: Book Transactions
     Then Book 'bookInfo' is not present in Books List
 
   @logout @returnBooks @tier2 @go
-  Scenario: Check out from Subcategory List View and return from Books
+  Scenario: Check out from Subcategory List View and Return from Books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -69,6 +102,8 @@ Feature: Book Transactions
       And I switch to 'eBooks' catalog tab
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
+    When I click on the book 'bookInfo' button READ on catalog books screen
+    Then Book 'bookInfo' is present on screen
     When I open Books
     Then Book 'bookInfo' is present in Books List
     When I open book 'bookInfo' details by clicking on cover
@@ -77,8 +112,8 @@ Feature: Book Transactions
     When I open Books
     Then Book 'bookInfo' is not present in Books List
 
-  @logout @returnBooks @tier2 @go1
-  Scenario: Return book from Subcategory List View
+  @logout @returnBooks @tier2 @go
+  Scenario: Check out from Subcategory List View and Return from Subcategory List View
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -91,6 +126,23 @@ Feature: Book Transactions
       And I wait for 3 seconds
       And I RETURN book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain GET button on Subcategory List View
+
+  @logout @returnBooks @tier2 @go
+  Scenario: Check out from Subcategory List View and Read from Books
+    When I add "LYRASIS" account from welcomeScreen
+      And I enter credentials for 'LYRASIS' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I switch to 'LYRASIS' from side menu
+      And I open search modal
+      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
+    When I open Books
+      And I open book 'bookInfo' details by clicking on cover
+      And Press on the book details screen at the action button READ
+    Then Book 'bookInfo' is present on screen
 
   @tier2
   Scenario: Download from Book detail view
@@ -140,74 +192,6 @@ Feature: Book Transactions
       And I delete book from book details screen
       And I open Books
     Then Book 'bookInfo' is not present in Books List
-
-  @logout @returnBooks @tier2 @exclude_android
-  Scenario: Check out from Book Detail View
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
-    Then Login is performed successfully
-    When I open Catalog
-      And I switch to 'LYRASIS' from side menu
-      And I open category by chain:
-        | Nonfiction         |
-        | Biography & Memoir |
-    When I open the book details for the subsequent GET and save it as 'bookInfo'
-    Then I check that opened book contains READ button at book details screen
-
-  @logout @returnBooks @tier2 @exclude_android
-  Scenario: Return book from books tab
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
-    Then Login is performed successfully
-    When I open Catalog
-      And I switch to 'LYRASIS' from side menu
-      And I open category by chain:
-        | Nonfiction   |
-        | Art & Design |
-        | Art          |
-      And I open the book details for the subsequent GET and save it as 'bookInfo'
-    Then I check that opened book contains READ button at book details screen
-    When I open Books
-    Then Book 'bookInfo' is present in Books List
-    When I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button RETURN
-    Then I check that the action button text equal to the GET
-    When I open Books
-    Then Book 'bookInfo' is not present in Books List
-
-  @logout @returnBooks @tier2
-  Scenario: Remove a Reserved Book from subcategory list
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
-    Then Login is performed successfully
-    When I open Catalog
-      And I switch to 'LYRASIS' from side menu
-      And I open search modal
-      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
-      And I switch to 'eBooks' catalog tab
-      Then Subcategory screen is present
-      And I RESERVE book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain CANCEL button on Subcategory List View
-    When I click on the book 'bookInfo' button CANCEL on catalog books screen
-    Then Book saved as 'bookInfo' should contain RESERVE button on Subcategory List View
-
-  @logout @returnBooks @tier2
-  Scenario: Remove a Reserved Book from Book Detail View
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
-    Then Login is performed successfully
-    When I open Catalog
-      And I switch to 'LYRASIS' from side menu
-      And I open search modal
-      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
-      And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    When I open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book 'bookInfo' is opened
-      And I press on the book details screen at the action button RESERVE
-    Then I check that opened book contains CANCEL button at book details screen
-    When Press on the book details screen at the action button CANCEL
-    Then I check that the action button text equal to the RESERVE
 
   @logout @returnBooks @tier3 @exclude_android
   Scenario: Cancel remove from holds tab
