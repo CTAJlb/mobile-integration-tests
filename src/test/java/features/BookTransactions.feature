@@ -145,55 +145,6 @@ Feature: Book Transactions
       And Press on the book details screen at the action button READ
     Then Book 'bookInfo' is present on screen
 
-  @tier2
-  Scenario: Download from Book detail view
-    When I add "Digital Public Library of America" account from welcomeScreen
-      And I open Catalog
-      And I open category by chain:
-        | Fiction |
-        | Drama   |
-    When I open the book details for the subsequent DOWNLOAD and save it as 'bookInfo'
-    Then I check that opened book contains READ button at book details screen
-
-  @tier2
-  Scenario: Download from subcategory screen
-    When I add "Digital Public Library of America" account from welcomeScreen
-      And I open Catalog
-      And I open category by chain:
-        | Fiction |
-        | Drama   |
-      And DOWNLOAD book from subcategory screen and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
-
-  @tier2
-  Scenario: Read from subcategory screen
-   #is there such a thing for Book detail view?
-    When I add "Digital Public Library of America" account from welcomeScreen
-      And I open Catalog
-      And I open category by chain:
-        | Fiction |
-        | Drama   |
-      And DOWNLOAD book from subcategory screen and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
-    When I open Books
-      And I Read book 'bookInfo'
-    Then Book 'bookInfo' is present on screen
-
-  @tier2
-  Scenario: Delete book from books tab
-    When I add "Digital Public Library of America" account from welcomeScreen
-      And I open Catalog
-      And I open category by chain:
-        | Fiction |
-        | Drama   |
-      And DOWNLOAD book from subcategory screen and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
-    When I open Books
-      And I open book 'bookInfo' details by clicking on cover
-      And I delete book from book details screen
-      And I open Books
-    Then Book 'bookInfo' is not present in Books List
-
   @logout @returnBooks @tier3 @exclude_android
   Scenario: Cancel remove from holds tab
     When I add "LYRASIS" account from welcomeScreen
