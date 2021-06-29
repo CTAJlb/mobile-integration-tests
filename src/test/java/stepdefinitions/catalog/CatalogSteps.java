@@ -103,8 +103,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openCategoryByChain(categoriesChain);
     }
 
-    @When("I open the book details for the subsequent {} and save it as {string}")
-    @And("Open the book details for the subsequent {} and save it as {string}")
+    @When("I open the book details for the subsequent {} on Subcategory List View and save it as {string}")
     public void openBookDetailsExecuteBookActionAndSaveItToContext(BookActionButtonKeys actionButtonKey, String bookInfoKey) {
         if (actionButtonKey == BookActionButtonKeys.DOWNLOAD && AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
             catalogSteps.openBookDetailsExecuteBookActionAndSaveItToContext(BookActionButtonKeys.GET, bookInfoKey);
@@ -256,9 +255,9 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.checkThatSavedBookContainButtonAtCatalogBooksScreen(bookInfoKey, key);
     }
 
-    @Then("I check that opened book contains {} button at book details screen")
-    public void checkThatSavedBookContainButtonAtBookDetailsScreen(final BookActionButtonKeys key) {
-        catalogSteps.checkThatSavedBookContainButtonAtBookDetailsScreen(key);
+    @Then("I check that book contains {} action button on book details view")
+    public void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final BookActionButtonKeys key) {
+        catalogSteps.checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(key);
     }
 
     @And("I return book from book details screen")
@@ -276,20 +275,9 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openBookDetailsByClickingOnCover(bookInfoKey);
     }
 
-    @When("I press on the book details screen at the action button {}")
-    @And("Press on the book details screen at the action button {}")
+    @When("I press on the book details view at the action button {}")
     public void pressOnBookDetailsScreenAtActionButton(BookActionButtonKeys actionButton) {
         catalogSteps.pressOnBookDetailsScreenAtActionButton(actionButton);
-    }
-
-    @And("Get book on the book details screen")
-    public void getBookOnBookDetailsScreen() {
-        catalogSteps.getBookOnBookDetailsScreen();
-    }
-
-    @Then("I check that the action button text equal to the {}")
-    public void checkThatActionButtonTextEqualToExpected(BookActionButtonKeys actionButton) {
-        catalogSteps.checkThatSavedBookContainButtonAtBookDetailsScreen(actionButton);
     }
 
     @When("I change books visibility to show {}")
@@ -298,14 +286,9 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.checkThatActionButtonTextEqualToExpected(facetAvailabilityKeys);
     }
 
-    @When("I read {} book")
+    @When("I read book with {} type from book details view")
     public void openGivenTypeBookReader(ReaderType readerType) {
         catalogSteps.openTypeBookReader(readerType);
-    }
-
-    @Then("Opened book contains read button at book details screen")
-    public void checkBookWasBorrowedSuccessfully() {
-        catalogSteps.checkBookWasBorrowedSuccessfully();
     }
 
     @When("I open first present category")

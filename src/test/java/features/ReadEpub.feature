@@ -7,7 +7,7 @@ Feature: Read EPUB
       And I search for 'Flower Fables'
       And DOWNLOAD book from subcategory screen and save it as 'bookInfo'
       And I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
 
   @tier1
@@ -33,7 +33,7 @@ Feature: Read EPUB
   @tier1
   Scenario: Navigate View options
     When I return to previous screen
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
     When I open font choices for book
     Then Font choices screen is present
@@ -68,13 +68,13 @@ Feature: Read EPUB
     #chapterNameInfo does not check in Assert for ios we check pageNumber and chapterName fot android only pageNumber
       And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
       And I return to previous screen
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
       And Page info 'pageNumberInfo' is correct
     When I restart app
       And I open Books
     Then Book 'bookInfo' is present in Books List
     When I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
       And Page info 'pageNumberInfo' is correct

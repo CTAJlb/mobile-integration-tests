@@ -9,24 +9,24 @@ Feature: Digital library
 
 @logout @returnBooks @tier2 @go1
 Scenario: Check out from Book Detail View and Return from Books
-  When I open the book details for the subsequent DOWNLOAD and save it as 'bookInfo'
-  Then I check that opened book contains READ button at book details screen
+  When I open the book details for the subsequent DOWNLOAD on Subcategory List View and save it as 'bookInfo'
+  Then I check that book contains READ action button on book details view
   When I open Books
   Then Book 'bookInfo' is present in Books List
   When I open book 'bookInfo' details by clicking on cover
-    And Press on the book details screen at the action button RETURN
-  Then I check that the action button text equal to the GET
+    And I press on the book details view at the action button RETURN
+  Then I check that book contains GET action button on book details view
   When I open Books
   Then Book 'bookInfo' is not present in Books List
 
   @logout @returnBooks @tier2 @go1
   Scenario: Check out from Book Detail View and Return from Book Detail View
-    When I open the book details for the subsequent DOWNLOAD and save it as 'bookInfo'
-    And Press on the book details screen at the action button READ
+    When I open the book details for the subsequent DOWNLOAD on Subcategory List View and save it as 'bookInfo'
+    And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
     When I return to previous screen
-    And Press on the book details screen at the action button RETURN
-    Then I check that opened book contains GET button at book details screen
+    And I press on the book details view at the action button RETURN
+    Then I check that book contains GET action button on book details view
 
   @logout @returnBooks @tier2 @go1
   Scenario: Check out from Subcategory List View and Return from Books
@@ -38,8 +38,8 @@ Scenario: Check out from Book Detail View and Return from Books
     When I open Books
     Then Book 'bookInfo' is present in Books List
     When I open book 'bookInfo' details by clicking on cover
-    And Press on the book details screen at the action button RETURN
-    Then I check that the action button text equal to the GET
+    And I press on the book details view at the action button RETURN
+    Then I check that book contains GET action button on book details view
     When I open Books
     Then Book 'bookInfo' is not present in Books List
 
@@ -58,5 +58,5 @@ Scenario: Check out from Book Detail View and Return from Books
     And I return to previous screen
     When I open Books
       And I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen

@@ -45,7 +45,7 @@ Feature: Book Transactions
     Then Subcategory screen is present
     When Open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
-    When I press on the book details screen at the action button RESERVE
+    When I press on the book details view at the action button RESERVE
       And I open Holds
     Then Book 'bookInfo' is present in Holds List
     When I click on the book 'bookInfo' button CANCEL on the holds screen
@@ -64,10 +64,10 @@ Feature: Book Transactions
     Then Subcategory screen is present
     When Open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
-    When I press on the book details screen at the action button RESERVE
-    Then I check that opened book contains CANCEL button at book details screen
-    When Press on the book details screen at the action button CANCEL
-    Then I check that the action button text equal to the RESERVE
+    When I press on the book details view at the action button RESERVE
+    Then I check that book contains CANCEL action button on book details view
+    When I press on the book details view at the action button CANCEL
+    Then I check that book contains RESERVE action button on book details view
 
   @logout @returnBooks @tier2 @go
   Scenario: Check out from Book Detail View and Return from Books
@@ -80,13 +80,13 @@ Feature: Book Transactions
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-      And Get book on the book details screen
-    Then I check that opened book contains READ button at book details screen
+      And I press on the book details view at the action button GET
+    Then I check that book contains READ action button on book details view
     When I open Books
     Then Book 'bookInfo' is present in Books List
     When I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button RETURN
-    Then I check that the action button text equal to the GET
+      And I press on the book details view at the action button RETURN
+    Then I check that book contains GET action button on book details view
     When I open Books
     Then Book 'bookInfo' is not present in Books List
 
@@ -108,8 +108,8 @@ Feature: Book Transactions
     When I open Books
     Then Book 'bookInfo' is present in Books List
     When I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button RETURN
-    Then I check that the action button text equal to the GET
+      And I press on the book details view at the action button RETURN
+    Then I check that book contains GET action button on book details view
     When I open Books
     Then Book 'bookInfo' is not present in Books List
 
@@ -142,7 +142,7 @@ Feature: Book Transactions
     Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open Books
       And I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
 
   @logout @returnBooks @tier3 @exclude_android
@@ -158,8 +158,8 @@ Feature: Book Transactions
     Then Subcategory screen is present
     When I open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
-      And I press on the book details screen at the action button RESERVE
-    Then I check that opened book contains CANCEL button at book details screen
+      And I press on the book details view at the action button RESERVE
+    Then I check that book contains CANCEL action button on book details view
     When I open Holds
     Then Book 'bookInfo' is present in Holds List
     When I click on the book 'bookInfo' button CANCEL on the holds screen and don't click on the popup button

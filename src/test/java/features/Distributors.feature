@@ -11,8 +11,8 @@ Feature: Distributors
       And I search 'unavailable' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open '<bookType>' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-      And I press on the book details screen at the action button RESERVE
-    Then I check that opened book contains CANCEL button at book details screen
+      And I press on the book details view at the action button RESERVE
+    Then I check that book contains CANCEL action button on book details view
 
     Scenarios:
       | distributor | bookType  | tabName    |
@@ -32,9 +32,9 @@ Feature: Distributors
       And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open '<bookType>' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-      And Get book on the book details screen
-    Then Opened book contains read button at book details screen
-    When I read <bookType> book
+      And I press on the book details view at the action button GET
+    Then I check that book contains READ action button on book details view
+    When I read book with <bookType> type from book details view
     Then Reader screen for <bookType> type book 'bookInfo' is present
 
     Scenarios:
@@ -55,10 +55,10 @@ Feature: Distributors
       And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open '<bookType>' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-      And Get book on the book details screen
+      And I press on the book details view at the action button GET
       And I wait for 3 seconds
-      And Press on the book details screen at the action button RETURN
-    Then I check that opened book contains GET button at book details screen
+      And I press on the book details view at the action button RETURN
+    Then I check that book contains GET action button on book details view
 
     Scenarios:
       | distributor | bookType  | tabName    |

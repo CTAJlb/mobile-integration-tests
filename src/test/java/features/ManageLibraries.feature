@@ -52,10 +52,10 @@ Feature: Manage Libraries
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When I open 'EBOOK' book 'bookNameInfo' and save it as 'bookInfo'
+    When Open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
-      And I press on the book details screen at the action button RESERVE
-    Then I check that opened book contains CANCEL button at book details screen
+      And I press on the book details view at the action button RESERVE
+    Then I check that book contains CANCEL action button on book details view
     When I open Holds
     Then Holds feed is loaded
       And Book 'bookInfo' is present in Holds List
