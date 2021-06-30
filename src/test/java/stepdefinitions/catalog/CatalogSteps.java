@@ -112,7 +112,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         }
     }
 
-    @And("{} book from subcategory screen and save it as {string}")
+    @And("{} book from subcategory list view and save it as {string}")
     public void executeBookActionAndSaveItToContextAndLibraryCancel(BookActionButtonKeys actionButtonKey, String bookInfoKey) {
         if (actionButtonKey == BookActionButtonKeys.DOWNLOAD && AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
             catalogSteps.executeBookActionAndSaveItToContextAndLibraryCancel(BookActionButtonKeys.GET, bookInfoKey);
@@ -148,7 +148,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openBookWithGivenName(bookName, bookInfoKey, bookType);
     }
 
-    @When("I click on the book {string} button {} on catalog books screen")
+    @When("I click on the book {string} button {} on subcategory list view")
     public void clickOnBookAddButtonOnCatalogBooksScreen(String bookInfoKey, BookActionButtonKeys key) {
         catalogSteps.clickOnBookAddButtonOnCatalogBooksScreen(bookInfoKey, key);
     }

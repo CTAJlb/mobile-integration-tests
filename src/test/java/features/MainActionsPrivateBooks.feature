@@ -29,7 +29,7 @@ Feature: Main actions private access books
       And I switch to 'eBooks' catalog tab
       And I RESERVE book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain CANCEL button on Subcategory List View
-    When I click on the book 'bookInfo' button CANCEL on catalog books screen
+    When I click on the book 'bookInfo' button CANCEL on subcategory list view
     Then Book saved as 'bookInfo' should contain RESERVE button on Subcategory List View
 
   @logout @returnBooks @tier2 @go
@@ -102,7 +102,7 @@ Feature: Main actions private access books
       And I switch to 'eBooks' catalog tab
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
-    When I click on the book 'bookInfo' button READ on catalog books screen
+    When I click on the book 'bookInfo' button READ on subcategory list view
     Then Book 'bookInfo' is present on screen
     And I return to previous screen
     When I open Books
@@ -145,7 +145,7 @@ Feature: Main actions private access books
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
 
-  @logout @returnBooks @tier3 @exclude_android
+  @logout @returnBooks @tier3 @exclude_android @go
   Scenario: Cancel remove from holds tab
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account

@@ -369,7 +369,7 @@ public class ReaderSteps {
         context.add(pageKey, pdfSearchScreen.getSearchedItemPageNumber(0));
     }
 
-    @Then("Reader screen for {} type book {string} is present")
+    @Then("Reader screen for {string} book with {} type is present")
     public void readerScreenForEbookTypeIsPresent(ReaderType readerType, String bookInfoKey) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         switch (readerType) {
