@@ -35,7 +35,7 @@ Feature: Distributors
       And I press on the book details view at the action button GET
     Then I check that book contains <buttonBookDetailsView> action button on book details view
     When I read book with <bookType> type from book details view
-    Then Reader screen for 'bookInfo' book with <bookType> type is present
+    Then Reader screen for 'bookInfo' book with '<bookType>' type is present
 
     Scenarios:
       | distributor | bookType  | tabName    | buttonBookDetailsView |
