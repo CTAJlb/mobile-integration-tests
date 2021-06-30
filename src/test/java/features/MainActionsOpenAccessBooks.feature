@@ -1,4 +1,4 @@
-Feature: Digital library
+Feature: Main actions open access books
 
   Background:
     Given I add "Digital Public Library of America" account from welcomeScreen

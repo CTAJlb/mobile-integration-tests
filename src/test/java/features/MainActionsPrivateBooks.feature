@@ -1,4 +1,4 @@
-Feature: Book Transactions
+Feature: Main actions private access books
 
   @logout @returnBooks @tier2 @go
   Scenario: Hold from Subcategory List View and Remove a Reserved Book from Holds
