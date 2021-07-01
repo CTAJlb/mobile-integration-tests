@@ -28,7 +28,7 @@ Scenario: Check out from Book Detail View and Return from Books
     And I press on the book details view at the action button DELETE
     Then I check that book contains GET action button on book details view
     When I open Books
-    Then Book 'bookInfo' is present in Books List
+    Then Book 'bookInfo' is not present in Books List
 
   @tier2 @exclude_ios @go1
   Scenario: Check out from Book Detail View and Return from Book Detail View
@@ -76,7 +76,7 @@ Scenario: Check out from Book Detail View and Return from Books
     And I press on the book details view at the action button DELETE
     Then I check that book contains GET action button on book details view
     When I open Books
-    Then Book 'bookInfo' is present in Books List
+    Then Book 'bookInfo' is not present in Books List
 
   @tier2 @exclude_ios @go1
   Scenario: Check out from Subcategory List View and Return from Subcategory List View
