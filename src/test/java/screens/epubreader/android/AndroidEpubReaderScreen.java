@@ -81,10 +81,6 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
         int height = lblPage.getElement().getSize().height;
         int width =  lblPage.getElement().getSize().width;
-        /*Point upperLeftCorner = lblPage.getElement().getLocation();
-        Point center = lblPage.getElement().getCenter();
-        Dimension dimensions = lblPage.getElement().getSize();
-        action.tap(PointOption.point(upperLeftCorner.x + dimensions.width - 1, center.y)).perform();*/
         action.tap(PointOption.point(width - 10, height/2)).perform();
     }
 
