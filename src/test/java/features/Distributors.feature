@@ -56,7 +56,7 @@ Feature: Distributors
       And I switch to '<tabName>' catalog tab
       And Open '<bookType>' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
       And I press on the book details view at the action button GET
-      And I wait for 3 seconds
+      #And I wait for 3 seconds
       And I press on the book details view at the action button RETURN
     Then I check that book contains GET action button on book details view
 
