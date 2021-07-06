@@ -71,12 +71,6 @@ Scenario: Check out from Book Detail View and Return from Books
       And I open Books
     Then Book 'bookInfo' is not present in Books List
 
-  @tier2 @exclude_ios
-  Scenario: Check out from Subcategory List View and Return from Subcategory List View
-    When DOWNLOAD book from subcategory list view and save it as 'bookInfo'
-      And I click on the book 'bookInfo' button DELETE on subcategory list view
-    Then Book saved as 'bookInfo' should contain DOWNLOAD button on Subcategory List View
-
   @tier2 @exclude_android
   Scenario: Check out from Subcategory List View and Return from Subcategory List View(IOS)
     When DOWNLOAD book from subcategory list view and save it as 'bookInfo'

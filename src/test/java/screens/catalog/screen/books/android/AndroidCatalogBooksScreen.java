@@ -180,6 +180,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     private CatalogBookModel openBook(IButton button, String bookTitle) {
         CatalogBookModel androidCatalogBookModel = getBookInfo(bookTitle);
         button.click();
+        AqualityServices.getConditionalWait().waitFor(() -> button.state().waitForNotDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         return androidCatalogBookModel;
     }
 
