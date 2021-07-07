@@ -71,7 +71,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
         IButton bookActionBtn =
                 getElementFactory().getButton(By.xpath(getBlockLocator(title) + String.format(BOOK_ADD_BUTTON_LOC, buttonName)), buttonName);
         clickOnSpecificBookElement(bookActionBtn);
-        bookActionBtn.state().waitForNotDisplayed();
+        AqualityServices.getConditionalWait().waitFor(() -> !bookActionBtn.state().isDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }
 
     @Override
