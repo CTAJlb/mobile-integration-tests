@@ -1,6 +1,6 @@
 Feature: Main actions private access books
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @run
   Scenario: Hold from Subcategory List View and Remove a Reserved Book from Holds
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -17,7 +17,7 @@ Feature: Main actions private access books
     When I click on the book 'bookInfo' button CANCEL on the holds screen
     Then Book 'bookInfo' is not present in Holds List
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @run
   Scenario: Hold from Subcategory List View and Remove a Reserved Book from Subcategory List View
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -86,7 +86,7 @@ Feature: Main actions private access books
       And I open Books
     Then Book 'bookInfo' is not present in Books List
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @run
   Scenario: Check out from Subcategory List View and Return from Books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account

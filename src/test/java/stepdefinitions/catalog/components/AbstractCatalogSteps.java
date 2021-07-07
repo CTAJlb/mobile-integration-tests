@@ -118,6 +118,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void openCategory(String categoryName) {
+        subcategoryScreen.state().waitForDisplayed();
         catalogScreen.openCategory(categoryName);
     }
 
@@ -180,6 +181,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     //new
     @Override
     public void performActionOnBookFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey) {
+        subcategoryScreen.state().waitForDisplayed();
         String bookName = context.get(bookNameInfoKey);
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
     }
