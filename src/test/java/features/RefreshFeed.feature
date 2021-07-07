@@ -8,7 +8,7 @@ Feature: Feed
     When I open category by chain:
       | Fiction |
       | Drama   |
-      And DOWNLOAD book and save it as 'bookInfo'
+      And DOWNLOAD book from subcategory list view and save it as 'bookInfo'
       And I open Books
     Then Book 'bookInfo' is present in Books List
       And Count of books is equal to 1

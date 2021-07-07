@@ -13,10 +13,10 @@ Feature: Read PDF IOS
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
       And Pdf book page number is 1
 
@@ -25,10 +25,10 @@ Feature: Read PDF IOS
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
       And Pdf book page number is 1
     When I go to next page in pdf book
@@ -41,10 +41,10 @@ Feature: Read PDF IOS
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
       And Each chapter of pdf book can be opened from Table of Contents
 
@@ -53,22 +53,22 @@ Feature: Read PDF IOS
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
     When I scroll pdf page forward from 10 to 20 times
       And I save pdf page number as 'pageNumber'
       And I return to previous screen
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct
     When I restart app
       And I open Books
     Then Book 'bookInfo' is present in Books List
     When I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct
 
@@ -77,10 +77,10 @@ Feature: Read PDF IOS
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
     When I open gallery menu
     Then Gallery is opened
@@ -98,10 +98,10 @@ Feature: Read PDF IOS
     When I search for pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET book with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
     When I click the search in the pdf button
     Then The search in the pdf page opened
@@ -112,9 +112,9 @@ Feature: Read PDF IOS
   Scenario: Navigate to Search Term
     When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners'
       And I GET hardcode book 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button at catalog books screen
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open book 'bookInfo' details by clicking on cover
-      And Press on the book details screen at the action button READ
+      And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
     When I click the search in the pdf button
       And I am typing 'vocabulary list' to the search field and apply search

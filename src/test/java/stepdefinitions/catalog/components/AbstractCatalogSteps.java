@@ -118,6 +118,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void openCategory(String categoryName) {
+        subcategoryScreen.state().waitForDisplayed();
         catalogScreen.openCategory(categoryName);
     }
 
@@ -180,6 +181,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     //new
     @Override
     public void performActionOnBookFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey) {
+        subcategoryScreen.state().waitForDisplayed();
         String bookName = context.get(bookNameInfoKey);
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
     }
@@ -327,10 +329,16 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void checkThatSavedBookContainButtonAtBookDetailsScreen(final BookActionButtonKeys key) {
+    public void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final BookActionButtonKeys key) {
         boolean isButtonPresent = bookDetailsScreen.isBookAddButtonTextEqualTo(key);
         addScreenshotIfErrorPresent(isButtonPresent);
         Assert.assertTrue(String.format("Button '%1$s' is not present on book details screen. Error (if present) - %2$s", key.i18n(), getErrorDetails()), isButtonPresent);
+    }
+
+    @Override
+    public void returnBookFromBookDetailsScreen() {
+        bookDetailsScreen.returnBook();
+        notificationModal.handleBookActionsAndNotificationPopups(BookActionButtonKeys.RETURN);
     }
 
     @Override
@@ -376,23 +384,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     private void clickButton(BookActionButtonKeys actionButton) {
         bookDetailsScreen.clickActionButton(actionButton);
-    }
-
-    public void getBookOnBookDetailsScreen() {
-        BookActionButtonKeys button = BookActionButtonKeys.GET;
-        if (bookDetailsScreen.isActionButtonPresent(BookActionButtonKeys.GET)) {
-            clickButton(BookActionButtonKeys.GET);
-        } else {
-            button = BookActionButtonKeys.DOWNLOAD;
-            clickButton(BookActionButtonKeys.DOWNLOAD);
-        }
-        notificationModal.handleBookActionsAndNotificationPopups(button);
-    }
-
-    public void checkBookWasBorrowedSuccessfully() {
-        boolean isButtonPresent = AqualityServices.getConditionalWait().waitFor(bookDetailsScreen::isBookReadyToRead);
-        addScreenshotIfErrorPresent(isButtonPresent);
-        Assert.assertTrue(String.format("Opened book page does not contain button %1$s or %2$s. Error message - %3$s", BookActionButtonKeys.READ.i18n(), BookActionButtonKeys.LISTEN.i18n(), getErrorDetails()), isButtonPresent);
     }
 
     private void addScreenshotIfErrorPresent(boolean isButtonPresent) {

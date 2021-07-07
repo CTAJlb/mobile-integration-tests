@@ -365,10 +365,17 @@ public class ReaderSteps {
         context.add(pageKey, pdfSearchScreen.getSearchedItemPageNumber(0));
     }
 
-    @Then("Reader screen for {} type book {string} is present")
-    public void readerScreenForEbookTypeIsPresent(ReaderType readerType, String bookInfoKey) {
+    @Then("Reader screen for {string} book with {string} type is present")
+    public void readerScreenForEbookTypeIsPresent(String bookInfoKey, String readerType) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
-        switch (readerType) {
+        ReaderType type = null;
+        if (readerType.toLowerCase().equals("EBOOK".toLowerCase())){
+            type = ReaderType.EBOOK;
+        }else if (readerType.toLowerCase().equals("AUDIOBOOK".toLowerCase())){
+            type = ReaderType.AUDIOBOOK;
+        }
+
+        switch (type) {
             case EBOOK:
                 if (epubReaderScreen.isBookNamePresent()) {
                     assertBookName(catalogBookModel);

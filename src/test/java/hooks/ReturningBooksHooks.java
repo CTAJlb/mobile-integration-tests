@@ -21,9 +21,9 @@ public class ReturningBooksHooks {
     public void returnBooks() {
         AqualityServices.getLogger().info("Test finished - returning books");
         Map<String, String> map = context.get(ScenarioContextKey.lIST_OF_CREDENTIALS_KEY);
-        for (Map.Entry<String, String> m : map.entrySet()) {
-            APIUtil.returnBooks(m.getKey(), m.getValue());
-            APIUtil.enterBooksAfterReturningBooks(m.getKey(), m.getValue());
-        }
+            for (Map.Entry<String, String> m : map.entrySet()) {
+                APIUtil.returnBooks(m.getKey(), m.getValue());
+                APIUtil.enterBooksAfterReturningBooks(m.getKey(), m.getValue());
+            }
     }
 }
