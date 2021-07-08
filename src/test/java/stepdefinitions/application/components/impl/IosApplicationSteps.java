@@ -30,6 +30,6 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
     public void addAccountFromWelcomeScreen(String libraryName) {
         welcomeScreen.state().waitForDisplayed();
         welcomeScreen.findLibrary();
-        addAccountScreen.selectLibraryWelcomeScreen(libraryName);
+        addAccountScreen.selectLibrary(libraryName);
     }
 }

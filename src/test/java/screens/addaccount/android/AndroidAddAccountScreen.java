@@ -27,16 +27,11 @@ public class AndroidAddAccountScreen extends AddAccountScreen {
 
     @Override
     public void selectLibrary(String libraryName) {
-        lblSelectLibrary.state().waitForDisplayed(Duration.ofMillis(AuthorizationTimeouts.DEBUG_MENU_IS_OPENED.getTimeoutMillis()));
+        //lblSelectLibrary.state().waitForDisplayed(Duration.ofMillis(AuthorizationTimeouts.DEBUG_MENU_IS_OPENED.getTimeoutMillis()));
         btnSearch.click();
         AqualityServices.getApplication().getDriver().hideKeyboard();
         txbSearch.clearAndType(libraryName);
         getLibraryButton(libraryName).click();
-    }
-
-    @Override
-    public void selectLibraryWelcomeScreen(String libraryName) {
-        //android works well without this
     }
 
     private IButton getLibraryButton(String libraryName) {

@@ -37,14 +37,8 @@ public class AccountSteps {
     public void addAccount(String libraryName) {
         openAccounts();
         accountsScreen.addAccount();
-        if (AqualityServices.getElementFactory().getButton(By.xpath("//android.widget.Button[@text = \"Deny\"]"), "DENYButton").state().waitForDisplayed()) {
-            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
-        }
-        Assert.assertTrue("Checking that add accounts screen visible", addAccountScreen.state().waitForDisplayed());
         addAccountScreen.selectLibrary(libraryName);
 
-        /*saveLibraryInContext(ContextLibrariesKeys.CANCEL_GET.getKey(), libraryName);
-        saveLibraryInContext(ContextLibrariesKeys.CANCEL_HOLD.getKey(), libraryName);*/
         if(libraryName.toLowerCase().equals("LYRASIS".toLowerCase())){
             saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
         }
