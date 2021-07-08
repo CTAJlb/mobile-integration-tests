@@ -61,6 +61,7 @@ Feature: Read EPUB
     When I scroll page forward from 10 to 20 times
     #chapterNameInfo does not check in Assert for ios we check pageNumber and chapterName fot android only pageNumber
       And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
+      And I wait for 3 seconds
       And I return to previous screen
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
