@@ -184,6 +184,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         subcategoryScreen.state().waitForDisplayed();
         String bookName = context.get(bookNameInfoKey);
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
+        alertScreen.closeNotNowModalIfPresent();
     }
 
     @Override
