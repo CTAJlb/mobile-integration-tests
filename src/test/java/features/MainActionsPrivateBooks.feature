@@ -151,7 +151,7 @@ Feature: Main actions private access books
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When I open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    When Open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
     When I press on the book details view at the action button RESERVE
       And I open Holds
