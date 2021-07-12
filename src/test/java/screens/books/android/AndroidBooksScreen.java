@@ -48,7 +48,7 @@ public class AndroidBooksScreen extends BooksScreen {
 
     @Override
     public boolean isBookPresent(CatalogBookModel bookInfo) {
-        return getAllBooksTitles().contains(bookInfo.getImageTitle());
+        return getAllBooksTitles().contains(bookInfo.getTitle()) && getAllBooksTitles().contains(bookInfo.getAuthor());
     }
 
     @Override

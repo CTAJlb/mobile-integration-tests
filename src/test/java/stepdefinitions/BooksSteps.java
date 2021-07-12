@@ -29,7 +29,7 @@ public class BooksSteps {
     public void checkBookInfoIsPresentInBooksList(String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         booksScreen.state().waitForDisplayed();
-        AqualityServices.getConditionalWait().waitFor(() -> booksScreen.isNoBooksMessagePresent() || booksScreen.getCountOfBooks() > 0);
+        //AqualityServices.getConditionalWait().waitFor(() -> booksScreen.isNoBooksMessagePresent() || booksScreen.getCountOfBooks() > 0);
         Assert.assertTrue(String.format("Book '%s' is not present in Books List", bookInfo), booksScreen.isBookPresent(bookInfo));
     }
 
