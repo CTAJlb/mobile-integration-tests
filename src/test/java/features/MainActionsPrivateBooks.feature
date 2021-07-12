@@ -67,7 +67,7 @@ Feature: Main actions private access books
       And I press on the book details view at the action button CANCEL
     Then I check that book contains RESERVE action button on book details view
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @run4
   Scenario: Check out from Book Detail View and Return from Books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
