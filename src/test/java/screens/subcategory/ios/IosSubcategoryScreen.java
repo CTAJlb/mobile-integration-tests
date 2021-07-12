@@ -24,7 +24,7 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     private static final String BOOK_NAME_XPATH =
             "//XCUIElementTypeStaticText[@name and not(.//ancestor::XCUIElementTypeButton)][1]";
     private static final String BOOK_NAME_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@name=\"%s\"]";
-    public static final String BOOK_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@text, \"%s\"]/following-sibling::XCUIElementTypeOther//XCUIElementTypeButton[@text=\"%s\"]";
+    public static final String BOOK_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@text, \"%s\"]/following-sibling::XCUIElementTypeOther//XCUIElementTypeButton[@name=\"%s\"]";
     private static final String AUTHOR_LABEL_LOCATOR_PATTERN = "/parent::XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
     private static final int COUNT_OF_ITEMS_TO_WAIT_FOR = 3;
     private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
