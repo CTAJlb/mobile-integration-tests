@@ -77,7 +77,7 @@ Feature: Main actions private access books
       And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
-      And Open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+      And Open 'EBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
       And I press on the book details view at the action button GET
       And I open Books
     Then Book 'bookInfo' is present in Books List
@@ -119,7 +119,6 @@ Feature: Main actions private access books
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-      And I wait for 3 seconds
       And I RETURN book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain GET button on Subcategory List View
 

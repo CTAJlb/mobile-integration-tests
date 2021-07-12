@@ -1,6 +1,7 @@
 package screens.subcategory;
 
 import aquality.appium.mobile.screens.Screen;
+import constants.localization.application.catalog.BookActionButtonKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 
@@ -25,7 +26,7 @@ public abstract class SubcategoryScreen extends Screen {
 
     public abstract void openBook(CatalogBookModel bookInfo);
 
-    public abstract CatalogBookModel openBookByName(String bookName, String bookType);
+    public abstract CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(String bookName, BookActionButtonKeys actionButtonKey, String bookType);
 
     public abstract String getErrorMessage();
 

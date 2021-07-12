@@ -9,6 +9,7 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
 import constants.application.attributes.AndroidAttributes;
+import constants.localization.application.catalog.BookActionButtonKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
@@ -31,10 +32,8 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
             "//android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
     private static final String TYPE_INFO_XPATH =
             "//android.widget.TextView[contains(@resource-id, \"bookCellIdleMeta\")]";
-    public static final String BOOK_WITH_GIVEN_NAME_LOCATOR_PATTERN = "//android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\") and @text=\"%s\"]";
-    public static final String COVER_LABEL_LOCATOR_PART = "//preceding-sibling::android.widget.ImageView[contains(@resource-id, \"bookCellIdleCover\")]";
-    public static final String AUTHOR_LABEL_LOCATOR_PART = "//following-sibling::android.widget.TextView[contains(@resource-id, \"bookCellIdleAuthor\")]";
-    public static final String BOOK_TYPE_LABEL_LOCATOR_PART = "//following-sibling::android.widget.TextView[contains(@resource-id, \"bookCellIdleMeta\")]";
+    public static final String BOOK_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN = "//android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\") and @text=\"%s\"]/following-sibling::android.widget.LinearLayout//android.widget.Button[@text=\"%s\"]";
+    public static final String AUTHOR_LABEL_LOCATOR_PART = "/parent::android.widget.LinearLayout/preceding-sibling::android.widget.TextView[contains(@resource-id, \"bookCellIdleAuthor\")]";
 
     private final ILabel lblFirstBookImageCover =
             getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR), "First book image info");
@@ -89,14 +88,16 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
-    public CatalogBookModel openBookByName(String bookName, String bookType) {
-        String locator = String.format(BOOK_WITH_GIVEN_NAME_LOCATOR_PATTERN, bookName);
+    public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(String bookName, BookActionButtonKeys actionButtonKey, String bookType) {
+        String actionButton = "";
+        if (actionButtonKey == BookActionButtonKeys.GET){
+            actionButton = "Get";
+        }
+        String locator = String.format(BOOK_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN, bookName, actionButton);
 
         CatalogBookModel bookInfo = new CatalogBookModel()
-                .setImageTitle(getElementFactory().getButton(By.xpath(locator + COVER_LABEL_LOCATOR_PART), bookName).getAttribute(AndroidAttributes.CONTENT_DESC))
                 .setTitle(bookName)
-                .setAuthor(getElementFactory().getButton(By.xpath(locator + AUTHOR_LABEL_LOCATOR_PART), bookName).getText())
-                .setBookType(getElementFactory().getButton(By.xpath(locator + BOOK_TYPE_LABEL_LOCATOR_PART), bookName).getText());
+                .setAuthor(getElementFactory().getButton(By.xpath(locator + AUTHOR_LABEL_LOCATOR_PART), bookName).getText());
         getElementFactory().getButton(By.xpath(locator), bookName).click();
         return bookInfo;
     }

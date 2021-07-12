@@ -6,6 +6,7 @@ import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
+import constants.localization.application.catalog.BookActionButtonKeys;
 import io.appium.java_client.MobileBy;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
@@ -70,7 +71,7 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
-    public CatalogBookModel openBookByName(String bookName, String bookType) {
+    public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(String bookName, BookActionButtonKeys actionButtonKey, String bookType) {
         String titleForLocator = bookName;
         if(bookType.toLowerCase().equals("audiobook") && AqualityServices.getApplicationProfile().getPlatformName().name().toLowerCase().equals("ios")){
             titleForLocator = titleForLocator + ". Audiobook.";

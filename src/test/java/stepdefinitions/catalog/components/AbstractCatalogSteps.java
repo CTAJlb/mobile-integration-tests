@@ -7,7 +7,6 @@ import constants.application.timeouts.CategoriesTimeouts;
 import constants.context.ScenarioContextKey;
 import constants.localization.application.catalog.BookActionButtonKeys;
 import constants.localization.application.catalog.BookActionButtonNames;
-import constants.localization.application.catalog.CategoriesNamesKeys;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
 import constants.localization.application.facetedSearch.FacetSortByKeys;
 import framework.utilities.ScenarioContext;
@@ -368,8 +367,9 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         facetedSearchScreen.changeAvailabilityTo(facetAvailabilityKeys);
     }
 
-    public void openBookWithGivenName(String bookName, String bookInfoKey, String bookType) {
-        context.add(bookInfoKey, subcategoryScreen.openBookByName(bookName, bookType));
+    @Override
+    public void openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(String bookName, BookActionButtonKeys actionButtonKey, String bookInfoKey, String bookType) {
+        context.add(bookInfoKey, subcategoryScreen.openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(bookName, actionButtonKey, bookType));
     }
 
     public void openTypeBookReader(ReaderType readerType) {

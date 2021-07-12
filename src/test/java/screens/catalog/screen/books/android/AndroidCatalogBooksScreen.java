@@ -191,10 +191,8 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     private CatalogBookModel getBookModel(String mainLocator) {
         AqualityServices.getConditionalWait().waitFor(() -> getBookDescriptionFromImage(mainLocator) != null);
         return new CatalogBookModel()
-                .setImageTitle(Objects.requireNonNull(getBookDescriptionFromImage(mainLocator)))
                 .setTitle(getBookParameter(mainLocator, BOOK_TITLE_LOC, "Book title"))
-                .setAuthor(getBookParameter(mainLocator, BOOK_AUTHOR_LOC, "Book author"))
-                .setBookType(getBookParameter(mainLocator, BOOK_TYPE_LOC, "Book type"));
+                .setAuthor(getBookParameter(mainLocator, BOOK_AUTHOR_LOC, "Book author"));
     }
 
     private String getBookDescriptionFromImage(String mainLocator) {
