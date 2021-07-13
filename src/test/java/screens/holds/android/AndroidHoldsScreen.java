@@ -17,6 +17,7 @@ import java.time.Duration;
 public class AndroidHoldsScreen extends HoldsScreen {
     private final ILabel lblNoBooks = getElementFactory().getLabel(By.id("feedEmptyText"), "No Books Present");
     private final String BOOK_INFO_LOCATOR_PATTERN = "//android.widget.ImageView[@content-desc=\"%s\"]";
+    private final String BOOK_TITLE_LOCATOR_PATTERN = "//android.widget.TextView[contains(@resource-id,\"bookCellIdleTitle\") and contains(@text, \"%s\")]";
 
     private static final String BOOK_BLOCK_BY_TITLE_LOC =
             "//*[contains(@resource-id,\"bookCellIdle\") and .//*[contains(@resource-id,\"bookCellIdleTitle\") and contains(@text, \"%1$s\")]]";
@@ -34,8 +35,8 @@ public class AndroidHoldsScreen extends HoldsScreen {
     }
 
     @Override
-    public boolean isBookPresent(String bookInfo) {
-        return getBook(bookInfo).state().waitForDisplayed();
+    public boolean isBookPresent(String bookTitle) {
+        return getBook(bookTitle).state().waitForDisplayed();
     }
 
     @Override
@@ -59,9 +60,9 @@ public class AndroidHoldsScreen extends HoldsScreen {
         bookWithSpecificAddBtn.click();
     }
 
-    private ILabel getBook(String bookInfo) {
+    private ILabel getBook(String bookTitle) {
         ILabel book =
-                getElementFactory().getLabel(By.xpath(String.format(BOOK_INFO_LOCATOR_PATTERN, bookInfo)), "No Books Present");
+                getElementFactory().getLabel(By.xpath(String.format(BOOK_TITLE_LOCATOR_PATTERN, bookTitle)), "bookTitle");
         book.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         return book;
     }

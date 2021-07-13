@@ -11,7 +11,7 @@ public abstract class HoldsScreen extends Screen {
 
     public abstract boolean isNoBooksMessagePresent();
 
-    public abstract boolean isBookPresent(String bookInfo);
+    public abstract boolean isBookPresent(String bookTitle);
 
     public abstract boolean isBookNotPresent(String bookInfo);
 

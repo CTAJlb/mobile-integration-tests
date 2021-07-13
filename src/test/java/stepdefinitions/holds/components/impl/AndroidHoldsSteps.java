@@ -16,7 +16,7 @@ public class AndroidHoldsSteps extends AbstractHoldsSteps {
     @Override
     public void checkBookBookInfoIsPresentInHoldsList(String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
-        Assert.assertTrue(String.format("Book '%s' is not present in Books List", bookInfo), holdsScreen.isBookPresent(bookInfo.getImageTitle()));
+        Assert.assertTrue(String.format("Book '%s' is not present in Books List", bookInfo), holdsScreen.isBookPresent(bookInfo.getTitle()));
     }
 
     @Override
