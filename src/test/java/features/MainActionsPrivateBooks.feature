@@ -31,7 +31,7 @@ Feature: Main actions private access books
     When I click on the book 'bookInfo' button CANCEL on subcategory list view
     Then Book saved as 'bookInfo' should contain RESERVE button on Subcategory List View
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @run4
   Scenario: Hold from Book Detail View and and Remove a Reserved Book from Holds
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -42,7 +42,7 @@ Feature: Main actions private access books
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When Open 'EBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    When Open 'EBOOK' book with RESERVE button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
     When I press on the book details view at the action button RESERVE
       And I open Holds
@@ -67,7 +67,7 @@ Feature: Main actions private access books
       And I press on the book details view at the action button CANCEL
     Then I check that book contains RESERVE action button on book details view
 
-  @logout @returnBooks @tier2 @run4
+  @logout @returnBooks @tier2
   Scenario: Check out from Book Detail View and Return from Books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account

@@ -94,6 +94,8 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
         String actionButton = "";
         if (actionButtonKey == BookActionButtonKeys.GET){
             actionButton = "Get";
+        }else if(actionButtonKey == BookActionButtonKeys.RESERVE){
+            actionButton = "Reserve";
         }
         String locator = String.format(BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN, bookName, actionButton);
 
