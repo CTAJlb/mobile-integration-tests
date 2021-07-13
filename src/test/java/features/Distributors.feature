@@ -10,7 +10,7 @@ Feature: Distributors
       And I open search modal
       And I search 'unavailable' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
-      And Open '<bookType>' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+      And Open '<bookType>' book with RESERVE button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
       And I press on the book details view at the action button RESERVE
     Then I check that book contains CANCEL action button on book details view
 
