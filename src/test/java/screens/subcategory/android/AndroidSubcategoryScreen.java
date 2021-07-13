@@ -145,10 +145,8 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     @Override
     public CatalogBookModel getFirstBookInfo() {
         return new CatalogBookModel()
-                .setImageTitle(lblFirstBookImageCover.getAttribute(AndroidAttributes.CONTENT_DESC))
                 .setTitle(lblFirstBookTitle.getText())
-                .setAuthor(lblFirstBookAuthor.getText())
-                .setBookType(lblFirstBookType.getText());
+                .setAuthor(lblFirstBookAuthor.getText());
     }
 
     @Override
