@@ -50,9 +50,7 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     @Override
     public CatalogBookModel getBookInfo() {
         return new CatalogBookModel()
-                .setImageTitle(lblBookInfo.getAttribute(AndroidAttributes.CONTENT_DESC))
                 .setTitle(lblBookTitleInfo.getText())
-                .setBookType(lblBookFormatInfo.getText())
                 .setAuthor(lblBookAuthorsInfo.getText());
     }
 
