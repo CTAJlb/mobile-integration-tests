@@ -86,11 +86,11 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
         }else if(actionButtonKey == BookActionButtonKeys.RESERVE){
             actionButton = "Reserve";
         }
-        /*try {
+        try {
             Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
+        }
         String locator = String.format(BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN, titleForLocator, actionButton);
 
         ILabel lblAuthor =
