@@ -7,7 +7,6 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
 import constants.localization.application.catalog.BookActionButtonKeys;
-import io.appium.java_client.MobileBy;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.subcategory.SubcategoryScreen;
@@ -24,7 +23,10 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     private static final String BOOK_NAME_XPATH =
             "//XCUIElementTypeStaticText[@name and not(.//ancestor::XCUIElementTypeButton)][1]";
     private static final String BOOK_NAME_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@name=\"%s\"]";
-    public static final String BOOK_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@text,\"%s\"]/following-sibling::XCUIElementTypeOther//XCUIElementTypeButton//XCUIElementTypeStaticText[@value=\"%s\"]";
+    public static final String BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@text,\"%s\"]/following-sibling::XCUIElementTypeOther//XCUIElementTypeButton//XCUIElementTypeStaticText[@value=\"%s\"]";
+    //
+    public static final String BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN = "/parent::XCUIElementTypeButton/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeStaticText[@text,\"%s\"]";
+    //
     private static final String AUTHOR_LABEL_LOCATOR_PATTERN = "/parent::XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
     private static final int COUNT_OF_ITEMS_TO_WAIT_FOR = 3;
     private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
@@ -81,21 +83,32 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
         String actionButton = "";
         if (actionButtonKey == BookActionButtonKeys.GET){
             actionButton = "Get";
+        }else if(actionButtonKey == BookActionButtonKeys.RESERVE){
+            actionButton = "Reserve";
         }
         /*try {
             Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-        String locator = String.format(BOOK_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN, titleForLocator, actionButton);
+        String locator = String.format(BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN, titleForLocator, actionButton);
 
-        ILabel lblBookName = getElementFactory().getLabel(By.xpath(locator), bookName);
         ILabel lblAuthor =
                 getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_LOCATOR_PATTERN, titleForLocator) + AUTHOR_LABEL_LOCATOR_PATTERN), bookName);
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(bookName)
                 .setAuthor(lblAuthor.getText());
-        lblBookName.click();
+
+        /////
+        if (getElementFactory().getButton(By.xpath(locator), bookName).state().isDisplayed()) {
+            getElementFactory().getButton(By.xpath(locator + String.format(BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN, bookName)), bookName).click();
+        } else {
+            throw new RuntimeException("There is not book with title-" + bookName + " and button-" + actionButton);
+        }
+        ////
+
+        /*ILabel lblBookName = getElementFactory().getLabel(By.xpath(locator), bookName);
+        lblBookName.click();*/
         return bookInfo;
     }
 
