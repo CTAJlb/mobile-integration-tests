@@ -23,10 +23,8 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     private static final String BOOK_NAME_XPATH =
             "//XCUIElementTypeStaticText[@name and not(.//ancestor::XCUIElementTypeButton)][1]";
     private static final String BOOK_NAME_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@name=\"%s\"]";
-    public static final String BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@text,\"%s\"]/following-sibling::XCUIElementTypeOther//XCUIElementTypeButton//XCUIElementTypeStaticText[@value=\"%s\"]";
-    //
-    public static final String BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN = "/parent::XCUIElementTypeButton/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeStaticText[@text,\"%s\"]";
-    //
+    public static final String BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther//XCUIElementTypeButton//XCUIElementTypeStaticText[@name=\"%s\"]";
+    public static final String BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN = "/parent::XCUIElementTypeButton/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String AUTHOR_LABEL_LOCATOR_PATTERN = "/parent::XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
     private static final int COUNT_OF_ITEMS_TO_WAIT_FOR = 3;
     private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
@@ -76,14 +74,14 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     @Override
     public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(String bookName, BookActionButtonKeys actionButtonKey, String bookType) {
         String titleForLocator = bookName;
-        if(bookType.toLowerCase().equals("audiobook")){
+        if (bookType.toLowerCase().equals("audiobook")) {
             titleForLocator = titleForLocator + ". Audiobook.";
         }
 
         String actionButton = "";
-        if (actionButtonKey == BookActionButtonKeys.GET){
+        if (actionButtonKey == BookActionButtonKeys.GET) {
             actionButton = "Get";
-        }else if(actionButtonKey == BookActionButtonKeys.RESERVE){
+        } else if (actionButtonKey == BookActionButtonKeys.RESERVE) {
             actionButton = "Reserve";
         }
         try {
@@ -99,16 +97,12 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
                 .setTitle(bookName)
                 .setAuthor(lblAuthor.getText());
 
-        /////
-        if (getElementFactory().getButton(By.xpath(locator), bookName).state().isDisplayed()) {
+        if (getElementFactory().getButton(By.xpath(locator), bookName).state().waitForDisplayed()) {
             getElementFactory().getButton(By.xpath(locator + String.format(BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN, bookName)), bookName).click();
         } else {
             throw new RuntimeException("There is not book with title-" + bookName + " and button-" + actionButton);
         }
-        ////
 
-        /*ILabel lblBookName = getElementFactory().getLabel(By.xpath(locator), bookName);
-        lblBookName.click();*/
         return bookInfo;
     }
 
