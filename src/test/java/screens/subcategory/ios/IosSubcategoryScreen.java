@@ -98,7 +98,7 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
                 .setAuthor(lblAuthor.getText());
 
         if (getElementFactory().getButton(By.xpath(locator), bookName).state().waitForDisplayed()) {
-            getElementFactory().getButton(By.xpath(locator + String.format(BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN, bookName)), bookName).click();
+            getElementFactory().getButton(By.xpath(locator + String.format(BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN, titleForLocator)), bookName).click();
         } else {
             throw new RuntimeException("There is not book with title-" + bookName + " and button-" + actionButton);
         }
