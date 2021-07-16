@@ -3,7 +3,6 @@ Feature: Main actions open access books
   Background:
     When I add "Acton Public Library" account from welcomeScreen
       And I switch to 'Digital Public Library of America' from side menu
-      And I open Catalog
       And I open category by chain:
         | Our Picks |
 

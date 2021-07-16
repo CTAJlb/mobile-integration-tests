@@ -5,9 +5,7 @@ Feature: Distributors
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
-    When I open Catalog
-      And I switch to 'LYRASIS' from side menu
-      And I open search modal
+    When I open search modal
       And I search 'unavailable' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open '<bookType>' book with RESERVE button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -26,9 +24,7 @@ Feature: Distributors
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
-    When I open Catalog
-      And I switch to 'LYRASIS' from side menu
-      And I open search modal
+    When I open search modal
       And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open '<bookType>' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -49,9 +45,7 @@ Feature: Distributors
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
-    When I open Catalog
-      And I switch to 'LYRASIS' from side menu
-      And I open search modal
+    When I open search modal
       And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open '<bookType>' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
