@@ -18,14 +18,18 @@ public class LoggerHooks {
 
     @Before(order = 0)
     public void startScenarioLogger(Scenario scenario) {
-        Logger.getInstance().createAppender(scenario.getName());
+        Logger logger = Logger.getInstance();
+        AqualityServices.getLogger().info("isLoggerNullBeforeAnnotation-"+logger);
+        logger.createAppender(scenario.getName());
         AqualityServices.getLogger().info(format("Scenario '%s' start", scenario.getName()));
         AqualityServices.getLogger().info("Session id - " + AqualityServices.getApplication().getDriver().getSessionId().toString());
     }
 
     @After(order = 1)
     public void addLogToScenario(Scenario scenario) {
-        byte[] data = Logger.getInstance().getLoggerInfoBytes();
+        Logger logger = Logger.getInstance();
+        AqualityServices.getLogger().info("isLoggerNullAfterAnnotation-"+logger);
+        byte[] data = logger.getLoggerInfoBytes();
         AqualityServices.getLogger().info(format("Scenario '%s' end", scenario.getName()));
         scenario.attach(data, "text/plain", "log.txt");
         Logger.getInstance().removeAppender();
