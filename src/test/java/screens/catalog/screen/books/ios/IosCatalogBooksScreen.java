@@ -163,9 +163,8 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
 
     private CatalogBookModel openBook(IButton button, String bookTitle) {
         CatalogBookModel bookInfo = getBookInfo(bookTitle);
-        button.state().waitForDisplayed();
-        button.state().waitForClickable();
         button.click();
+        //todo button.state().waitForNotExist()?
         button.state().waitForNotExist();
         return bookInfo;
     }

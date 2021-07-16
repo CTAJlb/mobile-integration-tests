@@ -27,7 +27,6 @@ public class XMLSteps {
     @And("I search {string} book of distributor {string} and bookType {string} and save as {string}")
     public void searchFor(String availabilityType, String distributor, String bookType, String bookNameInfoKey) {
         String bookName = getRandomBookNameWithoutBadSymbols(availabilityType, distributor, bookType);
-        //String bookName = GettingBookUtil.getRandomBook(availabilityType.toLowerCase(), bookType.toLowerCase(), distributor.toLowerCase());
         AqualityServices.getLogger().info("randomBookName: " + bookName);
         context.add(bookNameInfoKey, bookName);
         Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().waitForDisplayed());

@@ -5,7 +5,8 @@ Feature: Main actions private access books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
-    When I open search modal
+    When I open Catalog
+      And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And I RESERVE book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -20,7 +21,8 @@ Feature: Main actions private access books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
-    When I open search modal
+    When I open Catalog
+      And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And I RESERVE book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -32,7 +34,8 @@ Feature: Main actions private access books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
-    When I open search modal
+    When I open Catalog
+      And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
@@ -49,7 +52,8 @@ Feature: Main actions private access books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
-    When I open search modal
+    When I open Catalog
+      And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
@@ -64,7 +68,8 @@ Feature: Main actions private access books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
-    When I open search modal
+    When I open Catalog
+      And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Open 'EBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -81,7 +86,8 @@ Feature: Main actions private access books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
-    When I open search modal
+    When I open Catalog
+      And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -101,7 +107,8 @@ Feature: Main actions private access books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
-    When I open search modal
+    When I open Catalog
+      And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -113,7 +120,8 @@ Feature: Main actions private access books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
-    When I open search modal
+    When I open Catalog
+      And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -128,7 +136,8 @@ Feature: Main actions private access books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
-    When I open search modal
+    When I open Catalog
+      And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
