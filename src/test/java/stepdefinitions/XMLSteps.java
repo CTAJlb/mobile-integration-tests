@@ -43,7 +43,7 @@ public class XMLSteps {
 
         while (amount < 15) {
             bookName = GettingBookUtil.getRandomBook(availabilityType.toLowerCase(), bookType.toLowerCase(), distributor.toLowerCase());
-            Pattern pattern = Pattern.compile("[^\\w ]");
+            Pattern pattern = Pattern.compile("[^\\w :]");
             Matcher matcher = pattern.matcher(bookName);
             amount++;
             if (!matcher.find()) {
