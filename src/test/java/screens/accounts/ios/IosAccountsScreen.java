@@ -23,7 +23,7 @@ public class IosAccountsScreen extends AccountsScreen {
 
     @Override
     public boolean isLibraryPresent(String libraryName) {
-        return getLibraryButton(libraryName).state().waitForDisplayed();
+        return getLibraryButton(libraryName).state().isDisplayed();
     }
 
     private IButton getLibraryButton(String libraryName) {

@@ -7,7 +7,6 @@ import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import screens.accounts.AccountsScreen;
 import screens.addaccount.AddAccountScreen;
 import screens.bottommenu.BottomMenu;
