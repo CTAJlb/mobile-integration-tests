@@ -7,7 +7,7 @@ Feature: Read PDF
     When I open Catalog
       And I switch to 'LYRASIS' from side menu
       And I open search modal
-    When I search for pdf and save as 'bookNameInfo'
+    When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET or DOWNLOAD book by name 'bookNameInfo' and save it as 'bookInfo'

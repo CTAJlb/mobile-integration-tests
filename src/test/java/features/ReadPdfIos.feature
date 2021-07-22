@@ -10,7 +10,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Open document
-    When I search for pdf and save as 'bookNameInfo'
+    When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -22,7 +22,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by page
-    When I search for pdf and save as 'bookNameInfo'
+    When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -38,7 +38,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Table of Contents Menu
-    When I search for pdf and save as 'bookNameInfo'
+    When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -50,7 +50,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Open book to last page read
-    When I search for pdf and save as 'bookNameInfo'
+    When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -74,7 +74,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Gallery
-    When I search for pdf and save as 'bookNameInfo'
+    When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -95,7 +95,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Search document
-    When I search for pdf and save as 'bookNameInfo'
+    When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'

@@ -47,7 +47,7 @@ public class SearchSteps {
         Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", searchedText, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
     }
 
-    @When("I search for pdf and save as {string}")
+    @When("I search random pdf and save as {string}")
     public void searchForPdf(String bookNameInfoKey) {
         String pdfForSearching = GettingBookUtil.getRandomPdf();
         AqualityServices.getLogger().info("randomPdf: " + pdfForSearching);
