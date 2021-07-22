@@ -7,8 +7,7 @@ Feature: Manage Libraries
 
   @tier1
   Scenario: Switch Library Catalogs
-    When I add "Acton Public Library" account from welcomeScreen
-      And I switch to 'Digital Public Library of America' from side menu
+    When I add "Digital Public Library of America" account from welcomeScreen
       And I add 'Alameda County Library' account
       And Catalog is opened
       And I get names of books on screen and save them as 'nameOfBooks'
@@ -18,16 +17,14 @@ Feature: Manage Libraries
 
   @tier1
   Scenario: Remove library
-    When I add "Acton Public Library" account from welcomeScreen
-      And I switch to 'Digital Public Library of America' from side menu
+    When I add "Digital Public Library of America" account from welcomeScreen
       And I add 'Alameda County Library' account
       And I remove 'Alameda County Library' account
     Then Account 'Alameda County Library' is not present on Accounts screen
 
   @tier2
   Scenario: Switch library bookshelf
-    When I add "Acton Public Library" account from welcomeScreen
-      And I switch to 'Digital Public Library of America' from side menu
+    When I add "Digital Public Library of America" account from welcomeScreen
       And I add 'Alameda County Library' account
       And Catalog is opened
       And I switch to 'Digital Public Library of America' from side menu

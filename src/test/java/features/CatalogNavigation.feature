@@ -2,8 +2,7 @@ Feature: Catalog Navigation
 
   @tier1
   Scenario: Return to last library catalog
-    When I add "Acton Public Library" account from welcomeScreen
-      And I switch to 'Digital Public Library of America' from side menu
+    When I add "Digital Public Library of America" account from welcomeScreen
       And I add 'Alameda County Library' account
       And I open Catalog
       And I switch to 'Alameda County Library' from side menu
@@ -14,8 +13,7 @@ Feature: Catalog Navigation
 
   @tier1
   Scenario: Navigate Lists
-    When I add "Acton Public Library" account from welcomeScreen
-      And I switch to 'Digital Public Library of America' from side menu
+    When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
     Then Books feed is loaded
     When I get names of books on screen and save them as 'listOfBooksOnMainPage'
@@ -49,8 +47,7 @@ Feature: Catalog Navigation
 
   @tier1
   Scenario: Browse Lanes/Categories
-    When I add "Acton Public Library" account from welcomeScreen
-      And I switch to 'Digital Public Library of America' from side menu
+    When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
     Then Books feed is loaded
       And Count of books in first lane is more than 1

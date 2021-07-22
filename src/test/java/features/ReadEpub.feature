@@ -1,8 +1,7 @@
 Feature: Read EPUB
 
   Background:
-    When I add "Acton Public Library" account from welcomeScreen
-      And I switch to 'Digital Public Library of America' from side menu
+    When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
       And I open search modal
       And I search for 'Flower Fables'
