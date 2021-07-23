@@ -6,7 +6,6 @@ Feature: Audiobook
     When I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'LYRASIS' from side menu
       And I switch to 'Audiobooks' catalog tab
     When I open category by chain:
       | Fiction     |
