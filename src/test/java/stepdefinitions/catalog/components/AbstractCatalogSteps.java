@@ -179,7 +179,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         String bookName = context.get(bookNameInfoKey);
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
         notificationModal.handleBookActionsAndNotificationPopups(actionButtonKey);
-        alertScreen.closeNotNowModalIfPresent();
+        alertScreen.closeNotNowModalIfDisplayed();
         alertScreen.closeDoNotAllowIfPresent();
     }
 
@@ -355,7 +355,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void pressOnBookDetailsScreenAtActionButton(BookActionButtonKeys actionButton) {
         clickButton(actionButton);
         notificationModal.handleBookActionsAndNotificationPopups(actionButton);
-        alertScreen.closeNotNowModalIfPresent();
+        alertScreen.closeNotNowModalIfDisplayed();
     }
 
     @Override
