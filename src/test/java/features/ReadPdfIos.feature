@@ -60,10 +60,12 @@ Feature: Read PDF IOS
     Then Pdf book 'bookInfo' is present on screen
     When I scroll pdf page forward from 10 to 20 times
       And I save pdf page number as 'pageNumber'
+      And I wait for 3 seconds
       And I return to previous screen
       And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct
+      And I wait for 3 seconds
     When I restart app
       And I open Books
     Then Book 'bookInfo' is present in Books List
