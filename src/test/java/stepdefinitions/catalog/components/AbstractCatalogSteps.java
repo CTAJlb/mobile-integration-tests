@@ -159,7 +159,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void executeBookActionAndSaveItToContextAndLibraryCancel(
             BookActionButtonKeys actionButtonKey, String bookInfoKey) {
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookAndClickActionButton(actionButtonKey));
-        notificationModal.handleBookActionsAndNotificationPopups(actionButtonKey);
+        notificationModal.performActionForNotificationPopup(actionButtonKey);
     }
 
     @Override
@@ -178,7 +178,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         subcategoryScreen.state().waitForDisplayed();
         String bookName = context.get(bookNameInfoKey);
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
-        notificationModal.handleBookActionsAndNotificationPopups(actionButtonKey);
+        notificationModal.performActionForNotificationPopup(actionButtonKey);
         alertScreen.closeNotNowModalIfDisplayed();
         alertScreen.closeDoNotAllowIfPresent();
     }
@@ -187,7 +187,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void clickOnBookAddButtonOnCatalogBooksScreen(String bookInfoKey, BookActionButtonKeys key) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         catalogBooksScreen.clickBookByTitleButtonWithKey(catalogBookModel.getTitle(), key);
-        notificationModal.handleBookActionsAndNotificationPopups(key);
+        notificationModal.performActionForNotificationPopup(key);
     }
 
     @Override
@@ -335,13 +335,13 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void returnBookFromBookDetailsScreen() {
         bookDetailsScreen.returnBook();
-        notificationModal.handleBookActionsAndNotificationPopups(BookActionButtonKeys.RETURN);
+        notificationModal.performActionForNotificationPopup(BookActionButtonKeys.RETURN);
     }
 
     @Override
     public void deleteBookFromBookDetailsScreen() {
         bookDetailsScreen.deleteBook();
-        notificationModal.handleBookActionsAndNotificationPopups(BookActionButtonKeys.DELETE);
+        notificationModal.performActionForNotificationPopup(BookActionButtonKeys.DELETE);
     }
 
     @Override
@@ -354,7 +354,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void pressOnBookDetailsScreenAtActionButton(BookActionButtonKeys actionButton) {
         clickButton(actionButton);
-        notificationModal.handleBookActionsAndNotificationPopups(actionButton);
+        notificationModal.performActionForNotificationPopup(actionButton);
         alertScreen.closeNotNowModalIfDisplayed();
     }
 

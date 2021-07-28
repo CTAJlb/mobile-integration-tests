@@ -131,7 +131,7 @@ Feature: Main actions private access books
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
 
-  @logout @returnBooks @tier3 @exclude_android
+  @logout @returnBooks @tier3 @exclude_android @runrun
   Scenario: Hold from Book Detail View and Cancel remove from holds tab(IOS)
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -147,5 +147,5 @@ Feature: Main actions private access books
       And I open Holds
     Then Book 'bookInfo' is present in Holds List
     When I click on the book 'bookInfo' button CANCEL on the holds screen and don't click on the popup button
-    Then I click at the popup approve CANCEL the button CANCEL_POPUP
+    Then I click CANCEL button in Holds tab
       And Book saved as 'bookInfo' should contain CANCEL button at the hold screen

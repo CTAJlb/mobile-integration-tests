@@ -13,9 +13,7 @@ public abstract class NotificationModal extends Screen {
 
     public abstract void closeCannotAddBookModalIfDisplayed();
 
-    public abstract void clickBookActionPopupIfDisplayed(BookActionButtonKeys headerName, BookActionButtonKeys buttonName);
-
-    public abstract void handleBookActionsAndNotificationPopups(BookActionButtonKeys buttonName);
+    public abstract void performActionForNotificationPopup(BookActionButtonKeys buttonName);
 
     public abstract boolean isModalPresent();
 }

@@ -15,4 +15,6 @@ public interface IHoldsSteps {
     void clickOnBookAddButtonOnHoldsScreen(String bookInfoKey, BookActionButtonKeys key);
 
     void checkThatSavedBookContainButtonAtHoldScreen(final String bookInfoKey, final BookActionButtonKeys key);
+
+    void clickActionButtonForPopUp(BookActionButtonKeys key);
 }
