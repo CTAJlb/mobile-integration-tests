@@ -43,7 +43,7 @@ public class IosAlertScreen extends AlertScreen {
 
     @Override
     public void closeDoNotAllowIfPresent() {
-        if (btnDoNotAllow.state().waitForDisplayed()) {
+        if (btnDoNotAllow.state().isDisplayed()) {
             btnDoNotAllow.click();
         }
     }

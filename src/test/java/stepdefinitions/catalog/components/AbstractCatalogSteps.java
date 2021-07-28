@@ -355,6 +355,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void pressOnBookDetailsScreenAtActionButton(BookActionButtonKeys actionButton) {
         clickButton(actionButton);
         notificationModal.performActionForNotificationPopup(actionButton);
+        alertScreen.closeDoNotAllowIfPresent();
         alertScreen.closeNotNowModalIfDisplayed();
     }
 
