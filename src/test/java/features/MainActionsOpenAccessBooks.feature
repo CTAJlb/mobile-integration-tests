@@ -37,7 +37,7 @@ Scenario: Check out from Book Detail View and Return from Books
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
 
-  @tier2 @exclude_android
+  @tier2 @exclude_android @runrun2
   Scenario: Check out from Book Detail View and Return from Book Detail View(IOS)
     When I open the book details for the subsequent DOWNLOAD on Subcategory List View and save it as 'bookInfo'
       And I press on the book details view at the action button DELETE
