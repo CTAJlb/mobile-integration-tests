@@ -22,7 +22,7 @@ import java.util.Objects;
 public class IosCatalogBooksScreen extends CatalogBooksScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeCollectionView";
 
-    private static final String ADD_BOOK_BUTTON_PATTERN = "//XCUIElementTypeStaticText[@name=\"%1$s\"]";
+    private static final String ACTION_BUTTON_ON_BOOK_PATTERN = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final String BOOKS_LOC = ".//XCUIElementTypeCell";
     private static final String BOOK_BLOCK_BY_BUTTON_LOC = "//XCUIElementTypeCell[.//XCUIElementTypeButton[@name=\"%1$s\"]]";
     private static final String BOOK_TITLE_LOC = "//XCUIElementTypeStaticText[@name][1]";
@@ -134,7 +134,6 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
 
     private CatalogBookModel performActionOnBook(BookActionButtonKeys buttonName) {
         IButton button = getAddBookButton(buttonName);
-        waitForPageLoading();
         button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         String bookTitle =
                 getBookJacketWithGivenButtonName(buttonName).findChildElement(By.xpath(BOOK_TITLE_LOC), ElementType.LABEL).getText();
@@ -158,14 +157,12 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
 
     private IButton getAddBookButton(BookActionButtonKeys button) {
         String key = button.i18n();
-        return getElementFactory().getButton(By.xpath(String.format(ADD_BOOK_BUTTON_PATTERN, key)), key);
+        return getElementFactory().getButton(By.xpath(String.format(ACTION_BUTTON_ON_BOOK_PATTERN, key)), key);
     }
 
     private CatalogBookModel openBook(IButton button, String bookTitle) {
         CatalogBookModel bookInfo = getBookInfo(bookTitle);
         button.click();
-        //todo button.state().waitForNotExist()?
-        button.state().waitForNotExist();
         return bookInfo;
     }
 
