@@ -6,7 +6,6 @@ import constants.context.ContextLibrariesKeys;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
 import hooks.logout.components.AbstractLogoutHooks;
-import io.appium.java_client.appmanagement.ApplicationState;
 import screens.alert.AlertScreen;
 import screens.bottommenu.BottomMenu;
 import screens.notifications.NotificationModal;
@@ -32,7 +31,7 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
         for (String library : listOfLibraries) {
             if (!accountScreen.state().isDisplayed()) {
                 bottomMenuForm.open(BottomMenu.SETTINGS);
-                alertScreen.closeNotNowModalIfPresent();
+                alertScreen.closeNotNowModalIfDisplayed();
                 bottomMenuForm.open(BottomMenu.SETTINGS);
                 settingsScreen.openAccounts();
                 accountsScreen.openAccount(library);
@@ -48,7 +47,7 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
 
     private void logOut() {
         notificationModal.closeSyncNotificationIfDisplayed();
-        alertScreen.closeNotNowModalIfPresent();
+        alertScreen.closeNotNowModalIfDisplayed();
         accountScreen.logOut();
     }
 }

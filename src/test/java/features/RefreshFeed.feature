@@ -2,10 +2,8 @@ Feature: Feed
 
   @tier2
   Scenario: Update Bookshelf List
-    Given I add "Digital Public Library of America" account from welcomeScreen
-    When I open Catalog
-      And I switch to 'Digital Public Library of America' from side menu
-    When I open category by chain:
+    When I add "Digital Public Library of America" account from welcomeScreen
+      And I open category by chain:
       | Fiction |
       | Drama   |
       And DOWNLOAD book from subcategory list view and save it as 'bookInfo'

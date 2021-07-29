@@ -6,7 +6,6 @@ Feature: Main actions private access books
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'LYRASIS' from side menu
       And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -23,7 +22,6 @@ Feature: Main actions private access books
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'LYRASIS' from side menu
       And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -31,18 +29,17 @@ Feature: Main actions private access books
     When I click on the book 'bookInfo' button CANCEL on subcategory list view
     Then Book saved as 'bookInfo' should contain RESERVE button on Subcategory List View
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @run4
   Scenario: Hold from Book Detail View and and Remove a Reserved Book from Holds
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'LYRASIS' from side menu
       And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When Open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    When Open 'EBOOK' book with RESERVE button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
     When I press on the book details view at the action button RESERVE
       And I open Holds
@@ -56,12 +53,11 @@ Feature: Main actions private access books
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'LYRASIS' from side menu
       And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When Open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    When Open 'EBOOK' book with RESERVE button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
     When I press on the book details view at the action button RESERVE
       And I press on the book details view at the action button CANCEL
@@ -73,11 +69,10 @@ Feature: Main actions private access books
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'LYRASIS' from side menu
       And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
-      And Open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+      And Open 'EBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
       And I press on the book details view at the action button GET
       And I open Books
     Then Book 'bookInfo' is present in Books List
@@ -92,7 +87,6 @@ Feature: Main actions private access books
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'LYRASIS' from side menu
       And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -114,12 +108,10 @@ Feature: Main actions private access books
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'LYRASIS' from side menu
       And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-      And I wait for 3 seconds
       And I RETURN book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain GET button on Subcategory List View
 
@@ -129,7 +121,6 @@ Feature: Main actions private access books
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'LYRASIS' from side menu
       And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -146,16 +137,15 @@ Feature: Main actions private access books
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'LYRASIS' from side menu
       And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When I open 'EBOOK' book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    When Open 'EBOOK' book with RESERVE button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
     When I press on the book details view at the action button RESERVE
       And I open Holds
     Then Book 'bookInfo' is present in Holds List
     When I click on the book 'bookInfo' button CANCEL on the holds screen and don't click on the popup button
-    Then I click at the popup approve CANCEL the button CANCEL_POPUP
+    Then I click CANCEL_POPUP button on popup
       And Book saved as 'bookInfo' should contain CANCEL button at the hold screen

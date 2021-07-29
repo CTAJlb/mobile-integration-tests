@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import screens.catalog.form.MainCatalogToolbarForm;
+import screens.catalog.screen.catalog.CatalogScreen;
 import screens.search.modal.SearchModal;
 import screens.subcategory.SubcategoryScreen;
 
@@ -17,6 +18,7 @@ public class SearchSteps {
     private final MainCatalogToolbarForm mainCatalogToolbarForm;
     private final SearchModal searchModal;
     private final SubcategoryScreen subcategoryScreen;
+    private final CatalogScreen catalogScreen;
     private ScenarioContext context;
 
     @Inject
@@ -25,10 +27,12 @@ public class SearchSteps {
         mainCatalogToolbarForm = AqualityServices.getScreenFactory().getScreen(MainCatalogToolbarForm.class);
         searchModal = AqualityServices.getScreenFactory().getScreen(SearchModal.class);
         subcategoryScreen = AqualityServices.getScreenFactory().getScreen(SubcategoryScreen.class);
+        catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
     }
 
     @When("I open search modal")
     public void openSearchModal() {
+        catalogScreen.state().waitForDisplayed();
         mainCatalogToolbarForm.openSearchModal();
         searchModal.state().waitForDisplayed();
     }
@@ -40,14 +44,14 @@ public class SearchSteps {
 
     @When("I search for {string}")
     public void searchFor(String searchedText) {
-        Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().waitForDisplayed());
+        Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().isDisplayed());
         searchModal.setSearchedText(searchedText);
         searchModal.applySearch();
         Assert.assertTrue("Search modal is not disappear", searchModal.state().waitForNotDisplayed());
         Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", searchedText, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
     }
 
-    @When("I search for pdf and save as {string}")
+    @When("I search random pdf and save as {string}")
     public void searchForPdf(String bookNameInfoKey) {
         String pdfForSearching = GettingBookUtil.getRandomPdf();
         AqualityServices.getLogger().info("randomPdf: " + pdfForSearching);

@@ -1,10 +1,9 @@
 Feature: Main actions open access books
 
   Background:
-    Given I add "Digital Public Library of America" account from welcomeScreen
-    And I open Catalog
-    And I open category by chain:
-      | Our Picks |
+    When I add "Digital Public Library of America" account from welcomeScreen
+      And I open category by chain:
+        | Our Picks |
 
 @tier2 @exclude_ios
 Scenario: Check out from Book Detail View and Return from Books

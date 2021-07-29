@@ -1,11 +1,9 @@
 package stepdefinitions.catalog.components;
 
 import constants.localization.application.catalog.BookActionButtonKeys;
-import constants.localization.application.catalog.CategoriesNamesKeys;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
 import constants.localization.application.facetedSearch.FacetSortByKeys;
 import models.android.BookDetailsScreenInformationBlockModel;
-import models.android.CatalogBookModel;
 
 import java.util.List;
 
@@ -14,6 +12,8 @@ public interface ICatalogSteps {
     void booksFeedIsLoaded();
 
     void openPreviousCategoryScreen();
+
+    void openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(String bookType, BookActionButtonKeys actionButtonKey, String bookNameKey, String bookInfoKey);
 
     void performActionOnBookFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey);
 

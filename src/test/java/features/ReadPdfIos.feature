@@ -10,7 +10,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Open document
-    When I search for pdf and save as 'bookNameInfo'
+    When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -22,7 +22,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by page
-    When I search for pdf and save as 'bookNameInfo'
+    When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -38,7 +38,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Table of Contents Menu
-    When I search for pdf and save as 'bookNameInfo'
+    When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -50,7 +50,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Open book to last page read
-    When I search for pdf and save as 'bookNameInfo'
+    When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -60,10 +60,12 @@ Feature: Read PDF IOS
     Then Pdf book 'bookInfo' is present on screen
     When I scroll pdf page forward from 10 to 20 times
       And I save pdf page number as 'pageNumber'
+      And I wait for 3 seconds
       And I return to previous screen
       And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct
+      And I wait for 3 seconds
     When I restart app
       And I open Books
     Then Book 'bookInfo' is present in Books List
@@ -74,7 +76,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Gallery
-    When I search for pdf and save as 'bookNameInfo'
+    When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
@@ -95,7 +97,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Search document
-    When I search for pdf and save as 'bookNameInfo'
+    When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'

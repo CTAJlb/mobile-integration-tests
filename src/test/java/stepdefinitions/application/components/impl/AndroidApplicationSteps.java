@@ -22,10 +22,6 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
         }
         welcomeScreen.state().waitForDisplayed();
         welcomeScreen.findLibrary();
-        if (AqualityServices.getElementFactory().getButton(By.xpath("//android.widget.Button[@text = \"Deny\"]"), "DENYButton").state().waitForDisplayed()) {
-            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
-        }
-        Assert.assertTrue("Checking that add accounts screen visible", addAccountScreen.state().waitForDisplayed());
         addAccountScreen.selectLibrary(libraryName);
     }
 }

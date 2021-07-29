@@ -27,7 +27,6 @@ public class IosWelcomeScreen extends WelcomeScreen {
 
     @Override
     public void findLibrary() {
-        findLibraryBtn.state().waitForDisplayed();
         findLibraryBtn.click();
     }
 }

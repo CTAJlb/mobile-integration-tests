@@ -10,8 +10,7 @@ import screens.notifications.NotificationModal;
 @ScreenType(platform = PlatformName.IOS)
 public class IosNotificationModal extends NotificationModal {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeButton";
-    private static final String BTN_POPUP_BOOK_ACTION = "//XCUIElementTypeScrollView[.//XCUIElementTypeStaticText[contains(@name, \"%1$s\")]]"
-            + "/following-sibling::XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"%2$s\"]";
+    private static final String ACTION_BTN_FOR_POPUP_PATTERN = "//XCUIElementTypeAlert//XCUIElementTypeButton[@name = \"%s\"]";
 
     private final IButton btnDontAllowNotifications = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Don’t Allow\"]"),
             "Dont allow notifications");
@@ -40,19 +39,12 @@ public class IosNotificationModal extends NotificationModal {
     }
 
     @Override
-    public void clickBookActionPopupIfDisplayed(BookActionButtonKeys headerName, BookActionButtonKeys buttonName) {
+    public void performActionForNotificationPopup(BookActionButtonKeys buttonName) {
         IButton btnApproveAction = getElementFactory().getButton(
-                By.xpath(String.format(BTN_POPUP_BOOK_ACTION, headerName.i18n(), buttonName.i18n())), buttonName.i18n());
+                By.xpath(String.format(ACTION_BTN_FOR_POPUP_PATTERN, buttonName.i18n())), buttonName.i18n());
         if (btnApproveAction.state().isDisplayed()) {
             btnApproveAction.click();
         }
-    }
-
-    @Override
-    public void handleBookActionsAndNotificationPopups(BookActionButtonKeys buttonName) {
-        closeSyncNotificationIfDisplayed();
-        closeCannotAddBookModalIfDisplayed();
-        clickBookActionPopupIfDisplayed(buttonName, buttonName);
     }
 
     @Override

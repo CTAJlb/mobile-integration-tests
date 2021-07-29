@@ -54,9 +54,9 @@ public class HoldsSteps extends BaseSteps implements IHoldsSteps {
         abstractHoldsSteps.clickOnBookAddButtonOnHoldsScreenWithoutPopupHandling(bookInfoKey, key);
     }
 
-    @Then("I click at the popup approve {} the button {}")
-    public void clickBookActionPopupButtonWithHeader(BookActionButtonKeys header, BookActionButtonKeys buttonName) {
-        abstractHoldsSteps.clickBookActionPopupButtonWithHeader(header, buttonName);
+    @Then("I click {} button on popup")
+    public void clickActionButtonForPopUp(BookActionButtonKeys buttonName) {
+        abstractHoldsSteps.clickActionButtonForPopUp(buttonName);
     }
 
     @Then("Book saved as {string} should contain {} button at the hold screen")

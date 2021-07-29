@@ -7,7 +7,6 @@ import constants.application.timeouts.CategoriesTimeouts;
 import constants.context.ScenarioContextKey;
 import constants.localization.application.catalog.BookActionButtonKeys;
 import constants.localization.application.catalog.BookActionButtonNames;
-import constants.localization.application.catalog.CategoriesNamesKeys;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
 import constants.localization.application.facetedSearch.FacetSortByKeys;
 import framework.utilities.ScenarioContext;
@@ -99,11 +98,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void openCatalogWithAgeCheck() {
-        if (ageGateScreen.state().isDisplayed()) {
-            ageGateScreen.approveAge();
-        }
         bottomMenuForm.open(BottomMenu.CATALOG);
-        catalogScreen.state().waitForDisplayed();
     }
 
     @Override
@@ -164,7 +159,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void executeBookActionAndSaveItToContextAndLibraryCancel(
             BookActionButtonKeys actionButtonKey, String bookInfoKey) {
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookAndClickActionButton(actionButtonKey));
-        notificationModal.handleBookActionsAndNotificationPopups(actionButtonKey);
+        notificationModal.performActionForNotificationPopup(actionButtonKey);
     }
 
     @Override
@@ -178,19 +173,21 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickGetOrDownloadActionButton(actionButtonKey1, actionButtonKey2, bookName));
     }
 
-    //new
     @Override
     public void performActionOnBookFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey) {
         subcategoryScreen.state().waitForDisplayed();
         String bookName = context.get(bookNameInfoKey);
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
+        notificationModal.performActionForNotificationPopup(actionButtonKey);
+        alertScreen.closeNotNowModalIfDisplayed();
+        alertScreen.closeDoNotAllowIfPresent();
     }
 
     @Override
     public void clickOnBookAddButtonOnCatalogBooksScreen(String bookInfoKey, BookActionButtonKeys key) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         catalogBooksScreen.clickBookByTitleButtonWithKey(catalogBookModel.getTitle(), key);
-        notificationModal.handleBookActionsAndNotificationPopups(key);
+        notificationModal.performActionForNotificationPopup(key);
     }
 
     @Override
@@ -338,13 +335,13 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void returnBookFromBookDetailsScreen() {
         bookDetailsScreen.returnBook();
-        notificationModal.handleBookActionsAndNotificationPopups(BookActionButtonKeys.RETURN);
+        notificationModal.performActionForNotificationPopup(BookActionButtonKeys.RETURN);
     }
 
     @Override
     public void deleteBookFromBookDetailsScreen() {
         bookDetailsScreen.deleteBook();
-        notificationModal.handleBookActionsAndNotificationPopups(BookActionButtonKeys.DELETE);
+        notificationModal.performActionForNotificationPopup(BookActionButtonKeys.DELETE);
     }
 
     @Override
@@ -357,8 +354,9 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void pressOnBookDetailsScreenAtActionButton(BookActionButtonKeys actionButton) {
         clickButton(actionButton);
-        notificationModal.handleBookActionsAndNotificationPopups(actionButton);
-        alertScreen.closeNotNowModalIfPresent();
+        notificationModal.performActionForNotificationPopup(actionButton);
+        alertScreen.closeDoNotAllowIfPresent();
+        alertScreen.closeNotNowModalIfDisplayed();
     }
 
     @Override
@@ -367,8 +365,9 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         facetedSearchScreen.changeAvailabilityTo(facetAvailabilityKeys);
     }
 
-    public void openBookWithGivenName(String bookName, String bookInfoKey, String bookType) {
-        context.add(bookInfoKey, subcategoryScreen.openBookByName(bookName, bookType));
+    @Override
+    public void openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(String bookName, BookActionButtonKeys actionButtonKey, String bookInfoKey, String bookType) {
+        context.add(bookInfoKey, subcategoryScreen.openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(bookName, actionButtonKey, bookType));
     }
 
     public void openTypeBookReader(ReaderType readerType) {

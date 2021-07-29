@@ -25,7 +25,7 @@ public class AndroidAlertScreen extends AlertScreen {
     }
 
     @Override
-    public void closeNotNowModalIfPresent() {
+    public void closeNotNowModalIfDisplayed() {
     }
 
     @Override

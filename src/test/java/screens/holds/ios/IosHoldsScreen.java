@@ -36,8 +36,8 @@ public class IosHoldsScreen extends HoldsScreen {
     }
 
     @Override
-    public boolean isBookPresent(String bookInfo) {
-        return getBook(bookInfo).state().waitForDisplayed();
+    public boolean isBookPresent(String bookTitle) {
+        return getBook(bookTitle).state().waitForDisplayed();
     }
 
     @Override

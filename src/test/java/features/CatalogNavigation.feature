@@ -115,7 +115,7 @@ Feature: Catalog Navigation
     When I search for 'Sullivan\'s Promise'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When I open 'EBOOK' book with name 'Sullivan\'s Promise' and save it as 'bookInfo'
+    #When I open 'EBOOK' book with name 'Sullivan\'s Promise' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And The following values in the information block are present:
         | key         | value                                           |
@@ -144,7 +144,7 @@ Feature: Catalog Navigation
     When I search for 'UnEnchanted'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When I open 'EBOOK' book with name 'UnEnchanted' and save it as 'bookInfo'
+    #When I open 'EBOOK' book with name 'UnEnchanted' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And The following values in the information block are present:
         | key         | value                     |

@@ -4,6 +4,7 @@ import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
+import aquality.appium.mobile.elements.Label;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.ILabel;
@@ -37,6 +38,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     private static final String BOOK_BY_NAME_BUTTON_PATTERN =
             "//android.widget.TextView[contains(@resource-id,\"bookCellIdleTitle\") and @text=\"%1$s\"]/following-sibling::android.widget.LinearLayout/android.widget.Button[@content-desc=\"%2$s\"]";
     private static final String BOOK_COVER_LOCATOR = "//*[contains(@resource-id,\"bookCellIdleCover\")]";
+    private static final String LBL_IN_PROGRESS_TITLE = "//android.widget.TextView[contains(@resource-id,\"bookCellInProgressTitle\") and @text=\"%s\"]";
     private static final String BOOK_JACKET_XPATH_PATTERN =
             "//*[contains(@resource-id,\"bookCellIdle\") and .//android.widget.Button[@content-desc=\"%1$s\"]]";
     private String RELATIVE_BOOK_TITLE_LOCATOR_PATTERN =
@@ -71,7 +73,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
         IButton bookActionBtn =
                 getElementFactory().getButton(By.xpath(getBlockLocator(title) + String.format(BOOK_ADD_BUTTON_LOC, buttonName)), buttonName);
         clickOnSpecificBookElement(bookActionBtn);
-        bookActionBtn.state().waitForNotDisplayed();
+        AqualityServices.getConditionalWait().waitFor(() -> !bookActionBtn.state().isDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }
 
     @Override
@@ -106,6 +108,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
         String bookAddButtonLocator = getBookActionButtonLocatorWithGivenName(actionButtonKey, bookName);
         IButton button = getElementFactory().getButton(By.xpath(bookAddButtonLocator), actionButtonKey.i18n());
         button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+        //todo method title is bad
         return openBook(button, bookName);
     }
 
@@ -180,7 +183,11 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     private CatalogBookModel openBook(IButton button, String bookTitle) {
         CatalogBookModel androidCatalogBookModel = getBookInfo(bookTitle);
         button.click();
-        AqualityServices.getConditionalWait().waitFor(() -> button.state().waitForNotDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+        ILabel label = getElementFactory().getLabel(By.xpath(String.format(LBL_IN_PROGRESS_TITLE, bookTitle)), "lblInProgressTitle");
+        if(label.state().waitForDisplayed()){
+            label.state().waitForNotDisplayed(Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+        }
+
         return androidCatalogBookModel;
     }
 
@@ -191,10 +198,8 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     private CatalogBookModel getBookModel(String mainLocator) {
         AqualityServices.getConditionalWait().waitFor(() -> getBookDescriptionFromImage(mainLocator) != null);
         return new CatalogBookModel()
-                .setImageTitle(Objects.requireNonNull(getBookDescriptionFromImage(mainLocator)))
                 .setTitle(getBookParameter(mainLocator, BOOK_TITLE_LOC, "Book title"))
-                .setAuthor(getBookParameter(mainLocator, BOOK_AUTHOR_LOC, "Book author"))
-                .setBookType(getBookParameter(mainLocator, BOOK_TYPE_LOC, "Book type"));
+                .setAuthor(getBookParameter(mainLocator, BOOK_AUTHOR_LOC, "Book author"));
     }
 
     private String getBookDescriptionFromImage(String mainLocator) {

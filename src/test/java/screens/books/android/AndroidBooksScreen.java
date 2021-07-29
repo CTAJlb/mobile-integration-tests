@@ -48,7 +48,10 @@ public class AndroidBooksScreen extends BooksScreen {
 
     @Override
     public boolean isBookPresent(CatalogBookModel bookInfo) {
-        return getAllBooksTitles().contains(bookInfo.getImageTitle());
+        boolean isBookPresent = false;
+        isBookPresent = getAllBooksTitles().stream().anyMatch(title -> title.toLowerCase().contains(bookInfo.getTitle().toLowerCase()));
+        //return getAllBooksTitles().contains(bookInfo.getTitle());
+        return isBookPresent;
     }
 
     @Override

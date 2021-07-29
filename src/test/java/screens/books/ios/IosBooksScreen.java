@@ -9,20 +9,17 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
-import constants.application.attributes.IosAttributes;
 import constants.localization.application.catalog.BookActionButtonKeys;
 import framework.utilities.swipe.SwipeElementUtils;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.books.BooksScreen;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosBooksScreen extends BooksScreen {
+
     private static final String MAIN_ELEMENT_LOC = "//XCUIElementTypeButton[@name=\"All\"]";
     private static final String BOOK_ACTION_BUTTON_LOCATOR = "//XCUIElementTypeButton[contains(@name,\"%1$s\")]";
     private static final String BOOK_INFO_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]";

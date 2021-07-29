@@ -44,7 +44,7 @@ public abstract class AbstractHoldsSteps extends BaseSteps implements IHoldsStep
     @Override
     public void clickOnBookAddButtonOnHoldsScreen(String bookInfoKey, BookActionButtonKeys key) {
         clickOnBookAddButtonOnHoldsScreenWithoutPopupHandling(bookInfoKey, key);
-        notificationModal.handleBookActionsAndNotificationPopups(key);
+        notificationModal.performActionForNotificationPopup(key);
     }
 
     public void clickOnBookAddButtonOnHoldsScreenWithoutPopupHandling(String bookInfoKey, BookActionButtonKeys key) {
@@ -52,8 +52,9 @@ public abstract class AbstractHoldsSteps extends BaseSteps implements IHoldsStep
         holdsScreen.clickBookByTitleButtonWithKey(catalogBookModel.getTitle(), key);
     }
 
-    public void clickBookActionPopupButtonWithHeader(BookActionButtonKeys header, BookActionButtonKeys buttonName) {
-        notificationModal.clickBookActionPopupIfDisplayed(header, buttonName);
+    @Override
+    public void clickActionButtonForPopUp(BookActionButtonKeys buttonName) {
+        notificationModal.performActionForNotificationPopup(buttonName);
     }
 
     @Override
