@@ -131,7 +131,7 @@ Feature: Main actions private access books
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
 
-  @logout @returnBooks @tier3 @exclude_android @runrun
+  @logout @returnBooks @tier3 @exclude_android
   Scenario: Hold from Book Detail View and Cancel remove from holds tab(IOS)
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
