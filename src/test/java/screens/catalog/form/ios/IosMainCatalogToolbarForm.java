@@ -19,7 +19,7 @@ public class IosMainCatalogToolbarForm extends MainCatalogToolbarForm {
     private final IButton backBtn =
             getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC + "//XCUIElementTypeButton[@name=\"Back\"]"), "Back");
     private final ILabel lblCategoryAndCatalogName =
-            getElementFactory().getLabel(By.xpath(MAIN_ELEMENT_LOC + "//XCUIElementTypeStaticText"), "Catalog name");
+            getElementFactory().getLabel(By.xpath(MAIN_ELEMENT_LOC + "/XCUIElementTypeButton[1]/following-sibling::*"), "Catalog name");
     private final IButton btnSearch = getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC +
             "//XCUIElementTypeButton[@name=\"Search\"]"), "Search");
 

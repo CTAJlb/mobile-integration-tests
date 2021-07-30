@@ -10,7 +10,6 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
-import constants.application.ReaderType;
 import constants.application.attributes.IosAttributes;
 import constants.application.timeouts.AuthorizationTimeouts;
 import constants.application.timeouts.CategoriesTimeouts;
@@ -36,7 +35,7 @@ public class IosCatalogScreen extends CatalogScreen {
             "//XCUIElementTypeButton[@name=\"%1$s\"]";
 
     private static final String BOOKS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeButton[@name]";
-    private static final String CATEGORY_XPATH_PATTERN = "//XCUIElementTypeOther//XCUIElementTypeButton//XCUIElementTypeStaticText[not(contains(@name, 'More'))]";
+    private static final String CATEGORY_XPATH_PATTERN = "//XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR = 5;
 
     private final ILabel firstLaneName =

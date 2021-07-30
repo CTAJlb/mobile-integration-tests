@@ -117,6 +117,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
         List<String> bookNames = epubTableOfContentsScreen.getListOfBookChapters();
         AqualityServices.getApplication().getDriver().navigate().back();
         AqualityServices.getLogger().info("Found chapters - " + bookNames.stream().map(Object::toString).collect(Collectors.joining(", ")));
+        AqualityServices.getLogger().info("countOfChapters-" + bookNames.size());
         return bookNames;
     }
 
