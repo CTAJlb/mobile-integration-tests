@@ -2,7 +2,7 @@
   "iOS_Simulator": {
     "capabilities": {
       "deviceName": "iPhone XS",
-      "platformVersion": "14"
+      "platformVersion": "12"
     }
   },
   "Samsung_Galaxy": {
