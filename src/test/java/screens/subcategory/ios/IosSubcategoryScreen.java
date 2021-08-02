@@ -68,6 +68,11 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
         String title = bookInfo.getTitle();
         By locator = By.xpath(String.format(BOOK_COVER_XPATH_PATTERN, title));
         AqualityServices.getLogger().info("Count of books to click - " + getElementFactory().findElements(locator, ElementType.LABEL).size());
+        try {
+            Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         getElementFactory().getButton(locator, title).click();
     }
 
