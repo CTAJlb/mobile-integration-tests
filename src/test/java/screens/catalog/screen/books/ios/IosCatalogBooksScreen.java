@@ -32,7 +32,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
     private static final String ELEMENTS_TO_WAIT_FOR_XPATH = "//XCUIElementTypeCell//XCUIElementTypeOther//XCUIElementTypeStaticText";
     private static final int COUNT_OF_BUTTONS_TO_WAIT_FOR = 5;
     private static final String BUTTON_FOR_GIVEN_BOOK_XPATH_PATTERN =
-            "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]//following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText[contains(@name,\"%2$s\")]";
+            "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]//following-sibling::XCUIElementTypeOther//*[contains(@name,\"%2$s\")]";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
 
