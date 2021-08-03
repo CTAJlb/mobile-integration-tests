@@ -11,6 +11,12 @@
       "platformVersion": "9.0"
     }
   },
+  "Samsung_Tab": {
+    "capabilities": {
+      "deviceName": "Samsung Galaxy Tab S7",
+      "platformVersion": "10.0"
+    }
+  },
   "Samsung_Galaxy_Note": {
     "capabilities": {
       "deviceName": "Samsung Galaxy S10",
