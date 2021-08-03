@@ -43,4 +43,6 @@ public abstract class BookDetailsScreen extends Screen {
     public abstract void swipeError();
 
     public abstract boolean isBookReadyToRead();
+
+    public abstract void closeBookDetailsOnlyForIOSTabIfDisplayed();
 }

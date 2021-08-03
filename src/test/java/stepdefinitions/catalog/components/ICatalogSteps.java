@@ -100,4 +100,6 @@ public interface ICatalogSteps {
     void pressOnBookDetailsScreenAtActionButton(BookActionButtonKeys actionButton);
 
     void checkThatActionButtonTextEqualToExpected(FacetAvailabilityKeys facetAvailabilityKeys);
+
+    void closeBookDetailsOnlyForIOSTab();
 }

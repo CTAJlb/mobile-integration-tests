@@ -43,6 +43,8 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     private final IButton btnListen = getActionButton(BookActionButtonKeys.LISTEN);
     private final IButton btnRelatedBooks =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Information\"]/following-sibling::XCUIElementTypeTable"), "Related books");
+    private final IButton btnCloseBookDetailsOnlyIOSTab =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton/XCUIElementTypeStaticText[contains(@name, \"Close\")]"), "Close button");
     private final IButton btnMore =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]//following-sibling::XCUIElementTypeButton[@name=\"More…\"]"), "Show more description");
     private final IButton lblErrorDetails =
@@ -168,6 +170,13 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     @Override
     public boolean isBookReadyToRead() {
         return btnRead.state().isDisplayed() || btnListen.state().isDisplayed();
+    }
+
+    @Override
+    public void closeBookDetailsOnlyForIOSTabIfDisplayed() {
+        if (btnCloseBookDetailsOnlyIOSTab.state().isDisplayed()) {
+            btnCloseBookDetailsOnlyIOSTab.click();
+        }
     }
 
     private IButton getActionButton(BookActionButtonKeys buttonKey) {

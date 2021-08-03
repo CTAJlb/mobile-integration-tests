@@ -19,9 +19,11 @@ Scenario: Check out from Book Detail View and Return from Books
   @tier2 @exclude_android
   Scenario: Check out from Book Detail View and Return from Books(IOS)
     When I open the book details for the subsequent DOWNLOAD on Subcategory List View and save it as 'bookInfo'
+      And I close Book Details for IOSTab
       And I open Books
       And I open book 'bookInfo' details by clicking on cover
       And I press on the book details view at the action button DELETE
+      And I close Book Details for IOSTab
       And I open Books
     Then Book 'bookInfo' is not present in Books List
 
@@ -67,6 +69,7 @@ Scenario: Check out from Book Detail View and Return from Books
     Then Book 'bookInfo' is present in Books List
     When I open book 'bookInfo' details by clicking on cover
       And I press on the book details view at the action button DELETE
+      And I close Book Details for IOSTab
       And I open Books
     Then Book 'bookInfo' is not present in Books List
 

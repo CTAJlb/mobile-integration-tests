@@ -142,6 +142,11 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
         return btnRead.state().isDisplayed() || btnListen.state().isDisplayed();
     }
 
+    @Override
+    public void closeBookDetailsOnlyForIOSTabIfDisplayed() {
+        //only for ios
+    }
+
     private IButton getActionButton(BookActionButtonKeys buttonKey) {
         String key = buttonKey.i18n();
         return getElementFactory().getButton(By.xpath(String.format(BOOK_ACTION_BUTTON_LOC, key)), key);

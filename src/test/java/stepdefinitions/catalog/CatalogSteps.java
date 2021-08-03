@@ -281,6 +281,11 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.checkThatActionButtonTextEqualToExpected(facetAvailabilityKeys);
     }
 
+    @And("I close Book Details for IOSTab")
+    public void closeBookDetailsOnlyForIOSTab() {
+        catalogSteps.closeBookDetailsOnlyForIOSTab();
+    }
+
     @When("I read book with {} type from book details view")
     public void openGivenTypeBookReader(ReaderType readerType) {
         catalogSteps.openTypeBookReader(readerType);

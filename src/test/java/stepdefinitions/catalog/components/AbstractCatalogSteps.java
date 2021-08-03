@@ -301,6 +301,11 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
+    public void closeBookDetailsOnlyForIOSTab() {
+        bookDetailsScreen.closeBookDetailsOnlyForIOSTabIfDisplayed();
+    }
+
+    @Override
     public void openRelatedBooks() {
         bookDetailsScreen.clickRelatedBooks();
     }

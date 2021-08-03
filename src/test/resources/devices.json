@@ -2,6 +2,12 @@
   "iOS_Simulator": {
     "capabilities": {
       "deviceName": "iPhone XS",
+      "platformVersion": "12"
+    }
+  },
+  "iOS_Ipad": {
+    "capabilities": {
+      "deviceName": "iPad Pro 12.9 2021",
       "platformVersion": "14"
     }
   },

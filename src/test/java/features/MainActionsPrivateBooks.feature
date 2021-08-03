@@ -11,6 +11,7 @@ Feature: Main actions private access books
       And I switch to 'eBooks' catalog tab
       And I RESERVE book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain CANCEL button on Subcategory List View
+    And I close Book Details for IOSTab
     When I open Holds
     Then Book 'bookInfo' is present in Holds List
     When I click on the book 'bookInfo' button CANCEL on the holds screen
@@ -74,10 +75,14 @@ Feature: Main actions private access books
       And I switch to 'eBooks' catalog tab
       And Open 'EBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
       And I press on the book details view at the action button GET
+      And I close Book Details for IOSTab
+      And I close Book Details for IOSTab
       And I open Books
     Then Book 'bookInfo' is present in Books List
     When I open book 'bookInfo' details by clicking on cover
       And I press on the book details view at the action button RETURN
+      And I close Book Details for IOSTab
+      And I close Book Details for IOSTab
       And I open Books
     Then Book 'bookInfo' is not present in Books List
 
@@ -144,6 +149,7 @@ Feature: Main actions private access books
     When Open 'EBOOK' book with RESERVE button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
     When I press on the book details view at the action button RESERVE
+      And I close Book Details for IOSTab
       And I open Holds
     Then Book 'bookInfo' is present in Holds List
     When I click on the book 'bookInfo' button CANCEL on the holds screen and don't click on the popup button
