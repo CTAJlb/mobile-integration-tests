@@ -25,7 +25,7 @@ public abstract class EpubReaderScreen extends Screen {
 
     public abstract void clickRightCorner();
 
-    public abstract String getPageNumberInfo();
+    public abstract String getPageNumber();
 
     public abstract List<String> getListOfChapters();
 

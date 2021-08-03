@@ -12,13 +12,13 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Navigate by Page
-      When Book page number is 1
-      And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
+    When Book page number is 1
+      And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I click on right book corner
-    Then Navigated to the next page and old page 'pageNumberInfo' and 'chapterNameInfo'
-    When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
+    Then Next page is open and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName
+    When I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I click on left book corner
-    Then Navigated to the previous page and old page 'pageNumberInfo' and 'chapterNameInfo'
+    Then Previous page is open and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName
 
   @tier1
   Scenario: Navigate by Table of Contents Menu
@@ -59,15 +59,14 @@ Feature: Read EPUB
   @tier1
   Scenario: Return to Page (Bookmarking)
     When I scroll page forward from 10 to 20 times
-    #chapterNameInfo does not check in Assert for ios we check pageNumber and chapterName fot android only pageNumber
-      And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
+      And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I wait for 3 seconds
       And I return to previous screen
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
-      And Page info 'pageNumberInfo' is correct
+      And PageNumber 'pageNumberKey' is correct
     When I click on right book corner
-      And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
+      And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I wait for 3 seconds
       And I restart app
       And I open Books
@@ -75,4 +74,4 @@ Feature: Read EPUB
     When I open book 'bookInfo' details by clicking on cover
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
-      And Page info 'pageNumberInfo' is correct
+      And PageNumber 'pageNumberKey' is correct

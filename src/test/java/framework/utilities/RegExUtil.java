@@ -9,7 +9,7 @@ public class RegExUtil {
         return pattern.matcher(text);
     }
 
-    public static double getDoubleFromFirstMatchGroup(String text, String regex) {
+    public static double getDoubleFromFirstGroup(String text, String regex) {
         return Double.parseDouble(getStringFromFirstGroup(text, regex));
     }
 
@@ -17,6 +17,15 @@ public class RegExUtil {
         Matcher matcher = getMatcher(text, regex);
         if (matcher.find()) {
             return matcher.group(1);
+        } else {
+            throw new IllegalStateException(String.format("No match found for text '%s' with regex '%s'", text, regex));
+        }
+    }
+
+    public static String getStringFromThirdGroup(String text, String regex) {
+        Matcher matcher = getMatcher(text, regex);
+        if (matcher.find()) {
+            return matcher.group(3);
         } else {
             throw new IllegalStateException(String.format("No match found for text '%s' with regex '%s'", text, regex));
         }

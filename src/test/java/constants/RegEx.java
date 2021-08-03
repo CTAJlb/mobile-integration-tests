@@ -1,7 +1,8 @@
 package constants;
 
 public class RegEx {
-    public static final String PAGE_NUMBER_REGEX = "Page (\\d+) of \\d+";
+    public static final String PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS = "Page (\\d+) of (\\d+) (\\w.+)";
+    public static final String PAGE_NUMBER_REGEX_FOR_ANDROID = "Page (\\d+) of (\\d+)";
     public static final String FONT_SIZE_REGEX_ANDROID = "--USER__fontSize:(\\d+)%;";
     public static final String FONT_NAME_REGEX_ANDROID = "--USER__fontFamily:(.+?);";
     public static final String FONT_COLOR_REGEX = " color: (\\S* \\S*);";

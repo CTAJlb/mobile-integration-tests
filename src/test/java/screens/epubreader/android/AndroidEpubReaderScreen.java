@@ -85,9 +85,10 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public String getPageNumberInfo() {
+    public String getPageNumber() {
         lblPageNumber.state().waitForDisplayed(Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
-        return lblPageNumber.getText();
+        String pageNumberRegEx = lblPageNumber.getText();
+        return RegExUtil.getStringFromFirstGroup(pageNumberRegEx, RegEx.PAGE_NUMBER_REGEX_FOR_ANDROID);
     }
 
     @Override
@@ -122,7 +123,7 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public double getFontSize() {
-        return RegExUtil.getDoubleFromFirstMatchGroup(getBookSource(), RegEx.FONT_SIZE_REGEX_ANDROID);
+        return RegExUtil.getDoubleFromFirstGroup(getBookSource(), RegEx.FONT_SIZE_REGEX_ANDROID);
     }
 
     private String getBookSource() {

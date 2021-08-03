@@ -34,7 +34,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     private final ILabel lblBookName =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]"), "Book Cover", ElementState.EXISTS_IN_ANY_STATE);
-    private final ILabel lblPageNumber =
+    private final ILabel lblPageNumberAndChapterName =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeStaticText"), "Page Number");
     private final ILabel lblPage =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "Page View");
@@ -63,8 +63,13 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public String getChapterName() {
-        //only for android
-        return null;
+        if (btnFontSettings.state().isDisplayed()) {
+            CoordinatesClickUtils.clickAtCenterOfScreen();
+        }
+        lblPageNumberAndChapterName.state().waitForDisplayed();
+        String pageNumberAndChapterNameRegEx = lblPageNumberAndChapterName.getAttribute(IosAttributes.NAME);
+        pageNumberAndChapterNameRegEx = deleteBracketsFromText(pageNumberAndChapterNameRegEx);
+        return RegExUtil.getStringFromThirdGroup(pageNumberAndChapterNameRegEx, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
     }
 
     @Override
@@ -98,12 +103,21 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public String getPageNumberInfo() {
+    public String getPageNumber() {
         if (btnFontSettings.state().isDisplayed()) {
             CoordinatesClickUtils.clickAtCenterOfScreen();
         }
-        lblPageNumber.state().waitForDisplayed();
-        return lblPageNumber.getAttribute(IosAttributes.NAME);
+        lblPageNumberAndChapterName.state().waitForDisplayed();
+        String pageNumberAndChapterNameRegEx = lblPageNumberAndChapterName.getAttribute(IosAttributes.NAME);
+        pageNumberAndChapterNameRegEx = deleteBracketsFromText(pageNumberAndChapterNameRegEx);
+        return RegExUtil.getStringFromFirstGroup(pageNumberAndChapterNameRegEx, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
+    }
+
+    //todo I must delete this later. I should change regEX = PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS, I can work without brackets in regEx
+    private static String deleteBracketsFromText(String text) {
+        text = text.replaceAll("\\(", "");
+        text = text.replaceAll("\\)", "");
+        return text;
     }
 
     @Override
@@ -148,7 +162,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public double getFontSize() {
-        return RegExUtil.getDoubleFromFirstMatchGroup(getBookSource(), RegEx.FONT_SIZE_REGEX_IOS);
+        return RegExUtil.getDoubleFromFirstGroup(getBookSource(), RegEx.FONT_SIZE_REGEX_IOS);
     }
 
     private String getBookSource() {
