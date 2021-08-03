@@ -20,7 +20,7 @@
       }
     },
     "ios": {
-      "deviceKey": "iOS_Ipad",
+      "deviceKey": "iOS_Simulator",
       "capabilities": {
         "platformName": "iOS",
         "app": "",
