@@ -177,6 +177,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
         });
         Set<String> contextNames = driver.getContextHandles();
         driver.context((String) contextNames.toArray()[1]);
+        AqualityServices.getLogger().info("contextNames.toArray()[1]PageSource-" + driver.getPageSource());
         driver.switchTo().frame(EPUB_CONTENT_IFRAME);
         String frameSource = driver.getPageSource();
         logger.info(frameSource);
