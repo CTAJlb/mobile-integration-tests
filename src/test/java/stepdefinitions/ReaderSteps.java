@@ -134,11 +134,7 @@ public class ReaderSteps {
         for (String chapter :
                 chapters) {
             epubReaderScreen.openChapter(chapter);
-            if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
-                softAssertions.assertThat(chapter.toLowerCase().contains(epubReaderScreen.getChapterName().toLowerCase())).as("Chapter name is not correct. ExpectedName-" + chapter.toLowerCase() + " , ActualName-" + epubReaderScreen.getChapterName().toLowerCase()).isTrue();
-            }else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS){
-                softAssertions.assertThat(epubReaderScreen.getPageNumber().toLowerCase().contains(chapter.toLowerCase())).as("Chapter name is not correct. ExpectedName-" + chapter.toLowerCase() + " , ActualName-" + epubReaderScreen.getPageNumber().toLowerCase()).isTrue();
-            }
+            softAssertions.assertThat(chapter.toLowerCase().equals(epubReaderScreen.getChapterName().toLowerCase())).as("ChapterName is not correct. ExpectedChapterName-" + chapter.toLowerCase() + " , ActualChapterName-" + epubReaderScreen.getChapterName().toLowerCase()).isTrue();
         }
         softAssertions.assertAll();
     }
@@ -376,9 +372,9 @@ public class ReaderSteps {
     public void readerScreenForEbookTypeIsPresent(String bookInfoKey, String readerType) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         ReaderType type = null;
-        if (readerType.toLowerCase().equals("EBOOK".toLowerCase())){
+        if (readerType.toLowerCase().equals("EBOOK".toLowerCase())) {
             type = ReaderType.EBOOK;
-        }else if (readerType.toLowerCase().equals("AUDIOBOOK".toLowerCase())){
+        } else if (readerType.toLowerCase().equals("AUDIOBOOK".toLowerCase())) {
             type = ReaderType.AUDIOBOOK;
         }
 

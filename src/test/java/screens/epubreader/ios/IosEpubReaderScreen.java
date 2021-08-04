@@ -35,7 +35,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     private final ILabel lblBookName =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]"), "Book Cover", ElementState.EXISTS_IN_ANY_STATE);
     private final ILabel lblPageNumberAndChapterName =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeStaticText"), "Page Number");
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeStaticText"), "lblPageNumberAndChapterName");
     private final ILabel lblPage =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "Page View");
     private final IButton btnFontSettings = getElementFactory().getButton(
@@ -144,8 +144,6 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
         IButton button = getElementFactory().getButton(By.xpath(String.format(CHAPTER_ITEM_LOC, chapter)), chapter);
         button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         button.click();
-
-        checkThatBookOpenedAndOpenMenus();
     }
 
     @Override

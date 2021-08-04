@@ -22,7 +22,7 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Navigate by Table of Contents Menu
-      And Each chapter can be opened from Table of Contents
+    Then Each chapter can be opened from Table of Contents
 
   @tier1
   Scenario: Navigate View options
