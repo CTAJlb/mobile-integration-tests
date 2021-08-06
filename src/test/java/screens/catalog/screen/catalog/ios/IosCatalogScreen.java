@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosCatalogScreen extends CatalogScreen {
-    private static final String CATEGORY_LOCATOR = "//XCUIElementTypeButton[@name=\"%1$s\"]/following-sibling::XCUIElementTypeButton[contains(@name, \"More\")]";
+    private static final String CATEGORY_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
     private static final String LANE_BY_NAME_LOCATOR_PART = "(//XCUIElementTypeOther[.//XCUIElementTypeButton[@name=\"%1$s\"]]"
             + "/following-sibling::XCUIElementTypeCell)[1]";
     private static final String BOOK_COVER_IN_LANE_LOCATOR = "/XCUIElementTypeButton";
@@ -34,8 +34,8 @@ public class IosCatalogScreen extends CatalogScreen {
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN =
             "//XCUIElementTypeButton[@name=\"%1$s\"]";
 
-    private static final String BOOKS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeButton[@name]";
-    private static final String CATEGORY_XPATH_PATTERN = "//XCUIElementTypeOther/XCUIElementTypeButton[1]";
+    private static final String BOOKS_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton[@name]";
+    private static final String CATEGORY_XPATH_PATTERN = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR = 5;
 
     private final ILabel firstLaneName =
@@ -53,8 +53,9 @@ public class IosCatalogScreen extends CatalogScreen {
         int countOfItems = getElements(BOOKS_LOCATOR).size();
         AqualityServices.getConditionalWait().waitFor(() -> getElements(BOOKS_LOCATOR).size() <= countOfItems);
         List<String> listOfNames = getValuesFromListOfLabels(BOOKS_LOCATOR);
-        AqualityServices.getLogger().info("Found list of books - " + listOfNames.stream().map(Object::toString)
+        AqualityServices.getLogger().info("Found list of books from all subcategories on screen - " + listOfNames.stream().map(Object::toString)
                 .collect(Collectors.joining(", ")));
+        AqualityServices.getLogger().info("amount of books from all subcategories on screen - " + listOfNames.size());
         return listOfNames;
     }
 
@@ -138,6 +139,9 @@ public class IosCatalogScreen extends CatalogScreen {
                     , Duration.ofMillis(AuthorizationTimeouts.DEBUG_MENU_IS_OPENED.getTimeoutMillis()));
             currentBooksNames = geListOfCategoriesNames();
         } while (!categoriesNames.containsAll(currentBooksNames));
+        categoriesNames.stream().forEach(x ->
+                AqualityServices.getLogger().info("CategoryName-" + x));
+        AqualityServices.getLogger().info("amount of categories-" + categoriesNames.size());
         return categoriesNames;
     }
 
