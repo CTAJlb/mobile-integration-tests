@@ -33,15 +33,15 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     private static final String CHAPTER_ITEM_LOC = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[@name=\"%1$s\"]";
 
     private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]"), "Book Cover", ElementState.EXISTS_IN_ANY_STATE);
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Book Cover");
     private final ILabel lblPageNumberAndChapterName =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeStaticText"), "lblPageNumberAndChapterName");
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"Page\")]"), "lblPageNumberAndChapterName");
     private final ILabel lblPage =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "Page View");
     private final IButton btnFontSettings = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"Toggle reader settings\"]"), "Chapters");
+            By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[3]"), "Font settings");
     private final IButton btnChapters =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Table of contents\"]"), "Chapters");
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[2]"), "Chapters");
 
     public IosEpubReaderScreen() {
         super(By.xpath("//*[contains(@name,\"Page\")]"));
@@ -56,7 +56,10 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public String getBookName() {
-        String text = lblBookName.getText();
+        if (!btnFontSettings.state().isDisplayed()) {
+            CoordinatesClickUtils.clickAtCenterOfScreen();
+        }
+        String text = lblBookName.getAttribute("name");
         AqualityServices.getLogger().info("Book name - " + text);
         return text;
     }
@@ -64,7 +67,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     @Override
     public String getChapterName() {
         if (btnFontSettings.state().isDisplayed()) {
-            CoordinatesClickUtils.clickAtCenterOfScreen();
+            CoordinatesClickUtils.clickOnTopOfScreen();
         }
         lblPageNumberAndChapterName.state().waitForDisplayed();
         String pageNumberAndChapterNameRegEx = lblPageNumberAndChapterName.getAttribute(IosAttributes.NAME);

@@ -18,6 +18,12 @@ public final class CoordinatesClickUtils {
         action.tap(PointOption.point(dimension.width / 2, dimension.height / 2)).perform();
     }
 
+    public static void clickOnTopOfScreen() {
+        Dimension dimension = AqualityServices.getApplication().getDriver().manage().window().getSize();
+        TouchAction<?> action = new TouchAction<>(AqualityServices.getApplication().getDriver());
+        action.tap(PointOption.point(dimension.width / 2, dimension.height - 10)).perform();
+    }
+
     public static void clickOutOfElement(IElement iElement) {
         int yOffset = 100;
         clickOutOfElement(iElement, yOffset);

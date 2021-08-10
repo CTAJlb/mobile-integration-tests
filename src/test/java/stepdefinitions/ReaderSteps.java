@@ -57,7 +57,6 @@ public class ReaderSteps {
     @Then("Book {string} is present on screen")
     public void checkBookInfoIsPresentOnScreen(String bookInfoKey) {
         assertBookName(context.get(bookInfoKey));
-        epubReaderScreen.waitForBookLoading();
     }
 
     @Then("Book page number is {int}")
@@ -393,12 +392,6 @@ public class ReaderSteps {
     }
 
     private void assertBookName(CatalogBookModel catalogBookModel) {
-        // TODO: 29.04.2021 deleted ThreadSleep
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         String expectedBookName = prepareBookName(catalogBookModel.getTitle());
         String actualBookName = prepareBookName(epubReaderScreen.getBookName());
         Assert.assertTrue(String.format("Book name is not correct. Expected name - '%1$s', actual name - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));

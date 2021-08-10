@@ -12,7 +12,8 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Navigate by Page
-    When Book page number is 1
+    When I click on right book corner
+      And Book page number is 2
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I click on right book corner
     Then Next page is open and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName
