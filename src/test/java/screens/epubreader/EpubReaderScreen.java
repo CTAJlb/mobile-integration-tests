@@ -39,9 +39,7 @@ public abstract class EpubReaderScreen extends Screen {
 
     public abstract String getFontName();
 
-    public abstract String getFontColor();
-
-    public abstract String getFontAndBackgroundColor();
+    public abstract String getBackgroundColor();
 
     public abstract void waitForBookLoading();
 

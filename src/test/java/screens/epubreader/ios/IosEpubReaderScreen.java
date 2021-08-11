@@ -178,13 +178,10 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
         });
         Set<String> contextNames = driver.getContextHandles();
         driver.context((String) contextNames.toArray()[1]);
-        AqualityServices.getLogger().info("contextNames.toArray()[1]PageSource-" + driver.getPageSource());
-        driver.switchTo().frame(EPUB_CONTENT_IFRAME);
-        String frameSource = driver.getPageSource();
-        logger.info(frameSource);
-        driver.switchTo().defaultContent();
+        String pageSource = driver.getPageSource();
+        AqualityServices.getLogger().info("contextNames.toArray()[1]PageSource-" + pageSource);
         driver.context((String) contextNames.toArray()[0]);
-        return frameSource;
+        return pageSource;
     }
 
     @Override
@@ -193,12 +190,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public String getFontColor() {
-        return getReaderInfo(RegEx.FONT_COLOR_REGEX);
-    }
-
-    @Override
-    public String getFontAndBackgroundColor() {
+    public String getBackgroundColor() {
         return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX_IOS);
     }
 

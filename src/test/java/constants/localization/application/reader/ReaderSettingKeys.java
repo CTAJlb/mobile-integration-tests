@@ -15,8 +15,7 @@ public enum ReaderSettingKeys implements LocalizedValue {
     BLACK_TEXT_ON_WHITE("black_text_on_white"),
     BLACK_TEXT_ON_SEPIA("black_text_on_sepia"),
     DECREASE_FONT("decrease_font"),
-    INCREASE_FONT("increase_font"),
-    RESET_FONT("reset_font");
+    INCREASE_FONT("increase_font");
 
     private static final AbstractILocalizationProvider localizationProvider =
             LocalizationProviderFactory.getProvider("reader.ReaderSettingKeys");

@@ -5,7 +5,8 @@ import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.RegEx;
 import constants.application.ReaderType;
-import constants.localization.application.reader.ColorKeys;
+import constants.localization.application.reader.BackgroundColorKeys;
+import constants.localization.application.reader.FontNameKeys;
 import constants.localization.application.reader.ReaderSettingKeys;
 import framework.utilities.RegExUtil;
 import framework.utilities.ScenarioContext;
@@ -189,14 +190,14 @@ public class ReaderSteps {
         changeSetting(readerSettingKey);
     }
 
-    @Then("Book text displays {} on {}")
-    public void checkBookTextDisplaysWhiteTextOnBlack(ColorKeys fontColor, ColorKeys backgroundColor) {
-        assertFontAndBackground(fontColor, backgroundColor);
+    @Then("The {} background is correct")
+    public void checkBackgroundHasSpecificColor(BackgroundColorKeys fontBackgroundKey) {
+        assertBackgroundHasSpecificColor(fontBackgroundKey);
     }
 
     @Then("Book text displays in {} font")
-    public void bookTextDisplaysInSerifFont(ReaderSettingKeys key) {
-        assertFontName(key);
+    public void bookTextDisplaysInSerifFont(FontNameKeys fontNameKey) {
+        assertFontName(fontNameKey);
     }
 
     @And("PageNumber {string} is correct")
@@ -423,47 +424,16 @@ public class ReaderSteps {
         fontChoicesScreen.closeFontChoices();
     }
 
-    private void assertFontAndBackground(ColorKeys fontColor, ColorKeys backgroundColor) {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
-            String expectedFontAndBackground = "";
-            if (fontColor == ColorKeys.BLACK && backgroundColor == ColorKeys.WHITE) {
-                expectedFontAndBackground = "readium-default-on";
-            } else if (fontColor == ColorKeys.WHITE && backgroundColor == ColorKeys.BLACK) {
-                expectedFontAndBackground = "readium-night-on";
-            } else if (fontColor == ColorKeys.BLACK && backgroundColor == ColorKeys.SEPIA) {
-                expectedFontAndBackground = "readium-sepia-on";
-            }
-            String actualFontAndBackground = epubReaderScreen.getFontAndBackgroundColor();
-            Assert.assertTrue("BackgroundAndFont is not correct actualFontAndBackground-" + actualFontAndBackground + " expectedFontAndBackground-" + expectedFontAndBackground, actualFontAndBackground.toLowerCase().equals(expectedFontAndBackground.toLowerCase()));
-        } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            SoftAssertions softAssertions = new SoftAssertions();
-            softAssertions.assertThat(epubReaderScreen.getFontColor()).as("Font color is not correct").isEqualTo(fontColor.i18n());
-            softAssertions.assertThat(epubReaderScreen.getFontAndBackgroundColor()).as("Background color is not correct").isEqualTo(backgroundColor.i18n());
-            softAssertions.assertAll();
-        }
+    private void assertBackgroundHasSpecificColor(BackgroundColorKeys fontBackgroundKey) {
+        String expectedBackgroundColor = fontBackgroundKey.i18n();
+        String actualBackgroundColor = epubReaderScreen.getBackgroundColor();
+        Assert.assertTrue("BackgroundColor is not correct, actualBackgroundColor-" + actualBackgroundColor + ", expectedBackgroundColor-" + expectedBackgroundColor, actualBackgroundColor.toLowerCase().equals(expectedBackgroundColor.toLowerCase()));
     }
 
-    private void assertFontName(ReaderSettingKeys key) {
-        String expectedBookFont = "";
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
-            if (key == ReaderSettingKeys.FONT_SERIF) {
-                expectedBookFont = "serif";
-            } else if (key == ReaderSettingKeys.FONT_SANS) {
-                expectedBookFont = "sans-serif";
-            } else if (key == ReaderSettingKeys.FONT_DYSLEXIC) {
-                expectedBookFont = "OpenDyslexic";
-            }
-        } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            if (key == ReaderSettingKeys.FONT_SERIF) {
-                expectedBookFont = "Georgia !important";
-            } else if (key == ReaderSettingKeys.FONT_SANS) {
-                expectedBookFont = "Helvetica !important";
-            } else if (key == ReaderSettingKeys.FONT_DYSLEXIC) {
-                expectedBookFont = "OpenDyslexic3 !important";
-            }
-        }
+    private void assertFontName(FontNameKeys fontNameKey) {
+        String expectedFontName = fontNameKey.i18n();
         String actualFontName = epubReaderScreen.getFontName();
-        Assert.assertTrue("Book font is not correct actualFontName-" + actualFontName + " expectedFontName-" + expectedBookFont, actualFontName.toLowerCase().equals(expectedBookFont.toLowerCase()));
+        Assert.assertTrue("Book fontName is not correct, actualFontName-" + actualFontName + ", expectedFontName-" + expectedFontName, actualFontName.toLowerCase().equals(expectedFontName.toLowerCase()));
     }
 
     private String getTrimmedBookName() {

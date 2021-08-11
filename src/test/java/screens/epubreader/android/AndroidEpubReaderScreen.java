@@ -154,14 +154,8 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public String getFontColor() {
-        //only for IOS
-        return "";
-    }
-
-    @Override
-    public String getFontAndBackgroundColor() {
-        return getReaderInfo(RegEx.FONT_AND_BACKGROUND_ANDROID);
+    public String getBackgroundColor() {
+        return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX_ANDROID);
     }
 
     @Override
