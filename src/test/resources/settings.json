@@ -5,7 +5,7 @@
   "screensLocation": "screens",
   "driverSettings": {
     "android": {
-      "deviceKey": "Samsung_Tab",
+      "deviceKey": "Samsung_Galaxy",
       "capabilities": {
         "platformName": "Android",
         "app": "",

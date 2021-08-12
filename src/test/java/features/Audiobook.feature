@@ -8,8 +8,8 @@ Feature: Audiobook
     When I open Catalog
       And I switch to 'Audiobooks' catalog tab
     When I open category by chain:
-      | Fiction     |
-      | All Fiction |
+      | Fiction |
+      | Drama   |
       And I open the book details for the subsequent GET on Subcategory List View and save it as 'bookInfo'
 
   @logout @returnBooks @tier2
