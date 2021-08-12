@@ -50,7 +50,7 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
     }
 
     public void enterCredentialsForLibraryAccount(String libraryName) {
-        if(!accountsScreen.state().isDisplayed()){
+        if (!accountsScreen.state().isDisplayed()) {
             openAccounts();
         }
         accountsScreen.openAccount(libraryName);
@@ -59,7 +59,10 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
         accountScreen.enterCredentials(credentials);
         alertScreen.state().waitForDisplayed();
         alertScreen.closeNotNowModalIfDisplayed();
-        AqualityServices.getConditionalWait().waitFor(() -> accountScreen.isLoginSuccessful() || catalogScreen.state().isDisplayed());
+        boolean isLoginPerformedSuccessfully = AqualityServices.getConditionalWait().waitFor(() -> accountScreen.isLoginSuccessful() || catalogScreen.state().isDisplayed());
+        if (!isLoginPerformedSuccessfully) {
+            throw new RuntimeException("Login is not completed");
+        }
     }
 
     private void openAccounts() {
