@@ -31,6 +31,8 @@ public class IosCatalogScreen extends CatalogScreen {
     private static final String BOOK_COVER_IN_LANE_LOCATOR = "/XCUIElementTypeButton";
     private static final String FEED_LANE_TITLES_LOCATOR =
             "//XCUIElementTypeOther[./following-sibling::XCUIElementTypeCell[1]]//XCUIElementTypeButton[1]";
+    private static final String UNIQUE_ELEMENT =
+            "//XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"Change Library Account\")]";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN =
             "//XCUIElementTypeButton[@name=\"%1$s\"]";
 
@@ -44,7 +46,7 @@ public class IosCatalogScreen extends CatalogScreen {
     private final ILabel buttonMore = getElementFactory().getLabel(By.xpath("//XCUIElementTypeButton[contains(@name, 'More')][1]"), "Button More...");
 
     public IosCatalogScreen() {
-        super(By.xpath(FEED_LANE_TITLES_LOCATOR));
+        super(By.xpath(UNIQUE_ELEMENT));
     }
 
     @Override
