@@ -4,7 +4,7 @@ Feature: Read EPUB
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
       And I open search modal
-      And I search for 'Flower Fables'
+      And I search for 'The Scarecrow of Oz'
       And DOWNLOAD book from subcategory list view and save it as 'bookInfo'
       And I open book 'bookInfo' details by clicking on cover
       And I press on the book details view at the action button READ
@@ -27,9 +27,10 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Navigate View options
-    When I return to previous screen
+    When I return to previous screen for epub and pdf
+    And I wait for 3 seconds
       And I press on the book details view at the action button READ
-    Then Book 'bookInfo' is present on screen
+    #Then Book 'bookInfo' is present on screen
     When I open font choices for book
     Then Font choices screen is present
     When I close font choices
@@ -62,7 +63,7 @@ Feature: Read EPUB
     When I scroll page forward from 10 to 20 times
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I wait for 3 seconds
-      And I return to previous screen
+      And I return to previous screen for epub and pdf
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
       And PageNumber 'pageNumberKey' is correct

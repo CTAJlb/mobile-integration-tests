@@ -61,7 +61,7 @@ Feature: Read PDF IOS
     When I scroll pdf page forward from 10 to 20 times
       And I save pdf page number as 'pageNumber'
       And I wait for 3 seconds
-      And I return to previous screen
+      And I return to previous screen for epub and pdf
       And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct

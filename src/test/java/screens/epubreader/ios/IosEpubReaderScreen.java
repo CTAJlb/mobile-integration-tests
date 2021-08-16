@@ -6,7 +6,6 @@ import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.logging.Logger;
 import constants.RegEx;
 import constants.application.attributes.IosAttributes;
@@ -18,8 +17,6 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
 import screens.epubreader.EpubReaderScreen;
 import screens.epubtableofcontents.EpubTableOfContentsScreen;
 
@@ -29,11 +26,10 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosEpubReaderScreen extends EpubReaderScreen {
-    private static final String EPUB_CONTENT_IFRAME = "epubContentIframe";
     private static final String CHAPTER_ITEM_LOC = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[@name=\"%1$s\"]";
 
-    private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Book Cover");
+    private final ILabel btnBackAndBookName =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Book Cover and button back");
     private final ILabel lblPageNumberAndChapterName =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"Page\")]"), "lblPageNumberAndChapterName");
     private final ILabel lblPage =
@@ -59,7 +55,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
         if (!btnFontSettings.state().isDisplayed()) {
             CoordinatesClickUtils.clickAtCenterOfScreen();
         }
-        String text = lblBookName.getAttribute("name");
+        String text = btnBackAndBookName.getAttribute("name");
         AqualityServices.getLogger().info("Book name - " + text);
         return text;
     }
@@ -77,7 +73,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public boolean isBookNamePresent() {
-        return lblBookName.state().waitForDisplayed();
+        return btnBackAndBookName.state().waitForDisplayed();
     }
 
     @Override
@@ -93,16 +89,13 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     @Override
     public void clickLeftCorner() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        action.tap(PointOption.point(0, lblPage.getElement().getCenter().y)).perform();
+        action.tap(PointOption.point(20, lblPage.getElement().getCenter().y)).perform();
     }
 
     @Override
     public void clickRightCorner() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        Point upperLeftCorner = lblPage.getElement().getLocation();
-        Point center = lblPage.getElement().getCenter();
-        Dimension dimensions = lblPage.getElement().getSize();
-        action.tap(PointOption.point(upperLeftCorner.x + dimensions.width - 1, center.y)).perform();
+        action.tap(PointOption.point(lblPage.getElement().getSize().getWidth(), lblPage.getElement().getCenter().y)).perform();
     }
 
     @Override

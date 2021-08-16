@@ -66,9 +66,9 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void booksFeedIsLoaded() {
         boolean isPagePresent =
                 catalogScreen.state().waitForDisplayed(Duration.ofMillis(CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis()));
-        if (!isPagePresent && catalogScreen.isErrorButtonPresent()) {
+        /*if (!isPagePresent && catalogScreen.isErrorButtonPresent()) {
             addScreenshot();
-        }
+        }*/
         Assert.assertTrue("Books feed is not loaded. Error message (if present) - " + catalogScreen.getErrorDetails(), isPagePresent);
     }
 

@@ -18,7 +18,7 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
     }
 
     @Override
-    public void returnToPreviousScreen() {
+    public void returnToPreviousScreenForEpubAndPdf() {
         if (epubReaderScreen.state().isDisplayed()) {
             epubReaderScreen.returnToPreviousScreen();
         } else if (pdfReaderScreen.state().isDisplayed()) {

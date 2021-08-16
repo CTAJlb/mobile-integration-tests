@@ -2,7 +2,7 @@ package stepdefinitions.application.components;
 
 public interface IApplicationSteps {
 
-    void returnToPreviousScreen();
+    void returnToPreviousScreenForEpubAndPdf();
 
     void restartApp();
 

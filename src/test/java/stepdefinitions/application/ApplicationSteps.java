@@ -5,7 +5,6 @@ import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.context.ContextLibrariesKeys;
 import framework.utilities.ScenarioContext;
-import framework.utilities.feedXMLUtil.GettingBookUtil;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
@@ -28,9 +27,9 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         this.applicationSteps = stepsFactory.getSteps(AbstractApplicationSteps.class);
     }
 
-    @And("I return to previous screen")
-    public void returnToPreviousScreen() {
-        applicationSteps.returnToPreviousScreen();
+    @And("I return to previous screen for epub and pdf")
+    public void returnToPreviousScreenForEpubAndPdf() {
+        applicationSteps.returnToPreviousScreenForEpubAndPdf();
     }
 
     @When("I restart app")

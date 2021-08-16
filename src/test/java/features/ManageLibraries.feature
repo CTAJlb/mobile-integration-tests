@@ -35,7 +35,7 @@ Feature: Manage Libraries
       And I open Books
     Then Book 'bookInfo' is present in Books List
     When I open Catalog
-      And I return to previous screen
+      And I return to previous screen for epub and pdf
       And I switch to 'Alameda County Library' from side menu
       And I open Books
     Then No books are present in Books list

@@ -11,7 +11,7 @@ import stepdefinitions.application.components.AbstractApplicationSteps;
 public class AndroidApplicationSteps extends AbstractApplicationSteps {
 
     @Override
-    public void returnToPreviousScreen() {
+    public void returnToPreviousScreenForEpubAndPdf() {
         AqualityServices.getApplication().getDriver().navigate().back();
     }
 

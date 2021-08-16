@@ -99,7 +99,7 @@ Feature: Main actions private access books
     Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I click on the book 'bookInfo' button READ on subcategory list view
     Then Book 'bookInfo' is present on screen
-    When I return to previous screen
+    When I return to previous screen for epub and pdf
       And I open Books
     Then Book 'bookInfo' is present in Books List
     When I open book 'bookInfo' details by clicking on cover

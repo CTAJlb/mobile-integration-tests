@@ -36,7 +36,7 @@ Feature: Read PDF
   Scenario: Open book to last page read
     When I scroll pdf page forward from 10 to 20 times
       And I save pdf page number as 'pageNumber'
-      And I return to previous screen
+      And I return to previous screen for epub and pdf
       And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct
@@ -50,7 +50,7 @@ Feature: Read PDF
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Close book
-    When I return to previous screen
+    When I return to previous screen for epub and pdf
     Then I check that book contains READ action button on book details view
 
   @logout @returnBooks @tier1 @exclude_ios

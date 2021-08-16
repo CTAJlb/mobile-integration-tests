@@ -23,7 +23,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
         catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
     }
 
-    public abstract void returnToPreviousScreen();
+    public abstract void returnToPreviousScreenForEpubAndPdf();
 
     public abstract void addAccountFromWelcomeScreen(String libraryName);
 
