@@ -6,17 +6,20 @@ import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
+import constants.application.timeouts.CategoriesTimeouts;
 import constants.localization.application.catalog.BookActionButtonKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.subcategory.SubcategoryScreen;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosSubcategoryScreen extends SubcategoryScreen {
     private static final String BOOKS_LOCATOR = "//XCUIElementTypeCell";
+    private static final String SUBCATEGORY_ROWS_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton/XCUIElementTypeStaticText[@value]";
     private static final String BOOK_BUTTON_XPATH = BOOKS_LOCATOR + "//XCUIElementTypeButton";
     private static final String BOOK_COVER_XPATH_PATTERN = "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]";
     private static final String AUTHOR_INFO_XPATH = "//XCUIElementTypeStaticText[@name][2]";
@@ -139,6 +142,13 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     @Override
     public void openFirstBook() {
         lblFirstBookName.click();
+    }
+
+    @Override
+    public boolean areSubcategoryRowsLoaded() {
+        return AqualityServices.getConditionalWait().waitFor(() ->
+                        getElementFactory().findElements(By.xpath(SUBCATEGORY_ROWS_LOCATOR), ElementType.LABEL).size() > 0,
+                Duration.ofMillis(CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis()));
     }
 
     private List<String> getValuesFromListOfLabels(String xpath) {

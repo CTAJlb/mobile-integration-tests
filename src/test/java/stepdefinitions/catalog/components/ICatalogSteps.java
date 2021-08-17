@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface ICatalogSteps {
 
-    void booksFeedIsLoaded();
+    void categoryRowsAreLoaded();
+
+    void subcategoryRowsAreLoaded();
 
     void openPreviousCategoryScreen();
 

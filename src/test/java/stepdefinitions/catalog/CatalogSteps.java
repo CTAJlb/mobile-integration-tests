@@ -29,9 +29,14 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps = stepsFactory.getSteps(AbstractCatalogSteps.class, context);
     }
 
-    @Then("Books feed is loaded")
-    public void booksFeedIsLoaded() {
-        catalogSteps.booksFeedIsLoaded();
+    @Then("Category rows are loaded")
+    public void categoryRowsAreLoaded() {
+        catalogSteps.categoryRowsAreLoaded();
+    }
+
+    @Then("Subcategory rows are loaded")
+    public void subcategoryRowsAreLoaded() {
+        catalogSteps.subcategoryRowsAreLoaded();
     }
 
     @When("I return to previous category screen")

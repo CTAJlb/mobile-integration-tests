@@ -55,7 +55,7 @@ public class AndroidCatalogScreen extends CatalogScreen {
     }
 
     @Override
-    public boolean isCategoryPageLoad() {
+    public boolean areCategoryRowsLoaded() {
         return AqualityServices.getConditionalWait().waitFor(() -> getLabels(FEED_LANE_TITLES_LOC).size() > 0);
     }
 

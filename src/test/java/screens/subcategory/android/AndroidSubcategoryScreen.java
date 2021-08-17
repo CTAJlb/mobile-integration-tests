@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidSubcategoryScreen extends SubcategoryScreen {
     private static final String BOOKS_LOCATOR = "//android.widget.ImageView[contains(@resource-id,\"bookCellIdleCover\")]";
+    private static final String FEED_LANE_TITLES_LOC = "//*[contains(@resource-id,\"feedLaneTitle\")]";
     public static final String BOOK_BUTTON_XPATH =
             "//android.widget.LinearLayout[contains(@resource-id,\"bookCellIdleButtons\")]/android.widget.Button";
     public static final String BOOK_COVER_LOCATOR_PATTERN =
@@ -152,6 +153,15 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     @Override
     public void openFirstBook() {
         lblFirstBookImageCover.click();
+    }
+
+    @Override
+    public boolean areSubcategoryRowsLoaded() {
+        return AqualityServices.getConditionalWait().waitFor(() -> getLabels(FEED_LANE_TITLES_LOC).size() > 0);
+    }
+
+    private List<aquality.appium.mobile.elements.interfaces.IElement> getLabels(String xpath) {
+        return getElementFactory().findElements(By.xpath(xpath), ElementType.LABEL);
     }
 
     private boolean isFeedErrorDetailsButtonDisplayed() {

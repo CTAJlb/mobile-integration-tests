@@ -12,7 +12,7 @@ Feature: Manage Libraries
       And Catalog is opened
       And I get names of books on screen and save them as 'nameOfBooks'
       And I switch to 'Alameda County Library' from side menu
-    Then Books feed is loaded
+    Then Category rows are loaded
       And List of books on screen is not equal to list of books saved as 'nameOfBooks'
 
   @tier1

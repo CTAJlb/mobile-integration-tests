@@ -6,21 +6,21 @@ Feature: Catalog Navigation
       And I add 'Alameda County Library' account
       And I open Catalog
       And I switch to 'Alameda County Library' from side menu
-    Then Books feed is loaded
+    Then Category rows are loaded
     When I restart app
-    Then Books feed is loaded
+    Then Category rows are loaded
       And Current library is 'Alameda County Library' in Catalog
 
   @tier1
   Scenario: Navigate Lists
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
-    Then Books feed is loaded
+    Then Category rows are loaded
       And Count of books in first lane is more than 1
     When I get names of books on screen and save them as 'listOfBooksOnMainPage'
       And I open 'Children\'s Books' category
     Then Current category name is 'Children\'s Books'
-      And Books feed is loaded
+      And Subcategory rows are loaded
       And Following subcategories are present:
         | Classics             |
         | Fiction              |
@@ -35,7 +35,7 @@ Feature: Catalog Navigation
   Scenario: Browse Lanes/Categories
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
-    Then Books feed is loaded
+    Then Category rows are loaded
       And Count of books in first lane is more than 1
     When I open 'Children\'s Books' category
     Then Current category name is 'Children\'s Books'
@@ -55,12 +55,12 @@ Feature: Catalog Navigation
     When I add "Alameda County Library" account from welcomeScreen
       And I open Catalog
       And I switch to 'Alameda County Library' from side menu
-    Then Books feed is loaded
+    Then Category rows are loaded
     When I switch to 'Audiobooks' catalog tab
-    Then Books feed is loaded
+    Then Category rows are loaded
       And All present books are audiobooks
     When I switch to 'eBooks' catalog tab
-    Then Books feed is loaded
+    Then Category rows are loaded
     When I open category by chain:
       | Fiction |
       | Drama   |

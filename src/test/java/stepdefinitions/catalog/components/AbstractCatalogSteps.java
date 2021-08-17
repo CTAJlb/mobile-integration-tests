@@ -3,7 +3,6 @@ package stepdefinitions.catalog.components;
 import aquality.appium.mobile.application.AqualityServices;
 import constants.application.ReaderType;
 import constants.application.timeouts.AuthorizationTimeouts;
-import constants.application.timeouts.CategoriesTimeouts;
 import constants.context.ScenarioContextKey;
 import constants.localization.application.catalog.BookActionButtonKeys;
 import constants.localization.application.catalog.BookActionButtonNames;
@@ -63,13 +62,15 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void booksFeedIsLoaded() {
-        boolean isPagePresent =
-                catalogScreen.state().waitForDisplayed(Duration.ofMillis(CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis()));
-        /*if (!isPagePresent && catalogScreen.isErrorButtonPresent()) {
-            addScreenshot();
-        }*/
-        Assert.assertTrue("Books feed is not loaded. Error message (if present) - " + catalogScreen.getErrorDetails(), isPagePresent);
+    public void categoryRowsAreLoaded() {
+        boolean isCategoryRowsPresent = catalogScreen.areCategoryRowsLoaded();
+        Assert.assertTrue("Category rows are not loaded.", isCategoryRowsPresent);
+    }
+
+    @Override
+    public void subcategoryRowsAreLoaded() {
+        boolean isSubcategoryRowsPresent = subcategoryScreen.areSubcategoryRowsLoaded();
+        Assert.assertTrue("Subcategory rows are not loaded.", isSubcategoryRowsPresent);
     }
 
     @Override
@@ -141,7 +142,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         IntStream.range(0, categoriesChain.size()).forEach(index -> {
             openCategory(categoriesChain.get(index));
             if (index != categoriesChain.size() - 1) {
-                Assert.assertTrue("Category page is not loaded. Error (if present) - " + catalogScreen.getErrorDetails(), catalogScreen.isCategoryPageLoad());
+                Assert.assertTrue("Category page is not loaded. Error (if present) - " + catalogScreen.getErrorDetails(), catalogScreen.areCategoryRowsLoaded());
             }
         });
     }
