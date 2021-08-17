@@ -4,7 +4,7 @@ Feature: Read EPUB
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
       And I open search modal
-      And I search for 'The Scarecrow of Oz'
+      And I search for 'Flower Fables'
       And DOWNLOAD book from subcategory list view and save it as 'bookInfo'
       And I open book 'bookInfo' details by clicking on cover
       And I press on the book details view at the action button READ
@@ -12,8 +12,8 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Navigate by Page
-    When I click on right book corner
-      And Book page number is 2
+    #When I click on right book corner
+      #And Book page number is 2
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I click on right book corner
     Then Next page is open and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName

@@ -61,8 +61,10 @@ public class ReaderSteps {
     }
 
     @Then("Book page number is {int}")
-    public void checkBookPageNumberIs(int pageNumber) {
-        Assert.assertTrue("Book page number is not correct", pageNumber == Integer.parseInt(epubReaderScreen.getPageNumber()));
+    public void isBookPageNumberCorrect(int pageNumber) {
+        int expectedPageNumber = pageNumber;
+        int actualPageNumber = Integer.parseInt(epubReaderScreen.getPageNumber());
+        Assert.assertTrue("Book page number is not correct, expectedPageNumber-" + expectedPageNumber + " , actualPageNumber-" + actualPageNumber, expectedPageNumber == actualPageNumber);
     }
 
     @When("I swipe from left to right book corner")
@@ -395,7 +397,7 @@ public class ReaderSteps {
     private void assertBookName(CatalogBookModel catalogBookModel) {
         String expectedBookName = prepareBookName(catalogBookModel.getTitle());
         String actualBookName = prepareBookName(epubReaderScreen.getBookName());
-        Assert.assertTrue(String.format("Book name is not correct. Expected name - '%1$s', actual name - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));
+        Assert.assertTrue(String.format("Book name is not correct. Expected bookName - '%1$s', actualName - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));
     }
 
     private String prepareBookName(String title) {
