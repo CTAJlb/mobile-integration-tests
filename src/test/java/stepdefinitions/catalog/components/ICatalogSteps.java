@@ -93,8 +93,6 @@ public interface ICatalogSteps {
 
     void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final BookActionButtonKeys key);
 
-    void deleteBookFromBookDetailsScreen();
-
     void returnBookFromBookDetailsScreen();
 
     void openBookDetailsByClickingOnCover(String bookInfoKey);

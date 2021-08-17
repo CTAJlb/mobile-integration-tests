@@ -96,11 +96,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public void deleteBook() {
-        btnDelete.click();
-    }
-
-    @Override
     public void clickActionButton(BookActionButtonKeys buttonKeys) {
         //todo fixing here
         IButton button = getActionButton(buttonKeys);

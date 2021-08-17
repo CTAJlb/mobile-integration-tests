@@ -127,11 +127,6 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public void deleteBook() {
-        clickActionButton(BookActionButtonKeys.DELETE);
-    }
-
-    @Override
     public void clickActionButton(BookActionButtonKeys buttonKeys) {
         IButton actionButton = getActionButton(buttonKeys);
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());

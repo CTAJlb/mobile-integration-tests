@@ -42,6 +42,7 @@ public class IosNotificationModal extends NotificationModal {
     public void performActionForNotificationPopup(BookActionButtonKeys buttonName) {
         IButton btnApproveAction = getElementFactory().getButton(
                 By.xpath(String.format(ACTION_BTN_FOR_POPUP_PATTERN, buttonName.i18n())), buttonName.i18n());
+        btnApproveAction.state().waitForDisplayed();
         if (btnApproveAction.state().isDisplayed()) {
             btnApproveAction.click();
         }

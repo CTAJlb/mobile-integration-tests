@@ -345,12 +345,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void deleteBookFromBookDetailsScreen() {
-        bookDetailsScreen.deleteBook();
-        notificationModal.performActionForNotificationPopup(BookActionButtonKeys.DELETE);
-    }
-
-    @Override
     public void openBookDetailsByClickingOnCover(String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         subcategoryScreen.state().waitForDisplayed();
@@ -359,7 +353,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void pressOnBookDetailsScreenAtActionButton(BookActionButtonKeys actionButton) {
-        clickButton(actionButton);
+        clickActionButtonOnBookDetailsView(actionButton);
         notificationModal.performActionForNotificationPopup(actionButton);
         alertScreen.closeDoNotAllowIfPresent();
         alertScreen.closeNotNowModalIfDisplayed();
@@ -379,15 +373,15 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void openTypeBookReader(ReaderType readerType) {
         switch (readerType) {
             case EBOOK:
-                clickButton(BookActionButtonKeys.READ);
+                clickActionButtonOnBookDetailsView(BookActionButtonKeys.READ);
                 break;
             case AUDIOBOOK:
-                clickButton(BookActionButtonKeys.LISTEN);
+                clickActionButtonOnBookDetailsView(BookActionButtonKeys.LISTEN);
                 break;
         }
     }
 
-    private void clickButton(BookActionButtonKeys actionButton) {
+    private void clickActionButtonOnBookDetailsView(BookActionButtonKeys actionButton) {
         bookDetailsScreen.clickActionButton(actionButton);
     }
 

@@ -265,11 +265,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.returnBookFromBookDetailsScreen();
     }
 
-    @And("I delete book from book details screen")
-    public void deleteBookFromBookDetailsScreen() {
-        catalogSteps.deleteBookFromBookDetailsScreen();
-    }
-
     @When("I open book {string} details by clicking on cover")
     public void openBookDetailsByClickingOnCover(String bookInfoKey) {
         catalogSteps.openBookDetailsByClickingOnCover(bookInfoKey);
