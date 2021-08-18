@@ -370,7 +370,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         context.add(bookInfoKey, subcategoryScreen.openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(bookName, actionButtonKey, bookType));
     }
 
-    public void openTypeBookReader(ReaderType readerType) {
+    public void openBookWithSpecifyTypeOnBookDetailsView(ReaderType readerType) {
         switch (readerType) {
             case EBOOK:
                 clickActionButtonOnBookDetailsView(BookActionButtonKeys.READ);

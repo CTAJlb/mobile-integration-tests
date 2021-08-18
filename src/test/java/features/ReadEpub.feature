@@ -28,9 +28,8 @@ Feature: Read EPUB
   @tier1
   Scenario: Navigate View options
     When I return to previous screen for epub and pdf
-    And I wait for 3 seconds
       And I press on the book details view at the action button READ
-    #Then Book 'bookInfo' is present on screen
+    Then Book 'bookInfo' is present on screen
     When I open font choices for book
     Then Font choices screen is present
     When I close font choices

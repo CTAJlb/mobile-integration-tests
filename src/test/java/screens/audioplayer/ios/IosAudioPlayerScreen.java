@@ -34,6 +34,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private static final String PLAYBACK_OPTION_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%s\"]";
     private static final String TIME_IN_HOURS_LEFT_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d hour and %d minutes until playback pauses\"]";
     private static final String TIME_IN_MINUTES_LEFT_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d minutes and %d seconds until playback pauses\"]";
+    private static final String AUDIOBOOK_NAME_LOCATOR = "//XCUIElementTypeStaticText[@name=\"%s\"]";
 
     private final IButton btnMenu =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Table of Contents\"]"), "Menu");
@@ -228,5 +229,11 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public boolean isTimerSetTo(TimerKeys timerSetting) {
         return false;
+    }
+
+    @Override
+    public boolean isAudiobookNameCorrect(String audiobookName) {
+        boolean isAudiobookNameCorrect = getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME_LOCATOR, audiobookName)), "audiobookName").state().isDisplayed();
+        return isAudiobookNameCorrect;
     }
 }

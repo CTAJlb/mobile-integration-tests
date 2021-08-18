@@ -57,7 +57,7 @@ public class ReaderSteps {
 
     @Then("Book {string} is present on screen")
     public void checkBookInfoIsPresentOnScreen(String bookInfoKey) {
-        assertBookName(context.get(bookInfoKey));
+        assertBookNameForEpub(context.get(bookInfoKey));
     }
 
     @Then("Book page number is {int}")
@@ -228,13 +228,13 @@ public class ReaderSteps {
     @Then("Pdf book {string} is present on screen")
     public void checkPdfBookBookInfoIsPresentOnScreen(String bookInfoKey) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
-        assertPdfBookName(catalogBookModel);
+        assertBookNameForPdf(catalogBookModel);
     }
 
-    private void assertPdfBookName(CatalogBookModel catalogBookModel) {
-        Assert.assertTrue(String.format("Book name is not correct. Expected that name ['%1$s'] would contains in ['%2$s']",
-                catalogBookModel.getTitle().replace(" ", "").replace(":", "").toLowerCase(), getTrimmedBookName().replace(" ", "").replace(":", "").toLowerCase()), AqualityServices.getConditionalWait().waitFor(() ->
-                getTrimmedBookName().replace(" ", "").replace(":", "").toLowerCase().contains(catalogBookModel.getTitle().replace(" ", "").replace(":", "").toLowerCase())));
+    private void assertBookNameForPdf(CatalogBookModel catalogBookModel) {
+        String expectedBookName = catalogBookModel.getTitle();
+        String actualBookName = pdfReaderScreen.getBookName();
+        Assert.assertTrue(String.format("BookName(pdf) is not correct. Expected bookName - '%1$s', actualName - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));
     }
 
     @Then("Pdf book page number is {int}")
@@ -370,38 +370,28 @@ public class ReaderSteps {
         context.add(pageKey, pdfSearchScreen.getSearchedItemPageNumber(0));
     }
 
-    @Then("Reader screen for {string} book with {string} type is present")
-    public void readerScreenForEbookTypeIsPresent(String bookInfoKey, String readerType) {
+    @Then("Book {string} with {} type is present on epub or pdf or audiobook screen")
+    public void readerScreenForEbookTypeIsPresent(String bookInfoKey, ReaderType readerType) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
-        ReaderType type = null;
-        if (readerType.toLowerCase().equals("EBOOK".toLowerCase())) {
-            type = ReaderType.EBOOK;
-        } else if (readerType.toLowerCase().equals("AUDIOBOOK".toLowerCase())) {
-            type = ReaderType.AUDIOBOOK;
-        }
-
-        switch (type) {
+        String bookName = catalogBookModel.getTitle();
+        switch (readerType) {
             case EBOOK:
                 if (epubReaderScreen.isBookNamePresent()) {
-                    assertBookName(catalogBookModel);
+                    assertBookNameForEpub(catalogBookModel);
                 } else {
-                    assertPdfBookName(catalogBookModel);
+                    assertBookNameForPdf(catalogBookModel);
                 }
                 break;
             case AUDIOBOOK:
-                Assert.assertTrue("Audiobook screen is not present", audioPlayerScreen.state().waitForDisplayed());
+                Assert.assertTrue("AudiobookName is not present on audiobook screen", audioPlayerScreen.isAudiobookNameCorrect(bookName));
                 break;
         }
     }
 
-    private void assertBookName(CatalogBookModel catalogBookModel) {
-        String expectedBookName = prepareBookName(catalogBookModel.getTitle());
-        String actualBookName = prepareBookName(epubReaderScreen.getBookName());
-        Assert.assertTrue(String.format("Book name is not correct. Expected bookName - '%1$s', actualName - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));
-    }
-
-    private String prepareBookName(String title) {
-        return removeSpaces(title.toLowerCase().replace("women", "woman"));
+    private void assertBookNameForEpub(CatalogBookModel catalogBookModel) {
+        String expectedBookName = catalogBookModel.getTitle();
+        String actualBookName = epubReaderScreen.getBookName();
+        Assert.assertTrue(String.format("BookName(epub) is not correct. Expected bookName - '%1$s', actualName - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));
     }
 
     private String removeSpaces(String text) {
@@ -436,9 +426,5 @@ public class ReaderSteps {
         String expectedFontName = fontNameKey.i18n();
         String actualFontName = epubReaderScreen.getFontName();
         Assert.assertTrue("Book fontName is not correct, actualFontName-" + actualFontName + ", expectedFontName-" + expectedFontName, actualFontName.toLowerCase().equals(expectedFontName.toLowerCase()));
-    }
-
-    private String getTrimmedBookName() {
-        return pdfReaderScreen.getBookName().trim().replaceAll("[\n\r]", "");
     }
 }

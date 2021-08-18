@@ -60,4 +60,6 @@ public abstract class AudioPlayerScreen extends Screen {
     public abstract boolean isTimerEqualTo(Duration chapterLength);
 
     public abstract boolean isTimerSetTo(TimerKeys timerSetting);
+
+    public abstract boolean isAudiobookNameCorrect(String audiobookName);
 }

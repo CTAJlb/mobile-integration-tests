@@ -288,7 +288,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
 
     @When("I read book with {} type from book details view")
     public void openGivenTypeBookReader(ReaderType readerType) {
-        catalogSteps.openTypeBookReader(readerType);
+        catalogSteps.openBookWithSpecifyTypeOnBookDetailsView(readerType);
     }
 
     @When("I open first present category")

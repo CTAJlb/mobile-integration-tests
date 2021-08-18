@@ -86,7 +86,7 @@ Feature: Main actions private access books
       And I open Books
     Then Book 'bookInfo' is not present in Books List
 
-  @logout @returnBooks @tier2 @run
+  @logout @returnBooks @tier2
   Scenario: Check out from Subcategory List View and Return from Books
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
