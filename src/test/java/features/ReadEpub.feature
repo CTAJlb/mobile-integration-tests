@@ -12,8 +12,7 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Navigate by Page
-    #When I click on right book corner
-      #And Book page number is 2
+    When I click on right book corner
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I click on right book corner
     Then Next page is open and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName
@@ -59,7 +58,7 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Return to Page (Bookmarking)
-    When I scroll page forward from 10 to 20 times
+    When I scroll page forward from 1 to 3 times
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I wait for 3 seconds
       And I return to previous screen for epub and pdf

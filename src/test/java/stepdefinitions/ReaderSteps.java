@@ -60,13 +60,6 @@ public class ReaderSteps {
         assertBookNameForEpub(context.get(bookInfoKey));
     }
 
-    @Then("Book page number is {int}")
-    public void isBookPageNumberCorrect(int pageNumber) {
-        int expectedPageNumber = pageNumber;
-        int actualPageNumber = Integer.parseInt(epubReaderScreen.getPageNumber());
-        Assert.assertTrue("Book page number is not correct, expectedPageNumber-" + expectedPageNumber + " , actualPageNumber-" + actualPageNumber, expectedPageNumber == actualPageNumber);
-    }
-
     @When("I swipe from left to right book corner")
     public void swipeFromLeftToRightBookCorner() {
         epubReaderScreen.swipeFromLeftToRight();
@@ -214,15 +207,14 @@ public class ReaderSteps {
         int randomScrollsCount = RandomUtils.nextInt(minValue, maxValue);
         AqualityServices.getLogger().info("Scrolling " + randomScrollsCount + " times");
         IntStream.range(0, randomScrollsCount).forEachOrdered(i -> {
-            String pageNumber = epubReaderScreen.getPageNumber();
             epubReaderScreen.clickRightCorner();
         });
         //todo added waiting
-        try {
+        /*try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Then("Pdf book {string} is present on screen")
