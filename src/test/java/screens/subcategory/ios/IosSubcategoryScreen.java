@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @ScreenType(platform = PlatformName.IOS)
 public class IosSubcategoryScreen extends SubcategoryScreen {
     private static final String BOOKS_LOCATOR = "//XCUIElementTypeCell";
-    private static final String SUBCATEGORY_ROWS_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton/XCUIElementTypeStaticText[@value]";
+    private static final String SUBCATEGORY_ROWS_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[@name]";
     private static final String BOOK_BUTTON_XPATH = BOOKS_LOCATOR + "//XCUIElementTypeButton";
     private static final String BOOK_COVER_XPATH_PATTERN = "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]";
     private static final String AUTHOR_INFO_XPATH = "//XCUIElementTypeStaticText[@name][2]";
