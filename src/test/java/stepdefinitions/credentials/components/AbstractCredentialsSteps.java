@@ -41,7 +41,7 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
         settingsScreen = AqualityServices.getScreenFactory().getScreen(SettingsScreen.class);
     }
 
-    public void textOnLogoutButtonIsChangedToLogInOnAccountScreen() {
+    public void isLogoutSuccessfully() {
         Assert.assertTrue("Text on Login button is not changed to Log out on Account screen", accountScreen.isLogoutSuccessful());
     }
 

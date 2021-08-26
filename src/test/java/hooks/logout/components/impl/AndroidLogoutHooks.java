@@ -29,9 +29,6 @@ public class AndroidLogoutHooks extends AbstractLogoutHooks {
             if (accountScreen.isLogoutRequired()) {
                 accountScreen.logOut();
             }
-            if (!accountScreen.isLogoutSuccessful()) {
-                accountScreen.logOut();
-            }
         }
     }
 }

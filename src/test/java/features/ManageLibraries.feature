@@ -74,4 +74,4 @@ Feature: Manage Libraries
     Then Login is performed successfully
     When I open account 'LYRASIS'
       And I click the log out button on the account screen
-    Then Text on Logout button is changed to Log in on Account screen
+    Then Logout is performed successfully
