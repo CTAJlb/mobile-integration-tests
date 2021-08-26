@@ -14,11 +14,6 @@ public class AndroidNotificationModal extends NotificationModal {
     }
 
     @Override
-    public void closeSyncNotificationIfDisplayed() {
-        // default behavior is ignoring method. Android have not notification popups, appears only in the ios
-    }
-
-    @Override
     public void performActionForNotificationPopup(BookActionButtonKeys buttonName) {
         // default behavior is ignoring method. Android have not notification popups, appears only in the ios
     }

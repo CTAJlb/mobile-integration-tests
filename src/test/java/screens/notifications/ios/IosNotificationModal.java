@@ -12,18 +12,8 @@ public class IosNotificationModal extends NotificationModal {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeButton";
     private static final String ACTION_BTN_FOR_POPUP_PATTERN = "//XCUIElementTypeAlert//XCUIElementTypeButton[@name = \"%s\"]";
 
-    private final IButton btnDontAllowNotifications = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Don’t Allow\"]"),
-            "Dont allow notifications");
-
     public IosNotificationModal() {
         super(By.xpath(MAIN_ELEMENT));
-    }
-
-    @Override
-    public void closeSyncNotificationIfDisplayed() {
-        if (btnDontAllowNotifications.state().waitForDisplayed()) {
-            btnDontAllowNotifications.click();
-        }
     }
 
     @Override
