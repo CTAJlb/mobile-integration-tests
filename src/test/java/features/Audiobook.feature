@@ -7,12 +7,12 @@ Feature: Audiobook
     Then Login is performed successfully
     When I open Catalog
       And I switch to 'Audiobooks' catalog tab
-    When I open category by chain:
+    When I open categories by chain and chain starts from CategoryScreen:
       | Fiction |
       | Drama   |
       And I open the book details for the subsequent GET on Subcategory List View and save it as 'bookInfo'
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @oldOs @tablet
   Scenario: Navigate by Table of Contents Menu
     When I press on the book details view at the action button LISTEN
       And Open chapter list for an audiobook
@@ -22,14 +22,14 @@ Feature: Audiobook
       And Book is playing
 
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @oldOs
   Scenario: Loading chapters
     When I press on the book details view at the action button LISTEN
     Then Download has started and percentage value increased
     When Open chapter list for an audiobook
     Then I check that chapters are visible and check that all chapters loaded
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @oldOs
   Scenario: Return to Chapter (Bookmarking/Syncing)
     When I press on the book details view at the action button LISTEN
       And Open chapter list for an audiobook
@@ -46,7 +46,7 @@ Feature: Audiobook
       And I press on the book details view at the action button LISTEN
     Then I check that current chapter text equal to remembered 'newChapterText2'
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @oldOs
   Scenario: Play Audiobook
     Then I check that book contains LISTEN action button on book details view
     When I press on the book details view at the action button LISTEN
@@ -57,7 +57,7 @@ Feature: Audiobook
     Then Play button is present
       And Book is not playing
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @oldOs
   Scenario: Navigate Audiobook
     When I press on the book details view at the action button LISTEN
       And I click play button on player screen
@@ -71,7 +71,7 @@ Feature: Audiobook
     When I move to middle part of chapter
     Then Saved play time 'chapterLength' is close to middle part of chapter
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @oldOs
   Scenario Outline: Navigate playback options
     When I press on the book details view at the action button LISTEN
       And I click play button on player screen

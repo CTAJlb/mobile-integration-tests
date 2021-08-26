@@ -3,6 +3,7 @@ package screens.subcategory.ios;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
+import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class IosSubcategoryScreen extends SubcategoryScreen {
     private static final String BOOKS_LOCATOR = "//XCUIElementTypeCell";
     private static final String SUBCATEGORY_ROWS_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[@name]";
+    private static final String SPECIFIC_SUBCATEGORY_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
     private static final String BOOK_BUTTON_XPATH = BOOKS_LOCATOR + "//XCUIElementTypeButton";
     private static final String BOOK_COVER_XPATH_PATTERN = "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]";
     private static final String AUTHOR_INFO_XPATH = "//XCUIElementTypeStaticText[@name][2]";
@@ -117,6 +119,16 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     @Override
     public String getErrorMessage() {
         return null;
+    }
+
+    @Override
+    public void openCategory(String categoryName) {
+        IButton categoryButton = getCategoryButton(categoryName);
+        categoryButton.click();
+    }
+
+    private IButton getCategoryButton(String categoryName) {
+        return getElementFactory().getButton(By.xpath(String.format(SPECIFIC_SUBCATEGORY_LOCATOR, categoryName)), categoryName);
     }
 
     @Override

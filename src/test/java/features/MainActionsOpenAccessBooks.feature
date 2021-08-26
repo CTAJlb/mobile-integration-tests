@@ -2,7 +2,7 @@ Feature: Main actions open access books
 
   Background:
     When I add "Digital Public Library of America" account from welcomeScreen
-      And I open category by chain:
+      And I open categories by chain and chain starts from CategoryScreen:
         | Our Picks |
 
 @tier2 @exclude_ios

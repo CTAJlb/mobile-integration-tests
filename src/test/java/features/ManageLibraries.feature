@@ -1,11 +1,11 @@
 Feature: Manage Libraries
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Add Library
     When I add "Alameda County Library" account from welcomeScreen
     Then Account 'Alameda County Library' is present on Accounts screen
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Switch Library Catalogs
     When I add "Digital Public Library of America" account from welcomeScreen
       And I add 'Alameda County Library' account
@@ -15,20 +15,20 @@ Feature: Manage Libraries
     Then Category rows are loaded
       And List of books on screen is not equal to list of books saved as 'nameOfBooks'
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Remove library
     When I add "Digital Public Library of America" account from welcomeScreen
       And I add 'Alameda County Library' account
       And I remove 'Alameda County Library' account
     Then Account 'Alameda County Library' is not present on Accounts screen
 
-  @tier2
+  @tier2 @oldOs
   Scenario: Switch library bookshelf
     When I add "Digital Public Library of America" account from welcomeScreen
       And I add 'Alameda County Library' account
       And Catalog is opened
       And I switch to 'Digital Public Library of America' from side menu
-      And I open category by chain:
+      And I open categories by chain and chain starts from CategoryScreen:
         | Fiction |
         | Drama   |
       And DOWNLOAD book from subcategory list view and save it as 'bookInfo'
@@ -40,7 +40,7 @@ Feature: Manage Libraries
       And I open Books
     Then No books are present in Books list
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @oldOs
   Scenario: Switch Library Reservations
     When I add "Alameda County Library" account from welcomeScreen
     When I add 'LYRASIS' account
@@ -66,7 +66,7 @@ Feature: Manage Libraries
     Then Holds feed is loaded
       And No books are present in Holds list
 
-  @logout @tier2
+  @logout @tier2 @oldOs
   Scenario: Store library card
     When I add "LYRASIS" account from welcomeScreen
     Then Account 'LYRASIS' is present on Accounts screen

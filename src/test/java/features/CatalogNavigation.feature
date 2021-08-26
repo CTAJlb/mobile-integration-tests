@@ -1,6 +1,6 @@
 Feature: Catalog Navigation
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Return to last library catalog
     When I add "Digital Public Library of America" account from welcomeScreen
       And I add 'Alameda County Library' account
@@ -11,7 +11,7 @@ Feature: Catalog Navigation
     Then Category rows are loaded
       And Current library is 'Alameda County Library' in Catalog
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Navigate Lists
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
@@ -51,6 +51,13 @@ Feature: Catalog Navigation
     Then Book 'bookInfo' is opened
 
   @tier1
+  Scenario: Sort Lists1
+    When I add "Alameda County Library" account from welcomeScreen
+    When I open categories by chain and chain starts from CategoryScreen:
+      | Fiction |
+      | Drama   |
+
+  @tier1 @oldOs
   Scenario: Sort Lists
     When I add "Alameda County Library" account from welcomeScreen
       And I open Catalog
@@ -61,7 +68,7 @@ Feature: Catalog Navigation
       And All present books are audiobooks
     When I switch to 'eBooks' catalog tab
     Then Category rows are loaded
-    When I open category by chain:
+    When I open categories by chain and chain starts from CategoryScreen:
       | Fiction |
       | Drama   |
     Then Subcategory screen is present

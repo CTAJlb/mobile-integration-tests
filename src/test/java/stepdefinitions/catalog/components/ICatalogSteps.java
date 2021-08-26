@@ -41,7 +41,7 @@ public interface ICatalogSteps {
 
     void checkFollowingSubcategoriesArePresent(List<String> expectedValuesList);
 
-    void openCategoryByChain(List<String> categoriesChain);
+    void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain);
 
     void openBookDetailsExecuteBookActionAndSaveItToContext(BookActionButtonKeys actionButtonKey, String bookInfoKey);
 

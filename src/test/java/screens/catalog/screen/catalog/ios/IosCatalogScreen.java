@@ -25,13 +25,13 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosCatalogScreen extends CatalogScreen {
-    private static final String CATEGORY_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
     private static final String LANE_BY_NAME_LOCATOR_PART = "(//XCUIElementTypeOther[.//XCUIElementTypeButton[@name=\"%1$s\"]]"
             + "/following-sibling::XCUIElementTypeCell)[1]";
     private static final String BOOK_COVER_IN_LANE_LOCATOR = "/XCUIElementTypeButton";
     private static final String UNIQUE_ELEMENT =
             "//XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"Change Library Account\")]";
-    private static final String CATEGORY_ROWS_LOCATOR = UNIQUE_ELEMENT +
+    private static final String SPECIFIC_CATEGORY_LOCATOR = UNIQUE_ELEMENT + "/parent::XCUIElementTypeNavigationBar/following-sibling::XCUIElementTypeOther//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
+    private static final String CATEGORIES_LOCATOR = UNIQUE_ELEMENT +
             "/parent::XCUIElementTypeNavigationBar/following-sibling::XCUIElementTypeOther//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN =
             "//XCUIElementTypeButton[@name=\"%1$s\"]";
@@ -41,7 +41,7 @@ public class IosCatalogScreen extends CatalogScreen {
     private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR = 5;
 
     private final ILabel firstLaneName =
-            getElementFactory().getLabel(By.xpath(CATEGORY_ROWS_LOCATOR), "First lane name", ElementState.EXISTS_IN_ANY_STATE);
+            getElementFactory().getLabel(By.xpath(CATEGORIES_LOCATOR), "First lane name", ElementState.EXISTS_IN_ANY_STATE);
     private final ILabel categoryScreen = getElementFactory().getLabel(By.xpath("//XCUIElementTypeTable"), "Category Screen");
     private final ILabel buttonMore = getElementFactory().getLabel(By.xpath("//XCUIElementTypeButton[contains(@name, 'More')][1]"), "Button More...");
 
@@ -64,7 +64,7 @@ public class IosCatalogScreen extends CatalogScreen {
     @Override
     public boolean areCategoryRowsLoaded() {
         return AqualityServices.getConditionalWait().waitFor(() ->
-                        getElementFactory().findElements(By.xpath(CATEGORY_ROWS_LOCATOR), ElementType.LABEL).size() > 0,
+                        getElementFactory().findElements(By.xpath(CATEGORIES_LOCATOR), ElementType.LABEL).size() > 0,
                 Duration.ofMillis(CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis()));
     }
 
@@ -77,14 +77,11 @@ public class IosCatalogScreen extends CatalogScreen {
     @Override
     public void openCategory(String categoryName) {
         IButton categoryButton = getCategoryButton(categoryName);
-        categoryButton.state().waitForDisplayed();
-        categoryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        categoryButton.state().waitForDisplayed();
         categoryButton.click();
     }
 
     private IButton getCategoryButton(String categoryName) {
-        return getElementFactory().getButton(By.xpath(String.format(CATEGORY_LOCATOR, categoryName)), categoryName);
+        return getElementFactory().getButton(By.xpath(String.format(SPECIFIC_CATEGORY_LOCATOR, categoryName)), categoryName);
     }
 
     @Override

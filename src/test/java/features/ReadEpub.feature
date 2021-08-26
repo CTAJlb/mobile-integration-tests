@@ -10,7 +10,7 @@ Feature: Read EPUB
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Navigate by Page
     When I click on right book corner
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
@@ -20,11 +20,11 @@ Feature: Read EPUB
       And I click on left book corner
     Then Previous page is open and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Navigate by Table of Contents Menu
     Then Each chapter can be opened from Table of Contents
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Navigate View options
     When I return to previous screen for epub and pdf
       And I press on the book details view at the action button READ
@@ -35,7 +35,7 @@ Feature: Read EPUB
       And I open Table of Contents
     Then Table of Contents is opened
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Change, View Font and Contrast Settings
     When I save font size as 'fontSize'
     And I INCREASE_FONT of text
@@ -56,7 +56,7 @@ Feature: Read EPUB
     When I change contrast to WHITE_TEXT_ON_BLACK
     Then The WHITE_TEXT_ON_BLACK background is correct
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Return to Page (Bookmarking)
     When I scroll page forward from 1 to 3 times
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen

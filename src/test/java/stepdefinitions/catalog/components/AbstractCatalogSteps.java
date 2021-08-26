@@ -138,11 +138,13 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void openCategoryByChain(List<String> categoriesChain) {
-        IntStream.range(0, categoriesChain.size()).forEach(index -> {
-            openCategory(categoriesChain.get(index));
-            if (index != categoriesChain.size() - 1) {
-                Assert.assertTrue("Category page is not loaded. Error (if present) - " + catalogScreen.getErrorDetails(), catalogScreen.areCategoryRowsLoaded());
+    public void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain) {
+        categoriesChain.stream().forEach(categoryName -> {
+            if(catalogScreen.state().isDisplayed()){
+                catalogScreen.openCategory(categoryName);
+            }else {
+                subcategoryScreen.state().waitForDisplayed();
+                subcategoryScreen.openCategory(categoryName);
             }
         });
     }

@@ -32,5 +32,7 @@ public abstract class SubcategoryScreen extends Screen {
 
     public abstract String getErrorMessage();
 
+    public abstract void openCategory(String categoryName);
+
     public abstract boolean isErrorButtonPresent();
 }

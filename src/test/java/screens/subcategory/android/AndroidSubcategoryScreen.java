@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidSubcategoryScreen extends SubcategoryScreen {
     private static final String BOOKS_LOCATOR = "//android.widget.ImageView[contains(@resource-id,\"bookCellIdleCover\")]";
+    private static final String SPECIFIC_SUBCATEGORY_LOCATOR = "//*[contains(@resource-id, \"feedLaneTitle\") and @text=\"%1$s\"]";
     private static final String FEED_LANE_TITLES_LOC = "//*[contains(@resource-id,\"feedLaneTitle\")]";
     public static final String BOOK_BUTTON_XPATH =
             "//android.widget.LinearLayout[contains(@resource-id,\"bookCellIdleButtons\")]/android.widget.Button";
@@ -122,6 +123,16 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
         }
         AqualityServices.getLogger().info("Error details button is not present");
         return "";
+    }
+
+    @Override
+    public void openCategory(String categoryName) {
+        IButton categoryButton = getCategoryButton(categoryName);
+        categoryButton.click();
+    }
+
+    private IButton getCategoryButton(String categoryName) {
+        return getElementFactory().getButton(By.xpath(String.format(SPECIFIC_SUBCATEGORY_LOCATOR, categoryName)), categoryName);
     }
 
     @Override

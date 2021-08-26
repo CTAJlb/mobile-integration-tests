@@ -68,8 +68,6 @@ public class AndroidCatalogScreen extends CatalogScreen {
     @Override
     public void openCategory(String categoryName) {
         IButton categoryButton = getCategoryButton(categoryName);
-        categoryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-
         categoryButton.click();
     }
 

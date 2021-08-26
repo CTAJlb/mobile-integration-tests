@@ -102,10 +102,9 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.checkFollowingSubcategoriesArePresent(expectedValuesList);
     }
 
-    @When("I open category by chain:")
-    @And("Open category by chain:")
-    public void openCategoryByChain(List<String> categoriesChain) {
-        catalogSteps.openCategoryByChain(categoriesChain);
+    @When("I open categories by chain and chain starts from CategoryScreen:")
+    public void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain) {
+        catalogSteps.openCategoriesByChainAndChainStartsFromCategoryScreen(categoriesChain);
     }
 
     @When("I open the book details for the subsequent {} on Subcategory List View and save it as {string}")
