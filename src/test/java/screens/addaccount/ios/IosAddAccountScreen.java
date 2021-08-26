@@ -29,8 +29,4 @@ public class IosAddAccountScreen extends AddAccountScreen {
         txbSearch.clearAndType(libraryName);
         getLibraryButton(libraryName).click();
     }
-
-    private IButton getLibraryButton(String libraryName, String libraryButtonPattern) {
-        return getElementFactory().getButton(By.xpath(String.format(libraryButtonPattern, libraryName)), libraryName);
-    }
 }

@@ -16,7 +16,7 @@ public abstract class CatalogScreen extends Screen {
 
     public abstract boolean areCategoryRowsLoaded();
 
-    public abstract void openLibrary(String libraryName);
+    public abstract void selectLibraryFromListOfAddedLibraries(String libraryName);
 
     public abstract void openCategory(String categoryName);
 

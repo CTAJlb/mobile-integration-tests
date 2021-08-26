@@ -69,7 +69,7 @@ public class IosCatalogScreen extends CatalogScreen {
     }
 
     @Override
-    public void openLibrary(String libraryName) {
+    public void selectLibraryFromListOfAddedLibraries(String libraryName) {
         getElementFactory().getButton(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_PATTERN, libraryName)),
                 "Menu").click();
     }

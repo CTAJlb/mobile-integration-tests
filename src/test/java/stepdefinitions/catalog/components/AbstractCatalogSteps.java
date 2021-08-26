@@ -84,13 +84,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void openLibraryFromSideMenu(String libraryName) {
         bottomMenuForm.open(BottomMenu.CATALOG);
         mainCatalogToolbarForm.chooseAnotherLibrary();
-        catalogScreen.openLibrary(libraryName);
-        if (notificationModal.isModalPresent()) {
-            notificationModal.closeCannotAddBookModalIfDisplayed();
-            catalogScreen.openLibrary(libraryName);
-        }
-        catalogScreen.state().waitForDisplayed();
-        AqualityServices.getConditionalWait().waitFor(() -> catalogBooksScreen.getFoundBooksCount() > 0);
+        catalogScreen.selectLibraryFromListOfAddedLibraries(libraryName);
     }
 
     @Override
