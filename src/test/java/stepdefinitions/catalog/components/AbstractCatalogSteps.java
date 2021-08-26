@@ -16,7 +16,6 @@ import models.android.CatalogBookModel;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
-import screens.agegate.AgeGateScreen;
 import screens.alert.AlertScreen;
 import screens.bookDetails.BookDetailsScreen;
 import screens.bottommenu.BottomMenu;
@@ -32,13 +31,11 @@ import stepdefinitions.BaseSteps;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalogSteps {
     protected final BottomMenuForm bottomMenuForm;
     protected final CatalogScreen catalogScreen;
     protected final SubcategoryScreen subcategoryScreen;
-    protected final AgeGateScreen ageGateScreen;
     protected final BookDetailsScreen bookDetailsScreen;
     protected final MainCatalogToolbarForm mainCatalogToolbarForm;
     protected final CatalogBooksScreen catalogBooksScreen;
@@ -52,7 +49,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         mainCatalogToolbarForm = AqualityServices.getScreenFactory().getScreen(MainCatalogToolbarForm.class);
         bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
         catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
-        ageGateScreen = AqualityServices.getScreenFactory().getScreen(AgeGateScreen.class);
         bookDetailsScreen = AqualityServices.getScreenFactory().getScreen(BookDetailsScreen.class);
         subcategoryScreen = AqualityServices.getScreenFactory().getScreen(SubcategoryScreen.class);
         catalogBooksScreen = AqualityServices.getScreenFactory().getScreen(CatalogBooksScreen.class);

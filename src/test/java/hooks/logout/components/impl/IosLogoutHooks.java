@@ -26,7 +26,6 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
     @Override
     public void logout() {
         restartApp();
-        alertScreen.closeModalIfPresent();
         List<String> listOfLibraries = context.get(ContextLibrariesKeys.LOG_OUT.getKey());
         for (String library : listOfLibraries) {
             if (!accountScreen.state().isDisplayed()) {
@@ -34,7 +33,7 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
                 alertScreen.closeNotNowModalIfDisplayed();
                 bottomMenuForm.open(BottomMenu.SETTINGS);
                 settingsScreen.openAccounts();
-                accountsScreen.openAccount(library);
+                accountsScreen.openLibraryAccount(library);
             }
             if (accountScreen.isLogoutRequired()) {
                 logOut();

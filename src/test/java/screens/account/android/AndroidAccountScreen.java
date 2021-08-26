@@ -40,7 +40,7 @@ public class AndroidAccountScreen extends AccountScreen {
     }
 
     @Override
-    public void enterCredentials(Credentials credentials) {
+    public void enterCredentialsAndLogin(Credentials credentials) {
         txbCard.clearAndType(credentials.getBarcode());
         txbPin.clearAndTypeSecret(credentials.getPin());
         btnLogin.click();

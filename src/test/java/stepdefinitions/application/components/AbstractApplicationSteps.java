@@ -2,7 +2,6 @@ package stepdefinitions.application.components;
 
 import aquality.appium.mobile.application.AqualityServices;
 import screens.addaccount.AddAccountScreen;
-import screens.agegate.AgeGateScreen;
 import screens.catalog.screen.catalog.CatalogScreen;
 import screens.eulaagreement.EulaAgreementScreen;
 import screens.welcome.WelcomeScreen;
@@ -12,14 +11,12 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     protected final EulaAgreementScreen eulaAgreementScreen;
     protected final WelcomeScreen welcomeScreen;
     protected final AddAccountScreen addAccountScreen;
-    protected final AgeGateScreen ageGateScreen;
     protected final CatalogScreen catalogScreen;
 
     public AbstractApplicationSteps() {
         eulaAgreementScreen = AqualityServices.getScreenFactory().getScreen(EulaAgreementScreen.class);
         welcomeScreen = AqualityServices.getScreenFactory().getScreen(WelcomeScreen.class);
         addAccountScreen = AqualityServices.getScreenFactory().getScreen(AddAccountScreen.class);
-        ageGateScreen = AqualityServices.getScreenFactory().getScreen(AgeGateScreen.class);
         catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
     }
 

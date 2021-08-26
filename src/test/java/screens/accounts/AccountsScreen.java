@@ -10,7 +10,7 @@ public abstract class AccountsScreen extends Screen {
 
     public abstract boolean isLibraryPresent(String libraryName);
 
-    public abstract void openAccount(String libraryName);
+    public abstract void openLibraryAccount(String libraryName);
 
     public abstract void addAccount();
 

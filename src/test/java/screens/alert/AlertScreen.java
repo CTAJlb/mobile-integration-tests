@@ -8,10 +8,6 @@ public abstract class AlertScreen extends Screen {
         super(locator, "Alert");
     }
 
-    public abstract void accept();
-
-    public abstract void closeModalIfPresent();
-
     public abstract void closeNotNowModalIfDisplayed();
 
     public abstract void closeDoNotAllowIfPresent();

@@ -9,7 +9,7 @@ public abstract class AccountScreen extends Screen {
         super(locator, "Account");
     }
 
-    public abstract void enterCredentials(Credentials credentials);
+    public abstract void enterCredentialsAndLogin(Credentials credentials);
 
     public abstract boolean isLoginSuccessful();
 

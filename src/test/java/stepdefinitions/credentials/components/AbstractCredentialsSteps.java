@@ -53,10 +53,10 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
         if (!accountsScreen.state().isDisplayed()) {
             openAccounts();
         }
-        accountsScreen.openAccount(libraryName);
+        accountsScreen.openLibraryAccount(libraryName);
         Credentials credentials = Configuration.getCredentials(libraryName);
         storeCredentials(credentials);
-        accountScreen.enterCredentials(credentials);
+        accountScreen.enterCredentialsAndLogin(credentials);
         alertScreen.state().waitForDisplayed();
         alertScreen.closeNotNowModalIfDisplayed();
         boolean isLoginPerformedSuccessfully = AqualityServices.getConditionalWait().waitFor(() -> accountScreen.isLoginSuccessful() || catalogScreen.state().isDisplayed());
