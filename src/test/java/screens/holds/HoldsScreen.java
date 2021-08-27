@@ -15,7 +15,7 @@ public abstract class HoldsScreen extends Screen {
 
     public abstract boolean isBookNotPresent(String bookInfo);
 
-    public abstract void clickBookByTitleButtonWithKey(String title, BookActionButtonKeys key);
+    public abstract void performActionOnBook(String title, BookActionButtonKeys key);
 
-    public abstract boolean isBookAddButtonTextEqualTo(String bookTitle, BookActionButtonKeys key);
+    public abstract boolean isActionButtonPresentOnBook(String bookTitle, BookActionButtonKeys key);
 }

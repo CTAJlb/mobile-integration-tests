@@ -52,7 +52,7 @@ public interface ICatalogSteps {
 
     void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey1, BookActionButtonKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey);
 
-    void clickOnBookAddButtonOnCatalogBooksScreen(String bookInfoKey, BookActionButtonKeys key);
+    void performActionOnBook(String bookInfoKey, BookActionButtonKeys key);
 
     void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks);
 

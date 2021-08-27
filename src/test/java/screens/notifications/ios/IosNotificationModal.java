@@ -17,12 +17,12 @@ public class IosNotificationModal extends NotificationModal {
     }
 
     @Override
-    public void performActionForNotificationPopup(BookActionButtonKeys buttonName) {
-        IButton btnApproveAction = getElementFactory().getButton(
-                By.xpath(String.format(ACTION_BTN_FOR_POPUP_PATTERN, buttonName.i18n())), buttonName.i18n());
-        btnApproveAction.state().waitForDisplayed();
-        if (btnApproveAction.state().isDisplayed()) {
-            btnApproveAction.click();
+    public void performActionOnAlert(BookActionButtonKeys bookActionButtonKeys) {
+        IButton btnAction = getElementFactory().getButton(
+                By.xpath(String.format(ACTION_BTN_FOR_POPUP_PATTERN, bookActionButtonKeys.i18n())), bookActionButtonKeys.i18n());
+        btnAction.state().waitForDisplayed();
+        if (btnAction.state().isDisplayed()) {
+            btnAction.click();
         }
     }
 }

@@ -1,6 +1,7 @@
 package stepdefinitions.holds.components;
 
 import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
 import constants.localization.application.catalog.BookActionButtonKeys;
 import framework.utilities.ScenarioContext;
 import models.android.CatalogBookModel;
@@ -42,19 +43,21 @@ public abstract class AbstractHoldsSteps extends BaseSteps implements IHoldsStep
     public abstract void checkBookBookInfoIsPresentInHoldsList(String bookInfoKey);
 
     @Override
-    public void clickOnBookAddButtonOnHoldsScreen(String bookInfoKey, BookActionButtonKeys key) {
+    public void performActionOnHoldsScreen(BookActionButtonKeys key, String bookInfoKey) {
         clickOnBookAddButtonOnHoldsScreenWithoutPopupHandling(bookInfoKey, key);
-        notificationModal.performActionForNotificationPopup(key);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            notificationModal.performActionOnAlert(key);
+        }
     }
 
     public void clickOnBookAddButtonOnHoldsScreenWithoutPopupHandling(String bookInfoKey, BookActionButtonKeys key) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
-        holdsScreen.clickBookByTitleButtonWithKey(catalogBookModel.getTitle(), key);
+        holdsScreen.performActionOnBook(catalogBookModel.getTitle(), key);
     }
 
     @Override
-    public void clickActionButtonForPopUp(BookActionButtonKeys buttonName) {
-        notificationModal.performActionForNotificationPopup(buttonName);
+    public void performActionOnAlert(BookActionButtonKeys bookActionButtonKeys) {
+        notificationModal.performActionOnAlert(bookActionButtonKeys);
     }
 
     @Override
@@ -62,7 +65,7 @@ public abstract class AbstractHoldsSteps extends BaseSteps implements IHoldsStep
             final String bookInfoKey, final BookActionButtonKeys key) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         String title = catalogBookModel.getTitle();
-        Assert.assertTrue(String.format("Book with title '%1$s' button does not contain text '%2$s'", title, key.i18n()), holdsScreen.isBookAddButtonTextEqualTo(title, key));
+        Assert.assertTrue(String.format("Book with title '%1$s' button does not contain text '%2$s'", title, key.i18n()), holdsScreen.isActionButtonPresentOnBook(title, key));
     }
 
     public abstract void checkBookBookInfoIsNotPresentInHoldsList(String bookInfoKey);

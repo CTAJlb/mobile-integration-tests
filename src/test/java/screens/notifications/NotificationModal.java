@@ -9,5 +9,5 @@ public abstract class NotificationModal extends Screen {
         super(locator, "Notification modal");
     }
 
-    public abstract void performActionForNotificationPopup(BookActionButtonKeys buttonName);
+    public abstract void performActionOnAlert(BookActionButtonKeys bookActionButtonKeys);
 }

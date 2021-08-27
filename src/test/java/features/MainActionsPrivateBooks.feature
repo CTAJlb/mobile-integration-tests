@@ -14,7 +14,7 @@ Feature: Main actions private access books
     And I close Book Details for IOSTab
     When I open Holds
     Then Book 'bookInfo' is present in Holds List
-    When I click on the book 'bookInfo' button CANCEL on the holds screen
+    When I click CANCEL button on the 'bookInfo' book on holds screen
     Then Book 'bookInfo' is not present in Holds List
 
   @logout @returnBooks @tier2
@@ -46,7 +46,7 @@ Feature: Main actions private access books
       And I close Book Details for IOSTab
       And I open Holds
     Then Book 'bookInfo' is present in Holds List
-    When I click on the book 'bookInfo' button CANCEL on the holds screen
+    When I click CANCEL button on the 'bookInfo' book on holds screen
     Then Book 'bookInfo' is not present in Holds List
 
   @logout @returnBooks @tier2
@@ -153,5 +153,5 @@ Feature: Main actions private access books
       And I open Holds
     Then Book 'bookInfo' is present in Holds List
     When I click on the book 'bookInfo' button CANCEL on the holds screen and don't click on the popup button
-    Then I click CANCEL_POPUP button on popup
+    Then I click CANCEL_POPUP button on alert for ios
       And Book saved as 'bookInfo' should contain CANCEL button at the hold screen

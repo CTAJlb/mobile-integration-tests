@@ -45,12 +45,12 @@ public class AndroidHoldsScreen extends HoldsScreen {
     }
 
     @Override
-    public void clickBookByTitleButtonWithKey(String title, BookActionButtonKeys key) {
+    public void performActionOnBook(String title, BookActionButtonKeys key) {
         clickOnSpecificBookElement(getActionButton(key, getBookTitleLocator(title)));
     }
 
     @Override
-    public boolean isBookAddButtonTextEqualTo(String bookTitle, BookActionButtonKeys key) {
+    public boolean isActionButtonPresentOnBook(String bookTitle, BookActionButtonKeys key) {
         IButton btnBookAction = getActionButton(key, getBookTitleLocator(bookTitle));
         return btnBookAction.state().waitForDisplayed(Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }

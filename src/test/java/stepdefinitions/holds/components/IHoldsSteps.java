@@ -12,9 +12,9 @@ public interface IHoldsSteps {
 
     void checkBookBookInfoIsPresentInHoldsList(String bookInfoKey);
 
-    void clickOnBookAddButtonOnHoldsScreen(String bookInfoKey, BookActionButtonKeys key);
+    void performActionOnHoldsScreen(BookActionButtonKeys key, String bookInfoKey);
 
     void checkThatSavedBookContainButtonAtHoldScreen(final String bookInfoKey, final BookActionButtonKeys key);
 
-    void clickActionButtonForPopUp(BookActionButtonKeys key);
+    void performActionOnAlert(BookActionButtonKeys key);
 }

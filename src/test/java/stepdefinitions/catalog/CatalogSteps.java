@@ -148,8 +148,8 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     }
 
     @When("I click on the book {string} button {} on subcategory list view")
-    public void clickOnBookAddButtonOnCatalogBooksScreen(String bookInfoKey, BookActionButtonKeys key) {
-        catalogSteps.clickOnBookAddButtonOnCatalogBooksScreen(bookInfoKey, key);
+    public void performActionOnBook(String bookInfoKey, BookActionButtonKeys key) {
+        catalogSteps.performActionOnBook(bookInfoKey, key);
     }
 
     @And("Count of books in first lane is more than {int}")

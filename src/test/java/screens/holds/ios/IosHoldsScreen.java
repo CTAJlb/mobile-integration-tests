@@ -46,12 +46,12 @@ public class IosHoldsScreen extends HoldsScreen {
     }
 
     @Override
-    public void clickBookByTitleButtonWithKey(String title, BookActionButtonKeys key) {
+    public void performActionOnBook(String title, BookActionButtonKeys key) {
         clickOnSpecificBookElement(getBookActionButton(key, getBookBlockLocator(title)));
     }
 
     @Override
-    public boolean isBookAddButtonTextEqualTo(String bookTitle, BookActionButtonKeys key) {
+    public boolean isActionButtonPresentOnBook(String bookTitle, BookActionButtonKeys key) {
         IButton btnBookAdd = getBookActionButton(key, getBookBlockLocator(bookTitle));
         return btnBookAdd.state().waitForDisplayed(Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }
