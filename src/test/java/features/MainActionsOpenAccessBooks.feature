@@ -59,7 +59,7 @@ Scenario: Check out from Book Detail View and Return from Books
   Scenario: Check out from Subcategory List View and Read from Subcategory List View
     When DOWNLOAD book from subcategory list view and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
-    When I click on the book 'bookInfo' button READ on subcategory list view
+    When I click READ button on the 'bookInfo' book on subcategory list view
     Then Book 'bookInfo' is present on screen
 
   @tier2 @exclude_android
@@ -76,5 +76,5 @@ Scenario: Check out from Book Detail View and Return from Books
   @tier2 @exclude_android
   Scenario: Check out from Subcategory List View and Return from Subcategory List View(IOS)
     When DOWNLOAD book from subcategory list view and save it as 'bookInfo'
-      And I click on the book 'bookInfo' button DELETE on subcategory list view
+      And I click DELETE button on the 'bookInfo' book on subcategory list view
     Then Book saved as 'bookInfo' should contain GET button on Subcategory List View

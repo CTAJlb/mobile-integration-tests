@@ -8,7 +8,7 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
 import constants.application.timeouts.CategoriesTimeouts;
-import constants.localization.application.catalog.BookActionButtonKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.subcategory.SubcategoryScreen;
@@ -82,16 +82,16 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
-    public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(String bookName, BookActionButtonKeys actionButtonKey, String bookType) {
+    public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType) {
         String titleForLocator = bookName;
         if (bookType.toLowerCase().equals("audiobook")) {
             titleForLocator = titleForLocator + ". Audiobook.";
         }
 
         String actionButton = "";
-        if (actionButtonKey == BookActionButtonKeys.GET) {
+        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET) {
             actionButton = "Get";
-        } else if (actionButtonKey == BookActionButtonKeys.RESERVE) {
+        } else if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
             actionButton = "Reserve";
         }
         try {

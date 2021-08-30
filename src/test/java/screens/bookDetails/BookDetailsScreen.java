@@ -2,7 +2,7 @@ package screens.bookDetails;
 
 import aquality.appium.mobile.screens.Screen;
 import constants.localization.application.bookdetals.BookDetailsScreenInformationBlockKeys;
-import constants.localization.application.catalog.BookActionButtonKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 
@@ -22,15 +22,13 @@ public abstract class BookDetailsScreen extends Screen {
 
     public abstract void clickRelatedBooks();
 
-    public abstract void returnBook();
-
     public abstract boolean isRelatedBooksVisible();
 
-    public abstract boolean isBookAddButtonTextEqualTo(BookActionButtonKeys key);
+    public abstract boolean isBookAddButtonTextEqualTo(EnumActionButtonsForBooksAndAlertsKeys key);
 
-    public abstract void clickActionButton(BookActionButtonKeys buttonKeys);
+    public abstract void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKeys);
 
-    public abstract boolean isActionButtonPresent(BookActionButtonKeys actionButton);
+    public abstract boolean isActionButtonPresent(EnumActionButtonsForBooksAndAlertsKeys actionButton);
 
     public abstract String getErrorDetails();
 

@@ -7,7 +7,7 @@ import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.application.timeouts.BooksTimeouts;
-import constants.localization.application.catalog.BookActionButtonKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import org.openqa.selenium.By;
 import screens.holds.HoldsScreen;
 
@@ -45,12 +45,12 @@ public class AndroidHoldsScreen extends HoldsScreen {
     }
 
     @Override
-    public void performActionOnBook(String title, BookActionButtonKeys key) {
+    public void performActionOnBook(String title, EnumActionButtonsForBooksAndAlertsKeys key) {
         clickOnSpecificBookElement(getActionButton(key, getBookTitleLocator(title)));
     }
 
     @Override
-    public boolean isActionButtonPresentOnBook(String bookTitle, BookActionButtonKeys key) {
+    public boolean isActionButtonPresentOnBook(String bookTitle, EnumActionButtonsForBooksAndAlertsKeys key) {
         IButton btnBookAction = getActionButton(key, getBookTitleLocator(bookTitle));
         return btnBookAction.state().waitForDisplayed(Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }
@@ -67,7 +67,7 @@ public class AndroidHoldsScreen extends HoldsScreen {
         return book;
     }
 
-    private IButton getActionButton(BookActionButtonKeys key, String blockLoc) {
+    private IButton getActionButton(EnumActionButtonsForBooksAndAlertsKeys key, String blockLoc) {
         String buttonName = key.i18n();
         return getElementFactory().getButton(By.xpath(blockLoc + String.format(BOOK_ADD_BUTTON_LOC, buttonName)), buttonName);
     }

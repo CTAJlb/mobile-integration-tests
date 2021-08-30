@@ -3,6 +3,7 @@ package hooks.logout.components.impl;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import constants.context.ContextLibrariesKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
 import hooks.logout.components.AbstractLogoutHooks;
@@ -27,7 +28,7 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
         for (String library : listOfLibraries) {
             if (!accountScreen.state().isDisplayed()) {
                 bottomMenuForm.open(BottomMenu.SETTINGS);
-                alertScreen.closeNotNowModalIfDisplayed();
+                alertScreen.performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
                 bottomMenuForm.open(BottomMenu.SETTINGS);
                 settingsScreen.openAccounts();
                 accountsScreen.openLibraryAccount(library);

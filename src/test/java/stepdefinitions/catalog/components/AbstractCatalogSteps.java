@@ -1,11 +1,12 @@
 package stepdefinitions.catalog.components;
 
 import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
 import constants.application.ReaderType;
 import constants.application.timeouts.AuthorizationTimeouts;
 import constants.context.ScenarioContextKey;
-import constants.localization.application.catalog.BookActionButtonKeys;
 import constants.localization.application.catalog.BookActionButtonNames;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
 import constants.localization.application.facetedSearch.FacetSortByKeys;
 import framework.utilities.ScenarioContext;
@@ -24,7 +25,6 @@ import screens.catalog.form.MainCatalogToolbarForm;
 import screens.catalog.screen.books.CatalogBooksScreen;
 import screens.catalog.screen.catalog.CatalogScreen;
 import screens.facetedSearch.FacetedSearchScreen;
-import screens.notifications.NotificationModal;
 import screens.subcategory.SubcategoryScreen;
 import stepdefinitions.BaseSteps;
 
@@ -41,7 +41,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     protected final CatalogBooksScreen catalogBooksScreen;
     protected final FacetedSearchScreen facetedSearchScreen;
     protected final ScenarioContext context;
-    protected final NotificationModal notificationModal;
     private final AlertScreen alertScreen;
 
     public AbstractCatalogSteps(ScenarioContext context) {
@@ -53,7 +52,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         subcategoryScreen = AqualityServices.getScreenFactory().getScreen(SubcategoryScreen.class);
         catalogBooksScreen = AqualityServices.getScreenFactory().getScreen(CatalogBooksScreen.class);
         facetedSearchScreen = AqualityServices.getScreenFactory().getScreen(FacetedSearchScreen.class);
-        notificationModal = AqualityServices.getScreenFactory().getScreen(NotificationModal.class);
         alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
     }
 
@@ -130,9 +128,9 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain) {
         categoriesChain.stream().forEach(categoryName -> {
-            if(catalogScreen.state().isDisplayed()){
+            if (catalogScreen.state().isDisplayed()) {
                 catalogScreen.openCategory(categoryName);
-            }else {
+            } else {
                 subcategoryScreen.state().waitForDisplayed();
                 subcategoryScreen.openCategory(categoryName);
             }
@@ -141,7 +139,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void openBookDetailsExecuteBookActionAndSaveItToContext(
-            BookActionButtonKeys actionButtonKey, String bookInfoKey) {
+            EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         catalogBooksScreen.openBookWithGivenActionButtonDetails(actionButtonKey);
         CatalogBookModel catalogBookModel = bookDetailsScreen.getBookInfo();
         pressOnBookDetailsScreenAtActionButton(actionButtonKey);
@@ -149,38 +147,41 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void executeBookActionAndSaveItToContextAndLibraryCancel(
-            BookActionButtonKeys actionButtonKey, String bookInfoKey) {
-        context.add(bookInfoKey, catalogBooksScreen.scrollToBookAndClickActionButton(actionButtonKey));
-        notificationModal.performActionOnAlert(actionButtonKey);
+    public void performActionOnBookAndSaveBookInfoOnSubcategoryListView(
+            EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+        context.add(bookInfoKey, catalogBooksScreen.scrollToBookAndPerformActionAndSaveBookInfo(actionButtonKey));
     }
 
     @Override
-    public void performActionOnBookOfTypeAndSaveIt(BookActionButtonKeys actionButtonKey, String bookType, String bookInfoKey) {
+    public void performActionOnBookOfTypeAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType, String bookInfoKey) {
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByTypeAndClickActionButton(actionButtonKey, bookType));
     }
 
     @Override
-    public void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey1, BookActionButtonKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey) {
+    public void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey) {
         String bookName = context.get(bookNameInfoKey);
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickGetOrDownloadActionButton(actionButtonKey1, actionButtonKey2, bookName));
     }
 
     @Override
-    public void performActionOnBookFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey) {
+    public void performActionOnSpecificBookFromAPIAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey) {
         subcategoryScreen.state().waitForDisplayed();
         String bookName = context.get(bookNameInfoKey);
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
-        notificationModal.performActionOnAlert(actionButtonKey);
-        alertScreen.closeNotNowModalIfDisplayed();
-        alertScreen.closeDoNotAllowIfPresent();
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            alertScreen.performAlertActionIfDisplayed(actionButtonKey);
+            alertScreen.performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
+            alertScreen.performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.DO_NOT_ALLOW);
+        }
     }
 
     @Override
-    public void performActionOnBook(String bookInfoKey, BookActionButtonKeys key) {
+    public void performActionOnBookOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
-        catalogBooksScreen.clickBookByTitleButtonWithKey(catalogBookModel.getTitle(), key);
-        notificationModal.performActionOnAlert(key);
+        catalogBooksScreen.clickBookByTitleButtonWithKey(catalogBookModel.getTitle(), actionButtonKey);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            alertScreen.performAlertActionIfDisplayed(actionButtonKey);
+        }
     }
 
     @Override
@@ -232,15 +233,15 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void checkAllBooksCanBeDownloaded() {
         Assert.assertTrue("Not all present books can be downloaded", subcategoryScreen.getAllButtonsNames()
-                        .stream()
-                        .allMatch(x -> x.equals(BookActionButtonNames.DOWNLOAD_BUTTON_NAME)));
+                .stream()
+                .allMatch(x -> x.equals(BookActionButtonNames.DOWNLOAD_BUTTON_NAME)));
     }
 
     @Override
     public void checkAllBooksCanBeLoanedOrDownloaded() {
         Assert.assertTrue("Not all present books can be loaned or downloaded", subcategoryScreen.getAllButtonsNames()
-                        .stream()
-                        .allMatch(x -> x.equals(BookActionButtonNames.GET_BUTTON_NAME) || x.equals(BookActionButtonNames.DOWNLOAD_BUTTON_NAME)));
+                .stream()
+                .allMatch(x -> x.equals(BookActionButtonNames.GET_BUTTON_NAME) || x.equals(BookActionButtonNames.DOWNLOAD_BUTTON_NAME)));
     }
 
     @Override
@@ -250,7 +251,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void performActionOnHardcodeBookByNameAndSaveIt(BookActionButtonKeys actionButtonKey, String bookName, String bookInfoKey) {
+    public void performActionOnHardcodeBookByNameAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName, String bookInfoKey) {
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
     }
 
@@ -281,8 +282,8 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void checkFollowingValuesInInformationBlockArePresent(
             List<BookDetailsScreenInformationBlockModel> expectedValuesList) {
         Assert.assertTrue("Not all information block values are correct (or present)", expectedValuesList.stream().allMatch(listElement ->
-                        bookDetailsScreen.isValuePresentInInformationBlock(listElement.getKey(),
-                                listElement.getValue())));
+                bookDetailsScreen.isValuePresentInInformationBlock(listElement.getKey(),
+                        listElement.getValue())));
     }
 
     @Override
@@ -311,29 +312,23 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void checkThatSavedBookContainButtonAtCatalogBooksScreen(
-            final String bookInfoKey, final BookActionButtonKeys key) {
+            final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         String title = catalogBookModel.getTitle();
-        alertScreen.closeDoNotAllowIfPresent();
-        boolean isButtonPresent = catalogBooksScreen.isBookAddButtonTextEqualTo(title, key);
+        alertScreen.performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.DO_NOT_ALLOW);
+        boolean isButtonPresent = catalogBooksScreen.isBookAddButtonTextEqualTo(title, actionButtonKey);
         if (!isButtonPresent && catalogBooksScreen.isErrorButtonPresent()) {
             Scenario scenario = context.get(ScenarioContextKey.SCENARIO_KEY);
             scenario.attach(ScreenshotUtils.getScreenshot(), "image/png", "error_screenshot.png");
         }
-        Assert.assertTrue(String.format("Book's with title '%1$s' button does not contain text '%2$s'. Error message (if present) - '%3$s'", title, key.i18n(), catalogBooksScreen.getErrorMessage()), isButtonPresent);
+        Assert.assertTrue(String.format("Book's with title '%1$s' button does not contain text '%2$s'. Error message (if present) - '%3$s'", title, actionButtonKey.i18n(), catalogBooksScreen.getErrorMessage()), isButtonPresent);
     }
 
     @Override
-    public void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final BookActionButtonKeys key) {
+    public void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final EnumActionButtonsForBooksAndAlertsKeys key) {
         boolean isButtonPresent = bookDetailsScreen.isBookAddButtonTextEqualTo(key);
         addScreenshotIfErrorPresent(isButtonPresent);
         Assert.assertTrue(String.format("Button '%1$s' is not present on book details screen. Error (if present) - %2$s", key.i18n(), getErrorDetails()), isButtonPresent);
-    }
-
-    @Override
-    public void returnBookFromBookDetailsScreen() {
-        bookDetailsScreen.returnBook();
-        notificationModal.performActionOnAlert(BookActionButtonKeys.RETURN);
     }
 
     @Override
@@ -344,11 +339,13 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void pressOnBookDetailsScreenAtActionButton(BookActionButtonKeys actionButton) {
-        clickActionButtonOnBookDetailsView(actionButton);
-        notificationModal.performActionOnAlert(actionButton);
-        alertScreen.closeDoNotAllowIfPresent();
-        alertScreen.closeNotNowModalIfDisplayed();
+    public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        clickActionButtonOnBookDetailsView(actionButtonKey);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            alertScreen.performAlertActionIfDisplayed(actionButtonKey);
+            alertScreen.performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.DO_NOT_ALLOW);
+            alertScreen.performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
+        }
     }
 
     @Override
@@ -358,22 +355,22 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(String bookName, BookActionButtonKeys actionButtonKey, String bookInfoKey, String bookType) {
+    public void openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey, String bookType) {
         context.add(bookInfoKey, subcategoryScreen.openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(bookName, actionButtonKey, bookType));
     }
 
     public void openBookWithSpecifyTypeOnBookDetailsView(ReaderType readerType) {
         switch (readerType) {
             case EBOOK:
-                clickActionButtonOnBookDetailsView(BookActionButtonKeys.READ);
+                clickActionButtonOnBookDetailsView(EnumActionButtonsForBooksAndAlertsKeys.READ);
                 break;
             case AUDIOBOOK:
-                clickActionButtonOnBookDetailsView(BookActionButtonKeys.LISTEN);
+                clickActionButtonOnBookDetailsView(EnumActionButtonsForBooksAndAlertsKeys.LISTEN);
                 break;
         }
     }
 
-    private void clickActionButtonOnBookDetailsView(BookActionButtonKeys actionButton) {
+    private void clickActionButtonOnBookDetailsView(EnumActionButtonsForBooksAndAlertsKeys actionButton) {
         bookDetailsScreen.clickActionButton(actionButton);
     }
 

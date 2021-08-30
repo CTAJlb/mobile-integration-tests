@@ -2,6 +2,7 @@ package stepdefinitions.credentials.components;
 
 import aquality.appium.mobile.application.AqualityServices;
 import constants.context.ScenarioContextKey;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.configuration.Configuration;
 import framework.configuration.Credentials;
 import framework.utilities.ScenarioContext;
@@ -58,7 +59,7 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
         storeCredentials(credentials);
         accountScreen.enterCredentialsAndLogin(credentials);
         alertScreen.state().waitForDisplayed();
-        alertScreen.closeNotNowModalIfDisplayed();
+        alertScreen.performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
         boolean isLoginPerformedSuccessfully = AqualityServices.getConditionalWait().waitFor(() -> accountScreen.isLoginSuccessful() || catalogScreen.state().isDisplayed());
         if (!isLoginPerformedSuccessfully) {
             throw new RuntimeException("Login is not completed");

@@ -1,6 +1,6 @@
 package stepdefinitions.holds.components;
 
-import constants.localization.application.catalog.BookActionButtonKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 
 public interface IHoldsSteps {
 
@@ -12,9 +12,9 @@ public interface IHoldsSteps {
 
     void checkBookBookInfoIsPresentInHoldsList(String bookInfoKey);
 
-    void performActionOnHoldsScreen(BookActionButtonKeys key, String bookInfoKey);
+    void performActionOnHoldsScreen(EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKey, String bookInfoKey);
 
-    void checkThatSavedBookContainButtonAtHoldScreen(final String bookInfoKey, final BookActionButtonKeys key);
+    void checkThatSavedBookContainButtonAtHoldScreen(final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys key);
 
-    void performActionOnAlert(BookActionButtonKeys key);
+    void performActionOnBookWithoutClickActionButtonOnAlert(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKey);
 }

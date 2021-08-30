@@ -1,7 +1,7 @@
 package stepdefinitions.holds;
 
 import com.google.inject.Inject;
-import constants.localization.application.catalog.BookActionButtonKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -45,23 +45,18 @@ public class HoldsSteps extends BaseSteps implements IHoldsSteps {
     }
 
     @When("I click {} button on the {string} book on holds screen")
-    public void performActionOnHoldsScreen(BookActionButtonKeys bookActionButtonKey, String bookInfoKey) {
+    public void performActionOnHoldsScreen(EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKey, String bookInfoKey) {
         abstractHoldsSteps.performActionOnHoldsScreen(bookActionButtonKey, bookInfoKey);
     }
 
     @When("I click on the book {string} button {} on the holds screen and don't click on the popup button")
-    public void clickOnBookAddButtonOnHoldsScreenWithoutPopupHandling(String bookInfoKey, BookActionButtonKeys key) {
-        abstractHoldsSteps.clickOnBookAddButtonOnHoldsScreenWithoutPopupHandling(bookInfoKey, key);
-    }
-
-    @Then("I click {} button on alert for ios")
-    public void performActionOnAlert(BookActionButtonKeys bookActionButtonKeys) {
-        abstractHoldsSteps.performActionOnAlert(bookActionButtonKeys);
+    public void performActionOnBookWithoutClickActionButtonOnAlert(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKey) {
+        abstractHoldsSteps.performActionOnBookWithoutClickActionButtonOnAlert(bookInfoKey, bookActionButtonKey);
     }
 
     @Then("Book saved as {string} should contain {} button at the hold screen")
     public void checkThatSavedBookContainButtonAtHoldScreen(
-            final String bookInfoKey, final BookActionButtonKeys key) {
+            final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys key) {
         abstractHoldsSteps.checkThatSavedBookContainButtonAtHoldScreen(bookInfoKey, key);
     }
 }

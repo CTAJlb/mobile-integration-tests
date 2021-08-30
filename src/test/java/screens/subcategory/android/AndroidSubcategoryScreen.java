@@ -9,7 +9,7 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
 import constants.application.attributes.AndroidAttributes;
-import constants.localization.application.catalog.BookActionButtonKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
@@ -92,11 +92,11 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
-    public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(String bookName, BookActionButtonKeys actionButtonKey, String bookType) {
+    public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType) {
         String actionButton = "";
-        if (actionButtonKey == BookActionButtonKeys.GET){
+        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET){
             actionButton = "Get";
-        }else if(actionButtonKey == BookActionButtonKeys.RESERVE){
+        }else if(actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE){
             actionButton = "Reserve";
         }
         String locator = String.format(BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN, bookName, actionButton);

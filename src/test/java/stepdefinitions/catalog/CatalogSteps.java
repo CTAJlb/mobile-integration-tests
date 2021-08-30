@@ -4,7 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.application.ReaderType;
-import constants.localization.application.catalog.BookActionButtonKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
 import constants.localization.application.facetedSearch.FacetSortByKeys;
 import framework.utilities.ScenarioContext;
@@ -50,7 +50,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     }
 
     @When("I {} hardcode book {string} and save it as {string}")
-    public void performActionOnHardcodeBookByNameAndSaveIt(BookActionButtonKeys actionButtonKey, String bookName, String bookInfoKey) {
+    public void performActionOnHardcodeBookByNameAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName, String bookInfoKey) {
         catalogSteps.performActionOnHardcodeBookByNameAndSaveIt(actionButtonKey, bookName, bookInfoKey);
     }
 
@@ -108,48 +108,48 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     }
 
     @When("I open the book details for the subsequent {} on Subcategory List View and save it as {string}")
-    public void openBookDetailsExecuteBookActionAndSaveItToContext(BookActionButtonKeys actionButtonKey, String bookInfoKey) {
-        if (actionButtonKey == BookActionButtonKeys.DOWNLOAD && AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            catalogSteps.openBookDetailsExecuteBookActionAndSaveItToContext(BookActionButtonKeys.GET, bookInfoKey);
+    public void openBookDetailsExecuteBookActionAndSaveItToContext(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DOWNLOAD && AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            catalogSteps.openBookDetailsExecuteBookActionAndSaveItToContext(EnumActionButtonsForBooksAndAlertsKeys.GET, bookInfoKey);
         } else {
             catalogSteps.openBookDetailsExecuteBookActionAndSaveItToContext(actionButtonKey, bookInfoKey);
         }
     }
 
     @And("{} book from subcategory list view and save it as {string}")
-    public void executeBookActionAndSaveItToContextAndLibraryCancel(BookActionButtonKeys actionButtonKey, String bookInfoKey) {
-        if (actionButtonKey == BookActionButtonKeys.DOWNLOAD && AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            catalogSteps.executeBookActionAndSaveItToContextAndLibraryCancel(BookActionButtonKeys.GET, bookInfoKey);
+    public void performActionOnBookAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DOWNLOAD && AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            catalogSteps.performActionOnBookAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys.GET, bookInfoKey);
         } else {
-            catalogSteps.executeBookActionAndSaveItToContextAndLibraryCancel(actionButtonKey, bookInfoKey);
+            catalogSteps.performActionOnBookAndSaveBookInfoOnSubcategoryListView(actionButtonKey, bookInfoKey);
         }
     }
 
     @When("I {} book of {string} type and save it as {string}")
     @And("{} book of {string} type and save it as {string}")
-    public void performActionOnBookOfTypeAndSaveIt(BookActionButtonKeys actionButtonKey, String bookType, String bookInfoKey) {
+    public void performActionOnBookOfTypeAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType, String bookInfoKey) {
         catalogSteps.performActionOnBookOfTypeAndSaveIt(actionButtonKey, bookType, bookInfoKey);
     }
 
     @When("I {} or {} book by name {string} and save it as {string}")
-    public void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey1, BookActionButtonKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey) {
+    public void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey) {
         catalogSteps.performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(actionButtonKey1, actionButtonKey2, bookNameInfoKey, bookInfoKey);
     }
 
     @When("I {} book from Subcategory List View with title {string} and save it as {string}")
-    public void performActionOnBookFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey) {
-        catalogSteps.performActionOnBookFromAPIAndSaveIt(actionButtonKey, bookNameInfoKey, bookInfoKey);
+    public void performActionOnSpecificBookFromAPIAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey) {
+        catalogSteps.performActionOnSpecificBookFromAPIAndSaveBookInfoOnSubcategoryListView(actionButtonKey, bookNameInfoKey, bookInfoKey);
     }
 
     @When("Open {string} book with {} button from Subcategory List View with title {string} and save it as {string}")
-    public void openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(String bookType, BookActionButtonKeys actionButtonKey, String bookNameKey, String bookInfoKey) {
+    public void openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(String bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey, String bookInfoKey) {
         String bookName = context.get(bookNameKey);
         catalogSteps.openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(bookName, actionButtonKey, bookInfoKey, bookType);
     }
 
-    @When("I click on the book {string} button {} on subcategory list view")
-    public void performActionOnBook(String bookInfoKey, BookActionButtonKeys key) {
-        catalogSteps.performActionOnBook(bookInfoKey, key);
+    @When("I click {} button on the {string} book on subcategory list view")
+    public void performActionOnBookOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKeys, String bookInfoKey) {
+        catalogSteps.performActionOnBookOnSubcategoryListView(bookActionButtonKeys, bookInfoKey);
     }
 
     @And("Count of books in first lane is more than {int}")
@@ -250,18 +250,13 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
 
     @Then("Book saved as {string} should contain {} button on Subcategory List View")
     public void checkThatSavedBookContainButtonAtCatalogBooksScreen(
-            final String bookInfoKey, final BookActionButtonKeys key) {
+            final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys key) {
         catalogSteps.checkThatSavedBookContainButtonAtCatalogBooksScreen(bookInfoKey, key);
     }
 
     @Then("I check that book contains {} action button on book details view")
-    public void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final BookActionButtonKeys key) {
+    public void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final EnumActionButtonsForBooksAndAlertsKeys key) {
         catalogSteps.checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(key);
-    }
-
-    @And("I return book from book details screen")
-    public void returnBookFromBookDetailsScreen() {
-        catalogSteps.returnBookFromBookDetailsScreen();
     }
 
     @When("I open book {string} details by clicking on cover")
@@ -270,7 +265,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     }
 
     @When("I press on the book details view at the action button {}")
-    public void pressOnBookDetailsScreenAtActionButton(BookActionButtonKeys actionButton) {
+    public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButton) {
         catalogSteps.pressOnBookDetailsScreenAtActionButton(actionButton);
     }
 

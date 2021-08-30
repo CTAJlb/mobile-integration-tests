@@ -1,6 +1,6 @@
 package stepdefinitions.catalog.components;
 
-import constants.localization.application.catalog.BookActionButtonKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
 import constants.localization.application.facetedSearch.FacetSortByKeys;
 import models.android.BookDetailsScreenInformationBlockModel;
@@ -15,9 +15,9 @@ public interface ICatalogSteps {
 
     void openPreviousCategoryScreen();
 
-    void openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(String bookType, BookActionButtonKeys actionButtonKey, String bookNameKey, String bookInfoKey);
+    void openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(String bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey, String bookInfoKey);
 
-    void performActionOnBookFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey);
+    void performActionOnSpecificBookFromAPIAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey);
 
     void getNamesOfBooksAndSaveThem(String booksNamesListKey);
 
@@ -25,7 +25,7 @@ public interface ICatalogSteps {
 
     void openLibraryFromSideMenu(String libraryName);
 
-    void performActionOnHardcodeBookByNameAndSaveIt(BookActionButtonKeys actionButtonKey, String bookName, String bookInfoKey);
+    void performActionOnHardcodeBookByNameAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName, String bookInfoKey);
 
     void openCatalogWithAgeCheck();
 
@@ -43,16 +43,16 @@ public interface ICatalogSteps {
 
     void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain);
 
-    void openBookDetailsExecuteBookActionAndSaveItToContext(BookActionButtonKeys actionButtonKey, String bookInfoKey);
+    void openBookDetailsExecuteBookActionAndSaveItToContext(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey);
 
-    void executeBookActionAndSaveItToContextAndLibraryCancel(
-            BookActionButtonKeys actionButtonKey, String bookInfoKey);
+    void performActionOnBookAndSaveBookInfoOnSubcategoryListView(
+            EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey);
 
-    void performActionOnBookOfTypeAndSaveIt(BookActionButtonKeys actionButtonKey, String bookType, String bookInfoKey);
+    void performActionOnBookOfTypeAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType, String bookInfoKey);
 
-    void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(BookActionButtonKeys actionButtonKey1, BookActionButtonKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey);
+    void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey);
 
-    void performActionOnBook(String bookInfoKey, BookActionButtonKeys key);
+    void performActionOnBookOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKeys, String bookInfoKey);
 
     void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks);
 
@@ -89,15 +89,13 @@ public interface ICatalogSteps {
     void checkCountOfBooksInSearchResultIsUpTo(int countOfBooks);
 
     void checkThatSavedBookContainButtonAtCatalogBooksScreen(
-            final String bookInfoKey, final BookActionButtonKeys key);
+            final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys key);
 
-    void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final BookActionButtonKeys key);
-
-    void returnBookFromBookDetailsScreen();
+    void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final EnumActionButtonsForBooksAndAlertsKeys key);
 
     void openBookDetailsByClickingOnCover(String bookInfoKey);
 
-    void pressOnBookDetailsScreenAtActionButton(BookActionButtonKeys actionButton);
+    void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButton);
 
     void checkThatActionButtonTextEqualToExpected(FacetAvailabilityKeys facetAvailabilityKeys);
 
