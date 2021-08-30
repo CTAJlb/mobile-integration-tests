@@ -36,7 +36,7 @@ public class AccountSteps {
     public void addAccount(String libraryName) {
         openAccounts();
         accountsScreen.addAccount();
-        addAccountScreen.selectLibrary(libraryName);
+        addAccountScreen.selectLibraryViaSearch(libraryName);
 
         if(libraryName.toLowerCase().equals("LYRASIS".toLowerCase())){
             saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
@@ -63,7 +63,7 @@ public class AccountSteps {
     @When("I open account {string}")
     public void openAccount(String libraryName) {
         openAccounts();
-        accountsScreen.openAccount(libraryName);
+        accountsScreen.openLibraryAccount(libraryName);
     }
 
     private void saveLibraryInContext(String key, String libraryName) {

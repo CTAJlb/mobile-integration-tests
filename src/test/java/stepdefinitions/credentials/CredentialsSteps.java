@@ -22,9 +22,9 @@ public class CredentialsSteps extends BaseSteps implements ICredentialsSteps {
         abstractCredentialsSteps.checkLoginIsPerformedSuccessfully();
     }
 
-    @Then("Text on Logout button is changed to Log in on Account screen")
-    public void textOnLogoutButtonIsChangedToLogInOnAccountScreen() {
-        abstractCredentialsSteps.textOnLogoutButtonIsChangedToLogInOnAccountScreen();
+    @Then("Logout is performed successfully")
+    public void isLogoutSuccessfully() {
+        abstractCredentialsSteps.isLogoutSuccessfully();
     }
 
     @When("I click the log out button on the account screen")

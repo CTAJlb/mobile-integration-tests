@@ -3,15 +3,13 @@ package stepdefinitions.application.components.impl;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import stepdefinitions.application.components.AbstractApplicationSteps;
 
 @StepsType(platform = PlatformName.ANDROID)
 public class AndroidApplicationSteps extends AbstractApplicationSteps {
 
     @Override
-    public void returnToPreviousScreen() {
+    public void returnToPreviousScreenForEpubAndPdf() {
         AqualityServices.getApplication().getDriver().navigate().back();
     }
 
@@ -22,6 +20,6 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
         }
         welcomeScreen.state().waitForDisplayed();
         welcomeScreen.findLibrary();
-        addAccountScreen.selectLibrary(libraryName);
+        addAccountScreen.selectLibraryViaSearch(libraryName);
     }
 }

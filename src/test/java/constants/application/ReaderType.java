@@ -6,8 +6,7 @@ public enum ReaderType {
 
     private String bookType;
 
-    @Override
-    public String toString() {
+    public String getBookType() {
         return bookType;
     }
 

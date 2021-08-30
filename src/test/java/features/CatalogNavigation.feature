@@ -1,86 +1,74 @@
 Feature: Catalog Navigation
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Return to last library catalog
     When I add "Digital Public Library of America" account from welcomeScreen
       And I add 'Alameda County Library' account
       And I open Catalog
       And I switch to 'Alameda County Library' from side menu
-    Then Books feed is loaded
+    Then Category rows are loaded
     When I restart app
-    Then Books feed is loaded
+    Then Category rows are loaded
       And Current library is 'Alameda County Library' in Catalog
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Navigate Lists
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
-    Then Books feed is loaded
+    Then Category rows are loaded
+      And Count of books in first lane is more than 1
     When I get names of books on screen and save them as 'listOfBooksOnMainPage'
       And I open 'Children\'s Books' category
     Then Current category name is 'Children\'s Books'
-      And Books feed is loaded
+      And Subcategory rows are loaded
       And Following subcategories are present:
         | Classics             |
         | Fiction              |
         | Nonfiction           |
         | All Children's Books |
     And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
-    When I return to previous category screen
-      And I open 'Nonfiction' category
-    Then Current category name is 'Nonfiction'
-      And Books feed is loaded
-      And Following subcategories are present:
-        | Biography & Memoir    |
-        | Textbooks             |
-        | Government & Politics |
-        | Science & Technology  |
-        | History               |
-        | Self Help             |
-        | Food & Health         |
-        | Academic Press        |
-        | All Nonfiction        |
-      And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
-    When I open 'All Nonfiction' subcategory
+    And I open 'Classics' subcategory
     Then Subcategory screen is present
-      And Subcategory name is 'All Nonfiction'
+      And Subcategory name is 'Classics'
 
   @tier1
   Scenario: Browse Lanes/Categories
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
-    Then Books feed is loaded
+    Then Category rows are loaded
       And Count of books in first lane is more than 1
-    When I open 'Nonfiction' category
-    Then Current category name is 'Nonfiction'
+    When I open 'Children\'s Books' category
+    Then Current category name is 'Children\'s Books'
       And Following subcategories are present:
-        | Biography & Memoir    |
-        | Textbooks             |
-        | Government & Politics |
-        | Science & Technology  |
-        | History               |
-        | Self Help             |
-        | Food & Health         |
-        | Academic Press        |
-        | All Nonfiction        |
-    When I open 'Self Help' subcategory
+        | Classics             |
+        | Fiction              |
+        | Nonfiction           |
+        | All Children's Books |
+    When I open 'Classics' subcategory
     Then Subcategory screen is present
-      And Subcategory name is 'Self Help'
+      And Subcategory name is 'Classics'
     When I open first book in subcategory list and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
 
   @tier1
+  Scenario: Sort Lists1
+    When I add "Alameda County Library" account from welcomeScreen
+    When I open categories by chain and chain starts from CategoryScreen:
+      | Fiction |
+      | Drama   |
+
+  @tier1 @oldOs
   Scenario: Sort Lists
     When I add "Alameda County Library" account from welcomeScreen
       And I open Catalog
       And I switch to 'Alameda County Library' from side menu
-    Then Books feed is loaded
+    Then Category rows are loaded
     When I switch to 'Audiobooks' catalog tab
-    Then Books feed is loaded
+    Then Category rows are loaded
       And All present books are audiobooks
     When I switch to 'eBooks' catalog tab
-    Then Books feed is loaded
-    When I open category by chain:
+    Then Category rows are loaded
+    When I open categories by chain and chain starts from CategoryScreen:
       | Fiction |
       | Drama   |
     Then Subcategory screen is present

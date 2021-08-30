@@ -16,6 +16,8 @@ public abstract class SubcategoryScreen extends Screen {
 
     public abstract void openFirstBook();
 
+    public abstract boolean areSubcategoryRowsLoaded();
+
     public abstract List<String> getBooksInfo();
 
     public abstract List<String> getAllButtonsNames();
@@ -29,6 +31,8 @@ public abstract class SubcategoryScreen extends Screen {
     public abstract CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(String bookName, BookActionButtonKeys actionButtonKey, String bookType);
 
     public abstract String getErrorMessage();
+
+    public abstract void openCategory(String categoryName);
 
     public abstract boolean isErrorButtonPresent();
 }

@@ -5,7 +5,7 @@
   "screensLocation": "screens",
   "driverSettings": {
     "android": {
-      "deviceKey": "Samsung_Galaxy_Note",
+      "deviceKey": "Samsung_Galaxy_S21",
       "capabilities": {
         "platformName": "Android",
         "app": "",

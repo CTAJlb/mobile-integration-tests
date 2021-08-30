@@ -49,7 +49,7 @@ public class XMLSteps {
                 break;
             }
         }
-        AqualityServices.getLogger().info("Count of attempts-" + amount);
+        AqualityServices.getLogger().info("Count of attempts to get random book name without bad symbols-" + amount);
 
         return bookName;
     }

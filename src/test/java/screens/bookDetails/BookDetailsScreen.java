@@ -22,8 +22,6 @@ public abstract class BookDetailsScreen extends Screen {
 
     public abstract void clickRelatedBooks();
 
-    public abstract void deleteBook();
-
     public abstract void returnBook();
 
     public abstract boolean isRelatedBooksVisible();
@@ -43,4 +41,6 @@ public abstract class BookDetailsScreen extends Screen {
     public abstract void swipeError();
 
     public abstract boolean isBookReadyToRead();
+
+    public abstract void closeBookDetailsOnlyForIOSTabIfDisplayed();
 }

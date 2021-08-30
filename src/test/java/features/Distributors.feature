@@ -1,6 +1,6 @@
 Feature: Distributors
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @oldOs
   Scenario Outline: Hold from Book Detail View
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -20,7 +20,7 @@ Feature: Distributors
       | Axis 360    | EBOOK     | eBooks     |
       | Axis 360    | AUDIOBOOK | Audiobooks |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @oldOs
   Scenario Outline: Check out from Book Detail View
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account
@@ -33,7 +33,7 @@ Feature: Distributors
       And I press on the book details view at the action button GET
     Then I check that book contains <buttonBookDetailsView> action button on book details view
     When I read book with <bookType> type from book details view
-    Then Reader screen for 'bookInfo' book with '<bookType>' type is present
+    Then Book 'bookInfo' with <bookType> type is present on epub or pdf or audiobook screen
 
     Scenarios:
       | distributor | bookType  | tabName    | buttonBookDetailsView |
@@ -42,7 +42,7 @@ Feature: Distributors
       | Axis 360    | EBOOK     | eBooks     | READ                  |
       | Axis 360    | AUDIOBOOK | Audiobooks | LISTEN                |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @oldOs
   Scenario Outline: Return book from Book Detail View
     When I add "LYRASIS" account from welcomeScreen
       And I enter credentials for 'LYRASIS' account

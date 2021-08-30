@@ -9,11 +9,5 @@ public abstract class NotificationModal extends Screen {
         super(locator, "Notification modal");
     }
 
-    public abstract void closeSyncNotificationIfDisplayed();
-
-    public abstract void closeCannotAddBookModalIfDisplayed();
-
     public abstract void performActionForNotificationPopup(BookActionButtonKeys buttonName);
-
-    public abstract boolean isModalPresent();
 }

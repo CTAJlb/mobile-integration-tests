@@ -6,7 +6,6 @@ import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.logging.Logger;
 import constants.RegEx;
 import constants.application.attributes.IosAttributes;
@@ -18,8 +17,6 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.Point;
 import screens.epubreader.EpubReaderScreen;
 import screens.epubtableofcontents.EpubTableOfContentsScreen;
 
@@ -29,19 +26,18 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosEpubReaderScreen extends EpubReaderScreen {
-    private static final String EPUB_CONTENT_IFRAME = "epubContentIframe";
     private static final String CHAPTER_ITEM_LOC = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[@name=\"%1$s\"]";
 
-    private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]"), "Book Cover", ElementState.EXISTS_IN_ANY_STATE);
-    private final ILabel lblPageNumber =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[1]/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/XCUIElementTypeOther[3]/XCUIElementTypeStaticText"), "Page Number");
+    private final ILabel btnBackAndBookName =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Book Cover and button back");
+    private final ILabel lblPageNumberAndChapterName =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"Page\")]"), "lblPageNumberAndChapterName");
     private final ILabel lblPage =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "Page View");
     private final IButton btnFontSettings = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"Toggle reader settings\"]"), "Chapters");
+            By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[3]"), "Font settings");
     private final IButton btnChapters =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Table of contents\"]"), "Chapters");
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[2]"), "Chapters");
 
     public IosEpubReaderScreen() {
         super(By.xpath("//*[contains(@name,\"Page\")]"));
@@ -56,20 +52,28 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public String getBookName() {
-        String text = lblBookName.getText();
+        if (!btnFontSettings.state().isDisplayed()) {
+            CoordinatesClickUtils.clickAtCenterOfScreen();
+        }
+        String text = btnBackAndBookName.getAttribute("name");
         AqualityServices.getLogger().info("Book name - " + text);
         return text;
     }
 
     @Override
     public String getChapterName() {
-        //only for android
-        return null;
+        if (btnFontSettings.state().isDisplayed()) {
+            CoordinatesClickUtils.clickOnTopOfScreen();
+        }
+        lblPageNumberAndChapterName.state().waitForDisplayed();
+        String pageNumberAndChapterNameRegEx = lblPageNumberAndChapterName.getAttribute(IosAttributes.NAME);
+        pageNumberAndChapterNameRegEx = deleteBracketsFromText(pageNumberAndChapterNameRegEx);
+        return RegExUtil.getStringFromThirdGroup(pageNumberAndChapterNameRegEx, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
     }
 
     @Override
     public boolean isBookNamePresent() {
-        return lblBookName.state().waitForDisplayed();
+        return btnBackAndBookName.state().waitForDisplayed();
     }
 
     @Override
@@ -85,25 +89,31 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     @Override
     public void clickLeftCorner() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        action.tap(PointOption.point(0, lblPage.getElement().getCenter().y)).perform();
+        action.tap(PointOption.point(20, lblPage.getElement().getCenter().y)).perform();
     }
 
     @Override
     public void clickRightCorner() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        Point upperLeftCorner = lblPage.getElement().getLocation();
-        Point center = lblPage.getElement().getCenter();
-        Dimension dimensions = lblPage.getElement().getSize();
-        action.tap(PointOption.point(upperLeftCorner.x + dimensions.width - 1, center.y)).perform();
+        action.tap(PointOption.point(lblPage.getElement().getSize().getWidth(), lblPage.getElement().getCenter().y)).perform();
     }
 
     @Override
-    public String getPageNumberInfo() {
+    public String getPageNumber() {
         if (btnFontSettings.state().isDisplayed()) {
             CoordinatesClickUtils.clickAtCenterOfScreen();
         }
-        lblPageNumber.state().waitForDisplayed();
-        return lblPageNumber.getAttribute(IosAttributes.NAME);
+        lblPageNumberAndChapterName.state().waitForDisplayed();
+        String pageNumberAndChapterNameRegEx = lblPageNumberAndChapterName.getAttribute(IosAttributes.NAME);
+        pageNumberAndChapterNameRegEx = deleteBracketsFromText(pageNumberAndChapterNameRegEx);
+        return RegExUtil.getStringFromFirstGroup(pageNumberAndChapterNameRegEx, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
+    }
+
+    //todo I must delete this later. I should change regEX = PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS, I can work without brackets in regEx
+    private static String deleteBracketsFromText(String text) {
+        text = text.replaceAll("\\(", "");
+        text = text.replaceAll("\\)", "");
+        return text;
     }
 
     @Override
@@ -117,6 +127,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
         List<String> bookNames = epubTableOfContentsScreen.getListOfBookChapters();
         AqualityServices.getApplication().getDriver().navigate().back();
         AqualityServices.getLogger().info("Found chapters - " + bookNames.stream().map(Object::toString).collect(Collectors.joining(", ")));
+        AqualityServices.getLogger().info("countOfChapters-" + bookNames.size());
         return bookNames;
     }
 
@@ -129,8 +140,6 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
         IButton button = getElementFactory().getButton(By.xpath(String.format(CHAPTER_ITEM_LOC, chapter)), chapter);
         button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         button.click();
-
-        checkThatBookOpenedAndOpenMenus();
     }
 
     @Override
@@ -147,7 +156,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public double getFontSize() {
-        return RegExUtil.getDoubleFromFirstMatchGroup(getBookSource(), RegEx.FONT_SIZE_REGEX_IOS);
+        return RegExUtil.getDoubleFromFirstGroup(getBookSource(), RegEx.FONT_SIZE_REGEX_IOS);
     }
 
     private String getBookSource() {
@@ -162,12 +171,10 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
         });
         Set<String> contextNames = driver.getContextHandles();
         driver.context((String) contextNames.toArray()[1]);
-        driver.switchTo().frame(EPUB_CONTENT_IFRAME);
-        String frameSource = driver.getPageSource();
-        logger.info(frameSource);
-        driver.switchTo().defaultContent();
+        String pageSource = driver.getPageSource();
+        AqualityServices.getLogger().info("contextNames.toArray()[1]PageSource-" + pageSource);
         driver.context((String) contextNames.toArray()[0]);
-        return frameSource;
+        return pageSource;
     }
 
     @Override
@@ -176,12 +183,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public String getFontColor() {
-        return getReaderInfo(RegEx.FONT_COLOR_REGEX);
-    }
-
-    @Override
-    public String getFontAndBackgroundColor() {
+    public String getBackgroundColor() {
         return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX_IOS);
     }
 

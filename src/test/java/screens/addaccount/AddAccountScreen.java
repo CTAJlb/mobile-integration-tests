@@ -8,5 +8,5 @@ public abstract class AddAccountScreen extends Screen {
         super(locator, "Add Accounts");
     }
 
-    public abstract void selectLibrary(String libraryName);
+    public abstract void selectLibraryViaSearch(String libraryName);
 }

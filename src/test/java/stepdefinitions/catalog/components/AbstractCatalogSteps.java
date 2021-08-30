@@ -3,7 +3,6 @@ package stepdefinitions.catalog.components;
 import aquality.appium.mobile.application.AqualityServices;
 import constants.application.ReaderType;
 import constants.application.timeouts.AuthorizationTimeouts;
-import constants.application.timeouts.CategoriesTimeouts;
 import constants.context.ScenarioContextKey;
 import constants.localization.application.catalog.BookActionButtonKeys;
 import constants.localization.application.catalog.BookActionButtonNames;
@@ -17,7 +16,6 @@ import models.android.CatalogBookModel;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
-import screens.agegate.AgeGateScreen;
 import screens.alert.AlertScreen;
 import screens.bookDetails.BookDetailsScreen;
 import screens.bottommenu.BottomMenu;
@@ -33,13 +31,11 @@ import stepdefinitions.BaseSteps;
 import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalogSteps {
     protected final BottomMenuForm bottomMenuForm;
     protected final CatalogScreen catalogScreen;
     protected final SubcategoryScreen subcategoryScreen;
-    protected final AgeGateScreen ageGateScreen;
     protected final BookDetailsScreen bookDetailsScreen;
     protected final MainCatalogToolbarForm mainCatalogToolbarForm;
     protected final CatalogBooksScreen catalogBooksScreen;
@@ -53,7 +49,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         mainCatalogToolbarForm = AqualityServices.getScreenFactory().getScreen(MainCatalogToolbarForm.class);
         bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
         catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
-        ageGateScreen = AqualityServices.getScreenFactory().getScreen(AgeGateScreen.class);
         bookDetailsScreen = AqualityServices.getScreenFactory().getScreen(BookDetailsScreen.class);
         subcategoryScreen = AqualityServices.getScreenFactory().getScreen(SubcategoryScreen.class);
         catalogBooksScreen = AqualityServices.getScreenFactory().getScreen(CatalogBooksScreen.class);
@@ -63,13 +58,15 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void booksFeedIsLoaded() {
-        boolean isPagePresent =
-                catalogScreen.state().waitForDisplayed(Duration.ofMillis(CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis()));
-        if (!isPagePresent && catalogScreen.isErrorButtonPresent()) {
-            addScreenshot();
-        }
-        Assert.assertTrue("Books feed is not loaded. Error message (if present) - " + catalogScreen.getErrorDetails(), isPagePresent);
+    public void categoryRowsAreLoaded() {
+        boolean isCategoryRowsPresent = catalogScreen.areCategoryRowsLoaded();
+        Assert.assertTrue("Category rows are not loaded.", isCategoryRowsPresent);
+    }
+
+    @Override
+    public void subcategoryRowsAreLoaded() {
+        boolean isSubcategoryRowsPresent = subcategoryScreen.areSubcategoryRowsLoaded();
+        Assert.assertTrue("Subcategory rows are not loaded.", isSubcategoryRowsPresent);
     }
 
     @Override
@@ -87,13 +84,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void openLibraryFromSideMenu(String libraryName) {
         bottomMenuForm.open(BottomMenu.CATALOG);
         mainCatalogToolbarForm.chooseAnotherLibrary();
-        catalogScreen.openLibrary(libraryName);
-        if (notificationModal.isModalPresent()) {
-            notificationModal.closeCannotAddBookModalIfDisplayed();
-            catalogScreen.openLibrary(libraryName);
-        }
-        catalogScreen.state().waitForDisplayed();
-        AqualityServices.getConditionalWait().waitFor(() -> catalogBooksScreen.getFoundBooksCount() > 0);
+        catalogScreen.selectLibraryFromListOfAddedLibraries(libraryName);
     }
 
     @Override
@@ -137,11 +128,13 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void openCategoryByChain(List<String> categoriesChain) {
-        IntStream.range(0, categoriesChain.size()).forEach(index -> {
-            openCategory(categoriesChain.get(index));
-            if (index != categoriesChain.size() - 1) {
-                Assert.assertTrue("Category page is not loaded. Error (if present) - " + catalogScreen.getErrorDetails(), catalogScreen.isCategoryPageLoad());
+    public void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain) {
+        categoriesChain.stream().forEach(categoryName -> {
+            if(catalogScreen.state().isDisplayed()){
+                catalogScreen.openCategory(categoryName);
+            }else {
+                subcategoryScreen.state().waitForDisplayed();
+                subcategoryScreen.openCategory(categoryName);
             }
         });
     }
@@ -301,6 +294,11 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
+    public void closeBookDetailsOnlyForIOSTab() {
+        bookDetailsScreen.closeBookDetailsOnlyForIOSTabIfDisplayed();
+    }
+
+    @Override
     public void openRelatedBooks() {
         bookDetailsScreen.clickRelatedBooks();
     }
@@ -339,12 +337,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void deleteBookFromBookDetailsScreen() {
-        bookDetailsScreen.deleteBook();
-        notificationModal.performActionForNotificationPopup(BookActionButtonKeys.DELETE);
-    }
-
-    @Override
     public void openBookDetailsByClickingOnCover(String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         subcategoryScreen.state().waitForDisplayed();
@@ -353,7 +345,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void pressOnBookDetailsScreenAtActionButton(BookActionButtonKeys actionButton) {
-        clickButton(actionButton);
+        clickActionButtonOnBookDetailsView(actionButton);
         notificationModal.performActionForNotificationPopup(actionButton);
         alertScreen.closeDoNotAllowIfPresent();
         alertScreen.closeNotNowModalIfDisplayed();
@@ -370,18 +362,18 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         context.add(bookInfoKey, subcategoryScreen.openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(bookName, actionButtonKey, bookType));
     }
 
-    public void openTypeBookReader(ReaderType readerType) {
+    public void openBookWithSpecifyTypeOnBookDetailsView(ReaderType readerType) {
         switch (readerType) {
             case EBOOK:
-                clickButton(BookActionButtonKeys.READ);
+                clickActionButtonOnBookDetailsView(BookActionButtonKeys.READ);
                 break;
             case AUDIOBOOK:
-                clickButton(BookActionButtonKeys.LISTEN);
+                clickActionButtonOnBookDetailsView(BookActionButtonKeys.LISTEN);
                 break;
         }
     }
 
-    private void clickButton(BookActionButtonKeys actionButton) {
+    private void clickActionButtonOnBookDetailsView(BookActionButtonKeys actionButton) {
         bookDetailsScreen.clickActionButton(actionButton);
     }
 

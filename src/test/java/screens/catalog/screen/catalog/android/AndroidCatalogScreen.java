@@ -55,12 +55,12 @@ public class AndroidCatalogScreen extends CatalogScreen {
     }
 
     @Override
-    public boolean isCategoryPageLoad() {
+    public boolean areCategoryRowsLoaded() {
         return AqualityServices.getConditionalWait().waitFor(() -> getLabels(FEED_LANE_TITLES_LOC).size() > 0);
     }
 
     @Override
-    public void openLibrary(String libraryName) {
+    public void selectLibraryFromListOfAddedLibraries(String libraryName) {
         getElementFactory().getButton(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_PATTERN, libraryName)),
                 "Menu").click();
     }
@@ -68,8 +68,6 @@ public class AndroidCatalogScreen extends CatalogScreen {
     @Override
     public void openCategory(String categoryName) {
         IButton categoryButton = getCategoryButton(categoryName);
-        categoryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-
         categoryButton.click();
     }
 

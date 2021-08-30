@@ -7,16 +7,16 @@ import lombok.NonNull;
 
 import java.util.Locale;
 
-public enum ColorKeys implements LocalizedValue {
-    WHITE("white"),
-    BLACK("black"),
-    SEPIA("sepia");
+public enum BackgroundColorKeys implements LocalizedValue {
+    BLACK_TEXT_ON_WHITE("black_text_on_white"),
+    BLACK_TEXT_ON_SEPIA("black_text_on_sepia"),
+    WHITE_TEXT_ON_BLACK("white_text_on_black");
 
     private String color;
     private static final AbstractILocalizationProvider localizationProvider =
-            LocalizationProviderFactory.getProvider("reader.ColorKeys");
+            LocalizationProviderFactory.getProvider("reader.FontBackgroundKeys");
 
-    ColorKeys(String color) {
+    BackgroundColorKeys(String color) {
         this.color = color;
     }
 

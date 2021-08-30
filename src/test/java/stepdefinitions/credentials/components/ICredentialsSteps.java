@@ -3,7 +3,7 @@ package stepdefinitions.credentials.components;
 public interface ICredentialsSteps {
     void checkLoginIsPerformedSuccessfully();
 
-    void textOnLogoutButtonIsChangedToLogInOnAccountScreen();
+    void isLogoutSuccessfully();
 
     void clickLogOut();
 

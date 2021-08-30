@@ -41,7 +41,7 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
         settingsScreen = AqualityServices.getScreenFactory().getScreen(SettingsScreen.class);
     }
 
-    public void textOnLogoutButtonIsChangedToLogInOnAccountScreen() {
+    public void isLogoutSuccessfully() {
         Assert.assertTrue("Text on Login button is not changed to Log out on Account screen", accountScreen.isLogoutSuccessful());
     }
 
@@ -50,16 +50,19 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
     }
 
     public void enterCredentialsForLibraryAccount(String libraryName) {
-        if(!accountsScreen.state().isDisplayed()){
+        if (!accountsScreen.state().isDisplayed()) {
             openAccounts();
         }
-        accountsScreen.openAccount(libraryName);
+        accountsScreen.openLibraryAccount(libraryName);
         Credentials credentials = Configuration.getCredentials(libraryName);
         storeCredentials(credentials);
-        accountScreen.enterCredentials(credentials);
+        accountScreen.enterCredentialsAndLogin(credentials);
         alertScreen.state().waitForDisplayed();
         alertScreen.closeNotNowModalIfDisplayed();
-        AqualityServices.getConditionalWait().waitFor(() -> accountScreen.isLoginSuccessful() || catalogScreen.state().isDisplayed());
+        boolean isLoginPerformedSuccessfully = AqualityServices.getConditionalWait().waitFor(() -> accountScreen.isLoginSuccessful() || catalogScreen.state().isDisplayed());
+        if (!isLoginPerformedSuccessfully) {
+            throw new RuntimeException("Login is not completed");
+        }
     }
 
     private void openAccounts() {

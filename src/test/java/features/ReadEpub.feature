@@ -10,23 +10,23 @@ Feature: Read EPUB
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Navigate by Page
-      When Book page number is 1
-      And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
+    When I click on right book corner
+      And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I click on right book corner
-    Then Navigated to the next page and old page 'pageNumberInfo' and 'chapterNameInfo'
-    When I save page info as 'pageNumberInfo' and 'chapterNameInfo'
+    Then Next page is open and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName
+    When I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I click on left book corner
-    Then Navigated to the previous page and old page 'pageNumberInfo' and 'chapterNameInfo'
+    Then Previous page is open and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Navigate by Table of Contents Menu
-      And Each chapter can be opened from Table of Contents
+    Then Each chapter can be opened from Table of Contents
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Navigate View options
-    When I return to previous screen
+    When I return to previous screen for epub and pdf
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
     When I open font choices for book
@@ -35,7 +35,7 @@ Feature: Read EPUB
       And I open Table of Contents
     Then Table of Contents is opened
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Change, View Font and Contrast Settings
     When I save font size as 'fontSize'
     And I INCREASE_FONT of text
@@ -49,25 +49,24 @@ Feature: Read EPUB
     Then Book text displays in FONT_SANS font
     When I change font style to FONT_DYSLEXIC
     Then Book text displays in FONT_DYSLEXIC font
-    When I change contrast to WHITE_TEXT_ON_BLACK
-    Then Book text displays WHITE on BLACK
     When I change contrast to BLACK_TEXT_ON_WHITE
-    Then Book text displays BLACK on WHITE
+    Then The BLACK_TEXT_ON_WHITE background is correct
     When I change contrast to BLACK_TEXT_ON_SEPIA
-    Then Book text displays BLACK on SEPIA
+    Then The BLACK_TEXT_ON_SEPIA background is correct
+    When I change contrast to WHITE_TEXT_ON_BLACK
+    Then The WHITE_TEXT_ON_BLACK background is correct
 
-  @tier1
+  @tier1 @oldOs
   Scenario: Return to Page (Bookmarking)
-    When I scroll page forward from 10 to 20 times
-    #chapterNameInfo does not check in Assert for ios we check pageNumber and chapterName fot android only pageNumber
-      And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
+    When I scroll page forward from 1 to 3 times
+      And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I wait for 3 seconds
-      And I return to previous screen
+      And I return to previous screen for epub and pdf
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
-      And Page info 'pageNumberInfo' is correct
+      And PageNumber 'pageNumberKey' is correct
     When I click on right book corner
-      And I save page info as 'pageNumberInfo' and 'chapterNameInfo'
+      And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I wait for 3 seconds
       And I restart app
       And I open Books
@@ -75,4 +74,4 @@ Feature: Read EPUB
     When I open book 'bookInfo' details by clicking on cover
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
-      And Page info 'pageNumberInfo' is correct
+      And PageNumber 'pageNumberKey' is correct

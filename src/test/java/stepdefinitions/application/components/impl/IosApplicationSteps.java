@@ -18,7 +18,7 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
     }
 
     @Override
-    public void returnToPreviousScreen() {
+    public void returnToPreviousScreenForEpubAndPdf() {
         if (epubReaderScreen.state().isDisplayed()) {
             epubReaderScreen.returnToPreviousScreen();
         } else if (pdfReaderScreen.state().isDisplayed()) {
@@ -29,6 +29,6 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
     @Override
     public void addAccountFromWelcomeScreen(String libraryName) {
         welcomeScreen.findLibrary();
-        addAccountScreen.selectLibrary(libraryName);
+        addAccountScreen.selectLibraryViaSearch(libraryName);
     }
 }

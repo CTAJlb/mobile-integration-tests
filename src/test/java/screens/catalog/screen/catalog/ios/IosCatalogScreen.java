@@ -10,7 +10,6 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
-import constants.application.ReaderType;
 import constants.application.attributes.IosAttributes;
 import constants.application.timeouts.AuthorizationTimeouts;
 import constants.application.timeouts.CategoriesTimeouts;
@@ -26,26 +25,28 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosCatalogScreen extends CatalogScreen {
-    private static final String CATEGORY_LOCATOR = "//XCUIElementTypeButton[@name=\"%1$s\"]/following-sibling::XCUIElementTypeButton[contains(@name, \"More\")]";
     private static final String LANE_BY_NAME_LOCATOR_PART = "(//XCUIElementTypeOther[.//XCUIElementTypeButton[@name=\"%1$s\"]]"
             + "/following-sibling::XCUIElementTypeCell)[1]";
     private static final String BOOK_COVER_IN_LANE_LOCATOR = "/XCUIElementTypeButton";
-    private static final String FEED_LANE_TITLES_LOCATOR =
-            "//XCUIElementTypeOther[./following-sibling::XCUIElementTypeCell[1]]//XCUIElementTypeButton[1]";
+    private static final String UNIQUE_ELEMENT =
+            "//XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"Change Library Account\")]";
+    private static final String SPECIFIC_CATEGORY_LOCATOR = UNIQUE_ELEMENT + "/parent::XCUIElementTypeNavigationBar/following-sibling::XCUIElementTypeOther//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
+    private static final String CATEGORIES_LOCATOR = UNIQUE_ELEMENT +
+            "/parent::XCUIElementTypeNavigationBar/following-sibling::XCUIElementTypeOther//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN =
             "//XCUIElementTypeButton[@name=\"%1$s\"]";
 
-    private static final String BOOKS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeButton[@name]";
-    private static final String CATEGORY_XPATH_PATTERN = "//XCUIElementTypeOther//XCUIElementTypeButton//XCUIElementTypeStaticText[not(contains(@name, 'More'))]";
+    private static final String BOOKS_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton[@name]";
+    private static final String CATEGORY_XPATH_PATTERN = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR = 5;
 
     private final ILabel firstLaneName =
-            getElementFactory().getLabel(By.xpath(FEED_LANE_TITLES_LOCATOR), "First lane name", ElementState.EXISTS_IN_ANY_STATE);
+            getElementFactory().getLabel(By.xpath(CATEGORIES_LOCATOR), "First lane name", ElementState.EXISTS_IN_ANY_STATE);
     private final ILabel categoryScreen = getElementFactory().getLabel(By.xpath("//XCUIElementTypeTable"), "Category Screen");
     private final ILabel buttonMore = getElementFactory().getLabel(By.xpath("//XCUIElementTypeButton[contains(@name, 'More')][1]"), "Button More...");
 
     public IosCatalogScreen() {
-        super(By.xpath(FEED_LANE_TITLES_LOCATOR));
+        super(By.xpath(UNIQUE_ELEMENT));
     }
 
     @Override
@@ -54,20 +55,21 @@ public class IosCatalogScreen extends CatalogScreen {
         int countOfItems = getElements(BOOKS_LOCATOR).size();
         AqualityServices.getConditionalWait().waitFor(() -> getElements(BOOKS_LOCATOR).size() <= countOfItems);
         List<String> listOfNames = getValuesFromListOfLabels(BOOKS_LOCATOR);
-        AqualityServices.getLogger().info("Found list of books - " + listOfNames.stream().map(Object::toString)
+        AqualityServices.getLogger().info("Found list of books from all subcategories on screen - " + listOfNames.stream().map(Object::toString)
                 .collect(Collectors.joining(", ")));
+        AqualityServices.getLogger().info("amount of books from all subcategories on screen - " + listOfNames.size());
         return listOfNames;
     }
 
     @Override
-    public boolean isCategoryPageLoad() {
+    public boolean areCategoryRowsLoaded() {
         return AqualityServices.getConditionalWait().waitFor(() ->
-                        getElementFactory().findElements(By.xpath(FEED_LANE_TITLES_LOCATOR), ElementType.LABEL).size() > 0,
+                        getElementFactory().findElements(By.xpath(CATEGORIES_LOCATOR), ElementType.LABEL).size() > 0,
                 Duration.ofMillis(CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis()));
     }
 
     @Override
-    public void openLibrary(String libraryName) {
+    public void selectLibraryFromListOfAddedLibraries(String libraryName) {
         getElementFactory().getButton(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_PATTERN, libraryName)),
                 "Menu").click();
     }
@@ -75,14 +77,11 @@ public class IosCatalogScreen extends CatalogScreen {
     @Override
     public void openCategory(String categoryName) {
         IButton categoryButton = getCategoryButton(categoryName);
-        categoryButton.state().waitForDisplayed();
-        categoryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        categoryButton.state().waitForDisplayed();
         categoryButton.click();
     }
 
     private IButton getCategoryButton(String categoryName) {
-        return getElementFactory().getButton(By.xpath(String.format(CATEGORY_LOCATOR, categoryName)), categoryName);
+        return getElementFactory().getButton(By.xpath(String.format(SPECIFIC_CATEGORY_LOCATOR, categoryName)), categoryName);
     }
 
     @Override
@@ -139,6 +138,9 @@ public class IosCatalogScreen extends CatalogScreen {
                     , Duration.ofMillis(AuthorizationTimeouts.DEBUG_MENU_IS_OPENED.getTimeoutMillis()));
             currentBooksNames = geListOfCategoriesNames();
         } while (!categoriesNames.containsAll(currentBooksNames));
+        categoriesNames.stream().forEach(x ->
+                AqualityServices.getLogger().info("CategoryName-" + x));
+        AqualityServices.getLogger().info("amount of categories-" + categoriesNames.size());
         return categoriesNames;
     }
 

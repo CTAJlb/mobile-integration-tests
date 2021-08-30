@@ -3,7 +3,6 @@ package stepdefinitions;
 import aquality.appium.mobile.application.AqualityServices;
 import framework.utilities.ScenarioContext;
 import framework.utilities.feedXMLUtil.GettingBookUtil;
-import framework.utilities.feedXMLUtil.XMLUtil;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -13,6 +12,8 @@ import screens.search.modal.SearchModal;
 import screens.subcategory.SubcategoryScreen;
 
 import javax.inject.Inject;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SearchSteps {
     private final MainCatalogToolbarForm mainCatalogToolbarForm;
@@ -53,7 +54,7 @@ public class SearchSteps {
 
     @When("I search random pdf and save as {string}")
     public void searchForPdf(String bookNameInfoKey) {
-        String pdfForSearching = GettingBookUtil.getRandomPdf();
+        String pdfForSearching = getRandomPdfWithoutBadSymbols();
         AqualityServices.getLogger().info("randomPdf: " + pdfForSearching);
         context.add(bookNameInfoKey, pdfForSearching);
 
@@ -62,5 +63,24 @@ public class SearchSteps {
         searchModal.applySearch();
         Assert.assertTrue("Search modal is not disappear", searchModal.state().waitForNotDisplayed());
         Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", pdfForSearching, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
+    }
+
+
+    private String getRandomPdfWithoutBadSymbols() {
+        int amount = 0;
+        String pdfName = null;
+
+        while (amount < 15) {
+            pdfName = GettingBookUtil.getRandomPdf();
+            Pattern pattern = Pattern.compile("[^\\w :]");
+            Matcher matcher = pattern.matcher(pdfName);
+            amount++;
+            if (!matcher.find()) {
+                break;
+            }
+        }
+        AqualityServices.getLogger().info("Count of attempts to get random pdf name without bad symbols-" + amount);
+
+        return pdfName;
     }
 }

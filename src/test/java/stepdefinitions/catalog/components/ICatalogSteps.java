@@ -9,7 +9,9 @@ import java.util.List;
 
 public interface ICatalogSteps {
 
-    void booksFeedIsLoaded();
+    void categoryRowsAreLoaded();
+
+    void subcategoryRowsAreLoaded();
 
     void openPreviousCategoryScreen();
 
@@ -39,7 +41,7 @@ public interface ICatalogSteps {
 
     void checkFollowingSubcategoriesArePresent(List<String> expectedValuesList);
 
-    void openCategoryByChain(List<String> categoriesChain);
+    void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain);
 
     void openBookDetailsExecuteBookActionAndSaveItToContext(BookActionButtonKeys actionButtonKey, String bookInfoKey);
 
@@ -91,8 +93,6 @@ public interface ICatalogSteps {
 
     void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final BookActionButtonKeys key);
 
-    void deleteBookFromBookDetailsScreen();
-
     void returnBookFromBookDetailsScreen();
 
     void openBookDetailsByClickingOnCover(String bookInfoKey);
@@ -100,4 +100,6 @@ public interface ICatalogSteps {
     void pressOnBookDetailsScreenAtActionButton(BookActionButtonKeys actionButton);
 
     void checkThatActionButtonTextEqualToExpected(FacetAvailabilityKeys facetAvailabilityKeys);
+
+    void closeBookDetailsOnlyForIOSTab();
 }

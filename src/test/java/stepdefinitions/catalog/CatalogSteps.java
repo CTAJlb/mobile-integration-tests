@@ -29,9 +29,14 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps = stepsFactory.getSteps(AbstractCatalogSteps.class, context);
     }
 
-    @Then("Books feed is loaded")
-    public void booksFeedIsLoaded() {
-        catalogSteps.booksFeedIsLoaded();
+    @Then("Category rows are loaded")
+    public void categoryRowsAreLoaded() {
+        catalogSteps.categoryRowsAreLoaded();
+    }
+
+    @Then("Subcategory rows are loaded")
+    public void subcategoryRowsAreLoaded() {
+        catalogSteps.subcategoryRowsAreLoaded();
     }
 
     @When("I return to previous category screen")
@@ -97,10 +102,9 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.checkFollowingSubcategoriesArePresent(expectedValuesList);
     }
 
-    @When("I open category by chain:")
-    @And("Open category by chain:")
-    public void openCategoryByChain(List<String> categoriesChain) {
-        catalogSteps.openCategoryByChain(categoriesChain);
+    @When("I open categories by chain and chain starts from CategoryScreen:")
+    public void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain) {
+        catalogSteps.openCategoriesByChainAndChainStartsFromCategoryScreen(categoriesChain);
     }
 
     @When("I open the book details for the subsequent {} on Subcategory List View and save it as {string}")
@@ -260,11 +264,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.returnBookFromBookDetailsScreen();
     }
 
-    @And("I delete book from book details screen")
-    public void deleteBookFromBookDetailsScreen() {
-        catalogSteps.deleteBookFromBookDetailsScreen();
-    }
-
     @When("I open book {string} details by clicking on cover")
     public void openBookDetailsByClickingOnCover(String bookInfoKey) {
         catalogSteps.openBookDetailsByClickingOnCover(bookInfoKey);
@@ -281,9 +280,14 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.checkThatActionButtonTextEqualToExpected(facetAvailabilityKeys);
     }
 
+    @And("I close Book Details for IOSTab")
+    public void closeBookDetailsOnlyForIOSTab() {
+        catalogSteps.closeBookDetailsOnlyForIOSTab();
+    }
+
     @When("I read book with {} type from book details view")
     public void openGivenTypeBookReader(ReaderType readerType) {
-        catalogSteps.openTypeBookReader(readerType);
+        catalogSteps.openBookWithSpecifyTypeOnBookDetailsView(readerType);
     }
 
     @When("I open first present category")

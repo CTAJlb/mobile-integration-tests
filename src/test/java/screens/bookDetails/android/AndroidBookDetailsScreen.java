@@ -96,11 +96,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public void deleteBook() {
-        btnDelete.click();
-    }
-
-    @Override
     public void clickActionButton(BookActionButtonKeys buttonKeys) {
         //todo fixing here
         IButton button = getActionButton(buttonKeys);
@@ -140,6 +135,11 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     @Override
     public boolean isBookReadyToRead() {
         return btnRead.state().isDisplayed() || btnListen.state().isDisplayed();
+    }
+
+    @Override
+    public void closeBookDetailsOnlyForIOSTabIfDisplayed() {
+        //only for ios
     }
 
     private IButton getActionButton(BookActionButtonKeys buttonKey) {

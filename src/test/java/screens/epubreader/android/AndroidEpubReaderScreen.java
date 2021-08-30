@@ -85,9 +85,10 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public String getPageNumberInfo() {
+    public String getPageNumber() {
         lblPageNumber.state().waitForDisplayed(Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
-        return lblPageNumber.getText();
+        String pageNumberRegEx = lblPageNumber.getText();
+        return RegExUtil.getStringFromFirstGroup(pageNumberRegEx, RegEx.PAGE_NUMBER_REGEX_FOR_ANDROID);
     }
 
     @Override
@@ -98,6 +99,7 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
         List<String> bookNames = epubTableOfContentsScreen.getListOfBookChapters();
         AqualityServices.getApplication().getDriver().navigate().back();
         AqualityServices.getLogger().info("Found chapters - " + bookNames.stream().map(Object::toString).collect(Collectors.joining(", ")));
+        AqualityServices.getLogger().info("countOfChapters-" + bookNames.size());
         return bookNames;
     }
 
@@ -122,7 +124,7 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public double getFontSize() {
-        return RegExUtil.getDoubleFromFirstMatchGroup(getBookSource(), RegEx.FONT_SIZE_REGEX_ANDROID);
+        return RegExUtil.getDoubleFromFirstGroup(getBookSource(), RegEx.FONT_SIZE_REGEX_ANDROID);
     }
 
     private String getBookSource() {
@@ -152,14 +154,8 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public String getFontColor() {
-        //only for IOS
-        return "";
-    }
-
-    @Override
-    public String getFontAndBackgroundColor() {
-        return getReaderInfo(RegEx.FONT_AND_BACKGROUND_ANDROID);
+    public String getBackgroundColor() {
+        return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX_ANDROID);
     }
 
     @Override

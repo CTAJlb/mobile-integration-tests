@@ -32,7 +32,7 @@ public class AndroidAccountsScreen extends AccountsScreen {
     }
 
     @Override
-    public void openAccount(String libraryName) {
+    public void openLibraryAccount(String libraryName) {
         getLibraryButton(libraryName).click();
     }
 
