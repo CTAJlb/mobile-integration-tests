@@ -47,7 +47,7 @@ Feature: Catalog Navigation
     When I open 'Classics' subcategory
     Then Subcategory screen is present
       And Subcategory name is 'Classics'
-    When I open first book in subcategory list and save it as 'bookInfo'
+    When I open first book in Subcategory List and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
 
   @tier1
@@ -96,14 +96,10 @@ Feature: Catalog Navigation
   @tier1 @exclude_ios @ignore
   Scenario: View Book Details
     When I add "LYRASIS" account from welcomeScreen
-      And I open Catalog
-      And I switch to 'LYRASIS' from side menu
-    When I open search modal
-    Then Search modal is opened
-    When I search for 'Sullivan\'s Promise'
+      And I open search modal
+      And I search for 'Sullivan\'s Promise'
       And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    #When I open 'EBOOK' book with name 'Sullivan\'s Promise' and save it as 'bookInfo'
+    #And Open 'EBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And The following values in the information block are present:
         | key         | value                                           |

@@ -27,7 +27,7 @@ Feature: Main actions private access books
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And I RESERVE book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-    When I click CANCEL_RESERVATION button on the 'bookInfo' book on subcategory list view
+    When I click CANCEL_RESERVATION button on the 'bookInfo' book on Subcategory List view
     Then Book saved as 'bookInfo' should contain RESERVE button on Subcategory List View
 
   @logout @returnBooks @tier2
@@ -96,7 +96,7 @@ Feature: Main actions private access books
       And I switch to 'eBooks' catalog tab
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
-    When I click READ button on the 'bookInfo' book on subcategory list view
+    When I click READ button on the 'bookInfo' book on Subcategory List view
     Then Book 'bookInfo' is present on screen
     When I return to previous screen for epub and pdf
       And I open Books

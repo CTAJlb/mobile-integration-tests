@@ -116,7 +116,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         }
     }
 
-    @And("{} book from subcategory list view and save it as {string}")
+    @And("{} book from Subcategory List view and save it as {string}")
     public void performActionOnBookAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DOWNLOAD && AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
             catalogSteps.performActionOnBookAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys.GET, bookInfoKey);
@@ -147,7 +147,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(bookName, actionButtonKey, bookInfoKey, bookType);
     }
 
-    @When("I click {} button on the {string} book on subcategory list view")
+    @When("I click {} button on the {string} book on Subcategory List view")
     public void performActionOnBookOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKeys, String bookInfoKey) {
         catalogSteps.performActionOnBookOnSubcategoryListView(bookActionButtonKeys, bookInfoKey);
     }
@@ -172,7 +172,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.checkBookInfoIsOpened(bookInfoKey);
     }
 
-    @When("I open first book in subcategory list and save it as {string}")
+    @When("I open first book in Subcategory List and save it as {string}")
     public void openFirstBookInSubcategoryListAndSaveIt(String bookInfoKey) {
         catalogSteps.openFirstBookInSubcategoryListAndSaveIt(bookInfoKey);
     }
