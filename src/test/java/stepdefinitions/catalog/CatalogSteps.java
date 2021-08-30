@@ -81,9 +81,13 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     }
 
     @And("I open {string} category")
-    @When("I open {string} subcategory")
     public void openCategory(String categoryName) {
         catalogSteps.openCategory(categoryName);
+    }
+
+    @And("I open {string} subcategory")
+    public void openSubcategory(String subCategoryName) {
+        catalogSteps.openSubcategory(subCategoryName);
     }
 
     @Then("Current category name is {string}")

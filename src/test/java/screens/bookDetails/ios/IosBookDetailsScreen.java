@@ -8,7 +8,6 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
-import constants.application.BookDetailsScreenConstants;
 import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.bookdetals.BookDetailsScreenInformationBlockKeys;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
@@ -100,7 +99,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
         return getDescriptions()
                 .stream()
                 .map(IElement::getText)
-                .collect(Collectors.joining(BookDetailsScreenConstants.DESCRIPTION_DELIMITER));
+                .collect(Collectors.joining("\n"));
     }
 
     @Override

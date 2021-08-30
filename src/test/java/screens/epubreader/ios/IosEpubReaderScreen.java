@@ -55,7 +55,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
         if (!btnFontSettings.state().isDisplayed()) {
             CoordinatesClickUtils.clickAtCenterOfScreen();
         }
-        String text = btnBackAndBookName.getAttribute("name");
+        String text = btnBackAndBookName.getAttribute(IosAttributes.NAME);
         AqualityServices.getLogger().info("Book name - " + text);
         return text;
     }

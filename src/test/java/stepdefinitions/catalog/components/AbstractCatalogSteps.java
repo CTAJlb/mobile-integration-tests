@@ -4,7 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import constants.application.ReaderType;
 import constants.application.timeouts.AuthorizationTimeouts;
-import constants.context.ScenarioContextKey;
+import constants.keysForContext.ScenarioContextKey;
 import constants.localization.application.catalog.BookActionButtonNames;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
@@ -102,15 +102,21 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
 
     @Override
     public void openCategory(String categoryName) {
-        subcategoryScreen.state().waitForDisplayed();
+        catalogScreen.state().waitForDisplayed();
         catalogScreen.openCategory(categoryName);
+    }
+
+    @Override
+    public void openSubcategory(String subCategoryName) {
+        subcategoryScreen.state().waitForDisplayed();
+        subcategoryScreen.openCategory(subCategoryName);
     }
 
     public abstract void checkCurrentCategoryName(String expectedCategoryName);
 
     @Override
     public void checkSubcategoryScreenIsPresent() {
-        boolean isScreenPresent = subcategoryScreen.state().waitForDisplayed(Duration.ofMillis(AuthorizationTimeouts.DEBUG_MENU_IS_OPENED.getTimeoutMillis()));
+        boolean isScreenPresent = subcategoryScreen.state().waitForDisplayed();
         if (!isScreenPresent && subcategoryScreen.isErrorButtonPresent()) {
             Scenario scenario = context.get(ScenarioContextKey.SCENARIO_KEY);
             scenario.attach(ScreenshotUtils.getScreenshot(), "image/png", "error_screenshot.png");
@@ -121,7 +127,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void checkFollowingSubcategoriesArePresent(List<String> expectedValuesList) {
         catalogScreen.state().waitForDisplayed();
-        catalogScreen.swipeScreenUp();
         Assert.assertEquals("List of categories is not completely present", new HashSet<>(expectedValuesList), catalogScreen.getAllCategoriesNames());
     }
 

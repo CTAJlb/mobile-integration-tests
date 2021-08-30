@@ -1,4 +1,4 @@
-package constants.context;
+package constants.keysForContext;
 
 public class ScenarioContextKey {
     public static final String SCENARIO_KEY = "SCENARIO";

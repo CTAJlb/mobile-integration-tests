@@ -27,9 +27,9 @@ Feature: Catalog Navigation
         | Nonfiction           |
         | All Children's Books |
     And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
-    And I open 'Classics' subcategory
+    And I open 'Fiction' subcategory
     Then Subcategory screen is present
-      And Subcategory name is 'Classics'
+      And Subcategory name is 'Fiction'
 
   @tier1
   Scenario: Browse Lanes/Categories
@@ -44,9 +44,9 @@ Feature: Catalog Navigation
         | Fiction              |
         | Nonfiction           |
         | All Children's Books |
-    When I open 'Classics' subcategory
+    When I open 'Fiction' subcategory
     Then Subcategory screen is present
-      And Subcategory name is 'Classics'
+      And Subcategory name is 'Fiction'
     When I open first book in Subcategory List and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
 

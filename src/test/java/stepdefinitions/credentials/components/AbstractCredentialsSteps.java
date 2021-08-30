@@ -1,7 +1,7 @@
 package stepdefinitions.credentials.components;
 
 import aquality.appium.mobile.application.AqualityServices;
-import constants.context.ScenarioContextKey;
+import constants.keysForContext.ScenarioContextKey;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.configuration.Configuration;
 import framework.configuration.Credentials;

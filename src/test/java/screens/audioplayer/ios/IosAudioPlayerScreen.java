@@ -110,7 +110,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     public Integer getPercentageValue() {
 
         lblPercentageValue.state().waitForDisplayed(Duration.ofMillis(40000));
-        String percentageValueString = lblPercentageValue.getAttribute("name");
+        String percentageValueString = lblPercentageValue.getAttribute(IosAttributes.NAME);
         percentageValueString = percentageValueString.replace("%", "");
         return Integer.valueOf(percentageValueString);
     }
@@ -119,7 +119,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     public String selectChapterAndGetText(int chapterNumber) {
         AqualityServices.getConditionalWait().waitFor(() -> getElementFactory().findElements(By.xpath(LOADED_CHAPTERS_LOCATOR), ElementType.LABEL).size() >= chapterNumber, Duration.ofMillis(CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis()));
         ILabel chapter = getChaptersText().get(chapterNumber - 1);
-        String chapterText = chapter.getAttribute("name");
+        String chapterText = chapter.getAttribute(IosAttributes.NAME);
         chapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         chapter.click();
         return chapterText;
@@ -127,7 +127,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public String getCurrentChapterInfo() {
-        return lblCurrentChapter.getAttribute("value");
+        return lblCurrentChapter.getAttribute(IosAttributes.VALUE);
     }
 
     @Override

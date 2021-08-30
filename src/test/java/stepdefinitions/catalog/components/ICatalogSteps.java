@@ -35,6 +35,8 @@ public interface ICatalogSteps {
 
     void openCategory(String categoryName);
 
+    void openSubcategory(String subCategoryName);
+
     void checkCurrentCategoryName(String expectedCategoryName);
 
     void checkSubcategoryScreenIsPresent();

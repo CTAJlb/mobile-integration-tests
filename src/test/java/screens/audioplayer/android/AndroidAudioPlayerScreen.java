@@ -8,6 +8,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
+import constants.application.attributes.AndroidAttributes;
 import constants.application.timeouts.AudioBookTimeouts;
 import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
@@ -64,7 +65,8 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public void waitAndCheckAllChaptersLoaded() {
         checkThatChaptersVisible();
-        Assert.assertTrue("Book loading wasn't finished", AqualityServices.getConditionalWait().waitFor(() -> getElementFactory().findElements(By.xpath(LOADING_SCREEN_XPATH), ElementType.LABEL).size() == 0, Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis())));
+        Assert.assertTrue("Book loading wasn't finished", AqualityServices.getConditionalWait().waitFor(() -> getElementFactory().findElements(By.xpath(LOADING_SCREEN_XPATH),
+                ElementType.LABEL).size() == 0, Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis())));
     }
 
     @Override
@@ -86,7 +88,7 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public String selectChapterAndGetText(int chapterNumber) {
         ILabel chapter = getChaptersText().get(chapterNumber - 1);
-        String chapterText = chapter.getAttribute("text");
+        String chapterText = chapter.getAttribute(AndroidAttributes.TEXT);
         chapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         chapter.click();
         return chapterText;

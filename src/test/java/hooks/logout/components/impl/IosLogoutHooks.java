@@ -2,7 +2,7 @@ package hooks.logout.components.impl;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
-import constants.context.ContextLibrariesKeys;
+import constants.keysForContext.ContextLibrariesKeys;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;

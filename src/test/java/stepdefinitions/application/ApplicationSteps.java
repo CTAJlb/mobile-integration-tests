@@ -1,7 +1,7 @@
 package stepdefinitions.application;
 
 import com.google.inject.Inject;
-import constants.context.ContextLibrariesKeys;
+import constants.keysForContext.ContextLibrariesKeys;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;

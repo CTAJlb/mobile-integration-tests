@@ -1,5 +1,6 @@
 package screens.subcategory.ios;
 
+import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
@@ -124,6 +125,7 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     @Override
     public void openCategory(String categoryName) {
         IButton categoryButton = getCategoryButton(categoryName);
+        categoryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         categoryButton.click();
     }
 
