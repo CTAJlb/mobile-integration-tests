@@ -29,8 +29,7 @@ Feature: Manage Libraries
       And Catalog is opened
       And I switch to 'Digital Public Library of America' from side menu
       And I open categories by chain and chain starts from CategoryScreen:
-        | Fiction |
-        | Drama   |
+        |2021 New Public Domain Books|
       And DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
       And I open Books
     Then Book 'bookInfo' is present in Books List
