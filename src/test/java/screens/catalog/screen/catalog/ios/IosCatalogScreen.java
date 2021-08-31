@@ -88,6 +88,8 @@ public class IosCatalogScreen extends CatalogScreen {
     @Override
     public void switchToCatalogTab(String catalogTab) {
         getElementFactory().getButton(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_PATTERN, catalogTab)), catalogTab).click();
+        //todo I will change to check that appears specific screen
+        getElementFactory().getLabel(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"bookCellIdle\")"), "BookForm").state().waitForDisplayed();
     }
 
     @Override
