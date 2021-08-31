@@ -46,7 +46,7 @@ public abstract class AbstractHoldsSteps extends BaseSteps implements IHoldsStep
     public void performActionOnHoldsScreen(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         performActionOnBookWithoutClickActionButtonOnAlert(bookInfoKey, actionButtonKey);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            alertScreen.performAlertActionIfDisplayed(actionButtonKey);
+            alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
         }
     }
 

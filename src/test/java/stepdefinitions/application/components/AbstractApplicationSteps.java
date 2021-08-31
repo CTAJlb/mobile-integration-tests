@@ -30,7 +30,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     @Override
     public void performActionOnAlert(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        alertScreen.performAlertActionIfDisplayed(actionButtonKey);
+        alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
     }
 
     @Override

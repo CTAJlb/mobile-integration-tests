@@ -9,5 +9,5 @@ public abstract class AlertScreen extends Screen {
         super(locator, "AlertScreen");
     }
 
-    public abstract void performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys actionButtonNamesAlertKeys);
+    public abstract void waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys actionButtonNamesAlertKeys);
 }

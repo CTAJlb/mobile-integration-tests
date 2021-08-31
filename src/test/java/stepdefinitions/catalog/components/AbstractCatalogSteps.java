@@ -3,7 +3,6 @@ package stepdefinitions.catalog.components;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import constants.application.ReaderType;
-import constants.application.timeouts.AuthorizationTimeouts;
 import constants.keysForContext.ScenarioContextKey;
 import constants.localization.application.catalog.BookActionButtonNames;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
@@ -28,7 +27,6 @@ import screens.facetedSearch.FacetedSearchScreen;
 import screens.subcategory.SubcategoryScreen;
 import stepdefinitions.BaseSteps;
 
-import java.time.Duration;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -174,9 +172,9 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         String bookName = context.get(bookNameInfoKey);
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            alertScreen.performAlertActionIfDisplayed(actionButtonKey);
-            alertScreen.performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
-            alertScreen.performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.DO_NOT_ALLOW);
+            alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
+            alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.DO_NOT_ALLOW);
         }
     }
 
@@ -185,7 +183,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         catalogBooksScreen.clickBookByTitleButtonWithKey(catalogBookModel.getTitle(), actionButtonKey);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            alertScreen.performAlertActionIfDisplayed(actionButtonKey);
+            alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
         }
     }
 
@@ -320,7 +318,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
             final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         String title = catalogBookModel.getTitle();
-        alertScreen.performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.DO_NOT_ALLOW);
+        alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.DO_NOT_ALLOW);
         boolean isButtonPresent = catalogBooksScreen.isBookAddButtonTextEqualTo(title, actionButtonKey);
         if (!isButtonPresent && catalogBooksScreen.isErrorButtonPresent()) {
             Scenario scenario = context.get(ScenarioContextKey.SCENARIO_KEY);
@@ -347,9 +345,9 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         clickActionButtonOnBookDetailsView(actionButtonKey);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            alertScreen.performAlertActionIfDisplayed(actionButtonKey);
-            alertScreen.performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.DO_NOT_ALLOW);
-            alertScreen.performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
+            alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.DO_NOT_ALLOW);
+            alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
         }
     }
 

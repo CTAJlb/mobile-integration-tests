@@ -14,7 +14,7 @@ public class AndroidAlertScreen extends AlertScreen {
     }
 
     @Override
-    public void performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys actionButtonNamesAlertKeys) {
+    public void waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys actionButtonNamesAlertKeys) {
         //only ios
     }
 }

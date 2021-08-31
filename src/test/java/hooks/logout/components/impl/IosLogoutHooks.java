@@ -28,7 +28,7 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
         for (String library : listOfLibraries) {
             if (!accountScreen.state().isDisplayed()) {
                 bottomMenuForm.open(BottomMenu.SETTINGS);
-                alertScreen.performAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
+                alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
                 bottomMenuForm.open(BottomMenu.SETTINGS);
                 settingsScreen.openAccounts();
                 accountsScreen.openLibraryAccount(library);
