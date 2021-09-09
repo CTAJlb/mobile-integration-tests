@@ -58,6 +58,9 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
         accountsScreen.openLibraryAccount(libraryName);
         Credentials credentials = Configuration.getCredentials(libraryName);
         storeCredentials(credentials);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
+        }
         accountScreen.enterCredentialsAndLogin(credentials);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
             alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);

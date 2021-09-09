@@ -2,30 +2,30 @@ Feature: Manage Libraries
 
   @tier1 @oldOs
   Scenario: Add Library
-    When I add "Alameda County Library" account from welcomeScreen
-    Then Account 'Alameda County Library' is present on Accounts screen
+    When I add "LYRASIS Reads" account from welcomeScreen
+    Then Account 'LYRASIS Reads' is present on Accounts screen
 
   @tier1 @oldOs
   Scenario: Switch Library Catalogs
     When I add "Digital Public Library of America" account from welcomeScreen
-      And I add 'Alameda County Library' account
+      And I add 'LYRASIS Reads' account
       And Catalog is opened
       And I get names of books on screen and save them as 'nameOfBooks'
-      And I switch to 'Alameda County Library' from side menu
+      And I switch to 'LYRASIS Reads' from side menu
     Then Category rows are loaded
       And List of books on screen is not equal to list of books saved as 'nameOfBooks'
 
   @tier1 @oldOs
   Scenario: Remove library
     When I add "Digital Public Library of America" account from welcomeScreen
-      And I add 'Alameda County Library' account
-      And I remove 'Alameda County Library' account
-    Then Account 'Alameda County Library' is not present on Accounts screen
+      And I add 'LYRASIS Reads' account
+      And I remove 'LYRASIS Reads' account
+    Then Account 'LYRASIS Reads' is not present on Accounts screen
 
   @tier2 @oldOs
   Scenario: Switch library bookshelf
     When I add "Digital Public Library of America" account from welcomeScreen
-      And I add 'Alameda County Library' account
+      And I add 'LYRASIS Reads' account
       And Catalog is opened
       And I switch to 'Digital Public Library of America' from side menu
       And I open categories by chain and chain starts from CategoryScreen:
@@ -35,13 +35,13 @@ Feature: Manage Libraries
     Then Book 'bookInfo' is present in Books List
     When I open Catalog
       And I return to previous screen for epub and pdf
-      And I switch to 'Alameda County Library' from side menu
+      And I switch to 'LYRASIS Reads' from side menu
       And I open Books
     Then No books are present in Books list
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Switch Library Reservations
-    When I add "Alameda County Library" account from welcomeScreen
+    When I add "LYRASIS Reads" account from welcomeScreen
     When I add 'LYRASIS' account
       And I enter credentials for 'LYRASIS' account
     Then Login is performed successfully
@@ -60,7 +60,7 @@ Feature: Manage Libraries
       And Book 'bookInfo' is present in Holds List
     When I open Catalog
       And I open Catalog
-      And I switch to 'Alameda County Library' from side menu
+      And I switch to 'LYRASIS Reads' from side menu
       And Open Holds
     Then Holds feed is loaded
       And No books are present in Holds list

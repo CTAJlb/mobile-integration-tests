@@ -4,7 +4,8 @@ Feature: Feed
   Scenario: Update Bookshelf List
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open categories by chain and chain starts from CategoryScreen:
-        |2021 New Public Domain Books|
+        | Fiction            |
+        | Historical Fiction |
       And DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
       And I open Books
     Then Book 'bookInfo' is present in Books List

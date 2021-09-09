@@ -19,6 +19,7 @@ public class IosAlertScreen extends AlertScreen {
     @Override
     public void waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys actionButtonNamesAlertKeys) {
         IButton actionButton = getElementFactory().getButton(By.xpath(String.format(ACTION_BUTTON_LOC, actionButtonNamesAlertKeys.i18n())), String.format("%s ActionButtonAlert", actionButtonNamesAlertKeys.i18n()));
+        actionButton.state().waitForDisplayed();
         if(actionButton.state().waitForDisplayed()){
             actionButton.click();
         }

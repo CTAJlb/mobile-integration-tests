@@ -3,13 +3,13 @@ Feature: Catalog Navigation
   @tier1 @oldOs
   Scenario: Return to last library catalog
     When I add "Digital Public Library of America" account from welcomeScreen
-      And I add 'Alameda County Library' account
+      And I add 'LYRASIS Reads' account
       And I open Catalog
-      And I switch to 'Alameda County Library' from side menu
+      And I switch to 'LYRASIS Reads' from side menu
     Then Category rows are loaded
     When I restart app
     Then Category rows are loaded
-      And Current library is 'Alameda County Library' in Catalog
+      And Current library is 'LYRASIS Reads' in Catalog
 
   @tier1 @oldOs
   Scenario: Navigate Lists
@@ -52,16 +52,16 @@ Feature: Catalog Navigation
 
   @tier1
   Scenario: Sort Lists1
-    When I add "Alameda County Library" account from welcomeScreen
+    When I add "LYRASIS Reads" account from welcomeScreen
     When I open categories by chain and chain starts from CategoryScreen:
       | Fiction |
       | Drama   |
 
   @tier1 @oldOs
   Scenario: Sort Lists
-    When I add "Alameda County Library" account from welcomeScreen
+    When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
-      And I switch to 'Alameda County Library' from side menu
+      And I switch to 'LYRASIS Reads' from side menu
     Then Category rows are loaded
     When I switch to 'Audiobooks' catalog tab
     Then Category rows are loaded
@@ -69,8 +69,8 @@ Feature: Catalog Navigation
     When I switch to 'eBooks' catalog tab
     Then Category rows are loaded
     When I open categories by chain and chain starts from CategoryScreen:
-      | Fiction |
-      | Drama   |
+      | Young Adult Fiction |
+      | Fantasy             |
     Then Subcategory screen is present
     When I sort books by AUTHOR
     Then Subcategory screen is present
