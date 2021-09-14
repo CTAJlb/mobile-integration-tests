@@ -49,7 +49,7 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
     }
 
     private void saveLibraryForLogOut(String libraryName){
-        if(libraryName.toLowerCase().equals("LYRASIS".toLowerCase())){
+        if(libraryName.toLowerCase().equals("LYRASIS Reads".toLowerCase())){
             saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
         }
     }

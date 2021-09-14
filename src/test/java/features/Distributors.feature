@@ -2,8 +2,8 @@ Feature: Distributors
 
   @logout @returnBooks @tier2 @oldOs
   Scenario Outline: Hold from Book Detail View
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
@@ -22,8 +22,8 @@ Feature: Distributors
 
   @logout @returnBooks @tier2 @oldOs
   Scenario Outline: Check out from Book Detail View
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
@@ -44,8 +44,8 @@ Feature: Distributors
 
   @logout @returnBooks @tier2 @oldOs
   Scenario Outline: Return book from Book Detail View
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal

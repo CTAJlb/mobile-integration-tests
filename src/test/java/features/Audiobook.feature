@@ -1,15 +1,15 @@
 Feature: Audiobook
 
   Background:
-    Given I add "LYRASIS" account from welcomeScreen
-    Then Account 'LYRASIS' is present on Accounts screen
-    When I enter credentials for 'LYRASIS' account
+    Given I add "LYRASIS Reads" account from welcomeScreen
+    Then Account 'LYRASIS Reads' is present on Accounts screen
+    When I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I switch to 'Audiobooks' catalog tab
     When I open categories by chain and chain starts from CategoryScreen:
-      | Fiction |
-      | Drama   |
+      | Fiction  |
+      | Classics |
       And I open the book details for the subsequent GET on Subcategory List View and save it as 'bookInfo'
 
   @logout @returnBooks @tier2 @oldOs @tablet
@@ -27,7 +27,7 @@ Feature: Audiobook
     When I press on the book details view at the action button LISTEN
     Then Download has started and percentage value increased
     When Open chapter list for an audiobook
-    Then I check that chapters are visible and check that all chapters loaded
+    Then All chapters loaded
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Return to Chapter (Bookmarking/Syncing)

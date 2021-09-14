@@ -50,13 +50,6 @@ Feature: Catalog Navigation
     When I open first book in Subcategory List and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
 
-  @tier1
-  Scenario: Sort Lists1
-    When I add "LYRASIS Reads" account from welcomeScreen
-    When I open categories by chain and chain starts from CategoryScreen:
-      | Fiction |
-      | Drama   |
-
   @tier1 @oldOs
   Scenario: Sort Lists
     When I add "LYRASIS Reads" account from welcomeScreen
@@ -95,7 +88,7 @@ Feature: Catalog Navigation
 
   @tier1 @exclude_ios @ignore
   Scenario: View Book Details
-    When I add "LYRASIS" account from welcomeScreen
+    When I add "LYRASIS Reads" account from welcomeScreen
       And I open search modal
       And I search for 'Sullivan\'s Promise'
       And I switch to 'eBooks' catalog tab
@@ -120,9 +113,9 @@ Feature: Catalog Navigation
 
   @tier1 @exclude_android @ignore
   Scenario: View Book Details (iOS)
-    When I add "LYRASIS" account from welcomeScreen
+    When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
-      And I switch to 'LYRASIS' from side menu
+      And I switch to 'LYRASIS Reads' from side menu
     When I open search modal
     Then Search modal is opened
     When I search for 'UnEnchanted'

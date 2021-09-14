@@ -2,8 +2,8 @@ Feature: Main actions private access books
 
   @logout @returnBooks @tier2
   Scenario: Hold from Subcategory List View and Remove a Reserved Book from Holds
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
@@ -19,8 +19,8 @@ Feature: Main actions private access books
 
   @logout @returnBooks @tier2
   Scenario: Hold from Subcategory List View and Remove a Reserved Book from Subcategory List View
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
@@ -32,8 +32,8 @@ Feature: Main actions private access books
 
   @logout @returnBooks @tier2
   Scenario: Hold from Book Detail View and and Remove a Reserved Book from Holds
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
@@ -51,8 +51,8 @@ Feature: Main actions private access books
 
   @logout @returnBooks @tier2
   Scenario: Hold from Book Detail View and Remove a Reserved Book from Book Detail View
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
@@ -67,8 +67,8 @@ Feature: Main actions private access books
 
   @logout @returnBooks @tier2
   Scenario: Check out from Book Detail View and Return from Books
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
@@ -87,8 +87,8 @@ Feature: Main actions private access books
 
   @logout @returnBooks @tier2
   Scenario: Check out from Subcategory List View and Return from Books
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
@@ -108,8 +108,8 @@ Feature: Main actions private access books
 
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Check out from Subcategory List View and Return from Subcategory List View
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
@@ -121,8 +121,8 @@ Feature: Main actions private access books
 
   @logout @returnBooks @tier2
   Scenario: Check out from Subcategory List View and Read from Books
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
@@ -137,8 +137,8 @@ Feature: Main actions private access books
 
   @logout @returnBooks @tier3 @exclude_android
   Scenario: Hold from Book Detail View and Cancel remove from holds tab(IOS)
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal

@@ -41,12 +41,12 @@ Feature: Manage Libraries
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Switch Library Reservations
-    When I add "LYRASIS Reads" account from welcomeScreen
-    When I add 'LYRASIS' account
-      And I enter credentials for 'LYRASIS' account
+    When I add "Digital Public Library of America" account from welcomeScreen
+    When I add 'LYRASIS Reads' account
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'LYRASIS' from side menu
+      And I switch to 'LYRASIS Reads' from side menu
       And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -60,17 +60,17 @@ Feature: Manage Libraries
       And Book 'bookInfo' is present in Holds List
     When I open Catalog
       And I open Catalog
-      And I switch to 'LYRASIS Reads' from side menu
+      And I switch to 'Digital Public Library of America' from side menu
       And Open Holds
     Then Holds feed is loaded
       And No books are present in Holds list
 
   @logout @tier2 @oldOs
   Scenario: Store library card
-    When I add "LYRASIS" account from welcomeScreen
-    Then Account 'LYRASIS' is present on Accounts screen
-    When I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+    Then Account 'LYRASIS Reads' is present on Accounts screen
+    When I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
-    When I open account 'LYRASIS'
+    When I open account 'LYRASIS Reads'
       And I click the log out button on the account screen
     Then Logout is performed successfully
