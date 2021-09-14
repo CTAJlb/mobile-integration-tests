@@ -14,12 +14,4 @@ public class GettingBookUtil {
     public static synchronized String getRandomPdf(){
         return xmlUtil.getRandomPdf();
     }
-
-    public static synchronized int getRandomValue(){
-        return xmlUtil.getRandomValue();
-    }
-
-    public static synchronized XMLUtil getXmlUtil(){
-        return xmlUtil;
-    }
 }
