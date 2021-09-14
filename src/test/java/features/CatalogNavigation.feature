@@ -62,8 +62,7 @@ Feature: Catalog Navigation
     When I switch to 'eBooks' catalog tab
     Then Category rows are loaded
     When I open categories by chain and chain starts from CategoryScreen:
-      | Young Adult Fiction |
-      | Fantasy             |
+      | BiblioBoard Titles |
     Then Subcategory screen is present
     When I sort books by AUTHOR
     Then Subcategory screen is present
