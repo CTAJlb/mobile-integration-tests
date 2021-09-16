@@ -14,8 +14,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class XMLUtil {
-    private static final String BASE_URL = "https://demo.lyrasistechnology.org";
-    private static final String partOfURL = "lyrasis/crawlable";
+    private static final String BASE_URL = "https://gorgon.tpp-qa.lyrasistechnology.org";
+    private static final String partOfURL = "lyrasis-reads/crawlable";
     private HashMap<String, List<BookModel>> hashMapAvailableEbooks;
     private HashMap<String, List<BookModel>> hashMapAvailableAudiobooks;
     private HashMap<String, List<BookModel>> hashMapUnavailableEbooks;
@@ -23,38 +23,13 @@ public class XMLUtil {
     private ArrayList<BookModel> availableBooksAnyType;
     private ArrayList<BookModel> unavailableBooksAnyType;
     private ArrayList<BookModel> availablePdf;
-    private final int randomValue;
     private final int connectTimeout = 120;
     private final int readTimeout = 120;
     private final int writeTimeout = 120;
     private final int threadSleepTime = 3000;
 
     public XMLUtil() {
-        randomValue = RandomUtils.nextInt(0, 10);
         setHashMapsForEBooksAndAudioBooks();
-    }
-
-    public int getRandomValue() {
-        return randomValue;
-    }
-
-    //todo method does not use
-    public void getStatistics() {
-        HashMap<String, HashMap<String, List<BookModel>>> hashMap = new HashMap<>();
-        hashMap.put("AvailableEbooks".toLowerCase(), hashMapAvailableEbooks);
-        hashMap.put("AvailableAudiobooks".toLowerCase(), hashMapAvailableAudiobooks);
-        hashMap.put("UnavailableEbooks".toLowerCase(), hashMapUnavailableEbooks);
-        hashMap.put("UnavailableAudiobooks".toLowerCase(), hashMapUnavailableAudiobooks);
-        for (Map.Entry<String, HashMap<String, List<BookModel>>> mapOfSpecificType : hashMap.entrySet()) {
-            String typeAndAvailabilityOfBooks = mapOfSpecificType.getKey();
-            AqualityServices.getLogger().info("typeAndAvailabilityOfBooks: " + typeAndAvailabilityOfBooks);
-            for (Map.Entry<String, List<BookModel>> map : mapOfSpecificType.getValue().entrySet()) {
-                AqualityServices.getLogger().info("Statistics: ");
-                AqualityServices.getLogger().info("Distributor: " + map.getKey());
-                AqualityServices.getLogger().info("CountOfBooks: " + map.getValue().size());
-                AqualityServices.getLogger().info("+++++++++++++++++++++++++++++++++++++++++++++++");
-            }
-        }
     }
 
     private void setListAvailableAndUnavailableBooksAnyTypeMayBeWithRepeat() {

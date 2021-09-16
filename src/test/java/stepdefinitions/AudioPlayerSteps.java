@@ -46,7 +46,7 @@ public class AudioPlayerSteps {
         }
     }
 
-    @And("I check that chapters are visible and check that all chapters loaded")
+    @And("All chapters loaded")
     public void waitAndCheckAllChaptersLoaded() {
         audioPlayerScreen.waitAndCheckAllChaptersLoaded();
     }

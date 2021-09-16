@@ -9,7 +9,7 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
-import constants.localization.application.catalog.BookActionButtonKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.swipe.SwipeElementUtils;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
@@ -66,7 +66,7 @@ public class IosBooksScreen extends BooksScreen {
 
     @Override
     public void readBook(CatalogBookModel bookInfo) {
-        String readButtonName = BookActionButtonKeys.READ.i18n();
+        String readButtonName = EnumActionButtonsForBooksAndAlertsKeys.READ.i18n();
         IButton btnBookName =
                 getElementFactory().getButton(By.xpath(String.format(BOOKS_BY_TITLE_LOC, bookInfo.getTitle())), "The book " + bookInfo.getTitle());
         btnBookName.state().waitForDisplayed();

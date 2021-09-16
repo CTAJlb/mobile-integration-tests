@@ -1,27 +1,28 @@
 package stepdefinitions.holds.components;
 
 import aquality.appium.mobile.application.AqualityServices;
-import constants.localization.application.catalog.BookActionButtonKeys;
+import aquality.appium.mobile.application.PlatformName;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import models.android.CatalogBookModel;
 import org.junit.Assert;
+import screens.alert.AlertScreen;
 import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
 import screens.holds.HoldsScreen;
-import screens.notifications.NotificationModal;
 import stepdefinitions.BaseSteps;
 
 public abstract class AbstractHoldsSteps extends BaseSteps implements IHoldsSteps {
     protected final BottomMenuForm bottomMenuForm;
     protected final HoldsScreen holdsScreen;
-    protected final NotificationModal notificationModal;
     protected final ScenarioContext context;
+    protected final AlertScreen alertScreen;
 
     public AbstractHoldsSteps(ScenarioContext context) {
         this.context = context;
         bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
         holdsScreen = AqualityServices.getScreenFactory().getScreen(HoldsScreen.class);
-        notificationModal = AqualityServices.getScreenFactory().getScreen(NotificationModal.class);
+        alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
     }
 
     @Override
@@ -42,27 +43,25 @@ public abstract class AbstractHoldsSteps extends BaseSteps implements IHoldsStep
     public abstract void checkBookBookInfoIsPresentInHoldsList(String bookInfoKey);
 
     @Override
-    public void clickOnBookAddButtonOnHoldsScreen(String bookInfoKey, BookActionButtonKeys key) {
-        clickOnBookAddButtonOnHoldsScreenWithoutPopupHandling(bookInfoKey, key);
-        notificationModal.performActionForNotificationPopup(key);
-    }
-
-    public void clickOnBookAddButtonOnHoldsScreenWithoutPopupHandling(String bookInfoKey, BookActionButtonKeys key) {
-        CatalogBookModel catalogBookModel = context.get(bookInfoKey);
-        holdsScreen.clickBookByTitleButtonWithKey(catalogBookModel.getTitle(), key);
+    public void performActionOnHoldsScreen(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+        performActionOnBookWithoutClickActionButtonOnAlert(bookInfoKey, actionButtonKey);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+        }
     }
 
     @Override
-    public void clickActionButtonForPopUp(BookActionButtonKeys buttonName) {
-        notificationModal.performActionForNotificationPopup(buttonName);
+    public void performActionOnBookWithoutClickActionButtonOnAlert(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKey) {
+        CatalogBookModel catalogBookModel = context.get(bookInfoKey);
+        holdsScreen.performActionOnBook(catalogBookModel.getTitle(), bookActionButtonKey);
     }
 
     @Override
     public void checkThatSavedBookContainButtonAtHoldScreen(
-            final String bookInfoKey, final BookActionButtonKeys key) {
+            final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys key) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         String title = catalogBookModel.getTitle();
-        Assert.assertTrue(String.format("Book with title '%1$s' button does not contain text '%2$s'", title, key.i18n()), holdsScreen.isBookAddButtonTextEqualTo(title, key));
+        Assert.assertTrue(String.format("Book with title '%1$s' button does not contain text '%2$s'", title, key.i18n()), holdsScreen.isActionButtonPresentOnBook(title, key));
     }
 
     public abstract void checkBookBookInfoIsNotPresentInHoldsList(String bookInfoKey);

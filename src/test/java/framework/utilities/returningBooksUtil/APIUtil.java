@@ -12,7 +12,7 @@ import java.util.Base64;
 import java.util.concurrent.TimeUnit;
 
 public class APIUtil {
-    private static final String BASE_URL = "https://demo.lyrasistechnology.org";
+    private static final String BASE_URL = "https://gorgon.tpp-qa.lyrasistechnology.org";
     private static final int connectTimeout = 120;
     private static final int readTimeout = 120;
     private static final int writeTimeout = 120;

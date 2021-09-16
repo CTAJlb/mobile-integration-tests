@@ -2,7 +2,7 @@ package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
-import constants.context.ContextLibrariesKeys;
+import constants.keysForContext.ContextLibrariesKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -38,7 +38,7 @@ public class AccountSteps {
         accountsScreen.addAccount();
         addAccountScreen.selectLibraryViaSearch(libraryName);
 
-        if(libraryName.toLowerCase().equals("LYRASIS".toLowerCase())){
+        if(libraryName.toLowerCase().equals("LYRASIS Reads".toLowerCase())){
             saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
         }
     }

@@ -77,6 +77,7 @@ public class IosCatalogScreen extends CatalogScreen {
     @Override
     public void openCategory(String categoryName) {
         IButton categoryButton = getCategoryButton(categoryName);
+        categoryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         categoryButton.click();
     }
 
@@ -87,6 +88,8 @@ public class IosCatalogScreen extends CatalogScreen {
     @Override
     public void switchToCatalogTab(String catalogTab) {
         getElementFactory().getButton(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_PATTERN, catalogTab)), catalogTab).click();
+        //todo I will change to check that appears specific screen
+        getElementFactory().getLabel(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"bookCellIdle\")"), "BookForm").state().waitForDisplayed();
     }
 
     @Override
@@ -129,18 +132,7 @@ public class IosCatalogScreen extends CatalogScreen {
         AqualityServices.getConditionalWait().waitFor(() -> getElements(CATEGORY_XPATH_PATTERN).size() > COUNT_OF_CATEGORIES_TO_WAIT_FOR);
         List<String> currentBooksNames = geListOfCategoriesNames();
         Set<String> categoriesNames = new HashSet<>();
-        do {
-            categoriesNames.addAll(currentBooksNames);
-            List<String> finalCurrentBooksNames = currentBooksNames;
-            SwipeElementUtils.swipeElementUp(categoryScreen);
-            SwipeElementUtils.swipeElementUp(categoryScreen);
-            AqualityServices.getConditionalWait().waitFor(() -> !finalCurrentBooksNames.containsAll(geListOfCategoriesNames())
-                    , Duration.ofMillis(AuthorizationTimeouts.DEBUG_MENU_IS_OPENED.getTimeoutMillis()));
-            currentBooksNames = geListOfCategoriesNames();
-        } while (!categoriesNames.containsAll(currentBooksNames));
-        categoriesNames.stream().forEach(x ->
-                AqualityServices.getLogger().info("CategoryName-" + x));
-        AqualityServices.getLogger().info("amount of categories-" + categoriesNames.size());
+        categoriesNames.addAll(currentBooksNames);
         return categoriesNames;
     }
 

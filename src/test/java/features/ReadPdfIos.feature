@@ -1,11 +1,11 @@
 Feature: Read PDF IOS
 
   Background:
-    Given I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    Given I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'LYRASIS' from side menu
+      And I switch to 'LYRASIS Reads' from side menu
       And I open search modal
 
   @logout @returnBooks @tier1 @exclude_android @oldOs

@@ -4,9 +4,9 @@ Feature: Feed
   Scenario: Update Bookshelf List
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open categories by chain and chain starts from CategoryScreen:
-      | Fiction |
-      | Drama   |
-      And DOWNLOAD book from subcategory list view and save it as 'bookInfo'
+        | Fiction            |
+        | Historical Fiction |
+      And DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
       And I open Books
     Then Book 'bookInfo' is present in Books List
       And Count of books is equal to 1

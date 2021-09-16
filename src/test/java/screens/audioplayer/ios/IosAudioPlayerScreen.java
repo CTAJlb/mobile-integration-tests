@@ -54,7 +54,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private final ILabel lblCurrentChapter =
             getElementFactory().getLabel(By.xpath("(//XCUIElementTypeStaticText[@name=\"progress_rightLabel\"])[1]"), "Current chapter");
     private final ILabel lblPercentageValue =
-            getElementFactory().getLabel(By.xpath("(//XCUIElementTypeProgressIndicator/following-sibling::XCUIElementTypeStaticText"), "Percentage Value");
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeProgressIndicator/following-sibling::XCUIElementTypeStaticText"), "Percentage Value");
     private final ILabel lblChapterTime =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"progress_rightLabel\" and contains(@value,\":\")]"), "Chapter time", ElementState.EXISTS_IN_ANY_STATE);
     private final ILabel lblCurrentTime =
@@ -109,8 +109,8 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public Integer getPercentageValue() {
 
-        lblPercentageValue.state().waitForDisplayed(Duration.ofMillis(40000));
-        String percentageValueString = lblPercentageValue.getAttribute("name");
+        lblPercentageValue.state().waitForDisplayed(Duration.ofMillis(5000));
+        String percentageValueString = lblPercentageValue.getAttribute(IosAttributes.VALUE);
         percentageValueString = percentageValueString.replace("%", "");
         return Integer.valueOf(percentageValueString);
     }
@@ -119,7 +119,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     public String selectChapterAndGetText(int chapterNumber) {
         AqualityServices.getConditionalWait().waitFor(() -> getElementFactory().findElements(By.xpath(LOADED_CHAPTERS_LOCATOR), ElementType.LABEL).size() >= chapterNumber, Duration.ofMillis(CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis()));
         ILabel chapter = getChaptersText().get(chapterNumber - 1);
-        String chapterText = chapter.getAttribute("name");
+        String chapterText = chapter.getAttribute(IosAttributes.NAME);
         chapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         chapter.click();
         return chapterText;
@@ -127,7 +127,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public String getCurrentChapterInfo() {
-        return lblCurrentChapter.getAttribute("value");
+        return lblCurrentChapter.getAttribute(IosAttributes.VALUE);
     }
 
     @Override
@@ -159,6 +159,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public Duration getCurrentPlayTime() {
+        lblCurrentTime.state().waitForDisplayed();
         return DateUtils.getDuration(lblCurrentTime.getAttribute(IosAttributes.VALUE));
     }
 

@@ -4,14 +4,13 @@ import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
-import aquality.appium.mobile.elements.Label;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.application.attributes.AndroidAttributes;
 import constants.application.timeouts.BooksTimeouts;
-import constants.localization.application.catalog.BookActionButtonKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.swipe.SwipeElementUtils;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
@@ -63,12 +62,12 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
-    public CatalogBookModel scrollToBookAndClickActionButton(BookActionButtonKeys bookAddButtonKey) {
-        return performActionOnBook(bookAddButtonKey);
+    public CatalogBookModel scrollToBookAndPerformActionAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKeys) {
+        return performActionOnBook(bookActionButtonKeys);
     }
 
     @Override
-    public void clickBookByTitleButtonWithKey(String title, BookActionButtonKeys key) {
+    public void clickBookByTitleButtonWithKey(String title, EnumActionButtonsForBooksAndAlertsKeys key) {
         String buttonName = key.i18n();
         IButton bookActionBtn =
                 getElementFactory().getButton(By.xpath(getBlockLocator(title) + String.format(BOOK_ADD_BUTTON_LOC, buttonName)), buttonName);
@@ -77,12 +76,12 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
-    public void openBookWithGivenActionButtonDetails(BookActionButtonKeys action) {
+    public void openBookWithGivenActionButtonDetails(EnumActionButtonsForBooksAndAlertsKeys action) {
         clickOnSpecificBookElement(getBookJacketWithGivenButtonLabel(action));
     }
 
     @Override
-    public boolean isBookAddButtonTextEqualTo(String bookTitle, BookActionButtonKeys key) {
+    public boolean isBookAddButtonTextEqualTo(String bookTitle, EnumActionButtonsForBooksAndAlertsKeys key) {
         String buttonName = key.i18n();
         IButton btnBook =
                 getElementFactory().getButton(By.xpath(getBookActionButtonLocatorWithGivenName(key, bookTitle)), buttonName);
@@ -92,7 +91,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
-    public CatalogBookModel scrollToBookByTypeAndClickActionButton(BookActionButtonKeys actionButtonKey, String bookType) {
+    public CatalogBookModel scrollToBookByTypeAndClickActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType) {
         String key = actionButtonKey.i18n();
         String bookAddButtonLocator = getBookAddButtonLocatorWithGivenType(actionButtonKey, bookType);
         IButton button = getElementFactory().getButton(By.xpath(bookAddButtonLocator), key);
@@ -104,7 +103,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
-    public CatalogBookModel scrollToBookByNameAndClickActionButton(BookActionButtonKeys actionButtonKey, String bookName) {
+    public CatalogBookModel scrollToBookByNameAndClickActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName) {
         String bookAddButtonLocator = getBookActionButtonLocatorWithGivenName(actionButtonKey, bookName);
         IButton button = getElementFactory().getButton(By.xpath(bookAddButtonLocator), actionButtonKey.i18n());
         button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
@@ -113,7 +112,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
-    public CatalogBookModel scrollToBookByNameAndClickGetOrDownloadActionButton(BookActionButtonKeys actionButtonKey1, BookActionButtonKeys actionButtonKey2, String bookName) {
+    public CatalogBookModel scrollToBookByNameAndClickGetOrDownloadActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookName) {
         String bookAddButtonLocator1 = getBookActionButtonLocatorWithGivenName(actionButtonKey1, bookName);
         String bookAddButtonLocator2 = getBookActionButtonLocatorWithGivenName(actionButtonKey2, bookName);
         IButton button1 = getElementFactory().getButton(By.xpath(bookAddButtonLocator1), actionButtonKey1.i18n());
@@ -146,7 +145,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
         return btnErrorDetails.state().isDisplayed();
     }
 
-    private CatalogBookModel performActionOnBook(BookActionButtonKeys buttonName) {
+    private CatalogBookModel performActionOnBook(EnumActionButtonsForBooksAndAlertsKeys buttonName) {
         SwipeElementUtils.swipeElementDown(lblFirstFoundBook);
         IButton button = getAddBookButton(buttonName);
         button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
@@ -155,7 +154,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
         return openBook(button, bookTitle);
     }
 
-    private ILabel getBookJacketWithGivenButtonLabel(BookActionButtonKeys button) {
+    private ILabel getBookJacketWithGivenButtonLabel(EnumActionButtonsForBooksAndAlertsKeys button) {
         String key = button.i18n();
         return getElementFactory().getLabel(By.xpath(String.format(BOOK_JACKET_XPATH_PATTERN, key)), "Book jacket with " + key);
     }
@@ -165,17 +164,17 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
         bookWithSpecificAddBtn.click();
     }
 
-    private IButton getAddBookButton(BookActionButtonKeys button) {
+    private IButton getAddBookButton(EnumActionButtonsForBooksAndAlertsKeys button) {
         String key = button.i18n();
         return getElementFactory().getButton(By.xpath(String.format(ADD_BOOK_BUTTON_PATTERN, key)), key);
     }
 
-    private String getBookAddButtonLocatorWithGivenType(BookActionButtonKeys actionButtonKey, String bookType) {
+    private String getBookAddButtonLocatorWithGivenType(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType) {
         String key = actionButtonKey.i18n();
         return String.format(BOOK_OF_TYPE_BUTTON_PATTERN, bookType, key);
     }
 
-    private String getBookActionButtonLocatorWithGivenName(BookActionButtonKeys actionButtonKey, String bookName) {
+    private String getBookActionButtonLocatorWithGivenName(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName) {
         String key = actionButtonKey.i18n();
         return String.format(BOOK_BY_NAME_BUTTON_PATTERN, bookName, key);
     }

@@ -2,8 +2,8 @@ Feature: Distributors
 
   @logout @returnBooks @tier2 @oldOs
   Scenario Outline: Hold from Book Detail View
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
@@ -11,7 +11,7 @@ Feature: Distributors
       And I switch to '<tabName>' catalog tab
       And Open '<bookType>' book with RESERVE button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
       And I press on the book details view at the action button RESERVE
-    Then I check that book contains CANCEL action button on book details view
+    Then I check that book contains CANCEL_RESERVATION action button on book details view
 
     Scenarios:
       | distributor | bookType  | tabName    |
@@ -22,8 +22,8 @@ Feature: Distributors
 
   @logout @returnBooks @tier2 @oldOs
   Scenario Outline: Check out from Book Detail View
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
@@ -44,8 +44,8 @@ Feature: Distributors
 
   @logout @returnBooks @tier2 @oldOs
   Scenario Outline: Return book from Book Detail View
-    When I add "LYRASIS" account from welcomeScreen
-      And I enter credentials for 'LYRASIS' account
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
       And I open search modal

@@ -3,13 +3,13 @@ Feature: Catalog Navigation
   @tier1 @oldOs
   Scenario: Return to last library catalog
     When I add "Digital Public Library of America" account from welcomeScreen
-      And I add 'Alameda County Library' account
+      And I add 'LYRASIS Reads' account
       And I open Catalog
-      And I switch to 'Alameda County Library' from side menu
+      And I switch to 'LYRASIS Reads' from side menu
     Then Category rows are loaded
     When I restart app
     Then Category rows are loaded
-      And Current library is 'Alameda County Library' in Catalog
+      And Current library is 'LYRASIS Reads' in Catalog
 
   @tier1 @oldOs
   Scenario: Navigate Lists
@@ -27,9 +27,9 @@ Feature: Catalog Navigation
         | Nonfiction           |
         | All Children's Books |
     And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
-    And I open 'Classics' subcategory
+    And I open 'Fiction' subcategory
     Then Subcategory screen is present
-      And Subcategory name is 'Classics'
+      And Subcategory name is 'Fiction'
 
   @tier1
   Scenario: Browse Lanes/Categories
@@ -44,24 +44,17 @@ Feature: Catalog Navigation
         | Fiction              |
         | Nonfiction           |
         | All Children's Books |
-    When I open 'Classics' subcategory
+    When I open 'Fiction' subcategory
     Then Subcategory screen is present
-      And Subcategory name is 'Classics'
-    When I open first book in subcategory list and save it as 'bookInfo'
+      And Subcategory name is 'Fiction'
+    When I open first book in Subcategory List and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
-
-  @tier1
-  Scenario: Sort Lists1
-    When I add "Alameda County Library" account from welcomeScreen
-    When I open categories by chain and chain starts from CategoryScreen:
-      | Fiction |
-      | Drama   |
 
   @tier1 @oldOs
   Scenario: Sort Lists
-    When I add "Alameda County Library" account from welcomeScreen
+    When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
-      And I switch to 'Alameda County Library' from side menu
+      And I switch to 'LYRASIS Reads' from side menu
     Then Category rows are loaded
     When I switch to 'Audiobooks' catalog tab
     Then Category rows are loaded
@@ -69,8 +62,7 @@ Feature: Catalog Navigation
     When I switch to 'eBooks' catalog tab
     Then Category rows are loaded
     When I open categories by chain and chain starts from CategoryScreen:
-      | Fiction |
-      | Drama   |
+      | BiblioBoard Titles |
     Then Subcategory screen is present
     When I sort books by AUTHOR
     Then Subcategory screen is present
@@ -95,15 +87,11 @@ Feature: Catalog Navigation
 
   @tier1 @exclude_ios @ignore
   Scenario: View Book Details
-    When I add "LYRASIS" account from welcomeScreen
-      And I open Catalog
-      And I switch to 'LYRASIS' from side menu
-    When I open search modal
-    Then Search modal is opened
-    When I search for 'Sullivan\'s Promise'
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open search modal
+      And I search for 'Sullivan\'s Promise'
       And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    #When I open 'EBOOK' book with name 'Sullivan\'s Promise' and save it as 'bookInfo'
+    #And Open 'EBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
       And The following values in the information block are present:
         | key         | value                                           |
@@ -124,9 +112,9 @@ Feature: Catalog Navigation
 
   @tier1 @exclude_android @ignore
   Scenario: View Book Details (iOS)
-    When I add "LYRASIS" account from welcomeScreen
+    When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
-      And I switch to 'LYRASIS' from side menu
+      And I switch to 'LYRASIS Reads' from side menu
     When I open search modal
     Then Search modal is opened
     When I search for 'UnEnchanted'

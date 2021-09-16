@@ -1,7 +1,6 @@
 package screens.books;
 
 import aquality.appium.mobile.screens.Screen;
-import constants.localization.application.catalog.BookActionButtonKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 

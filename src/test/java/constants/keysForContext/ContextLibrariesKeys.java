@@ -1,10 +1,7 @@
-package constants.context;
+package constants.keysForContext;
 
 public enum ContextLibrariesKeys {
-    CANCEL_HOLD("librariesForCancelHold"),
-    LOG_OUT("librariesForLogOut"),
-    APP_BUNDLE_ID("bundleId"),
-    CANCEL_GET("librariesForCancelGet");
+    LOG_OUT("librariesForLogOut");
 
     private final String key;
 

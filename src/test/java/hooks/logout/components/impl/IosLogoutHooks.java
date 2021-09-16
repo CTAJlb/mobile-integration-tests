@@ -2,24 +2,22 @@ package hooks.logout.components.impl;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
-import constants.context.ContextLibrariesKeys;
+import constants.keysForContext.ContextLibrariesKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
 import hooks.logout.components.AbstractLogoutHooks;
 import screens.alert.AlertScreen;
 import screens.bottommenu.BottomMenu;
-import screens.notifications.NotificationModal;
 
 import java.util.List;
 
 @StepsType(platform = PlatformName.IOS)
 public class IosLogoutHooks extends AbstractLogoutHooks {
-    private final NotificationModal notificationModal;
     private final AlertScreen alertScreen;
 
     public IosLogoutHooks(ScenarioContext context) {
         super(context);
-        notificationModal = AqualityServices.getScreenFactory().getScreen(NotificationModal.class);
         alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
     }
 
@@ -30,7 +28,7 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
         for (String library : listOfLibraries) {
             if (!accountScreen.state().isDisplayed()) {
                 bottomMenuForm.open(BottomMenu.SETTINGS);
-                alertScreen.closeNotNowModalIfDisplayed();
+                alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
                 bottomMenuForm.open(BottomMenu.SETTINGS);
                 settingsScreen.openAccounts();
                 accountsScreen.openLibraryAccount(library);

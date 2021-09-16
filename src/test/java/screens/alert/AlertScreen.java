@@ -1,14 +1,13 @@
 package screens.alert;
 
 import aquality.appium.mobile.screens.Screen;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import org.openqa.selenium.By;
 
 public abstract class AlertScreen extends Screen {
     protected AlertScreen(By locator) {
-        super(locator, "Alert");
+        super(locator, "AlertScreen");
     }
 
-    public abstract void closeNotNowModalIfDisplayed();
-
-    public abstract void closeDoNotAllowIfPresent();
+    public abstract void waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys actionButtonNamesAlertKeys);
 }

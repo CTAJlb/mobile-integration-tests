@@ -6,10 +6,9 @@ import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.application.attributes.AndroidAttributes;
 import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.bookdetals.BookDetailsScreenInformationBlockKeys;
-import constants.localization.application.catalog.BookActionButtonKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.swipe.SwipeElementUtils;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
@@ -25,19 +24,17 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
             "//*[contains(@resource-id,\"key\") and @text=\"%1$s\"]/following-sibling::*[contains(@resource-id,\":id/value\")]";
     private static final String BOOK_ACTION_BUTTON_LOC = "//android.widget.Button[@content-desc=\"%1$s\"]";
 
-    private final ILabel lblBookInfo = getElementFactory().getLabel(By.id("bookDetailCoverImage"), "Cover Image");
+    //private final ILabel lblBookInfo = getElementFactory().getLabel(By.id("bookDetailCoverImage"), "Cover Image");
     private final ILabel lblErrorScreen = getElementFactory().getLabel(By.xpath("//android.widget.ScrollView"), "Error Screen");
     private final ILabel lblBookTitleInfo = getElementFactory().getLabel(By.id("bookDetailTitle"), "Book title");
-    private final ILabel lblBookFormatInfo = getElementFactory().getLabel(By.id("bookDetailFormat"), "Book format");
+    //private final ILabel lblBookFormatInfo = getElementFactory().getLabel(By.id("bookDetailFormat"), "Book format");
     private final ILabel lblBookAuthorsInfo = getElementFactory().getLabel(By.id("bookDetailAuthors"), "Book Authors");
     private final ILabel lblBookDescription =
             getElementFactory().getLabel(By.xpath("//*[contains(@resource-id,\"bookDetailDescriptionText\")]"), "Description");
     private final ILabel lblErrorMessage = getElementFactory().getLabel(By.id("errorDetails"), "Error message");
 
-    private final IButton btnRead = getActionButton(BookActionButtonKeys.READ);
-    private final IButton btnDelete = getActionButton(BookActionButtonKeys.DELETE);
-    private final IButton btnReturn = getActionButton(BookActionButtonKeys.RETURN);
-    private final IButton btnListen = getActionButton(BookActionButtonKeys.LISTEN);
+    private final IButton btnRead = getActionButton(EnumActionButtonsForBooksAndAlertsKeys.READ);
+    private final IButton btnListen = getActionButton(EnumActionButtonsForBooksAndAlertsKeys.LISTEN);
     private final IButton btnRelatedBooks =
             getElementFactory().getButton(By.xpath("//*[contains(@resource-id,\"bookDetailRelated\")]"), "Related books");
     private final IButton btnErrorDetails =
@@ -84,19 +81,14 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public boolean isBookAddButtonTextEqualTo(BookActionButtonKeys key) {
+    public boolean isBookAddButtonTextEqualTo(EnumActionButtonsForBooksAndAlertsKeys key) {
         IButton button = getActionButton(key);
         AqualityServices.getConditionalWait().waitFor(() -> button.state().isDisplayed() || isErrorButtonPresent(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         return button.state().isDisplayed();
     }
 
     @Override
-    public void returnBook() {
-        btnReturn.click();
-    }
-
-    @Override
-    public void clickActionButton(BookActionButtonKeys buttonKeys) {
+    public void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKeys) {
         //todo fixing here
         IButton button = getActionButton(buttonKeys);
         button.click();
@@ -104,7 +96,7 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public boolean isActionButtonPresent(BookActionButtonKeys actionButton) {
+    public boolean isActionButtonPresent(EnumActionButtonsForBooksAndAlertsKeys actionButton) {
         return getActionButton(actionButton).state().waitForDisplayed();
     }
 
@@ -142,7 +134,7 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
         //only for ios
     }
 
-    private IButton getActionButton(BookActionButtonKeys buttonKey) {
+    private IButton getActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKey) {
         String key = buttonKey.i18n();
         return getElementFactory().getButton(By.xpath(String.format(BOOK_ACTION_BUTTON_LOC, key)), key);
     }

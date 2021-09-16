@@ -7,24 +7,26 @@ import lombok.NonNull;
 
 import java.util.Locale;
 
-public enum BookActionButtonKeys implements LocalizedValue {
+public enum EnumActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     GET("get"),
     DOWNLOAD("download"),
-    CANCEL("cancel"),
     READ("read"),
     RESERVE("reserve"),
     DELETE("delete"),
     RETURN("return"),
     LISTEN("listen"),
+    NOT_NOW("notNow"),
+    DO_NOT_ALLOW("doNotAllow"),
+    CANCEL_RESERVATION("cancelReservation"),
     CANCEL_POPUP("cancelPopup");
 
     private static final AbstractILocalizationProvider localizationProvider =
-            LocalizationProviderFactory.getProvider("catalog.BookActionButtonKeys");
+            LocalizationProviderFactory.getProvider("catalog.ActionButtonsForBooksAndAlerts");
 
     private final String key;
 
 
-    BookActionButtonKeys(String key) {
+    EnumActionButtonsForBooksAndAlertsKeys(String key) {
         this.key = key;
     }
 

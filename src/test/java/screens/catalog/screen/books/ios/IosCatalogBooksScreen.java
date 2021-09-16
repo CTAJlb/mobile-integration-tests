@@ -9,7 +9,7 @@ import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.application.timeouts.BooksTimeouts;
-import constants.localization.application.catalog.BookActionButtonKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.catalog.screen.books.CatalogBooksScreen;
@@ -57,12 +57,12 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
-    public CatalogBookModel scrollToBookAndClickActionButton(BookActionButtonKeys bookAddButtonKey) {
-        return performActionOnBook(bookAddButtonKey);
+    public CatalogBookModel scrollToBookAndPerformActionAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKeys) {
+        return performActionOnBook(bookActionButtonKeys);
     }
 
     @Override
-    public void clickBookByTitleButtonWithKey(String title, BookActionButtonKeys actionButton) {
+    public void clickBookByTitleButtonWithKey(String title, EnumActionButtonsForBooksAndAlertsKeys actionButton) {
         String key = actionButton.i18n();
         IButton bookAddBtn =
                 getButtonForBookWithAction(title, key);
@@ -70,21 +70,21 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
-    public void openBookWithGivenActionButtonDetails(BookActionButtonKeys action) {
+    public void openBookWithGivenActionButtonDetails(EnumActionButtonsForBooksAndAlertsKeys action) {
         state().waitForDisplayed();
         waitForPageLoading();
         clickOnSpecificBookElement(getBookJacketWithGivenButtonName(action));
     }
 
     @Override
-    public boolean isBookAddButtonTextEqualTo(String bookTitle, BookActionButtonKeys buttonKeys) {
+    public boolean isBookAddButtonTextEqualTo(String bookTitle, EnumActionButtonsForBooksAndAlertsKeys buttonKeys) {
         String key = buttonKeys.i18n();
         IButton bookAddBtn = getButtonForBookWithAction(bookTitle, key);
         return bookAddBtn.state().waitForDisplayed(Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }
 
     @Override
-    public CatalogBookModel scrollToBookByTypeAndClickActionButton(BookActionButtonKeys actionButtonKey, String bookType) {
+    public CatalogBookModel scrollToBookByTypeAndClickActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType) {
         String key = actionButtonKey.i18n();
         IButton button = getElementFactory().getButton(By.xpath(getBookAddButtonLocatorWithGivenType(actionButtonKey, bookType)), key);
         button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
@@ -99,7 +99,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
-    public CatalogBookModel scrollToBookByNameAndClickActionButton(BookActionButtonKeys actionButtonKey, String bookName) {
+    public CatalogBookModel scrollToBookByNameAndClickActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName) {
         String key = actionButtonKey.i18n();
         IButton actionButton = getButtonForBookWithAction(bookName, key);
         switchToEbooksTab();
@@ -117,7 +117,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
-    public CatalogBookModel scrollToBookByNameAndClickGetOrDownloadActionButton(BookActionButtonKeys actionButtonKey1, BookActionButtonKeys actionButtonKey2, String bookName) {
+    public CatalogBookModel scrollToBookByNameAndClickGetOrDownloadActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookName) {
         //this does not use for ios
         return null;
     }
@@ -132,7 +132,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
         return false;
     }
 
-    private CatalogBookModel performActionOnBook(BookActionButtonKeys buttonName) {
+    private CatalogBookModel performActionOnBook(EnumActionButtonsForBooksAndAlertsKeys buttonName) {
         IButton button = getAddBookButton(buttonName);
         button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         String bookTitle =
@@ -140,7 +140,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
         return openBook(button, bookTitle);
     }
 
-    private ILabel getBookJacketWithGivenButtonName(BookActionButtonKeys button) {
+    private ILabel getBookJacketWithGivenButtonName(EnumActionButtonsForBooksAndAlertsKeys button) {
         String key = button.i18n();
         return getElementFactory().getLabel(By.xpath(String.format(BOOK_BLOCK_BY_BUTTON_LOC, key)), "Book jacket with button " + key);
     }
@@ -150,12 +150,12 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
         bookWithSpecificAddBtn.click();
     }
 
-    private String getBookAddButtonLocatorWithGivenType(BookActionButtonKeys actionButtonKey, String bookType) {
+    private String getBookAddButtonLocatorWithGivenType(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType) {
         String key = actionButtonKey.i18n();
         return String.format("", bookType, key);
     }
 
-    private IButton getAddBookButton(BookActionButtonKeys button) {
+    private IButton getAddBookButton(EnumActionButtonsForBooksAndAlertsKeys button) {
         String key = button.i18n();
         return getElementFactory().getButton(By.xpath(String.format(ACTION_BUTTON_ON_BOOK_PATTERN, key)), key);
     }

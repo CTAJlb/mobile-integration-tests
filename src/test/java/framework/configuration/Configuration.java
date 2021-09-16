@@ -15,6 +15,7 @@ public class Configuration {
     public static Credentials getCredentials(String libraryName) {
         Properties systemEnvironments = System.getProperties();
         Map<String, Object> listOfCredentials = new HashMap<>();
+        libraryName = libraryName.replace(" ", "");
         String osName = AqualityServices.getApplication().getPlatformName().toString().toLowerCase();
         String variableNameBeginning = String.format("credentials.%s.%s.", libraryName, osName);
         if (systemEnvironments.keySet().stream().anyMatch(x -> ((String) x).startsWith(variableNameBeginning))) {

@@ -8,10 +8,9 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
-import constants.application.BookDetailsScreenConstants;
 import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.bookdetals.BookDetailsScreenInformationBlockKeys;
-import constants.localization.application.catalog.BookActionButtonKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import models.android.CatalogBookModel;
@@ -39,8 +38,8 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
             "//XCUIElementTypeStaticText[@name=\"Description\"]/following-sibling::XCUIElementTypeTextView/*";
 
     private final ILabel lblBookTitleInfo = getElementFactory().getLabel(By.xpath("(//XCUIElementTypeOther//XCUIElementTypeStaticText[@name])[1]"), "Book title");
-    private final IButton btnRead = getActionButton(BookActionButtonKeys.READ);
-    private final IButton btnListen = getActionButton(BookActionButtonKeys.LISTEN);
+    private final IButton btnRead = getActionButton(EnumActionButtonsForBooksAndAlertsKeys.READ);
+    private final IButton btnListen = getActionButton(EnumActionButtonsForBooksAndAlertsKeys.LISTEN);
     private final IButton btnRelatedBooks =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Information\"]/following-sibling::XCUIElementTypeTable"), "Related books");
     private final IButton btnCloseBookDetailsOnlyIOSTab =
@@ -100,7 +99,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
         return getDescriptions()
                 .stream()
                 .map(IElement::getText)
-                .collect(Collectors.joining(BookDetailsScreenConstants.DESCRIPTION_DELIMITER));
+                .collect(Collectors.joining("\n"));
     }
 
     @Override
@@ -115,19 +114,14 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public boolean isBookAddButtonTextEqualTo(BookActionButtonKeys key) {
+    public boolean isBookAddButtonTextEqualTo(EnumActionButtonsForBooksAndAlertsKeys key) {
         AqualityServices.getConditionalWait().waitFor(() ->
                 getActionButton(key).state().isDisplayed() || lblErrorDetails.state().isDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         return getActionButton(key).state().isDisplayed();
     }
 
     @Override
-    public void returnBook() {
-        clickActionButton(BookActionButtonKeys.RETURN);
-    }
-
-    @Override
-    public void clickActionButton(BookActionButtonKeys buttonKeys) {
+    public void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKeys) {
         IButton actionButton = getActionButton(buttonKeys);
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
         action.tap(PointOption.point(actionButton.getElement().getCenter()));
@@ -135,7 +129,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public boolean isActionButtonPresent(BookActionButtonKeys actionButton) {
+    public boolean isActionButtonPresent(EnumActionButtonsForBooksAndAlertsKeys actionButton) {
         return getActionButton(actionButton).state().isDisplayed();
     }
 
@@ -174,7 +168,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
         }
     }
 
-    private IButton getActionButton(BookActionButtonKeys buttonKey) {
+    private IButton getActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKey) {
         String key = buttonKey.i18n();
         return getElementFactory().getButton(By.xpath(String.format(BOOK_ACTION_BUTTON_LOC, key)), key);
     }
