@@ -159,6 +159,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public Duration getCurrentPlayTime() {
+        lblCurrentTime.state().waitForDisplayed();
         return DateUtils.getDuration(lblCurrentTime.getAttribute(IosAttributes.VALUE));
     }
 
