@@ -8,5 +8,5 @@ public abstract class SettingsScreen extends Screen {
         super(locator, "Settings");
     }
 
-    public abstract void openAccounts();
+    public abstract void openLibraries();
 }

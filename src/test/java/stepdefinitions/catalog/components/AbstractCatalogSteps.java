@@ -345,6 +345,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         clickActionButtonOnBookDetailsView(actionButtonKey);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
             alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.DO_NOT_ALLOW);
         }
     }

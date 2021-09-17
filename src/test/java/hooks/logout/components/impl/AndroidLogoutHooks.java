@@ -23,7 +23,7 @@ public class AndroidLogoutHooks extends AbstractLogoutHooks {
         for (String library : listOfLibraries) {
             if (!accountScreen.state().waitForDisplayed()) {
                 bottomMenuForm.open(BottomMenu.SETTINGS);
-                settingsScreen.openAccounts();
+                settingsScreen.openLibraries();
                 accountsScreen.openLibraryAccount(library);
             }
             if (accountScreen.isLogoutRequired()) {

@@ -30,7 +30,7 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
                 bottomMenuForm.open(BottomMenu.SETTINGS);
                 alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
                 bottomMenuForm.open(BottomMenu.SETTINGS);
-                settingsScreen.openAccounts();
+                settingsScreen.openLibraries();
                 accountsScreen.openLibraryAccount(library);
             }
             if (accountScreen.isLogoutRequired()) {

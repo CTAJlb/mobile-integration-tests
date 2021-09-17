@@ -77,6 +77,6 @@ public class AccountSteps {
 
     private void openAccounts() {
         bottomMenuForm.open(BottomMenu.SETTINGS);
-        settingsScreen.openAccounts();
+        settingsScreen.openLibraries();
     }
 }

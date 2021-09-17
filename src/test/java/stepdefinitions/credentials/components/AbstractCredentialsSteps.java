@@ -73,7 +73,7 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
 
     private void openAccounts() {
         bottomMenuForm.open(BottomMenu.SETTINGS);
-        settingsScreen.openAccounts();
+        settingsScreen.openLibraries();
     }
 
     private void storeCredentials(Credentials credentials) {

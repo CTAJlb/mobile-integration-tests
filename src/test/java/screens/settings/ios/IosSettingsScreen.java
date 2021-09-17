@@ -1,6 +1,5 @@
 package screens.settings.ios;
 
-import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
@@ -11,17 +10,15 @@ import screens.settings.SettingsScreen;
 public class IosSettingsScreen extends SettingsScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeNavigationBar[@name=\"Settings\"]";
 
-    private final IButton accountsBtn = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeStaticText[@name=\"Accounts\"]"), "Accounts");
-    private final IButton cancelSyncAgree = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"Not Now\"]"), "Cancel sync agree");
+    private final IButton librariesBtn = getElementFactory().getButton(
+            By.xpath("//XCUIElementTypeStaticText[@name=\"Libraries\"]"), "Accounts");
 
     public IosSettingsScreen() {
         super(By.xpath(MAIN_ELEMENT));
     }
 
     @Override
-    public void openAccounts() {
-        accountsBtn.click();
+    public void openLibraries() {
+        librariesBtn.click();
     }
 }
