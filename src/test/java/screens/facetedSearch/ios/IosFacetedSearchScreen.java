@@ -15,7 +15,7 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
     private static final String FACET_SEARCH_SELECTION = "//XCUIElementTypeButton[@name=\"%1$s\"]";
 
     private final IButton availabilityButton =
-            getElementFactory().getButton(By.xpath(String.format("(%1$s//XCUIElementTypeButton)[2]", MAIN_ELEMENT)), "Availability");
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Availability:\"]/following-sibling::XCUIElementTypeButton[1]"), "Availability");
     private final IButton btnSortBy =
             getElementFactory().getButton(By.xpath(String.format("(%1$s//XCUIElementTypeButton)[1]", MAIN_ELEMENT)), "Sort by");
 
