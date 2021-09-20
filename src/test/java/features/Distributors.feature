@@ -14,11 +14,13 @@ Feature: Distributors
     Then I check that book contains CANCEL_RESERVATION action button on book details view
 
     Scenarios:
-      | distributor | bookType  | tabName    |
-      | Bibliotheca | EBOOK     | eBooks     |
-      | Bibliotheca | AUDIOBOOK | Audiobooks |
-      | Axis 360    | EBOOK     | eBooks     |
-      | Axis 360    | AUDIOBOOK | Audiobooks |
+      | distributor   | bookType  | tabName    |
+      | Bibliotheca   | EBOOK     | eBooks     |
+      | Bibliotheca   | AUDIOBOOK | Audiobooks |
+      | Axis 360      | EBOOK     | eBooks     |
+      | Axis 360      | AUDIOBOOK | Audiobooks |
+      | DPLA Exchange | EBOOK     | eBooks     |
+      | DPLA Exchange | AUDIOBOOK | Audiobooks |
 
   @logout @returnBooks @tier2 @oldOs
   Scenario Outline: Check out from Book Detail View
@@ -36,11 +38,13 @@ Feature: Distributors
     Then Book 'bookInfo' with <bookType> type is present on epub or pdf or audiobook screen
 
     Scenarios:
-      | distributor | bookType  | tabName    | buttonBookDetailsView |
-      | Bibliotheca | EBOOK     | eBooks     | READ                  |
-      | Bibliotheca | AUDIOBOOK | Audiobooks | LISTEN                |
-      | Axis 360    | EBOOK     | eBooks     | READ                  |
-      | Axis 360    | AUDIOBOOK | Audiobooks | LISTEN                |
+      | distributor   | bookType  | tabName    | buttonBookDetailsView |
+      | Bibliotheca   | EBOOK     | eBooks     | READ                  |
+      | Bibliotheca   | AUDIOBOOK | Audiobooks | LISTEN                |
+      | Axis 360      | EBOOK     | eBooks     | READ                  |
+      | Axis 360      | AUDIOBOOK | Audiobooks | LISTEN                |
+      | DPLA Exchange | EBOOK     | eBooks     | READ                  |
+      | DPLA Exchange | AUDIOBOOK | Audiobooks | LISTEN                |
 
   @logout @returnBooks @tier2 @oldOs
   Scenario Outline: Return book from Book Detail View
@@ -57,6 +61,8 @@ Feature: Distributors
     Then I check that book contains GET action button on book details view
 
     Scenarios:
-      | distributor | bookType  | tabName    |
-      | Bibliotheca | EBOOK     | eBooks     |
-      | Bibliotheca | AUDIOBOOK | Audiobooks |
+      | distributor   | bookType  | tabName    |
+      | Bibliotheca   | EBOOK     | eBooks     |
+      | Bibliotheca   | AUDIOBOOK | Audiobooks |
+      | DPLA Exchange | EBOOK     | eBooks     |
+      | DPLA Exchange | AUDIOBOOK | Audiobooks |

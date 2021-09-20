@@ -94,8 +94,8 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void checkCurrentLibraryIsCorrect(String expectedLibraryName) {
-        Assert.assertEquals("Current library name is not correct", expectedLibraryName, mainCatalogToolbarForm.getCatalogName());
+    public void isLibraryPresentOnCatalogScreen(String libraryName) {
+        Assert.assertTrue(String.format("Library %s is not present on Catalog Screen", libraryName), catalogScreen.isLibraryPresent(libraryName));
     }
 
     @Override

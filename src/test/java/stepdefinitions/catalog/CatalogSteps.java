@@ -75,9 +75,9 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openBooks();
     }
 
-    @And("Current library is {string} in Catalog")
-    public void checkCurrentLibraryIsCorrect(String expectedLibraryName) {
-        catalogSteps.checkCurrentLibraryIsCorrect(expectedLibraryName);
+    @And("Library {string} is present on Catalog Screen")
+    public void isLibraryPresentOnCatalogScreen(String libraryName) {
+        catalogSteps.isLibraryPresentOnCatalogScreen(libraryName);
     }
 
     @And("I open {string} category")

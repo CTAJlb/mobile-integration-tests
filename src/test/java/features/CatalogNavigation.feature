@@ -9,7 +9,7 @@ Feature: Catalog Navigation
     Then Category rows are loaded
     When I restart app
     Then Category rows are loaded
-      And Current library is 'LYRASIS Reads' in Catalog
+      And Library 'LYRASIS Reads' is present on Catalog Screen
 
   @tier1 @oldOs
   Scenario: Navigate Lists
