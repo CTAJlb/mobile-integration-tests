@@ -171,10 +171,10 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         subcategoryScreen.state().waitForDisplayed();
         String bookName = context.get(bookNameInfoKey);
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.DO_NOT_ALLOW);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+            AqualityServices.getLogger().info("Alert appears and dismiss alert");
             alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
-            alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
         }
     }
 
@@ -318,7 +318,10 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
             final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         String title = catalogBookModel.getTitle();
-        alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.DO_NOT_ALLOW);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+            AqualityServices.getLogger().info("Alert appears and dismiss alert");
+        }
         boolean isButtonPresent = catalogBooksScreen.isBookAddButtonTextEqualTo(title, actionButtonKey);
         if (!isButtonPresent && catalogBooksScreen.isErrorButtonPresent()) {
             Scenario scenario = context.get(ScenarioContextKey.SCENARIO_KEY);
@@ -344,9 +347,12 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         clickActionButtonOnBookDetailsView(actionButtonKey);
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
-            alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.DO_NOT_ALLOW);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+            AqualityServices.getLogger().info("Alert appears and dismiss alert");
+            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN && actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE && actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION){
+                alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            }
         }
     }
 
