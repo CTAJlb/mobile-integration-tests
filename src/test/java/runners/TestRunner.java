@@ -25,7 +25,9 @@ public class TestRunner{
 
         @BeforeClass
         public static void setup() {
+                System.out.println("Start getting books");
                 XMLUtil xmlUtil = new XMLUtil();
                 GettingBookUtil.setXmlUtil(xmlUtil);
+                System.out.println("end getting books");
         }
 }

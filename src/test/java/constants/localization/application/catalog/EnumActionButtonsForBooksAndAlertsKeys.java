@@ -15,8 +15,6 @@ public enum EnumActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     DELETE("delete"),
     RETURN("return"),
     LISTEN("listen"),
-    NOT_NOW("notNow"),
-    DO_NOT_ALLOW("doNotAllow"),
     CANCEL_RESERVATION("cancelReservation"),
     CANCEL_POPUP("cancelPopup");
 

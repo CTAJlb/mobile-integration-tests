@@ -31,7 +31,7 @@ public interface ICatalogSteps {
 
     void openBooks();
 
-    void checkCurrentLibraryIsCorrect(String expectedLibraryName);
+    void isLibraryPresentOnCatalogScreen(String libraryName);
 
     void openCategory(String categoryName);
 

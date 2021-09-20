@@ -41,11 +41,6 @@ public class AndroidMainCatalogToolbarForm extends MainCatalogToolbarForm {
     }
 
     @Override
-    public String getCatalogName() {
-        return lblCatalogName.getText();
-    }
-
-    @Override
     public String getCategoryName() {
         return lblCategoryName.getText();
     }

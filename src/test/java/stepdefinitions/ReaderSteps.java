@@ -368,7 +368,7 @@ public class ReaderSteps {
         String bookName = catalogBookModel.getTitle();
         switch (readerType) {
             case EBOOK:
-                if (epubReaderScreen.isBookNamePresent()) {
+                if (epubReaderScreen.state().isDisplayed()) {
                     assertBookNameForEpub(catalogBookModel);
                 } else {
                     assertBookNameForPdf(catalogBookModel);

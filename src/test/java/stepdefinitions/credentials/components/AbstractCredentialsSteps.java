@@ -58,12 +58,14 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
         accountsScreen.openLibraryAccount(libraryName);
         Credentials credentials = Configuration.getCredentials(libraryName);
         storeCredentials(credentials);
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+            AqualityServices.getLogger().info("Alert appears and dismiss alert");
         }
         accountScreen.enterCredentialsAndLogin(credentials);
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+            AqualityServices.getLogger().info("Alert appears and dismiss alert");
         }
         boolean isLoginPerformedSuccessfully = AqualityServices.getConditionalWait().waitFor(() -> accountScreen.isLoginSuccessful() || catalogScreen.state().isDisplayed());
         if (!isLoginPerformedSuccessfully) {
@@ -73,7 +75,7 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
 
     private void openAccounts() {
         bottomMenuForm.open(BottomMenu.SETTINGS);
-        settingsScreen.openAccounts();
+        settingsScreen.openLibraries();
     }
 
     private void storeCredentials(Credentials credentials) {

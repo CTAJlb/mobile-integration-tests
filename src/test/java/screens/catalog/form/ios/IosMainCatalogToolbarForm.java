@@ -38,11 +38,6 @@ public class IosMainCatalogToolbarForm extends MainCatalogToolbarForm {
     }
 
     @Override
-    public String getCatalogName() {
-        return lblCategoryAndCatalogName.getText();
-    }
-
-    @Override
     public String getCategoryName() {
         return lblCategoryAndCatalogName.getText();
     }

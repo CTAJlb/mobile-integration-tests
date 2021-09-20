@@ -27,16 +27,11 @@ public class AndroidCatalogScreen extends CatalogScreen {
     private static final String BOOK_COVER_IN_LANE_LOCATOR = "/android.widget.LinearLayout";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN =
             "//android.widget.TextView[contains(@resource-id,\"accountTitle\") and @text=\"%s\"]";
-    private static final String BOOKS_LOCATOR = "//androidx.recyclerview.widget.RecyclerView[1]"
-            + "//android.widget.LinearLayout[@content-desc]";
     private static final String FEED_LANE_TITLES_LOC = "//*[contains(@resource-id,\"feedLaneTitle\")]";
-    private static final String BOOK_IN_LANE_LOCATOR_PATTERN =
-            "//*[contains(@text,'{%s} - Medium {%s}')]/following-sibling::androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout";
     private static final String CATEGORY_NAME_XPATH_LOCATOR = "//android.widget.LinearLayout/android.widget.TextView";
+    private static final String LIBRARY_NAME_LOC = "//android.widget.TextView[@text=\"%s\" and contains(@resource-id,\"feedLibraryText\")]";
 
     private final ILabel lblFirstLaneName = getElementFactory().getLabel(By.xpath(FEED_LANE_TITLES_LOC), "First lane name");
-    private final ILabel lblMainFragment =
-            getElementFactory().getLabel(By.id("tabbedFragmentHolder"), "Main fragment to swipe on");
     private final IButton btnErrorMessage = getElementFactory().getButton(By.xpath("//*[contains(@text, \"Details\")]"), "Details");
     private final ILabel lblErrorMessage = getElementFactory().getLabel(By.id("errorDetails"), "Error message");
     private final ILabel lblScreen = getElementFactory().getLabel(By.id("mainFragmentHolder"), "Screen to swipe");
@@ -102,24 +97,13 @@ public class AndroidCatalogScreen extends CatalogScreen {
     }
 
     @Override
-    public void swipeScreenUp() {
-        SwipeElementUtils.swipeElementDown(lblMainFragment);
-    }
-
-    @Override
     public boolean isErrorButtonPresent() {
         return btnErrorMessage.state().isDisplayed();
     }
 
     @Override
-    public String getErrorDetails() {
-        if (isErrorButtonPresent()) {
-            btnErrorMessage.click();
-            AqualityServices.getLogger().info(AqualityServices.getApplication().getDriver().getPageSource());
-            return getErrorMessage();
-        }
-        AqualityServices.getLogger().info("Error details button is not present");
-        return "";
+    public boolean isLibraryPresent(String libraryName) {
+        return getElementFactory().getLabel(By.xpath(String.format(LIBRARY_NAME_LOC, libraryName)), "labelLibraryName").state().waitForDisplayed();
     }
 
     @Override

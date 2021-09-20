@@ -123,9 +123,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     @Override
     public void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKeys) {
         IButton actionButton = getActionButton(buttonKeys);
-        TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        action.tap(PointOption.point(actionButton.getElement().getCenter()));
-        action.perform();
+        actionButton.click();
     }
 
     @Override
