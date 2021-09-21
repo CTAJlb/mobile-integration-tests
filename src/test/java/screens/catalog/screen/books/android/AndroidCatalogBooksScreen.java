@@ -160,8 +160,12 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     private void clickOnSpecificBookElement(IElement bookWithSpecificAddBtn) {
-        bookWithSpecificAddBtn.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        bookWithSpecificAddBtn.click();
+        if (bookWithSpecificAddBtn.state().isDisplayed()){
+            bookWithSpecificAddBtn.click();
+        }else {
+            bookWithSpecificAddBtn.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+            bookWithSpecificAddBtn.click();
+        }
     }
 
     private IButton getAddBookButton(EnumActionButtonsForBooksAndAlertsKeys button) {

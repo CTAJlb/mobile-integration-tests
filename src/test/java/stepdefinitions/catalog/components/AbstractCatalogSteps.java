@@ -17,12 +17,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.alert.AlertScreen;
+import screens.audioplayer.AudioPlayerScreen;
 import screens.bookDetails.BookDetailsScreen;
 import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
 import screens.catalog.form.MainCatalogToolbarForm;
 import screens.catalog.screen.books.CatalogBooksScreen;
 import screens.catalog.screen.catalog.CatalogScreen;
+import screens.epubreader.EpubReaderScreen;
 import screens.facetedSearch.FacetedSearchScreen;
 import screens.subcategory.SubcategoryScreen;
 import stepdefinitions.BaseSteps;
@@ -38,6 +40,8 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     protected final MainCatalogToolbarForm mainCatalogToolbarForm;
     protected final CatalogBooksScreen catalogBooksScreen;
     protected final FacetedSearchScreen facetedSearchScreen;
+    protected final AudioPlayerScreen audioPlayerScreen;
+    protected final EpubReaderScreen epubReaderScreen;
     protected final ScenarioContext context;
     private final AlertScreen alertScreen;
 
@@ -51,6 +55,8 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         catalogBooksScreen = AqualityServices.getScreenFactory().getScreen(CatalogBooksScreen.class);
         facetedSearchScreen = AqualityServices.getScreenFactory().getScreen(FacetedSearchScreen.class);
         alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
+        audioPlayerScreen = AqualityServices.getScreenFactory().getScreen(AudioPlayerScreen.class);
+        epubReaderScreen = AqualityServices.getScreenFactory().getScreen(EpubReaderScreen.class);
     }
 
     @Override
@@ -367,13 +373,15 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         context.add(bookInfoKey, subcategoryScreen.openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(bookName, actionButtonKey, bookType));
     }
 
-    public void openBookWithSpecifyTypeOnBookDetailsView(ReaderType readerType) {
+    public void startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(ReaderType readerType) {
         switch (readerType) {
             case EBOOK:
                 clickActionButtonOnBookDetailsView(EnumActionButtonsForBooksAndAlertsKeys.READ);
+                epubReaderScreen.state().waitForDisplayed();
                 break;
             case AUDIOBOOK:
                 clickActionButtonOnBookDetailsView(EnumActionButtonsForBooksAndAlertsKeys.LISTEN);
+                audioPlayerScreen.state().waitForDisplayed();
                 break;
         }
     }
