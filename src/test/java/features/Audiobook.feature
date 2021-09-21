@@ -34,6 +34,7 @@ Feature: Audiobook
     When I press on the book details view at the action button LISTEN
       And Open chapter list for an audiobook
     When I select the chapter not equal to the first 1 chapters and remember selected chapter text as 'newChapterText'
+      And I wait for 3 seconds
       And I return to previous screen for audiobook
       And I press on the book details view at the action button LISTEN
     Then I check that current chapter text equal to remembered 'newChapterText'

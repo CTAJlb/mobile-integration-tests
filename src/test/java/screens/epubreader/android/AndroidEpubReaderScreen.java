@@ -40,7 +40,7 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
             getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_title\")]"), "Chapter Name");
 
     public AndroidEpubReaderScreen() {
-        super(By.id("//android.view.View[@resource-id=\"reflowable-book-frame\"]"));
+        super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"readerContainer\")]"));
     }
 
     @Override

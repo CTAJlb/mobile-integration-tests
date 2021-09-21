@@ -21,14 +21,14 @@ import java.util.List;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
-    private static final String MAIN_ELEMENT = "player_cover";
+    private static final String UNIQUE_ELEMENT = "//android.widget.ImageView[contains(@resource-id,\"player_jump_forwards\")]";
     private static final String CHAPTERS_LOC = "//android.widget.RelativeLayout[.//*[contains(@resource-id, \"player_toc_item_view_title\")]]";
     private static final String CHAPTERS_TEXT = "//android.widget.RelativeLayout//android.widget.TextView[contains(@resource-id, \"player_toc_item_view_title\")]";
     private static final String LOADING_SCREEN_XPATH = "//*[contains(@resource-id,\"player_toc_item_downloading_progress\")]";
     private static final String SPEED_OPTION_XPATH_LOCATOR_PATTERN = "//*[contains(@resource-id, \"player_menu_playback_rate_text\") and @text=\"%sx\"]";
     private static final String TIMER_XPATH_PATTERN_LOCATOR = "//*[contains(@resource-id, \"player_sleep_item_view_name\") and @text=\"%s\"]";
     private static final String TIMER_SETTING_XPATH_LOCATOR_PATTERN = "//*[contains(@resource-id, \"player_menu_sleep\") and @content-desc=\"Set Your Sleep Timer. The Sleep Timer Is Currently Set To Sleep At %s\"]";
-    private static final String AUDIOBOOK_NAME_LOCATOR = "//android.widget.TextView[@name=\"%s\"]";
+    private static final String AUDIOBOOK_NAME_LOCATOR = "//android.widget.TextView[@text=\"%s\"]";
 
     private final IButton btnMenu = getElementFactory().getButton(By.id("player_menu_toc"), "Menu");
     private final ILabel lblCurrentChapter = getElementFactory().getLabel(By.id("player_spine_element"), "Current chapter");
@@ -46,7 +46,7 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     private final IButton btnSleep = getElementFactory().getButton(By.id("player_menu_sleep_image"), "Sleep");
 
     public AndroidAudioPlayerScreen() {
-        super(By.id(MAIN_ELEMENT));
+        super(By.xpath(UNIQUE_ELEMENT));
     }
 
     public List<ILabel> getChapters() {
@@ -175,8 +175,8 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public boolean isAudiobookNameCorrect(String audiobookName) {
-        boolean isAudiobookNameCorrect = getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME_LOCATOR, audiobookName)), "audiobookName").state().isDisplayed();
+    public boolean isAudiobookNamePresent(String audiobookName) {
+        boolean isAudiobookNameCorrect = getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME_LOCATOR, audiobookName)), "audiobookName").state().waitForDisplayed();
         return isAudiobookNameCorrect;
     }
 

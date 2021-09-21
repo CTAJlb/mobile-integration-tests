@@ -18,7 +18,7 @@ public class AndroidFacetedSearchScreen extends FacetedSearchScreen {
 
     private final IButton btnSortBy = getElementFactory().getButton(By.xpath(SORTING_BUTTON_XPATH_PATTERN + "[2]"), "Sort By");
     private final IButton btnAvailability =
-            getElementFactory().getButton(By.xpath(MAIN_ELEMENT + "/android.widget.TextView[contains(@text,\"Availability:\")]/following-sibling::android.widget.Button"), "Availability");
+            getElementFactory().getButton(By.xpath(MAIN_ELEMENT + "/android.widget.Button[1]"), "Availability");
 
     public AndroidFacetedSearchScreen() {
         super(By.xpath(MAIN_ELEMENT));

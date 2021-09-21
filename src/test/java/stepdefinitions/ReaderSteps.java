@@ -368,14 +368,14 @@ public class ReaderSteps {
         String bookName = catalogBookModel.getTitle();
         switch (readerType) {
             case EBOOK:
-                if (epubReaderScreen.state().isDisplayed()) {
+                if (epubReaderScreen.state().waitForDisplayed()) {
                     assertBookNameForEpub(catalogBookModel);
                 } else {
                     assertBookNameForPdf(catalogBookModel);
                 }
                 break;
             case AUDIOBOOK:
-                Assert.assertTrue("AudiobookName is not present on audiobook screen", audioPlayerScreen.isAudiobookNameCorrect(bookName));
+                Assert.assertTrue("AudiobookName is not present on audiobook screen", audioPlayerScreen.isAudiobookNamePresent(bookName));
                 break;
         }
     }

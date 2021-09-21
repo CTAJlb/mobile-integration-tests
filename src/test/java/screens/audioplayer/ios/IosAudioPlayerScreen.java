@@ -233,8 +233,8 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public boolean isAudiobookNameCorrect(String audiobookName) {
-        boolean isAudiobookNameCorrect = getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME_LOCATOR, audiobookName)), "audiobookName").state().isDisplayed();
-        return isAudiobookNameCorrect;
+    public boolean isAudiobookNamePresent(String audiobookName) {
+        boolean isAudiobookNamePresent = getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME_LOCATOR, audiobookName)), "audiobookName").state().waitForDisplayed();
+        return isAudiobookNamePresent;
     }
 }

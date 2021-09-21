@@ -284,9 +284,9 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.closeBookDetailsOnlyForIOSTab();
     }
 
-    @When("I read book with {} type from book details view")
+    @When("I start reading or listening to a book with {} type from book details view")
     public void openGivenTypeBookReader(ReaderType readerType) {
-        catalogSteps.openBookWithSpecifyTypeOnBookDetailsView(readerType);
+        catalogSteps.startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(readerType);
     }
 
     @When("I open first present category")

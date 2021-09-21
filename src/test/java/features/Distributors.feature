@@ -34,7 +34,7 @@ Feature: Distributors
       And Open '<bookType>' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
       And I press on the book details view at the action button GET
     Then I check that book contains <buttonBookDetailsView> action button on book details view
-    When I read book with <bookType> type from book details view
+    When I start reading or listening to a book with <bookType> type from book details view
     Then Book 'bookInfo' with <bookType> type is present on epub or pdf or audiobook screen
 
     Scenarios:
