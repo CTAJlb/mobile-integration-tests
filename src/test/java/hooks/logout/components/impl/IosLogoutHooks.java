@@ -28,7 +28,7 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
         for (String library : listOfLibraries) {
             if (!accountScreen.state().isDisplayed()) {
                 bottomMenuForm.open(BottomMenu.SETTINGS);
-                if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+                if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
                     AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
                     AqualityServices.getLogger().info("Alert appears and dismiss alert");
                 }
