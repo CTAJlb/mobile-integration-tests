@@ -8,10 +8,8 @@ Feature: Manage Libraries
   @tier1 @oldOs
   Scenario: Switch Library Catalogs
     When I add "Digital Public Library of America" account from welcomeScreen
-      And I add 'LYRASIS Reads' account
-      And Catalog is opened
       And I get names of books on screen and save them as 'nameOfBooks'
-      And I switch to 'LYRASIS Reads' from side menu
+      And I add 'LYRASIS Reads' account
     Then Category rows are loaded
       And List of books on screen is not equal to list of books saved as 'nameOfBooks'
 

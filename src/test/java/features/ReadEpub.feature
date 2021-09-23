@@ -58,7 +58,7 @@ Feature: Read EPUB
 
   @tier1 @oldOs
   Scenario: Return to Page (Bookmarking)
-    When I scroll page forward from 1 to 3 times
+    When I scroll page forward from 1 to 2 times
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I wait for 3 seconds
       And I return to previous screen for epub and pdf
