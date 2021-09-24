@@ -8,10 +8,8 @@ Feature: Manage Libraries
   @tier1 @oldOs
   Scenario: Switch Library Catalogs
     When I add "Digital Public Library of America" account from welcomeScreen
-      And I add 'LYRASIS Reads' account
-      And Catalog is opened
       And I get names of books on screen and save them as 'nameOfBooks'
-      And I switch to 'LYRASIS Reads' from side menu
+      And I add 'LYRASIS Reads' account
     Then Category rows are loaded
       And List of books on screen is not equal to list of books saved as 'nameOfBooks'
 
@@ -49,7 +47,7 @@ Feature: Manage Libraries
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Switch Library Reservations
-    When I add "Digital Public Library of America" account from welcomeScreen
+    When I add "Internet Archive" account from welcomeScreen
     When I add 'LYRASIS Reads' account
       And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
@@ -68,7 +66,7 @@ Feature: Manage Libraries
       And Book 'bookInfo' is present in Holds List
     When I open Catalog
       And I open Catalog
-      And I switch to 'Digital Public Library of America' from side menu
+      And I switch to 'Internet Archive' from side menu
       And Open Holds
     Then Holds feed is loaded
       And No books are present in Holds list

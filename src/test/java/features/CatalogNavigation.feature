@@ -12,41 +12,23 @@ Feature: Catalog Navigation
       And Library 'LYRASIS Reads' is present on Catalog Screen
 
   @tier1 @oldOs
-  Scenario: Navigate Lists
+  Scenario: Browse Categories
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
     Then Category rows are loaded
       And Count of books in first lane is more than 1
     When I get names of books on screen and save them as 'listOfBooksOnMainPage'
-      And I open 'Children\'s Books' category
-    Then Current category name is 'Children\'s Books'
+      And I open categories by chain and chain starts from CategoryScreen:
+        | Fiction  |
+        | Classics |
+    Then Subcategory name is 'Classics'
       And Subcategory rows are loaded
       And Following subcategories are present:
-        | Classics             |
-        | Fiction              |
-        | Nonfiction           |
-        | All Children's Books |
+        |All Classics|
     And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
-    And I open 'Fiction' subcategory
+    And I open 'All Classics' subcategory
     Then Subcategory screen is present
-      And Subcategory name is 'Fiction'
-
-  @tier1
-  Scenario: Browse Lanes/Categories
-    When I add "Digital Public Library of America" account from welcomeScreen
-      And I open Catalog
-    Then Category rows are loaded
-      And Count of books in first lane is more than 1
-    When I open 'Children\'s Books' category
-    Then Current category name is 'Children\'s Books'
-      And Following subcategories are present:
-        | Classics             |
-        | Fiction              |
-        | Nonfiction           |
-        | All Children's Books |
-    When I open 'Fiction' subcategory
-    Then Subcategory screen is present
-      And Subcategory name is 'Fiction'
+      And Subcategory name is 'All Classics'
     When I open first book in Subcategory List and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
 
