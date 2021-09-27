@@ -178,9 +178,12 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         String bookName = context.get(bookNameInfoKey);
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
-            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
-            AqualityServices.getLogger().info("Alert appears and dismiss alert");
-            alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION){
+                alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            }else {
+                AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+                AqualityServices.getLogger().info("Alert appears and dismiss alert");
+            }
         }
     }
 
