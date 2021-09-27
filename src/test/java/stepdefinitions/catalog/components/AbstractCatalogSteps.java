@@ -137,7 +137,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain) {
         categoriesChain.stream().forEach(categoryName -> {
-            if (catalogScreen.state().isDisplayed()) {
+            if (catalogScreen.state().waitForDisplayed()) {
                 catalogScreen.openCategory(categoryName);
             } else {
                 subcategoryScreen.state().waitForDisplayed();
@@ -354,10 +354,11 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         clickActionButtonOnBookDetailsView(actionButtonKey);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
-            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
-            AqualityServices.getLogger().info("Alert appears and dismiss alert");
-            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN && actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE && actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION){
+            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION){
                 alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            }else {
+                AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+                AqualityServices.getLogger().info("Alert appears and dismiss alert");
             }
         }
     }

@@ -38,12 +38,12 @@ Feature: Manage Libraries
         |2021 New Public Domain Books|
       And DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
       And I open Books
-    Then Book 'bookInfo' is present in Books List
+    Then Book 'bookInfo' with READ action button is present on Books Screen
     When I open Catalog
       And I return to previous screen for epub and pdf
       And I switch to 'LYRASIS Reads' from side menu
       And I open Books
-    Then No books are present in Books list
+    Then There are not books on Books Screen
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Switch Library Reservations

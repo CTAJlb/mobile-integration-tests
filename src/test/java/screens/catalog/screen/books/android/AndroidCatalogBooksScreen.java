@@ -22,7 +22,7 @@ import java.util.Objects;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
-    private static final String ADD_BOOK_BUTTON_PATTERN = "//android.widget.Button[@content-desc=\"%1$s\"]";
+    private static final String ADD_BOOK_BUTTON_PATTERN = "//android.widget.Button[@text=\"%1$s\"]";
     private static final String BOOKS_LOC = ".//*[contains(@resource-id,\"bookCellIdle\")]";
     private static final String BOOK_BLOCK_BY_TITLE_LOC =
             "//*[contains(@resource-id,\"bookCellIdle\") and .//*[contains(@resource-id,\"bookCellIdleTitle\") and contains(@text, \"%1$s\")]]";
@@ -30,16 +30,16 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     private static final String BOOK_AUTHOR_LOC = "//*[contains(@resource-id,\"bookCellIdleAuthor\")]";
     private static final String BOOK_TYPE_LOC = "//*[contains(@resource-id,\"bookCellIdleMeta\")]";
     private static final String BOOK_ADD_BUTTON_LOC =
-            "//*[contains(@resource-id,\"bookCellIdleButtons\")]/android.widget.Button[@content-desc=\"%1$s\"]";
+            "//*[contains(@resource-id,\"bookCellIdleButtons\")]/android.widget.Button[@text=\"%1$s\"]";
     private static final String BOOK_OF_TYPE_BUTTON_PATTERN =
             "//android.widget.TextView[contains(@resource-id,\"bookCellIdleMeta\") and @text=\"%1$s\"]"
-                    + "/following-sibling::android.widget.LinearLayout/android.widget.Button[@content-desc=\"%2$s\"]";
+                    + "/following-sibling::android.widget.LinearLayout/android.widget.Button[@text=\"%2$s\"]";
     private static final String BOOK_BY_NAME_BUTTON_PATTERN =
-            "//android.widget.TextView[contains(@resource-id,\"bookCellIdleTitle\") and @text=\"%1$s\"]/following-sibling::android.widget.LinearLayout/android.widget.Button[@content-desc=\"%2$s\"]";
+            "//android.widget.TextView[contains(@resource-id,\"bookCellIdleTitle\") and @text=\"%1$s\"]/following-sibling::android.widget.LinearLayout/android.widget.Button[@text=\"%2$s\"]";
     private static final String BOOK_COVER_LOCATOR = "//*[contains(@resource-id,\"bookCellIdleCover\")]";
     private static final String LBL_IN_PROGRESS_TITLE = "//android.widget.TextView[contains(@resource-id,\"bookCellInProgressTitle\") and @text=\"%s\"]";
     private static final String BOOK_JACKET_XPATH_PATTERN =
-            "//*[contains(@resource-id,\"bookCellIdle\") and .//android.widget.Button[@content-desc=\"%1$s\"]]";
+            "//*[contains(@resource-id,\"bookCellIdle\") and .//android.widget.Button[@text=\"%1$s\"]]";
     private String RELATIVE_BOOK_TITLE_LOCATOR_PATTERN =
             "%s/../preceding-sibling::android.widget.TextView[contains(@resource-id,\"bookCellIdleTitle\")]";
 

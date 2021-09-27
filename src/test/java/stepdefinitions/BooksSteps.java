@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -20,23 +21,28 @@ public class BooksSteps {
         booksScreen = AqualityServices.getScreenFactory().getScreen(BooksScreen.class);
     }
 
-    @Then("No books are present in Books list")
+    @Then("There are not books on Books Screen")
     public void checkNoBooksArePresentInBooksList() {
         Assert.assertTrue("Books are present in Books list", booksScreen.isNoBooksMessagePresent());
     }
 
-    @Then("Book {string} is present in Books List")
-    public void checkBookInfoIsPresentInBooksList(String bookInfoKey) {
+    @When("I open {string} book with {} action button on Books Screen")
+    public void openBookDetailsByClickingOnCover(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         booksScreen.state().waitForDisplayed();
-        //AqualityServices.getConditionalWait().waitFor(() -> booksScreen.isNoBooksMessagePresent() || booksScreen.getCountOfBooks() > 0);
-        Assert.assertTrue(String.format("Book '%s' is not present in Books List", bookInfo), booksScreen.isBookPresent(bookInfo));
+        booksScreen.openBookWithDefiniteNameAndDefiniteActionButton(bookInfo, actionButtonKey);
     }
 
-    @Then("Book {string} is not present in Books List")
-    public void checkBookInfoIsNotPresentInBooksList(String bookInfoKey) {
+    @Then("Book {string} with {} action button is not present on Books Screen")
+    public void checkBookWithReadActionButtonIsNotPresentInBooksList(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
-        Assert.assertFalse(String.format("Book '%s' is present in Books List", bookInfo), booksScreen.isBookPresent(bookInfo));
+        Assert.assertFalse(String.format("Book '%s' with action button is present in Books List", bookInfo), booksScreen.isSpecificBookWithSpecificActionButtonPresent(bookInfo, actionButtonKey));
+    }
+
+    @Then("Book {string} with {} action button is present on Books Screen")
+    public void checkBookWithReadActionButtonIsPresentInBooksList(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        CatalogBookModel bookInfo = context.get(bookInfoKey);
+        Assert.assertTrue(String.format("Book '%s' with action button is not present in Books List", bookInfo), booksScreen.isSpecificBookWithSpecificActionButtonPresent(bookInfo, actionButtonKey));
     }
 
     @And("Count of books is equal to {int}")

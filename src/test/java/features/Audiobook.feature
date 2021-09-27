@@ -8,8 +8,8 @@ Feature: Audiobook
     When I open Catalog
       And I switch to 'Audiobooks' catalog tab
     When I open categories by chain and chain starts from CategoryScreen:
-      | Fiction  |
-      | Classics |
+      | Fiction   |
+      | Adventure |
       And I open the book details for the subsequent GET on Subcategory List View and save it as 'bookInfo'
 
   @logout @returnBooks @tier2 @oldOs @tablet
@@ -43,7 +43,7 @@ Feature: Audiobook
       And I wait for 3 seconds
       And I restart app
       And I open Books
-      And I open book 'bookInfo' details by clicking on cover
+      And I open 'bookInfo' book with LISTEN action button on Books Screen
       And I press on the book details view at the action button LISTEN
     Then I check that current chapter text equal to remembered 'newChapterText2'
 

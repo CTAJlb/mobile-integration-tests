@@ -24,7 +24,7 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     private static final String SUBCATEGORY_ROWS_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[@name]";
     private static final String SPECIFIC_SUBCATEGORY_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
     private static final String BOOK_BUTTON_XPATH = BOOKS_LOCATOR + "//XCUIElementTypeButton";
-    private static final String BOOK_COVER_XPATH_PATTERN = "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]";
+    private static final String SPECIFIC_BOOK_IMAGE_LOC = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final String AUTHOR_INFO_XPATH = "//XCUIElementTypeStaticText[@name][2]";
     private static final String BOOK_NAME_XPATH =
             "//XCUIElementTypeStaticText[@name and not(.//ancestor::XCUIElementTypeButton)][1]";
@@ -72,14 +72,14 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     public void openBook(CatalogBookModel bookInfo) {
         waitForPageLoading();
         String title = bookInfo.getTitle();
-        By locator = By.xpath(String.format(BOOK_COVER_XPATH_PATTERN, title));
-        AqualityServices.getLogger().info("Count of books to click - " + getElementFactory().findElements(locator, ElementType.LABEL).size());
+        By locator = By.xpath(String.format(SPECIFIC_BOOK_IMAGE_LOC, title));
+        IButton buttonBoolCover = getElementFactory().getButton(locator, title);
         try {
             Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        getElementFactory().getButton(locator, title).click();
+        buttonBoolCover.click();
     }
 
     @Override
@@ -125,6 +125,7 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     @Override
     public void openCategory(String categoryName) {
         IButton categoryButton = getCategoryButton(categoryName);
+        categoryButton.state().waitForDisplayed();
         categoryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         categoryButton.click();
     }
