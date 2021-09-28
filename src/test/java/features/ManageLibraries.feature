@@ -13,15 +13,8 @@ Feature: Manage Libraries
     Then Category rows are loaded
       And List of books on screen is not equal to list of books saved as 'nameOfBooks'
 
-  @tier1 @exclude_ios @oldOs
+  @tier1 @oldOs
   Scenario: Remove library
-    When I add "LYRASIS Reads" account from welcomeScreen
-      And I add 'Digital Public Library of America' account
-      And I remove 'Digital Public Library of America' account
-    Then Account 'Digital Public Library of America' is not present on Accounts screen
-
-  @tier1 @exclude_android @oldOs
-  Scenario: Remove library(IOS)
     When I add "LYRASIS Reads" account from welcomeScreen
     And I add 'Digital Public Library of America' account
     And I switch to 'LYRASIS Reads' from side menu
