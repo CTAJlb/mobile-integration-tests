@@ -22,7 +22,7 @@ public class IosBooksScreen extends BooksScreen {
     private static final String MAIN_ELEMENT_LOC = "//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[@name=\"My Books\"]";
     private static final String SPECIFIC_BOOK_NAME_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]";
     private static final String BOOKS_LOC = "//XCUIElementTypeCollectionView//XCUIElementTypeCell";
-    private static final String SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%s\")]/following-sibling::XCUIElementTypeOther//XCUIElementTypeButton[@name=\"%s\"]";
+    private static final String SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%s\")]/following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeButton";
     private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
 
     private ILabel mainBooksElementCollection = getElementFactory().getLabel(
