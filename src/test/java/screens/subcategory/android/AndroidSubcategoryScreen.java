@@ -12,8 +12,6 @@ import constants.application.attributes.AndroidAttributes;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.StaleElementReferenceException;
 import screens.subcategory.SubcategoryScreen;
 
 import java.util.List;
@@ -26,8 +24,6 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     private static final String FEED_LANE_TITLES_LOC = "//*[contains(@resource-id,\"feedLaneTitle\")]";
     public static final String BOOK_BUTTON_XPATH =
             "//android.widget.LinearLayout[contains(@resource-id,\"bookCellIdleButtons\")]/android.widget.Button";
-    public static final String BOOK_COVER_LOCATOR_PATTERN =
-            "//android.widget.ImageView[contains(@resource-id, \"bookCellIdleCover\") and @content-desc=\"%s\"]";
     private static final String AUTHOR_INFO_XPATH =
             "//android.widget.TextView[contains(@resource-id, \"bookCellIdleAuthor\")]";
     private static final String BOOK_NAME_XPATH =
@@ -36,15 +32,14 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
             "//android.widget.TextView[contains(@resource-id, \"bookCellIdleMeta\")]";
     public static final String BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN = "//android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\") and @text=\"%s\"]/following-sibling::android.widget.LinearLayout//android.widget.Button[@text=\"%s\"]";
     public static final String BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN = "/parent::android.widget.LinearLayout/preceding-sibling::android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
-    public static final String BOOK_TITLE_WITH_DEFINITE_NAME_LOCATOR_PATTERN = "//android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\") and @text=\"%s\"]";
     public static final String AUTHOR_LABEL_LOCATOR_PART = "/parent::android.widget.LinearLayout/preceding-sibling::android.widget.TextView[contains(@resource-id, \"bookCellIdleAuthor\")]";
+    private static final String SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC = "//android.widget.TextView[contains(@text,\"%s\")]/following-sibling::android.widget.LinearLayout/android.widget.Button[@text=\"%s\"]";
+    private static final String SPECIFIC_BOOK_NAME_LOC = "//android.widget.TextView[contains(@text,\"%s\")]";
 
     private final ILabel lblFirstBookImageCover =
             getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR), "First book image info");
     private final ILabel lblFirstBookTitle =
             getElementFactory().getLabel(By.xpath(BOOK_NAME_XPATH), "First book title");
-    private final ILabel lblFirstBookType =
-            getElementFactory().getLabel(By.xpath(TYPE_INFO_XPATH), "First book type");
     private final ILabel lblFirstBookAuthor =
             getElementFactory().getLabel(By.xpath(AUTHOR_INFO_XPATH), "First book author");
     private final ILabel lblErrorDetails = getElementFactory().getLabel(By.id("errorDetails"), "Error details");
@@ -80,23 +75,26 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
-    public void openBook(CatalogBookModel bookInfo) {
-        String bookTitle = bookInfo.getTitle();
-        IButton button = getElementFactory().getButton(By.xpath(String.format(BOOK_TITLE_WITH_DEFINITE_NAME_LOCATOR_PATTERN, bookTitle)), bookTitle);
-        if (!button.state().waitForDisplayed()) {
-            button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+    public void openBookWithDefiniteNameAndDefiniteActionButton(CatalogBookModel bookInfo, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        String bookName = bookInfo.getTitle();
+        String actionButtonString = actionButtonKey.i18n();
+        IButton actionButton = getElementFactory().getButton(By.xpath(String.format(SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC, bookName, actionButtonString)), "Action Button");
+        if (!actionButton.state().waitForDisplayed()) {
+            actionButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         }
-        Point coordinates = getCenter(button);
-        AqualityServices.getConditionalWait().waitFor(() -> coordinates.equals(getCenter(button)));
-        button.click();
+        if (actionButton.state().isDisplayed()) {
+            getElementFactory().getButton(By.xpath(String.format(SPECIFIC_BOOK_NAME_LOC, bookName)), bookName).click();
+        } else {
+            throw new RuntimeException("There is not book with action button and title-" + bookName);
+        }
     }
 
     @Override
-    public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType) {
+    public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIAndGetBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType) {
         String actionButton = "";
-        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET){
+        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET) {
             actionButton = "Get";
-        }else if(actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE){
+        } else if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
             actionButton = "Reserve";
         }
         String locator = String.format(BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN, bookName, actionButton);
@@ -186,17 +184,5 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     private String getErrorDetails() {
         lblErrorDetails.state().waitForDisplayed();
         return lblErrorDetails.getText();
-    }
-
-    private Point getCenter(IButton button) {
-        Point center;
-        try {
-            center = button.getElement().getCenter();
-        } catch (StaleElementReferenceException exception) {
-            AqualityServices.getLogger().debug("Caught exception - " + exception.getLocalizedMessage());
-            button.state().waitForExist();
-            center = button.getElement().getCenter();
-        }
-        return center;
     }
 }

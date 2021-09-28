@@ -24,7 +24,6 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     private static final String SUBCATEGORY_ROWS_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[@name]";
     private static final String SPECIFIC_SUBCATEGORY_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
     private static final String BOOK_BUTTON_XPATH = BOOKS_LOCATOR + "//XCUIElementTypeButton";
-    private static final String SPECIFIC_BOOK_IMAGE_LOC = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final String AUTHOR_INFO_XPATH = "//XCUIElementTypeStaticText[@name][2]";
     private static final String BOOK_NAME_XPATH =
             "//XCUIElementTypeStaticText[@name and not(.//ancestor::XCUIElementTypeButton)][1]";
@@ -32,6 +31,10 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     public static final String BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther//XCUIElementTypeButton//XCUIElementTypeStaticText[@name=\"%s\"]";
     public static final String BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN = "/parent::XCUIElementTypeButton/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String AUTHOR_LABEL_LOCATOR_PATTERN = "/parent::XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
+
+    private static final String SPECIFIC_BOOK_NAME_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]";
+    private static final String SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%s\")]/following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeButton";
+
     private static final int COUNT_OF_ITEMS_TO_WAIT_FOR = 3;
     private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
 
@@ -69,21 +72,22 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
-    public void openBook(CatalogBookModel bookInfo) {
-        waitForPageLoading();
-        String title = bookInfo.getTitle();
-        By locator = By.xpath(String.format(SPECIFIC_BOOK_IMAGE_LOC, title));
-        IButton buttonBoolCover = getElementFactory().getButton(locator, title);
-        try {
-            Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    public void openBookWithDefiniteNameAndDefiniteActionButton(CatalogBookModel bookInfo, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        String bookName = bookInfo.getTitle();
+        String actionButtonString = actionButtonKey.i18n();
+        IButton actionButton = getElementFactory().getButton(By.xpath(String.format(SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC, bookName, actionButtonString)), "Action Button");
+        if (!actionButton.state().waitForDisplayed()) {
+            actionButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         }
-        buttonBoolCover.click();
+        if (actionButton.state().isDisplayed()) {
+            getElementFactory().getButton(By.xpath(String.format(SPECIFIC_BOOK_NAME_LOC, bookName)), bookName).click();
+        } else {
+            throw new RuntimeException("There is not book with action button and title-" + bookName);
+        }
     }
 
     @Override
-    public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType) {
+    public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIAndGetBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType) {
         String titleForLocator = bookName;
         if (bookType.toLowerCase().equals("audiobook")) {
             titleForLocator = titleForLocator + ". Audiobook.";
@@ -175,9 +179,5 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
 
     private List<aquality.appium.mobile.elements.interfaces.IElement> getElements(String xpath, ElementType label) {
         return getElementFactory().findElements(By.xpath(xpath), label);
-    }
-
-    private void waitForPageLoading() {
-        AqualityServices.getConditionalWait().waitFor(() -> getElements(BOOK_BUTTON_XPATH, ElementType.BUTTON).size() >= COUNT_OF_ITEMS_TO_WAIT_FOR);
     }
 }

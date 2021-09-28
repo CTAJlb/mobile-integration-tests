@@ -347,10 +347,10 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void openBookDetailsByClickingOnCover(String bookInfoKey) {
+    public void openSpecificBookWithSpecificActionButton(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         subcategoryScreen.state().waitForDisplayed();
-        subcategoryScreen.openBook(bookInfo);
+        subcategoryScreen.openBookWithDefiniteNameAndDefiniteActionButton(bookInfo, actionButtonKey);
     }
 
     @Override
@@ -373,8 +373,8 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey, String bookType) {
-        context.add(bookInfoKey, subcategoryScreen.openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(bookName, actionButtonKey, bookType));
+    public void openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIOAndSaveBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey, String bookType) {
+        context.add(bookInfoKey, subcategoryScreen.openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIAndGetBookInfo(bookName, actionButtonKey, bookType));
     }
 
     public void startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(ReaderType readerType) {
