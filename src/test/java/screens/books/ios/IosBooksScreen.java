@@ -41,7 +41,7 @@ public class IosBooksScreen extends BooksScreen {
 
     @Override
     public boolean isSpecificBookWithSpecificActionButtonPresent(CatalogBookModel bookInfo, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        addWait();
+        //addWait();
         String actionButton = actionButtonKey.i18n();
         IButton actionButtonOnBook = getElementFactory()
                 .getButton(By.xpath(String.format(SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC, bookInfo.getTitle(), actionButton)),
@@ -52,13 +52,13 @@ public class IosBooksScreen extends BooksScreen {
         return actionButtonOnBook.state().waitForDisplayed();
     }
 
-    private void addWait(){
+    /*private void addWait(){
         try {
             Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     @Override
     public int getCountOfBooks() {
@@ -72,7 +72,7 @@ public class IosBooksScreen extends BooksScreen {
 
     @Override
     public void openBookWithDefiniteNameAndDefiniteActionButton(CatalogBookModel bookInfo, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        addWait();
+        //addWait();
         String bookName = bookInfo.getTitle();
         String actionButtonString = actionButtonKey.i18n();
         IButton actionButton = getElementFactory().getButton(By.xpath(String.format(SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC, bookName, actionButtonString)), "Action Button");
