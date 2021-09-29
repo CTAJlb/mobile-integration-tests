@@ -10,17 +10,12 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
-import constants.application.attributes.AndroidAttributes;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
-import framework.utilities.swipe.SwipeElementUtils;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.books.BooksScreen;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidBooksScreen extends BooksScreen {
@@ -68,7 +63,7 @@ public class AndroidBooksScreen extends BooksScreen {
         btnRefresh.click();
     }
 
-    private void addWait(){
+    private void addWait() {
         AqualityServices.getConditionalWait().waitFor(() -> isNoBooksMessagePresent() && getCountOfBooks() > 0);
     }
 
@@ -78,7 +73,7 @@ public class AndroidBooksScreen extends BooksScreen {
         String bookName = bookInfo.getTitle();
         String actionButtonString = actionButtonKey.i18n();
         IButton actionButton = getElementFactory().getButton(By.xpath(String.format(SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC, bookName, actionButtonString)), "Action Button");
-        if (!actionButton.state().waitForDisplayed()){
+        if (!actionButton.state().waitForDisplayed()) {
             actionButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         }
         if (actionButton.state().isDisplayed()) {

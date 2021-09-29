@@ -23,7 +23,6 @@ public class IosBooksScreen extends BooksScreen {
     private static final String SPECIFIC_BOOK_NAME_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]";
     private static final String BOOKS_LOC = "//XCUIElementTypeCollectionView//XCUIElementTypeCell";
     private static final String SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%s\")]/following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeButton";
-    private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
 
     private ILabel mainBooksElementCollection = getElementFactory().getLabel(
             By.xpath("//XCUIElementTypeCollectionView"), "Elements collection container");
@@ -41,7 +40,6 @@ public class IosBooksScreen extends BooksScreen {
 
     @Override
     public boolean isSpecificBookWithSpecificActionButtonPresent(CatalogBookModel bookInfo, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        //addWait();
         String actionButton = actionButtonKey.i18n();
         IButton actionButtonOnBook = getElementFactory()
                 .getButton(By.xpath(String.format(SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC, bookInfo.getTitle(), actionButton)),
@@ -51,14 +49,6 @@ public class IosBooksScreen extends BooksScreen {
         }
         return actionButtonOnBook.state().waitForDisplayed();
     }
-
-    /*private void addWait(){
-        try {
-            Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     @Override
     public int getCountOfBooks() {
@@ -72,11 +62,10 @@ public class IosBooksScreen extends BooksScreen {
 
     @Override
     public void openBookWithDefiniteNameAndDefiniteActionButton(CatalogBookModel bookInfo, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        //addWait();
         String bookName = bookInfo.getTitle();
         String actionButtonString = actionButtonKey.i18n();
         IButton actionButton = getElementFactory().getButton(By.xpath(String.format(SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC, bookName, actionButtonString)), "Action Button");
-        if (!actionButton.state().waitForDisplayed()){
+        if (!actionButton.state().waitForDisplayed()) {
             actionButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         }
         if (actionButton.state().isDisplayed()) {
