@@ -71,7 +71,7 @@ Feature: Catalog Navigation
   Scenario: View Book Details
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open search modal
-      And I search for 'Sullivan\'s Promise'
+      And I search for 'Sullivan\'s Promise' and save bookName as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     #And Open 'EBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book 'bookInfo' is opened
@@ -99,7 +99,7 @@ Feature: Catalog Navigation
       And I switch to 'LYRASIS Reads' from side menu
     When I open search modal
     Then Search modal is opened
-    When I search for 'UnEnchanted'
+    When I search for 'UnEnchanted' and save bookName as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
     #When I open 'EBOOK' book with name 'UnEnchanted' and save it as 'bookInfo'

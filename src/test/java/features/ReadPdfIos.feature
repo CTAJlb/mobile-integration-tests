@@ -112,7 +112,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
   Scenario: Navigate to Search Term
-    When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners'
+    When I search for 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save bookName as 'bookNameInfo'
       And I GET hardcode book 'Communication Beginnings: An Introductory Listening and Speaking Text for English Language Learners' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open 'bookInfo' book with READ action button on Subcategory Screen

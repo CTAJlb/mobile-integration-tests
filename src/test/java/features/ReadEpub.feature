@@ -4,7 +4,7 @@ Feature: Read EPUB
     When I add "Digital Public Library of America" account from welcomeScreen
       And I open Catalog
       And I open search modal
-      And I search for 'Flower Fables'
+      And I search for 'Flower Fables' and save bookName as 'bookNameInfo'
       And DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
       And I open 'bookInfo' book with READ action button on Subcategory Screen
       And I press on the book details view at the action button READ

@@ -6,11 +6,11 @@ Feature: Audiobook
     When I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'Audiobooks' catalog tab
-    When I open categories by chain and chain starts from CategoryScreen:
-      | Fiction   |
-      | Adventure |
-      And I open the book details for the subsequent GET on Subcategory List View and save it as 'bookInfo'
+    And I open search modal
+    And I search for 'Red Country' and save bookName as 'bookNameInfo'
+    And I switch to 'Audiobooks' catalog tab
+    And Open 'AUDIOBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    And I press on the book details view at the action button GET
 
   @logout @returnBooks @tier2 @oldOs @tablet
   Scenario: Navigate by Table of Contents Menu
