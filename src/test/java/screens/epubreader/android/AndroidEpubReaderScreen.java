@@ -8,7 +8,6 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.logging.Logger;
 import constants.RegEx;
-import constants.application.timeouts.AuthorizationTimeouts;
 import constants.application.timeouts.BooksTimeouts;
 import framework.utilities.RegExUtil;
 import framework.utilities.swipe.SwipeElementUtils;
@@ -26,7 +25,6 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidEpubReaderScreen extends EpubReaderScreen {
-    public static final String EPUB_CONTENT_IFRAME = "epubContentIframe";
     private final ILabel lblBookName =
             getElementFactory().getLabel(By.xpath("//android.widget.TextView[1]"), "Book Cover");
     private final ILabel lblPageNumber =
@@ -56,11 +54,6 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public boolean isBookNamePresent() {
-        return lblBookName.state().waitForDisplayed();
-    }
-
-    @Override
     public void swipeFromLeftToRight() {
         SwipeElementUtils.swipeFromLeftToRight(lblPage);
     }
@@ -80,8 +73,8 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     public void clickRightCorner() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
         int height = lblPage.getElement().getSize().height;
-        int width =  lblPage.getElement().getSize().width;
-        action.tap(PointOption.point(width - 10, height/2)).perform();
+        int width = lblPage.getElement().getSize().width;
+        action.tap(PointOption.point(width - 10, height / 2)).perform();
     }
 
     @Override
@@ -156,11 +149,6 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     @Override
     public String getBackgroundColor() {
         return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX_ANDROID);
-    }
-
-    @Override
-    public void waitForBookLoading() {
-        lblPageNumber.state().waitForDisplayed(Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getTimeoutMillis()));
     }
 
     @Override
