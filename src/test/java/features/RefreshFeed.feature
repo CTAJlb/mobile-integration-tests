@@ -2,7 +2,7 @@ Feature: Feed
 
   @tier2 @oldOs
   Scenario: Update Bookshelf List
-    When I add "Digital Public Library of America" account from welcomeScreen
+    When I add "Palace Bookshelf" account from welcomeScreen
       And I open categories by chain and chain starts from CategoryScreen:
         | Fiction            |
         | Historical Fiction |

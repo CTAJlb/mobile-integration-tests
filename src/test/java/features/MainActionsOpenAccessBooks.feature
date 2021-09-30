@@ -1,7 +1,7 @@
 Feature: Main actions open access books
 
   Background:
-    When I add "Digital Public Library of America" account from welcomeScreen
+    When I add "Palace Bookshelf" account from welcomeScreen
       And I open categories by chain and chain starts from CategoryScreen:
         | Our Picks |
 

@@ -2,7 +2,7 @@ Feature: Catalog Navigation
 
   @tier1 @oldOs
   Scenario: Return to last library catalog
-    When I add "Digital Public Library of America" account from welcomeScreen
+    When I add "Palace Bookshelf" account from welcomeScreen
       And I add 'LYRASIS Reads' account
       And I open Catalog
       And I switch to 'LYRASIS Reads' from side menu
@@ -13,7 +13,7 @@ Feature: Catalog Navigation
 
   @tier1 @oldOs
   Scenario: Browse Categories
-    When I add "Digital Public Library of America" account from welcomeScreen
+    When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
     Then Category rows are loaded
       And Count of books in first lane is more than 1
