@@ -137,7 +137,7 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain) {
         categoriesChain.stream().forEach(categoryName -> {
-            if (catalogScreen.state().isDisplayed()) {
+            if (catalogScreen.state().waitForDisplayed()) {
                 catalogScreen.openCategory(categoryName);
             } else {
                 subcategoryScreen.state().waitForDisplayed();
@@ -178,9 +178,12 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         String bookName = context.get(bookNameInfoKey);
         context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
-            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
-            AqualityServices.getLogger().info("Alert appears and dismiss alert");
-            alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION){
+                alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            }else {
+                AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+                AqualityServices.getLogger().info("Alert appears and dismiss alert");
+            }
         }
     }
 
@@ -344,20 +347,21 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void openBookDetailsByClickingOnCover(String bookInfoKey) {
+    public void openSpecificBookWithSpecificActionButton(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         subcategoryScreen.state().waitForDisplayed();
-        subcategoryScreen.openBook(bookInfo);
+        subcategoryScreen.openBookWithDefiniteNameAndDefiniteActionButton(bookInfo, actionButtonKey);
     }
 
     @Override
     public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         clickActionButtonOnBookDetailsView(actionButtonKey);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
-            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
-            AqualityServices.getLogger().info("Alert appears and dismiss alert");
-            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN && actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE && actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION){
+            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION){
                 alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            }else {
+                AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+                AqualityServices.getLogger().info("Alert appears and dismiss alert");
             }
         }
     }
@@ -369,8 +373,8 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey, String bookType) {
-        context.add(bookInfoKey, subcategoryScreen.openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(bookName, actionButtonKey, bookType));
+    public void openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIOAndSaveBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey, String bookType) {
+        context.add(bookInfoKey, subcategoryScreen.openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIAndGetBookInfo(bookName, actionButtonKey, bookType));
     }
 
     public void startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(ReaderType readerType) {

@@ -28,8 +28,8 @@ import java.util.stream.Collectors;
 public class IosEpubReaderScreen extends EpubReaderScreen {
     private static final String CHAPTER_ITEM_LOC = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[@name=\"%1$s\"]";
 
-    private final ILabel btnBackAndBookName =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Book Cover and button back");
+    private final ILabel lblBookName =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "Label Book Name");
     private final ILabel lblPageNumberAndChapterName =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"Page\")]"), "lblPageNumberAndChapterName");
     private final ILabel lblPage =
@@ -52,10 +52,7 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public String getBookName() {
-        if (!btnFontSettings.state().isDisplayed()) {
-            CoordinatesClickUtils.clickAtCenterOfScreen();
-        }
-        String text = btnBackAndBookName.getAttribute(IosAttributes.NAME);
+        String text = lblBookName.getAttribute(IosAttributes.NAME);
         AqualityServices.getLogger().info("Book name - " + text);
         return text;
     }
@@ -69,11 +66,6 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
         String pageNumberAndChapterNameRegEx = lblPageNumberAndChapterName.getAttribute(IosAttributes.NAME);
         pageNumberAndChapterNameRegEx = deleteBracketsFromText(pageNumberAndChapterNameRegEx);
         return RegExUtil.getStringFromThirdGroup(pageNumberAndChapterNameRegEx, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
-    }
-
-    @Override
-    public boolean isBookNamePresent() {
-        return btnBackAndBookName.state().waitForDisplayed();
     }
 
     @Override
@@ -109,7 +101,6 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
         return RegExUtil.getStringFromFirstGroup(pageNumberAndChapterNameRegEx, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
     }
 
-    //todo I must delete this later. I should change regEX = PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS, I can work without brackets in regEx
     private static String deleteBracketsFromText(String text) {
         text = text.replaceAll("\\(", "");
         text = text.replaceAll("\\)", "");
@@ -185,10 +176,6 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     @Override
     public String getBackgroundColor() {
         return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX_IOS);
-    }
-
-    @Override
-    public void waitForBookLoading() {
     }
 
     @Override

@@ -7,43 +7,36 @@ Feature: Manage Libraries
 
   @tier1 @oldOs
   Scenario: Switch Library Catalogs
-    When I add "Digital Public Library of America" account from welcomeScreen
+    When I add "Palace Bookshelf" account from welcomeScreen
       And I get names of books on screen and save them as 'nameOfBooks'
       And I add 'LYRASIS Reads' account
     Then Category rows are loaded
       And List of books on screen is not equal to list of books saved as 'nameOfBooks'
 
-  @tier1 @exclude_ios @oldOs
+  @tier1 @oldOs
   Scenario: Remove library
     When I add "LYRASIS Reads" account from welcomeScreen
-      And I add 'Digital Public Library of America' account
-      And I remove 'Digital Public Library of America' account
-    Then Account 'Digital Public Library of America' is not present on Accounts screen
-
-  @tier1 @exclude_android @oldOs
-  Scenario: Remove library(IOS)
-    When I add "LYRASIS Reads" account from welcomeScreen
-    And I add 'Digital Public Library of America' account
+    And I add 'Palace Bookshelf' account
     And I switch to 'LYRASIS Reads' from side menu
-    And I remove 'Digital Public Library of America' account
-    Then Account 'Digital Public Library of America' is not present on Accounts screen
+    And I remove 'Palace Bookshelf' account
+    Then Account 'Palace Bookshelf' is not present on Accounts screen
 
   @tier2 @oldOs
   Scenario: Switch library bookshelf
-    When I add "Digital Public Library of America" account from welcomeScreen
+    When I add "Palace Bookshelf" account from welcomeScreen
       And I add 'LYRASIS Reads' account
       And Catalog is opened
-      And I switch to 'Digital Public Library of America' from side menu
+      And I switch to 'Palace Bookshelf' from side menu
       And I open categories by chain and chain starts from CategoryScreen:
         |2021 New Public Domain Books|
       And DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
       And I open Books
-    Then Book 'bookInfo' is present in Books List
+    Then Book 'bookInfo' with READ action button is present on Books Screen
     When I open Catalog
       And I return to previous screen for epub and pdf
       And I switch to 'LYRASIS Reads' from side menu
       And I open Books
-    Then No books are present in Books list
+    Then There are not books on Books Screen
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Switch Library Reservations

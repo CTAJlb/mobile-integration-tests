@@ -4,7 +4,6 @@ import aquality.appium.mobile.screens.Screen;
 import org.openqa.selenium.By;
 
 import java.util.List;
-import java.util.Set;
 
 public abstract class EpubReaderScreen extends Screen {
     protected EpubReaderScreen(By locator) {
@@ -14,8 +13,6 @@ public abstract class EpubReaderScreen extends Screen {
     public abstract String getBookName();
 
     public abstract String getChapterName();
-
-    public abstract boolean isBookNamePresent();
 
     public abstract void swipeFromLeftToRight();
 
@@ -40,8 +37,6 @@ public abstract class EpubReaderScreen extends Screen {
     public abstract String getFontName();
 
     public abstract String getBackgroundColor();
-
-    public abstract void waitForBookLoading();
 
     public abstract void returnToPreviousScreen();
 }

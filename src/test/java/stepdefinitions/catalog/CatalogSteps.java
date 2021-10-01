@@ -146,9 +146,9 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     }
 
     @When("Open {string} book with {} button from Subcategory List View with title {string} and save it as {string}")
-    public void openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(String bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey, String bookInfoKey) {
+    public void openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIOAndSaveBookInfo(String bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey, String bookInfoKey) {
         String bookName = context.get(bookNameKey);
-        catalogSteps.openBookWithDefiniteActionButtonAndDefiniteNameFromAPIOAndSaveBookInfo(bookName, actionButtonKey, bookInfoKey, bookType);
+        catalogSteps.openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIOAndSaveBookInfo(bookName, actionButtonKey, bookInfoKey, bookType);
     }
 
     @When("I click {} button on the {string} book on Subcategory List view")
@@ -263,9 +263,9 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(key);
     }
 
-    @When("I open book {string} details by clicking on cover")
-    public void openBookDetailsByClickingOnCover(String bookInfoKey) {
-        catalogSteps.openBookDetailsByClickingOnCover(bookInfoKey);
+    @When("I open {string} book with {} action button on Subcategory Screen")
+    public void openSpecificBookWithSpecificActionButton(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        catalogSteps.openSpecificBookWithSpecificActionButton(bookInfoKey, actionButtonKey);
     }
 
     @When("I press on the book details view at the action button {}")

@@ -22,12 +22,10 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
 
     private static final String INFORMATION_TAB_VALUE_LOC_PART =
             "//*[contains(@resource-id,\"key\") and @text=\"%1$s\"]/following-sibling::*[contains(@resource-id,\":id/value\")]";
-    private static final String BOOK_ACTION_BUTTON_LOC = "//android.widget.Button[@content-desc=\"%1$s\"]";
+    private static final String BOOK_ACTION_BUTTON_LOC = "//android.widget.Button[@text=\"%s\"]";
 
-    //private final ILabel lblBookInfo = getElementFactory().getLabel(By.id("bookDetailCoverImage"), "Cover Image");
     private final ILabel lblErrorScreen = getElementFactory().getLabel(By.xpath("//android.widget.ScrollView"), "Error Screen");
     private final ILabel lblBookTitleInfo = getElementFactory().getLabel(By.id("bookDetailTitle"), "Book title");
-    //private final ILabel lblBookFormatInfo = getElementFactory().getLabel(By.id("bookDetailFormat"), "Book format");
     private final ILabel lblBookAuthorsInfo = getElementFactory().getLabel(By.id("bookDetailAuthors"), "Book Authors");
     private final ILabel lblBookDescription =
             getElementFactory().getLabel(By.xpath("//*[contains(@resource-id,\"bookDetailDescriptionText\")]"), "Description");
@@ -89,8 +87,8 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
 
     @Override
     public void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKeys) {
-        //todo fixing here
         IButton button = getActionButton(buttonKeys);
+        button.state().waitForDisplayed();
         button.click();
         AqualityServices.getConditionalWait().waitFor(() -> button.state().waitForNotDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }

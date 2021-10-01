@@ -12,7 +12,7 @@ Feature: Read PDF
     Then Subcategory screen is present
       And I GET or DOWNLOAD book by name 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
-    When I open book 'bookInfo' details by clicking on cover
+    When I open 'bookInfo' book with READ action button on Subcategory Screen
       And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
 
@@ -42,8 +42,8 @@ Feature: Read PDF
       And Pdf page number 'pageNumber' is correct
     When I restart app
       And I open Books
-    Then Book 'bookInfo' is present in Books List
-    When I open book 'bookInfo' details by clicking on cover
+    Then Book 'bookInfo' with READ action button is present on Books Screen
+    When I open 'bookInfo' book with READ action button on Books Screen
       And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct

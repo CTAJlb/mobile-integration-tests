@@ -1,37 +1,37 @@
 {
-  "iOS_Simulator": {
+  "iPhoneXS_14": {
     "capabilities": {
       "deviceName": "iPhone XS",
       "platformVersion": "14"
     }
   },
-  "iOS_Ipad": {
+  "iPhoneXS_12": {
+    "capabilities": {
+      "deviceName": "iPhone XS",
+      "platformVersion": "12"
+    }
+  },
+  "iPadPro2021": {
     "capabilities": {
       "deviceName": "iPad Pro 12.9 2021",
       "platformVersion": "14"
     }
   },
-  "Samsung_Galaxy_S10": {
+  "SamsungGalaxyS10_9": {
     "capabilities": {
       "deviceName": "Samsung Galaxy S10",
       "platformVersion": "9.0"
     }
   },
-  "Samsung_Tab": {
+  "SamsungGalaxyTabS7_10": {
     "capabilities": {
       "deviceName": "Samsung Galaxy Tab S7",
       "platformVersion": "10.0"
     }
   },
-  "Samsung_Galaxy_S21": {
+  "SamsungGalaxyS21_11": {
     "capabilities": {
       "deviceName": "Samsung Galaxy S21",
-      "platformVersion": "11.0"
-    }
-  },
-  "Google_Pixel": {
-    "capabilities": {
-      "deviceName": "Google Pixel 5",
       "platformVersion": "11.0"
     }
   }

@@ -78,7 +78,9 @@ public class IosCatalogScreen extends CatalogScreen {
     @Override
     public void openCategory(String categoryName) {
         IButton categoryButton = getCategoryButton(categoryName);
-        categoryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+        if(!categoryButton.state().waitForDisplayed()){
+            categoryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+        }
         categoryButton.click();
     }
 

@@ -16,14 +16,13 @@ import java.time.Duration;
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidHoldsScreen extends HoldsScreen {
     private final ILabel lblNoBooks = getElementFactory().getLabel(By.id("feedEmptyText"), "No Books Present");
-    private final String BOOK_INFO_LOCATOR_PATTERN = "//android.widget.ImageView[@content-desc=\"%s\"]";
     private final String BOOK_TITLE_LOCATOR_PATTERN = "//android.widget.TextView[contains(@resource-id,\"bookCellIdleTitle\") and contains(@text, \"%s\")]";
 
     private static final String BOOK_BLOCK_BY_TITLE_LOC =
             "//*[contains(@resource-id,\"bookCellIdle\") and .//*[contains(@resource-id,\"bookCellIdleTitle\") and contains(@text, \"%1$s\")]]";
 
     private static final String BOOK_ADD_BUTTON_LOC =
-            "//*[contains(@resource-id,\"bookCellIdleButtons\")]/android.widget.Button[@content-desc=\"%1$s\"]";
+            "//*[contains(@resource-id,\"bookCellIdleButtons\")]/android.widget.Button[@text=\"%1$s\"]";
 
     public AndroidHoldsScreen() {
         super(By.xpath("//android.widget.TextView[contains(@text,\"Holds\")]"));

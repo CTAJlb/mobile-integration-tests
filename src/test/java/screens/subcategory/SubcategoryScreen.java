@@ -26,9 +26,9 @@ public abstract class SubcategoryScreen extends Screen {
 
     public abstract List<String> getTitlesInfo();
 
-    public abstract void openBook(CatalogBookModel bookInfo);
+    public abstract void openBookWithDefiniteNameAndDefiniteActionButton(CatalogBookModel bookInfo, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
-    public abstract CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameFromAPIAndGetBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType);
+    public abstract CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIAndGetBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType);
 
     public abstract String getErrorMessage();
 
