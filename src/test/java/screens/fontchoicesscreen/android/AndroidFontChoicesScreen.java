@@ -11,13 +11,17 @@ import screens.fontchoicesscreen.FontChoicesScreen;
 public class AndroidFontChoicesScreen extends FontChoicesScreen {
 
     public AndroidFontChoicesScreen() {
-        super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"setFontSans\")]"));
+        super(By.xpath("//android.widget.FrameLayout[contains(@resource-id,\"setFontSans\")]"));
     }
 
     @Override
-    public void setSetting(ReaderSettingKeys increaseFontSettings) {
-        String setting = increaseFontSettings.i18n();
-        getElementFactory().getButton(By.xpath(String.format("//android.view.ViewGroup[contains(@resource-id,\"%s\")]", setting)), setting).click();
+    public void setSetting(ReaderSettingKeys readerSettingKey) {
+        String setting = readerSettingKey.i18n();
+        if(ReaderSettingKeys.FONT_DYSLEXIC == readerSettingKey || ReaderSettingKeys.FONT_SERIF == readerSettingKey || ReaderSettingKeys.FONT_SANS == readerSettingKey){
+            getElementFactory().getButton(By.xpath(String.format("//android.widget.FrameLayout[contains(@resource-id,\"%s\")]", setting)), setting).click();
+        }else {
+            getElementFactory().getButton(By.xpath(String.format("//android.view.ViewGroup[contains(@resource-id,\"%s\")]", setting)), setting).click();
+        }
     }
 
     @Override

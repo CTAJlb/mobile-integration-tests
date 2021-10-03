@@ -21,8 +21,8 @@ public class IosFontChoicesScreen extends FontChoicesScreen {
     }
 
     @Override
-    public void setSetting(ReaderSettingKeys increaseFontSettings) {
-        String setting = increaseFontSettings.i18n();
+    public void setSetting(ReaderSettingKeys readerSettingKey) {
+        String setting = readerSettingKey.i18n();
         getElementFactory().getButton(By.xpath(String.format(SETTING_LOC, setting)), setting).click();
     }
 
