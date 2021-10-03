@@ -18,8 +18,6 @@ public class IosEpubTableOfContentsScreen extends EpubTableOfContentsScreen {
     private static final String CHAPTERS_LIST_LOC = "//XCUIElementTypeTable";
     private static final String CHAPTER_TEXT_LOC = "//XCUIElementTypeCell/XCUIElementTypeStaticText";
 
-    private final ILabel lblTable = getElementFactory().getLabel(By.xpath(CHAPTERS_LIST_LOC), "Table");
-
     public IosEpubTableOfContentsScreen() {
         super(By.xpath(CHAPTERS_LIST_LOC));
     }

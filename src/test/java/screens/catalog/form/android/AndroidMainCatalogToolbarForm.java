@@ -18,11 +18,8 @@ public class AndroidMainCatalogToolbarForm extends MainCatalogToolbarForm {
                     By.xpath(MAIN_ELEMENT_LOC +
                             "/android.widget.ImageView"),
                     "Menu");
-    private final IButton backBtn = getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC + "/android.widget.ImageButton"), "Back");
     private final ILabel lblCategoryName =
             getElementFactory().getLabel(By.xpath(CATEGORY_INFO_LOCATOR_PART), "Category name");
-    private final ILabel lblCatalogName =
-            getElementFactory().getLabel(By.xpath(LIBRARY_NAME_LOC), "libraryName");
     private final IButton btnSearch =
             getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC + "//*[contains(@resource-id,\"catalogMenuActionSearch\")]"), "Search");
 
@@ -33,11 +30,6 @@ public class AndroidMainCatalogToolbarForm extends MainCatalogToolbarForm {
     @Override
     public void chooseAnotherLibrary() {
         btnChooseAnotherLibrary.click();
-    }
-
-    @Override
-    public void goBack() {
-        backBtn.click();
     }
 
     @Override

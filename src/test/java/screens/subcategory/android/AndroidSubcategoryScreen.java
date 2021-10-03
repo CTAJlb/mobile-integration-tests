@@ -28,8 +28,6 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
             "//android.widget.TextView[contains(@resource-id, \"bookCellIdleAuthor\")]";
     private static final String BOOK_NAME_XPATH =
             "//android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
-    private static final String TYPE_INFO_XPATH =
-            "//android.widget.TextView[contains(@resource-id, \"bookCellIdleMeta\")]";
     public static final String BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN = "//android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\") and @text=\"%s\"]/following-sibling::android.widget.LinearLayout//android.widget.Button[@text=\"%s\"]";
     public static final String BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN = "/parent::android.widget.LinearLayout/preceding-sibling::android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
     public static final String AUTHOR_LABEL_LOCATOR_PART = "/parent::android.widget.LinearLayout/preceding-sibling::android.widget.TextView[contains(@resource-id, \"bookCellIdleAuthor\")]";

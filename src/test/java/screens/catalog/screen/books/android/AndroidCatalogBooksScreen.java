@@ -28,7 +28,6 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
             "//*[contains(@resource-id,\"bookCellIdle\") and .//*[contains(@resource-id,\"bookCellIdleTitle\") and contains(@text, \"%1$s\")]]";
     private static final String BOOK_TITLE_LOC = "//*[contains(@resource-id,\"bookCellIdleTitle\")]";
     private static final String BOOK_AUTHOR_LOC = "//*[contains(@resource-id,\"bookCellIdleAuthor\")]";
-    private static final String BOOK_TYPE_LOC = "//*[contains(@resource-id,\"bookCellIdleMeta\")]";
     private static final String BOOK_ADD_BUTTON_LOC =
             "//*[contains(@resource-id,\"bookCellIdleButtons\")]/android.widget.Button[@text=\"%1$s\"]";
     private static final String BOOK_OF_TYPE_BUTTON_PATTERN =
@@ -107,7 +106,6 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
         String bookAddButtonLocator = getBookActionButtonLocatorWithGivenName(actionButtonKey, bookName);
         IButton button = getElementFactory().getButton(By.xpath(bookAddButtonLocator), actionButtonKey.i18n());
         button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        //todo method title is bad
         return openBook(button, bookName);
     }
 
@@ -118,14 +116,13 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
         IButton button1 = getElementFactory().getButton(By.xpath(bookAddButtonLocator1), actionButtonKey1.i18n());
         IButton button2 = getElementFactory().getButton(By.xpath(bookAddButtonLocator2), actionButtonKey2.i18n());
         IButton buttonForClick = null;
-        if(button1.state().waitForDisplayed()){
+        if (button1.state().waitForDisplayed()) {
             buttonForClick = button1;
             button1.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        }else if(button2.state().waitForDisplayed()){
+        } else if (button2.state().waitForDisplayed()) {
             button2.getTouchActions().scrollToElement(SwipeDirection.DOWN);
             buttonForClick = button2;
         }
-
         return openBook(buttonForClick, bookName);
     }
 
@@ -160,9 +157,9 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     private void clickOnSpecificBookElement(IElement bookWithSpecificAddBtn) {
-        if (bookWithSpecificAddBtn.state().isDisplayed()){
+        if (bookWithSpecificAddBtn.state().isDisplayed()) {
             bookWithSpecificAddBtn.click();
-        }else {
+        } else {
             bookWithSpecificAddBtn.getTouchActions().scrollToElement(SwipeDirection.DOWN);
             bookWithSpecificAddBtn.click();
         }
@@ -187,7 +184,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
         CatalogBookModel androidCatalogBookModel = getBookInfo(bookTitle);
         button.click();
         ILabel label = getElementFactory().getLabel(By.xpath(String.format(LBL_IN_PROGRESS_TITLE, bookTitle)), "lblInProgressTitle");
-        if(label.state().waitForDisplayed()){
+        if (label.state().waitForDisplayed()) {
             label.state().waitForNotDisplayed(Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         }
 

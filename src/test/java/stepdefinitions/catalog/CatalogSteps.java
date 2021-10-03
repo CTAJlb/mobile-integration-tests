@@ -39,11 +39,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.subcategoryRowsAreLoaded();
     }
 
-    @When("I return to previous category screen")
-    public void openPreviousCategoryScreen() {
-        catalogSteps.openPreviousCategoryScreen();
-    }
-
     @When("I get names of books on screen and save them as {string}")
     public void getNamesOfBooksAndSaveThem(String booksNamesListKey) {
         catalogSteps.getNamesOfBooksAndSaveThem(booksNamesListKey);

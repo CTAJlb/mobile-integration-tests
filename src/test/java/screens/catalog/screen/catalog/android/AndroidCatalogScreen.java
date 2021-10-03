@@ -8,7 +8,6 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
-import constants.application.ReaderType;
 import constants.application.attributes.AndroidAttributes;
 import framework.utilities.swipe.SwipeElementUtils;
 import org.openqa.selenium.By;
@@ -33,7 +32,6 @@ public class AndroidCatalogScreen extends CatalogScreen {
 
     private final ILabel lblFirstLaneName = getElementFactory().getLabel(By.xpath(FEED_LANE_TITLES_LOC), "First lane name");
     private final IButton btnErrorMessage = getElementFactory().getButton(By.xpath("//*[contains(@text, \"Details\")]"), "Details");
-    private final ILabel lblErrorMessage = getElementFactory().getLabel(By.id("errorDetails"), "Error message");
     private final ILabel lblScreen = getElementFactory().getLabel(By.id("mainFragmentHolder"), "Screen to swipe");
 
     public AndroidCatalogScreen() {
@@ -148,9 +146,5 @@ public class AndroidCatalogScreen extends CatalogScreen {
 
     private List<aquality.appium.mobile.elements.interfaces.IElement> getLabels(String xpath) {
         return getElementFactory().findElements(By.xpath(xpath), ElementType.LABEL);
-    }
-
-    private String getErrorMessage() {
-        return lblErrorMessage.state().isDisplayed() ? lblErrorMessage.getText() : "";
     }
 }

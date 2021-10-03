@@ -16,17 +16,14 @@ import screens.catalog.screen.books.CatalogBooksScreen;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.Objects;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosCatalogBooksScreen extends CatalogBooksScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeCollectionView";
-
     private static final String ACTION_BUTTON_ON_BOOK_PATTERN = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final String BOOKS_LOC = ".//XCUIElementTypeCell";
     private static final String BOOK_BLOCK_BY_BUTTON_LOC = "//XCUIElementTypeCell[.//XCUIElementTypeButton[@name=\"%1$s\"]]";
     private static final String BOOK_TITLE_LOC = "//XCUIElementTypeStaticText[@name][1]";
-    private static final String BOOK_AUTHOR_LOC = "//XCUIElementTypeStaticText[@name][2]";
     private static final String AUTHOR_NAME_XPATH_PATTERN =
             "//XCUIElementTypeStaticText[@name=\"%s\"]//following-sibling::XCUIElementTypeStaticText";
     private static final String ELEMENTS_TO_WAIT_FOR_XPATH = "//XCUIElementTypeCell//XCUIElementTypeOther//XCUIElementTypeStaticText";
@@ -177,16 +174,6 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
     private String getAuthorsName(String title) {
         ILabel label = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_NAME_XPATH_PATTERN, title)), title);
         return label.state().isDisplayed() ? label.getText() : "";
-    }
-
-    private CatalogBookModel getBookModel(String mainLocator) {
-        return new CatalogBookModel()
-                .setTitle(getBookParameter(mainLocator, BOOK_TITLE_LOC, "Book title"))
-                .setAuthor(getBookParameter(mainLocator, BOOK_AUTHOR_LOC, "Book author"));
-    }
-
-    private String getBookParameter(String mainLocator, String subLocator, String name) {
-        return Objects.requireNonNull(getElementFactory().getLabel(By.xpath(mainLocator + subLocator), name).getText());
     }
 
     private void switchToEbooksTab() {

@@ -10,8 +10,6 @@ public abstract class MainCatalogToolbarForm extends Screen {
 
     public abstract void chooseAnotherLibrary();
 
-    public abstract void goBack();
-
     public abstract String getCategoryName();
 
     public abstract void openSearchModal();

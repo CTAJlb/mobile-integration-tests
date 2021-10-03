@@ -31,8 +31,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
             getElementFactory().getLabel(By.xpath("//*[contains(@resource-id,\"bookDetailDescriptionText\")]"), "Description");
     private final ILabel lblErrorMessage = getElementFactory().getLabel(By.id("errorDetails"), "Error message");
 
-    private final IButton btnRead = getActionButton(EnumActionButtonsForBooksAndAlertsKeys.READ);
-    private final IButton btnListen = getActionButton(EnumActionButtonsForBooksAndAlertsKeys.LISTEN);
     private final IButton btnRelatedBooks =
             getElementFactory().getButton(By.xpath("//*[contains(@resource-id,\"bookDetailRelated\")]"), "Related books");
     private final IButton btnErrorDetails =
@@ -94,11 +92,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public boolean isActionButtonPresent(EnumActionButtonsForBooksAndAlertsKeys actionButton) {
-        return getActionButton(actionButton).state().waitForDisplayed();
-    }
-
-    @Override
     public String getErrorDetails() {
         if (lblErrorMessage.state().isDisplayed()) {
             return lblErrorMessage.getText();
@@ -120,11 +113,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     @Override
     public void swipeError() {
         SwipeElementUtils.swipeThroughEntireElementUp(lblErrorScreen);
-    }
-
-    @Override
-    public boolean isBookReadyToRead() {
-        return btnRead.state().isDisplayed() || btnListen.state().isDisplayed();
     }
 
     @Override

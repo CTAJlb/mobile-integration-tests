@@ -28,8 +28,6 @@ public abstract class BookDetailsScreen extends Screen {
 
     public abstract void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKeys);
 
-    public abstract boolean isActionButtonPresent(EnumActionButtonsForBooksAndAlertsKeys actionButton);
-
     public abstract String getErrorDetails();
 
     public abstract boolean isErrorButtonPresent();
@@ -37,8 +35,6 @@ public abstract class BookDetailsScreen extends Screen {
     public abstract void openErrorDetails();
 
     public abstract void swipeError();
-
-    public abstract boolean isBookReadyToRead();
 
     public abstract void closeBookDetailsOnlyForIOSTabIfDisplayed();
 }

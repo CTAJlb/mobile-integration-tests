@@ -11,8 +11,6 @@ import aquality.selenium.core.elements.interfaces.IElement;
 import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.bookdetals.BookDetailsScreenInformationBlockKeys;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.offset.PointOption;
 import models.android.CatalogBookModel;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -38,8 +36,6 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
             "//XCUIElementTypeStaticText[@name=\"Description\"]/following-sibling::XCUIElementTypeTextView/*";
 
     private final ILabel lblBookTitleInfo = getElementFactory().getLabel(By.xpath("(//XCUIElementTypeOther//XCUIElementTypeStaticText[@name])[1]"), "Book title");
-    private final IButton btnRead = getActionButton(EnumActionButtonsForBooksAndAlertsKeys.READ);
-    private final IButton btnListen = getActionButton(EnumActionButtonsForBooksAndAlertsKeys.LISTEN);
     private final IButton btnRelatedBooks =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Information\"]/following-sibling::XCUIElementTypeTable"), "Related books");
     private final IButton btnCloseBookDetailsOnlyIOSTab =
@@ -127,11 +123,6 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public boolean isActionButtonPresent(EnumActionButtonsForBooksAndAlertsKeys actionButton) {
-        return getActionButton(actionButton).state().isDisplayed();
-    }
-
-    @Override
     public String getErrorDetails() {
         if (isErrorButtonPresent()) {
             return lblErrorDetails.getText();
@@ -152,11 +143,6 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     @Override
     public void swipeError() {
 
-    }
-
-    @Override
-    public boolean isBookReadyToRead() {
-        return btnRead.state().isDisplayed() || btnListen.state().isDisplayed();
     }
 
     @Override

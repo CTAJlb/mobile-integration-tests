@@ -31,10 +31,8 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     public static final String BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther//XCUIElementTypeButton//XCUIElementTypeStaticText[@name=\"%s\"]";
     public static final String BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN = "/parent::XCUIElementTypeButton/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String AUTHOR_LABEL_LOCATOR_PATTERN = "/parent::XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
-
     private static final String SPECIFIC_BOOK_NAME_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]";
     private static final String SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%s\")]/following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeButton";
-
     private static final int COUNT_OF_ITEMS_TO_WAIT_FOR = 3;
     private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
 
@@ -117,7 +115,6 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
         } else {
             throw new RuntimeException("There is not book with title-" + bookName + " and button-" + actionButton);
         }
-
         return bookInfo;
     }
 

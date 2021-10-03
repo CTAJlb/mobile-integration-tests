@@ -1,7 +1,6 @@
 package screens.catalog.screen.catalog;
 
 import aquality.appium.mobile.screens.Screen;
-import constants.application.ReaderType;
 import org.openqa.selenium.By;
 
 import java.util.List;

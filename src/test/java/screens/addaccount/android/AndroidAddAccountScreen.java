@@ -13,9 +13,6 @@ import screens.addaccount.AddAccountScreen;
 public class AndroidAddAccountScreen extends AddAccountScreen {
     private IButton btnSearch = getElementFactory().getButton(By.id("accountMenuActionSearch"), "Search");
     private ITextBox txbSearch = getElementFactory().getTextBox(By.id("search_src_text"), "Search");
-    private ILabel lblSelectLibrary =
-            getElementFactory().getLabel(By.xpath("//*[@text=\"Please select a library…\" and contains(@resource-id,\"accountRegistryTitle\")]"), "Please select a library");
-
     public static final String LIBRARY_BUTTON_LOCATOR_PATTERN = "//android.widget.TextView[contains(@text, \"%s\")]";
 
     public AndroidAddAccountScreen() {
