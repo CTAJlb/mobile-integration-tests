@@ -21,7 +21,7 @@ import java.util.List;
 public class AndroidBooksScreen extends BooksScreen {
     private static final String MAIN_ELEMENT_LOC = "//android.widget.TextView[@text=\"Books\"]";
     private static final String BOOKS_LOC = "//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout";
-    private static final String SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC = "//android.widget.TextView[contains(@text,\"%s\")]/following-sibling::android.widget.LinearLayout/android.widget.Button[@text=\"%s\"]";
+    private static final String SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC = "//android.view.ViewGroup/android.widget.TextView[contains(@text,\"%s\")]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
     private static final String SPECIFIC_BOOK_NAME_LOC = "//android.widget.TextView[contains(@text,\"%s\")]";
 
     private ILabel lblNoBooks = getElementFactory().getLabel(By.id("feedEmptyText"), "No Books Present");
