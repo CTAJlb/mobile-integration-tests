@@ -1,8 +1,9 @@
 package constants.application;
 
-public enum ReaderType {
-    EBOOK("Book"),
-    AUDIOBOOK("Audio");
+public enum EnumBookType {
+    EBOOK("ebook"),
+    AUDIOBOOK("audiobook"),
+    PDF("pdf");
 
     private String bookType;
 
@@ -10,7 +11,7 @@ public enum ReaderType {
         return bookType;
     }
 
-    ReaderType(String bookType) {
+    EnumBookType(String bookType) {
         this.bookType = bookType;
     }
 }

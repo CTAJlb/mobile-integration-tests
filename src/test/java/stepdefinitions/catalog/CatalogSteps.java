@@ -3,7 +3,7 @@ package stepdefinitions.catalog;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
-import constants.application.ReaderType;
+import constants.application.EnumBookType;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
 import constants.localization.application.facetedSearch.FacetSortByKeys;
@@ -280,8 +280,8 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     }
 
     @When("I start reading or listening to a book with {} type from book details view")
-    public void openGivenTypeBookReader(ReaderType readerType) {
-        catalogSteps.startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(readerType);
+    public void openGivenTypeBookReader(EnumBookType bookType) {
+        catalogSteps.startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(bookType);
     }
 
     @When("I open first present category")

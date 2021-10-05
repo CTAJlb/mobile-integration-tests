@@ -2,7 +2,7 @@ package stepdefinitions.catalog.components;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
-import constants.application.ReaderType;
+import constants.application.EnumBookType;
 import constants.keysForContext.ScenarioContextKey;
 import constants.localization.application.catalog.BookActionButtonNames;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
@@ -377,8 +377,8 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         context.add(bookInfoKey, subcategoryScreen.openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIAndGetBookInfo(bookName, actionButtonKey, bookType));
     }
 
-    public void startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(ReaderType readerType) {
-        switch (readerType) {
+    public void startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(EnumBookType bookType) {
+        switch (bookType) {
             case EBOOK:
                 clickActionButtonOnBookDetailsView(EnumActionButtonsForBooksAndAlertsKeys.READ);
                 epubReaderScreen.state().waitForDisplayed();

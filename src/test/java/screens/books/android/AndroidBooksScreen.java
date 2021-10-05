@@ -1,6 +1,5 @@
 package screens.books.android;
 
-import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
@@ -10,18 +9,19 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
+import constants.application.EnumBookType;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
-import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
+import screens.IWorkingWithListOfBooks;
 import screens.books.BooksScreen;
 
 import java.util.List;
 
 @ScreenType(platform = PlatformName.ANDROID)
-public class AndroidBooksScreen extends BooksScreen {
+public class AndroidBooksScreen extends BooksScreen implements IWorkingWithListOfBooks {
     private static final String MAIN_ELEMENT_LOC = "//android.widget.TextView[@text=\"Books\"]";
     private static final String BOOKS_LOC = "//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout";
-    private static final String SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC = "//android.view.ViewGroup/android.widget.TextView[contains(@text,\"%s\")]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
+    private static final String SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC = "//android.view.ViewGroup/android.widget.TextView[contains(@text,\"%s\")]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
     private static final String SPECIFIC_BOOK_NAME_LOC = "//android.widget.TextView[contains(@text,\"%s\")]";
 
     private ILabel lblNoBooks = getElementFactory().getLabel(By.id("feedEmptyText"), "No Books Present");
@@ -40,16 +40,9 @@ public class AndroidBooksScreen extends BooksScreen {
     }
 
     @Override
-    public boolean isSpecificBookWithSpecificActionButtonPresent(CatalogBookModel bookInfo, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public boolean isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         addWait();
-        String actionButton = actionButtonKey.i18n();
-        IButton actionButtonOnBook = getElementFactory()
-                .getButton(By.xpath(String.format(SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC, bookInfo.getTitle(), actionButton)),
-                        "Book with Action Button");
-        if (!actionButtonOnBook.state().waitForDisplayed()) {
-            actionButtonOnBook.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        }
-        return actionButtonOnBook.state().waitForDisplayed();
+        return getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(EnumBookType.EBOOK, bookName, actionButtonKey, SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, SPECIFIC_BOOK_NAME_LOC).state().waitForDisplayed();
     }
 
     @Override
@@ -68,19 +61,9 @@ public class AndroidBooksScreen extends BooksScreen {
     }
 
     @Override
-    public void openBookWithDefiniteNameAndDefiniteActionButton(CatalogBookModel bookInfo, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public void openBookWithSpecificTypeAndSpecificNameAndSpecificActionButton(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         addWait();
-        String bookName = bookInfo.getTitle();
-        String actionButtonString = actionButtonKey.i18n();
-        IButton actionButton = getElementFactory().getButton(By.xpath(String.format(SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC, bookName, actionButtonString)), "Action Button");
-        if (!actionButton.state().waitForDisplayed()) {
-            actionButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        }
-        if (actionButton.state().isDisplayed()) {
-            getElementFactory().getButton(By.xpath(String.format(SPECIFIC_BOOK_NAME_LOC, bookName)), bookName).click();
-        } else {
-            throw new RuntimeException("There is not book with action button and title-" + bookName);
-        }
+        getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(EnumBookType.EBOOK, bookName, actionButtonKey, SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, SPECIFIC_BOOK_NAME_LOC).click();
     }
 
     private List<IElement> getListOfBooks() {

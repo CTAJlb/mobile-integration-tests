@@ -70,8 +70,8 @@ Feature: Read EPUB
       And I wait for 3 seconds
       And I restart app
       And I open Books
-    Then Book 'bookInfo' with READ action button is present on Books Screen
-    When I open 'bookInfo' book with READ action button on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
       And PageNumber 'pageNumberKey' is correct

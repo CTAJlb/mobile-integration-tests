@@ -157,7 +157,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     private void clickOnSpecificBookElement(IElement bookWithSpecificAddBtn) {
-        if (bookWithSpecificAddBtn.state().isDisplayed()) {
+        if (bookWithSpecificAddBtn.state().waitForDisplayed()) {
             bookWithSpecificAddBtn.click();
         } else {
             bookWithSpecificAddBtn.getTouchActions().scrollToElement(SwipeDirection.DOWN);

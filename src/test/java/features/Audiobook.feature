@@ -43,7 +43,7 @@ Feature: Audiobook
       And I wait for 3 seconds
       And I restart app
       And I open Books
-      And I open 'bookInfo' book with LISTEN action button on Books Screen
+      And Open EBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
       And I press on the book details view at the action button LISTEN
     Then I check that current chapter text equal to remembered 'newChapterText2'
 

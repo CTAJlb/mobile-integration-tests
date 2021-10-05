@@ -90,13 +90,15 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
         if (bookType.toLowerCase().equals("audiobook")) {
             titleForLocator = titleForLocator + ". Audiobook.";
         }
-
+        //I will delete this, because I fixed a property file
+        //start
         String actionButton = "";
         if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET) {
             actionButton = "Get";
         } else if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
             actionButton = "Reserve";
         }
+        //end
         try {
             Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
         } catch (InterruptedException e) {

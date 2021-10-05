@@ -8,8 +8,8 @@ Feature: Feed
         | Historical Fiction |
       And DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
       And I open Books
-    Then Book 'bookInfo' with READ action button is present on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
       And Count of books is equal to 1
     When I refresh list of books
-    Then Book 'bookInfo' with READ action button is present on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
       And Count of books is equal to 1

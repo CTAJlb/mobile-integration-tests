@@ -31,7 +31,7 @@ Feature: Manage Libraries
         |2021 New Public Domain Books|
       And DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
       And I open Books
-    Then Book 'bookInfo' with READ action button is present on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When I open Catalog
       And I return to previous screen for epub and pdf
       And I switch to 'LYRASIS Reads' from side menu

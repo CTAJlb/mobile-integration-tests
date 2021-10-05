@@ -78,12 +78,12 @@ Feature: Main actions private access books
       And I press on the book details view at the action button GET
       And I close Book Details for IOSTab
       And I open Books
-    Then Book 'bookInfo' with READ action button is present on Books Screen
-    When I open 'bookInfo' book with READ action button on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And I press on the book details view at the action button RETURN
       And I close Book Details for IOSTab
       And I open Books
-    Then Book 'bookInfo' with READ action button is not present on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
   @logout @returnBooks @tier2
   Scenario: Check out from Subcategory List View and Return from Books
@@ -100,11 +100,11 @@ Feature: Main actions private access books
     Then Book 'bookInfo' is present on screen
     When I return to previous screen for epub and pdf
       And I open Books
-    Then Book 'bookInfo' with READ action button is present on Books Screen
-    When I open 'bookInfo' book with READ action button on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And I press on the book details view at the action button RETURN
       And I open Books
-    Then Book 'bookInfo' with READ action button is not present on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Check out from Subcategory List View and Return from Subcategory List View
@@ -131,7 +131,7 @@ Feature: Main actions private access books
       And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I open Books
-      And I open 'bookInfo' book with READ action button on Books Screen
+      And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And I press on the book details view at the action button READ
     Then Book 'bookInfo' is present on screen
 

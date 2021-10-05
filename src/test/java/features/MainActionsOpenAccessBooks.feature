@@ -10,23 +10,23 @@ Scenario: Check out from Book Detail View and Return from Books
   When I open the book details for the subsequent DOWNLOAD on Subcategory List View and save it as 'bookInfo'
   Then I check that book contains READ action button on book details view
   When I open Books
-  Then Book 'bookInfo' with READ action button is present on Books Screen
-  When I open 'bookInfo' book with READ action button on Books Screen
+  Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+  When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
     And I press on the book details view at the action button DELETE
     And I open Books
-  Then Book 'bookInfo' with DOWNLOAD action button is present on Books Screen
+  Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
 
   @tier2 @exclude_android
   Scenario: Check out from Book Detail View and Return from Books(IOS)
     When I open the book details for the subsequent DOWNLOAD on Subcategory List View and save it as 'bookInfo'
       And I close Book Details for IOSTab
       And I open Books
-    Then Book 'bookInfo' with READ action button is present on Books Screen
-    When I open 'bookInfo' book with READ action button on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And I press on the book details view at the action button DELETE
       And I close Book Details for IOSTab
       And I open Books
-    Then Book 'bookInfo' with READ action button is not present on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
   @tier2 @exclude_ios
   Scenario: Check out from Book Detail View and Return from Book Detail View
@@ -50,11 +50,11 @@ Scenario: Check out from Book Detail View and Return from Books
   Scenario: Check out from Subcategory List View and Return from Books
     When DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
       And I open Books
-    Then Book 'bookInfo' with READ action button is present on Books Screen
-    When I open 'bookInfo' book with READ action button on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And I press on the book details view at the action button DELETE
       And I open Books
-    Then Book 'bookInfo' with DOWNLOAD action button is present on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
 
   @tier2
   Scenario: Check out from Subcategory List View and Read from Subcategory List View
@@ -67,12 +67,12 @@ Scenario: Check out from Book Detail View and Return from Books
   Scenario: Check out from Subcategory List View and Return from Books(IOS)
     When DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
       And I open Books
-    Then Book 'bookInfo' with READ action button is present on Books Screen
-    When I open 'bookInfo' book with READ action button on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And I press on the book details view at the action button DELETE
       And I close Book Details for IOSTab
       And I open Books
-    Then Book 'bookInfo' with READ action button is not present on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
   @tier2 @exclude_android
   Scenario: Check out from Subcategory List View and Return from Subcategory List View(IOS)
