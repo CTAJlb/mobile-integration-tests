@@ -11,20 +11,29 @@ import io.cucumber.java.en.When;
 import models.android.CatalogBookModel;
 import org.junit.Assert;
 import screens.books.BooksScreen;
+import screens.bottommenu.BottomMenu;
+import screens.bottommenu.BottomMenuForm;
 
 public class BooksSteps {
     private final BooksScreen booksScreen;
+    protected final BottomMenuForm bottomMenuForm;
     private ScenarioContext context;
 
     @Inject
     public BooksSteps(ScenarioContext context) {
         this.context = context;
+        bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
         booksScreen = AqualityServices.getScreenFactory().getScreen(BooksScreen.class);
     }
 
     @Then("There are not books on Books Screen")
-    public void checkNoBooksArePresentInBooksList() {
-        Assert.assertTrue("Books are present in Books list", booksScreen.isNoBooksMessagePresent());
+    public void areBooksNotPresent() {
+        Assert.assertTrue("Books are present on books screen", booksScreen.isNoBooksMessagePresent());
+    }
+
+    @And("I open Books")
+    public void openBooks() {
+        bottomMenuForm.open(BottomMenu.BOOKS);
     }
 
     @When("Open {} book with {} action button and {string} bookInfo on books screen")

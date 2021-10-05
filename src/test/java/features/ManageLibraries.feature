@@ -55,14 +55,12 @@ Feature: Manage Libraries
       And I press on the book details view at the action button RESERVE
     Then I check that book contains CANCEL_RESERVATION action button on book details view
     When I open Holds
-    Then Holds feed is loaded
-      And Book 'bookInfo' is present in Holds List
+    Then EBOOK book with CANCEL_RESERVATION action button and 'bookInfo' bookInfo is present on holds screen
     When I open Catalog
       And I open Catalog
       And I switch to 'Internet Archive' from side menu
-      And Open Holds
-    Then Holds feed is loaded
-      And No books are present in Holds list
+      And I open Holds
+      And There are not books on holds screen
 
   @logout @tier2 @oldOs
   Scenario: Store library card

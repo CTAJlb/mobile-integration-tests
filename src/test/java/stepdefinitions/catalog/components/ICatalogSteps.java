@@ -27,8 +27,6 @@ public interface ICatalogSteps {
 
     void openCatalogWithAgeCheck();
 
-    void openBooks();
-
     void isLibraryPresentOnCatalogScreen(String libraryName);
 
     void openCategory(String categoryName);

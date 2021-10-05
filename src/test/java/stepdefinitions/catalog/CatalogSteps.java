@@ -65,11 +65,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openCatalogWithAgeCheck();
     }
 
-    @And("I open Books")
-    public void openBooks() {
-        catalogSteps.openBooks();
-    }
-
     @And("Library {string} is present on Catalog Screen")
     public void isLibraryPresentOnCatalogScreen(String libraryName) {
         catalogSteps.isLibraryPresentOnCatalogScreen(libraryName);
