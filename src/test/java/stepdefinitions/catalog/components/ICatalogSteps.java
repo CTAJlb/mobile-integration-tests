@@ -41,9 +41,6 @@ public interface ICatalogSteps {
 
     void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain);
 
-    void performActionOnBookAndSaveBookInfoOnSubcategoryListView(
-            EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey);
-
     void performActionOnBookOfTypeAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType, String bookInfoKey);
 
     void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey);

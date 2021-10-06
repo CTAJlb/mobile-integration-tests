@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import constants.application.EnumBookType;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
-import framework.utilities.feedXMLUtil.BookModel;
 import io.cucumber.java.en.When;
 import models.android.CatalogBookModel;
 import screens.catalog.screen.books.CatalogBooksScreen;
@@ -24,6 +23,13 @@ public class CatalogBooksSteps {
     public void openBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonAndSaveBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey, String bookInfoKey) {
         String bookName = context.get(bookNameKey);
         CatalogBookModel bookInfo = catalogBooksScreen.openBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonAndGetBookInfo(bookType, bookName, actionButtonKey);
+        context.add(bookInfoKey, bookInfo);
+    }
+
+    @When("Click {} action button on {} book with {string} bookName on catalog books screen and save book as {string}")
+    public void clickSpecificActionButtonOnBookWithSpecificTypeAndSpecificNameAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumBookType bookType, String bookNameKey, String bookInfoKey) {
+        String bookName = context.get(bookNameKey);
+        CatalogBookModel bookInfo = catalogBooksScreen.clickSpecificActionButtonOnBookWithSpecificTypeAndSpecificNameAndGetBookInfo(bookType, bookName, actionButtonKey);
         context.add(bookInfoKey, bookInfo);
     }
 }

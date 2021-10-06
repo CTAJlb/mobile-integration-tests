@@ -61,7 +61,7 @@ Scenario: Check out from Book Detail View and Return from Books(ANDROID)
 
   @tier2 @exclude_ios
   Scenario: Check out from Subcategory List View and Return from Books(ANDROID)
-    When DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
+    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
@@ -71,7 +71,7 @@ Scenario: Check out from Book Detail View and Return from Books(ANDROID)
 
   @tier2 @exclude_android
   Scenario: Check out from Subcategory List View and Return from Books(IOS)
-    When DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
@@ -80,15 +80,22 @@ Scenario: Check out from Book Detail View and Return from Books(ANDROID)
     And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
-  @tier2
-  Scenario: Check out from Subcategory List View and Read from Subcategory List View
-    When DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
+  @tier2 @exclude_ios
+  Scenario: Check out from Subcategory List View and Read from Subcategory List View(ANDROID)
+    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
+    When I click READ button on the 'bookInfo' book on Subcategory List view
+    Then Book 'bookInfo' is present on screen
+
+  @tier2 @exclude_android
+  Scenario: Check out from Subcategory List View and Read from Subcategory List View(IOS)
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
     When I click READ button on the 'bookInfo' book on Subcategory List view
     Then Book 'bookInfo' is present on screen
 
   @tier2 @exclude_android
   Scenario: Check out from Subcategory List View and Return from Subcategory List View(IOS)
-    When DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And I click DELETE button on the 'bookInfo' book on Subcategory List view
     Then Book saved as 'bookInfo' should contain GET button on Subcategory List View

@@ -15,7 +15,8 @@ public abstract class CatalogBooksScreen extends Screen {
 
     public abstract CatalogBookModel getBookInfo(String title);
 
-    public abstract CatalogBookModel scrollToBookAndPerformActionAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKeys);
+    //here
+    public abstract CatalogBookModel clickSpecificActionButtonOnBookWithSpecificTypeAndSpecificNameAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
     public abstract void clickBookByTitleButtonWithKey(String title, EnumActionButtonsForBooksAndAlertsKeys key);
 

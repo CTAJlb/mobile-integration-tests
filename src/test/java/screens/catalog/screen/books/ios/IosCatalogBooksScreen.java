@@ -64,8 +64,14 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     }
 
     @Override
-    public CatalogBookModel scrollToBookAndPerformActionAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKeys) {
-        return performActionOnBook(bookActionButtonKeys);
+    public CatalogBookModel clickSpecificActionButtonOnBookWithSpecificTypeAndSpecificNameAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        IButton bookNameButton = getSpecificActionButtonForBookWithSpecificTypeAndSpecificNameFromListOfBooks(bookType, bookName, actionButtonKey, SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC);
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_FOR_BOOK_WITH_SPECIFIC_NAME_LOC, bookName)), "lblAuthor");
+        CatalogBookModel bookInfo = new CatalogBookModel()
+                .setTitle(bookName)
+                .setAuthor(lblAuthor.getAttribute(IosAttributes.NAME));
+        bookNameButton.click();
+        return bookInfo;
     }
 
     @Override
