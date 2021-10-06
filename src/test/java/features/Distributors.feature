@@ -9,7 +9,7 @@ Feature: Distributors
       And I open search modal
       And I search 'unavailable' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
-      And Open '<bookType>' book with RESERVE button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+      And Open <bookType> book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And I press on the book details view at the action button RESERVE
     Then I check that book contains CANCEL_RESERVATION action button on book details view
 
@@ -31,7 +31,7 @@ Feature: Distributors
       And I open search modal
       And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
-      And Open '<bookType>' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+      And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And I press on the book details view at the action button GET
     Then I check that book contains <buttonBookDetailsView> action button on book details view
     When I start reading or listening to a book with <bookType> type from book details view
@@ -55,7 +55,7 @@ Feature: Distributors
       And I open search modal
       And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
-      And Open '<bookType>' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+      And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And I press on the book details view at the action button GET
       And I press on the book details view at the action button RETURN
     Then I check that book contains GET action button on book details view

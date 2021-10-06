@@ -13,8 +13,6 @@ public interface ICatalogSteps {
 
     void subcategoryRowsAreLoaded();
 
-    void openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIOAndSaveBookInfo(String bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey, String bookInfoKey);
-
     void performActionOnSpecificBookFromAPIAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey);
 
     void getNamesOfBooksAndSaveThem(String booksNamesListKey);

@@ -290,11 +290,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         facetedSearchScreen.changeAvailabilityTo(facetAvailabilityKeys);
     }
 
-    @Override
-    public void openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIOAndSaveBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey, String bookType) {
-        context.add(bookInfoKey, subcategoryScreen.openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIAndGetBookInfo(bookName, actionButtonKey, bookType));
-    }
-
     public void startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(EnumBookType bookType) {
         switch (bookType) {
             case EBOOK:

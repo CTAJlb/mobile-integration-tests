@@ -117,12 +117,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.performActionOnSpecificBookFromAPIAndSaveBookInfoOnSubcategoryListView(actionButtonKey, bookNameInfoKey, bookInfoKey);
     }
 
-    @When("Open {string} book with {} button from Subcategory List View with title {string} and save it as {string}")
-    public void openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIOAndSaveBookInfo(String bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey, String bookInfoKey) {
-        String bookName = context.get(bookNameKey);
-        catalogSteps.openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIOAndSaveBookInfo(bookName, actionButtonKey, bookInfoKey, bookType);
-    }
-
     @And("Count of books in first lane is more than {int}")
     public void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks) {
         catalogSteps.checkCountOfBooksInFirstLaneIsMoreThan(countOfBooks);
