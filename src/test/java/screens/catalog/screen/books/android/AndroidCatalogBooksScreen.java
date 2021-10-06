@@ -60,11 +60,6 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     }
 
     @Override
-    public int getFoundBooksCount() {
-        return getFoundBooks().size();
-    }
-
-    @Override
     public CatalogBookModel getBookInfo(final String title) {
         return getBookModel(getBlockLocator(title));
     }
@@ -78,15 +73,6 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
                 .setAuthor(lblAuthor.getText());
         bookNameButton.click();
         return bookInfo;
-    }
-
-    @Override
-    public void clickBookByTitleButtonWithKey(String title, EnumActionButtonsForBooksAndAlertsKeys key) {
-        String buttonName = key.i18n();
-        IButton bookActionBtn =
-                getElementFactory().getButton(By.xpath(getBlockLocator(title) + String.format(BOOK_ADD_BUTTON_LOC, buttonName)), buttonName);
-        clickOnSpecificBookElement(bookActionBtn);
-        AqualityServices.getConditionalWait().waitFor(() -> !bookActionBtn.state().isDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }
 
     @Override
@@ -115,42 +101,6 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
         String bookTitle =
                 getElementFactory().getButton(By.xpath(String.format(RELATIVE_BOOK_TITLE_LOCATOR_PATTERN, bookAddButtonLocator)), key).getText();
         return openBook(button, bookTitle);
-    }
-
-    @Override
-    public CatalogBookModel scrollToBookByNameAndClickActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName) {
-        String bookAddButtonLocator = getBookActionButtonLocatorWithGivenName(actionButtonKey, bookName);
-        IButton button = getElementFactory().getButton(By.xpath(bookAddButtonLocator), actionButtonKey.i18n());
-        button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        return openBook(button, bookName);
-    }
-
-    @Override
-    public CatalogBookModel scrollToBookByNameAndClickGetOrDownloadActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookName) {
-        String bookAddButtonLocator1 = getBookActionButtonLocatorWithGivenName(actionButtonKey1, bookName);
-        String bookAddButtonLocator2 = getBookActionButtonLocatorWithGivenName(actionButtonKey2, bookName);
-        IButton button1 = getElementFactory().getButton(By.xpath(bookAddButtonLocator1), actionButtonKey1.i18n());
-        IButton button2 = getElementFactory().getButton(By.xpath(bookAddButtonLocator2), actionButtonKey2.i18n());
-        IButton buttonForClick = null;
-        if (button1.state().waitForDisplayed()) {
-            buttonForClick = button1;
-            button1.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        } else if (button2.state().waitForDisplayed()) {
-            button2.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-            buttonForClick = button2;
-        }
-        return openBook(buttonForClick, bookName);
-    }
-
-    @Override
-    public String getErrorMessage() {
-        if (isErrorButtonPresent()) {
-            btnErrorDetails.click();
-            lblErrorDetails.state().waitForDisplayed();
-            return lblErrorDetails.getText();
-        }
-        AqualityServices.getLogger().info("Error details button is not present");
-        return "";
     }
 
     @Override

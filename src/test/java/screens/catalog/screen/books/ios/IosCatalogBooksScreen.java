@@ -52,11 +52,6 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     }
 
     @Override
-    public int getFoundBooksCount() {
-        return getFoundBooks().size();
-    }
-
-    @Override
     public CatalogBookModel getBookInfo(final String title) {
         return new CatalogBookModel()
                 .setTitle(title)
@@ -72,14 +67,6 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
                 .setAuthor(lblAuthor.getAttribute(IosAttributes.NAME));
         bookNameButton.click();
         return bookInfo;
-    }
-
-    @Override
-    public void clickBookByTitleButtonWithKey(String title, EnumActionButtonsForBooksAndAlertsKeys actionButton) {
-        String key = actionButton.i18n();
-        IButton bookAddBtn =
-                getButtonForBookWithAction(title, key);
-        clickOnSpecificBookElement(bookAddBtn);
     }
 
     @Override
@@ -111,35 +98,6 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         waitForPageLoading();
         //ends here
         return openBook(button, bookTitle);
-    }
-
-    @Override
-    public CatalogBookModel scrollToBookByNameAndClickActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName) {
-        String key = actionButtonKey.i18n();
-        IButton actionButton = getButtonForBookWithAction(bookName, key);
-        switchToEbooksTab();
-        if (!actionButton.state().waitForDisplayed()) {
-            actionButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        }
-        AqualityServices.getLogger().info("Started Thread.sleep");
-        try {
-            Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
-        } catch (InterruptedException e) {
-            AqualityServices.getLogger().debug("Thread.sleep issue happened. " + e.getLocalizedMessage());
-        }
-        AqualityServices.getLogger().info("Finished Thread.sleep");
-        return openBook(actionButton, bookName);
-    }
-
-    @Override
-    public CatalogBookModel scrollToBookByNameAndClickGetOrDownloadActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookName) {
-        //this does not use for ios
-        return null;
-    }
-
-    @Override
-    public String getErrorMessage() {
-        return null;
     }
 
     @Override
