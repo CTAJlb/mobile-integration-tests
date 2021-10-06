@@ -197,15 +197,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void checkCountOfBooksInSubcategoryLaneIsUpTo(String lineName, int countOfBooks) {
-        int foundCountOfBooks = catalogScreen
-                .getListOfAllBooksNamesInSubcategoryLane(lineName)
-                .size();
-        Assert.assertTrue(String.format("Expected count of books bigger or equal to %1$s but found %2$s", countOfBooks,
-                foundCountOfBooks), countOfBooks >= foundCountOfBooks);
-    }
-
-    @Override
     public void checkBookInfoIsOpened(String bookInfoKey) {
         Assert.assertEquals("Expected book is not opened", Optional.ofNullable(context.get(bookInfoKey)).orElse(bookInfoKey), bookDetailsScreen.getBookInfo());
     }
@@ -286,35 +277,8 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void checkFollowingValuesInInformationBlockArePresent(
-            List<BookDetailsScreenInformationBlockModel> expectedValuesList) {
-        Assert.assertTrue("Not all information block values are correct (or present)", expectedValuesList.stream().allMatch(listElement ->
-                bookDetailsScreen.isValuePresentInInformationBlock(listElement.getKey(),
-                        listElement.getValue())));
-    }
-
-    @Override
-    public void checkDescriptionHasText(final String description) {
-        SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(bookDetailsScreen.isDescriptionPresent()).as("Description does not present").isTrue();
-        softAssertions.assertThat(StringUtils.trim(bookDetailsScreen.getDescriptionText()).contains(StringUtils.trim(description))).as("Description has not correct text").isTrue();
-        softAssertions.assertAll();
-    }
-
-    @Override
     public void closeBookDetailsOnlyForIOSTab() {
         bookDetailsScreen.closeBookDetailsOnlyForIOSTabIfDisplayed();
-    }
-
-    @Override
-    public void openRelatedBooks() {
-        bookDetailsScreen.clickRelatedBooks();
-    }
-
-    @Override
-    public void checkCountOfBooksInSearchResultIsUpTo(int countOfBooks) {
-        int foundBooksCount = catalogBooksScreen.getFoundBooksCount();
-        Assert.assertTrue(String.format("Found count of books (%d) is bigger than expected - %d", foundBooksCount, countOfBooks), countOfBooks >= foundBooksCount);
     }
 
     @Override
@@ -398,15 +362,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     protected void addScreenshot() {
         Scenario scenario = context.get(ScenarioContextKey.SCENARIO_KEY);
         scenario.attach(ScreenshotUtils.getScreenshot(), "image/png", "screenshot.png");
-    }
-
-    public void checkCountOfBooksInSearchResultIsMoreThen(int countOfBooks) {
-        Assert.assertTrue(String.format("Found count of books (%d) is less than expected - %d", catalogBooksScreen.getFoundBooksCount(), countOfBooks), AqualityServices.getConditionalWait().waitFor(() -> countOfBooks <= catalogBooksScreen.getFoundBooksCount()));
-    }
-
-    public void checkCountOfBooksInSubcategoryLaneIsMoreThen(String lineName, int countOfBooks) {
-        int foundCountOfBooks = catalogScreen.getListOfAllBooksNamesInSubcategoryLane(lineName).size();
-        Assert.assertTrue(String.format("Expected count of books bigger or equal to %1$s but found %2$s", countOfBooks, foundCountOfBooks), countOfBooks <= foundCountOfBooks);
     }
 
     public void openFirstCategory() {

@@ -151,16 +151,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.checkCountOfBooksInFirstLaneIsMoreThan(countOfBooks);
     }
 
-    @And("Count of books in subcategory {string} lane is up to {int}")
-    public void checkCountOfBooksInSubcategoryLaneIsUpTo(String lineName, int countOfBooks) {
-        catalogSteps.checkCountOfBooksInSubcategoryLaneIsUpTo(lineName, countOfBooks);
-    }
-
-    @And("Count of books in subcategory {string} lane is more then {int}")
-    public void checkCountOfBooksInSubcategoryLaneIsMoreThen(String lineName, int countOfBooks) {
-        catalogSteps.checkCountOfBooksInSubcategoryLaneIsMoreThen(lineName, countOfBooks);
-    }
-
     @Then("Book {string} is opened")
     public void checkBookInfoIsOpened(String bookInfoKey) {
         catalogSteps.checkBookInfoIsOpened(bookInfoKey);
@@ -214,32 +204,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     @Then("Books are sorted by Title ascending")
     public void booksAreSortedByTitleAscending() {
         catalogSteps.booksAreSortedByTitleAscending();
-    }
-
-    @And("The following values in the information block are present:")
-    public void checkFollowingValuesInInformationBlockArePresent(
-            List<BookDetailsScreenInformationBlockModel> expectedValuesList) {
-        catalogSteps.checkFollowingValuesInInformationBlockArePresent(expectedValuesList);
-    }
-
-    @And("Description has text")
-    public void checkDescriptionHasText(final String description) {
-        catalogSteps.checkDescriptionHasText(description);
-    }
-
-    @When("I open related books")
-    public void openRelatedBooks() {
-        catalogSteps.openRelatedBooks();
-    }
-
-    @And("Count of books in search result is up to {int}")
-    public void checkCountOfBooksInSearchResultIsUpTo(int countOfBooks) {
-        catalogSteps.checkCountOfBooksInSearchResultIsUpTo(countOfBooks);
-    }
-
-    @And("Count of books in search result is more then {int}")
-    public void checkCountOfBooksInSearchResultIsMoreThen(int countOfBooks) {
-        catalogSteps.checkCountOfBooksInSearchResultIsMoreThen(countOfBooks);
     }
 
     @Then("Book saved as {string} should contain {} button on Subcategory List View")

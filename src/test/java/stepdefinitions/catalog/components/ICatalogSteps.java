@@ -54,8 +54,6 @@ public interface ICatalogSteps {
 
     void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks);
 
-    void checkCountOfBooksInSubcategoryLaneIsUpTo(String lineName, int countOfBooks);
-
     void checkBookInfoIsOpened(String bookInfoKey);
 
     void openFirstBookInSubcategoryListAndSaveIt(String bookInfoKey);
@@ -77,14 +75,6 @@ public interface ICatalogSteps {
     void checkBooksAreSortedByAuthorAscending();
 
     void booksAreSortedByTitleAscending();
-
-    void checkFollowingValuesInInformationBlockArePresent(List<BookDetailsScreenInformationBlockModel> expectedValuesList);
-
-    void checkDescriptionHasText(final String description);
-
-    void openRelatedBooks();
-
-    void checkCountOfBooksInSearchResultIsUpTo(int countOfBooks);
 
     void checkThatSavedBookContainButtonAtCatalogBooksScreen(
             final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys key);
