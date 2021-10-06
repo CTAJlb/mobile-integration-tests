@@ -44,11 +44,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.getNamesOfBooksAndSaveThem(booksNamesListKey);
     }
 
-    @When("I {} hardcode book {string} and save it as {string}")
-    public void performActionOnHardcodeBookByNameAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName, String bookInfoKey) {
-        catalogSteps.performActionOnHardcodeBookByNameAndSaveIt(actionButtonKey, bookName, bookInfoKey);
-    }
-
     @Then("List of books on screen is not equal to list of books saved as {string}")
     public void checkListOfBooksIsNotEqualToSavedListOfBooks(String booksNamesListKey) {
         catalogSteps.checkListOfBooksIsNotEqualToSavedListOfBooks(booksNamesListKey);
@@ -105,11 +100,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     @And("{} book of {string} type and save it as {string}")
     public void performActionOnBookOfTypeAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType, String bookInfoKey) {
         catalogSteps.performActionOnBookOfTypeAndSaveIt(actionButtonKey, bookType, bookInfoKey);
-    }
-
-    @When("I {} or {} book by name {string} and save it as {string}")
-    public void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey) {
-        catalogSteps.performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(actionButtonKey1, actionButtonKey2, bookNameInfoKey, bookInfoKey);
     }
 
     @And("Count of books in first lane is more than {int}")
@@ -175,11 +165,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     @Then("I check that book contains {} action button on book details view")
     public void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final EnumActionButtonsForBooksAndAlertsKeys key) {
         catalogSteps.checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(key);
-    }
-
-    @When("I open {string} book with {} action button on Subcategory Screen")
-    public void openSpecificBookWithSpecificActionButton(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        catalogSteps.openSpecificBookWithSpecificActionButton(bookInfoKey, actionButtonKey);
     }
 
     @When("I press on the book details view at the action button {}")

@@ -147,12 +147,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey) {
-        String bookName = context.get(bookNameInfoKey);
-        context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickGetOrDownloadActionButton(actionButtonKey1, actionButtonKey2, bookName));
-    }
-
-    @Override
     public void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks) {
         Assert.assertTrue("Count of books is smaller than " + countOfBooks, countOfBooks <= catalogScreen.getListOfAllBooksNamesInFirstLane().size());
     }
@@ -210,11 +204,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void performActionOnHardcodeBookByNameAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName, String bookInfoKey) {
-        context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
-    }
-
-    @Override
     public void checkBooksAreSortedByAuthorAscending() {
         List<String> list = subcategoryScreen.getAuthorsInfo();
         List<String> listOfSurnames = getSurnames(list);
@@ -247,13 +236,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         boolean isButtonPresent = bookDetailsScreen.isBookAddButtonTextEqualTo(key);
         addScreenshotIfErrorPresent(isButtonPresent);
         Assert.assertTrue(String.format("Button '%1$s' is not present on book details screen. Error (if present) - %2$s", key.i18n(), getErrorDetails()), isButtonPresent);
-    }
-
-    @Override
-    public void openSpecificBookWithSpecificActionButton(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        CatalogBookModel bookInfo = context.get(bookInfoKey);
-        subcategoryScreen.state().waitForDisplayed();
-        subcategoryScreen.openBookWithDefiniteNameAndDefiniteActionButton(bookInfo, actionButtonKey);
     }
 
     @Override

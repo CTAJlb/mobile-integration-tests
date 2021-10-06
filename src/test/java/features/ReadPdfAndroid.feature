@@ -10,9 +10,9 @@ Feature: Read PDF
     When I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-      And I GET or DOWNLOAD book by name 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
-    When I open 'bookInfo' book with READ action button on Subcategory Screen
+    And Click DOWNLOAD action button on PDF book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then PDF book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
+    When Open PDF book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And I press on the book details view at the action button READ
     Then Pdf book 'bookInfo' is present on screen
 

@@ -9,7 +9,7 @@ Feature: Audiobook
     And I open search modal
     And I search for 'Red Country' and save bookName as 'bookNameInfo'
     And I switch to 'Audiobooks' catalog tab
-    And Open 'AUDIOBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And I press on the book details view at the action button GET
 
   @logout @returnBooks @tier2 @oldOs @tablet

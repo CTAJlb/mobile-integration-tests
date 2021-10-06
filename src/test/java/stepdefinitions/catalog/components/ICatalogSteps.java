@@ -19,8 +19,6 @@ public interface ICatalogSteps {
 
     void openLibraryFromSideMenu(String libraryName);
 
-    void performActionOnHardcodeBookByNameAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName, String bookInfoKey);
-
     void openCatalogWithAgeCheck();
 
     void isLibraryPresentOnCatalogScreen(String libraryName);
@@ -38,8 +36,6 @@ public interface ICatalogSteps {
     void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain);
 
     void performActionOnBookOfTypeAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType, String bookInfoKey);
-
-    void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey);
 
     void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks);
 
@@ -66,8 +62,6 @@ public interface ICatalogSteps {
     void booksAreSortedByTitleAscending();
 
     void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final EnumActionButtonsForBooksAndAlertsKeys key);
-
-    void openSpecificBookWithSpecificActionButton(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
     void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButton);
 
