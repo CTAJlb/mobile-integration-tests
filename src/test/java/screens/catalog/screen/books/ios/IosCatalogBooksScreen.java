@@ -39,7 +39,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
 
     //
     private static final String SPECIFIC_BOOK_NAME_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]";
-    private static final String AUTHOR_FOR_BOOK_WITH_SPECIFIC_NAME_LOC = SPECIFIC_BOOK_NAME_LOC + "//following-sibling::XCUIElementTypeStaticText";
+    private static final String AUTHOR_FOR_BOOK_WITH_SPECIFIC_NAME_LOC = SPECIFIC_BOOK_NAME_LOC + "/following-sibling::XCUIElementTypeStaticText";
     private static final String SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%s\")]/following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeButton";
 
 
@@ -94,10 +94,8 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     }
 
     @Override
-    public boolean isBookAddButtonTextEqualTo(String bookTitle, EnumActionButtonsForBooksAndAlertsKeys buttonKeys) {
-        String key = buttonKeys.i18n();
-        IButton bookAddBtn = getButtonForBookWithAction(bookTitle, key);
-        return bookAddBtn.state().waitForDisplayed(Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+    public boolean isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        return getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(EnumBookType.EBOOK, bookName, actionButtonKey, SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, SPECIFIC_BOOK_NAME_LOC).state().waitForDisplayed();
     }
 
     @Override

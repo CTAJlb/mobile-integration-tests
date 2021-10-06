@@ -45,8 +45,6 @@ public interface ICatalogSteps {
 
     void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey);
 
-    void performActionOnBookOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKeys, String bookInfoKey);
-
     void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks);
 
     void checkBookInfoIsOpened(String bookInfoKey);
@@ -70,9 +68,6 @@ public interface ICatalogSteps {
     void checkBooksAreSortedByAuthorAscending();
 
     void booksAreSortedByTitleAscending();
-
-    void checkThatSavedBookContainButtonAtCatalogBooksScreen(
-            final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys key);
 
     void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final EnumActionButtonsForBooksAndAlertsKeys key);
 

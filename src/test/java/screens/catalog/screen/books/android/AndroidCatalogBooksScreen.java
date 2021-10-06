@@ -101,13 +101,8 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     }
 
     @Override
-    public boolean isBookAddButtonTextEqualTo(String bookTitle, EnumActionButtonsForBooksAndAlertsKeys key) {
-        String buttonName = key.i18n();
-        IButton btnBook =
-                getElementFactory().getButton(By.xpath(getBookActionButtonLocatorWithGivenName(key, bookTitle)), buttonName);
-        AqualityServices.getConditionalWait().waitFor(() ->
-                btnBook.state().isDisplayed() || btnErrorDetails.state().isDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
-        return btnBook.state().isDisplayed();
+    public boolean isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        return getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(EnumBookType.EBOOK, bookName, actionButtonKey, SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, SPECIFIC_BOOK_NAME_LOC).state().waitForDisplayed();
     }
 
     @Override

@@ -83,19 +83,19 @@ Scenario: Check out from Book Detail View and Return from Books(ANDROID)
   @tier2 @exclude_ios
   Scenario: Check out from Subcategory List View and Read from Subcategory List View(ANDROID)
     When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
-    When I click READ button on the 'bookInfo' book on Subcategory List view
+    And EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
+    And Click READ action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is present on screen
 
   @tier2 @exclude_android
   Scenario: Check out from Subcategory List View and Read from Subcategory List View(IOS)
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
-    When I click READ button on the 'bookInfo' book on Subcategory List view
+    And EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
+    And Click READ action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is present on screen
 
   @tier2 @exclude_android
   Scenario: Check out from Subcategory List View and Return from Subcategory List View(IOS)
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And I click DELETE button on the 'bookInfo' book on Subcategory List view
-    Then Book saved as 'bookInfo' should contain GET button on Subcategory List View
+    And Click DELETE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with GET action button and 'bookInfo' bookInfo is present on catalog books screen

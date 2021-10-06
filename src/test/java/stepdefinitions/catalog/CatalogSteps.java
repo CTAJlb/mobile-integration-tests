@@ -123,11 +123,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIOAndSaveBookInfo(bookName, actionButtonKey, bookInfoKey, bookType);
     }
 
-    @When("I click {} button on the {string} book on Subcategory List view")
-    public void performActionOnBookOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKeys, String bookInfoKey) {
-        catalogSteps.performActionOnBookOnSubcategoryListView(bookActionButtonKeys, bookInfoKey);
-    }
-
     @And("Count of books in first lane is more than {int}")
     public void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks) {
         catalogSteps.checkCountOfBooksInFirstLaneIsMoreThan(countOfBooks);
@@ -186,12 +181,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     @Then("Books are sorted by Title ascending")
     public void booksAreSortedByTitleAscending() {
         catalogSteps.booksAreSortedByTitleAscending();
-    }
-
-    @Then("Book saved as {string} should contain {} button on Subcategory List View")
-    public void checkThatSavedBookContainButtonAtCatalogBooksScreen(
-            final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys key) {
-        catalogSteps.checkThatSavedBookContainButtonAtCatalogBooksScreen(bookInfoKey, key);
     }
 
     @Then("I check that book contains {} action button on book details view")

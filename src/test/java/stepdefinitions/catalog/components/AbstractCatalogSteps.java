@@ -168,15 +168,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void performActionOnBookOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
-        CatalogBookModel catalogBookModel = context.get(bookInfoKey);
-        catalogBooksScreen.clickBookByTitleButtonWithKey(catalogBookModel.getTitle(), actionButtonKey);
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
-        }
-    }
-
-    @Override
     public void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks) {
         Assert.assertTrue("Count of books is smaller than " + countOfBooks, countOfBooks <= catalogScreen.getListOfAllBooksNamesInFirstLane().size());
     }
@@ -264,23 +255,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     @Override
     public void closeBookDetailsOnlyForIOSTab() {
         bookDetailsScreen.closeBookDetailsOnlyForIOSTabIfDisplayed();
-    }
-
-    @Override
-    public void checkThatSavedBookContainButtonAtCatalogBooksScreen(
-            final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        CatalogBookModel catalogBookModel = context.get(bookInfoKey);
-        String title = catalogBookModel.getTitle();
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
-            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
-            AqualityServices.getLogger().info("Alert appears and dismiss alert");
-        }
-        boolean isButtonPresent = catalogBooksScreen.isBookAddButtonTextEqualTo(title, actionButtonKey);
-        if (!isButtonPresent && catalogBooksScreen.isErrorButtonPresent()) {
-            Scenario scenario = context.get(ScenarioContextKey.SCENARIO_KEY);
-            scenario.attach(ScreenshotUtils.getScreenshot(), "image/png", "error_screenshot.png");
-        }
-        Assert.assertTrue(String.format("Book's with title '%1$s' button does not contain text '%2$s'. Error message (if present) - '%3$s'", title, actionButtonKey.i18n(), catalogBooksScreen.getErrorMessage()), isButtonPresent);
     }
 
     @Override
