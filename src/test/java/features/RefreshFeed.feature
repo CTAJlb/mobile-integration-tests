@@ -9,7 +9,7 @@ Feature: Feed
       And DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
-      And Count of books is equal to 1
+      And Amount of books is equal to 1
     When I refresh list of books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
-      And Count of books is equal to 1
+      And Amount of books is equal to 1

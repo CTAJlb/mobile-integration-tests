@@ -36,7 +36,7 @@ Feature: Manage Libraries
       And I return to previous screen for epub and pdf
       And I switch to 'LYRASIS Reads' from side menu
       And I open Books
-    Then There are not books on Books Screen
+    Then There are not books on books screen
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Switch Library Reservations

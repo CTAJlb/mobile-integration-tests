@@ -26,7 +26,7 @@ public class BooksSteps {
         booksScreen = AqualityServices.getScreenFactory().getScreen(BooksScreen.class);
     }
 
-    @Then("There are not books on Books Screen")
+    @Then("There are not books on books screen")
     public void areBooksNotPresent() {
         Assert.assertTrue("Books are present on books screen", booksScreen.isNoBooksMessagePresent());
     }
@@ -37,7 +37,7 @@ public class BooksSteps {
     }
 
     @When("Open {} book with {} action button and {string} bookInfo on books screen")
-    public void openBookDetailsByClickingOnCover(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+    public void openBookWithSpecificTypeAndSpecificNameAndSpecificActionButton(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();
         booksScreen.openBookWithSpecificTypeAndSpecificNameAndSpecificActionButton(bookType, bookName, actionButtonKey);
@@ -59,9 +59,9 @@ public class BooksSteps {
                 booksScreen.isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(bookType, bookName, actionButtonKey));
     }
 
-    @And("Count of books is equal to {int}")
-    public void checkCountOfBooksIsEqualTo(int expectedCountOfBooks) {
-        Assert.assertEquals("Count of books is not correct", expectedCountOfBooks, booksScreen.getCountOfBooks());
+    @And("Amount of books is equal to {int}")
+    public void isAmountOfBooksEqualTo(int expectedAmountOfBooks) {
+        Assert.assertEquals("Amount of books is not correct", expectedAmountOfBooks, booksScreen.getCountOfBooks());
     }
 
     @When("I refresh list of books")
