@@ -8,12 +8,15 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import constants.application.EnumBookType;
 import constants.application.attributes.AndroidAttributes;
+import constants.application.attributes.IosAttributes;
 import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.swipe.SwipeElementUtils;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
+import screens.IWorkingWithListOfBooks;
 import screens.catalog.screen.books.CatalogBooksScreen;
 
 import java.time.Duration;
@@ -21,7 +24,7 @@ import java.util.List;
 import java.util.Objects;
 
 @ScreenType(platform = PlatformName.ANDROID)
-public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
+public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWorkingWithListOfBooks {
     private static final String ADD_BOOK_BUTTON_PATTERN = "//android.widget.Button[@text=\"%1$s\"]";
     private static final String BOOKS_LOC = ".//*[contains(@resource-id,\"bookCellIdle\")]";
     private static final String BOOK_BLOCK_BY_TITLE_LOC =
@@ -45,6 +48,12 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     private final ILabel lblFirstFoundBook = getElementFactory().getLabel(By.xpath(BOOKS_LOC), "First found book");
     private final ILabel lblErrorDetails = getElementFactory().getLabel(By.id("errorDetails"), "Error details");
     private final IButton btnErrorDetails = getElementFactory().getButton(By.id("bookCellErrorButtonDetails"), "Error details");
+
+    //
+    private static final String SPECIFIC_BOOK_NAME_LOC = "//android.widget.TextView[contains(@text,\"%s\")]";
+    private static final String AUTHOR_FOR_BOOK_WITH_SPECIFIC_NAME_LOC = SPECIFIC_BOOK_NAME_LOC + "//following-sibling::android.widget.TextView[contains(@resource-id,\"bookCellIdleAuthor\")]";
+    private static final String SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC = "//android.view.ViewGroup/android.widget.TextView[contains(@text,\"%s\")]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
+
 
     public AndroidCatalogBooksScreen() {
         super(By.id("feedWithGroups"));
@@ -75,8 +84,14 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
-    public void openBookWithGivenActionButtonDetails(EnumActionButtonsForBooksAndAlertsKeys action) {
-        clickOnSpecificBookElement(getBookJacketWithGivenButtonLabel(action));
+    public CatalogBookModel openBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        IButton bookNameButton = getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(bookType, bookName, actionButtonKey, SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, SPECIFIC_BOOK_NAME_LOC);
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_FOR_BOOK_WITH_SPECIFIC_NAME_LOC, bookName)), "lblAuthor");
+        CatalogBookModel bookInfo = new CatalogBookModel()
+                .setTitle(bookName)
+                .setAuthor(lblAuthor.getText());
+        bookNameButton.click();
+        return bookInfo;
     }
 
     @Override

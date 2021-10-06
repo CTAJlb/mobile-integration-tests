@@ -1,6 +1,7 @@
 package screens.catalog.screen.books;
 
 import aquality.appium.mobile.screens.Screen;
+import constants.application.EnumBookType;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
@@ -18,7 +19,8 @@ public abstract class CatalogBooksScreen extends Screen {
 
     public abstract void clickBookByTitleButtonWithKey(String title, EnumActionButtonsForBooksAndAlertsKeys key);
 
-    public abstract void openBookWithGivenActionButtonDetails(EnumActionButtonsForBooksAndAlertsKeys action);
+    //here
+    public abstract CatalogBookModel openBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
     public abstract boolean isBookAddButtonTextEqualTo(String bookTitle, EnumActionButtonsForBooksAndAlertsKeys key);
 

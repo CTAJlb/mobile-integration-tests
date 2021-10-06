@@ -101,15 +101,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openCategoriesByChainAndChainStartsFromCategoryScreen(categoriesChain);
     }
 
-    @When("I open the book details for the subsequent {} on Subcategory List View and save it as {string}")
-    public void openBookDetailsExecuteBookActionAndSaveItToContext(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
-        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DOWNLOAD && AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            catalogSteps.openBookDetailsExecuteBookActionAndSaveItToContext(EnumActionButtonsForBooksAndAlertsKeys.GET, bookInfoKey);
-        } else {
-            catalogSteps.openBookDetailsExecuteBookActionAndSaveItToContext(actionButtonKey, bookInfoKey);
-        }
-    }
-
     @And("{} book from Subcategory List view and save it as {string}")
     public void performActionOnBookAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DOWNLOAD && AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {

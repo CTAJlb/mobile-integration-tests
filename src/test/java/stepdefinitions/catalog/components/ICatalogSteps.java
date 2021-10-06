@@ -41,8 +41,6 @@ public interface ICatalogSteps {
 
     void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain);
 
-    void openBookDetailsExecuteBookActionAndSaveItToContext(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey);
-
     void performActionOnBookAndSaveBookInfoOnSubcategoryListView(
             EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey);
 

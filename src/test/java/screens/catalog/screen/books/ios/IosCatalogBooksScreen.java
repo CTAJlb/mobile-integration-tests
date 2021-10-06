@@ -8,18 +8,22 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import constants.application.EnumBookType;
+import constants.application.attributes.IosAttributes;
 import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
+import screens.IWorkingWithListOfBooks;
 import screens.catalog.screen.books.CatalogBooksScreen;
 
 import java.time.Duration;
 import java.util.List;
 
 @ScreenType(platform = PlatformName.IOS)
-public class IosCatalogBooksScreen extends CatalogBooksScreen {
+public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkingWithListOfBooks {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeCollectionView";
+    //
     private static final String ACTION_BUTTON_ON_BOOK_PATTERN = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final String BOOKS_LOC = ".//XCUIElementTypeCell";
     private static final String BOOK_BLOCK_BY_BUTTON_LOC = "//XCUIElementTypeCell[.//XCUIElementTypeButton[@name=\"%1$s\"]]";
@@ -32,6 +36,12 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
             "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]//following-sibling::XCUIElementTypeOther//*[contains(@name,\"%2$s\")]";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
+
+    //
+    private static final String SPECIFIC_BOOK_NAME_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]";
+    private static final String AUTHOR_FOR_BOOK_WITH_SPECIFIC_NAME_LOC = SPECIFIC_BOOK_NAME_LOC + "//following-sibling::XCUIElementTypeStaticText";
+    private static final String SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%s\")]/following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeButton";
+
 
     public IosCatalogBooksScreen() {
         super(By.xpath(MAIN_ELEMENT));
@@ -67,10 +77,14 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen {
     }
 
     @Override
-    public void openBookWithGivenActionButtonDetails(EnumActionButtonsForBooksAndAlertsKeys action) {
-        state().waitForDisplayed();
-        waitForPageLoading();
-        clickOnSpecificBookElement(getBookJacketWithGivenButtonName(action));
+    public CatalogBookModel openBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        IButton bookNameButton = getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(bookType, bookName, actionButtonKey, SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, SPECIFIC_BOOK_NAME_LOC);
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_FOR_BOOK_WITH_SPECIFIC_NAME_LOC, bookName)), "lblAuthor");
+        CatalogBookModel bookInfo = new CatalogBookModel()
+                .setTitle(bookName)
+                .setAuthor(lblAuthor.getAttribute(IosAttributes.NAME));
+        bookNameButton.click();
+        return bookInfo;
     }
 
     @Override
