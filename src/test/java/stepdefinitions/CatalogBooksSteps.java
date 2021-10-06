@@ -42,8 +42,13 @@ public class CatalogBooksSteps {
         }
         CatalogBookModel bookInfo = catalogBooksScreen.clickSpecificActionButtonOnBookWithSpecificTypeAndSpecificNameAndGetBookInfo(bookType, bookName, actionButtonKey);
         context.add(bookInfoKey, bookInfo);
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed() && EnumActionButtonsForBooksAndAlertsKeys.DELETE == actionButtonKey) {
-            alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION){
+                alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            }else {
+                AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+                AqualityServices.getLogger().info("Alert appears and dismiss alert");
+            }
         }
     }
 

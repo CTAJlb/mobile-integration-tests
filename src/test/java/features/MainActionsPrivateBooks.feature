@@ -9,8 +9,8 @@ Feature: Main actions private access books
       And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
-      And I RESERVE book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain CANCEL_RESERVATION button on Subcategory List View
+      And Click RESERVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with CANCEL_RESERVATION action button and 'bookInfo' bookInfo is present on catalog books screen
     And I close Book Details for IOSTab
     When I open Holds
     Then EBOOK book with CANCEL_RESERVATION action button and 'bookInfo' bookInfo is present on holds screen
@@ -28,9 +28,9 @@ Feature: Main actions private access books
       And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
-      And I RESERVE book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-    When I click CANCEL_RESERVATION button on the 'bookInfo' book on Subcategory List view
-    Then Book saved as 'bookInfo' should contain RESERVE button on Subcategory List View
+    And Click RESERVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    And Click CANCEL_RESERVATION action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with RESERVE action button and 'bookInfo' bookInfo is present on catalog books screen
 
   @logout @returnBooks @tier2
   Scenario: Hold from Book Detail View and and Remove a Reserved Book from Holds
@@ -42,7 +42,7 @@ Feature: Main actions private access books
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When Open 'EBOOK' book with RESERVE button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened
     When I press on the book details view at the action button RESERVE
       And I close Book Details for IOSTab
@@ -63,7 +63,7 @@ Feature: Main actions private access books
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When Open 'EBOOK' book with RESERVE button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened
     When I press on the book details view at the action button RESERVE
       And I press on the book details view at the action button CANCEL_RESERVATION
@@ -78,7 +78,7 @@ Feature: Main actions private access books
       And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
-      And Open 'EBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    When Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And I press on the book details view at the action button GET
       And I close Book Details for IOSTab
       And I open Books
@@ -98,9 +98,9 @@ Feature: Main actions private access books
       And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
-      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
-    When I click READ button on the 'bookInfo' book on Subcategory List view
+    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    And EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
+    And Click READ action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is present on screen
     When I return to previous screen for epub and pdf
       And I open Books
@@ -119,9 +119,9 @@ Feature: Main actions private access books
       And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
-      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-      And I RETURN book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain GET button on Subcategory List View
+    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    And Click RETURN action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    And EBOOK book with GET action button and 'bookInfo' bookInfo is present on catalog books screen
 
   @logout @returnBooks @tier2
   Scenario: Check out from Subcategory List View and Read from Books
@@ -132,8 +132,8 @@ Feature: Main actions private access books
       And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
-      And I GET book from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book saved as 'bookInfo' should contain READ button on Subcategory List View
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And I press on the book details view at the action button READ
@@ -149,7 +149,7 @@ Feature: Main actions private access books
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When Open 'EBOOK' book with RESERVE button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened
     When I press on the book details view at the action button RESERVE
       And I close Book Details for IOSTab

@@ -13,8 +13,6 @@ public interface ICatalogSteps {
 
     void subcategoryRowsAreLoaded();
 
-    void performActionOnSpecificBookFromAPIAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey);
-
     void getNamesOfBooksAndSaveThem(String booksNamesListKey);
 
     void checkListOfBooksIsNotEqualToSavedListOfBooks(String booksNamesListKey);
