@@ -73,42 +73,6 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
-    public void openBookWithDefiniteNameAndDefiniteActionButton(CatalogBookModel bookInfo, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        String bookName = bookInfo.getTitle();
-        String actionButtonString = actionButtonKey.i18n();
-        IButton actionButton = getElementFactory().getButton(By.xpath(String.format(SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC, bookName, actionButtonString)), "Action Button");
-        if (!actionButton.state().waitForDisplayed()) {
-            actionButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        }
-        if (actionButton.state().isDisplayed()) {
-            getElementFactory().getButton(By.xpath(String.format(SPECIFIC_BOOK_NAME_LOC, bookName)), bookName).click();
-        } else {
-            throw new RuntimeException("There is not book with action button and title-" + bookName);
-        }
-    }
-
-    @Override
-    public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIAndGetBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType) {
-        String actionButton = "";
-        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET) {
-            actionButton = "Get";
-        } else if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
-            actionButton = "Reserve";
-        }
-        String locator = String.format(BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN, bookName, actionButton);
-
-        CatalogBookModel bookInfo = new CatalogBookModel()
-                .setTitle(bookName)
-                .setAuthor(getElementFactory().getButton(By.xpath(locator + AUTHOR_LABEL_LOCATOR_PART), bookName).getText());
-        if (getElementFactory().getButton(By.xpath(locator), bookName).state().isDisplayed()) {
-            getElementFactory().getButton(By.xpath(locator + BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN), bookName).click();
-        } else {
-            throw new RuntimeException("There is not book with title-" + bookName + " and button-" + actionButton);
-        }
-        return bookInfo;
-    }
-
-    @Override
     public String getErrorMessage() {
         if (isErrorDetailsButtonDisplayed()) {
             btnErrorDetails.click();

@@ -70,57 +70,6 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
-    public void openBookWithDefiniteNameAndDefiniteActionButton(CatalogBookModel bookInfo, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        String bookName = bookInfo.getTitle();
-        String actionButtonString = actionButtonKey.i18n();
-        IButton actionButton = getElementFactory().getButton(By.xpath(String.format(SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC, bookName, actionButtonString)), "Action Button");
-        if (!actionButton.state().waitForDisplayed()) {
-            actionButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        }
-        if (actionButton.state().isDisplayed()) {
-            getElementFactory().getButton(By.xpath(String.format(SPECIFIC_BOOK_NAME_LOC, bookName)), bookName).click();
-        } else {
-            throw new RuntimeException("There is not book with action button and title-" + bookName);
-        }
-    }
-
-    @Override
-    public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIAndGetBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType) {
-        String titleForLocator = bookName;
-        if (bookType.toLowerCase().equals("audiobook")) {
-            titleForLocator = titleForLocator + ". Audiobook.";
-        }
-        //I will delete this, because I fixed a property file
-        //start
-        String actionButton = "";
-        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET) {
-            actionButton = "Get";
-        } else if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
-            actionButton = "Reserve";
-        }
-        //end
-        try {
-            Thread.sleep(MILLIS_TO_WAIT_FOR_SEARCH_LOADING);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        String locator = String.format(BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN, titleForLocator, actionButton);
-
-        ILabel lblAuthor =
-                getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_LOCATOR_PATTERN, titleForLocator) + AUTHOR_LABEL_LOCATOR_PATTERN), bookName);
-        CatalogBookModel bookInfo = new CatalogBookModel()
-                .setTitle(bookName)
-                .setAuthor(lblAuthor.getText());
-
-        if (getElementFactory().getButton(By.xpath(locator), bookName).state().waitForDisplayed()) {
-            getElementFactory().getButton(By.xpath(locator + String.format(BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN, titleForLocator)), bookName).click();
-        } else {
-            throw new RuntimeException("There is not book with title-" + bookName + " and button-" + actionButton);
-        }
-        return bookInfo;
-    }
-
-    @Override
     public String getErrorMessage() {
         return null;
     }
