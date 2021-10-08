@@ -25,11 +25,7 @@ public abstract class CatalogScreen extends Screen {
 
     public abstract Set<String> getListOfAllBooksNamesInSubcategoryLane(String lineName);
 
-    public abstract boolean isErrorButtonPresent();
-
     public abstract boolean isLibraryPresent(String libraryName);
 
     public abstract Set<String> getAllCategoriesNames();
-
-    public abstract void openFirstCategory();
 }

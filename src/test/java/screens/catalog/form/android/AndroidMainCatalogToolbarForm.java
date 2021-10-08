@@ -11,7 +11,6 @@ import screens.catalog.form.MainCatalogToolbarForm;
 public class AndroidMainCatalogToolbarForm extends MainCatalogToolbarForm {
     private static final String MAIN_ELEMENT_LOC = "//*[contains(@resource-id,\"mainToolbar\")]";
     private static final String CATEGORY_INFO_LOCATOR_PART = MAIN_ELEMENT_LOC + "/android.widget.TextView";
-    private static final String LIBRARY_NAME_LOC = MAIN_ELEMENT_LOC + "/android.widget.TextView";
 
     private final IButton btnChooseAnotherLibrary =
             getElementFactory().getButton(

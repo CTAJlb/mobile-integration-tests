@@ -42,8 +42,6 @@ public class IosCatalogScreen extends CatalogScreen {
     private final ILabel firstLaneName =
             getElementFactory().getLabel(By.xpath(CATEGORIES_LOCATOR), "First lane name", ElementState.EXISTS_IN_ANY_STATE);
 
-    private final ILabel buttonMore = getElementFactory().getLabel(By.xpath("//XCUIElementTypeButton[contains(@name, 'More')][1]"), "Button More...");
-
     public IosCatalogScreen() {
         super(By.xpath(UNIQUE_ELEMENT));
     }
@@ -114,11 +112,6 @@ public class IosCatalogScreen extends CatalogScreen {
     }
 
     @Override
-    public boolean isErrorButtonPresent() {
-        return false;
-    }
-
-    @Override
     public boolean isLibraryPresent(String libraryName) {
         return getElementFactory().getLabel(By.id(libraryName), "labelLibraryName").state().isExist();
     }
@@ -130,11 +123,6 @@ public class IosCatalogScreen extends CatalogScreen {
         Set<String> categoriesNames = new HashSet<>();
         categoriesNames.addAll(currentBooksNames);
         return categoriesNames;
-    }
-
-    @Override
-    public void openFirstCategory() {
-        buttonMore.click();
     }
 
     private List<String> geListOfCategoriesNames() {

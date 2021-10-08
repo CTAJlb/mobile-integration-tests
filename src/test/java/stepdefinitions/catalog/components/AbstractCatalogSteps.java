@@ -280,21 +280,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         scenario.attach(ScreenshotUtils.getScreenshot(), "image/png", "screenshot.png");
     }
 
-    public void openFirstCategory() {
-        catalogScreen.state().waitForDisplayed();
-        catalogScreen.openFirstCategory();
-        if (!subcategoryScreen.state().waitForDisplayed()) {
-            //todo added waiting
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            catalogScreen.openFirstCategory();
-            catalogScreen.state().waitForDisplayed();
-        }
-    }
-
     private String getErrorDetails() {
         if (bookDetailsScreen.isErrorButtonPresent()) {
             bookDetailsScreen.openErrorDetails();

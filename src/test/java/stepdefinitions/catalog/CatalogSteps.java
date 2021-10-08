@@ -181,9 +181,4 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     public void openGivenTypeBookReader(EnumBookType bookType) {
         catalogSteps.startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(bookType);
     }
-
-    @When("I open first present category")
-    public void openFirstPresentCategory() {
-        catalogSteps.openFirstCategory();
-    }
 }

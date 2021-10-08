@@ -31,7 +31,6 @@ public class AndroidCatalogScreen extends CatalogScreen {
     private static final String LIBRARY_NAME_LOC = "//android.widget.TextView[@text=\"%s\" and contains(@resource-id,\"feedLibraryText\")]";
 
     private final ILabel lblFirstLaneName = getElementFactory().getLabel(By.xpath(FEED_LANE_TITLES_LOC), "First lane name");
-    private final IButton btnErrorMessage = getElementFactory().getButton(By.xpath("//*[contains(@text, \"Details\")]"), "Details");
     private final ILabel lblScreen = getElementFactory().getLabel(By.id("mainFragmentHolder"), "Screen to swipe");
 
     public AndroidCatalogScreen() {
@@ -95,11 +94,6 @@ public class AndroidCatalogScreen extends CatalogScreen {
     }
 
     @Override
-    public boolean isErrorButtonPresent() {
-        return btnErrorMessage.state().isDisplayed();
-    }
-
-    @Override
     public boolean isLibraryPresent(String libraryName) {
         return getElementFactory().getLabel(By.xpath(String.format(LIBRARY_NAME_LOC, libraryName)), "labelLibraryName").state().waitForDisplayed();
     }
@@ -115,10 +109,6 @@ public class AndroidCatalogScreen extends CatalogScreen {
             currentCategoriesNames = getListOfCategories();
         } while (!bookNames.containsAll(currentCategoriesNames));
         return bookNames;
-    }
-
-    @Override
-    public void openFirstCategory() {
     }
 
     private List<String> getListOfVisibleBooksNamesInSubcategoryLane(String lineName) {
