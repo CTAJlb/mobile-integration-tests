@@ -35,8 +35,6 @@ public interface ICatalogSteps {
 
     void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain);
 
-    void performActionOnBookOfTypeAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType, String bookInfoKey);
-
     void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks);
 
     void checkBookInfoIsOpened(String bookInfoKey);

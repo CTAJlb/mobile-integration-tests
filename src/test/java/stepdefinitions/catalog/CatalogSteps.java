@@ -96,12 +96,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openCategoriesByChainAndChainStartsFromCategoryScreen(categoriesChain);
     }
 
-    @When("I {} book of {string} type and save it as {string}")
-    @And("{} book of {string} type and save it as {string}")
-    public void performActionOnBookOfTypeAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType, String bookInfoKey) {
-        catalogSteps.performActionOnBookOfTypeAndSaveIt(actionButtonKey, bookType, bookInfoKey);
-    }
-
     @And("Count of books in first lane is more than {int}")
     public void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks) {
         catalogSteps.checkCountOfBooksInFirstLaneIsMoreThan(countOfBooks);
