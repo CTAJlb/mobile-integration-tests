@@ -25,4 +25,7 @@ public abstract class CatalogBooksScreen extends Screen {
     public abstract CatalogBookModel scrollToBookByTypeAndClickActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType);
 
     public abstract boolean isErrorButtonPresent();
+
+    //here
+    public abstract CatalogBookModel clickSpecificActionButtonOnTheFirstBookWithSpecificActionButtonAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 }

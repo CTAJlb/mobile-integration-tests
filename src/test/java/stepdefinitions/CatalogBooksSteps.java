@@ -64,4 +64,23 @@ public class CatalogBooksSteps {
         Assert.assertTrue(String.format("'%s' book with specific action button is not present on catalog books screen", bookName),
                 catalogBooksScreen.isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(bookType, bookName, actionButtonKey));
     }
+
+    @And("Click {} action button on the first {} book on catalog books screen and save book as {string}")
+    public void clickActionButtonOnTheFirstBookWithSpecificActionButtonAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumBookType bookType, String bookInfoKey){
+        try {
+            Thread.sleep(40000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        CatalogBookModel bookInfo = catalogBooksScreen.clickSpecificActionButtonOnTheFirstBookWithSpecificActionButtonAndGetBookInfo(bookType, actionButtonKey);
+        context.add(bookInfoKey, bookInfo);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION){
+                alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            }else {
+                AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+                AqualityServices.getLogger().info("Alert appears and dismiss alert");
+            }
+        }
+    }
 }

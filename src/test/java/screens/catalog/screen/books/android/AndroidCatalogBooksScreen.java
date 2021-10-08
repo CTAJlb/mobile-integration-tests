@@ -50,10 +50,13 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     private final IButton btnErrorDetails = getElementFactory().getButton(By.id("bookCellErrorButtonDetails"), "Error details");
 
     //
-    private static final String SPECIFIC_BOOK_NAME_LOC = "//android.widget.TextView[contains(@text,\"%s\")]";
-    private static final String AUTHOR_FOR_BOOK_WITH_SPECIFIC_NAME_LOC = SPECIFIC_BOOK_NAME_LOC + "//following-sibling::android.widget.TextView[contains(@resource-id,\"bookCellIdleAuthor\")]";
     private static final String SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC = "//android.view.ViewGroup/android.widget.TextView[contains(@text,\"%s\")]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
+    private static final String SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC = SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC + "/parent::android.widget.LinearLayout/parent::android.view.ViewGroup/android.widget.TextView[1]";
+    private static final String AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC = SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC + "/parent::android.widget.LinearLayout/parent::android.view.ViewGroup/android.widget.TextView[2]";
 
+    private static final String SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC = "//android.view.ViewGroup/android.widget.TextView[@text]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
+    private static final String THE_FIRST_BOOK_NAME_WITH_SPECIFIC_ACTION_BUTTON_LOC = SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC + "/parent::android.widget.LinearLayout/parent::android.view.ViewGroup/android.widget.TextView[1]";
+    private static final String AUTHOR_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC = SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC + "/parent::android.widget.LinearLayout/parent::android.view.ViewGroup/android.widget.TextView[2]";
 
     public AndroidCatalogBooksScreen() {
         super(By.id("feedWithGroups"));
@@ -66,8 +69,10 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
 
     @Override
     public CatalogBookModel clickSpecificActionButtonOnBookWithSpecificTypeAndSpecificNameAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        IButton bookNameButton = getSpecificActionButtonForBookWithSpecificTypeAndSpecificNameFromListOfBooks(bookType, bookName, actionButtonKey, SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC);
-        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_FOR_BOOK_WITH_SPECIFIC_NAME_LOC, bookName)), "lblAuthor");
+        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, bookName, actionButtonString);
+        IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC, bookName)), "lblAuthor");
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(bookName)
                 .setAuthor(lblAuthor.getText());
@@ -77,8 +82,11 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
 
     @Override
     public CatalogBookModel openBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        IButton bookNameButton = getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(bookType, bookName, actionButtonKey, SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, SPECIFIC_BOOK_NAME_LOC);
-        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_FOR_BOOK_WITH_SPECIFIC_NAME_LOC, bookName)), "lblAuthor");
+        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, bookName, actionButtonString);
+        String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
+        IButton bookNameButton = getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(actionButtonLoc, bookNameLoc);
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC, bookName)), "lblAuthor");
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(bookName)
                 .setAuthor(lblAuthor.getText());
@@ -88,7 +96,10 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
 
     @Override
     public boolean isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        return getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(EnumBookType.EBOOK, bookName, actionButtonKey, SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, SPECIFIC_BOOK_NAME_LOC).state().waitForDisplayed();
+        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, bookName, actionButtonString);
+        String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
+        return getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(actionButtonLoc, bookNameLoc).state().waitForDisplayed();
     }
 
     @Override
@@ -106,6 +117,20 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     @Override
     public boolean isErrorButtonPresent() {
         return btnErrorDetails.state().isDisplayed();
+    }
+
+    @Override
+    public CatalogBookModel clickSpecificActionButtonOnTheFirstBookWithSpecificActionButtonAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString);
+        IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString )), "lblAuthor");
+        ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(THE_FIRST_BOOK_NAME_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString)), "lblBookName");
+        CatalogBookModel bookInfo = new CatalogBookModel()
+                .setTitle(lblBookName.getAttribute(IosAttributes.NAME))
+                .setAuthor(lblAuthor.getAttribute(IosAttributes.NAME));
+        bookNameButton.click();
+        return bookInfo;
     }
 
     private CatalogBookModel performActionOnBook(EnumActionButtonsForBooksAndAlertsKeys buttonName) {

@@ -10,14 +10,12 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.application.EnumBookType;
 import constants.application.attributes.IosAttributes;
-import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.IWorkingWithListOfBooks;
 import screens.catalog.screen.books.CatalogBooksScreen;
 
-import java.time.Duration;
 import java.util.List;
 
 @ScreenType(platform = PlatformName.IOS)
@@ -38,10 +36,13 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     private static final int MILLIS_TO_WAIT_FOR_SEARCH_LOADING = 40000;
 
     //
-    private static final String SPECIFIC_BOOK_NAME_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]";
-    private static final String AUTHOR_FOR_BOOK_WITH_SPECIFIC_NAME_LOC = SPECIFIC_BOOK_NAME_LOC + "/following-sibling::XCUIElementTypeStaticText";
-    private static final String SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%s\")]/following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeButton";
+    private static final String SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC = "//XCUIElementTypeStaticText[contains(@name,\"%1$s\")]/following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeButton";
+    private static final String SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC = SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC + "/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
+    private static final String AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC = SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC + "/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
 
+    private static final String SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC = "//XCUIElementTypeStaticText/following-sibling::XCUIElementTypeOther//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeButton";
+    private static final String THE_FIRST_BOOK_NAME_WITH_SPECIFIC_ACTION_BUTTON_LOC = SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC + "/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
+    private static final String AUTHOR_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC = SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC + "/parent::XCUIElementTypeOther/parent::XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
 
     public IosCatalogBooksScreen() {
         super(By.xpath(MAIN_ELEMENT));
@@ -60,29 +61,46 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
 
     @Override
     public CatalogBookModel clickSpecificActionButtonOnBookWithSpecificTypeAndSpecificNameAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        IButton bookNameButton = getSpecificActionButtonForBookWithSpecificTypeAndSpecificNameFromListOfBooks(bookType, bookName, actionButtonKey, SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC);
-        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_FOR_BOOK_WITH_SPECIFIC_NAME_LOC, bookName)), "lblAuthor");
+        if (EnumBookType.AUDIOBOOK == bookType) {
+            bookName = bookName + ". Audiobook.";
+        }
+        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, bookName, actionButtonString);
+        IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC, bookName)), "lblAuthor");
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(bookName)
-                .setAuthor(lblAuthor.getAttribute(IosAttributes.NAME));
+                .setAuthor(lblAuthor.getText());
         bookNameButton.click();
         return bookInfo;
     }
 
     @Override
     public CatalogBookModel openBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        IButton bookNameButton = getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(bookType, bookName, actionButtonKey, SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, SPECIFIC_BOOK_NAME_LOC);
-        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_FOR_BOOK_WITH_SPECIFIC_NAME_LOC, bookName)), "lblAuthor");
+        if (EnumBookType.AUDIOBOOK == bookType) {
+            bookName = bookName + ". Audiobook.";
+        }
+        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, bookName, actionButtonString);
+        String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
+        IButton bookNameButton = getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(actionButtonLoc, bookNameLoc);
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC, bookName)), "lblAuthor");
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(bookName)
-                .setAuthor(lblAuthor.getAttribute(IosAttributes.NAME));
+                .setAuthor(lblAuthor.getText());
         bookNameButton.click();
         return bookInfo;
     }
 
     @Override
     public boolean isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        return getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(EnumBookType.EBOOK, bookName, actionButtonKey, SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, SPECIFIC_BOOK_NAME_LOC).state().waitForDisplayed();
+        if (EnumBookType.AUDIOBOOK == bookType) {
+            bookName = bookName + ". Audiobook.";
+        }
+        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, bookName, actionButtonString);
+        String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
+        return getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(actionButtonLoc, bookNameLoc).state().waitForDisplayed();
     }
 
     @Override
@@ -103,6 +121,20 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     @Override
     public boolean isErrorButtonPresent() {
         return false;
+    }
+
+    @Override
+    public CatalogBookModel clickSpecificActionButtonOnTheFirstBookWithSpecificActionButtonAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString);
+        IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString )), "lblAuthor");
+        ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(THE_FIRST_BOOK_NAME_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString)), "lblBookName");
+        CatalogBookModel bookInfo = new CatalogBookModel()
+                .setTitle(lblBookName.getAttribute(IosAttributes.NAME))
+                .setAuthor(lblAuthor.getAttribute(IosAttributes.NAME));
+        bookNameButton.click();
+        return bookInfo;
     }
 
     private CatalogBookModel performActionOnBook(EnumActionButtonsForBooksAndAlertsKeys buttonName) {

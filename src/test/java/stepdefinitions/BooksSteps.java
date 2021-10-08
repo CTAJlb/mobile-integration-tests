@@ -53,6 +53,11 @@ public class BooksSteps {
 
     @Then("{} book with {} action button and {string} bookInfo is present on books screen")
     public void isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+        try {
+            Thread.sleep(40000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();
         Assert.assertTrue(String.format("'%s' book with specific action button is not present on books screen", bookName),
