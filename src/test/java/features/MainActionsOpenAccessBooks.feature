@@ -16,7 +16,7 @@ Scenario: Check out from Book Detail View and Return from Books(ANDROID)
   When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
     And I press on the book details view at the action button DELETE
     And I open Books
-  Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+  Then EBOOK book with DOWNLOAD action button and 'bookInfo' bookInfo is present on books screen
 
   @tier2 @exclude_android
   Scenario: Check out from Book Detail View and Return from Books(IOS)
@@ -29,7 +29,7 @@ Scenario: Check out from Book Detail View and Return from Books(ANDROID)
       And I press on the book details view at the action button DELETE
       And I close Book Details for IOSTab
       And I open Books
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
+    Then EBOOK book with DOWNLOAD action button and 'bookInfo' bookInfo is not present on books screen
 
   @tier2 @exclude_ios
   Scenario: Check out from Book Detail View and Return from Book Detail View(ANDROID)
@@ -67,7 +67,7 @@ Scenario: Check out from Book Detail View and Return from Books(ANDROID)
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And I press on the book details view at the action button DELETE
       And I open Books
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+    Then EBOOK book with DOWNLOAD action button and 'bookInfo' bookInfo is present on books screen
 
   @tier2 @exclude_android
   Scenario: Check out from Subcategory List View and Return from Books(IOS)
@@ -78,7 +78,7 @@ Scenario: Check out from Book Detail View and Return from Books(ANDROID)
     And I press on the book details view at the action button DELETE
     And I close Book Details for IOSTab
     And I open Books
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
+    Then EBOOK book with DOWNLOAD action button and 'bookInfo' bookInfo is not present on books screen
 
   @tier2 @exclude_ios
   Scenario: Check out from Subcategory List View and Read from Subcategory List View(ANDROID)
