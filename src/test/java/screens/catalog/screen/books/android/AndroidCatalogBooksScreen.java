@@ -31,7 +31,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
         String actionButtonString = actionButtonKey.i18n();
         String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, bookName, actionButtonString);
         IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
-        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC, bookName)), "lblAuthor");
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString)), "lblAuthor");
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(bookName)
                 .setAuthor(lblAuthor.getText());
@@ -45,7 +45,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
         String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, bookName, actionButtonString);
         String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
         IButton bookNameButton = getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(actionButtonLoc, bookNameLoc);
-        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC, bookName)), "lblAuthor");
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString)), "lblAuthor");
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(bookName)
                 .setAuthor(lblAuthor.getText());

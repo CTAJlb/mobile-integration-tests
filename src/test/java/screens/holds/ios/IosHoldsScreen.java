@@ -6,7 +6,6 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.application.EnumBookType;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
-import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.IWorkingWithListOfBooks;
 import screens.holds.HoldsScreen;

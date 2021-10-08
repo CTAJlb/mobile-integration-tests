@@ -11,7 +11,6 @@ import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
 import constants.application.EnumBookType;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
-import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.IWorkingWithListOfBooks;
 import screens.books.BooksScreen;
