@@ -2,8 +2,7 @@ package constants.application;
 
 public enum EnumBookType {
     EBOOK("ebook"),
-    AUDIOBOOK("audiobook"),
-    PDF("pdf");
+    AUDIOBOOK("audiobook");
 
     private String bookType;
 
