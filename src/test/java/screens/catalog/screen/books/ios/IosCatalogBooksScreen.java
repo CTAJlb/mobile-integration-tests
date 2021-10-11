@@ -36,9 +36,15 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, bookName, actionButtonString);
         IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
         ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString)), "lblAuthor");
+        String author = "";
+        if (!lblAuthor.state().isDisplayed()) {
+            author = null;
+        } else {
+            author = lblAuthor.getText();
+        }
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(bookName)
-                .setAuthor(lblAuthor.getText());
+                .setAuthor(author);
         bookNameButton.click();
         return bookInfo;
     }
@@ -53,9 +59,15 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
         IButton bookNameButton = getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(actionButtonLoc, bookNameLoc);
         ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString)), "lblAuthor");
+        String author = "";
+        if (!lblAuthor.state().isDisplayed()) {
+            author = null;
+        } else {
+            author = lblAuthor.getText();
+        }
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(bookName)
-                .setAuthor(lblAuthor.getText());
+                .setAuthor(author);
         bookNameButton.click();
         return bookInfo;
     }
@@ -78,9 +90,15 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
         ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString)), "lblAuthor");
         ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(THE_FIRST_BOOK_NAME_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString)), "lblBookName");
+        String author = "";
+        if (!lblAuthor.state().isDisplayed()) {
+            author = null;
+        } else {
+            author = lblAuthor.getAttribute(IosAttributes.NAME);
+        }
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(lblBookName.getAttribute(IosAttributes.NAME))
-                .setAuthor(lblAuthor.getAttribute(IosAttributes.NAME));
+                .setAuthor(author);
         bookNameButton.click();
         return bookInfo;
     }
