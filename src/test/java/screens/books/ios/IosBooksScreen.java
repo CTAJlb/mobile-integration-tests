@@ -45,7 +45,7 @@ public class IosBooksScreen extends BooksScreen implements IWorkingWithListOfBoo
         }
         String actionButtonString = actionButtonKey.i18n();
         String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
-        return getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(bookNameLoc).state().waitForDisplayed();
+        return getBookNameButtonFromListOfBooks(bookNameLoc).state().waitForDisplayed();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class IosBooksScreen extends BooksScreen implements IWorkingWithListOfBoo
         }
         String actionButtonString = actionButtonKey.i18n();
         String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
-        IButton bookNameButton = getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(bookNameLoc);
+        IButton bookNameButton = getBookNameButtonFromListOfBooks(bookNameLoc);
         bookNameButton.click();
     }
 

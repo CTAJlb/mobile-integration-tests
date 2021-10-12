@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 
 public interface IWorkingWithListOfBooks {
 
-    default IButton getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(String bookNameLoc) {
+    default IButton getBookNameButtonFromListOfBooks(String bookNameLoc) {
         IElementFactory elementFactory = AqualityServices.getElementFactory();
         IButton actionButton = elementFactory.getButton(By.xpath(bookNameLoc), "button");
         if (!actionButton.state().waitForDisplayed()) {

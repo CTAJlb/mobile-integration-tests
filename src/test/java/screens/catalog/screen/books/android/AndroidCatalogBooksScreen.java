@@ -59,7 +59,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
         }
         String actionButtonString = actionButtonKey.i18n();
         String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
-        IButton bookNameButton = getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(bookNameLoc);
+        IButton bookNameButton = getBookNameButtonFromListOfBooks(bookNameLoc);
         ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString)), "lblAuthor");
         String author = "";
         if (!lblAuthor.state().isDisplayed()) {
@@ -83,7 +83,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
         }
         String actionButtonString = actionButtonKey.i18n();
         String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
-        return getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(bookNameLoc).state().waitForDisplayed();
+        return getBookNameButtonFromListOfBooks(bookNameLoc).state().waitForDisplayed();
     }
 
     @Override
