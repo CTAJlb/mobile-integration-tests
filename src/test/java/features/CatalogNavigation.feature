@@ -56,10 +56,6 @@ Feature: Catalog Navigation
       And I sort books by RECENTLY_ADDED
     Then Subcategory screen is present
       And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
-    When I save list of books as 'recentlyAddedListOfBooks'
-      And I sort books by RANDOM
-    Then List of books on subcategory screen is not equal to list of books saved as 'recentlyAddedListOfBooks'
-    When I save list of books as 'randomListOfBooks'
       And Change books visibility to show AVAILABLE_NOW
     Then All books can be loaned or downloaded
     When I change books visibility to show ALL
