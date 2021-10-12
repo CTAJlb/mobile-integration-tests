@@ -12,17 +12,10 @@ public class IosWelcomeScreen extends WelcomeScreen {
             + "and .//XCUIElementTypeButton[@name=\"Find Your Library\"] "
             + "and .//XCUIElementTypeButton[@name=\"Add a Library Later\"]]";
 
-    private final IButton addLibraryLater = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"Add a Library Later\"]"), "Add a Library Later");
     private final IButton findLibraryBtn = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton"), "Find Your Library");
 
     public IosWelcomeScreen() {
         super(By.xpath(MAIN_ELEMENT));
-    }
-
-    @Override
-    public void addALibraryLater() {
-        addLibraryLater.click();
     }
 
     @Override

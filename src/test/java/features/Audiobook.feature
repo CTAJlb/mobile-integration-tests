@@ -7,9 +7,9 @@ Feature: Audiobook
     Then Login is performed successfully
     When I open Catalog
     And I open search modal
-    And I search for 'Red Country' and save bookName as 'bookNameInfo'
+    And I search for 'The Virginian' and save bookName as 'bookNameInfo'
     And I switch to 'Audiobooks' catalog tab
-    And Open 'AUDIOBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And I press on the book details view at the action button GET
 
   @logout @returnBooks @tier2 @oldOs @tablet
@@ -43,7 +43,7 @@ Feature: Audiobook
       And I wait for 3 seconds
       And I restart app
       And I open Books
-      And I open 'bookInfo' book with LISTEN action button on Books Screen
+        And Open AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
       And I press on the book details view at the action button LISTEN
     Then I check that current chapter text equal to remembered 'newChapterText2'
 

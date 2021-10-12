@@ -141,7 +141,7 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public void waitForLoadingDisappearing() {
-
+        //only for ios
     }
 
     @Override

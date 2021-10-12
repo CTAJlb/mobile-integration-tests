@@ -4,7 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.RegEx;
-import constants.application.ReaderType;
+import constants.application.EnumBookType;
 import constants.localization.application.reader.BackgroundColorKeys;
 import constants.localization.application.reader.FontNameKeys;
 import constants.localization.application.reader.ReaderSettingKeys;
@@ -363,10 +363,10 @@ public class ReaderSteps {
     }
 
     @Then("Book {string} with {} type is present on epub or pdf or audiobook screen")
-    public void readerScreenForEbookTypeIsPresent(String bookInfoKey, ReaderType readerType) {
+    public void readerScreenForEbookTypeIsPresent(String bookInfoKey, EnumBookType bookType) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         String bookName = catalogBookModel.getTitle();
-        switch (readerType) {
+        switch (bookType) {
             case EBOOK:
                 if (epubReaderScreen.state().waitForDisplayed()) {
                     assertBookNameForEpub(catalogBookModel);

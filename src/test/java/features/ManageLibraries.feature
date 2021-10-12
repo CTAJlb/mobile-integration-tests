@@ -21,22 +21,39 @@ Feature: Manage Libraries
     And I remove 'Palace Bookshelf' account
     Then Account 'Palace Bookshelf' is not present on Accounts screen
 
-  @tier2 @oldOs
-  Scenario: Switch library bookshelf
+  @tier2 @exclude_ios @oldOs
+  Scenario: Switch library bookshelf(ANDROID)
+    When I add "Palace Bookshelf" account from welcomeScreen
+      And I add 'LYRASIS Reads' account
+      And Catalog is opened
+      And I switch to 'Palace Bookshelf' from side menu
+       And I open categories by chain and chain starts from CategoryScreen:
+        |Halloween Reads|
+    And Click DOWNLOAD action button on the first EBOOK book on catalog books screen and save book as 'bookInfo'
+      And I open Books
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+    When I open Catalog
+      And I return to previous screen for epub and pdf
+      And I switch to 'LYRASIS Reads' from side menu
+      And I open Books
+    Then There are not books on books screen
+
+  @tier2 @exclude_android @oldOs
+  Scenario: Switch library bookshelf(IOS)
     When I add "Palace Bookshelf" account from welcomeScreen
       And I add 'LYRASIS Reads' account
       And Catalog is opened
       And I switch to 'Palace Bookshelf' from side menu
       And I open categories by chain and chain starts from CategoryScreen:
-        |2021 New Public Domain Books|
-      And DOWNLOAD book from Subcategory List view and save it as 'bookInfo'
+        |Halloween Reads|
+      And Click GET action button on the first EBOOK book on catalog books screen and save book as 'bookInfo'
       And I open Books
-    Then Book 'bookInfo' with READ action button is present on Books Screen
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When I open Catalog
       And I return to previous screen for epub and pdf
       And I switch to 'LYRASIS Reads' from side menu
       And I open Books
-    Then There are not books on Books Screen
+    Then There are not books on books screen
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Switch Library Reservations
@@ -50,19 +67,17 @@ Feature: Manage Libraries
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
-    When Open 'EBOOK' book with RESERVE button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
+    When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened
       And I press on the book details view at the action button RESERVE
     Then I check that book contains CANCEL_RESERVATION action button on book details view
     When I open Holds
-    Then Holds feed is loaded
-      And Book 'bookInfo' is present in Holds List
+    Then EBOOK book with CANCEL_RESERVATION action button and 'bookInfo' bookInfo is present on holds screen
     When I open Catalog
       And I open Catalog
       And I switch to 'Internet Archive' from side menu
-      And Open Holds
-    Then Holds feed is loaded
-      And No books are present in Holds list
+      And I open Holds
+      And There are not books on holds screen
 
   @logout @tier2 @oldOs
   Scenario: Store library card

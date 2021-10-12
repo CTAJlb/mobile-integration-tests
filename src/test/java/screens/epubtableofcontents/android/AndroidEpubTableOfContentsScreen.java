@@ -15,9 +15,6 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidEpubTableOfContentsScreen extends EpubTableOfContentsScreen {
-    private final ILabel lblTable =
-            getElementFactory().getLabel(By.xpath("//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"tocChaptersList\")]"), "Table");
-
     private List<ILabel> getChapters() {
         return getElementFactory().findElements(By.xpath("//android.widget.TextView[contains(@resource-id,\"chapterTitle\")]"), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
     }

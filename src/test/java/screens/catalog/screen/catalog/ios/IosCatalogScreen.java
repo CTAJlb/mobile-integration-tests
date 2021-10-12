@@ -11,7 +11,6 @@ import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
 import constants.application.attributes.IosAttributes;
-import constants.application.timeouts.AuthorizationTimeouts;
 import constants.application.timeouts.CategoriesTimeouts;
 import framework.utilities.swipe.SwipeElementUtils;
 import org.openqa.selenium.By;
@@ -42,9 +41,6 @@ public class IosCatalogScreen extends CatalogScreen {
 
     private final ILabel firstLaneName =
             getElementFactory().getLabel(By.xpath(CATEGORIES_LOCATOR), "First lane name", ElementState.EXISTS_IN_ANY_STATE);
-
-    private final ILabel categoryScreen = getElementFactory().getLabel(By.xpath("//XCUIElementTypeTable"), "Category Screen");
-    private final ILabel buttonMore = getElementFactory().getLabel(By.xpath("//XCUIElementTypeButton[contains(@name, 'More')][1]"), "Button More...");
 
     public IosCatalogScreen() {
         super(By.xpath(UNIQUE_ELEMENT));
@@ -78,7 +74,7 @@ public class IosCatalogScreen extends CatalogScreen {
     @Override
     public void openCategory(String categoryName) {
         IButton categoryButton = getCategoryButton(categoryName);
-        if(!categoryButton.state().waitForDisplayed()){
+        if (!categoryButton.state().waitForDisplayed()) {
             categoryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         }
         categoryButton.click();
@@ -91,7 +87,6 @@ public class IosCatalogScreen extends CatalogScreen {
     @Override
     public void switchToCatalogTab(String catalogTab) {
         getElementFactory().getButton(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_PATTERN, catalogTab)), catalogTab).click();
-        //todo I will change to check that appears specific screen
         getElementFactory().getLabel(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"bookCellIdle\")"), "BookForm").state().waitForDisplayed();
     }
 
@@ -117,11 +112,6 @@ public class IosCatalogScreen extends CatalogScreen {
     }
 
     @Override
-    public boolean isErrorButtonPresent() {
-        return false;
-    }
-
-    @Override
     public boolean isLibraryPresent(String libraryName) {
         return getElementFactory().getLabel(By.id(libraryName), "labelLibraryName").state().isExist();
     }
@@ -133,11 +123,6 @@ public class IosCatalogScreen extends CatalogScreen {
         Set<String> categoriesNames = new HashSet<>();
         categoriesNames.addAll(currentBooksNames);
         return categoriesNames;
-    }
-
-    @Override
-    public void openFirstCategory() {
-        buttonMore.click();
     }
 
     private List<String> geListOfCategoriesNames() {

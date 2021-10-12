@@ -1,6 +1,5 @@
 package screens.subcategory.android;
 
-import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
@@ -9,7 +8,6 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
 import constants.application.attributes.AndroidAttributes;
-import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.subcategory.SubcategoryScreen;
@@ -28,13 +26,6 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
             "//android.widget.TextView[contains(@resource-id, \"bookCellIdleAuthor\")]";
     private static final String BOOK_NAME_XPATH =
             "//android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
-    private static final String TYPE_INFO_XPATH =
-            "//android.widget.TextView[contains(@resource-id, \"bookCellIdleMeta\")]";
-    public static final String BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN = "//android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\") and @text=\"%s\"]/following-sibling::android.widget.LinearLayout//android.widget.Button[@text=\"%s\"]";
-    public static final String BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN = "/parent::android.widget.LinearLayout/preceding-sibling::android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
-    public static final String AUTHOR_LABEL_LOCATOR_PART = "/parent::android.widget.LinearLayout/preceding-sibling::android.widget.TextView[contains(@resource-id, \"bookCellIdleAuthor\")]";
-    private static final String SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC = "//android.widget.TextView[contains(@text,\"%s\")]/following-sibling::android.widget.LinearLayout/android.widget.Button[@text=\"%s\"]";
-    private static final String SPECIFIC_BOOK_NAME_LOC = "//android.widget.TextView[contains(@text,\"%s\")]";
 
     private final ILabel lblFirstBookImageCover =
             getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR), "First book image info");
@@ -72,42 +63,6 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
         List<String> listOfNames = getValuesFromListOfLabels(BOOK_NAME_XPATH);
         AqualityServices.getLogger().info("Found list of titles - " + listOfNames.stream().map(Object::toString).collect(Collectors.joining(", ")));
         return listOfNames;
-    }
-
-    @Override
-    public void openBookWithDefiniteNameAndDefiniteActionButton(CatalogBookModel bookInfo, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        String bookName = bookInfo.getTitle();
-        String actionButtonString = actionButtonKey.i18n();
-        IButton actionButton = getElementFactory().getButton(By.xpath(String.format(SPECIFIC_ACTION_BUTTON_ON_SPECIFIC_BOOK_LOC, bookName, actionButtonString)), "Action Button");
-        if (!actionButton.state().waitForDisplayed()) {
-            actionButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        }
-        if (actionButton.state().isDisplayed()) {
-            getElementFactory().getButton(By.xpath(String.format(SPECIFIC_BOOK_NAME_LOC, bookName)), bookName).click();
-        } else {
-            throw new RuntimeException("There is not book with action button and title-" + bookName);
-        }
-    }
-
-    @Override
-    public CatalogBookModel openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIAndGetBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType) {
-        String actionButton = "";
-        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET) {
-            actionButton = "Get";
-        } else if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
-            actionButton = "Reserve";
-        }
-        String locator = String.format(BOOK_BUTTON_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_LOCATOR_PATTERN, bookName, actionButton);
-
-        CatalogBookModel bookInfo = new CatalogBookModel()
-                .setTitle(bookName)
-                .setAuthor(getElementFactory().getButton(By.xpath(locator + AUTHOR_LABEL_LOCATOR_PART), bookName).getText());
-        if (getElementFactory().getButton(By.xpath(locator), bookName).state().isDisplayed()) {
-            getElementFactory().getButton(By.xpath(locator + BOOK_TITLE_WITH_DEFINITE_NAME_AND_DEFINITE_ACTION_BUTTON_ENDING_PART_LOCATOR_PATTERN), bookName).click();
-        } else {
-            throw new RuntimeException("There is not book with title-" + bookName + " and button-" + actionButton);
-        }
-        return bookInfo;
     }
 
     @Override

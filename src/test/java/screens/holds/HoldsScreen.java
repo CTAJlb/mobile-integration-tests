@@ -1,6 +1,7 @@
 package screens.holds;
 
 import aquality.appium.mobile.screens.Screen;
+import constants.application.EnumBookType;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import org.openqa.selenium.By;
 
@@ -11,11 +12,7 @@ public abstract class HoldsScreen extends Screen {
 
     public abstract boolean isNoBooksMessagePresent();
 
-    public abstract boolean isBookPresent(String bookTitle);
+    public abstract boolean isBookPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
-    public abstract boolean isBookNotPresent(String bookInfo);
-
-    public abstract void performActionOnBook(String title, EnumActionButtonsForBooksAndAlertsKeys key);
-
-    public abstract boolean isActionButtonPresentOnBook(String bookTitle, EnumActionButtonsForBooksAndAlertsKeys key);
+    public abstract void openBook(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 }

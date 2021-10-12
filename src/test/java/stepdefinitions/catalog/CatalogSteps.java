@@ -3,7 +3,7 @@ package stepdefinitions.catalog;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
-import constants.application.ReaderType;
+import constants.application.EnumBookType;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
 import constants.localization.application.facetedSearch.FacetSortByKeys;
@@ -39,19 +39,9 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.subcategoryRowsAreLoaded();
     }
 
-    @When("I return to previous category screen")
-    public void openPreviousCategoryScreen() {
-        catalogSteps.openPreviousCategoryScreen();
-    }
-
     @When("I get names of books on screen and save them as {string}")
     public void getNamesOfBooksAndSaveThem(String booksNamesListKey) {
         catalogSteps.getNamesOfBooksAndSaveThem(booksNamesListKey);
-    }
-
-    @When("I {} hardcode book {string} and save it as {string}")
-    public void performActionOnHardcodeBookByNameAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName, String bookInfoKey) {
-        catalogSteps.performActionOnHardcodeBookByNameAndSaveIt(actionButtonKey, bookName, bookInfoKey);
     }
 
     @Then("List of books on screen is not equal to list of books saved as {string}")
@@ -68,11 +58,6 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     @Given("Catalog is opened")
     public void openCatalogWithAgeCheck() {
         catalogSteps.openCatalogWithAgeCheck();
-    }
-
-    @And("I open Books")
-    public void openBooks() {
-        catalogSteps.openBooks();
     }
 
     @And("Library {string} is present on Catalog Screen")
@@ -111,64 +96,9 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.openCategoriesByChainAndChainStartsFromCategoryScreen(categoriesChain);
     }
 
-    @When("I open the book details for the subsequent {} on Subcategory List View and save it as {string}")
-    public void openBookDetailsExecuteBookActionAndSaveItToContext(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
-        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DOWNLOAD && AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            catalogSteps.openBookDetailsExecuteBookActionAndSaveItToContext(EnumActionButtonsForBooksAndAlertsKeys.GET, bookInfoKey);
-        } else {
-            catalogSteps.openBookDetailsExecuteBookActionAndSaveItToContext(actionButtonKey, bookInfoKey);
-        }
-    }
-
-    @And("{} book from Subcategory List view and save it as {string}")
-    public void performActionOnBookAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
-        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DOWNLOAD && AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            catalogSteps.performActionOnBookAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys.GET, bookInfoKey);
-        } else {
-            catalogSteps.performActionOnBookAndSaveBookInfoOnSubcategoryListView(actionButtonKey, bookInfoKey);
-        }
-    }
-
-    @When("I {} book of {string} type and save it as {string}")
-    @And("{} book of {string} type and save it as {string}")
-    public void performActionOnBookOfTypeAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType, String bookInfoKey) {
-        catalogSteps.performActionOnBookOfTypeAndSaveIt(actionButtonKey, bookType, bookInfoKey);
-    }
-
-    @When("I {} or {} book by name {string} and save it as {string}")
-    public void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey) {
-        catalogSteps.performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(actionButtonKey1, actionButtonKey2, bookNameInfoKey, bookInfoKey);
-    }
-
-    @When("I {} book from Subcategory List View with title {string} and save it as {string}")
-    public void performActionOnSpecificBookFromAPIAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey) {
-        catalogSteps.performActionOnSpecificBookFromAPIAndSaveBookInfoOnSubcategoryListView(actionButtonKey, bookNameInfoKey, bookInfoKey);
-    }
-
-    @When("Open {string} book with {} button from Subcategory List View with title {string} and save it as {string}")
-    public void openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIOAndSaveBookInfo(String bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey, String bookInfoKey) {
-        String bookName = context.get(bookNameKey);
-        catalogSteps.openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIOAndSaveBookInfo(bookName, actionButtonKey, bookInfoKey, bookType);
-    }
-
-    @When("I click {} button on the {string} book on Subcategory List view")
-    public void performActionOnBookOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKeys, String bookInfoKey) {
-        catalogSteps.performActionOnBookOnSubcategoryListView(bookActionButtonKeys, bookInfoKey);
-    }
-
     @And("Count of books in first lane is more than {int}")
     public void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks) {
         catalogSteps.checkCountOfBooksInFirstLaneIsMoreThan(countOfBooks);
-    }
-
-    @And("Count of books in subcategory {string} lane is up to {int}")
-    public void checkCountOfBooksInSubcategoryLaneIsUpTo(String lineName, int countOfBooks) {
-        catalogSteps.checkCountOfBooksInSubcategoryLaneIsUpTo(lineName, countOfBooks);
-    }
-
-    @And("Count of books in subcategory {string} lane is more then {int}")
-    public void checkCountOfBooksInSubcategoryLaneIsMoreThen(String lineName, int countOfBooks) {
-        catalogSteps.checkCountOfBooksInSubcategoryLaneIsMoreThen(lineName, countOfBooks);
     }
 
     @Then("Book {string} is opened")
@@ -226,46 +156,9 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
         catalogSteps.booksAreSortedByTitleAscending();
     }
 
-    @And("The following values in the information block are present:")
-    public void checkFollowingValuesInInformationBlockArePresent(
-            List<BookDetailsScreenInformationBlockModel> expectedValuesList) {
-        catalogSteps.checkFollowingValuesInInformationBlockArePresent(expectedValuesList);
-    }
-
-    @And("Description has text")
-    public void checkDescriptionHasText(final String description) {
-        catalogSteps.checkDescriptionHasText(description);
-    }
-
-    @When("I open related books")
-    public void openRelatedBooks() {
-        catalogSteps.openRelatedBooks();
-    }
-
-    @And("Count of books in search result is up to {int}")
-    public void checkCountOfBooksInSearchResultIsUpTo(int countOfBooks) {
-        catalogSteps.checkCountOfBooksInSearchResultIsUpTo(countOfBooks);
-    }
-
-    @And("Count of books in search result is more then {int}")
-    public void checkCountOfBooksInSearchResultIsMoreThen(int countOfBooks) {
-        catalogSteps.checkCountOfBooksInSearchResultIsMoreThen(countOfBooks);
-    }
-
-    @Then("Book saved as {string} should contain {} button on Subcategory List View")
-    public void checkThatSavedBookContainButtonAtCatalogBooksScreen(
-            final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys key) {
-        catalogSteps.checkThatSavedBookContainButtonAtCatalogBooksScreen(bookInfoKey, key);
-    }
-
     @Then("I check that book contains {} action button on book details view")
     public void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final EnumActionButtonsForBooksAndAlertsKeys key) {
         catalogSteps.checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(key);
-    }
-
-    @When("I open {string} book with {} action button on Subcategory Screen")
-    public void openSpecificBookWithSpecificActionButton(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        catalogSteps.openSpecificBookWithSpecificActionButton(bookInfoKey, actionButtonKey);
     }
 
     @When("I press on the book details view at the action button {}")
@@ -285,12 +178,7 @@ public class CatalogSteps extends BaseSteps implements ICatalogSteps {
     }
 
     @When("I start reading or listening to a book with {} type from book details view")
-    public void openGivenTypeBookReader(ReaderType readerType) {
-        catalogSteps.startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(readerType);
-    }
-
-    @When("I open first present category")
-    public void openFirstPresentCategory() {
-        catalogSteps.openFirstCategory();
+    public void openGivenTypeBookReader(EnumBookType bookType) {
+        catalogSteps.startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(bookType);
     }
 }

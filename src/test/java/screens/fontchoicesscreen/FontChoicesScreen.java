@@ -9,7 +9,7 @@ public abstract class FontChoicesScreen extends Screen {
         super(locator, "Font choices");
     }
 
-    public abstract void setSetting(ReaderSettingKeys increaseFontSettings);
+    public abstract void setSetting(ReaderSettingKeys readerSettingKey);
 
     public abstract void closeFontChoices();
 }

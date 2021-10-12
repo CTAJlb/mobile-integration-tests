@@ -12,12 +12,8 @@ public class IosMainCatalogToolbarForm extends MainCatalogToolbarForm {
     private static final String MAIN_ELEMENT_LOC = "//XCUIElementTypeNavigationBar";
 
     private final IButton btnChooseAnotherLibrary =
-            getElementFactory().getButton(
-                    By.xpath(MAIN_ELEMENT_LOC +
-                            "//XCUIElementTypeButton[@name=\"Change Library Account\"]"),
+            getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC + "//XCUIElementTypeButton[@name=\"Change Library Account\"]"),
                     "Change library account");
-    private final IButton backBtn =
-            getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC + "//XCUIElementTypeButton[@name=\"Back\"]"), "Back");
     private final ILabel lblCategoryAndCatalogName =
             getElementFactory().getLabel(By.xpath(MAIN_ELEMENT_LOC + "/XCUIElementTypeButton[1]/following-sibling::*"), "Catalog name");
     private final IButton btnSearch = getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC +
@@ -30,11 +26,6 @@ public class IosMainCatalogToolbarForm extends MainCatalogToolbarForm {
     @Override
     public void chooseAnotherLibrary() {
         btnChooseAnotherLibrary.click();
-    }
-
-    @Override
-    public void goBack() {
-        backBtn.click();
     }
 
     @Override

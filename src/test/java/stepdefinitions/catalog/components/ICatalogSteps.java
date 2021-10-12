@@ -13,23 +13,13 @@ public interface ICatalogSteps {
 
     void subcategoryRowsAreLoaded();
 
-    void openPreviousCategoryScreen();
-
-    void openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIOAndSaveBookInfo(String bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey, String bookInfoKey);
-
-    void performActionOnSpecificBookFromAPIAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey);
-
     void getNamesOfBooksAndSaveThem(String booksNamesListKey);
 
     void checkListOfBooksIsNotEqualToSavedListOfBooks(String booksNamesListKey);
 
     void openLibraryFromSideMenu(String libraryName);
 
-    void performActionOnHardcodeBookByNameAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName, String bookInfoKey);
-
     void openCatalogWithAgeCheck();
-
-    void openBooks();
 
     void isLibraryPresentOnCatalogScreen(String libraryName);
 
@@ -45,20 +35,7 @@ public interface ICatalogSteps {
 
     void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain);
 
-    void openBookDetailsExecuteBookActionAndSaveItToContext(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey);
-
-    void performActionOnBookAndSaveBookInfoOnSubcategoryListView(
-            EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey);
-
-    void performActionOnBookOfTypeAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType, String bookInfoKey);
-
-    void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey);
-
-    void performActionOnBookOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys bookActionButtonKeys, String bookInfoKey);
-
     void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks);
-
-    void checkCountOfBooksInSubcategoryLaneIsUpTo(String lineName, int countOfBooks);
 
     void checkBookInfoIsOpened(String bookInfoKey);
 
@@ -82,20 +59,7 @@ public interface ICatalogSteps {
 
     void booksAreSortedByTitleAscending();
 
-    void checkFollowingValuesInInformationBlockArePresent(List<BookDetailsScreenInformationBlockModel> expectedValuesList);
-
-    void checkDescriptionHasText(final String description);
-
-    void openRelatedBooks();
-
-    void checkCountOfBooksInSearchResultIsUpTo(int countOfBooks);
-
-    void checkThatSavedBookContainButtonAtCatalogBooksScreen(
-            final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys key);
-
     void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final EnumActionButtonsForBooksAndAlertsKeys key);
-
-    void openSpecificBookWithSpecificActionButton(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
     void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButton);
 

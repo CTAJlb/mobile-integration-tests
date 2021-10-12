@@ -2,7 +2,7 @@ package stepdefinitions.catalog.components;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
-import constants.application.ReaderType;
+import constants.application.EnumBookType;
 import constants.keysForContext.ScenarioContextKey;
 import constants.localization.application.catalog.BookActionButtonNames;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
@@ -95,11 +95,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void openBooks() {
-        bottomMenuForm.open(BottomMenu.BOOKS);
-    }
-
-    @Override
     public void isLibraryPresentOnCatalogScreen(String libraryName) {
         Assert.assertTrue(String.format("Library %s is not present on Catalog Screen", libraryName), catalogScreen.isLibraryPresent(libraryName));
     }
@@ -147,67 +142,8 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void openBookDetailsExecuteBookActionAndSaveItToContext(
-            EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
-        catalogBooksScreen.openBookWithGivenActionButtonDetails(actionButtonKey);
-        CatalogBookModel catalogBookModel = bookDetailsScreen.getBookInfo();
-        pressOnBookDetailsScreenAtActionButton(actionButtonKey);
-        context.add(bookInfoKey, catalogBookModel);
-    }
-
-    @Override
-    public void performActionOnBookAndSaveBookInfoOnSubcategoryListView(
-            EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
-        context.add(bookInfoKey, catalogBooksScreen.scrollToBookAndPerformActionAndSaveBookInfo(actionButtonKey));
-    }
-
-    @Override
-    public void performActionOnBookOfTypeAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookType, String bookInfoKey) {
-        context.add(bookInfoKey, catalogBooksScreen.scrollToBookByTypeAndClickActionButton(actionButtonKey, bookType));
-    }
-
-    @Override
-    public void performGetOrDownloadActionOnBookByNameFromAPIAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey1, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey2, String bookNameInfoKey, String bookInfoKey) {
-        String bookName = context.get(bookNameInfoKey);
-        context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickGetOrDownloadActionButton(actionButtonKey1, actionButtonKey2, bookName));
-    }
-
-    @Override
-    public void performActionOnSpecificBookFromAPIAndSaveBookInfoOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameInfoKey, String bookInfoKey) {
-        subcategoryScreen.state().waitForDisplayed();
-        String bookName = context.get(bookNameInfoKey);
-        context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
-            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION){
-                alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
-            }else {
-                AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
-                AqualityServices.getLogger().info("Alert appears and dismiss alert");
-            }
-        }
-    }
-
-    @Override
-    public void performActionOnBookOnSubcategoryListView(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
-        CatalogBookModel catalogBookModel = context.get(bookInfoKey);
-        catalogBooksScreen.clickBookByTitleButtonWithKey(catalogBookModel.getTitle(), actionButtonKey);
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
-        }
-    }
-
-    @Override
     public void checkCountOfBooksInFirstLaneIsMoreThan(int countOfBooks) {
         Assert.assertTrue("Count of books is smaller than " + countOfBooks, countOfBooks <= catalogScreen.getListOfAllBooksNamesInFirstLane().size());
-    }
-
-    @Override
-    public void checkCountOfBooksInSubcategoryLaneIsUpTo(String lineName, int countOfBooks) {
-        int foundCountOfBooks = catalogScreen
-                .getListOfAllBooksNamesInSubcategoryLane(lineName)
-                .size();
-        Assert.assertTrue(String.format("Expected count of books bigger or equal to %1$s but found %2$s", countOfBooks,
-                foundCountOfBooks), countOfBooks >= foundCountOfBooks);
     }
 
     @Override
@@ -263,11 +199,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void performActionOnHardcodeBookByNameAndSaveIt(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName, String bookInfoKey) {
-        context.add(bookInfoKey, catalogBooksScreen.scrollToBookByNameAndClickActionButton(actionButtonKey, bookName));
-    }
-
-    @Override
     public void checkBooksAreSortedByAuthorAscending() {
         List<String> list = subcategoryScreen.getAuthorsInfo();
         List<String> listOfSurnames = getSurnames(list);
@@ -291,52 +222,8 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     }
 
     @Override
-    public void checkFollowingValuesInInformationBlockArePresent(
-            List<BookDetailsScreenInformationBlockModel> expectedValuesList) {
-        Assert.assertTrue("Not all information block values are correct (or present)", expectedValuesList.stream().allMatch(listElement ->
-                bookDetailsScreen.isValuePresentInInformationBlock(listElement.getKey(),
-                        listElement.getValue())));
-    }
-
-    @Override
-    public void checkDescriptionHasText(final String description) {
-        SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(bookDetailsScreen.isDescriptionPresent()).as("Description does not present").isTrue();
-        softAssertions.assertThat(StringUtils.trim(bookDetailsScreen.getDescriptionText()).contains(StringUtils.trim(description))).as("Description has not correct text").isTrue();
-        softAssertions.assertAll();
-    }
-
-    @Override
     public void closeBookDetailsOnlyForIOSTab() {
         bookDetailsScreen.closeBookDetailsOnlyForIOSTabIfDisplayed();
-    }
-
-    @Override
-    public void openRelatedBooks() {
-        bookDetailsScreen.clickRelatedBooks();
-    }
-
-    @Override
-    public void checkCountOfBooksInSearchResultIsUpTo(int countOfBooks) {
-        int foundBooksCount = catalogBooksScreen.getFoundBooksCount();
-        Assert.assertTrue(String.format("Found count of books (%d) is bigger than expected - %d", foundBooksCount, countOfBooks), countOfBooks >= foundBooksCount);
-    }
-
-    @Override
-    public void checkThatSavedBookContainButtonAtCatalogBooksScreen(
-            final String bookInfoKey, final EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        CatalogBookModel catalogBookModel = context.get(bookInfoKey);
-        String title = catalogBookModel.getTitle();
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
-            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
-            AqualityServices.getLogger().info("Alert appears and dismiss alert");
-        }
-        boolean isButtonPresent = catalogBooksScreen.isBookAddButtonTextEqualTo(title, actionButtonKey);
-        if (!isButtonPresent && catalogBooksScreen.isErrorButtonPresent()) {
-            Scenario scenario = context.get(ScenarioContextKey.SCENARIO_KEY);
-            scenario.attach(ScreenshotUtils.getScreenshot(), "image/png", "error_screenshot.png");
-        }
-        Assert.assertTrue(String.format("Book's with title '%1$s' button does not contain text '%2$s'. Error message (if present) - '%3$s'", title, actionButtonKey.i18n(), catalogBooksScreen.getErrorMessage()), isButtonPresent);
     }
 
     @Override
@@ -344,13 +231,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         boolean isButtonPresent = bookDetailsScreen.isBookAddButtonTextEqualTo(key);
         addScreenshotIfErrorPresent(isButtonPresent);
         Assert.assertTrue(String.format("Button '%1$s' is not present on book details screen. Error (if present) - %2$s", key.i18n(), getErrorDetails()), isButtonPresent);
-    }
-
-    @Override
-    public void openSpecificBookWithSpecificActionButton(String bookInfoKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        CatalogBookModel bookInfo = context.get(bookInfoKey);
-        subcategoryScreen.state().waitForDisplayed();
-        subcategoryScreen.openBookWithDefiniteNameAndDefiniteActionButton(bookInfo, actionButtonKey);
     }
 
     @Override
@@ -372,13 +252,8 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
         facetedSearchScreen.changeAvailabilityTo(facetAvailabilityKeys);
     }
 
-    @Override
-    public void openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIOAndSaveBookInfo(String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey, String bookType) {
-        context.add(bookInfoKey, subcategoryScreen.openBookWithDefiniteActionButtonAndDefiniteNameAndDefiniteBookTypeFromAPIAndGetBookInfo(bookName, actionButtonKey, bookType));
-    }
-
-    public void startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(ReaderType readerType) {
-        switch (readerType) {
+    public void startReadingOrListeningToBookWithSpecifyTypeOnBookDetailsView(EnumBookType bookType) {
+        switch (bookType) {
             case EBOOK:
                 clickActionButtonOnBookDetailsView(EnumActionButtonsForBooksAndAlertsKeys.READ);
                 epubReaderScreen.state().waitForDisplayed();
@@ -403,30 +278,6 @@ public abstract class AbstractCatalogSteps extends BaseSteps implements ICatalog
     protected void addScreenshot() {
         Scenario scenario = context.get(ScenarioContextKey.SCENARIO_KEY);
         scenario.attach(ScreenshotUtils.getScreenshot(), "image/png", "screenshot.png");
-    }
-
-    public void checkCountOfBooksInSearchResultIsMoreThen(int countOfBooks) {
-        Assert.assertTrue(String.format("Found count of books (%d) is less than expected - %d", catalogBooksScreen.getFoundBooksCount(), countOfBooks), AqualityServices.getConditionalWait().waitFor(() -> countOfBooks <= catalogBooksScreen.getFoundBooksCount()));
-    }
-
-    public void checkCountOfBooksInSubcategoryLaneIsMoreThen(String lineName, int countOfBooks) {
-        int foundCountOfBooks = catalogScreen.getListOfAllBooksNamesInSubcategoryLane(lineName).size();
-        Assert.assertTrue(String.format("Expected count of books bigger or equal to %1$s but found %2$s", countOfBooks, foundCountOfBooks), countOfBooks <= foundCountOfBooks);
-    }
-
-    public void openFirstCategory() {
-        catalogScreen.state().waitForDisplayed();
-        catalogScreen.openFirstCategory();
-        if (!subcategoryScreen.state().waitForDisplayed()) {
-            //todo added waiting
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            catalogScreen.openFirstCategory();
-            catalogScreen.state().waitForDisplayed();
-        }
     }
 
     private String getErrorDetails() {
