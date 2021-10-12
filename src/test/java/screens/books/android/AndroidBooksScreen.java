@@ -40,7 +40,7 @@ public class AndroidBooksScreen extends BooksScreen implements IWorkingWithListO
     }
 
     @Override
-    public boolean isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public boolean isBookPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         try {
             Thread.sleep(20000);
         } catch (InterruptedException e) {
@@ -67,12 +67,7 @@ public class AndroidBooksScreen extends BooksScreen implements IWorkingWithListO
     }
 
     @Override
-    public void openBookWithSpecificTypeAndSpecificNameAndSpecificActionButton(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void openBook(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         String actionButtonString = actionButtonKey.i18n();
         String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
         IButton bookNameButton = getBookNameButtonForBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonFromListOfBooks(bookNameLoc);

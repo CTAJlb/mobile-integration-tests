@@ -28,7 +28,7 @@ public class AndroidHoldsScreen extends HoldsScreen implements IWorkingWithListO
     }
 
     @Override
-    public boolean isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public boolean isBookPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         try {
             Thread.sleep(20000);
         } catch (InterruptedException e) {
@@ -41,7 +41,7 @@ public class AndroidHoldsScreen extends HoldsScreen implements IWorkingWithListO
     }
 
     @Override
-    public void openBookWithSpecificTypeAndSpecificNameAndSpecificActionButton(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public void openBook(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         try {
             Thread.sleep(20000);
         } catch (InterruptedException e) {

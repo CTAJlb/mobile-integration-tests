@@ -28,7 +28,7 @@ public class CatalogBooksSteps {
     @When("Open {} book with {} action button and {string} bookName on catalog books screen and save book as {string}")
     public void openBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonAndSaveBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey, String bookInfoKey) {
         String bookName = context.get(bookNameKey);
-        CatalogBookModel bookInfo = catalogBooksScreen.openBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonAndGetBookInfo(bookType, bookName, actionButtonKey);
+        CatalogBookModel bookInfo = catalogBooksScreen.openBookAndGetBookInfo(bookType, bookName, actionButtonKey);
         context.add(bookInfoKey, bookInfo);
     }
 
@@ -40,7 +40,7 @@ public class CatalogBooksSteps {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        CatalogBookModel bookInfo = catalogBooksScreen.clickSpecificActionButtonOnBookWithSpecificTypeAndSpecificNameAndGetBookInfo(bookType, bookName, actionButtonKey);
+        CatalogBookModel bookInfo = catalogBooksScreen.clickActionButtonAndGetBookInfo(bookType, bookName, actionButtonKey);
         context.add(bookInfoKey, bookInfo);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
             if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION){
@@ -62,7 +62,7 @@ public class CatalogBooksSteps {
             e.printStackTrace();
         }
         Assert.assertTrue(String.format("'%s' book with specific action button is not present on catalog books screen", bookName),
-                catalogBooksScreen.isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(bookType, bookName, actionButtonKey));
+                catalogBooksScreen.isBookPresent(bookType, bookName, actionButtonKey));
     }
 
     @And("Click {} action button on the first {} book on catalog books screen and save book as {string}")
@@ -72,7 +72,7 @@ public class CatalogBooksSteps {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        CatalogBookModel bookInfo = catalogBooksScreen.clickSpecificActionButtonOnTheFirstBookWithSpecificActionButtonAndGetBookInfo(bookType, actionButtonKey);
+        CatalogBookModel bookInfo = catalogBooksScreen.clickActionButtonOnTheFirstBookAndGetBookInfo(bookType, actionButtonKey);
         context.add(bookInfoKey, bookInfo);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
             if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION){

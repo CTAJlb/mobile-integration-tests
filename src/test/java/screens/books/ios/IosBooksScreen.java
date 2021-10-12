@@ -39,7 +39,7 @@ public class IosBooksScreen extends BooksScreen implements IWorkingWithListOfBoo
     }
 
     @Override
-    public boolean isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public boolean isBookPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         if (EnumBookType.AUDIOBOOK == bookType) {
             bookName = bookName + ". Audiobook.";
         }
@@ -59,7 +59,7 @@ public class IosBooksScreen extends BooksScreen implements IWorkingWithListOfBoo
     }
 
     @Override
-    public void openBookWithSpecificTypeAndSpecificNameAndSpecificActionButton(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public void openBook(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         if (EnumBookType.AUDIOBOOK == bookType) {
             bookName = bookName + ". Audiobook.";
         }

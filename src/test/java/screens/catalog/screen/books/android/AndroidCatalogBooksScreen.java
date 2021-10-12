@@ -27,7 +27,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     }
 
     @Override
-    public CatalogBookModel clickSpecificActionButtonOnBookWithSpecificTypeAndSpecificNameAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public CatalogBookModel clickActionButtonAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         try {
             Thread.sleep(20000);
         } catch (InterruptedException e) {
@@ -51,7 +51,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     }
 
     @Override
-    public CatalogBookModel openBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public CatalogBookModel openBookAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         try {
             Thread.sleep(20000);
         } catch (InterruptedException e) {
@@ -75,7 +75,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     }
 
     @Override
-    public boolean isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public boolean isBookPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         try {
             Thread.sleep(20000);
         } catch (InterruptedException e) {
@@ -87,7 +87,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     }
 
     @Override
-    public CatalogBookModel clickSpecificActionButtonOnTheFirstBookWithSpecificActionButtonAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public CatalogBookModel clickActionButtonOnTheFirstBookAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         try {
             Thread.sleep(20000);
         } catch (InterruptedException e) {

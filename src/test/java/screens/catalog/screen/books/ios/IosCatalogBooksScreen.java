@@ -28,7 +28,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     }
 
     @Override
-    public CatalogBookModel clickSpecificActionButtonOnBookWithSpecificTypeAndSpecificNameAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public CatalogBookModel clickActionButtonAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         if (EnumBookType.AUDIOBOOK == bookType) {
             bookName = bookName + ". Audiobook.";
         }
@@ -50,7 +50,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     }
 
     @Override
-    public CatalogBookModel openBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public CatalogBookModel openBookAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         String bookNameForLocator = bookName;
         if (EnumBookType.AUDIOBOOK == bookType) {
             bookNameForLocator = bookNameForLocator + ". Audiobook.";
@@ -73,7 +73,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     }
 
     @Override
-    public boolean isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public boolean isBookPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         if (EnumBookType.AUDIOBOOK == bookType) {
             bookName = bookName + ". Audiobook.";
         }
@@ -83,7 +83,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     }
 
     @Override
-    public CatalogBookModel clickSpecificActionButtonOnTheFirstBookWithSpecificActionButtonAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public CatalogBookModel clickActionButtonOnTheFirstBookAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         String actionButtonString = actionButtonKey.i18n();
         String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString);
         IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);

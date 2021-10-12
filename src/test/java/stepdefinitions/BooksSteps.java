@@ -38,17 +38,27 @@ public class BooksSteps {
 
     @When("Open {} book with {} action button and {string} bookInfo on books screen")
     public void openBookWithSpecificTypeAndSpecificNameAndSpecificActionButton(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+        try {
+            Thread.sleep(40000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();
-        booksScreen.openBookWithSpecificTypeAndSpecificNameAndSpecificActionButton(bookType, bookName, actionButtonKey);
+        booksScreen.openBook(bookType, bookName, actionButtonKey);
     }
 
     @Then("{} book with {} action button and {string} bookInfo is not present on books screen")
     public void isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonNotPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+        try {
+            Thread.sleep(40000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();
         Assert.assertFalse(String.format("'%s' book with specific action button is present on books screen", bookName),
-                booksScreen.isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(bookType, bookName, actionButtonKey));
+                booksScreen.isBookPresent(bookType, bookName, actionButtonKey));
     }
 
     @Then("{} book with {} action button and {string} bookInfo is present on books screen")
@@ -61,7 +71,7 @@ public class BooksSteps {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();
         Assert.assertTrue(String.format("'%s' book with specific action button is not present on books screen", bookName),
-                booksScreen.isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(bookType, bookName, actionButtonKey));
+                booksScreen.isBookPresent(bookType, bookName, actionButtonKey));
     }
 
     @And("Amount of books is equal to {int}")
