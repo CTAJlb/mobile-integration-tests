@@ -39,7 +39,7 @@ public class HoldsSteps {
     }
 
     @And("{} book with {} action button and {string} bookInfo is present on holds screen")
-    public void isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+    public void isBookPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         try {
             Thread.sleep(40000);
         } catch (InterruptedException e) {
@@ -52,7 +52,7 @@ public class HoldsSteps {
     }
 
     @And("{} book with {} action button and {string} bookInfo is not present on holds screen")
-    public void isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonNotPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+    public void isBookNotPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         try {
             Thread.sleep(40000);
         } catch (InterruptedException e) {
@@ -65,7 +65,7 @@ public class HoldsSteps {
     }
 
     @When("Open {} book with {} action button and {string} bookInfo on holds screen")
-    public void openBookDetailsByClickingOnCover(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+    public void openBook(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         try {
             Thread.sleep(40000);
         } catch (InterruptedException e) {

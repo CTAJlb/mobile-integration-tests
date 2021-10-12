@@ -26,14 +26,14 @@ public class CatalogBooksSteps {
     }
 
     @When("Open {} book with {} action button and {string} bookName on catalog books screen and save book as {string}")
-    public void openBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonAndSaveBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey, String bookInfoKey) {
+    public void openBookAndSaveBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey, String bookInfoKey) {
         String bookName = context.get(bookNameKey);
         CatalogBookModel bookInfo = catalogBooksScreen.openBookAndGetBookInfo(bookType, bookName, actionButtonKey);
         context.add(bookInfoKey, bookInfo);
     }
 
     @When("Click {} action button on {} book with {string} bookName on catalog books screen and save book as {string}")
-    public void clickSpecificActionButtonOnBookWithSpecificTypeAndSpecificNameAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumBookType bookType, String bookNameKey, String bookInfoKey) {
+    public void clickActionButtonAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumBookType bookType, String bookNameKey, String bookInfoKey) {
         String bookName = context.get(bookNameKey);
         try {
             Thread.sleep(40000);
@@ -53,7 +53,7 @@ public class CatalogBooksSteps {
     }
 
     @And("{} book with {} action button and {string} bookInfo is present on catalog books screen")
-    public void isBookWithSpecificTypeAndSpecificNameAndSpecificActionButtonPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+    public void isBookPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();
         try {
@@ -66,7 +66,7 @@ public class CatalogBooksSteps {
     }
 
     @And("Click {} action button on the first {} book on catalog books screen and save book as {string}")
-    public void clickActionButtonOnTheFirstBookWithSpecificActionButtonAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumBookType bookType, String bookInfoKey){
+    public void clickActionButtonOnTheFirstBookAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumBookType bookType, String bookInfoKey){
         try {
             Thread.sleep(40000);
         } catch (InterruptedException e) {
