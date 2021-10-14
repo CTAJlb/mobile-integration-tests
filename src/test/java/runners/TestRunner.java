@@ -28,6 +28,7 @@ public class TestRunner{
                 System.out.println("Start getting books");
                 XMLUtil xmlUtil = new XMLUtil();
                 GettingBookUtil.setXmlUtil(xmlUtil);
+                GettingBookUtil.printDistributorsInfo();
                 System.out.println("end getting books");
         }
 }
