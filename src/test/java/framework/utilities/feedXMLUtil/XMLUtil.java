@@ -32,6 +32,36 @@ public class XMLUtil {
         setHashMapsForEBooksAndAudioBooks();
     }
 
+    public void getDistributorsInfo(){
+        System.out.println("//////////////////////////////////////////////////////////////////////////////////////");
+        for (String distributor : hashMapAvailableAudiobooks.keySet()) {
+            printDistributorInfo("hashMapAvailableAudiobooks", distributor, hashMapAvailableAudiobooks.get(distributor));
+        }
+        System.out.println("//////////////////////////////////////////////////////////////////////////////////////");
+        for (String distributor : hashMapAvailableEbooks.keySet()) {
+            printDistributorInfo("hashMapAvailableEbooks", distributor, hashMapAvailableEbooks.get(distributor));
+        }
+        System.out.println("//////////////////////////////////////////////////////////////////////////////////////");
+        for (String distributor : hashMapUnavailableAudiobooks.keySet()) {
+            printDistributorInfo("hashMapUnavailableAudiobooks", distributor, hashMapUnavailableAudiobooks.get(distributor));
+        }
+        System.out.println("//////////////////////////////////////////////////////////////////////////////////////");
+        for (String distributor : hashMapUnavailableEbooks.keySet()) {
+            printDistributorInfo("hashMapUnavailableEbooks", distributor, hashMapUnavailableEbooks.get(distributor));
+        }
+        System.out.println("//////////////////////////////////////////////////////////////////////////////////////");
+    }
+
+    private void printDistributorInfo(String text, String distributor, List<BookModel> list){
+        System.out.println("+++++++++++++++++++++");
+        System.out.println(text + "info");
+        System.out.println();
+        System.out.println("Distributor " + distributor);
+        System.out.println();
+        System.out.println("amount " + list.size());
+        System.out.println("+++++++++++++++++++++");
+    }
+
     private void setListAvailableAndUnavailableBooksAnyTypeMayBeWithRepeat() {
         String url = partOfURL;
         ArrayList<BookModel> listAvailableBooksAnyType = new ArrayList<>();
