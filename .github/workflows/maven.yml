@@ -5,7 +5,6 @@ name: Test Run
 
 on:
   workflow_dispatch:
-    branches: [ master ]
     inputs:
       test_tag:
         description: 'Tags to run'
@@ -29,8 +28,8 @@ on:
         default: 'SamsungGalaxyS21_11'
 
 jobs:
-  build:
-
+  first_job:
+    name: "${{github.event.inputs.device_name_and_version}}"
     runs-on: ubuntu-latest
     timeout-minutes: 600
 
