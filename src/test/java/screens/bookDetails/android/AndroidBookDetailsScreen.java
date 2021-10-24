@@ -22,8 +22,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     private final ILabel lblBookAuthorsInfo = getElementFactory().getLabel(By.id("bookDetailAuthors"), "Book Authors");
     private final ILabel lblErrorMessage = getElementFactory().getLabel(By.id("errorDetails"), "Error message");
 
-    private final IButton btnRelatedBooks =
-            getElementFactory().getButton(By.xpath("//*[contains(@resource-id,\"bookDetailRelated\")]"), "Related books");
     private final IButton btnErrorDetails =
             getElementFactory().getButton(By.xpath("//*[contains(@resource-id,'bookDetailButtons')]//*[contains(@text,'Details')]"), "Error");
 
@@ -36,11 +34,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
         return new CatalogBookModel()
                 .setTitle(lblBookTitleInfo.getText())
                 .setAuthor(lblBookAuthorsInfo.getText());
-    }
-
-    @Override
-    public boolean isRelatedBooksVisible() {
-        return btnRelatedBooks.state().isDisplayed();
     }
 
     @Override

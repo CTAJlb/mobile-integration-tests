@@ -24,8 +24,6 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     private static final String LBL_BOOK_AUTHORS_INFO = String.format("(%1$s)[%%d]", BOOK_MAIN_INFO);
 
     private final ILabel lblBookTitleInfo = getElementFactory().getLabel(By.xpath("(//XCUIElementTypeOther//XCUIElementTypeStaticText[@name])[1]"), "Book title");
-    private final IButton btnRelatedBooks =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Information\"]/following-sibling::XCUIElementTypeTable"), "Related books");
     private final IButton btnCloseBookDetailsOnlyIOSTab =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeButton/XCUIElementTypeStaticText[contains(@name, \"Close\")]"), "Close button");
     private final IButton lblErrorDetails =
@@ -48,11 +46,6 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
                 .setTitle(lblBookTitleInfo.getText())
                 .setAuthor(getElementFactory().getLabel(By.xpath(String.format(LBL_BOOK_AUTHORS_INFO,
                         getBookMainInfo().size())), "Author").getText());
-    }
-
-    @Override
-    public boolean isRelatedBooksVisible() {
-        return btnRelatedBooks.state().isDisplayed();
     }
 
     @Override
