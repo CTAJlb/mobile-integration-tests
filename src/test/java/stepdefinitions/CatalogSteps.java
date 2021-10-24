@@ -151,8 +151,8 @@ public class CatalogSteps extends BaseSteps {
         Assert.assertTrue("Count of books is smaller than " + countOfBooks, countOfBooks <= catalogScreen.getListOfAllBooksNamesInFirstLane().size());
     }
 
-    @Then("Book {string} is opened")
-    public void checkBookInfoIsOpened(String bookInfoKey) {
+    @Then("Book {string} is opened on book details screen")
+    public void isBookOpened(String bookInfoKey) {
         Assert.assertEquals("Expected book is not opened", Optional.ofNullable(context.get(bookInfoKey)).orElse(bookInfoKey), bookDetailsScreen.getBookInfo());
     }
 
@@ -226,9 +226,9 @@ public class CatalogSteps extends BaseSteps {
         Assert.assertEquals("Lists of authors is not sorted properly" + list.stream().map(Object::toString).collect(Collectors.joining(", ")), list.stream().sorted().collect(Collectors.toList()), list);
     }
 
-    @Then("I check that book contains {} action button on book details view")
-    public void checkThatBookContainsButtonWithDefiniteActionOnBookDetailsView(final EnumActionButtonsForBooksAndAlertsKeys key) {
-        boolean isButtonPresent = bookDetailsScreen.isBookAddButtonTextEqualTo(key);
+    @Then("I check that book contains {} action button on book details screen")
+    public void checkThatBookContainsActionButton(final EnumActionButtonsForBooksAndAlertsKeys key) {
+        boolean isButtonPresent = bookDetailsScreen.isActionButtonPresent(key);
         addScreenshotIfErrorPresent(isButtonPresent);
         Assert.assertTrue(String.format("Button '%1$s' is not present on book details screen. Error (if present) - %2$s", key.i18n(), getErrorDetails()), isButtonPresent);
     }
@@ -256,9 +256,9 @@ public class CatalogSteps extends BaseSteps {
         scenario.attach(ScreenshotUtils.getScreenshot(), "image/png", "screenshot.png");
     }
 
-    @When("I press on the book details view at the action button {}")
+    @When("Click {} action button on book details screen")
     public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        clickActionButtonOnBookDetailsView(actionButtonKey);
+        bookDetailsScreen.clickActionButton(actionButtonKey);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
             if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION) {
                 alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
@@ -267,10 +267,6 @@ public class CatalogSteps extends BaseSteps {
                 AqualityServices.getLogger().info("Alert appears and dismiss alert");
             }
         }
-    }
-
-    private void clickActionButtonOnBookDetailsView(EnumActionButtonsForBooksAndAlertsKeys actionButton) {
-        bookDetailsScreen.clickActionButton(actionButton);
     }
 
     @When("I change books visibility to show {}")
@@ -283,19 +279,5 @@ public class CatalogSteps extends BaseSteps {
     @And("I close Book Details for IOSTab")
     public void closeBookDetailsOnlyForIOSTab() {
         bookDetailsScreen.closeBookDetailsOnlyForIOSTabIfDisplayed();
-    }
-
-    @When("I start reading or listening to a book with {} type from book details view")
-    public void openGivenTypeBookReader(EnumBookType bookType) {
-        switch (bookType) {
-            case EBOOK:
-                clickActionButtonOnBookDetailsView(EnumActionButtonsForBooksAndAlertsKeys.READ);
-                epubReaderScreen.state().waitForDisplayed();
-                break;
-            case AUDIOBOOK:
-                clickActionButtonOnBookDetailsView(EnumActionButtonsForBooksAndAlertsKeys.LISTEN);
-                audioPlayerScreen.state().waitForDisplayed();
-                break;
-        }
     }
 }

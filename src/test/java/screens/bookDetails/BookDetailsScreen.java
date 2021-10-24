@@ -12,7 +12,7 @@ public abstract class BookDetailsScreen extends Screen {
 
     public abstract CatalogBookModel getBookInfo();
 
-    public abstract boolean isBookAddButtonTextEqualTo(EnumActionButtonsForBooksAndAlertsKeys key);
+    public abstract boolean isActionButtonPresent(EnumActionButtonsForBooksAndAlertsKeys key);
 
     public abstract void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKeys);
 

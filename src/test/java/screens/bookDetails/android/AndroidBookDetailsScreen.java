@@ -37,7 +37,7 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public boolean isBookAddButtonTextEqualTo(EnumActionButtonsForBooksAndAlertsKeys key) {
+    public boolean isActionButtonPresent(EnumActionButtonsForBooksAndAlertsKeys key) {
         IButton button = getActionButton(key);
         AqualityServices.getConditionalWait().waitFor(() -> button.state().isDisplayed() || isErrorButtonPresent(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         return button.state().isDisplayed();

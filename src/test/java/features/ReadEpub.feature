@@ -10,7 +10,7 @@ Feature: Read EPUB
   Scenario: Navigate by Page(ANDROID)
     And Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And I press on the book details view at the action button READ
+    And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
     When I click on right book corner
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
@@ -24,7 +24,7 @@ Feature: Read EPUB
   Scenario: Navigate by Page(IOS)
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And I press on the book details view at the action button READ
+    And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
     When I click on right book corner
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
@@ -38,7 +38,7 @@ Feature: Read EPUB
   Scenario: Navigate by Table of Contents Menu(ANDROID)
     And Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And I press on the book details view at the action button READ
+    And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
     Then Each chapter can be opened from Table of Contents
 
@@ -46,7 +46,7 @@ Feature: Read EPUB
   Scenario: Navigate by Table of Contents Menu(IOS)
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And I press on the book details view at the action button READ
+    And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
     Then Each chapter can be opened from Table of Contents
 
@@ -54,10 +54,10 @@ Feature: Read EPUB
   Scenario: Navigate View options(ANDROID)
     And Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And I press on the book details view at the action button READ
+    And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
     When I return to previous screen for epub and pdf
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
     When I open font choices for book
     Then Font choices screen is present
@@ -69,10 +69,10 @@ Feature: Read EPUB
   Scenario: Navigate View options(IOS)
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And I press on the book details view at the action button READ
+    And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
     When I return to previous screen for epub and pdf
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
     When I open font choices for book
     Then Font choices screen is present
@@ -84,7 +84,7 @@ Feature: Read EPUB
   Scenario: Change, View Font and Contrast Settings(ANDROID)
     And Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And I press on the book details view at the action button READ
+    And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
     When I save font size as 'fontSize'
     And I INCREASE_FONT of text
@@ -109,7 +109,7 @@ Feature: Read EPUB
   Scenario: Change, View Font and Contrast Settings(IOS)
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And I press on the book details view at the action button READ
+    And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
     When I save font size as 'fontSize'
     And I INCREASE_FONT of text
@@ -134,13 +134,13 @@ Feature: Read EPUB
   Scenario: Return to Page (Bookmarking)(ANDROID)
     And Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And I press on the book details view at the action button READ
+    And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
     When I scroll page forward from 1 to 2 times
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I wait for 3 seconds
       And I return to previous screen for epub and pdf
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
       And PageNumber 'pageNumberKey' is correct
     When I click on right book corner
@@ -150,7 +150,7 @@ Feature: Read EPUB
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
       And PageNumber 'pageNumberKey' is correct
 
@@ -158,13 +158,13 @@ Feature: Read EPUB
   Scenario: Return to Page (Bookmarking)(IOS)
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And I press on the book details view at the action button READ
+    And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
     When I scroll page forward from 1 to 2 times
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on EpubReaderScreen
       And I wait for 3 seconds
       And I return to previous screen for epub and pdf
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
       And PageNumber 'pageNumberKey' is correct
     When I click on right book corner
@@ -174,6 +174,6 @@ Feature: Read EPUB
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
       And PageNumber 'pageNumberKey' is correct

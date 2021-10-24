@@ -16,7 +16,7 @@ Feature: Read PDF IOS
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Pdf book 'bookInfo' is present on screen
       And Pdf book page number is 1
 
@@ -28,7 +28,7 @@ Feature: Read PDF IOS
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Pdf book 'bookInfo' is present on screen
       And Pdf book page number is 1
     When I go to next page in pdf book
@@ -44,7 +44,7 @@ Feature: Read PDF IOS
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Pdf book 'bookInfo' is present on screen
       And Each chapter of pdf book can be opened from Table of Contents
 
@@ -56,13 +56,13 @@ Feature: Read PDF IOS
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Pdf book 'bookInfo' is present on screen
     When I scroll pdf page forward from 10 to 20 times
       And I save pdf page number as 'pageNumber'
       And I wait for 3 seconds
       And I return to previous screen for epub and pdf
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct
       And I wait for 3 seconds
@@ -70,7 +70,7 @@ Feature: Read PDF IOS
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct
 
@@ -82,7 +82,7 @@ Feature: Read PDF IOS
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Pdf book 'bookInfo' is present on screen
     When I open gallery menu
     Then Gallery is opened
@@ -103,7 +103,7 @@ Feature: Read PDF IOS
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Pdf book 'bookInfo' is present on screen
     When I click the search in the pdf button
     Then The search in the pdf page opened
@@ -116,7 +116,7 @@ Feature: Read PDF IOS
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Pdf book 'bookInfo' is present on screen
     When I click the search in the pdf button
       And I am typing 'vocabulary list' to the search field and apply search

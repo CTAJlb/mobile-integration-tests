@@ -15,7 +15,7 @@ Feature: Main actions private access books
     When I open Holds
     Then EBOOK book with CANCEL_RESERVATION action button and 'bookInfo' bookInfo is present on holds screen
     When Open EBOOK book with CANCEL_RESERVATION action button and 'bookInfo' bookInfo on holds screen
-    And I press on the book details view at the action button CANCEL_RESERVATION
+    And Click CANCEL_RESERVATION action button on book details screen
     And I open Holds
     Then EBOOK book with CANCEL_RESERVATION action button and 'bookInfo' bookInfo is not present on holds screen
 
@@ -43,13 +43,13 @@ Feature: Main actions private access books
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
     When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookInfo' is opened
-    When I press on the book details view at the action button RESERVE
+    Then Book 'bookInfo' is opened on book details screen
+    When Click RESERVE action button on book details screen
       And I close Book Details for IOSTab
     When I open Holds
     Then EBOOK book with CANCEL_RESERVATION action button and 'bookInfo' bookInfo is present on holds screen
     When Open EBOOK book with CANCEL_RESERVATION action button and 'bookInfo' bookInfo on holds screen
-    And I press on the book details view at the action button CANCEL_RESERVATION
+    And Click CANCEL_RESERVATION action button on book details screen
     And I open Holds
     Then EBOOK book with CANCEL_RESERVATION action button and 'bookInfo' bookInfo is not present on holds screen
 
@@ -64,10 +64,10 @@ Feature: Main actions private access books
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
     When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookInfo' is opened
-    When I press on the book details view at the action button RESERVE
-      And I press on the book details view at the action button CANCEL_RESERVATION
-    Then I check that book contains RESERVE action button on book details view
+    Then Book 'bookInfo' is opened on book details screen
+    When Click RESERVE action button on book details screen
+      And Click CANCEL_RESERVATION action button on book details screen
+    Then I check that book contains RESERVE action button on book details screen
 
   @logout @returnBooks @tier2
   Scenario: Check out from Book Detail View and Return from Books
@@ -79,12 +79,12 @@ Feature: Main actions private access books
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     When Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And I press on the book details view at the action button GET
+      And Click GET action button on book details screen
       And I close Book Details for IOSTab
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-      And I press on the book details view at the action button RETURN
+      And Click RETURN action button on book details screen
       And I close Book Details for IOSTab
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
@@ -106,7 +106,7 @@ Feature: Main actions private access books
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-      And I press on the book details view at the action button RETURN
+      And Click RETURN action button on book details screen
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
@@ -136,7 +136,7 @@ Feature: Main actions private access books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Book 'bookInfo' is present on screen
 
   @logout @returnBooks @tier3 @exclude_android @ignore
@@ -150,8 +150,8 @@ Feature: Main actions private access books
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
     When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookInfo' is opened
-    When I press on the book details view at the action button RESERVE
+    Then Book 'bookInfo' is opened on book details screen
+    When Click RESERVE action button on book details screen
       And I close Book Details for IOSTab
       And I open Holds
     Then Book 'bookInfo' is present in Holds List
