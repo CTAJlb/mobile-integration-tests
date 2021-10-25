@@ -5,12 +5,12 @@ import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.localization.application.reader.ReaderSettingKeys;
 import org.openqa.selenium.By;
-import screens.fontchoicesscreen.FontChoicesScreen;
+import screens.fontchoicesscreen.EpubFontChoicesScreen;
 
 @ScreenType(platform = PlatformName.ANDROID)
-public class AndroidFontChoicesScreen extends FontChoicesScreen {
+public class AndroidEpubFontChoicesScreen extends EpubFontChoicesScreen {
 
-    public AndroidFontChoicesScreen() {
+    public AndroidEpubFontChoicesScreen() {
         super(By.xpath("//android.widget.FrameLayout[contains(@resource-id,\"setFontSans\")]"));
     }
 

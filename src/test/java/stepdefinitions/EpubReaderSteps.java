@@ -15,25 +15,24 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.epubreader.EpubReaderScreen;
 import screens.epubtableofcontents.EpubTableOfContentsScreen;
-import screens.fontchoicesscreen.FontChoicesScreen;
+import screens.fontchoicesscreen.EpubFontChoicesScreen;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class EpubReaderSteps {
-    private FontChoicesScreen fontChoicesScreen;
+    private EpubFontChoicesScreen epubFontChoicesScreen;
     private EpubTableOfContentsScreen epubTableOfContentsScreen;
     private ScenarioContext context;
     private EpubReaderScreen epubReaderScreen;
 
     @Inject
     public EpubReaderSteps(ScenarioContext context) {
-        fontChoicesScreen = AqualityServices.getScreenFactory().getScreen(FontChoicesScreen.class);
+        epubFontChoicesScreen = AqualityServices.getScreenFactory().getScreen(EpubFontChoicesScreen.class);
         epubTableOfContentsScreen = AqualityServices.getScreenFactory().getScreen(EpubTableOfContentsScreen.class);
         epubReaderScreen = AqualityServices.getScreenFactory().getScreen(EpubReaderScreen.class);
         this.context = context;
     }
-
 
     @Then("{string} book is present on epub reader screen")
     public void isBookPresent(String bookInfoKey) {
@@ -43,55 +42,55 @@ public class EpubReaderSteps {
         Assert.assertTrue(String.format("Book is not present on epub reader screen. Expected bookName - '%1$s', actualName - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));
     }
 
-    @When("I click on left book corner")
+    @When("I click on left book corner on epub reader screen")
     public void clickOnLeftBookCorner() {
         epubReaderScreen.clickLeftCorner();
     }
 
-    @When("I click on right book corner")
+    @When("I click on right book corner on epub reader screen")
     public void clickOnRightBookCorner() {
         epubReaderScreen.clickRightCorner();
     }
 
-    @When("I save pageNumber as {string} and chapterName as {string} on EpubReaderScreen")
-    public void savePageNumberAndChapterNameForEpubReaderScreen(String pageNumberKey, String chapterNameKey) {
+    @When("I save pageNumber as {string} and chapterName as {string} on epub reader screen")
+    public void savePageNumberAndChapterName(String pageNumberKey, String chapterNameKey) {
         context.add(pageNumberKey, epubReaderScreen.getPageNumber());
         context.add(chapterNameKey, epubReaderScreen.getChapterName());
     }
 
-    @Then("Next page is open and old page has {string} pageNumber and {string} chapterName")
-    public void checkThatNextPageIsOpen(String pageNumberInfo, String chapterNameInfo) {
+    @Then("Next page is opened and old page has {string} pageNumber and {string} chapterName on epub reader screen")
+    public void isNextPageOpened(String pageNumberKey, String chapterNameKey) {
         String actualPageNumberString = epubReaderScreen.getPageNumber();
-        String expectedPageNumberString = context.get(pageNumberInfo);
+        String expectedPageNumberString = context.get(pageNumberKey);
         int actualPageNumber = Integer.parseInt(actualPageNumberString);
         int expectedPageNumber = Integer.parseInt(expectedPageNumberString) + 1;
         AqualityServices.getLogger().info("actualPageNumberOfNextPage" + actualPageNumber);
         AqualityServices.getLogger().info("expectedPageNumberOfNextPage" + expectedPageNumber);
         String actualChapterName = epubReaderScreen.getChapterName();
-        String expectedChapterName = context.get(chapterNameInfo);
+        String expectedChapterName = context.get(chapterNameKey);
         AqualityServices.getLogger().info("actualChapterNameOfNextPage" + actualChapterName);
         AqualityServices.getLogger().info("expectedChapterNameOfNextPage" + expectedChapterName);
         Assert.assertTrue(String.format("Page number or chapter name is not correct (actualPageNumber - %d, expectedPageNumber - %d), (actualChapterName-%s, expectedChapterName-%s)", actualPageNumber, expectedPageNumber, actualChapterName, expectedChapterName), expectedPageNumber == actualPageNumber ||
                 (actualPageNumber == 1 && !actualChapterName.toLowerCase().equals(expectedChapterName.toLowerCase())));
     }
 
-    @Then("Previous page is open and old page has {string} pageNumber and {string} chapterName")
-    public void checkThatPreviousPageIsOpen(String pageNumberInfo, String chapterNameInfo) {
+    @Then("Previous page is opened and old page has {string} pageNumber and {string} chapterName on epub reader screen")
+    public void isPreviousPageOpened(String pageNumberKey, String chapterNameKey) {
         String actualPageNumberString = epubReaderScreen.getPageNumber();
-        String expectedPageNumberString = context.get(pageNumberInfo);
+        String expectedPageNumberString = context.get(pageNumberKey);
         int actualPageNumber = Integer.parseInt(actualPageNumberString);
         int expectedPageNumber = Integer.parseInt(expectedPageNumberString) - 1;
         AqualityServices.getLogger().info("actualPageNumberOfPreviousPage" + actualPageNumber);
         AqualityServices.getLogger().info("expectedPageNumberOfPreviousPage" + expectedPageNumber);
         String actualChapterName = epubReaderScreen.getChapterName();
-        String expectedChapterName = context.get(chapterNameInfo);
+        String expectedChapterName = context.get(chapterNameKey);
         AqualityServices.getLogger().info("actualChapterNameOfPreviousPage" + actualChapterName);
         AqualityServices.getLogger().info("expectedChapterNameOfPreviousPage" + expectedChapterName);
         Assert.assertTrue(String.format("Page number or chapterName is not correct (actualPageNumber - %d, expectedPageNumber - %d), (actualChapterName-%s, expectedChapterName-%s)", actualPageNumber, expectedPageNumber, actualChapterName, expectedChapterName), expectedPageNumber == actualPageNumber ||
                 (actualPageNumber == 1 && !actualChapterName.toLowerCase().equals(expectedChapterName.toLowerCase())));
     }
 
-    @And("Each chapter can be opened from Table of Contents")
+    @And("Each chapter of epub book can be opened from table of contents")
     public void checkEachChapterCanBeOpenedFromTableOfContents() {
         SoftAssertions softAssertions = new SoftAssertions();
         List<String> chapters = epubReaderScreen.getListOfChapters();
@@ -103,29 +102,29 @@ public class EpubReaderSteps {
         softAssertions.assertAll();
     }
 
-    @When("I open font choices for book")
+    @When("I open font choices on epub reader screen")
     public void openFontChoicesForBook() {
         epubReaderScreen.openFontSettings();
     }
 
-    @And("I open Table of Contents")
+    @And("I open table of contents on epub reader screen")
     public void openTableOfContents() {
         epubReaderScreen.openTableOfContents();
     }
 
-    @Then("Table of Contents is opened")
-    public void checkTableOfContentsIsOpened() {
-        Assert.assertTrue("Table of Contents is not opened", epubTableOfContentsScreen.state().waitForDisplayed());
+    @Then("Epub table of contents screen is opened")
+    public void isEpubTableOfContentsOpened() {
+        Assert.assertTrue("Epub table of contents screen is not opened", epubTableOfContentsScreen.state().waitForDisplayed());
     }
 
-    @Then("Font choices screen is present")
-    public void checkFontChoicesScreenIsPresent() {
-        Assert.assertTrue("Font choices screen is not opened", fontChoicesScreen.state().waitForDisplayed());
+    @Then("Epub font choices screen is opened")
+    public void isFontChoicesScreenOpened() {
+        Assert.assertTrue("Epub font choices screen is not opened", epubFontChoicesScreen.state().waitForDisplayed());
     }
 
     @When("I close font choices")
     public void closeFontChoices() {
-        fontChoicesScreen.closeFontChoices();
+        epubFontChoicesScreen.closeFontChoices();
     }
 
     @When("I save font size as {string}")
@@ -152,8 +151,8 @@ public class EpubReaderSteps {
     @When("I change contrast to {}")
     public void changeSettingsForFont(ReaderSettingKeys readerSettingKey) {
         epubReaderScreen.openFontSettings();
-        fontChoicesScreen.setSetting(readerSettingKey);
-        fontChoicesScreen.closeFontChoices();
+        epubFontChoicesScreen.setSetting(readerSettingKey);
+        epubFontChoicesScreen.closeFontChoices();
     }
 
     @And("PageNumber {string} is correct")
