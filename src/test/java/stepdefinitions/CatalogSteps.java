@@ -1,12 +1,9 @@
 package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
-import constants.application.EnumBookType;
 import constants.keysForContext.ScenarioContextKey;
 import constants.localization.application.catalog.BookActionButtonNames;
-import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
 import constants.localization.application.facetedSearch.FacetSortByKeys;
 import framework.utilities.ScenarioContext;
@@ -17,33 +14,26 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import screens.alert.AlertScreen;
-import screens.audioplayer.AudioPlayerScreen;
-import screens.bookDetails.BookDetailsScreen;
 import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
 import screens.catalog.form.MainCatalogToolbarForm;
-import screens.catalog.screen.books.CatalogBooksScreen;
 import screens.catalog.screen.catalog.CatalogScreen;
-import screens.epubreader.EpubReaderScreen;
 import screens.facetedSearch.FacetedSearchScreen;
 import screens.subcategory.SubcategoryScreen;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Collectors;
 
-public class CatalogSteps extends BaseSteps {
-    protected final BottomMenuForm bottomMenuForm;
-    protected final CatalogScreen catalogScreen;
-    protected final SubcategoryScreen subcategoryScreen;
-    protected final BookDetailsScreen bookDetailsScreen;
-    protected final MainCatalogToolbarForm mainCatalogToolbarForm;
-    protected final CatalogBooksScreen catalogBooksScreen;
-    protected final FacetedSearchScreen facetedSearchScreen;
-    protected final AudioPlayerScreen audioPlayerScreen;
-    protected final EpubReaderScreen epubReaderScreen;
-    protected final ScenarioContext context;
-    private final AlertScreen alertScreen;
+public class CatalogSteps {
+    private BottomMenuForm bottomMenuForm;
+    private CatalogScreen catalogScreen;
+    private SubcategoryScreen subcategoryScreen;
+    private MainCatalogToolbarForm mainCatalogToolbarForm;
+    private FacetedSearchScreen facetedSearchScreen;
+    private ScenarioContext context;
 
     @Inject
     public CatalogSteps(ScenarioContext context) {
@@ -51,13 +41,8 @@ public class CatalogSteps extends BaseSteps {
         mainCatalogToolbarForm = AqualityServices.getScreenFactory().getScreen(MainCatalogToolbarForm.class);
         bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
         catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
-        bookDetailsScreen = AqualityServices.getScreenFactory().getScreen(BookDetailsScreen.class);
         subcategoryScreen = AqualityServices.getScreenFactory().getScreen(SubcategoryScreen.class);
-        catalogBooksScreen = AqualityServices.getScreenFactory().getScreen(CatalogBooksScreen.class);
         facetedSearchScreen = AqualityServices.getScreenFactory().getScreen(FacetedSearchScreen.class);
-        alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
-        audioPlayerScreen = AqualityServices.getScreenFactory().getScreen(AudioPlayerScreen.class);
-        epubReaderScreen = AqualityServices.getScreenFactory().getScreen(EpubReaderScreen.class);
     }
 
     @Then("Category rows are loaded")
@@ -151,11 +136,6 @@ public class CatalogSteps extends BaseSteps {
         Assert.assertTrue("Count of books is smaller than " + countOfBooks, countOfBooks <= catalogScreen.getListOfAllBooksNamesInFirstLane().size());
     }
 
-    @Then("Book {string} is opened on book details screen")
-    public void isBookOpened(String bookInfoKey) {
-        Assert.assertEquals("Expected book is not opened", Optional.ofNullable(context.get(bookInfoKey)).orElse(bookInfoKey), bookDetailsScreen.getBookInfo());
-    }
-
     @When("I open first book in Subcategory List and save it as {string}")
     public void openFirstBookInSubcategoryListAndSaveIt(String bookInfoKey) {
         context.add(bookInfoKey, subcategoryScreen.getFirstBookInfo());
@@ -226,58 +206,10 @@ public class CatalogSteps extends BaseSteps {
         Assert.assertEquals("Lists of authors is not sorted properly" + list.stream().map(Object::toString).collect(Collectors.joining(", ")), list.stream().sorted().collect(Collectors.toList()), list);
     }
 
-    @Then("I check that book contains {} action button on book details screen")
-    public void checkThatBookContainsActionButton(final EnumActionButtonsForBooksAndAlertsKeys key) {
-        boolean isButtonPresent = bookDetailsScreen.isActionButtonPresent(key);
-        addScreenshotIfErrorPresent(isButtonPresent);
-        Assert.assertTrue(String.format("Button '%1$s' is not present on book details screen. Error (if present) - %2$s", key.i18n(), getErrorDetails()), isButtonPresent);
-    }
-
-    private String getErrorDetails() {
-        if (bookDetailsScreen.isErrorButtonPresent()) {
-            bookDetailsScreen.openErrorDetails();
-            String errorDetails = bookDetailsScreen.getErrorDetails();
-            addScreenshot();
-            bookDetailsScreen.swipeError();
-            return errorDetails;
-        } else {
-            return "";
-        }
-    }
-
-    private void addScreenshotIfErrorPresent(boolean isButtonPresent) {
-        if (!isButtonPresent && bookDetailsScreen.isErrorButtonPresent()) {
-            addScreenshot();
-        }
-    }
-
-    private void addScreenshot() {
-        Scenario scenario = context.get(ScenarioContextKey.SCENARIO_KEY);
-        scenario.attach(ScreenshotUtils.getScreenshot(), "image/png", "screenshot.png");
-    }
-
-    @When("Click {} action button on book details screen")
-    public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        bookDetailsScreen.clickActionButton(actionButtonKey);
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
-            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.CANCEL_RESERVATION) {
-                alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
-            } else {
-                AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
-                AqualityServices.getLogger().info("Alert appears and dismiss alert");
-            }
-        }
-    }
-
     @When("I change books visibility to show {}")
     @And("Change books visibility to show {}")
     public void checkThatActionButtonTextEqualToExpected(FacetAvailabilityKeys facetAvailabilityKeys) {
         facetedSearchScreen.openAvailabilityMenu();
         facetedSearchScreen.changeAvailabilityTo(facetAvailabilityKeys);
-    }
-
-    @And("I close Book Details for IOSTab")
-    public void closeBookDetailsOnlyForIOSTab() {
-        bookDetailsScreen.closeBookDetailsOnlyForIOSTabIfDisplayed();
     }
 }
