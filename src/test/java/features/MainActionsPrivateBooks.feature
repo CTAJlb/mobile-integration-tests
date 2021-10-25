@@ -101,7 +101,7 @@ Feature: Main actions private access books
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     And Click READ action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookInfo' is present on screen
+    Then 'bookInfo' book is present on epub reader screen
     When I return to previous screen for epub and pdf
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
@@ -137,7 +137,7 @@ Feature: Main actions private access books
     When I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And Click READ action button on book details screen
-    Then Book 'bookInfo' is present on screen
+    Then 'bookInfo' book is present on epub reader screen
 
   @logout @returnBooks @tier3 @exclude_android @ignore
   Scenario: Hold from Book Detail View and Cancel remove from holds tab(IOS)

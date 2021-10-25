@@ -35,22 +35,12 @@ public class EpubReaderSteps {
     }
 
 
-    @Then("Book {string} is present on screen")
-    public void checkBookInfoIsPresentOnScreen(String bookInfoKey) {
+    @Then("{string} book is present on epub reader screen")
+    public void isBookPresent(String bookInfoKey) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         String expectedBookName = catalogBookModel.getTitle();
         String actualBookName = epubReaderScreen.getBookName();
-        Assert.assertTrue(String.format("BookName(epub) is not correct. Expected bookName - '%1$s', actualName - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));
-    }
-
-    @When("I swipe from left to right book corner")
-    public void swipeFromLeftToRightBookCorner() {
-        epubReaderScreen.swipeFromLeftToRight();
-    }
-
-    @When("I swipe from right to left book corner")
-    public void swipeFromRightToLeftBookCorner() {
-        epubReaderScreen.swipeFromRightToLeft();
+        Assert.assertTrue(String.format("Book is not present on epub reader screen. Expected bookName - '%1$s', actualName - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));
     }
 
     @When("I click on left book corner")
@@ -161,12 +151,8 @@ public class EpubReaderSteps {
     @When("I change font style to {}")
     @When("I change contrast to {}")
     public void changeSettingsForFont(ReaderSettingKeys readerSettingKey) {
-        changeSetting(readerSettingKey);
-    }
-
-    private void changeSetting(ReaderSettingKeys settingName) {
         epubReaderScreen.openFontSettings();
-        fontChoicesScreen.setSetting(settingName);
+        fontChoicesScreen.setSetting(readerSettingKey);
         fontChoicesScreen.closeFontChoices();
     }
 
@@ -188,21 +174,14 @@ public class EpubReaderSteps {
 
     @Then("The {} background is correct")
     public void checkBackgroundHasSpecificColor(BackgroundColorKeys fontBackgroundKey) {
-        assertBackgroundHasSpecificColor(fontBackgroundKey);
-    }
-
-    private void assertBackgroundHasSpecificColor(BackgroundColorKeys fontBackgroundKey) {
         String expectedBackgroundColor = fontBackgroundKey.i18n();
         String actualBackgroundColor = epubReaderScreen.getBackgroundColor();
         Assert.assertTrue("BackgroundColor is not correct, actualBackgroundColor-" + actualBackgroundColor + ", expectedBackgroundColor-" + expectedBackgroundColor, actualBackgroundColor.toLowerCase().equals(expectedBackgroundColor.toLowerCase()));
+
     }
 
     @Then("Book text displays in {} font")
     public void bookTextDisplaysInSerifFont(FontNameKeys fontNameKey) {
-        assertFontName(fontNameKey);
-    }
-
-    private void assertFontName(FontNameKeys fontNameKey) {
         String expectedFontName = fontNameKey.i18n();
         String actualFontName = epubReaderScreen.getFontName();
         Assert.assertTrue("Book fontName is not correct, actualFontName-" + actualFontName + ", expectedFontName-" + expectedFontName, actualFontName.toLowerCase().equals(expectedFontName.toLowerCase()));

@@ -50,14 +50,14 @@ Scenario: Check out from Book Detail View and Return from Books(ANDROID)
     When Open EBOOK book with DOWNLOAD action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Click DOWNLOAD action button on book details screen
       And Click READ action button on book details screen
-    Then Book 'bookInfo' is present on screen
+    Then 'bookInfo' book is present on epub reader screen
 
   @tier2 @exclude_android
   Scenario: Check out from Book Detail View and Read from Book Detail View(IOS)
     When Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Click GET action button on book details screen
     And Click READ action button on book details screen
-    Then Book 'bookInfo' is present on screen
+    Then 'bookInfo' book is present on epub reader screen
 
   @tier2 @exclude_ios
   Scenario: Check out from Subcategory List View and Return from Books(ANDROID)
@@ -85,14 +85,14 @@ Scenario: Check out from Book Detail View and Return from Books(ANDROID)
     When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     And Click READ action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookInfo' is present on screen
+    Then 'bookInfo' book is present on epub reader screen
 
   @tier2 @exclude_android
   Scenario: Check out from Subcategory List View and Read from Subcategory List View(IOS)
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     And Click READ action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookInfo' is present on screen
+    Then 'bookInfo' book is present on epub reader screen
 
   @tier2 @exclude_android
   Scenario: Check out from Subcategory List View and Return from Subcategory List View(IOS)

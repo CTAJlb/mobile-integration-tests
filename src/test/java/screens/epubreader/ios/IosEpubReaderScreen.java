@@ -69,16 +69,6 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public void swipeFromLeftToRight() {
-        SwipeElementUtils.swipeFromLeftToRight(lblPage);
-    }
-
-    @Override
-    public void swipeFromRightToLeft() {
-        SwipeElementUtils.swipeFromRightToLeft(lblPage);
-    }
-
-    @Override
     public void clickLeftCorner() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
         action.tap(PointOption.point(20, lblPage.getElement().getCenter().y)).perform();

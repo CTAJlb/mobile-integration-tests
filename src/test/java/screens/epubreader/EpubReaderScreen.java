@@ -14,10 +14,6 @@ public abstract class EpubReaderScreen extends Screen {
 
     public abstract String getChapterName();
 
-    public abstract void swipeFromLeftToRight();
-
-    public abstract void swipeFromRightToLeft();
-
     public abstract void clickLeftCorner();
 
     public abstract void clickRightCorner();
