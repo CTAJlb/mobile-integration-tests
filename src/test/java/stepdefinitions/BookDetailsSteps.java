@@ -17,13 +17,13 @@ import screens.bookDetails.BookDetailsScreen;
 
 import java.util.Optional;
 
-public class BookDetails {
+public class BookDetailsSteps {
     private ScenarioContext context;
     private BookDetailsScreen bookDetailsScreen;
     private AlertScreen alertScreen;
 
     @Inject
-    public BookDetails(ScenarioContext context) {
+    public BookDetailsSteps(ScenarioContext context) {
         this.context = context;
         bookDetailsScreen = AqualityServices.getScreenFactory().getScreen(BookDetailsScreen.class);
         alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
