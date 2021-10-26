@@ -68,9 +68,9 @@ Feature: Manage Libraries
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
     When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookInfo' is opened
-      And I press on the book details view at the action button RESERVE
-    Then I check that book contains CANCEL_RESERVATION action button on book details view
+    Then Book 'bookInfo' is opened on book details screen
+      And Click RESERVE action button on book details screen
+    Then I check that book contains CANCEL_RESERVATION action button on book details screen
     When I open Holds
     Then EBOOK book with CANCEL_RESERVATION action button and 'bookInfo' bookInfo is present on holds screen
     When I open Catalog

@@ -7,16 +7,16 @@ import constants.localization.application.reader.ReaderSettingKeys;
 import framework.utilities.CoordinatesClickUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import screens.fontchoicesscreen.FontChoicesScreen;
+import screens.fontchoicesscreen.EpubFontChoicesScreen;
 
 @ScreenType(platform = PlatformName.IOS)
-public class IosFontChoicesScreen extends FontChoicesScreen {
+public class IosEpubFontChoicesScreen extends EpubFontChoicesScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeOther[./XCUIElementTypeButton[@name=\"Sans font\"]]";
     private static final String SETTING_LOC = "//XCUIElementTypeButton[@name=\"%1$s\"]";
 
     private final ILabel fontChoicesScreen = getElementFactory().getLabel(By.xpath(MAIN_ELEMENT), "Font choices screen");
 
-    public IosFontChoicesScreen() {
+    public IosEpubFontChoicesScreen() {
         super(By.xpath(MAIN_ELEMENT));
     }
 

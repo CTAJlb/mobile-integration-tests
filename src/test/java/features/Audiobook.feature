@@ -10,11 +10,11 @@ Feature: Audiobook
     And I search for 'The Given Sacrifice' and save bookName as 'bookNameInfo'
     And I switch to 'Audiobooks' catalog tab
     And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And I press on the book details view at the action button GET
+    And Click GET action button on book details screen
 
   @logout @returnBooks @tier2 @oldOs @tablet
   Scenario: Navigate by Table of Contents Menu
-    When I press on the book details view at the action button LISTEN
+    When Click LISTEN action button on book details screen
       And Open chapter list for an audiobook
     When I select the chapter not equal to the first 1 chapters and remember selected chapter text as 'newChapterText'
     Then I check that current chapter text equal to remembered 'newChapterText'
@@ -24,19 +24,19 @@ Feature: Audiobook
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Loading chapters
-    When I press on the book details view at the action button LISTEN
+    When Click LISTEN action button on book details screen
     Then Download has started and percentage value increased
     When Open chapter list for an audiobook
     Then All chapters loaded
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Return to Chapter (Bookmarking/Syncing)
-    When I press on the book details view at the action button LISTEN
+    When Click LISTEN action button on book details screen
       And Open chapter list for an audiobook
     When I select the chapter not equal to the first 1 chapters and remember selected chapter text as 'newChapterText'
       And I wait for 3 seconds
       And I return to previous screen for audiobook
-      And I press on the book details view at the action button LISTEN
+      And Click LISTEN action button on book details screen
     Then I check that current chapter text equal to remembered 'newChapterText'
       And Open chapter list for an audiobook
     When I select the chapter not equal to the first 2 chapters and remember selected chapter text as 'newChapterText2'
@@ -44,13 +44,13 @@ Feature: Audiobook
       And I restart app
       And I open Books
         And Open AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
-      And I press on the book details view at the action button LISTEN
+      And Click LISTEN action button on book details screen
     Then I check that current chapter text equal to remembered 'newChapterText2'
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Play Audiobook
-    Then I check that book contains LISTEN action button on book details view
-    When I press on the book details view at the action button LISTEN
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
       And I click play button on player screen
     Then Pause button is present
       And Book is playing
@@ -60,7 +60,7 @@ Feature: Audiobook
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Navigate Audiobook
-    When I press on the book details view at the action button LISTEN
+    When Click LISTEN action button on book details screen
       And I click play button on player screen
       And I save chapter length as 'chapterLength'
       And I save book play time as 'timeAhead'
@@ -74,7 +74,7 @@ Feature: Audiobook
 
   @logout @returnBooks @tier2 @oldOs
   Scenario Outline: Navigate playback options
-    When I press on the book details view at the action button LISTEN
+    When Click LISTEN action button on book details screen
       And I click play button on player screen
     When I select playback speed <speed>X
       And I save book play time as 'timeAhead'

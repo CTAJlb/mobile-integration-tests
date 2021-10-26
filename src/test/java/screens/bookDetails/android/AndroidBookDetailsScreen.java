@@ -22,8 +22,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     private final ILabel lblBookAuthorsInfo = getElementFactory().getLabel(By.id("bookDetailAuthors"), "Book Authors");
     private final ILabel lblErrorMessage = getElementFactory().getLabel(By.id("errorDetails"), "Error message");
 
-    private final IButton btnRelatedBooks =
-            getElementFactory().getButton(By.xpath("//*[contains(@resource-id,\"bookDetailRelated\")]"), "Related books");
     private final IButton btnErrorDetails =
             getElementFactory().getButton(By.xpath("//*[contains(@resource-id,'bookDetailButtons')]//*[contains(@text,'Details')]"), "Error");
 
@@ -39,12 +37,7 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public boolean isRelatedBooksVisible() {
-        return btnRelatedBooks.state().isDisplayed();
-    }
-
-    @Override
-    public boolean isBookAddButtonTextEqualTo(EnumActionButtonsForBooksAndAlertsKeys key) {
+    public boolean isActionButtonPresent(EnumActionButtonsForBooksAndAlertsKeys key) {
         IButton button = getActionButton(key);
         AqualityServices.getConditionalWait().waitFor(() -> button.state().isDisplayed() || isErrorButtonPresent(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         return button.state().isDisplayed();

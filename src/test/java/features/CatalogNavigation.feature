@@ -30,7 +30,7 @@ Feature: Catalog Navigation
     Then Subcategory screen is present
       And Subcategory name is 'All Classics'
     When I open first book in Subcategory List and save it as 'bookInfo'
-    Then Book 'bookInfo' is opened
+    Then Book 'bookInfo' is opened on book details screen
 
   @tier1 @oldOs
   Scenario: Sort Lists
@@ -70,7 +70,7 @@ Feature: Catalog Navigation
       And I search for 'Sullivan\'s Promise' and save bookName as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     #And Open 'EBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book 'bookInfo' is opened
+    Then Book 'bookInfo' is opened on book details screen
       And The following values in the information block are present:
         | key         | value                                           |
         | PUBLISHED   | 2021-03-05                                      |
@@ -99,7 +99,7 @@ Feature: Catalog Navigation
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
     #When I open 'EBOOK' book with name 'UnEnchanted' and save it as 'bookInfo'
-    Then Book 'bookInfo' is opened
+    Then Book 'bookInfo' is opened on book details screen
       And The following values in the information block are present:
         | key         | value                     |
         | PUBLISHED   | 29. December 2011         |

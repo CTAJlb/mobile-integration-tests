@@ -13,7 +13,7 @@ Feature: Read PDF
     And Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Pdf book 'bookInfo' is present on screen
 
   @logout @returnBooks @tier1 @exclude_ios
@@ -37,21 +37,21 @@ Feature: Read PDF
     When I scroll pdf page forward from 10 to 20 times
       And I save pdf page number as 'pageNumber'
       And I return to previous screen for epub and pdf
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct
     When I restart app
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-      And I press on the book details view at the action button READ
+      And Click READ action button on book details screen
     Then Pdf book 'bookInfo' is present on screen
       And Pdf page number 'pageNumber' is correct
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Close book
     When I return to previous screen for epub and pdf
-    Then I check that book contains READ action button on book details view
+    Then I check that book contains READ action button on book details screen
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Navigate by Page slider

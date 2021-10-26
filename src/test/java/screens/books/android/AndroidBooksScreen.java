@@ -11,6 +11,7 @@ import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
 import constants.application.EnumBookType;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
+import framework.utilities.swipe.SwipeElementUtils;
 import org.openqa.selenium.By;
 import screens.IWorkingWithListOfBooks;
 import screens.books.BooksScreen;
@@ -24,11 +25,9 @@ public class AndroidBooksScreen extends BooksScreen implements IWorkingWithListO
     private static final String SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC = "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
     private static final String SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC = SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
 
+    private ILabel mainBooksElementCollection = getElementFactory().getLabel(
+            By.xpath("//android.view.ViewGroup[contains(@resource-id,\"feedWithoutGroupsRefresh\")]"), "Elements collection container");
     private ILabel lblNoBooks = getElementFactory().getLabel(By.id("feedEmptyText"), "No Books Present");
-    private IButton btnMenuForRefresh =
-            getElementFactory().getButton(By.xpath("//android.widget.ImageView[@content-desc=\"More options\"]"),
-                    "Button Menu For Refresh");
-    private IButton btnRefresh = getElementFactory().getButton(By.id("title"), "Refresh Button");
 
     public AndroidBooksScreen() {
         super(By.xpath(MAIN_ELEMENT_LOC));
@@ -58,8 +57,7 @@ public class AndroidBooksScreen extends BooksScreen implements IWorkingWithListO
 
     @Override
     public void refreshList() {
-        btnMenuForRefresh.click();
-        btnRefresh.click();
+        SwipeElementUtils.swipeElementDown(mainBooksElementCollection);
     }
 
     private void addWait() {
