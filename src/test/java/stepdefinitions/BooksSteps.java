@@ -74,12 +74,12 @@ public class BooksSteps {
                 booksScreen.isBookPresent(bookType, bookName, actionButtonKey));
     }
 
-    @And("Amount of books is equal to {int}")
+    @And("Amount of books is equal to {int} on books screen")
     public void isAmountOfBooksEqualTo(int expectedAmountOfBooks) {
-        Assert.assertEquals("Amount of books is not correct", expectedAmountOfBooks, booksScreen.getCountOfBooks());
+        Assert.assertEquals("Amount of books is not correct on books screen", expectedAmountOfBooks, booksScreen.getCountOfBooks());
     }
 
-    @When("I refresh list of books")
+    @When("I refresh list of books on books screen")
     public void refreshListOfBooks() {
         booksScreen.refreshList();
     }

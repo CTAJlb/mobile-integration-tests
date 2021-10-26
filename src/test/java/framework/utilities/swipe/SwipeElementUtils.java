@@ -27,7 +27,8 @@ public final class SwipeElementUtils {
         MobileElement mobileElement = element.getElement();
         Point upperLeft = mobileElement.getLocation();
         Dimension dimensions = mobileElement.getSize();
-        element.getTouchActions().swipe(new Point(upperLeft.x + dimensions.width / 2, upperLeft.y + dimensions.height));
+        Point center = mobileElement.getCenter();
+        element.getTouchActions().swipe(new Point(upperLeft.x + dimensions.width / 2, center.getY() + dimensions.height/2));
     }
 
     public static void swipeElementUp(IElement element) {
