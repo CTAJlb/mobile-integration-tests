@@ -45,15 +45,15 @@ Feature: Read EPUB
 
   @tier1 @oldOs
   Scenario: Change, View Font and Contrast Settings
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Click READ action button on book details screen
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
     Then 'bookInfo' book is present on epub reader screen
     When I save font size as 'fontSize'
-    And I INCREASE_FONT of text
+      And I INCREASE_FONT of text
     Then Font size 'fontSize' is increased
     When I save font size as 'fontSize'
-    And I DECREASE_FONT of text
+      And I DECREASE_FONT of text
     Then Font size 'fontSize' is decreased
     When I change font style to FONT_SERIF
     Then Book text displays in FONT_SERIF font
@@ -67,6 +67,14 @@ Feature: Read EPUB
     Then The BLACK_TEXT_ON_SEPIA background is correct
     When I change contrast to WHITE_TEXT_ON_BLACK
     Then The WHITE_TEXT_ON_BLACK background is correct
+    When I wait for 3 seconds
+      And I restart app
+      And I open Books
+      And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then The WHITE_TEXT_ON_BLACK background is correct
+      And Book text displays in FONT_DYSLEXIC font
+      And Font size 'fontSize' is decreased
 
   @tier1 @oldOs
   Scenario: Return to Page (Bookmarking)

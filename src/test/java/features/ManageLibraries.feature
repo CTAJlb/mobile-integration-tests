@@ -53,9 +53,9 @@ Feature: Manage Libraries
     When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Click RESERVE action button on book details screen
-    Then I check that book contains CANCEL_RESERVATION action button on book details screen
+    Then I check that book contains REMOVE action button on book details screen
     When I open Holds
-    Then EBOOK book with CANCEL_RESERVATION action button and 'bookInfo' bookInfo is present on holds screen
+    Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
     When I open Catalog
       And I open Catalog
       And I switch to 'Internet Archive' from side menu

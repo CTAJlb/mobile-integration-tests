@@ -9,13 +9,12 @@ import java.util.Locale;
 
 public enum EnumActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     GET("get"),
-    DOWNLOAD("download"),
     READ("read"),
     RESERVE("reserve"),
     DELETE("delete"),
     RETURN("return"),
     LISTEN("listen"),
-    CANCEL_RESERVATION("cancelReservation"),
+    REMOVE("remove"),
     CANCEL_POPUP("cancelPopup");
 
     private static final AbstractILocalizationProvider localizationProvider =
