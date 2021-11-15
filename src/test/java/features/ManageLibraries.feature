@@ -57,7 +57,7 @@ Feature: Manage Libraries
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Switch Library Reservations
-    When I add "Internet Archive" account from welcomeScreen
+    When I add "Carnegie Library of Pittsburgh" account from welcomeScreen
     When I add 'LYRASIS Reads' account
       And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
