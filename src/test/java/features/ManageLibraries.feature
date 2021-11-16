@@ -58,7 +58,7 @@ Feature: Manage Libraries
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
     When I open Catalog
       And I open Catalog
-      And I switch to 'Internet Archive' from side menu
+      And I switch to 'Carnegie Library of Pittsburgh' from side menu
       And I open Holds
       And There are not books on holds screen
 
