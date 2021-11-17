@@ -11,7 +11,7 @@ Feature: Distributors
       And I switch to '<tabName>' catalog tab
       And Open <bookType> book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click RESERVE action button on book details screen
-    Then I check that book contains CANCEL_RESERVATION action button on book details screen
+    Then I check that book contains REMOVE action button on book details screen
 
     Scenarios:
       | distributor        | bookType  | tabName    |

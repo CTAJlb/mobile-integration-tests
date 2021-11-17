@@ -21,25 +21,8 @@ Feature: Manage Libraries
     And I remove 'Palace Bookshelf' account
     Then Account 'Palace Bookshelf' is not present on Accounts screen
 
-  @tier2 @exclude_ios @oldOs
-  Scenario: Switch library bookshelf(ANDROID)
-    When I add "Palace Bookshelf" account from welcomeScreen
-      And I add 'LYRASIS Reads' account
-      And Catalog is opened
-      And I switch to 'Palace Bookshelf' from side menu
-       And I open categories by chain and chain starts from CategoryScreen:
-        |Halloween Reads|
-    And Click DOWNLOAD action button on the first EBOOK book on catalog books screen and save book as 'bookInfo'
-      And I open Books
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
-    When I open Catalog
-      And I return to previous screen for epub and pdf
-      And I switch to 'LYRASIS Reads' from side menu
-      And I open Books
-    Then There are not books on books screen
-
-  @tier2 @exclude_android @oldOs
-  Scenario: Switch library bookshelf(IOS)
+  @tier2 @oldOs
+  Scenario: Switch library bookshelf
     When I add "Palace Bookshelf" account from welcomeScreen
       And I add 'LYRASIS Reads' account
       And Catalog is opened
@@ -57,7 +40,7 @@ Feature: Manage Libraries
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Switch Library Reservations
-    When I add "Internet Archive" account from welcomeScreen
+    When I add "Carnegie Library of Pittsburgh" account from welcomeScreen
     When I add 'LYRASIS Reads' account
       And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
@@ -70,12 +53,12 @@ Feature: Manage Libraries
     When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Click RESERVE action button on book details screen
-    Then I check that book contains CANCEL_RESERVATION action button on book details screen
+    Then I check that book contains REMOVE action button on book details screen
     When I open Holds
-    Then EBOOK book with CANCEL_RESERVATION action button and 'bookInfo' bookInfo is present on holds screen
+    Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
     When I open Catalog
       And I open Catalog
-      And I switch to 'Internet Archive' from side menu
+      And I switch to 'Carnegie Library of Pittsburgh' from side menu
       And I open Holds
       And There are not books on holds screen
 
