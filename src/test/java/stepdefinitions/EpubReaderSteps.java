@@ -16,6 +16,7 @@ import org.junit.Assert;
 import screens.epubreader.EpubReaderScreen;
 import screens.epubtableofcontents.EpubTableOfContentsScreen;
 import screens.fontchoicesscreen.EpubFontChoicesScreen;
+import screens.tocEpub.TocEpubScreen;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -25,12 +26,14 @@ public class EpubReaderSteps {
     private EpubTableOfContentsScreen epubTableOfContentsScreen;
     private ScenarioContext context;
     private EpubReaderScreen epubReaderScreen;
+    private TocEpubScreen tocEpubScreen;
 
     @Inject
     public EpubReaderSteps(ScenarioContext context) {
         epubFontChoicesScreen = AqualityServices.getScreenFactory().getScreen(EpubFontChoicesScreen.class);
         epubTableOfContentsScreen = AqualityServices.getScreenFactory().getScreen(EpubTableOfContentsScreen.class);
         epubReaderScreen = AqualityServices.getScreenFactory().getScreen(EpubReaderScreen.class);
+        tocEpubScreen = AqualityServices.getScreenFactory().getScreen(TocEpubScreen.class);
         this.context = context;
     }
 
@@ -93,10 +96,12 @@ public class EpubReaderSteps {
     @And("Each chapter of epub book can be opened from table of contents")
     public void checkEachChapterCanBeOpenedFromTableOfContents() {
         SoftAssertions softAssertions = new SoftAssertions();
-        List<String> chapters = epubReaderScreen.getListOfChapters();
-        for (String chapter :
-                chapters) {
-            epubReaderScreen.openChapter(chapter);
+        epubReaderScreen.openToc();
+        List<String> chapters = tocEpubScreen.openListOfChaptersAndGetListOfBookChapters();
+        tocEpubScreen.returnToPreviousScreen();
+        for (String chapter : chapters) {
+            epubReaderScreen.openToc();
+            tocEpubScreen.openChapter(chapter);
             softAssertions.assertThat(chapter.toLowerCase().equals(epubReaderScreen.getChapterName().toLowerCase())).as("ChapterName is not correct. ExpectedChapterName-" + chapter.toLowerCase() + " , ActualChapterName-" + epubReaderScreen.getChapterName().toLowerCase()).isTrue();
         }
         softAssertions.assertAll();
@@ -109,7 +114,7 @@ public class EpubReaderSteps {
 
     @And("I open table of contents on epub reader screen")
     public void openTableOfContents() {
-        epubReaderScreen.openTableOfContents();
+        epubReaderScreen.openToc();
     }
 
     @Then("Epub table of contents screen is opened")

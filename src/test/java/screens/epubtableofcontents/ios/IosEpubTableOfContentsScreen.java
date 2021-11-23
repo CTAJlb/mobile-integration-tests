@@ -1,5 +1,7 @@
 package screens.epubtableofcontents.ios;
 
+import aquality.appium.mobile.actions.SwipeDirection;
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.ILabel;
@@ -15,19 +17,26 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosEpubTableOfContentsScreen extends EpubTableOfContentsScreen {
-    private static final String CHAPTERS_LIST_LOC = "//XCUIElementTypeTable";
-    private static final String CHAPTER_TEXT_LOC = "//XCUIElementTypeCell/XCUIElementTypeStaticText";
-
     public IosEpubTableOfContentsScreen() {
-        super(By.xpath(CHAPTERS_LIST_LOC));
+        super(By.xpath("//XCUIElementTypeTable"));
     }
 
+    @Override
+    public void openChapter(String chapter) {
+        ILabel lblChapter = getElementFactory().getLabel(By.xpath(String.format("//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[@name=\"%1$s\"]", chapter)), chapter);
+        lblChapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+        lblChapter.click();
+    }
+
+    @Override
     public List<String> getListOfBookChapters() {
         List<String> listOfChapters = getChapters().stream().map(IElement::getText).collect(Collectors.toList());
+        AqualityServices.getLogger().info("Found chapters - " + listOfChapters.stream().map(Object::toString).collect(Collectors.joining(", ")));
+        AqualityServices.getLogger().info("amountOfChapters-" + listOfChapters.size());
         return listOfChapters;
     }
 
     private List<ILabel> getChapters() {
-        return getElementFactory().findElements(By.xpath(CHAPTERS_LIST_LOC + CHAPTER_TEXT_LOC), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
+        return getElementFactory().findElements(By.xpath("//XCUIElementTypeTable//XCUIElementTypeCell/XCUIElementTypeStaticText"), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
     }
 }

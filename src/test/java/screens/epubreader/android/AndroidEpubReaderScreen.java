@@ -1,51 +1,59 @@
 package screens.epubreader.android;
 
-import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
-import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.logging.Logger;
 import constants.RegEx;
-import constants.application.timeouts.BooksTimeouts;
+import framework.utilities.CoordinatesClickUtils;
 import framework.utilities.RegExUtil;
-import framework.utilities.swipe.SwipeElementUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import screens.epubreader.EpubReaderScreen;
-import screens.epubtableofcontents.EpubTableOfContentsScreen;
+import screens.menuEpub.NavigationBarEpubScreen;
 
-import java.time.Duration;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidEpubReaderScreen extends EpubReaderScreen {
+    private final NavigationBarEpubScreen navigationBarEpubScreen;
     private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[1]"), "Book Cover");
+            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"titleText\")]"), "lblBookName");
     private final ILabel lblPageNumber =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_page\")]"), "Page Number");
+            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_page\")]"), "lblPageNumber");
     private final ILabel lblPage =
-            getElementFactory().getLabel(By.xpath("//android.webkit.WebView"), "Page View");
-    private final IButton btnFontSettings = getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuSettings\")]"), "FontSettings");
-    private final IButton btnChapters =
-            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuTOC\")]"), "Chapters");
+            getElementFactory().getLabel(By.xpath("//android.webkit.WebView[1]"), "lblPage");
     private final ILabel lblChapterName =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_title\")]"), "Chapter Name");
+            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_title\")]"), "lblChapterName");
 
     public AndroidEpubReaderScreen() {
-        super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"readerContainer\")]"));
+        super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"readerToolbar\")]"));
+        navigationBarEpubScreen = AqualityServices.getScreenFactory().getScreen(NavigationBarEpubScreen.class);
     }
 
     @Override
     public String getBookName() {
+        hideNavigationBar();
         String text = lblBookName.getText();
-        AqualityServices.getLogger().info("Book name - " + text);
+        AqualityServices.getLogger().info("Book name on epub reader screen - " + text);
         return text;
+    }
+
+    @Override
+    public void openNavigationBar() {
+        if (!navigationBarEpubScreen.state().isDisplayed()) {
+            CoordinatesClickUtils.clickAtCenterOfScreen();
+        }
+    }
+
+    @Override
+    public void hideNavigationBar() {
+        if (navigationBarEpubScreen.state().isDisplayed()) {
+            CoordinatesClickUtils.clickAtCenterOfScreen();
+        }
     }
 
     @Override
@@ -69,40 +77,20 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public String getPageNumber() {
-        lblPageNumber.state().waitForDisplayed(Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         String pageNumberRegEx = lblPageNumber.getText();
         return RegExUtil.getStringFromFirstGroup(pageNumberRegEx, RegEx.PAGE_NUMBER_REGEX_FOR_ANDROID);
     }
 
     @Override
-    public List<String> getListOfChapters() {
-        btnChapters.click();
-        EpubTableOfContentsScreen epubTableOfContentsScreen = AqualityServices.getScreenFactory().getScreen(EpubTableOfContentsScreen.class);
-        epubTableOfContentsScreen.state().waitForExist();
-        List<String> bookNames = epubTableOfContentsScreen.getListOfBookChapters();
-        AqualityServices.getApplication().getDriver().navigate().back();
-        AqualityServices.getLogger().info("Found chapters - " + bookNames.stream().map(Object::toString).collect(Collectors.joining(", ")));
-        AqualityServices.getLogger().info("countOfChapters-" + bookNames.size());
-        return bookNames;
-    }
-
-    @Override
-    public void openChapter(String chapter) {
-        btnChapters.click();
-        IButton button = getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"chapterTitle\") and @text=\"" + chapter + "\"]"), chapter);
-        button.state().waitForDisplayed();
-        button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        button.click();
-    }
-
-    @Override
     public void openFontSettings() {
-        btnFontSettings.click();
+        openNavigationBar();
+        navigationBarEpubScreen.clickFontSettingsButton();
     }
 
     @Override
-    public void openTableOfContents() {
-        btnChapters.click();
+    public void openToc() {
+        openNavigationBar();
+        navigationBarEpubScreen.clickTOCButton();
     }
 
     @Override
@@ -143,7 +131,8 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
 
     @Override
     public void returnToPreviousScreen() {
-
+        openNavigationBar();
+        navigationBarEpubScreen.returnToPreviousScreen();
     }
 
     private String getReaderInfo(String regex) {
