@@ -1,4 +1,4 @@
-package screens.fontchoicesscreen.ios;
+package screens.epub.fontchoicesscreen.ios;
 
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.ILabel;
@@ -7,7 +7,7 @@ import constants.localization.application.reader.ReaderSettingKeys;
 import framework.utilities.CoordinatesClickUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import screens.fontchoicesscreen.EpubFontChoicesScreen;
+import screens.epub.fontchoicesscreen.EpubFontChoicesScreen;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosEpubFontChoicesScreen extends EpubFontChoicesScreen {

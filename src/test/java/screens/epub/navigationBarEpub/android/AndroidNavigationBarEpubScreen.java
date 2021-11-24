@@ -1,10 +1,10 @@
-package screens.menuEpub.android;
+package screens.epub.navigationBarEpub.android;
 
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import org.openqa.selenium.By;
-import screens.menuEpub.NavigationBarEpubScreen;
+import screens.epub.navigationBarEpub.NavigationBarEpubScreen;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidNavigationBarEpubScreen extends NavigationBarEpubScreen {
@@ -37,7 +37,7 @@ public class AndroidNavigationBarEpubScreen extends NavigationBarEpubScreen {
     }
 
     @Override
-    public void clickTOCButton() {
+    public void clickTOCAndBookmarksButton() {
         btnTOC.click();
     }
 }

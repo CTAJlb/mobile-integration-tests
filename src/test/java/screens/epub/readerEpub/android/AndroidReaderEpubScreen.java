@@ -1,4 +1,4 @@
-package screens.epubreader.android;
+package screens.epub.readerEpub.android;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
@@ -12,14 +12,13 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
-import screens.epubreader.EpubReaderScreen;
-import screens.menuEpub.NavigationBarEpubScreen;
+import screens.epub.readerEpub.ReaderEpubScreen;
+import screens.epub.navigationBarEpub.NavigationBarEpubScreen;
 
 import java.util.Set;
 
 @ScreenType(platform = PlatformName.ANDROID)
-public class AndroidEpubReaderScreen extends EpubReaderScreen {
-    private final NavigationBarEpubScreen navigationBarEpubScreen;
+public class AndroidReaderEpubScreen extends ReaderEpubScreen {
     private final ILabel lblBookName =
             getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"titleText\")]"), "lblBookName");
     private final ILabel lblPageNumber =
@@ -29,7 +28,7 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     private final ILabel lblChapterName =
             getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_title\")]"), "lblChapterName");
 
-    public AndroidEpubReaderScreen() {
+    public AndroidReaderEpubScreen() {
         super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"readerToolbar\")]"));
         navigationBarEpubScreen = AqualityServices.getScreenFactory().getScreen(NavigationBarEpubScreen.class);
     }
@@ -40,6 +39,11 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
         String text = lblBookName.getText();
         AqualityServices.getLogger().info("Book name on epub reader screen - " + text);
         return text;
+    }
+
+    @Override
+    public NavigationBarEpubScreen getNavigationBarEpubScreen() {
+        return navigationBarEpubScreen;
     }
 
     @Override
@@ -82,18 +86,6 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public void openFontSettings() {
-        openNavigationBar();
-        navigationBarEpubScreen.clickFontSettingsButton();
-    }
-
-    @Override
-    public void openToc() {
-        openNavigationBar();
-        navigationBarEpubScreen.clickTOCButton();
-    }
-
-    @Override
     public double getFontSize() {
         return RegExUtil.getDoubleFromFirstGroup(getBookSource(), RegEx.FONT_SIZE_REGEX_ANDROID);
     }
@@ -127,12 +119,6 @@ public class AndroidEpubReaderScreen extends EpubReaderScreen {
     @Override
     public String getBackgroundColor() {
         return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX_ANDROID);
-    }
-
-    @Override
-    public void returnToPreviousScreen() {
-        openNavigationBar();
-        navigationBarEpubScreen.returnToPreviousScreen();
     }
 
     private String getReaderInfo(String regex) {

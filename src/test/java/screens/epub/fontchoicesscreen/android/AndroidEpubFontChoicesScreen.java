@@ -1,11 +1,11 @@
-package screens.fontchoicesscreen.android;
+package screens.epub.fontchoicesscreen.android;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.localization.application.reader.ReaderSettingKeys;
 import org.openqa.selenium.By;
-import screens.fontchoicesscreen.EpubFontChoicesScreen;
+import screens.epub.fontchoicesscreen.EpubFontChoicesScreen;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidEpubFontChoicesScreen extends EpubFontChoicesScreen {

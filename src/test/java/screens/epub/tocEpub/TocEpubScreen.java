@@ -1,12 +1,12 @@
-package screens.epubtableofcontents;
+package screens.epub.tocEpub;
 
 import aquality.appium.mobile.screens.Screen;
 import org.openqa.selenium.By;
 
 import java.util.List;
 
-public abstract class EpubTableOfContentsScreen extends Screen {
-    public EpubTableOfContentsScreen(By locator) {
+public abstract class TocEpubScreen extends Screen {
+    public TocEpubScreen(By locator) {
         super(locator, "Table of Contents");
     }
 

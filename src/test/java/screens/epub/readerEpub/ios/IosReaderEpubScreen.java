@@ -1,4 +1,4 @@
-package screens.epubreader.ios;
+package screens.epub.readerEpub.ios;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
@@ -13,17 +13,13 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
-import screens.epubreader.EpubReaderScreen;
-import screens.menuEpub.NavigationBarEpubScreen;
-import screens.tocEpub.TocEpubScreen;
+import screens.epub.readerEpub.ReaderEpubScreen;
+import screens.epub.navigationBarEpub.NavigationBarEpubScreen;
 
 import java.util.Set;
 
 @ScreenType(platform = PlatformName.IOS)
-public class IosEpubReaderScreen extends EpubReaderScreen {
-    private final NavigationBarEpubScreen navigationBarEpubScreen;
-    private final TocEpubScreen tocEpubScreen;
-
+public class IosReaderEpubScreen extends ReaderEpubScreen {
     private final ILabel lblBookName =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "lblBookName");
     private final ILabel lblPageNumberAndChapterName =
@@ -31,10 +27,9 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     private final ILabel lblPage =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "lblPage");
 
-    public IosEpubReaderScreen() {
+    public IosReaderEpubScreen() {
         super(By.xpath("//*[contains(@name,\"Page\")]"));
         navigationBarEpubScreen = AqualityServices.getScreenFactory().getScreen(NavigationBarEpubScreen.class);
-        tocEpubScreen = AqualityServices.getScreenFactory().getScreen(TocEpubScreen.class);
     }
 
     @Override
@@ -56,6 +51,11 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
         String text = lblBookName.getAttribute(IosAttributes.NAME);
         AqualityServices.getLogger().info("Book name on epub reader screen - " + text);
         return text;
+    }
+
+    @Override
+    public NavigationBarEpubScreen getNavigationBarEpubScreen() {
+        return navigationBarEpubScreen;
     }
 
     @Override
@@ -91,18 +91,6 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     }
 
     @Override
-    public void openFontSettings() {
-        openNavigationBar();
-        navigationBarEpubScreen.clickFontSettingsButton();
-    }
-
-    @Override
-    public void openToc() {
-        openNavigationBar();
-        navigationBarEpubScreen.clickTOCButton();
-    }
-
-    @Override
     public double getFontSize() {
         return RegExUtil.getDoubleFromFirstGroup(getBookSource(), RegEx.FONT_SIZE_REGEX_IOS);
     }
@@ -133,12 +121,6 @@ public class IosEpubReaderScreen extends EpubReaderScreen {
     @Override
     public String getBackgroundColor() {
         return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX_IOS);
-    }
-
-    @Override
-    public void returnToPreviousScreen() {
-        openNavigationBar();
-        navigationBarEpubScreen.returnToPreviousScreen();
     }
 
     private String getReaderInfo(String regex) {

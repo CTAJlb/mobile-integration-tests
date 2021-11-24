@@ -1,4 +1,4 @@
-package screens.fontchoicesscreen;
+package screens.epub.fontchoicesscreen;
 
 import aquality.appium.mobile.screens.Screen;
 import constants.localization.application.reader.ReaderSettingKeys;
