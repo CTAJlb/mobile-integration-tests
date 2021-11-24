@@ -1,12 +1,12 @@
-package screens.pdfsearch;
+package screens.pdf.searchPdf;
 
 import aquality.appium.mobile.screens.Screen;
 import org.openqa.selenium.By;
 
 import java.util.List;
 
-public abstract class PdfSearchScreen extends Screen {
-    protected PdfSearchScreen(By locator) {
+public abstract class SearchPdfScreen extends Screen {
+    protected SearchPdfScreen(By locator) {
         super(locator, "Pdf search");
     }
 

@@ -1,4 +1,4 @@
-package screens.pdfsearch.ios;
+package screens.pdf.searchPdf.ios;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
@@ -9,14 +9,14 @@ import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import screens.pdfsearch.PdfSearchScreen;
+import screens.pdf.searchPdf.SearchPdfScreen;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
-public class IosPdfSearchScreen extends PdfSearchScreen {
+public class IosSearchPdfScreen extends SearchPdfScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeSearchField";
     private static final String SEARCHED_ELEMENTS_LOC = "//XCUIElementTypeCell";
     private static final String SEARCHED_ELEMENT_NAME_LOC = ".//XCUIElementTypeStaticText[@name][1]";
@@ -28,7 +28,7 @@ public class IosPdfSearchScreen extends PdfSearchScreen {
     private final IButton applySearchBtn = getElementFactory().getButton(
             By.xpath("//XCUIElementTypeButton[@name=\"Search\"]"), "Apply search");
 
-    public IosPdfSearchScreen() {
+    public IosSearchPdfScreen() {
         super(By.xpath(MAIN_ELEMENT));
     }
 

@@ -1,17 +1,17 @@
-package screens.pdfsearch.android;
+package screens.pdf.searchPdf.android;
 
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.By;
-import screens.pdfsearch.PdfSearchScreen;
+import screens.pdf.searchPdf.SearchPdfScreen;
 
 import java.util.List;
 
 @ScreenType(platform = PlatformName.ANDROID)
-public class AndroidPdfSearchScreen extends PdfSearchScreen {
+public class AndroidSearchPdfScreen extends SearchPdfScreen {
 
-    public AndroidPdfSearchScreen() {
+    public AndroidSearchPdfScreen() {
         super(By.xpath(""));
     }
 

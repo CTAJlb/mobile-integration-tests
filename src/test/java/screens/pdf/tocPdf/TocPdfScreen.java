@@ -1,4 +1,4 @@
-package screens.pdftableofcontents;
+package screens.pdf.tocPdf;
 
 import aquality.appium.mobile.screens.Screen;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;
@@ -6,8 +6,8 @@ import org.openqa.selenium.By;
 
 import java.util.Set;
 
-public abstract class PdfTableOfContentsScreen extends Screen {
-    protected PdfTableOfContentsScreen(By locator) {
+public abstract class TocPdfScreen extends Screen {
+    protected TocPdfScreen(By locator) {
         super(locator, "Table of Contents");
     }
 

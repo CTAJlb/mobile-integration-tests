@@ -1,4 +1,4 @@
-package screens.pdfreader.ios;
+package screens.pdf.readerPdf.ios;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
@@ -13,11 +13,11 @@ import framework.utilities.swipe.SwipeElementUtils;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;
 import framework.utilities.swipe.directions.EntireScreenDragDirection;
 import org.openqa.selenium.By;
-import screens.pdfreader.PdfReaderScreen;
-import screens.pdftableofcontents.PdfTableOfContentsScreen;
+import screens.pdf.readerPdf.ReaderPdfScreen;
+import screens.pdf.tocPdf.TocPdfScreen;
 
 @ScreenType(platform = PlatformName.IOS)
-public class IosPdfReaderScreen extends PdfReaderScreen {
+public class IosReaderPdfScreen extends ReaderPdfScreen {
     private final ILabel lblBookName =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeTextView"), "Book Name");
     private final ILabel lblPageNumber =
@@ -34,7 +34,7 @@ public class IosPdfReaderScreen extends PdfReaderScreen {
     private final IButton btnGoBack =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton"), "Go back");
 
-    public IosPdfReaderScreen() {
+    public IosReaderPdfScreen() {
         super(By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeTextView"));
     }
 
@@ -60,7 +60,6 @@ public class IosPdfReaderScreen extends PdfReaderScreen {
     public void goToNextPage() {
         SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.RIGHT);
         CoordinatesClickUtils.clickOutOfElement(lblPage); // needed to expand navigation and labels
-
     }
 
     @Override
@@ -75,12 +74,12 @@ public class IosPdfReaderScreen extends PdfReaderScreen {
     }
 
     @Override
-    public PdfTableOfContentsScreen openChaptersGallery() {
+    public TocPdfScreen openGallery() {
         btnChapters.click();
-        PdfTableOfContentsScreen pdfTableOfContentsScreen =
-                AqualityServices.getScreenFactory().getScreen(PdfTableOfContentsScreen.class);
-        pdfTableOfContentsScreen.state().waitForExist();
-        return pdfTableOfContentsScreen;
+        TocPdfScreen tocPdfScreen =
+                AqualityServices.getScreenFactory().getScreen(TocPdfScreen.class);
+        tocPdfScreen.state().waitForExist();
+        return tocPdfScreen;
     }
 
     @Override

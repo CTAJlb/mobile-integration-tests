@@ -1,4 +1,4 @@
-package screens.pdftableofcontents.android;
+package screens.pdf.tocPdf.android;
 
 import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.PlatformName;
@@ -11,7 +11,7 @@ import framework.utilities.swipe.SwipeElementUtils;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;
 import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.By;
-import screens.pdftableofcontents.PdfTableOfContentsScreen;
+import screens.pdf.tocPdf.TocPdfScreen;
 
 import java.util.HashSet;
 import java.util.List;
@@ -19,13 +19,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.ANDROID)
-public class AndroidPdfTableOfContentsScreen extends PdfTableOfContentsScreen {
+public class AndroidTocPdfScreen extends TocPdfScreen {
     private static final String CHAPTER_NAME_BUTTON_XPATH_PATTERN = "//android.widget.TextView[contains(@resource-id,\"reader_toc_element_title\") and @text=\"%s\"]";
     private static final String PAGE_NUMBER_LOCATOR_PATTERN = "//android.widget.TextView[contains(@resource-id,\"reader_toc_element_title\") and @text=\"%s\"]//following-sibling::android.widget.TextView";
     private static final String CHAPTER_XPATH_LOCATOR = "//android.widget.TextView[contains(@resource-id,\"reader_toc_element_title\")]";
     private final ILabel lblTable = getElementFactory().getLabel(By.id("recyclerView"), "Table");
 
-    public AndroidPdfTableOfContentsScreen() {
+    public AndroidTocPdfScreen() {
         super(By.id("pdf_reader_fragment_holder"));
     }
 

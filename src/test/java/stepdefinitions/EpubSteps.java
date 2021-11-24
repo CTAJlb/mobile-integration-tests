@@ -14,25 +14,22 @@ import models.android.CatalogBookModel;
 import org.apache.commons.lang3.RandomUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
-import screens.epub.readerEpub.ReaderEpubScreen;
-import screens.epub.tocEpub.TocEpubScreen;
 import screens.epub.fontAndBackgroundSettingsEpub.FontAndBackgroundSettingsEpubScreen;
+import screens.epub.readerEpub.ReaderEpubScreen;
 import screens.epub.tocAndBookmarksEpub.TocAndBookmarksEpubScreen;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class EpubReaderSteps {
-    private FontAndBackgroundSettingsEpubScreen fontAndBackgroundSettingsEpubScreen;
-    private TocEpubScreen tocEpubScreen;
-    private ScenarioContext context;
-    private ReaderEpubScreen readerEpubScreen;
-    private TocAndBookmarksEpubScreen tocAndBookmarksEpubScreen;
+public class EpubSteps {
+    private final FontAndBackgroundSettingsEpubScreen fontAndBackgroundSettingsEpubScreen;
+    private final ScenarioContext context;
+    private final ReaderEpubScreen readerEpubScreen;
+    private final TocAndBookmarksEpubScreen tocAndBookmarksEpubScreen;
 
     @Inject
-    public EpubReaderSteps(ScenarioContext context) {
+    public EpubSteps(ScenarioContext context) {
         fontAndBackgroundSettingsEpubScreen = AqualityServices.getScreenFactory().getScreen(FontAndBackgroundSettingsEpubScreen.class);
-        tocEpubScreen = AqualityServices.getScreenFactory().getScreen(TocEpubScreen.class);
         readerEpubScreen = AqualityServices.getScreenFactory().getScreen(ReaderEpubScreen.class);
         tocAndBookmarksEpubScreen = AqualityServices.getScreenFactory().getScreen(TocAndBookmarksEpubScreen.class);
         this.context = context;
@@ -126,7 +123,7 @@ public class EpubReaderSteps {
 
     @Then("Epub table of contents screen is opened")
     public void isEpubTableOfContentsOpened() {
-        Assert.assertTrue("Epub table of contents screen is not opened", tocEpubScreen.state().waitForDisplayed());
+        Assert.assertTrue("Epub table of contents screen is not opened", tocAndBookmarksEpubScreen.getTocEpubScreen().state().waitForDisplayed());
     }
 
     @Then("Epub font choices screen is opened")

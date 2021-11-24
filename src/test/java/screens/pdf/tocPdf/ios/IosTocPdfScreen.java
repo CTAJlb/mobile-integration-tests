@@ -1,4 +1,4 @@
-package screens.pdftableofcontents.ios;
+package screens.pdf.tocPdf.ios;
 
 import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
@@ -13,7 +13,7 @@ import aquality.selenium.core.elements.interfaces.IElement;
 import framework.utilities.swipe.SwipeElementUtils;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;
 import org.openqa.selenium.By;
-import screens.pdftableofcontents.PdfTableOfContentsScreen;
+import screens.pdf.tocPdf.TocPdfScreen;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
-public class IosPdfTableOfContentsScreen extends PdfTableOfContentsScreen {
+public class IosTocPdfScreen extends TocPdfScreen {
     private static final String GALLERY_VIEW = "//XCUIElementTypeCollectionView";
     private static final String PAGES_IN_GALLERY_VIEW = "//XCUIElementTypeOther/following-sibling::XCUIElementTypeCell";
     private static final String CHAPTER_NAME_BUTTON_XPATH_PATTERN =
@@ -38,7 +38,7 @@ public class IosPdfTableOfContentsScreen extends PdfTableOfContentsScreen {
 private final IButton btnResume =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name = \"Resume\"]"), "Resume Button");
 
-    public IosPdfTableOfContentsScreen() {
+    public IosTocPdfScreen() {
         super(By.xpath("//XCUIElementTypeTable"));
     }
 

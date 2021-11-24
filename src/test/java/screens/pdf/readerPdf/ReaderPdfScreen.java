@@ -1,12 +1,12 @@
-package screens.pdfreader;
+package screens.pdf.readerPdf;
 
 import aquality.appium.mobile.screens.Screen;
 import framework.utilities.swipe.directions.EntireScreenDragDirection;
 import org.openqa.selenium.By;
-import screens.pdftableofcontents.PdfTableOfContentsScreen;
+import screens.pdf.tocPdf.TocPdfScreen;
 
-public abstract class PdfReaderScreen extends Screen {
-    protected PdfReaderScreen(By locator) {
+public abstract class ReaderPdfScreen extends Screen {
+    protected ReaderPdfScreen(By locator) {
         super(locator, "Pdf reader");
     }
 
@@ -22,7 +22,7 @@ public abstract class PdfReaderScreen extends Screen {
 
     public abstract void slidePageSlider(EntireScreenDragDirection entireScreenDragDirection);
 
-    public abstract PdfTableOfContentsScreen openChaptersGallery();
+    public abstract TocPdfScreen openGallery();
 
     public abstract void openSearchPdf();
 
