@@ -1,16 +1,16 @@
-package screens.fontchoicesscreen.android;
+package screens.epub.fontAndBackgroundSettingsEpub.android;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.localization.application.reader.ReaderSettingKeys;
 import org.openqa.selenium.By;
-import screens.fontchoicesscreen.EpubFontChoicesScreen;
+import screens.epub.fontAndBackgroundSettingsEpub.FontAndBackgroundSettingsEpubScreen;
 
 @ScreenType(platform = PlatformName.ANDROID)
-public class AndroidEpubFontChoicesScreen extends EpubFontChoicesScreen {
+public class AndroidFontAndBackgroundSettingsEpubScreen extends FontAndBackgroundSettingsEpubScreen {
 
-    public AndroidEpubFontChoicesScreen() {
+    public AndroidFontAndBackgroundSettingsEpubScreen() {
         super(By.xpath("//android.widget.FrameLayout[contains(@resource-id,\"setFontSans\")]"));
     }
 
@@ -25,7 +25,7 @@ public class AndroidEpubFontChoicesScreen extends EpubFontChoicesScreen {
     }
 
     @Override
-    public void closeFontChoices() {
+    public void closeSettings() {
         AqualityServices.getApplication().getDriver().navigate().back();
     }
 }

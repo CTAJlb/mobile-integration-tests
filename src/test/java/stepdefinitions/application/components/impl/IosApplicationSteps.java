@@ -2,25 +2,26 @@ package stepdefinitions.application.components.impl;
 
 import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
-import screens.epubreader.EpubReaderScreen;
+import screens.epub.readerEpub.ReaderEpubScreen;
 import screens.pdfreader.PdfReaderScreen;
 import stepdefinitions.application.components.AbstractApplicationSteps;
 
 @StepsType(platform = PlatformName.IOS)
 public class IosApplicationSteps extends AbstractApplicationSteps {
-    private final EpubReaderScreen epubReaderScreen;
+    private final ReaderEpubScreen readerEpubScreen;
     private final PdfReaderScreen pdfReaderScreen;
 
     public IosApplicationSteps() {
         super();
-        epubReaderScreen = screenFactory.getScreen(EpubReaderScreen.class);
+        readerEpubScreen = screenFactory.getScreen(ReaderEpubScreen.class);
         pdfReaderScreen = screenFactory.getScreen(PdfReaderScreen.class);
     }
 
     @Override
     public void returnToPreviousScreenForEpubAndPdf() {
-        if (epubReaderScreen.state().isDisplayed()) {
-            epubReaderScreen.returnToPreviousScreen();
+        if (readerEpubScreen.state().isDisplayed()) {
+            readerEpubScreen.openNavigationBar();
+            readerEpubScreen.getNavigationBarEpubScreen().returnToPreviousScreen();
         } else if (pdfReaderScreen.state().isDisplayed()) {
             pdfReaderScreen.closeReader();
         }

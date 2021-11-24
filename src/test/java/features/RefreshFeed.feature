@@ -4,7 +4,8 @@ Feature: Feed
   Scenario: Update Bookshelf List
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open categories by chain and chain starts from CategoryScreen:
-        |Halloween Reads|
+        | Fiction            |
+        | Historical Fiction |
       And Click GET action button on the first EBOOK book on catalog books screen and save book as 'bookInfo'
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen

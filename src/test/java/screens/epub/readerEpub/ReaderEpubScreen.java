@@ -1,16 +1,23 @@
-package screens.epubreader;
+package screens.epub.readerEpub;
 
 import aquality.appium.mobile.screens.Screen;
 import org.openqa.selenium.By;
+import screens.epub.navigationBarEpub.NavigationBarEpubScreen;
 
-import java.util.List;
+public abstract class ReaderEpubScreen extends Screen {
+    protected NavigationBarEpubScreen navigationBarEpubScreen;
 
-public abstract class EpubReaderScreen extends Screen {
-    protected EpubReaderScreen(By locator) {
+    protected ReaderEpubScreen(By locator) {
         super(locator, "Reader");
     }
 
     public abstract String getBookName();
+
+    public abstract NavigationBarEpubScreen getNavigationBarEpubScreen();
+
+    public abstract void openNavigationBar();
+
+    public abstract void hideNavigationBar();
 
     public abstract String getChapterName();
 
@@ -20,19 +27,9 @@ public abstract class EpubReaderScreen extends Screen {
 
     public abstract String getPageNumber();
 
-    public abstract List<String> getListOfChapters();
-
-    public abstract void openChapter(String chapter);
-
-    public abstract void openFontSettings();
-
-    public abstract void openTableOfContents();
-
     public abstract double getFontSize();
 
     public abstract String getFontName();
 
     public abstract String getBackgroundColor();
-
-    public abstract void returnToPreviousScreen();
 }

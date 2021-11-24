@@ -15,7 +15,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.audioplayer.AudioPlayerScreen;
-import screens.epubreader.EpubReaderScreen;
+import screens.epub.readerEpub.ReaderEpubScreen;
 import screens.pdfreader.PdfReaderScreen;
 import screens.pdfsearch.PdfSearchScreen;
 import screens.pdftableofcontents.PdfTableOfContentsScreen;
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class ReaderSteps {
-    private final EpubReaderScreen epubReaderScreen;
+    private final ReaderEpubScreen readerEpubScreen;
     private final PdfReaderScreen pdfReaderScreen;
     private final ScenarioContext context;
     private final PdfTableOfContentsScreen pdfTableOfContentsScreen;
@@ -35,7 +35,7 @@ public class ReaderSteps {
 
     @Inject
     public ReaderSteps(ScenarioContext context) {
-        epubReaderScreen = AqualityServices.getScreenFactory().getScreen(EpubReaderScreen.class);
+        readerEpubScreen = AqualityServices.getScreenFactory().getScreen(ReaderEpubScreen.class);
         pdfReaderScreen = AqualityServices.getScreenFactory().getScreen(PdfReaderScreen.class);
         pdfTableOfContentsScreen = AqualityServices.getScreenFactory().getScreen(PdfTableOfContentsScreen.class);
         pdfSearchScreen = AqualityServices.getScreenFactory().getScreen(PdfSearchScreen.class);
@@ -194,7 +194,7 @@ public class ReaderSteps {
         String bookName = catalogBookModel.getTitle();
         switch (bookType) {
             case EBOOK:
-                if (epubReaderScreen.state().waitForDisplayed()) {
+                if (readerEpubScreen.state().waitForDisplayed()) {
                     assertBookNameForEpub(catalogBookModel);
                 } else {
                     assertBookNameForPdf(catalogBookModel);
@@ -208,7 +208,7 @@ public class ReaderSteps {
 
     private void assertBookNameForEpub(CatalogBookModel catalogBookModel) {
         String expectedBookName = catalogBookModel.getTitle();
-        String actualBookName = epubReaderScreen.getBookName();
+        String actualBookName = readerEpubScreen.getBookName();
         Assert.assertTrue(String.format("BookName(epub) is not correct. Expected bookName - '%1$s', actualName - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));
     }
 

@@ -6,20 +6,8 @@ Feature: Main actions open access books
     And I open search modal
     And I search for 'Flower Fables' and save bookName as 'bookNameInfo'
 
-@tier2 @exclude_ios
-Scenario: Check out from Book Detail View and Return from Books(ANDROID)
-  When Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-  And Click GET action button on book details screen
-  Then I check that book contains READ action button on book details screen
-  When I open Books
-  Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
-  When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-    And Click DELETE action button on book details screen
-    And I open Books
-  Then EBOOK book with GET action button and 'bookInfo' bookInfo is present on books screen
-
-  @tier2 @exclude_android
-  Scenario: Check out from Book Detail View and Return from Books(IOS)
+  @tier2
+  Scenario: Check out from Book Detail View and Return from Books
     When Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Click GET action button on book details screen
       And I close Book Details for IOSTab
@@ -45,18 +33,8 @@ Scenario: Check out from Book Detail View and Return from Books(ANDROID)
     And Click READ action button on book details screen
     Then 'bookInfo' book is present on epub reader screen
 
-  @tier2 @exclude_ios
-  Scenario: Check out from Subcategory List View and Return from Books(ANDROID)
-    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And I open Books
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
-    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-      And Click DELETE action button on book details screen
-      And I open Books
-    Then EBOOK book with GET action button and 'bookInfo' bookInfo is present on books screen
-
-  @tier2 @exclude_android
-  Scenario: Check out from Subcategory List View and Return from Books(IOS)
+  @tier2
+  Scenario: Check out from Subcategory List View and Return from Books
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
