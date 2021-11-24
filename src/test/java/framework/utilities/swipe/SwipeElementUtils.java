@@ -1,7 +1,6 @@
 package framework.utilities.swipe;
 
 import aquality.appium.mobile.actions.ITouchActions;
-import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;
@@ -28,7 +27,7 @@ public final class SwipeElementUtils {
         Point upperLeft = mobileElement.getLocation();
         Dimension dimensions = mobileElement.getSize();
         Point center = mobileElement.getCenter();
-        element.getTouchActions().swipe(new Point(upperLeft.x + dimensions.width / 2, center.getY() + dimensions.height/2));
+        element.getTouchActions().swipe(new Point(upperLeft.x + dimensions.width / 2, center.getY() + dimensions.height / 2));
     }
 
     public static void swipeElementUp(IElement element) {

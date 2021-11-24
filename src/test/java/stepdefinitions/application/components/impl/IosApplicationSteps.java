@@ -1,5 +1,6 @@
 package stepdefinitions.application.components.impl;
 
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
 import screens.epub.readerEpub.ReaderEpubScreen;
@@ -23,7 +24,12 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
             readerEpubScreen.openNavigationBar();
             readerEpubScreen.getNavigationBarEpubScreen().returnToPreviousScreen();
         } else if (readerPdfScreen.state().isDisplayed()) {
-            readerPdfScreen.closeReader();
+            if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
+                readerPdfScreen.returnToPreviousScreen();
+            } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+                readerPdfScreen.openAdditionalButtonsAndLabels();
+                readerPdfScreen.getNavigationBarPdfScreen().returnToPreviousScreen();
+            }
         }
     }
 

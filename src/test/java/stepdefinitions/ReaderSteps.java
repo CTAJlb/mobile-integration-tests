@@ -73,7 +73,13 @@ public class ReaderSteps {
     @And("Each chapter of pdf book can be opened from Table of Contents")
     public void checkEachChapterOfPdfBookCanBeOpenedFromTableOfContents() {
         SoftAssertions softAssertions = new SoftAssertions();
-        readerPdfScreen.openTableOfContents();
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
+            readerPdfScreen.clickToc();
+        } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            readerPdfScreen.openAdditionalButtonsAndLabels();
+            readerPdfScreen.getNavigationBarPdfScreen().clickTocAndBookmarksAndGalleryButton();
+        }
+        //readerPdfScreen.openTableOfContents();
         tocPdfScreen.switchToChaptersListView();
         Set<String> chapters = tocPdfScreen.getListOfBookChapters();
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
@@ -82,7 +88,13 @@ public class ReaderSteps {
             tocPdfScreen.clickResumeButton();
         }
         for (String chapter : chapters.stream().limit(5).collect(Collectors.toList())) {
-            readerPdfScreen.openTableOfContents();
+            if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
+                readerPdfScreen.clickToc();
+            } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+                readerPdfScreen.openAdditionalButtonsAndLabels();
+                readerPdfScreen.getNavigationBarPdfScreen().clickTocAndBookmarksAndGalleryButton();
+            }
+            //readerPdfScreen.openTableOfContents();
             tocPdfScreen.state().waitForDisplayed();
             int pageNumber = tocPdfScreen.getChapterPageNumber(chapter);
             tocPdfScreen.openChapter(chapter);
@@ -118,7 +130,9 @@ public class ReaderSteps {
 
     @When("I open gallery menu")
     public void openChaptersGallery() {
-        readerPdfScreen.openGallery();
+        readerPdfScreen.openAdditionalButtonsAndLabels();
+        readerPdfScreen.getNavigationBarPdfScreen().clickTocAndBookmarksAndGalleryButton();
+        //readerPdfScreen.openGallery();
     }
 
     @Then("Gallery is opened")
@@ -157,7 +171,9 @@ public class ReaderSteps {
 
     @When("I click the search in the pdf button")
     public void openSearchPdf() {
-        readerPdfScreen.openSearchPdf();
+        readerPdfScreen.openAdditionalButtonsAndLabels();
+        readerPdfScreen.getNavigationBarPdfScreen().clickSearchButton();
+        //readerPdfScreen.openSearchPdf();
     }
 
     @Then("The search in the pdf page opened")
