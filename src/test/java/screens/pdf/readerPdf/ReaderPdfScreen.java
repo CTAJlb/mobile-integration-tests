@@ -4,10 +4,11 @@ import aquality.appium.mobile.screens.Screen;
 import framework.utilities.swipe.directions.EntireScreenDragDirection;
 import org.openqa.selenium.By;
 import screens.pdf.navigationBarPdf.NavigationBarPdfScreen;
+import screens.pdf.searchPdf.SearchPdfScreen;
 
 public abstract class ReaderPdfScreen extends Screen {
-    protected ReaderPdfScreen(By locator) {
-        super(locator, "Pdf reader");
+    public ReaderPdfScreen(By locator) {
+        super(locator, "ReaderPdf");
     }
 
     public abstract String getBookName();
@@ -18,15 +19,15 @@ public abstract class ReaderPdfScreen extends Screen {
 
     public abstract void goToPreviousPage();
 
-    public abstract void clickToc();
+    public abstract void openToc();
 
     public abstract void returnToPreviousScreen();
 
-    public abstract NavigationBarPdfScreen getNavigationBarPdfScreen();
+    public abstract void openNavigationBar();
 
-    public abstract void openAdditionalButtonsAndLabels();
+    public abstract NavigationBarPdfScreen getNavigationBarScreen();
 
-    public abstract void hideAdditionalButtonsAndLabels();
+    public abstract SearchPdfScreen getSearchPdfScreen();
 
     public abstract void slidePageSlider(EntireScreenDragDirection entireScreenDragDirection);
 }

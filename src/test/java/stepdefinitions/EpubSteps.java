@@ -36,7 +36,7 @@ public class EpubSteps {
     }
 
     @Then("{string} book is present on epub reader screen")
-    public void isBookPresent(String bookInfoKey) {
+    public void isEpubBookPresent(String bookInfoKey) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);
         String expectedBookName = catalogBookModel.getTitle();
         String actualBookName = readerEpubScreen.getBookName();
@@ -173,9 +173,9 @@ public class EpubSteps {
     }
 
     @When("I scroll page forward from {int} to {int} times")
-    public void scrollPageForward(int minValue, int maxValue) {
+    public void swipePageForward(int minValue, int maxValue) {
         int randomScrollsCount = RandomUtils.nextInt(minValue, maxValue);
-        AqualityServices.getLogger().info("Scrolling " + randomScrollsCount + " times");
+        AqualityServices.getLogger().info("Scrolling " + randomScrollsCount + " times on reader epub screen");
         IntStream.range(0, randomScrollsCount).forEachOrdered(i -> {
             readerEpubScreen.clickRightCorner();
         });

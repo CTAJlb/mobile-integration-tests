@@ -6,17 +6,15 @@ import org.openqa.selenium.By;
 import java.util.List;
 
 public abstract class SearchPdfScreen extends Screen {
-    protected SearchPdfScreen(By locator) {
+    public SearchPdfScreen(By locator) {
         super(locator, "Pdf search");
     }
 
-    public abstract void findTextInDocument(String textToBeFound);
+    public abstract void findTextInDocument(String text);
 
-    public abstract boolean isFoundItemsExist();
+    public abstract List<String> getListOfFoundTexts();
 
-    public abstract List<String> getListOfFoundItems();
+    public abstract void openTheFirstFoundText();
 
-    public abstract void openSearchedItemByName(String itemName);
-
-    public abstract int getSearchedItemPageNumber(int index);
+    public abstract int getNumberOfTheFirstFoundText();
 }

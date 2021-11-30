@@ -1,90 +1,57 @@
 package screens.pdf.tocPdf.android;
 
 import aquality.appium.mobile.actions.SwipeDirection;
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
-import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import aquality.selenium.core.elements.ElementState;
+import aquality.selenium.core.elements.ElementsCount;
 import aquality.selenium.core.elements.interfaces.IElement;
-import framework.utilities.swipe.SwipeElementUtils;
-import framework.utilities.swipe.directions.EntireElementSwipeDirection;
-import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.By;
 import screens.pdf.tocPdf.TocPdfScreen;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidTocPdfScreen extends TocPdfScreen {
-    private static final String CHAPTER_NAME_BUTTON_XPATH_PATTERN = "//android.widget.TextView[contains(@resource-id,\"reader_toc_element_title\") and @text=\"%s\"]";
-    private static final String PAGE_NUMBER_LOCATOR_PATTERN = "//android.widget.TextView[contains(@resource-id,\"reader_toc_element_title\") and @text=\"%s\"]//following-sibling::android.widget.TextView";
-    private static final String CHAPTER_XPATH_LOCATOR = "//android.widget.TextView[contains(@resource-id,\"reader_toc_element_title\")]";
-    private final ILabel lblTable = getElementFactory().getLabel(By.id("recyclerView"), "Table");
+    private static final String CHAPTER_BY_NAME_LOC = "//android.widget.TextView[contains(@resource-id,\"reader_toc_element_title\") and @text=\"%s\"]";
+    private static final String CHAPTER_NUMBER_BY_NAME_LOC = "//android.widget.TextView[contains(@resource-id,\"reader_toc_element_title\") and @text=\"%s\"]//following-sibling::android.widget.TextView";
+    private static final String CHAPTER_LOC = "//android.widget.TextView[contains(@resource-id,\"reader_toc_element_title\")]";
 
     public AndroidTocPdfScreen() {
         super(By.id("pdf_reader_fragment_holder"));
     }
 
-    @Override
-    public void clickResumeButton() {
-        // not implemented on Android
-    }
-
-    @Override
-    public void switchToChaptersListView() {
-        // not implemented on Android
-    }
-
-    public Set<String> getListOfBookChapters() {
+    public List<String> getListOfBookChapters() {
         List<String> listOfChapters = getChapters().stream().map(IElement::getText).collect(Collectors.toList());
-        Set<String> bookNames = new HashSet<>();
-        do {
-            bookNames.addAll(listOfChapters);
-            SwipeElementUtils.swipeThroughEntireElementUp(lblTable);
-            listOfChapters = getChapters().stream().map(IElement::getText).collect(Collectors.toList());
-        } while (!bookNames.containsAll(listOfChapters));
-        return bookNames;
+        AqualityServices.getLogger().info("Found chapters on toc pdf - " + listOfChapters.stream().map(Object::toString).collect(Collectors.joining(", ")));
+        AqualityServices.getLogger().info("amountOfChapters on toc pdf - " + listOfChapters.size());
+        return listOfChapters;
     }
 
     @Override
     public void openChapter(String chapter) {
-        IButton button = getElementFactory().getButton(By.xpath(String.format(CHAPTER_NAME_BUTTON_XPATH_PATTERN, chapter)), chapter);
-        button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        button.click();
+        ILabel lblChapter = getElementFactory().getLabel(By.xpath(String.format(CHAPTER_BY_NAME_LOC, chapter)), chapter);
+        lblChapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+        lblChapter.click();
     }
 
     @Override
-    public int getChapterPageNumber(String chapter) {
-        IButton button = getElementFactory().getButton(By.xpath(String.format(PAGE_NUMBER_LOCATOR_PATTERN, chapter)), chapter);
-        button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        return Integer.parseInt(button.getText());
+    public int getChapterNumber(String chapter) {
+        ILabel lblChapterNumber = getElementFactory().getLabel(By.xpath(String.format(CHAPTER_NUMBER_BY_NAME_LOC, chapter)), chapter);
+        lblChapterNumber.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+        return Integer.parseInt(lblChapterNumber.getText());
     }
 
     @Override
-    public boolean isGalleryPagesLoaded() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public int getCountOfBookPages() {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void scrollGallery(EntireElementSwipeDirection entireElementSwipeDirection) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void openGalleryPage(int pageNumber) {
-        throw new NotImplementedException();
+    public void returnToReaderPdfScreen() {
+        AqualityServices.getApplication().getDriver().navigate().back();
     }
 
     private List<ILabel> getChapters() {
-        return getElementFactory().findElements(By.xpath(CHAPTER_XPATH_LOCATOR), ElementType.LABEL);
+        return getElementFactory().findElements(By.xpath(CHAPTER_LOC), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
     }
 }

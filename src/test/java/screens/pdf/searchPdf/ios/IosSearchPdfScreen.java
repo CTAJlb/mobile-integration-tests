@@ -1,88 +1,61 @@
 package screens.pdf.searchPdf.ios;
 
-import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import org.junit.Assert;
+import aquality.selenium.core.elements.ElementState;
+import aquality.selenium.core.elements.ElementsCount;
+import constants.application.attributes.IosAttributes;
 import org.openqa.selenium.By;
 import screens.pdf.searchPdf.SearchPdfScreen;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosSearchPdfScreen extends SearchPdfScreen {
-    private static final String MAIN_ELEMENT = "//XCUIElementTypeSearchField";
-    private static final String SEARCHED_ELEMENTS_LOC = "//XCUIElementTypeCell";
-    private static final String SEARCHED_ELEMENT_NAME_LOC = ".//XCUIElementTypeStaticText[@name][1]";
-    private static final String PAGE_NUMBER_LOC = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name][2]";
-    private static final int COUNT_OF_ITEMS_TO_WAIT_FOR = 2;
+    private static final String FOUND_TEXT_LOC = "//XCUIElementTypeCell/XCUIElementTypeStaticText[2]";
+    private static final String NUMBER_OF_FOUND_TEXT_LOC = "//XCUIElementTypeCell/XCUIElementTypeStaticText[2]/following-sibling::XCUIElementTypeStaticText";
 
-    private final ITextBox searchTxb = getElementFactory().getTextBox(
-            By.xpath(MAIN_ELEMENT), "Search");
-    private final IButton applySearchBtn = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"Search\"]"), "Apply search");
+    private final ITextBox txbSearch = getElementFactory().getTextBox(
+            By.xpath("//XCUIElementTypeSearchField"), "txbSearch");
+    private final IButton btnApplySearch = getElementFactory().getButton(
+            By.xpath("//XCUIElementTypeButton[@name=\"Search\"]"), "btnApplySearch");
 
     public IosSearchPdfScreen() {
-        super(By.xpath(MAIN_ELEMENT));
+        super(By.xpath("//XCUIElementTypeSearchField"));
     }
 
     @Override
-    public void findTextInDocument(String textToBeFound) {
-        searchTxb.sendKeys(textToBeFound);
-        applySearchBtn.click();
+    public void findTextInDocument(String text) {
+        txbSearch.sendKeys(text);
+        btnApplySearch.click();
     }
 
     @Override
-    public boolean isFoundItemsExist() {
-        return AqualityServices.getConditionalWait().waitFor(() -> getSearchedElements().size() > 0);
+    public List<String> getListOfFoundTexts() {
+        return getFoundTexts().stream().map(lblText -> lblText.getAttribute(IosAttributes.NAME)).collect(Collectors.toList());
     }
 
     @Override
-    public List<String> getListOfFoundItems() {
-        return isFoundItemsExist()
-                ? getSearchedElements().stream().map(element -> element
-                .findChildElement(By.xpath(SEARCHED_ELEMENT_NAME_LOC), ElementType.LABEL)
-                .getText())
-                .collect(Collectors.toList())
-                : Collections.emptyList();
+    public void openTheFirstFoundText() {
+        getFoundTexts().get(0).click();
     }
 
     @Override
-    public void openSearchedItemByName(final String itemName) {
-        getSearchedItemByName(itemName).click();
+    public int getNumberOfTheFirstFoundText() {
+        ILabel lblNumberOfFoundText = getNumbersOfFoundTexts().get(0);
+        return Integer.parseInt(lblNumberOfFoundText.getAttribute(IosAttributes.NAME));
     }
 
-    @Override
-    public int getSearchedItemPageNumber(int index) {
-        AqualityServices.getConditionalWait().waitFor(() -> getSearchedElements().size() >= COUNT_OF_ITEMS_TO_WAIT_FOR);
-        return Integer.parseInt(getPageNumbers().get(index).getText());
+    private List<ILabel> getFoundTexts() {
+        return getElementFactory().findElements(By.xpath(FOUND_TEXT_LOC), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
     }
 
-    private ILabel getSearchedItemByName(final String itemName) {
-        Assert.assertTrue("No items were found", isFoundItemsExist());
-        ILabel targetItem = getSearchedElements()
-                .stream()
-                .filter(element -> element
-                        .findChildElement(By.xpath(SEARCHED_ELEMENT_NAME_LOC), ElementType.LABEL)
-                        .getText()
-                        .equals(itemName))
-                .findFirst()
-                .orElse(null);
-        Assert.assertNotNull("The item that was tried to find does not exist", targetItem);
-        return targetItem;
-    }
-
-    private List<ILabel> getSearchedElements() {
-        return getElementFactory().findElements(By.xpath(SEARCHED_ELEMENTS_LOC), ElementType.LABEL);
-    }
-
-    private List<ILabel> getPageNumbers() {
-        return getElementFactory().findElements(By.xpath(PAGE_NUMBER_LOC), ElementType.LABEL);
+    private List<ILabel> getNumbersOfFoundTexts() {
+        return getElementFactory().findElements(By.xpath(NUMBER_OF_FOUND_TEXT_LOC), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
     }
 }

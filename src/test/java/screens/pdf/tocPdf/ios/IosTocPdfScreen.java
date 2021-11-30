@@ -4,106 +4,56 @@ import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
-import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
-import aquality.selenium.core.elements.interfaces.IElement;
-import framework.utilities.swipe.SwipeElementUtils;
-import framework.utilities.swipe.directions.EntireElementSwipeDirection;
+import constants.application.attributes.IosAttributes;
 import org.openqa.selenium.By;
+import screens.pdf.tocBookmarksGalleryPdf.TocBookmarksGalleryPdfScreen;
 import screens.pdf.tocPdf.TocPdfScreen;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosTocPdfScreen extends TocPdfScreen {
-    private static final String GALLERY_VIEW = "//XCUIElementTypeCollectionView";
-    private static final String PAGES_IN_GALLERY_VIEW = "//XCUIElementTypeOther/following-sibling::XCUIElementTypeCell";
-    private static final String CHAPTER_NAME_BUTTON_XPATH_PATTERN =
-            "//XCUIElementTypeCell//XCUIElementTypeStaticText[@name=\"%1$s\"]";
-    private static final String PAGE_NUMBER_LOCATOR_PATTERN =
-            "//XCUIElementTypeCell//XCUIElementTypeStaticText[@name=\"%1$s\"]/following-sibling::XCUIElementTypeStaticText";
-    private static final String CHAPTER_XPATH_LOCATOR = "//XCUIElementTypeCell//XCUIElementTypeStaticText[@name][1]";
-
-    private final ILabel lblGallery = getElementFactory().getLabel(By.xpath(GALLERY_VIEW), "Gallery view");
-    private final ILabel lblTable = getElementFactory().getLabel(By.xpath("//XCUIElementTypeTable"), "Table");
-    private final IButton btnListView =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"List\"]"), "Chapters list view");
-
-private final IButton btnResume =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name = \"Resume\"]"), "Resume Button");
+    private static final String CHAPTER_BY_NAME_LOC = "//XCUIElementTypeTable//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"%1$s\"]";
+    private static final String CHAPTER_NUMBER_BY_NAME_LOC =
+            "//XCUIElementTypeTable//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"%1$s\"]/following-sibling::XCUIElementTypeStaticText";
+    private static final String CHAPTER_LOC = "//XCUIElementTypeTable//XCUIElementTypeCell/XCUIElementTypeStaticText[1]";
 
     public IosTocPdfScreen() {
         super(By.xpath("//XCUIElementTypeTable"));
     }
 
-    @Override
-    public void clickResumeButton() {
-        btnResume.click();
-    }
-
-    @Override
-    public void switchToChaptersListView() {
-        btnListView.click();
-    }
-
-    public Set<String> getListOfBookChapters() {
-        List<String> listOfChapters = getChapters().stream().map(IElement::getText).collect(Collectors.toList());
-        Set<String> bookNames = new HashSet<>();
-        do {
-            bookNames.addAll(listOfChapters);
-            SwipeElementUtils.swipeThroughEntireElementUp(lblTable);
-            if (AqualityServices.getConditionalWait().waitFor(() -> getChapters().size() > 0)) {
-                listOfChapters = getChapters().stream().map(IElement::getText).collect(Collectors.toList());
-            }
-        } while (!bookNames.containsAll(listOfChapters));
-        return bookNames;
+    public List<String> getListOfBookChapters() {
+        List<String> listOfChapters = getChapters().stream().map(chapter -> chapter.getAttribute(IosAttributes.NAME)).collect(Collectors.toList());
+        AqualityServices.getLogger().info("Found chapters on toc pdf - " + listOfChapters.stream().map(Object::toString).collect(Collectors.joining(", ")));
+        AqualityServices.getLogger().info("amountOfChapters on toc pdf - " + listOfChapters.size());
+        return listOfChapters;
     }
 
     @Override
     public void openChapter(String chapter) {
-        IButton button = getElementFactory().getButton(By.xpath(String.format(CHAPTER_NAME_BUTTON_XPATH_PATTERN, chapter)), chapter);
-        button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        button.click();
+        ILabel lblChapter = getElementFactory().getLabel(By.xpath(String.format(CHAPTER_BY_NAME_LOC, chapter)), chapter);
+        lblChapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+        lblChapter.click();
     }
 
     @Override
-    public int getChapterPageNumber(String chapter) {
-        IButton button = getElementFactory().getButton(By.xpath(String.format(PAGE_NUMBER_LOCATOR_PATTERN, chapter)), chapter);
-        button.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        return Integer.parseInt(button.getText());
+    public int getChapterNumber(String chapter) {
+        ILabel lblChapterNumber = getElementFactory().getLabel(By.xpath(String.format(CHAPTER_NUMBER_BY_NAME_LOC, chapter)), chapter);
+        lblChapterNumber.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+        return Integer.parseInt(lblChapterNumber.getAttribute(IosAttributes.NAME));
     }
 
     @Override
-    public boolean isGalleryPagesLoaded() {
-        return AqualityServices.getConditionalWait().waitFor(() -> getPages().size() > 0);
-    }
-
-    @Override
-    public int getCountOfBookPages() {
-        return getPages().size();
-    }
-
-    @Override
-    public void scrollGallery(EntireElementSwipeDirection entireElementSwipeDirection) {
-        SwipeElementUtils.swipeThroughEntireElement(lblGallery, entireElementSwipeDirection);
-    }
-
-    @Override
-    public void openGalleryPage(int pageNumber) {
-        getPages().get(pageNumber).click();
+    public void returnToReaderPdfScreen() {
+        AqualityServices.getScreenFactory().getScreen(TocBookmarksGalleryPdfScreen.class).tapResumeButton();
     }
 
     private List<ILabel> getChapters() {
-        return getElementFactory().findElements(By.xpath(CHAPTER_XPATH_LOCATOR), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
-    }
-
-    private List<aquality.appium.mobile.elements.interfaces.IElement> getPages() {
-        return getElementFactory().findElements(By.xpath(PAGES_IN_GALLERY_VIEW), ElementType.LABEL);
+        return getElementFactory().findElements(By.xpath(CHAPTER_LOC), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
     }
 }

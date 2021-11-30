@@ -8,11 +8,11 @@ public abstract class NavigationBarPdfScreen extends Screen {
         super(locator, "NavigationBarPdf");
     }
 
-    public abstract void returnToPreviousScreen();
+    public abstract void tapBackButton();
 
-    public abstract void clickTocAndBookmarksAndGalleryButton();
+    public abstract void openTocBookmarksGallery();
 
-    public abstract void clickSearchButton();
+    public abstract void tapSearchButton();
 
-    public abstract void clickBookmarksButton();
+    public abstract void tapBookmarksButton();
 }

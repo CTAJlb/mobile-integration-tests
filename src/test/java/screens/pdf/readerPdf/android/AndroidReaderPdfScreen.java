@@ -12,6 +12,7 @@ import framework.utilities.swipe.directions.EntireScreenDragDirection;
 import org.openqa.selenium.By;
 import screens.pdf.navigationBarPdf.NavigationBarPdfScreen;
 import screens.pdf.readerPdf.ReaderPdfScreen;
+import screens.pdf.searchPdf.SearchPdfScreen;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidReaderPdfScreen extends ReaderPdfScreen {
@@ -35,6 +36,7 @@ public class AndroidReaderPdfScreen extends ReaderPdfScreen {
 
     @Override
     public int getPageNumber() {
+        openPageNumberSlider();
         return Integer.parseInt(lblPageNumberSlider.getText());
     }
 
@@ -44,21 +46,7 @@ public class AndroidReaderPdfScreen extends ReaderPdfScreen {
     }
 
     @Override
-    public void openAdditionalButtonsAndLabels() {
-        if (!lblPageNumberSlider.state().isDisplayed()) {
-            CoordinatesClickUtils.clickAtCenterOfScreen();
-        }
-    }
-
-    @Override
-    public void hideAdditionalButtonsAndLabels() {
-        if (lblPageNumberSlider.state().isDisplayed()) {
-            CoordinatesClickUtils.clickAtCenterOfScreen();
-        }
-    }
-
-    @Override
-    public void clickToc(){
+    public void openToc(){
         btnToc.click();
     }
 
@@ -67,10 +55,10 @@ public class AndroidReaderPdfScreen extends ReaderPdfScreen {
         SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.LEFT);
     }
 
-    @Override
-    public NavigationBarPdfScreen getNavigationBarPdfScreen() {
-        //only for ios
-        return null;
+    private void openPageNumberSlider() {
+        if (!lblPageNumberSlider.state().isDisplayed()) {
+            CoordinatesClickUtils.clickAtCenterOfScreen();
+        }
     }
 
     @Override
@@ -81,5 +69,22 @@ public class AndroidReaderPdfScreen extends ReaderPdfScreen {
     @Override
     public void returnToPreviousScreen() {
         AqualityServices.getApplication().getDriver().navigate().back();
+    }
+
+    @Override
+    public void openNavigationBar() {
+        //only for ios
+    }
+
+    @Override
+    public NavigationBarPdfScreen getNavigationBarScreen() {
+        //only for ios
+        return null;
+    }
+
+    @Override
+    public SearchPdfScreen getSearchPdfScreen() {
+        //only for ios
+        return null;
     }
 }

@@ -23,22 +23,22 @@ public class IosNavigationBarPdfScreen extends NavigationBarPdfScreen {
 
 
     @Override
-    public void returnToPreviousScreen() {
+    public void tapBackButton() {
         btnBack.click();
     }
 
     @Override
-    public void clickTocAndBookmarksAndGalleryButton() {
+    public void openTocBookmarksGallery() {
         btnTocAndBookmarksAndGallery.click();
     }
 
     @Override
-    public void clickSearchButton() {
+    public void tapSearchButton() {
         btnSearch.click();
     }
 
     @Override
-    public void clickBookmarksButton() {
+    public void tapBookmarksButton() {
         btnBookmarks.click();
     }
 }
