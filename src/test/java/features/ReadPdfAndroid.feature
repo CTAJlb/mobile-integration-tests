@@ -17,8 +17,8 @@ Feature: Read PDF
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
-    Then Pdf book 'bookInfo' is present on screen
-      And Pdf book page number is 1
+    Then 'bookInfo' book is present on reader pdf screen
+      And Pdf page number is 1 on reader pdf screen
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Navigate by page
@@ -29,12 +29,12 @@ Feature: Read PDF
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
-    Then Pdf book 'bookInfo' is present on screen
-      And Pdf book page number is 1
-    When I go to next page in pdf book
-    Then Pdf book page number is 2
-    When I go to previous page in pdf book
-    Then Pdf book page number is 1
+    Then 'bookInfo' book is present on reader pdf screen
+      And Pdf page number is 1 on reader pdf screen
+    When I go to next page on reader pdf screen
+    Then Pdf page number is 2 on reader pdf screen
+    When I go to previous page on reader pdf screen
+    Then Pdf page number is 1 on reader pdf screen
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Navigate by Table of Contents Menu
@@ -45,8 +45,8 @@ Feature: Read PDF
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
-    Then Pdf book 'bookInfo' is present on screen
-      And Each chapter of pdf book can be opened from Table of Contents
+    Then 'bookInfo' book is present on reader pdf screen
+      And Each chapter of pdf book can be opened from toc pdf screen
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Open book to last page read
@@ -57,20 +57,20 @@ Feature: Read PDF
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
-    Then Pdf book 'bookInfo' is present on screen
-    When I scroll pdf page forward from 10 to 20 times
-      And I save pdf page number as 'pageNumber'
+    Then 'bookInfo' book is present on reader pdf screen
+    When I swipe pdf page forward from 10 to 20 times on reader pdf screen
+      And I save pdf page number as 'pageNumber' on reader pdf screen
       And I return to previous screen for epub and pdf
       And Click READ action button on book details screen
-    Then Pdf book 'bookInfo' is present on screen
-      And Pdf page number 'pageNumber' is correct
+    Then 'bookInfo' book is present on reader pdf screen
+      And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
     When I restart app
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And Click READ action button on book details screen
-    Then Pdf book 'bookInfo' is present on screen
-      And Pdf page number 'pageNumber' is correct
+    Then 'bookInfo' book is present on reader pdf screen
+      And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Close book
@@ -81,7 +81,7 @@ Feature: Read PDF
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
-    Then Pdf book 'bookInfo' is present on screen
+    Then 'bookInfo' book is present on reader pdf screen
     When I return to previous screen for epub and pdf
     Then I check that book contains READ action button on book details screen
 
@@ -94,10 +94,10 @@ Feature: Read PDF
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
-    Then Pdf book 'bookInfo' is present on screen
-    When I save pdf page number as 'pageNumber'
-      And Slide page slider RIGHT
-    Then Pdf saved page number 'pageNumber' should not be equal to current
-    When I save pdf page number as 'pageNumber'
-      And Slide page slider LEFT
-    Then Pdf saved page number 'pageNumber' should not be equal to current
+    Then 'bookInfo' book is present on reader pdf screen
+    When I save pdf page number as 'pageNumber' on reader pdf screen
+      And Slide page slider RIGHT on reader pdf screen
+    Then 'pageNumber' pdf saved page number should not be equal to current page number on reader pdf screen
+    When I save pdf page number as 'pageNumber' on reader pdf screen
+      And Slide page slider LEFT on reader pdf screen
+    Then 'pageNumber' pdf saved page number should not be equal to current page number on reader pdf screen
