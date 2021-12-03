@@ -6,6 +6,7 @@ import screens.addaccount.AddAccountScreen;
 import screens.alert.AlertScreen;
 import screens.catalog.screen.catalog.CatalogScreen;
 import screens.eulaagreement.EulaAgreementScreen;
+import screens.tutorial.TutorialScreen;
 import screens.welcome.WelcomeScreen;
 import stepdefinitions.BaseSteps;
 
@@ -15,6 +16,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     protected final AddAccountScreen addAccountScreen;
     protected final CatalogScreen catalogScreen;
     protected final AlertScreen alertScreen;
+    protected final TutorialScreen tutorialScreen;
 
     public AbstractApplicationSteps() {
         eulaAgreementScreen = AqualityServices.getScreenFactory().getScreen(EulaAgreementScreen.class);
@@ -22,6 +24,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
         addAccountScreen = AqualityServices.getScreenFactory().getScreen(AddAccountScreen.class);
         catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
         alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
+        tutorialScreen = AqualityServices.getScreenFactory().getScreen(TutorialScreen.class);
     }
 
     public abstract void returnToPreviousScreenForEpubAndPdf();
