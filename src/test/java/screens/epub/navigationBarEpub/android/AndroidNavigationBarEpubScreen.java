@@ -13,9 +13,9 @@ public class AndroidNavigationBarEpubScreen extends NavigationBarEpubScreen {
     private final IButton btnTOC =
             getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuTOC\")]"), "btnChapters");
     private final IButton btnAddBookmark =
-            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuAddBookmark\")]"), "btnAddBookmark");
+            getElementFactory().getButton(By.xpath("//android.widget.TextView[@content-desc=\"Create a bookmark for the current page\"]"), "btnAddBookmark");
     private final IButton btnDeleteBookmark =
-            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuAddBookmark\")]"), "btnDeleteBookmark");
+            getElementFactory().getButton(By.xpath("//android.widget.TextView[@content-desc=\"Delete the bookmark for the current page\"]"), "btnDeleteBookmark");
     private final IButton btnBack =
             getElementFactory().getButton(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"readerToolbar\")]/android.widget.ImageButton"), "btnBack");
 

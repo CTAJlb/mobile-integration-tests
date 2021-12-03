@@ -54,6 +54,16 @@ public class TocBookmarksEpubSteps {
         tocBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.BOOKMARKS);
     }
 
+    @When("Delete bookmark on bookmarks epub screen")
+    public void deleteBookmarkOnBookmarksEpubScreen(){
+        tocBookmarksEpubScreen.getBookmarksEpubScreen().deleteBookmark(0);
+    }
+
+    @When("Return to reader epub screen from toc bookmarks epub screen")
+    public void returnToReaderEpubScreen(){
+        tocBookmarksEpubScreen.returnToPreviousScreen();
+    }
+
     @When("Add bookmark on reader epub screen")
     public void addBookmark(){
         readerEpubScreen.openNavigationBar();
@@ -61,7 +71,7 @@ public class TocBookmarksEpubSteps {
     }
 
     @When("Delete bookmark on reader epub screen")
-    public void deleteBookmark(){
+    public void deleteBookmarkOnReaderEpubScreen(){
         readerEpubScreen.openNavigationBar();
         readerEpubScreen.getNavigationBarEpubScreen().tapDeleteBookmarkButton();
     }
@@ -72,6 +82,12 @@ public class TocBookmarksEpubSteps {
         Assert.assertTrue("Bookmark is not displayed on reader epub screen", readerEpubScreen.getNavigationBarEpubScreen().isBookmarkDisplayed());
     }
 
+    @Then("Bookmark is not displayed on reader epub screen")
+    public void checkBookmarkIsNotDisplayedOnReaderEpubScreen(){
+        readerEpubScreen.openNavigationBar();
+        Assert.assertFalse("Bookmark is displayed on reader epub screen", readerEpubScreen.getNavigationBarEpubScreen().isBookmarkDisplayed());
+    }
+
     @Then("Bookmark with {string} and {string} is displayed on bookmarks epub screen")
     public void checkBookmarkIsDisplayedOnBookmarksEpubScreen(String chapterNameKey, String deviceTimeDateKey){
         String bookmarkTitle = context.get(chapterNameKey);
@@ -79,5 +95,4 @@ public class TocBookmarksEpubSteps {
         Assert.assertTrue(String.format("Bookmark with '%s' bookmarkTitle and '%s' deviceTimeDate is not displayed on bookmarks epub screen", bookmarkTitle, deviceTimeDate),
                 tocBookmarksEpubScreen.getBookmarksEpubScreen().isBookmarkPresent(bookmarkTitle, deviceTimeDate));
     }
-
 }
