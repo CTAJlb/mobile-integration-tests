@@ -12,8 +12,10 @@ public class IosNavigationBarEpubScreen extends NavigationBarEpubScreen {
             By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[3]"), "btnFontSettings");
     private final IButton btnTOC =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[2]"), "btnChapters");
-    private final IButton btnBookmark =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[4]"), "btnBookmark");
+    private final IButton btnAddBookmark =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Add Bookmark\"]"), "btnAddBookmark");
+    private final IButton btnDeleteBookmark =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Remove Bookmark\"]"), "btnDeleteBookmark");
     private final IButton btnBack =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "btnBack");
 
@@ -27,17 +29,27 @@ public class IosNavigationBarEpubScreen extends NavigationBarEpubScreen {
     }
 
     @Override
-    public void clickFontSettingsButton() {
+    public void tapFontSettingsButton() {
         btnFontSettings.click();
     }
 
     @Override
-    public void clickBookmarkButton() {
-        btnBookmark.click();
+    public void tapAddBookmarkButton() {
+        btnAddBookmark.click();
     }
 
     @Override
-    public void clickTOCAndBookmarksButton() {
+    public void tapDeleteBookmarkButton() {
+        btnDeleteBookmark.click();
+    }
+
+    @Override
+    public void tapTOCBookmarksButton() {
         btnTOC.click();
+    }
+
+    @Override
+    public boolean isBookmarkDisplayed() {
+        return btnDeleteBookmark.state().isDisplayed();
     }
 }

@@ -12,8 +12,10 @@ public class AndroidNavigationBarEpubScreen extends NavigationBarEpubScreen {
             getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuSettings\")]"), "btnFontSettings");
     private final IButton btnTOC =
             getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuTOC\")]"), "btnChapters");
-    private final IButton btnBookmark =
-            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuAddBookmark\")]"), "btnBookmark");
+    private final IButton btnAddBookmark =
+            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuAddBookmark\")]"), "btnAddBookmark");
+    private final IButton btnDeleteBookmark =
+            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuAddBookmark\")]"), "btnDeleteBookmark");
     private final IButton btnBack =
             getElementFactory().getButton(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"readerToolbar\")]/android.widget.ImageButton"), "btnBack");
 
@@ -27,17 +29,27 @@ public class AndroidNavigationBarEpubScreen extends NavigationBarEpubScreen {
     }
 
     @Override
-    public void clickFontSettingsButton() {
+    public void tapFontSettingsButton() {
         btnFontSettings.click();
     }
 
     @Override
-    public void clickBookmarkButton() {
-        btnBookmark.click();
+    public void tapAddBookmarkButton() {
+        btnAddBookmark.click();
     }
 
     @Override
-    public void clickTOCAndBookmarksButton() {
+    public void tapDeleteBookmarkButton() {
+        btnDeleteBookmark.click();
+    }
+
+    @Override
+    public void tapTOCBookmarksButton() {
         btnTOC.click();
+    }
+
+    @Override
+    public boolean isBookmarkDisplayed() {
+        return btnDeleteBookmark.state().isDisplayed();
     }
 }

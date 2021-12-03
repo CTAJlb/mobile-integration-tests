@@ -1,4 +1,4 @@
-package stepdefinitions;
+package stepdefinitions.epubSteps;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
@@ -16,7 +16,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.epub.fontAndBackgroundSettingsEpub.FontAndBackgroundSettingsEpubScreen;
 import screens.epub.readerEpub.ReaderEpubScreen;
-import screens.epub.tocAndBookmarksEpub.TocAndBookmarksEpubScreen;
+import screens.epub.tocBookmarksEpub.TocBookmarksEpubScreen;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -25,13 +25,13 @@ public class EpubSteps {
     private final FontAndBackgroundSettingsEpubScreen fontAndBackgroundSettingsEpubScreen;
     private final ScenarioContext context;
     private final ReaderEpubScreen readerEpubScreen;
-    private final TocAndBookmarksEpubScreen tocAndBookmarksEpubScreen;
+    private final TocBookmarksEpubScreen tocBookmarksEpubScreen;
 
     @Inject
     public EpubSteps(ScenarioContext context) {
         fontAndBackgroundSettingsEpubScreen = AqualityServices.getScreenFactory().getScreen(FontAndBackgroundSettingsEpubScreen.class);
         readerEpubScreen = AqualityServices.getScreenFactory().getScreen(ReaderEpubScreen.class);
-        tocAndBookmarksEpubScreen = AqualityServices.getScreenFactory().getScreen(TocAndBookmarksEpubScreen.class);
+        tocBookmarksEpubScreen = AqualityServices.getScreenFactory().getScreen(TocBookmarksEpubScreen.class);
         this.context = context;
     }
 
@@ -95,15 +95,15 @@ public class EpubSteps {
     public void checkEachChapterCanBeOpenedFromTableOfContents() {
         SoftAssertions softAssertions = new SoftAssertions();
         readerEpubScreen.openNavigationBar();
-        readerEpubScreen.getNavigationBarEpubScreen().clickTOCAndBookmarksButton();
-        tocAndBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.TOC);
-        List<String> chapters = tocAndBookmarksEpubScreen.getTocEpubScreen().getListOfBookChapters();
-        tocAndBookmarksEpubScreen.returnToPreviousScreen();
+        readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
+        tocBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.TOC);
+        List<String> chapters = tocBookmarksEpubScreen.getTocEpubScreen().getListOfBookChapters();
+        tocBookmarksEpubScreen.returnToPreviousScreen();
         for (String chapter : chapters) {
             readerEpubScreen.openNavigationBar();
-            readerEpubScreen.getNavigationBarEpubScreen().clickTOCAndBookmarksButton();
-            tocAndBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.TOC);
-            tocAndBookmarksEpubScreen.getTocEpubScreen().openChapter(chapter);
+            readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
+            tocBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.TOC);
+            tocBookmarksEpubScreen.getTocEpubScreen().openChapter(chapter);
             softAssertions.assertThat(chapter.toLowerCase().equals(readerEpubScreen.getChapterName().toLowerCase())).as("ChapterName is not correct. ExpectedChapterName-" + chapter.toLowerCase() + " , ActualChapterName-" + readerEpubScreen.getChapterName().toLowerCase()).isTrue();
         }
         softAssertions.assertAll();
@@ -112,18 +112,18 @@ public class EpubSteps {
     @When("I open font choices on epub reader screen")
     public void openFontChoicesForBook() {
         readerEpubScreen.openNavigationBar();
-        readerEpubScreen.getNavigationBarEpubScreen().clickFontSettingsButton();
+        readerEpubScreen.getNavigationBarEpubScreen().tapFontSettingsButton();
     }
 
     @And("I open table of contents on epub reader screen")
     public void openTableOfContents() {
         readerEpubScreen.openNavigationBar();
-        readerEpubScreen.getNavigationBarEpubScreen().clickTOCAndBookmarksButton();
+        readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
     }
 
     @Then("Epub table of contents screen is opened")
     public void isEpubTableOfContentsOpened() {
-        Assert.assertTrue("Epub table of contents screen is not opened", tocAndBookmarksEpubScreen.getTocEpubScreen().state().waitForDisplayed());
+        Assert.assertTrue("Epub table of contents screen is not opened", tocBookmarksEpubScreen.getTocEpubScreen().state().waitForDisplayed());
     }
 
     @Then("Epub font choices screen is opened")
@@ -160,7 +160,7 @@ public class EpubSteps {
     @When("I change contrast to {}")
     public void changeSettingsForFont(ReaderSettingKeys readerSettingKey) {
         readerEpubScreen.openNavigationBar();
-        readerEpubScreen.getNavigationBarEpubScreen().clickFontSettingsButton();
+        readerEpubScreen.getNavigationBarEpubScreen().tapFontSettingsButton();
         fontAndBackgroundSettingsEpubScreen.setSetting(readerSettingKey);
         fontAndBackgroundSettingsEpubScreen.closeSettings();
     }
