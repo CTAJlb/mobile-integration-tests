@@ -20,6 +20,47 @@ Feature: Read EPUB
       And I click on left book corner on epub reader screen
     Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
 
+  @tier1
+  Scenario: Navigate by bookmarks
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When I click on right book corner on epub reader screen
+      And Add bookmark on reader epub screen
+    Then Bookmark is displayed on reader epub screen
+    When I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Save device time and date as 'deviceTimeDateKey'
+      And I scroll page forward from 4 to 6 times
+      And Add bookmark on reader epub screen
+      And I save pageNumber as 'pageNumberKey2' and chapterName as 'chapterNameKey2' on epub reader screen
+      And Save device time and date as 'deviceTimeDateKey2'
+      And Open bookmarks epub screen
+    Then Bookmark with 'chapterNameKey' and 'deviceTimeDateKey' is displayed on bookmarks epub screen
+      And Bookmark with 'chapterNameKey2' and 'deviceTimeDateKey2' is displayed on bookmarks epub screen
+    When Open random bookmark and save chapter name as 'chapterNameKey3' on bookmarks epub screen
+    Then 'chapterNameKey3' chapter name is displayed on reader epub screen
+
+  @tier1
+  Scenario: Delete bookmarks
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+    Then 'bookInfo' book is present on epub reader screen
+    When I click on right book corner on epub reader screen
+      And Add bookmark on reader epub screen
+      And Delete bookmark on reader epub screen
+    Then Bookmark is not displayed on reader epub screen
+    When I scroll page forward from 4 to 6 times
+      And Add bookmark on reader epub screen
+      And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Open bookmarks epub screen
+      And Delete bookmark on bookmarks epub screen
+      And Return to reader epub screen from toc bookmarks epub screen
+    Then 'chapterNameKey' chapter name is displayed on reader epub screen
+      And Bookmark is not displayed on reader epub screen
+
+
   @tier1 @oldOs
   Scenario: Navigate by Table of Contents Menu
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'

@@ -18,6 +18,7 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
         if (!eulaAgreementScreen.isVanillaApp()) {
             eulaAgreementScreen.clickAgree();
         }
+        tutorialScreen.closeTutorial();
         welcomeScreen.state().waitForDisplayed();
         welcomeScreen.findLibrary();
         addAccountScreen.selectLibraryViaSearch(libraryName);

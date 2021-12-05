@@ -1,15 +1,17 @@
-package screens.epub.tocAndBookmarksEpub;
+package screens.epub.tocBookmarksEpub;
 
 import aquality.appium.mobile.screens.Screen;
 import constants.epub.EnumTabsTocAndBookmarksEpub;
 import org.openqa.selenium.By;
+import screens.epub.bookmarksEpub.BookmarksEpubScreen;
 import screens.epub.tocEpub.TocEpubScreen;
 
-public abstract class TocAndBookmarksEpubScreen extends Screen {
+public abstract class TocBookmarksEpubScreen extends Screen {
     protected TocEpubScreen tocEpubScreen;
+    protected BookmarksEpubScreen bookmarksEpubScreen;
 
-    public TocAndBookmarksEpubScreen(By locator) {
-        super(locator, "TocEpub");
+    public TocBookmarksEpubScreen(By locator) {
+        super(locator, "TocBookmarksEpub");
     }
 
     public abstract void returnToPreviousScreen();
@@ -17,4 +19,6 @@ public abstract class TocAndBookmarksEpubScreen extends Screen {
     public abstract void openTab(EnumTabsTocAndBookmarksEpub tab);
 
     public abstract TocEpubScreen getTocEpubScreen();
+
+    public abstract BookmarksEpubScreen getBookmarksEpubScreen();
 }

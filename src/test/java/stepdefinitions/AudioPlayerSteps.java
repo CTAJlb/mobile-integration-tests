@@ -53,8 +53,7 @@ public class AudioPlayerSteps {
 
     @When("I select the chapter not equal to the first {int} chapters and remember selected chapter text as {string}")
     public void selectChapterIsNotEqualToSavedInContextByKeyAndSaveSelectedChapter(Integer countChapters, String keySelectedChapterText) {
-        int totalChapterCount = audioPlayerScreen.getCountOfChapters();
-        int chapterToSelect = RandomUtils.nextInt(countChapters + 1, totalChapterCount + 1);
+        int chapterToSelect = RandomUtils.nextInt(countChapters + 1, 5);
         AqualityServices.getLogger().info("chapterToSelect: " + chapterToSelect);
         String chapterText = audioPlayerScreen.selectChapterAndGetText(chapterToSelect);
         context.add(keySelectedChapterText, chapterText);

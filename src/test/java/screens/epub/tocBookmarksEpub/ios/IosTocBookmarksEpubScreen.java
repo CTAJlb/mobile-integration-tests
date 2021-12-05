@@ -1,18 +1,20 @@
-package screens.epub.tocAndBookmarksEpub.ios;
+package screens.epub.tocBookmarksEpub.ios;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.epub.EnumTabsTocAndBookmarksEpub;
 import org.openqa.selenium.By;
-import screens.epub.tocAndBookmarksEpub.TocAndBookmarksEpubScreen;
+import screens.epub.bookmarksEpub.BookmarksEpubScreen;
+import screens.epub.tocBookmarksEpub.TocBookmarksEpubScreen;
 import screens.epub.tocEpub.TocEpubScreen;
 
 @ScreenType(platform = PlatformName.IOS)
-public class IosTocAndBookmarksEpubScreen extends TocAndBookmarksEpubScreen {
-    public IosTocAndBookmarksEpubScreen() {
+public class IosTocBookmarksEpubScreen extends TocBookmarksEpubScreen {
+    public IosTocBookmarksEpubScreen() {
         super(By.xpath("//XCUIElementTypeStaticText[@name=\"Table of Contents\"]"));
         tocEpubScreen = AqualityServices.getScreenFactory().getScreen(TocEpubScreen.class);
+        bookmarksEpubScreen = AqualityServices.getScreenFactory().getScreen(BookmarksEpubScreen.class);
     }
 
     @Override
@@ -28,5 +30,10 @@ public class IosTocAndBookmarksEpubScreen extends TocAndBookmarksEpubScreen {
     @Override
     public TocEpubScreen getTocEpubScreen() {
         return tocEpubScreen;
+    }
+
+    @Override
+    public BookmarksEpubScreen getBookmarksEpubScreen() {
+        return bookmarksEpubScreen;
     }
 }

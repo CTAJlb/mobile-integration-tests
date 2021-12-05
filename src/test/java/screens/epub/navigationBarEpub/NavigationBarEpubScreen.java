@@ -9,7 +9,14 @@ public abstract class NavigationBarEpubScreen extends Screen {
     }
 
     public abstract void returnToPreviousScreen();
-    public abstract void clickFontSettingsButton();
-    public abstract void clickBookmarkButton();
-    public abstract void clickTOCAndBookmarksButton();
+
+    public abstract void tapFontSettingsButton();
+
+    public abstract void tapAddBookmarkButton();
+
+    public abstract void tapDeleteBookmarkButton();
+
+    public abstract void tapTOCBookmarksButton();
+
+    public abstract boolean isBookmarkDisplayed();
 }
