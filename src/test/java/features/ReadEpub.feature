@@ -54,12 +54,17 @@ Feature: Read EPUB
     When I scroll page forward from 4 to 6 times
       And Add bookmark on reader epub screen
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Save device time and date as 'deviceTimeDateKey'
+      And I wait for 50 seconds
+      And I click on right book corner on epub reader screen
+      And I wait for 50 seconds
+      And I click on left book corner on epub reader screen
       And Open bookmarks epub screen
       And Delete bookmark on bookmarks epub screen
-      And Return to reader epub screen from toc bookmarks epub screen
+    Then Bookmark with 'chapterNameKey' and 'deviceTimeDateKey' is not displayed on bookmarks epub screen
+    When Return to reader epub screen from toc bookmarks epub screen
     Then 'chapterNameKey' chapter name is displayed on reader epub screen
       And Bookmark is not displayed on reader epub screen
-
 
   @tier1 @oldOs
   Scenario: Navigate by Table of Contents Menu
