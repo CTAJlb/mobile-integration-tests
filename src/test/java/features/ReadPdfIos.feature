@@ -7,30 +7,21 @@ Feature: Read PDF IOS
     When I open Catalog
       And I switch to 'LYRASIS Reads' from side menu
       And I open search modal
+      And I search for 'Velociraptor' and save bookName as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+    Then Subcategory screen is present
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
+    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+    Then 'bookInfo' book is present on reader pdf screen
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
   Scenario: Open document
-    When I search random pdf and save as 'bookNameInfo'
-      And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
-    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click READ action button on book details screen
-    Then 'bookInfo' book is present on reader pdf screen
-      And Pdf page number is 1 on reader pdf screen
+    Then Pdf page number is 1 on reader pdf screen
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
   Scenario: Navigate by page
-    When I search random pdf and save as 'bookNameInfo'
-      And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
-    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click READ action button on book details screen
-    Then 'bookInfo' book is present on reader pdf screen
-      And Pdf page number is 1 on reader pdf screen
     When I go to next page on reader pdf screen
     Then Pdf page number is 2 on reader pdf screen
     When I go to previous page on reader pdf screen
@@ -38,26 +29,10 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
   Scenario: Navigate by Table of Contents Menu
-    When I search random pdf and save as 'bookNameInfo'
-      And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
-    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click READ action button on book details screen
-    Then 'bookInfo' book is present on reader pdf screen
-      And Each chapter of pdf book can be opened from toc pdf screen
+    Then Each chapter of pdf book can be opened from toc pdf screen
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
   Scenario: Open book to last page read
-    When I search random pdf and save as 'bookNameInfo'
-      And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
-    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click READ action button on book details screen
-    Then 'bookInfo' book is present on reader pdf screen
     When I swipe pdf page forward from 10 to 20 times on reader pdf screen
       And I save pdf page number as 'pageNumber' on reader pdf screen
       And I wait for 3 seconds
@@ -76,14 +51,6 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
   Scenario: Navigate by Gallery
-    When I search for 'Velociraptor' and save bookName as 'bookNameInfo'
-      And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
-    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click READ action button on book details screen
-    Then 'bookInfo' book is present on reader pdf screen
     When I open gallery pdf screen
     Then Gallery pdf screen is opened
     When I open random pdf page on gallery pdf screen and save pdf page number as 'pageNumber'
@@ -92,14 +59,6 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
   Scenario: Search document
-    When I search for 'Velociraptor' and save bookName as 'bookNameInfo'
-      And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
-    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click READ action button on book details screen
-    Then 'bookInfo' book is present on reader pdf screen
     When I open search pdf screen
     Then Search pdf screen is opened
     When I search 'contenido' text on search pdf screen
@@ -107,12 +66,6 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
   Scenario: Navigate to Search Term
-    When I search for 'Velociraptor' and save bookName as 'bookNameInfo'
-      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
-    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click READ action button on book details screen
-    Then 'bookInfo' book is present on reader pdf screen
     When I open search pdf screen
       And I search 'contenido' text on search pdf screen
       And I save page number as 'pageNumber' of the first found text on search pdf screen

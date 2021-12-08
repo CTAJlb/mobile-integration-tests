@@ -10,8 +10,8 @@ import screens.settings.SettingsScreen;
 public class IosSettingsScreen extends SettingsScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeNavigationBar[@name=\"Settings\"]";
 
-    private final IButton librariesBtn = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeStaticText[@name=\"Libraries\"]"), "Accounts");
+    private final IButton btnLibraries = getElementFactory().getButton(
+            By.xpath("//XCUIElementTypeButton[@name=\"Libraries\"]"), "btnLibraries");
 
     public IosSettingsScreen() {
         super(By.xpath(MAIN_ELEMENT));
@@ -19,6 +19,6 @@ public class IosSettingsScreen extends SettingsScreen {
 
     @Override
     public void openLibraries() {
-        librariesBtn.click();
+        btnLibraries.click();
     }
 }

@@ -55,10 +55,7 @@ Feature: Read EPUB
       And Add bookmark on reader epub screen
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey'
-      And I wait for 50 seconds
-      And I click on right book corner on epub reader screen
-      And I wait for 50 seconds
-      And I click on left book corner on epub reader screen
+      And I wait for 100 seconds
       And Open bookmarks epub screen
       And Delete bookmark on bookmarks epub screen
     Then Bookmark with 'chapterNameKey' and 'deviceTimeDateKey' is not displayed on bookmarks epub screen
