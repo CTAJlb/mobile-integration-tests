@@ -13,6 +13,17 @@ public class IosTutorialScreen extends TutorialScreen {
 
     @Override
     public void closeTutorial() {
+        //only for android
+    }
 
+    @Override
+    public boolean isTutorialPageOpened(String pageName) {
+        //only for android
+        return false;
+    }
+
+    @Override
+    public void goToNextPage() {
+        //only for android
     }
 }

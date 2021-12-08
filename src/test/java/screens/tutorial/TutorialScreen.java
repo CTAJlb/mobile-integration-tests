@@ -9,4 +9,8 @@ public abstract class TutorialScreen extends Screen {
     }
 
     public abstract void closeTutorial();
+
+    public abstract boolean isTutorialPageOpened(String pageName);
+
+    public abstract void goToNextPage();
 }
