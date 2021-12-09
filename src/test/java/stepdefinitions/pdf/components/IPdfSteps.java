@@ -25,9 +25,13 @@ public interface IPdfSteps {
 
     void openGalleryPdfScreen();
 
+    void openBookmarksPdfScreen();
+
     void openRandomPdfPageAndSavePageNumberOnGalleryScreen(String pageNumberKey);
 
     void openSearchPdfScreen();
+
+    void checkBookmarksPdfScreenIsOpened();
 
     void checkSearchPdfScreenIsOpened();
 

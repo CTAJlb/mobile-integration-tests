@@ -14,8 +14,12 @@ public class IosNavigationBarPdfScreen extends NavigationBarPdfScreen {
             getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[2]"), "btnTocAndBookmarksAndGallery");
     private final IButton btnSearch =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[3]"), "btnSearch");
-    private final IButton btnBookmarks =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[4]"), "btnBookmarks");
+    //will be changed
+    private final IButton btnAddBookmark =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Add Bookmark\"]"), "btnAddBookmark");
+    //will be changed
+    private final IButton btnDeleteBookmark =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Remove Bookmark\"]"), "btnDeleteBookmark");
 
     public IosNavigationBarPdfScreen() {
         super(By.xpath("//XCUIElementTypeNavigationBar"));
@@ -38,7 +42,17 @@ public class IosNavigationBarPdfScreen extends NavigationBarPdfScreen {
     }
 
     @Override
-    public void tapBookmarksButton() {
-        btnBookmarks.click();
+    public void tapAddBookmarkButton() {
+        btnAddBookmark.click();
+    }
+
+    @Override
+    public void tapDeleteBookmarkButton() {
+        btnDeleteBookmark.click();
+    }
+
+    @Override
+    public boolean isBookmarkDisplayed() {
+        return btnDeleteBookmark.state().isDisplayed();
     }
 }

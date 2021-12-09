@@ -2,6 +2,7 @@ package screens.pdf.tocBookmarksGalleryPdf;
 
 import aquality.appium.mobile.screens.Screen;
 import org.openqa.selenium.By;
+import screens.pdf.bookmarksPdf.BookmarksPdfScreen;
 import screens.pdf.galleryPdf.GalleryPdfScreen;
 import screens.pdf.tocPdf.TocPdfScreen;
 
@@ -19,6 +20,8 @@ public abstract class TocBookmarksGalleryPdfScreen extends Screen {
     public abstract void tapBookmarksButton();
 
     public abstract TocPdfScreen getTocPdfScreen();
+
+    public abstract BookmarksPdfScreen getBookmarksPdfScreen();
 
     public abstract GalleryPdfScreen getGalleryPdfScreen();
 

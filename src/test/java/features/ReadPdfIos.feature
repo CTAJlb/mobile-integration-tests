@@ -50,6 +50,11 @@ Feature: Read PDF IOS
       And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
+  Scenario: Navigate by bookmarks
+    When I open bookmarks pdf screen
+    Then Bookmarks pdf screen is opened
+
+  @logout @returnBooks @tier1 @exclude_android @oldOs
   Scenario: Navigate by Gallery
     When I open gallery pdf screen
     Then Gallery pdf screen is opened

@@ -8,7 +8,7 @@ public abstract class ReaderEpubScreen extends Screen {
     protected NavigationBarEpubScreen navigationBarEpubScreen;
 
     protected ReaderEpubScreen(By locator) {
-        super(locator, "Reader");
+        super(locator, "ReaderEpub");
     }
 
     public abstract String getBookName();

@@ -3,6 +3,7 @@ package stepdefinitions.pdf.components;
 import aquality.appium.mobile.application.AqualityServices;
 import framework.utilities.ScenarioContext;
 import framework.utilities.swipe.directions.EntireScreenDragDirection;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.android.CatalogBookModel;
 import org.apache.commons.lang3.RandomUtils;
@@ -110,6 +111,18 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
         readerPdfScreen.openNavigationBar();
         readerPdfScreen.getNavigationBarScreen().openTocBookmarksGallery();
         tocBookmarksGalleryPdfScreen.tapGalleryButton();
+    }
+
+    @Override
+    public void openBookmarksPdfScreen() {
+        readerPdfScreen.openNavigationBar();
+        readerPdfScreen.getNavigationBarScreen().openTocBookmarksGallery();
+        tocBookmarksGalleryPdfScreen.tapBookmarksButton();
+    }
+
+    @Override
+    public void checkBookmarksPdfScreenIsOpened(){
+        Assert.assertTrue("Bookmarks pdf screen is not opened", tocBookmarksGalleryPdfScreen.getBookmarksPdfScreen().state().isDisplayed());
     }
 
     @Override

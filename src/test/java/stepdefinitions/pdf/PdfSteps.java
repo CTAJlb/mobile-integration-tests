@@ -84,6 +84,12 @@ public class PdfSteps extends BaseSteps implements IPdfSteps {
         abstractPdfSteps.openGalleryPdfScreen();
     }
 
+    @When("I open bookmarks pdf screen")
+    @Override
+    public void openBookmarksPdfScreen() {
+        abstractPdfSteps.openBookmarksPdfScreen();
+    }
+
     @When("I open random pdf page on gallery pdf screen and save pdf page number as {string}")
     @Override
     public void openRandomPdfPageAndSavePageNumberOnGalleryScreen(String pageNumberKey) {
@@ -94,6 +100,12 @@ public class PdfSteps extends BaseSteps implements IPdfSteps {
     @Override
     public void openSearchPdfScreen() {
         abstractPdfSteps.openSearchPdfScreen();
+    }
+
+    @Then("Bookmarks pdf screen is opened")
+    @Override
+    public void checkBookmarksPdfScreenIsOpened() {
+        abstractPdfSteps.checkBookmarksPdfScreenIsOpened();
     }
 
     @Then("Search pdf screen is opened")

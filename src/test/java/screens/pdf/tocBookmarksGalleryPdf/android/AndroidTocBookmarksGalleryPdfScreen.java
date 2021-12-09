@@ -3,6 +3,7 @@ package screens.pdf.tocBookmarksGalleryPdf.android;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import org.openqa.selenium.By;
+import screens.pdf.bookmarksPdf.BookmarksPdfScreen;
 import screens.pdf.galleryPdf.GalleryPdfScreen;
 import screens.pdf.tocBookmarksGalleryPdf.TocBookmarksGalleryPdfScreen;
 import screens.pdf.tocPdf.TocPdfScreen;
@@ -35,6 +36,12 @@ public class AndroidTocBookmarksGalleryPdfScreen extends TocBookmarksGalleryPdfS
 
     @Override
     public TocPdfScreen getTocPdfScreen() {
+        //only for ios
+        return null;
+    }
+
+    @Override
+    public BookmarksPdfScreen getBookmarksPdfScreen() {
         //only for ios
         return null;
     }

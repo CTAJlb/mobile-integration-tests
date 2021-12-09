@@ -5,6 +5,7 @@ import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import org.openqa.selenium.By;
+import screens.pdf.bookmarksPdf.BookmarksPdfScreen;
 import screens.pdf.galleryPdf.GalleryPdfScreen;
 import screens.pdf.tocBookmarksGalleryPdf.TocBookmarksGalleryPdfScreen;
 import screens.pdf.tocPdf.TocPdfScreen;
@@ -13,6 +14,8 @@ import screens.pdf.tocPdf.TocPdfScreen;
 public class IosTocBookmarksGalleryPdfScreen extends TocBookmarksGalleryPdfScreen {
     private final TocPdfScreen tocPdfScreen;
     private final GalleryPdfScreen galleryPdfScreen;
+    private final BookmarksPdfScreen bookmarksPdfScreen;
+
     private final IButton btnResume =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name = \"Resume\"]"), "btnResume");
     private final IButton btnBack =
@@ -28,6 +31,7 @@ public class IosTocBookmarksGalleryPdfScreen extends TocBookmarksGalleryPdfScree
         super(By.xpath("//XCUIElementTypeButton[@name = \"Resume\"]"));
         tocPdfScreen = AqualityServices.getScreenFactory().getScreen(TocPdfScreen.class);
         galleryPdfScreen = AqualityServices.getScreenFactory().getScreen(GalleryPdfScreen.class);
+        bookmarksPdfScreen = AqualityServices.getScreenFactory().getScreen(BookmarksPdfScreen.class);
     }
 
     @Override
@@ -53,6 +57,11 @@ public class IosTocBookmarksGalleryPdfScreen extends TocBookmarksGalleryPdfScree
     @Override
     public TocPdfScreen getTocPdfScreen() {
         return tocPdfScreen;
+    }
+
+    @Override
+    public BookmarksPdfScreen getBookmarksPdfScreen() {
+        return bookmarksPdfScreen;
     }
 
     @Override

@@ -14,5 +14,9 @@ public abstract class NavigationBarPdfScreen extends Screen {
 
     public abstract void tapSearchButton();
 
-    public abstract void tapBookmarksButton();
+    public abstract void tapAddBookmarkButton();
+
+    public abstract void tapDeleteBookmarkButton();
+
+    public abstract boolean isBookmarkDisplayed();
 }
