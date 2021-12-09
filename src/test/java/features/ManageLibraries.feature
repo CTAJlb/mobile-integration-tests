@@ -5,6 +5,13 @@ Feature: Manage Libraries
     When I add "LYRASIS Reads" account from welcomeScreen
     Then Account 'LYRASIS Reads' is present on Accounts screen
 
+  @tier1 @exclude_ios @oldOs
+  Scenario: Navigate by tutorial
+    When Approve the agreement on eula agreement screen for android
+    Then Each tutorial page can be opened on tutorial screen for android
+    When Close tutorial screen for android
+    Then Welcome screen is opened
+
   @tier1 @oldOs
   Scenario: Switch Library Catalogs
     When I add "Palace Bookshelf" account from welcomeScreen
