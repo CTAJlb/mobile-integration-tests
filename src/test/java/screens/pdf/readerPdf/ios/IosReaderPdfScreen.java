@@ -43,6 +43,7 @@ public class IosReaderPdfScreen extends ReaderPdfScreen {
     @Override
     public int getPageNumber() {
         openNavigationBar();
+        openNavigationBar();
         return Integer.parseInt(RegExUtil.getStringFromFirstGroup(lblPageNumber.getAttribute(IosAttributes.NAME), RegEx.PDF_CURRENT_PAGE_REGEX));
     }
 

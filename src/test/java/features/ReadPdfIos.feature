@@ -17,11 +17,8 @@ Feature: Read PDF IOS
     Then 'bookInfo' book is present on reader pdf screen
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
-  Scenario: Open document
+  Scenario: Navigate by Page
     Then Pdf page number is 1 on reader pdf screen
-
-  @logout @returnBooks @tier1 @exclude_android @oldOs
-  Scenario: Navigate by page
     When I go to next page on reader pdf screen
     Then Pdf page number is 2 on reader pdf screen
     When I go to previous page on reader pdf screen
@@ -33,7 +30,7 @@ Feature: Read PDF IOS
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
   Scenario: Open book to last page read
-    When I swipe pdf page forward from 10 to 20 times on reader pdf screen
+    When I swipe pdf page forward from 4 to 6 times on reader pdf screen
       And I save pdf page number as 'pageNumber' on reader pdf screen
       And I wait for 3 seconds
       And I return to previous screen for epub and pdf
@@ -50,7 +47,7 @@ Feature: Read PDF IOS
       And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
-  Scenario: Navigate by bookmarks
+  Scenario: Navigate by Bookmarks
     When I open bookmarks pdf screen
     Then Bookmarks pdf screen is opened
 
@@ -63,14 +60,14 @@ Feature: Read PDF IOS
     Then 'bookInfo' book is present on reader pdf screen
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
-  Scenario: Search document
+  Scenario: Search Pdf Functionality
     When I open search pdf screen
     Then Search pdf screen is opened
     When I search 'contenido' text on search pdf screen
     Then Found lines should contain 'contenido' in themselves on search pdf screen
 
   @logout @returnBooks @tier1 @exclude_android @oldOs
-  Scenario: Navigate to Search Term
+  Scenario: Navigate by Pdf Search Results
     When I open search pdf screen
       And I search 'contenido' text on search pdf screen
       And I save page number as 'pageNumber' of the first found text on search pdf screen

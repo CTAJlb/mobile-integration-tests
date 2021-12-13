@@ -2,9 +2,6 @@ package stepdefinitions.application.components;
 
 import aquality.appium.mobile.application.AqualityServices;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
-import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.addaccount.AddAccountScreen;
 import screens.alert.AlertScreen;
