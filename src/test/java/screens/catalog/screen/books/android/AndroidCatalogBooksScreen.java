@@ -28,11 +28,6 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
 
     @Override
     public CatalogBookModel clickActionButtonAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         String actionButtonString = actionButtonKey.i18n();
         String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, bookName, actionButtonString);
         IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
@@ -47,16 +42,12 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
                 .setTitle(bookName)
                 .setAuthor(author);
         bookNameButton.click();
+        bookNameButton.state().waitForNotDisplayed();
         return bookInfo;
     }
 
     @Override
     public CatalogBookModel openBookAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         String actionButtonString = actionButtonKey.i18n();
         String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
         IButton bookNameButton = getBookNameButtonFromListOfBooks(bookNameLoc);
@@ -76,11 +67,6 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
 
     @Override
     public boolean isBookPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         String actionButtonString = actionButtonKey.i18n();
         String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
         return getBookNameButtonFromListOfBooks(bookNameLoc).state().waitForDisplayed();
@@ -88,11 +74,6 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
 
     @Override
     public CatalogBookModel clickActionButtonOnTheFirstBookAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         String actionButtonString = actionButtonKey.i18n();
         String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString);
         IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
@@ -108,6 +89,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
                 .setTitle(lblBookName.getAttribute(IosAttributes.NAME))
                 .setAuthor(author);
         bookNameButton.click();
+        bookNameButton.state().waitForNotDisplayed();
         return bookInfo;
     }
 }

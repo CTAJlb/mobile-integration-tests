@@ -4,9 +4,9 @@ import aquality.appium.mobile.screens.Screen;
 import org.openqa.selenium.By;
 
 public abstract class WelcomeScreen extends Screen {
-    protected WelcomeScreen(By locator) {
-        super(locator, "Main");
+    public WelcomeScreen(By locator) {
+        super(locator, "Welcome");
     }
 
-    public abstract void findLibrary();
+    public abstract void tapFindLibraryButton();
 }

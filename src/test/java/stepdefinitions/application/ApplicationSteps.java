@@ -54,19 +54,13 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.approveAgreement();
     }
 
-    @When("Close tutorial screen for android")
-    @Override
-    public void closeTutorial() {
-        abstractApplicationSteps.closeTutorial();
-    }
-
     @Then("Welcome screen is opened")
     @Override
     public void checkWelcomeScreenIsOpened() {
         abstractApplicationSteps.checkWelcomeScreenIsOpened();
     }
 
-    @Then("Each tutorial page can be opened on tutorial screen for android")
+    @Then("Each tutorial page can be opened on tutorial screen for android and close tutorial screen")
     @Override
     public void checkEachTutorialPageCanBeOpened() {
         abstractApplicationSteps.checkEachTutorialPageCanBeOpened();

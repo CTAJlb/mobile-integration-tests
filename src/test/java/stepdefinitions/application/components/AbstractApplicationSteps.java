@@ -45,11 +45,6 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     }
 
     @Override
-    public void closeTutorial(){
-        tutorialScreen.closeTutorial();
-    }
-
-    @Override
     public void checkEachTutorialPageCanBeOpened(){
         tutorialScreen.getListOfContentDescOfTutorialTabs().stream().forEach(contentDesc -> {
             Assert.assertTrue(String.format("Tab with '%s' contentDesc is not opened", contentDesc), tutorialScreen.isTutorialPageOpened(contentDesc));

@@ -6,11 +6,10 @@ Feature: Manage Libraries
     Then Account 'LYRASIS Reads' is present on Accounts screen
 
   @tier1 @exclude_ios @oldOs
-  Scenario: Navigate by tutorial
+  Scenario: Navigate by Tutorial
     When Approve the agreement on eula agreement screen for android
-    Then Each tutorial page can be opened on tutorial screen for android
-    When Close tutorial screen for android
-    Then Welcome screen is opened
+    Then Each tutorial page can be opened on tutorial screen for android and close tutorial screen
+      And Welcome screen is opened
 
   @tier1 @oldOs
   Scenario: Switch Library Catalogs

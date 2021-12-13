@@ -13,8 +13,6 @@ public interface IApplicationSteps {
 
     void approveAgreement();
 
-    void closeTutorial();
-
     void checkWelcomeScreenIsOpened();
 
     void checkEachTutorialPageCanBeOpened();

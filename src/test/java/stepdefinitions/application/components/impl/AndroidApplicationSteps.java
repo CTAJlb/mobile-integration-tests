@@ -3,8 +3,6 @@ package stepdefinitions.application.components.impl;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
-import org.assertj.core.api.SoftAssertions;
-import org.junit.Assert;
 import stepdefinitions.application.components.AbstractApplicationSteps;
 
 @StepsType(platform = PlatformName.ANDROID)
@@ -20,7 +18,7 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
         eulaAgreementScreen.clickAgree();
         tutorialScreen.closeTutorial();
         welcomeScreen.state().waitForDisplayed();
-        welcomeScreen.findLibrary();
+        welcomeScreen.tapFindLibraryButton();
         addAccountScreen.selectLibraryViaSearch(libraryName);
     }
 }
