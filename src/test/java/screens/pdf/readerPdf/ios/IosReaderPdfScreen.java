@@ -72,7 +72,7 @@ public class IosReaderPdfScreen extends ReaderPdfScreen {
 
     @Override
     public void openNavigationBar() {
-        if (!navigationBarPdfScreen.state().isDisplayed()) {
+        if (!navigationBarPdfScreen.state().waitForDisplayed()) {
             CoordinatesClickUtils.clickAtCenterOfScreen();
         }
     }
