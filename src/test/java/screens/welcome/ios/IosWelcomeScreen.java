@@ -8,7 +8,7 @@ import screens.welcome.WelcomeScreen;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosWelcomeScreen extends WelcomeScreen {
-    private final IButton btnFindLibrary = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton"), "btnFindLibrary");
+    private final IButton btnFindLibrary = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Find Your Library\"]"), "btnFindLibrary");
 
     public IosWelcomeScreen() {
         super(By.xpath("//XCUIElementTypeButton[@name=\"Find Your Library\"]"));
