@@ -76,9 +76,9 @@ public class CatalogSteps {
     }
 
     @And("I open Catalog")
-    @Given("Catalog is opened")
-    public void openCatalogWithAgeCheck() {
+    public void openCatalog() {
         bottomMenuForm.open(BottomMenu.CATALOG);
+        catalogScreen.state().waitForDisplayed();
     }
 
     @And("Library {string} is present on Catalog Screen")
@@ -145,6 +145,7 @@ public class CatalogSteps {
     @When("I switch to {string} catalog tab")
     public void switchToCatalogTab(String catalogTab) {
         catalogScreen.switchToCatalogTab(catalogTab);
+        catalogScreen.state().waitForDisplayed();
     }
 
     @Then("All present books are audiobooks")

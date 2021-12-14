@@ -59,6 +59,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     public void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKeys) {
         IButton actionButton = getActionButton(buttonKeys);
         actionButton.click();
+        actionButton.state().waitForNotDisplayed();
     }
 
     @Override

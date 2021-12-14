@@ -31,7 +31,7 @@ Feature: Manage Libraries
   Scenario: Switch library bookshelf
     When I add "Palace Bookshelf" account from welcomeScreen
       And I add 'LYRASIS Reads' account
-      And Catalog is opened
+      And I open Catalog
       And I switch to 'Palace Bookshelf' from side menu
       And I open categories by chain and chain starts from CategoryScreen:
         | Fiction            |
