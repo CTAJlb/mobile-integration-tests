@@ -1,5 +1,6 @@
 package screens.epub.bookmarksEpub.android;
 
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
@@ -18,6 +19,9 @@ public class AndroidBookmarksEpubScreen extends BookmarksEpubScreen {
     private static final String BOOKMARK_TITLE_LOC = "//android.widget.TextView[contains(@resource-id,\"bookmarkTitle\")]";
     private static final String BOOKMARK_DATE_TIME_LOC = "//android.widget.TextView[contains(@resource-id,\"bookmarkDate\")]";
     private static final String BTN_DELETE_LOC = "//android.widget.ImageView[contains(@resource-id,\"bookmarkDelete\")]";
+
+    private final IButton btnDeleteFromAlert =
+            getElementFactory().getButton(By.xpath("//android.widget.Button[contains(@resource-id,\"button1\")]"), "btnDeleteFromAlert");
 
     public AndroidBookmarksEpubScreen() {
         super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"tocBookmarksLastRead\")]"));
@@ -44,6 +48,7 @@ public class AndroidBookmarksEpubScreen extends BookmarksEpubScreen {
     @Override
     public void deleteBookmark(int bookmarkNumber) {
         getListOfDeleteBtns().get(bookmarkNumber).click();
+        btnDeleteFromAlert.click();
     }
 
     private List<IButton> getListOfDeleteBtns() {

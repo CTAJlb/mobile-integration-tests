@@ -10,4 +10,10 @@ public interface IApplicationSteps {
     void performActionOnAlert(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
     void addAccountFromWelcomeScreen(String libraryName);
+
+    void approveAgreement();
+
+    void checkWelcomeScreenIsOpened();
+
+    void checkEachTutorialPageCanBeOpened();
 }

@@ -95,4 +95,12 @@ public class TocBookmarksEpubSteps {
         Assert.assertTrue(String.format("Bookmark with '%s' bookmarkTitle and '%s' deviceTimeDate is not displayed on bookmarks epub screen", bookmarkTitle, deviceTimeDate),
                 tocBookmarksEpubScreen.getBookmarksEpubScreen().isBookmarkPresent(bookmarkTitle, deviceTimeDate));
     }
+
+    @Then("Bookmark with {string} and {string} is not displayed on bookmarks epub screen")
+    public void checkBookmarkIsNotDisplayedOnBookmarksEpubScreen(String chapterNameKey, String deviceTimeDateKey){
+        String bookmarkTitle = context.get(chapterNameKey);
+        String deviceTimeDate = context.get(deviceTimeDateKey);
+        Assert.assertFalse(String.format("Bookmark with '%s' bookmarkTitle and '%s' deviceTimeDate is displayed on bookmarks epub screen", bookmarkTitle, deviceTimeDate),
+                tocBookmarksEpubScreen.getBookmarksEpubScreen().isBookmarkPresent(bookmarkTitle, deviceTimeDate));
+    }
 }

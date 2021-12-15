@@ -183,7 +183,15 @@ public class AudioPlayerSteps {
 
     @And("I wait for {int} seconds")
     public void waitForSeconds(Integer secondsCount) {
-        AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount));
+        if(secondsCount > 10){
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount/3));
+            AqualityServices.getApplication().getDriver().getContext();
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount/3));
+            AqualityServices.getApplication().getDriver().getContext();
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount/3));
+        }else {
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount));
+        }
     }
 
     @And("I select playback speed {double}X")

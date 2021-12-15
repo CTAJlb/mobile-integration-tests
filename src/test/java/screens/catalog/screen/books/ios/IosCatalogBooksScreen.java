@@ -46,6 +46,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
                 .setTitle(bookName)
                 .setAuthor(author);
         bookNameButton.click();
+        bookNameButton.state().waitForNotDisplayed();
         return bookInfo;
     }
 
@@ -99,6 +100,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
                 .setTitle(lblBookName.getAttribute(IosAttributes.NAME))
                 .setAuthor(author);
         bookNameButton.click();
+        bookNameButton.state().waitForNotDisplayed();
         return bookInfo;
     }
 }

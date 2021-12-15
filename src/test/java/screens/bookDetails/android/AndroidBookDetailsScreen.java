@@ -48,7 +48,7 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
         IButton button = getActionButton(buttonKeys);
         button.state().waitForDisplayed();
         button.click();
-        AqualityServices.getConditionalWait().waitFor(() -> button.state().waitForNotDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+        button.state().waitForNotDisplayed();
     }
 
     @Override

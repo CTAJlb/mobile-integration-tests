@@ -15,12 +15,10 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
 
     @Override
     public void addAccountFromWelcomeScreen(String libraryName) {
-        if (!eulaAgreementScreen.isVanillaApp()) {
-            eulaAgreementScreen.clickAgree();
-        }
+        eulaAgreementScreen.clickAgree();
         tutorialScreen.closeTutorial();
         welcomeScreen.state().waitForDisplayed();
-        welcomeScreen.findLibrary();
+        welcomeScreen.tapFindLibraryButton();
         addAccountScreen.selectLibraryViaSearch(libraryName);
     }
 }

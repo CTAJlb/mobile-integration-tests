@@ -25,7 +25,6 @@ public class IosAddAccountScreen extends AddAccountScreen {
     @Override
     public void selectLibraryViaSearch(String libraryName) {
         txbSearch.click();
-        AqualityServices.getApplication().getDriver().hideKeyboard();
         txbSearch.clearAndType(libraryName);
         getLibraryButton(libraryName).click();
     }

@@ -34,7 +34,8 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
 
     @Override
     public void addAccountFromWelcomeScreen(String libraryName) {
-        welcomeScreen.findLibrary();
+        tutorialScreen.closeTutorial();
+        welcomeScreen.tapFindLibraryButton();
         addAccountScreen.selectLibraryViaSearch(libraryName);
     }
 }

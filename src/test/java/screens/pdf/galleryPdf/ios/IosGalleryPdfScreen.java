@@ -1,6 +1,5 @@
 package screens.pdf.galleryPdf.ios;
 
-import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.ILabel;

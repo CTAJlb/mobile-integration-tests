@@ -18,34 +18,52 @@ import java.util.List;
 public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
     public static final String IOS_APP_BUNDLE_ID = "org.nypl.labs.SimplyE";
     public static final String GET_CURRENT_PACKAGE_COMMAND = "getCurrentPackage";
-    private AbstractApplicationSteps applicationSteps;
+    private AbstractApplicationSteps abstractApplicationSteps;
     private ScenarioContext context;
 
     @Inject
     public ApplicationSteps(ScenarioContext context) {
         this.context = context;
-        this.applicationSteps = stepsFactory.getSteps(AbstractApplicationSteps.class);
+        this.abstractApplicationSteps = stepsFactory.getSteps(AbstractApplicationSteps.class);
     }
 
     @Then("I click {} button on alert for ios")
     public void performActionOnAlert(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        applicationSteps.performActionOnAlert(actionButtonKey);
+        abstractApplicationSteps.performActionOnAlert(actionButtonKey);
     }
 
     @And("I return to previous screen for epub and pdf")
     public void returnToPreviousScreenForEpubAndPdf() {
-        applicationSteps.returnToPreviousScreenForEpubAndPdf();
+        abstractApplicationSteps.returnToPreviousScreenForEpubAndPdf();
     }
 
     @When("I restart app")
     public void restartApp() {
-        applicationSteps.restartApp();
+        abstractApplicationSteps.restartApp();
     }
 
     @Given("I add {string} account from welcomeScreen")
     public void addAccountFromWelcomeScreen(String libraryName) {
         saveLibraryForLogOut(libraryName);
-        applicationSteps.addAccountFromWelcomeScreen(libraryName);
+        abstractApplicationSteps.addAccountFromWelcomeScreen(libraryName);
+    }
+
+    @When("Approve the agreement on eula agreement screen for android")
+    @Override
+    public void approveAgreement() {
+        abstractApplicationSteps.approveAgreement();
+    }
+
+    @Then("Welcome screen is opened")
+    @Override
+    public void checkWelcomeScreenIsOpened() {
+        abstractApplicationSteps.checkWelcomeScreenIsOpened();
+    }
+
+    @Then("Each tutorial page can be opened on tutorial screen for android and close tutorial screen")
+    @Override
+    public void checkEachTutorialPageCanBeOpened() {
+        abstractApplicationSteps.checkEachTutorialPageCanBeOpened();
     }
 
     private void saveLibraryForLogOut(String libraryName){

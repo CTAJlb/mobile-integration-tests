@@ -54,12 +54,14 @@ Feature: Read EPUB
     When I scroll page forward from 4 to 6 times
       And Add bookmark on reader epub screen
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
+      And Save device time and date as 'deviceTimeDateKey'
+      And I wait for 100 seconds
       And Open bookmarks epub screen
       And Delete bookmark on bookmarks epub screen
-      And Return to reader epub screen from toc bookmarks epub screen
+    Then Bookmark with 'chapterNameKey' and 'deviceTimeDateKey' is not displayed on bookmarks epub screen
+    When Return to reader epub screen from toc bookmarks epub screen
     Then 'chapterNameKey' chapter name is displayed on reader epub screen
       And Bookmark is not displayed on reader epub screen
-
 
   @tier1 @oldOs
   Scenario: Navigate by Table of Contents Menu
@@ -118,7 +120,7 @@ Feature: Read EPUB
       And Font size 'fontSize' is decreased
 
   @tier1 @oldOs
-  Scenario: Return to Page (Bookmarking)
+  Scenario: Open book to last page read
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Click READ action button on book details screen

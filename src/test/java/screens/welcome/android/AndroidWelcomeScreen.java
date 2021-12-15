@@ -8,16 +8,14 @@ import screens.welcome.WelcomeScreen;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidWelcomeScreen extends WelcomeScreen {
-    private static final By PAGE_LOCATOR = By.id("selectionAlternateButton");
-    private final IButton findLibraryBtn = getElementFactory().getButton(By.xpath("//android.widget.Button"), "Find Your Library");
+    private final IButton btnFindLibrary = getElementFactory().getButton(By.xpath("//android.widget.Button"), "btnFindLibrary");
 
     public AndroidWelcomeScreen() {
-        super(PAGE_LOCATOR);
+        super(By.xpath("//android.widget.Button[contains(@resource-id,\"selectionButton\")]"));
     }
 
     @Override
-    public void findLibrary() {
-        findLibraryBtn.state().waitForDisplayed();
-        findLibraryBtn.click();
+    public void tapFindLibraryButton() {
+        btnFindLibrary.click();
     }
 }
