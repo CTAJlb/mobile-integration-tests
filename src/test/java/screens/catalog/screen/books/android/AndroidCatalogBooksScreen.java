@@ -42,7 +42,6 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
                 .setTitle(bookName)
                 .setAuthor(author);
         bookNameButton.click();
-        bookNameButton.state().waitForNotDisplayed();
         return bookInfo;
     }
 
@@ -73,6 +72,14 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     }
 
     @Override
+    public boolean isActionButtonOnBookDisplayed(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, bookName, actionButtonString);
+        IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
+        return bookNameButton.state().isDisplayed();
+    }
+
+    @Override
     public CatalogBookModel clickActionButtonOnTheFirstBookAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         String actionButtonString = actionButtonKey.i18n();
         String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString);
@@ -89,7 +96,14 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
                 .setTitle(lblBookName.getAttribute(IosAttributes.NAME))
                 .setAuthor(author);
         bookNameButton.click();
-        bookNameButton.state().waitForNotDisplayed();
         return bookInfo;
+    }
+
+    @Override
+    public boolean isActionButtonOnTheFirstBookDisplayed(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString);
+        IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
+        return bookNameButton.state().isDisplayed();
     }
 }

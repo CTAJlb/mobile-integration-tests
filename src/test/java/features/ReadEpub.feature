@@ -5,13 +5,13 @@ Feature: Read EPUB
       And I open Catalog
       And I open search modal
       And I search for 'Flower Fables' and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+    Then 'bookInfo' book is present on epub reader screen
 
   @tier1 @oldOs
   Scenario: Navigate by Page
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Click READ action button on book details screen
-    Then 'bookInfo' book is present on epub reader screen
     When I click on right book corner on epub reader screen
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And I click on right book corner on epub reader screen
@@ -22,16 +22,12 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Navigate by bookmarks
-    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click READ action button on book details screen
-    Then 'bookInfo' book is present on epub reader screen
     When I click on right book corner on epub reader screen
       And Add bookmark on reader epub screen
     Then Bookmark is displayed on reader epub screen
     When I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey'
-      And I scroll page forward from 4 to 6 times
+      And I scroll page forward from 7 to 9 times
       And Add bookmark on reader epub screen
       And I save pageNumber as 'pageNumberKey2' and chapterName as 'chapterNameKey2' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey2'
@@ -43,15 +39,11 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Delete bookmarks
-    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click READ action button on book details screen
-    Then 'bookInfo' book is present on epub reader screen
     When I click on right book corner on epub reader screen
       And Add bookmark on reader epub screen
       And Delete bookmark on reader epub screen
     Then Bookmark is not displayed on reader epub screen
-    When I scroll page forward from 4 to 6 times
+    When I scroll page forward from 7 to 9 times
       And Add bookmark on reader epub screen
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey'
@@ -65,18 +57,10 @@ Feature: Read EPUB
 
   @tier1 @oldOs
   Scenario: Navigate by Table of Contents Menu
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Click READ action button on book details screen
-    Then 'bookInfo' book is present on epub reader screen
     Then Each chapter of epub book can be opened from table of contents
 
   @tier1 @oldOs
   Scenario: Navigate View options
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Click READ action button on book details screen
-    Then 'bookInfo' book is present on epub reader screen
     When I return to previous screen for epub and pdf
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on epub reader screen
@@ -88,10 +72,6 @@ Feature: Read EPUB
 
   @tier1 @oldOs
   Scenario: Change, View Font and Contrast Settings
-      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click READ action button on book details screen
-    Then 'bookInfo' book is present on epub reader screen
     When I save font size as 'fontSize'
       And I INCREASE_FONT of text
     Then Font size 'fontSize' is increased
@@ -121,10 +101,6 @@ Feature: Read EPUB
 
   @tier1 @oldOs
   Scenario: Open book to last page read
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Click READ action button on book details screen
-    Then 'bookInfo' book is present on epub reader screen
     When I scroll page forward from 1 to 2 times
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And I wait for 3 seconds

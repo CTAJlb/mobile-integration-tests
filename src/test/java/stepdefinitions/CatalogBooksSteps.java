@@ -4,6 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.application.EnumBookType;
+import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
@@ -12,6 +13,8 @@ import models.android.CatalogBookModel;
 import org.junit.Assert;
 import screens.alert.AlertScreen;
 import screens.catalog.screen.books.CatalogBooksScreen;
+
+import java.time.Duration;
 
 public class CatalogBooksSteps {
     private final CatalogBooksScreen catalogBooksScreen;
@@ -50,6 +53,8 @@ public class CatalogBooksSteps {
                 AqualityServices.getLogger().info("Alert appears and dismiss alert");
             }
         }
+        AqualityServices.getConditionalWait().waitFor(() ->
+                !catalogBooksScreen.isActionButtonOnBookDisplayed(bookType, bookName, actionButtonKey), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }
 
     @And("{} book with {} action button and {string} bookInfo is present on catalog books screen")
@@ -82,5 +87,7 @@ public class CatalogBooksSteps {
                 AqualityServices.getLogger().info("Alert appears and dismiss alert");
             }
         }
+        AqualityServices.getConditionalWait().waitFor(() ->
+                !catalogBooksScreen.isActionButtonOnTheFirstBookDisplayed(bookType, actionButtonKey), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }
 }

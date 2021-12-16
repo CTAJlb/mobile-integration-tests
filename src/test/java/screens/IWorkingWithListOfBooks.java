@@ -25,10 +25,6 @@ public interface IWorkingWithListOfBooks {
             actionButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         }
         actionButton.state().waitForDisplayed();
-        if(!actionButton.state().isDisplayed()){
-            throw new RuntimeException("There is not specific action button on specific book on catalog books screen. ActionButtonLoc-" + actionButtonLoc);
-        }else {
-            return actionButton;
-        }
+        return actionButton;
     }
 }

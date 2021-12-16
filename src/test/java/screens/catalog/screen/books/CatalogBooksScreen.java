@@ -17,5 +17,9 @@ public abstract class CatalogBooksScreen extends Screen {
 
     public abstract boolean isBookPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
+    public abstract boolean isActionButtonOnBookDisplayed(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
+
     public abstract CatalogBookModel clickActionButtonOnTheFirstBookAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
+
+    public abstract boolean isActionButtonOnTheFirstBookDisplayed(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 }

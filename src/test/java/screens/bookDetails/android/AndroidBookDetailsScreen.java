@@ -1,18 +1,14 @@
 package screens.bookDetails.android;
 
-import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.swipe.SwipeElementUtils;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.bookDetails.BookDetailsScreen;
-
-import java.time.Duration;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidBookDetailsScreen extends BookDetailsScreen {
@@ -37,9 +33,8 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public boolean isActionButtonPresent(EnumActionButtonsForBooksAndAlertsKeys key) {
+    public boolean isActionButtonDisplayed(EnumActionButtonsForBooksAndAlertsKeys key) {
         IButton button = getActionButton(key);
-        AqualityServices.getConditionalWait().waitFor(() -> button.state().isDisplayed() || isErrorButtonPresent(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         return button.state().isDisplayed();
     }
 
@@ -48,7 +43,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
         IButton button = getActionButton(buttonKeys);
         button.state().waitForDisplayed();
         button.click();
-        button.state().waitForNotDisplayed();
     }
 
     @Override

@@ -49,9 +49,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
-    public boolean isActionButtonPresent(EnumActionButtonsForBooksAndAlertsKeys key) {
-        AqualityServices.getConditionalWait().waitFor(() ->
-                getActionButton(key).state().isDisplayed() || lblErrorDetails.state().isDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+    public boolean isActionButtonDisplayed(EnumActionButtonsForBooksAndAlertsKeys key) {
         return getActionButton(key).state().isDisplayed();
     }
 
@@ -59,7 +57,6 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     public void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKeys) {
         IButton actionButton = getActionButton(buttonKeys);
         actionButton.click();
-        actionButton.state().waitForNotDisplayed();
     }
 
     @Override

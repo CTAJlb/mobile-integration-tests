@@ -3,6 +3,7 @@ package stepdefinitions;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
+import constants.application.timeouts.BooksTimeouts;
 import constants.keysForContext.ScenarioContextKey;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
@@ -15,6 +16,7 @@ import org.junit.Assert;
 import screens.alert.AlertScreen;
 import screens.bookDetails.BookDetailsScreen;
 
+import java.time.Duration;
 import java.util.Optional;
 
 public class BookDetailsSteps {
@@ -45,11 +47,13 @@ public class BookDetailsSteps {
                 AqualityServices.getLogger().info("Alert appears and dismiss alert");
             }
         }
+        AqualityServices.getConditionalWait().waitFor(() ->
+                !bookDetailsScreen.isActionButtonDisplayed(actionButtonKey), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }
 
     @Then("I check that book contains {} action button on book details screen")
     public void checkThatBookContainsActionButton(final EnumActionButtonsForBooksAndAlertsKeys key) {
-        boolean isButtonPresent = bookDetailsScreen.isActionButtonPresent(key);
+        boolean isButtonPresent = bookDetailsScreen.isActionButtonDisplayed(key);
         addScreenshotIfErrorPresent(isButtonPresent);
         Assert.assertTrue(String.format("Button '%1$s' is not present on book details screen. Error (if present) - %2$s", key.i18n(), getErrorDetails()), isButtonPresent);
     }
