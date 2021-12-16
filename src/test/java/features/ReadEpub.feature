@@ -31,6 +31,7 @@ Feature: Read EPUB
       And Add bookmark on reader epub screen
       And I save pageNumber as 'pageNumberKey2' and chapterName as 'chapterNameKey2' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey2'
+      And I click on right book corner on epub reader screen
       And Open bookmarks epub screen
     Then Bookmark with 'chapterNameKey' and 'deviceTimeDateKey' is displayed on bookmarks epub screen
       And Bookmark with 'chapterNameKey2' and 'deviceTimeDateKey2' is displayed on bookmarks epub screen

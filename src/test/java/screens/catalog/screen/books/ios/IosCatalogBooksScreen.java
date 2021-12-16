@@ -14,28 +14,28 @@ import screens.catalog.screen.books.CatalogBooksScreen;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkingWithListOfBooks {
-    private static final String MAIN_ELEMENT = "//XCUIElementTypeCollectionView";
-    private static final String SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther//*[@name=\"%s\"]";
-    private static final String SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC = SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
-    private static final String AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC = SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
+    private static final String ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther//*[@name=\"%s\"]";
+    private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
+    private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
 
-    private static final String SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC = "//XCUIElementTypeStaticText/following-sibling::XCUIElementTypeOther//*[@name=\"%s\"]";
-    private static final String THE_FIRST_BOOK_NAME_WITH_SPECIFIC_ACTION_BUTTON_LOC = SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
-    private static final String AUTHOR_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC = SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
+    private static final String ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = "//XCUIElementTypeStaticText/following-sibling::XCUIElementTypeOther//*[@name=\"%s\"]";
+    private static final String BOOK_NAME_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
+    private static final String AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
 
     public IosCatalogBooksScreen() {
-        super(By.xpath(MAIN_ELEMENT));
+        super(By.xpath("//XCUIElementTypeCollectionView"));
     }
 
     @Override
     public CatalogBookModel clickActionButtonAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        String bookNameForLocator = bookName;
         if (EnumBookType.AUDIOBOOK == bookType) {
-            bookName = bookName + ". Audiobook.";
+            bookNameForLocator = bookNameForLocator + ". Audiobook.";
         }
         String actionButtonString = actionButtonKey.i18n();
-        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, bookName, actionButtonString);
-        IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
-        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString)), "lblAuthor");
+        String actionButtonLoc = String.format(ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
+        IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString)), "lblAuthor");
         String author = "";
         if (!lblAuthor.state().isDisplayed()) {
             author = null;
@@ -45,7 +45,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(bookName)
                 .setAuthor(author);
-        bookNameButton.click();
+        actionButton.click();
         return bookInfo;
     }
 
@@ -56,9 +56,9 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
             bookNameForLocator = bookNameForLocator + ". Audiobook.";
         }
         String actionButtonString = actionButtonKey.i18n();
-        String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookNameForLocator, actionButtonString);
-        IButton bookNameButton = getBookNameButtonFromListOfBooks(bookNameLoc);
-        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_BOOK_WITH_SPECIFIC_NAME_AND_SPECIFIC_ACTION_BUTTON_LOC, bookNameForLocator, actionButtonString)), "lblAuthor");
+        String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
+        ILabel lblBookName = getBookNameLabelFromListOfBooks(bookNameLoc);
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString)), "lblAuthor");
         String author = "";
         if (!lblAuthor.state().isDisplayed()) {
             author = null;
@@ -68,38 +68,40 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(bookName)
                 .setAuthor(author);
-        bookNameButton.click();
+        lblBookName.click();
         return bookInfo;
     }
 
     @Override
-    public boolean isBookPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public boolean isBookDisplayed(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        String bookNameForLocator = bookName;
         if (EnumBookType.AUDIOBOOK == bookType) {
-            bookName = bookName + ". Audiobook.";
+            bookNameForLocator = bookNameForLocator + ". Audiobook.";
         }
         String actionButtonString = actionButtonKey.i18n();
-        String bookNameLoc = String.format(SPECIFIC_BOOK_NAME_ON_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, bookName, actionButtonString);
-        return getBookNameButtonFromListOfBooks(bookNameLoc).state().waitForDisplayed();
+        String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
+        return getBookNameLabelFromListOfBooks(bookNameLoc).state().waitForDisplayed();
     }
 
     @Override
-    public boolean isActionButtonOnBookDisplayed(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public boolean isActionButtonDisplayed(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        String bookNameForLocator = bookName;
         if (EnumBookType.AUDIOBOOK == bookType) {
-            bookName = bookName + ". Audiobook.";
+            bookNameForLocator = bookNameForLocator + ". Audiobook.";
         }
         String actionButtonString = actionButtonKey.i18n();
-        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_BOOK_WITH_SPECIFIC_NAME_LOC, bookName, actionButtonString);
-        IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
-        return bookNameButton.state().isDisplayed();
+        String actionButtonLoc = String.format(ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
+        IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
+        return actionButton.state().isDisplayed();
     }
 
     @Override
     public CatalogBookModel clickActionButtonOnTheFirstBookAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         String actionButtonString = actionButtonKey.i18n();
-        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString);
-        IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
-        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString)), "lblAuthor");
-        ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(THE_FIRST_BOOK_NAME_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString)), "lblBookName");
+        String actionButtonLoc = String.format(ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, actionButtonString);
+        IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, actionButtonString)), "lblAuthor");
+        ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, actionButtonString)), "lblBookName");
         String author = "";
         if (!lblAuthor.state().isDisplayed()) {
             author = null;
@@ -109,15 +111,15 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(lblBookName.getAttribute(IosAttributes.NAME))
                 .setAuthor(author);
-        bookNameButton.click();
+        actionButton.click();
         return bookInfo;
     }
 
     @Override
-    public boolean isActionButtonOnTheFirstBookDisplayed(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+    public boolean isActionButtonForTheFirstBookDisplayed(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         String actionButtonString = actionButtonKey.i18n();
-        String actionButtonLoc = String.format(SPECIFIC_ACTION_BUTTON_ON_THE_FIRST_BOOK_WITH_SPECIFIC_ACTION_BUTTON_LOC, actionButtonString);
-        IButton bookNameButton = getActionButtonFromListOfBooks(actionButtonLoc);
-        return bookNameButton.state().isDisplayed();
+        String actionButtonLoc = String.format(ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, actionButtonString);
+        IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
+        return actionButton.state().isDisplayed();
     }
 }
