@@ -117,11 +117,9 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public String selectChapterAndGetText(int chapterNumber) {
-        AqualityServices.getConditionalWait().waitFor(() -> getElementFactory().findElements(By.xpath(LOADED_CHAPTERS_LOCATOR), ElementType.LABEL).size() >= chapterNumber, Duration.ofMillis(CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis()));
-        ILabel chapter = getChaptersText().get(chapterNumber - 1);
-        String chapterText = chapter.getAttribute(IosAttributes.NAME);
-        chapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        chapter.click();
+        ILabel lblChapterText = getChaptersText().get(chapterNumber);
+        String chapterText = lblChapterText.getAttribute(IosAttributes.NAME);
+        lblChapterText.click();
         return chapterText;
     }
 

@@ -87,10 +87,9 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public String selectChapterAndGetText(int chapterNumber) {
-        ILabel chapter = getChaptersText().get(chapterNumber - 1);
-        String chapterText = chapter.getAttribute(AndroidAttributes.TEXT);
-        chapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
-        chapter.click();
+        ILabel lblChapterText = getChaptersText().get(chapterNumber);
+        String chapterText = lblChapterText.getAttribute(AndroidAttributes.TEXT);
+        lblChapterText.click();
         return chapterText;
     }
 

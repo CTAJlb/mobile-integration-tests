@@ -51,25 +51,24 @@ public class AudioPlayerSteps {
         audioPlayerScreen.waitAndCheckAllChaptersLoaded();
     }
 
-    @When("I select the chapter not equal to the first {int} chapters and remember selected chapter text as {string}")
-    public void selectChapterIsNotEqualToSavedInContextByKeyAndSaveSelectedChapter(Integer countChapters, String keySelectedChapterText) {
-        int chapterToSelect = RandomUtils.nextInt(countChapters + 1, 5);
-        AqualityServices.getLogger().info("chapterToSelect: " + chapterToSelect);
-        String chapterText = audioPlayerScreen.selectChapterAndGetText(chapterToSelect);
-        context.add(keySelectedChapterText, chapterText);
+    @When("Select a random chapter that is not equal to the first chapter and save the chapter as {string}")
+    public void selectRandomChapterAndSaveChapter(String keyChapter) {
+        int selectedChapter = RandomUtils.nextInt(2, 5);
+        AqualityServices.getLogger().info("Selected chapter for audiobook: " + selectedChapter);
+        String chapter = audioPlayerScreen.selectChapterAndGetText(selectedChapter - 1);
+        context.add(keyChapter, chapter);
     }
 
-    @When("I select {int} chapter and remember selected chapter as {string}")
-    public void selectSecondChapterAndSaveSelectedChapter(int chapterToSelect, String keySelectedChapter) {
-        audioPlayerScreen.selectChapterAndGetText(chapterToSelect);
-        audioPlayerScreen.waitForLoadingDisappearing();
-        context.add(keySelectedChapter, chapterToSelect);
+    @When("Select the {int} chapter and save the chapter as {string}")
+    public void selectChapterAndSaveChapter(int chapterNumber, String keyChapter) {
+        String chapter = audioPlayerScreen.selectChapterAndGetText(chapterNumber - 1);
+        context.add(keyChapter, chapter);
     }
 
-    @Then("I check that current chapter text equal to remembered {string}")
-    public void checkThatCurrentChapterEqualSavedChapter(String keySelectedChapterText) {
-        String expectedChapterText = context.get(keySelectedChapterText);
-        Assert.assertTrue(String.format("Current chapter text is not correct. Expected - %s; actual - %s", expectedChapterText, getChapterText()), AqualityServices.getConditionalWait().waitFor(() -> getChapterText().toLowerCase().equals(expectedChapterText.toLowerCase())));
+    @Then("Chapter is equal to {string} saved chapter")
+    public void checkThatChapterEqualToSavedChapter(String keyChapter) {
+        String expectedChapter = context.get(keyChapter);
+        Assert.assertTrue(String.format("Chapter is not equal to saved chapter. Expected - %s; actual - %s", expectedChapter, getChapter()), expectedChapter.toLowerCase().equals(getChapter().toLowerCase()));
     }
 
     @And("I click play button on player screen")
@@ -79,7 +78,7 @@ public class AudioPlayerSteps {
 
     @When("I click pause button on player screen")
     public void clickPauseButtonOnPlayerScreen() {
-            audioPlayerScreen.pauseBook();
+        audioPlayerScreen.pauseBook();
     }
 
     @Then("Pause button is present")
@@ -183,13 +182,13 @@ public class AudioPlayerSteps {
 
     @And("I wait for {int} seconds")
     public void waitForSeconds(Integer secondsCount) {
-        if(secondsCount > 10){
-            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount/3));
+        if (secondsCount > 10) {
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount / 3));
             AqualityServices.getApplication().getDriver().getContext();
-            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount/3));
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount / 3));
             AqualityServices.getApplication().getDriver().getContext();
-            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount/3));
-        }else {
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount / 3));
+        } else {
             AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount));
         }
     }
@@ -247,7 +246,7 @@ public class AudioPlayerSteps {
         }
     }
 
-    private String getChapterText() {
+    private String getChapter() {
         return RegExUtil.getStringFromFirstGroup(audioPlayerScreen.getCurrentChapterInfo(), RegEx.AUDIO_BOOK_CURRENT_CHAPTER_TEXT_REGEX);
     }
 }
