@@ -52,9 +52,7 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
     }
 
     public void enterCredentialsForLibraryAccount(String libraryName) {
-        if (!accountsScreen.state().isDisplayed()) {
-            openAccounts();
-        }
+        openAccounts();
         accountsScreen.openLibraryAccount(libraryName);
         Credentials credentials = Configuration.getCredentials(libraryName);
         storeCredentials(credentials);
@@ -74,6 +72,7 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
     }
 
     private void openAccounts() {
+        bottomMenuForm.open(BottomMenu.SETTINGS);
         bottomMenuForm.open(BottomMenu.SETTINGS);
         settingsScreen.openLibraries();
     }

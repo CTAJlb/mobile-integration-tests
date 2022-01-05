@@ -10,7 +10,7 @@ import screens.accounts.AccountsScreen;
 @ScreenType(platform = PlatformName.IOS)
 public class IosAccountsScreen extends AccountsScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeNavigationBar[@name=\"Accounts\"]";
-    private static final String BUTTON_LIBRARY_LOCATOR = "//XCUIElementTypeStaticText[@name=\"%s\"]";
+    private static final String LIBRARY_BUTTON_BY_LIBRARY_NAME_LOC = "//XCUIElementTypeStaticText[@name=\"%s\"]/preceding-sibling::XCUIElementTypeButton";
 
     private final IButton btnAdd = getElementFactory().getButton(
             By.xpath("//XCUIElementTypeButton[@name=\"Add Library\"]"), "Add library");
@@ -27,7 +27,7 @@ public class IosAccountsScreen extends AccountsScreen {
     }
 
     private IButton getLibraryButton(String libraryName) {
-        return getElementFactory().getButton(By.xpath(String.format(BUTTON_LIBRARY_LOCATOR, libraryName)), libraryName);
+        return getElementFactory().getButton(By.xpath(String.format(LIBRARY_BUTTON_BY_LIBRARY_NAME_LOC, libraryName)), libraryName);
     }
 
     @Override
