@@ -7,7 +7,7 @@ Feature: Audiobook
     Then Login is performed successfully
     When I open Catalog
     And I open search modal
-    And I search for 'Vanderbilt' and save bookName as 'bookNameInfo'
+    And I search for 'Down the Hatch' and save bookName as 'bookNameInfo'
     And I switch to 'Audiobooks' catalog tab
     And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Click GET action button on book details screen

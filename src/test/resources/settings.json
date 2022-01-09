@@ -20,7 +20,7 @@
       }
     },
     "ios": {
-      "deviceKey": "iPhone13_15",
+      "deviceKey": "iPhone13ProMax_15",
       "capabilities": {
         "platformName": "iOS",
         "app": "",

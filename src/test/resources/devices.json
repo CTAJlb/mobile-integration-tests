@@ -1,7 +1,7 @@
 {
-  "iPhone13_15": {
+  "iPhone13ProMax_15": {
     "capabilities": {
-      "deviceName": "iPhone 13",
+      "deviceName": "iPhone 13 Pro Max",
       "platformVersion": "15"
     }
   },
