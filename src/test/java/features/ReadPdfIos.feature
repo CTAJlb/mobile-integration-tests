@@ -7,7 +7,7 @@ Feature: Read PDF IOS
     When I open Catalog
       And I switch to 'LYRASIS Reads' from side menu
       And I open search modal
-      And I search for 'Velociraptor' and save bookName as 'bookNameInfo'
+      And I search random pdf and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
