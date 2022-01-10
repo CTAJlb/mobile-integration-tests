@@ -64,6 +64,8 @@ public class IosBookmarksEpubScreen extends BookmarksEpubScreen {
         for (int i = 0; i < getListOfBookmarkTitles().size(); i++) {
             LocalDateTime actualLocalDateTime = getActualLocalDateTime(getListOfBookmarkTimeDates().get(i));
             if (getListOfBookmarkTitles().get(i).toLowerCase().equals(bookmarkTitle.toLowerCase()) && expectedLocalDateTime.getHour() == actualLocalDateTime.getHour()
+                    && expectedLocalDateTime.getMonthValue() == actualLocalDateTime.getMonthValue() && expectedLocalDateTime.getDayOfMonth() == actualLocalDateTime.getDayOfMonth()
+                    && expectedLocalDateTime.getYear() == actualLocalDateTime.getYear()
                     && (expectedLocalDateTime.getMinute() == actualLocalDateTime.getMinute() || expectedLocalDateTime.getMinute() == actualLocalDateTime.getMinute() + 1)) {
                 isBookmarkPresent = true;
                 break;

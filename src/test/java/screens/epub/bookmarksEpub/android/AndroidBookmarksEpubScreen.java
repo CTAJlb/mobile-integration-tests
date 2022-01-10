@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidBookmarksEpubScreen extends BookmarksEpubScreen {
-    private static final String BOOKMARK_TITLE_LOC = "//android.widget.TextView[contains(@resource-id,\"bookmarkTitle\")]";
+    private static final String BOOKMARK_TITLE_LOC = "//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"tocBookmarksList\")]/android.view.ViewGroup//android.widget.TextView[contains(@resource-id,\"bookmarkTitle\")]";
     private static final String BOOKMARK_DATE_TIME_LOC = "//android.widget.TextView[contains(@resource-id,\"bookmarkDate\")]";
     private static final String BTN_DELETE_LOC = "//android.widget.ImageView[contains(@resource-id,\"bookmarkDelete\")]";
 
@@ -63,16 +63,18 @@ public class AndroidBookmarksEpubScreen extends BookmarksEpubScreen {
     @Override
     public boolean isBookmarkPresent(String bookmarkTitle, String bookmarkDateTime) {
         LocalDateTime expectedLocalDateTime = getExpectedLocalDateTime(bookmarkDateTime);
-        boolean bookmarkIsPresent = false;
+        boolean isBookmarkPresent = false;
         for (int i = 0; i < getListOfBookmarkTitles().size(); i++) {
             LocalDateTime actualLocalDateTime = getActualLocalDateTime(getListOfBookmarkTimeDates().get(i));
             if (getListOfBookmarkTitles().get(i).toLowerCase().equals(bookmarkTitle.toLowerCase()) && expectedLocalDateTime.getHour() == actualLocalDateTime.getHour()
+                    && expectedLocalDateTime.getMonthValue() == actualLocalDateTime.getMonthValue() && expectedLocalDateTime.getDayOfMonth() == actualLocalDateTime.getDayOfMonth()
+                    && expectedLocalDateTime.getYear() == actualLocalDateTime.getYear()
                     && (expectedLocalDateTime.getMinute() == actualLocalDateTime.getMinute() || expectedLocalDateTime.getMinute() == actualLocalDateTime.getMinute() + 1)) {
-                bookmarkIsPresent = true;
+                isBookmarkPresent = true;
                 break;
             }
         }
-        return bookmarkIsPresent;
+        return isBookmarkPresent;
     }
 
     private LocalDateTime getExpectedLocalDateTime(String stringExpectedDateTime){
