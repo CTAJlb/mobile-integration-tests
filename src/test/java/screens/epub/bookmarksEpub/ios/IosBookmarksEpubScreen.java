@@ -60,16 +60,16 @@ public class IosBookmarksEpubScreen extends BookmarksEpubScreen {
     @Override
     public boolean isBookmarkPresent(String bookmarkTitle, String bookmarkDateTime) {
         LocalDateTime expectedLocalDateTime = getExpectedLocalDateTime(bookmarkDateTime);
-        boolean bookmarkIsPresent = false;
+        boolean isBookmarkPresent = false;
         for (int i = 0; i < getListOfBookmarkTitles().size(); i++) {
             LocalDateTime actualLocalDateTime = getActualLocalDateTime(getListOfBookmarkTimeDates().get(i));
             if (getListOfBookmarkTitles().get(i).toLowerCase().equals(bookmarkTitle.toLowerCase()) && expectedLocalDateTime.getHour() == actualLocalDateTime.getHour()
                     && (expectedLocalDateTime.getMinute() == actualLocalDateTime.getMinute() || expectedLocalDateTime.getMinute() == actualLocalDateTime.getMinute() + 1)) {
-                bookmarkIsPresent = true;
+                isBookmarkPresent = true;
                 break;
             }
         }
-        return bookmarkIsPresent;
+        return isBookmarkPresent;
     }
 
     private LocalDateTime getExpectedLocalDateTime(String stringExpectedDateTime){
@@ -79,7 +79,7 @@ public class IosBookmarksEpubScreen extends BookmarksEpubScreen {
     }
 
     private LocalDateTime getActualLocalDateTime(String stringActualDateTime){
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.M.yy, HH:m");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yy, H:m");
         LocalDateTime actualLocalDateTime = LocalDateTime.parse(deleteSomeCharactersForActualDateTime(stringActualDateTime), dateTimeFormatter);
         return actualLocalDateTime;
     }
@@ -90,6 +90,6 @@ public class IosBookmarksEpubScreen extends BookmarksEpubScreen {
     }
 
     private String deleteSomeCharactersForActualDateTime(String stringActualDateTime) {
-        return stringActualDateTime.split(" - ")[0];
+        return stringActualDateTime.split(" - ")[0].replace(" AM", "").replace(" PM", "");
     }
 }
