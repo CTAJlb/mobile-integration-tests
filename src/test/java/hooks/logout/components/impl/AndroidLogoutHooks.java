@@ -20,12 +20,14 @@ public class AndroidLogoutHooks extends AbstractLogoutHooks {
     public void logout() {
         restartApp();
         List<String> listOfLibraries = context.get(ContextLibrariesKeys.LOG_OUT.getKey());
+        if (listOfLibraries.size() == 0) {
+            throw new RuntimeException("There are not libraries for logout");
+        }
         for (String library : listOfLibraries) {
-            if (!accountScreen.state().waitForDisplayed()) {
-                bottomMenuForm.open(BottomMenu.SETTINGS);
-                settingsScreen.openLibraries();
-                accountsScreen.openLibraryAccount(library);
-            }
+            bottomMenuForm.open(BottomMenu.SETTINGS);
+            bottomMenuForm.open(BottomMenu.SETTINGS);
+            settingsScreen.openLibraries();
+            accountsScreen.openLibraryAccount(library);
             if (accountScreen.isLogoutRequired()) {
                 accountScreen.logOut();
             }

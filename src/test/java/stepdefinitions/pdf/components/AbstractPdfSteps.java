@@ -55,20 +55,18 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
     }
 
     @Override
-    public void checkEachChapterOfPdfBookCanBeOpenedFromTocPdfScreen() {
-        SoftAssertions softAssertions = new SoftAssertions();
+    public void checkThatRandomChapterOfPdfBookCanBeOpenedFromTocPdfScreen() {
         readerPdfScreen.openToc();
         List<String> chapters = tocPdfScreen.getListOfBookChapters();
-        tocPdfScreen.returnToReaderPdfScreen();
-        chapters.stream().skip(1).forEach(chapterName -> {
-            readerPdfScreen.openToc();
-            int expectedChapterNumber = tocPdfScreen.getChapterNumber(chapterName);
-            tocPdfScreen.openChapter(chapterName);
-            int actualChapterNumber = readerPdfScreen.getPageNumber();
-            softAssertions.assertThat(actualChapterNumber).as("Pdf chapter number is not correct on reader pdf screen. Expected - " + expectedChapterNumber
-                    + ", actual - " + actualChapterNumber).isEqualTo(expectedChapterNumber);
-        });
-        softAssertions.assertAll();
+        if (chapters.size() == 0) {
+            throw new RuntimeException("size of the listOfBookChapters for toc pdf == 0");
+        }
+        int randomChapterNumber = RandomUtils.nextInt(2, (int) chapters.stream().limit(5).count());
+        int expectedChapterNumber = tocPdfScreen.getChapterNumber(chapters.get(randomChapterNumber));
+        tocPdfScreen.openChapter(chapters.get(randomChapterNumber));
+        int actualChapterNumber = readerPdfScreen.getPageNumber();
+        Assert.assertTrue("Pdf chapter number is not correct on reader pdf screen. Expected - " + expectedChapterNumber
+                + ", actual - " + actualChapterNumber, actualChapterNumber == expectedChapterNumber);
     }
 
     @Override
@@ -119,7 +117,7 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
     }
 
     @Override
-    public void checkBookmarksPdfScreenIsOpened(){
+    public void checkBookmarksPdfScreenIsOpened() {
         Assert.assertTrue("Bookmarks pdf screen is not opened", tocBookmarksGalleryPdfScreen.getBookmarksPdfScreen().state().isDisplayed());
     }
 
@@ -162,7 +160,7 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
         softAssertions.assertAll();
     }
 
-   @Override
+    @Override
     public void openTheFirstFoundText() {
         readerPdfScreen.getSearchPdfScreen().openTheFirstFoundText();
     }
