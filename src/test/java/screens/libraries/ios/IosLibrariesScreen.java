@@ -1,24 +1,24 @@
-package screens.accounts.ios;
+package screens.libraries.ios;
 
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import framework.utilities.swipe.SwipeElementUtils;
 import org.openqa.selenium.By;
-import screens.accounts.AccountsScreen;
+import screens.libraries.LibrariesScreen;
 
 @ScreenType(platform = PlatformName.IOS)
-public class IosAccountsScreen extends AccountsScreen {
-    private static final String MAIN_ELEMENT = "//XCUIElementTypeNavigationBar[@name=\"Accounts\"]";
-    private static final String LIBRARY_BUTTON_BY_LIBRARY_NAME_LOC = "//XCUIElementTypeStaticText[@name=\"%s\"]/preceding-sibling::XCUIElementTypeButton";
+public class IosLibrariesScreen extends LibrariesScreen {
+    private static final String LIBRARY_BUTTON_BY_LIBRARY_NAME_LOC =
+            "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeButton";
 
-    private final IButton btnAdd = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"Add Library\"]"), "Add library");
-    private final IButton btnDelete =
-            getElementFactory().getButton(By.name("Delete"), "Delete library");
+    private final IButton btnAddLibrary = getElementFactory().getButton(
+            By.xpath("//XCUIElementTypeButton[@name=\"Add Library\"]"), "btnAddLibrary");
+    private final IButton btnDeleteLibrary =
+            getElementFactory().getButton(By.name("Delete"), "btnDeleteLibrary");
 
-    public IosAccountsScreen() {
-        super(By.xpath(MAIN_ELEMENT));
+    public IosLibrariesScreen() {
+        super(By.xpath("//XCUIElementTypeStaticText[@name=\"Libraries\"]"));
     }
 
     @Override
@@ -31,19 +31,19 @@ public class IosAccountsScreen extends AccountsScreen {
     }
 
     @Override
-    public void openLibraryAccount(String libraryName) {
+    public void openLibrary(String libraryName) {
         getLibraryButton(libraryName).click();
     }
 
     @Override
-    public void addAccount() {
-        btnAdd.click();
+    public void addLibrary() {
+        btnAddLibrary.click();
     }
 
     @Override
     public void deleteLibrary(String libraryName) {
         IButton libraryToSwipeLeft = getLibraryButton(libraryName);
         SwipeElementUtils.swipeElementLeft(libraryToSwipeLeft);
-        btnDelete.click();
+        btnDeleteLibrary.click();
     }
 }

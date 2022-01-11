@@ -7,7 +7,7 @@ import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import screens.accounts.AccountsScreen;
+import screens.libraries.LibrariesScreen;
 import screens.addaccount.AddAccountScreen;
 import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountSteps {
-    private final AccountsScreen accountsScreen;
+    private final LibrariesScreen librariesScreen;
     private final BottomMenuForm bottomMenuForm;
     private final SettingsScreen settingsScreen;
     private final AddAccountScreen addAccountScreen;
@@ -26,7 +26,7 @@ public class AccountSteps {
     @Inject
     public AccountSteps(ScenarioContext context) {
         this.context = context;
-        accountsScreen = AqualityServices.getScreenFactory().getScreen(AccountsScreen.class);
+        librariesScreen = AqualityServices.getScreenFactory().getScreen(LibrariesScreen.class);
         bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
         settingsScreen = AqualityServices.getScreenFactory().getScreen(SettingsScreen.class);
         addAccountScreen = AqualityServices.getScreenFactory().getScreen(AddAccountScreen.class);
@@ -35,7 +35,7 @@ public class AccountSteps {
     @When("I add {string} account")
     public void addAccount(String libraryName) {
         openAccounts();
-        accountsScreen.addAccount();
+        librariesScreen.addLibrary();
         addAccountScreen.selectLibraryViaSearch(libraryName);
 
         if(libraryName.toLowerCase().equals("LYRASIS Reads".toLowerCase())){
@@ -46,24 +46,24 @@ public class AccountSteps {
     @Then("Account {string} is present on Accounts screen")
     public void checkAccountIsPresent(String libraryName) {
         openAccounts();
-        Assert.assertTrue(libraryName + " is not present on Accounts screen", accountsScreen.isLibraryPresent(libraryName));
+        Assert.assertTrue(libraryName + " is not present on Accounts screen", librariesScreen.isLibraryPresent(libraryName));
     }
 
     @Then("Account {string} is not present on Accounts screen")
     public void checkAccountIsNotPresent(String libraryName) {
-        Assert.assertFalse(libraryName + " is present on Accounts screen", accountsScreen.isLibraryPresent(libraryName));
+        Assert.assertFalse(libraryName + " is present on Accounts screen", librariesScreen.isLibraryPresent(libraryName));
     }
 
     @When("I remove {string} account")
     public void removeAccount(String libraryName) {
         openAccounts();
-        accountsScreen.deleteLibrary(libraryName);
+        librariesScreen.deleteLibrary(libraryName);
     }
 
     @When("I open account {string}")
     public void openAccount(String libraryName) {
         openAccounts();
-        accountsScreen.openLibraryAccount(libraryName);
+        librariesScreen.openLibrary(libraryName);
     }
 
     private void saveLibraryInContext(String key, String libraryName) {
