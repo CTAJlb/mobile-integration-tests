@@ -11,6 +11,8 @@ import screens.libraries.LibrariesScreen;
 public class IosLibrariesScreen extends LibrariesScreen {
     private static final String LIBRARY_BUTTON_BY_LIBRARY_NAME_LOC =
             "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeButton";
+    private static final String LIBRARY_CELL_BY_LIBRARY_NAME_LOC =
+            "//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeCell";
 
     private final IButton btnAddLibrary = getElementFactory().getButton(
             By.xpath("//XCUIElementTypeButton[@name=\"Add Library\"]"), "btnAddLibrary");
@@ -27,7 +29,7 @@ public class IosLibrariesScreen extends LibrariesScreen {
     }
 
     private IButton getLibraryButton(String libraryName) {
-        return getElementFactory().getButton(By.xpath(String.format(LIBRARY_BUTTON_BY_LIBRARY_NAME_LOC, libraryName)), libraryName);
+        return getElementFactory().getButton(By.xpath(String.format(LIBRARY_BUTTON_BY_LIBRARY_NAME_LOC, libraryName)), "btnLibrary");
     }
 
     @Override
@@ -42,7 +44,7 @@ public class IosLibrariesScreen extends LibrariesScreen {
 
     @Override
     public void deleteLibrary(String libraryName) {
-        IButton libraryToSwipeLeft = getLibraryButton(libraryName);
+        IButton libraryToSwipeLeft = getElementFactory().getButton(By.xpath(String.format(LIBRARY_CELL_BY_LIBRARY_NAME_LOC, libraryName)), "libraryCell");
         SwipeElementUtils.swipeElementLeft(libraryToSwipeLeft);
         btnDeleteLibrary.click();
     }
