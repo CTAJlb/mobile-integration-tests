@@ -1,5 +1,6 @@
 package screens.epub.bookmarksEpub.ios;
 
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
@@ -60,9 +61,21 @@ public class IosBookmarksEpubScreen extends BookmarksEpubScreen {
     @Override
     public boolean isBookmarkPresent(String bookmarkTitle, String bookmarkDateTime) {
         LocalDateTime expectedLocalDateTime = getExpectedLocalDateTime(bookmarkDateTime);
+        AqualityServices.getLogger().info("expected bookmark info: ");
+        AqualityServices.getLogger().info("actual year-" + expectedLocalDateTime.getYear());
+        AqualityServices.getLogger().info("actual month-" + expectedLocalDateTime.getMonthValue());
+        AqualityServices.getLogger().info("actual dayNumber-" + expectedLocalDateTime.getDayOfMonth());
+        AqualityServices.getLogger().info("actual min-" + expectedLocalDateTime.getMinute());
+        AqualityServices.getLogger().info("actual hour-" + expectedLocalDateTime.getHour());
         boolean isBookmarkPresent = false;
         for (int i = 0; i < getListOfBookmarkTitles().size(); i++) {
             LocalDateTime actualLocalDateTime = getActualLocalDateTime(getListOfBookmarkTimeDates().get(i));
+            AqualityServices.getLogger().info("bookmark number " + i + " info: ");
+            AqualityServices.getLogger().info("actual year-" + actualLocalDateTime.getYear());
+            AqualityServices.getLogger().info("actual month-" + actualLocalDateTime.getMonth().getValue());
+            AqualityServices.getLogger().info("actual dayNumber-" + actualLocalDateTime.getDayOfMonth());
+            AqualityServices.getLogger().info("actual min-" + actualLocalDateTime.getMinute());
+            AqualityServices.getLogger().info("actual hour-" + actualLocalDateTime.getHour());
             if (getListOfBookmarkTitles().get(i).toLowerCase().equals(bookmarkTitle.toLowerCase()) && expectedLocalDateTime.getHour() == actualLocalDateTime.getHour()
                     && expectedLocalDateTime.getMonthValue() == actualLocalDateTime.getMonthValue() && expectedLocalDateTime.getDayOfMonth() == actualLocalDateTime.getDayOfMonth()
                     && expectedLocalDateTime.getYear() == actualLocalDateTime.getYear()
@@ -81,7 +94,7 @@ public class IosBookmarksEpubScreen extends BookmarksEpubScreen {
     }
 
     private LocalDateTime getActualLocalDateTime(String stringActualDateTime){
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d/M/yy, H:m");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("M/d/yy, H:m");
         LocalDateTime actualLocalDateTime = LocalDateTime.parse(deleteSomeCharactersForActualDateTime(stringActualDateTime), dateTimeFormatter);
         return actualLocalDateTime;
     }
