@@ -7,20 +7,20 @@ Feature: Audiobook
     Then Login is performed successfully
     When I open Catalog
     And I open search modal
-    And I search for 'The Given Sacrifice' and save bookName as 'bookNameInfo'
+    And I search for 'Down the Hatch' and save bookName as 'bookNameInfo'
     And I switch to 'Audiobooks' catalog tab
     And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Click GET action button on book details screen
 
   @logout @returnBooks @tier2 @oldOs @tablet
-  Scenario: Navigate by Table of Contents Menu
+  Scenario: Navigate by Table of Contents
     When Click LISTEN action button on book details screen
       And Open chapter list for an audiobook
-    When I select the chapter not equal to the first 1 chapters and remember selected chapter text as 'newChapterText'
-    Then I check that current chapter text equal to remembered 'newChapterText'
+    When Select a random chapter that is not equal to the first chapter and save the chapter as 'chapterKey'
+      And I wait for 12 seconds
+    Then Chapter is equal to 'chapterKey' saved chapter
       And Pause button is present
       And Book is playing
-
 
   @logout @returnBooks @tier2 @oldOs
   Scenario: Loading chapters
@@ -30,25 +30,27 @@ Feature: Audiobook
     Then All chapters loaded
 
   @logout @returnBooks @tier2 @oldOs
-  Scenario: Return to Chapter (Bookmarking/Syncing)
+  Scenario: Open the audiobook at the last open chapter
     When Click LISTEN action button on book details screen
       And Open chapter list for an audiobook
-    When I select the chapter not equal to the first 1 chapters and remember selected chapter text as 'newChapterText'
-      And I wait for 3 seconds
+    When Select the 2 chapter and save the chapter as 'chapterKey'
+      And I wait for 12 seconds
       And I return to previous screen for audiobook
       And Click LISTEN action button on book details screen
-    Then I check that current chapter text equal to remembered 'newChapterText'
-      And Open chapter list for an audiobook
-    When I select the chapter not equal to the first 2 chapters and remember selected chapter text as 'newChapterText2'
-      And I wait for 3 seconds
+      And I wait for 12 seconds
+    Then Chapter is equal to 'chapterKey' saved chapter
+    When Open chapter list for an audiobook
+      And Select the 4 chapter and save the chapter as 'chapterKey2'
+      And I wait for 12 seconds
       And I restart app
       And I open Books
-        And Open AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
+      And Open AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
       And Click LISTEN action button on book details screen
-    Then I check that current chapter text equal to remembered 'newChapterText2'
+      And I wait for 12 seconds
+    Then Chapter is equal to 'chapterKey2' saved chapter
 
   @logout @returnBooks @tier2 @oldOs
-  Scenario: Play Audiobook
+  Scenario: Playing Audiobook
     Then I check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
       And I click play button on player screen
@@ -59,7 +61,7 @@ Feature: Audiobook
       And Book is not playing
 
   @logout @returnBooks @tier2 @oldOs
-  Scenario: Navigate Audiobook
+  Scenario: Navigate by Audiobook
     When Click LISTEN action button on book details screen
       And I click play button on player screen
       And I save chapter length as 'chapterLength'
@@ -73,7 +75,7 @@ Feature: Audiobook
     Then Saved play time 'chapterLength' is close to middle part of chapter
 
   @logout @returnBooks @tier2 @oldOs
-  Scenario Outline: Navigate playback options
+  Scenario Outline: Navigate by Playback Options
     When Click LISTEN action button on book details screen
       And I click play button on player screen
     When I select playback speed <speed>X

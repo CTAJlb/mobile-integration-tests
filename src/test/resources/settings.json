@@ -5,7 +5,7 @@
   "screensLocation": "screens",
   "driverSettings": {
     "android": {
-      "deviceKey": "SamsungGalaxyS21_11",
+      "deviceKey": "SamsungGalaxyS21Ultra_11",
       "capabilities": {
         "platformName": "Android",
         "app": "",
@@ -20,7 +20,7 @@
       }
     },
     "ios": {
-      "deviceKey": "iPhoneXS_14",
+      "deviceKey": "iPhone13ProMax_15",
       "capabilities": {
         "platformName": "iOS",
         "app": "",
@@ -31,6 +31,7 @@
         "browserstack.networkLogs": true,
         "automationName": "XCUITest",
         "deviceOrientation": "portrait",
+        "locale": "en_US",
         "bundleId": ""
       }
     }

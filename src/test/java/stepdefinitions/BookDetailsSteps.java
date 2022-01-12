@@ -3,6 +3,7 @@ package stepdefinitions;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
+import constants.application.timeouts.BooksTimeouts;
 import constants.keysForContext.ScenarioContextKey;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
@@ -15,6 +16,7 @@ import org.junit.Assert;
 import screens.alert.AlertScreen;
 import screens.bookDetails.BookDetailsScreen;
 
+import java.time.Duration;
 import java.util.Optional;
 
 public class BookDetailsSteps {
@@ -36,6 +38,9 @@ public class BookDetailsSteps {
 
     @When("Click {} action button on book details screen")
     public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
+            actionButtonKey = EnumActionButtonsForBooksAndAlertsKeys.DOWNLOAD;
+        }
         bookDetailsScreen.clickActionButton(actionButtonKey);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
             if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE) {
@@ -49,7 +54,7 @@ public class BookDetailsSteps {
 
     @Then("I check that book contains {} action button on book details screen")
     public void checkThatBookContainsActionButton(final EnumActionButtonsForBooksAndAlertsKeys key) {
-        boolean isButtonPresent = bookDetailsScreen.isActionButtonPresent(key);
+        boolean isButtonPresent = bookDetailsScreen.isActionButtonDisplayed(key);
         addScreenshotIfErrorPresent(isButtonPresent);
         Assert.assertTrue(String.format("Button '%1$s' is not present on book details screen. Error (if present) - %2$s", key.i18n(), getErrorDetails()), isButtonPresent);
     }

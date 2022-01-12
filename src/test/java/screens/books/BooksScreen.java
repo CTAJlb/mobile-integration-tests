@@ -13,7 +13,7 @@ public abstract class BooksScreen extends Screen {
 
     public abstract boolean isNoBooksMessagePresent();
 
-    public abstract boolean isBookPresent(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
+    public abstract boolean isBookDisplayed(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
     public abstract int getCountOfBooks();
 

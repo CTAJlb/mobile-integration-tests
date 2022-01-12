@@ -40,37 +40,22 @@ public class HoldsSteps {
 
     @And("{} book with {} action button and {string} bookInfo is present on holds screen")
     public void isBookPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
-        try {
-            Thread.sleep(40000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();
         Assert.assertTrue(String.format("'%s' book with specific action button is not present on holds screen", bookName),
-                holdsScreen.isBookPresent(bookType, bookName, actionButtonKey));
+                holdsScreen.isBookDisplayed(bookType, bookName, actionButtonKey));
     }
 
     @And("{} book with {} action button and {string} bookInfo is not present on holds screen")
     public void isBookNotPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
-        try {
-            Thread.sleep(40000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();
         Assert.assertFalse(String.format("'%s' book with specific action button is present on holds screen", bookName),
-                holdsScreen.isBookPresent(bookType, bookName, actionButtonKey));
+                holdsScreen.isBookDisplayed(bookType, bookName, actionButtonKey));
     }
 
     @When("Open {} book with {} action button and {string} bookInfo on holds screen")
     public void openBook(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
-        try {
-            Thread.sleep(40000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();
         holdsScreen.openBook(bookType, bookName, actionButtonKey);

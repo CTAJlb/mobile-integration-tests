@@ -11,7 +11,7 @@ public interface IPdfSteps {
 
     void goToNextPdfPage();
 
-    void checkEachChapterOfPdfBookCanBeOpenedFromTocPdfScreen();
+    void checkThatRandomChapterOfPdfBookCanBeOpenedFromTocPdfScreen();
 
     void savePdfPageNumber(String pageNumberKey);
 

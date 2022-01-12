@@ -3,14 +3,13 @@ package stepdefinitions.credentials.components;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import constants.keysForContext.ScenarioContextKey;
-import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.configuration.Configuration;
 import framework.configuration.Credentials;
 import framework.utilities.ScenarioContext;
 import framework.utilities.returningBooksUtil.APIUtil;
 import org.junit.Assert;
 import screens.account.AccountScreen;
-import screens.accounts.AccountsScreen;
+import screens.libraries.LibrariesScreen;
 import screens.alert.AlertScreen;
 import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
@@ -24,7 +23,7 @@ import java.util.Map;
 
 public abstract class AbstractCredentialsSteps extends BaseSteps implements ICredentialsSteps {
     protected final AccountScreen accountScreen;
-    private final AccountsScreen accountsScreen;
+    private final LibrariesScreen librariesScreen;
     protected final SubcategoryScreen subcategoryScreen;
     protected final CatalogScreen catalogScreen;
     protected final AlertScreen alertScreen;
@@ -35,7 +34,7 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
     public AbstractCredentialsSteps(ScenarioContext context) {
         this.context = context;
         accountScreen = AqualityServices.getScreenFactory().getScreen(AccountScreen.class);
-        accountsScreen = AqualityServices.getScreenFactory().getScreen(AccountsScreen.class);
+        librariesScreen = AqualityServices.getScreenFactory().getScreen(LibrariesScreen.class);
         subcategoryScreen = AqualityServices.getScreenFactory().getScreen(SubcategoryScreen.class);
         catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
         alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
@@ -52,10 +51,8 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
     }
 
     public void enterCredentialsForLibraryAccount(String libraryName) {
-        if (!accountsScreen.state().isDisplayed()) {
-            openAccounts();
-        }
-        accountsScreen.openLibraryAccount(libraryName);
+        openAccounts();
+        librariesScreen.openLibrary(libraryName);
         Credentials credentials = Configuration.getCredentials(libraryName);
         storeCredentials(credentials);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
@@ -74,6 +71,7 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
     }
 
     private void openAccounts() {
+        bottomMenuForm.open(BottomMenu.SETTINGS);
         bottomMenuForm.open(BottomMenu.SETTINGS);
         settingsScreen.openLibraries();
     }

@@ -1,22 +1,17 @@
 Feature: Read PDF IOS
 
   Background:
-    Given I add "LYRASIS Reads" account from welcomeScreen
-      And I enter credentials for 'LYRASIS Reads' account
-    Then Login is performed successfully
-    When I open Catalog
-      And I switch to 'LYRASIS Reads' from side menu
-      And I open search modal
-      And I search for 'Velociraptor' and save bookName as 'bookNameInfo'
-      And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When I add "Palace Bookshelf" account from welcomeScreen
+    And I open Catalog
+    And I open search modal
+    And I search for 'A grammar of Yauyos Quechua' and save bookName as 'bookNameInfo'
+    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on reader pdf screen
 
-  @logout @returnBooks @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android @oldOs
   Scenario: Navigate by Page
     Then Pdf page number is 1 on reader pdf screen
     When I go to next page on reader pdf screen
@@ -24,11 +19,11 @@ Feature: Read PDF IOS
     When I go to previous page on reader pdf screen
     Then Pdf page number is 1 on reader pdf screen
 
-  @logout @returnBooks @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android @oldOs
   Scenario: Navigate by Table of Contents Menu
-    Then Each chapter of pdf book can be opened from toc pdf screen
+    Then Random chapter of pdf book can be opened from toc pdf screen
 
-  @logout @returnBooks @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android @oldOs
   Scenario: Open book to last page read
     When I swipe pdf page forward from 4 to 6 times on reader pdf screen
       And I save pdf page number as 'pageNumber' on reader pdf screen
@@ -46,12 +41,12 @@ Feature: Read PDF IOS
     Then 'bookInfo' book is present on reader pdf screen
       And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
 
-  @logout @returnBooks @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android @oldOs
   Scenario: Navigate by Bookmarks
     When I open bookmarks pdf screen
     Then Bookmarks pdf screen is opened
 
-  @logout @returnBooks @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android @oldOs
   Scenario: Navigate by Gallery
     When I open gallery pdf screen
     Then Gallery pdf screen is opened
@@ -59,14 +54,14 @@ Feature: Read PDF IOS
       And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
     Then 'bookInfo' book is present on reader pdf screen
 
-  @logout @returnBooks @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android @oldOs
   Scenario: Search Pdf Functionality
     When I open search pdf screen
     Then Search pdf screen is opened
     When I search 'contenido' text on search pdf screen
     Then Found lines should contain 'contenido' in themselves on search pdf screen
 
-  @logout @returnBooks @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android @oldOs
   Scenario: Navigate by Pdf Search Results
     When I open search pdf screen
       And I search 'contenido' text on search pdf screen

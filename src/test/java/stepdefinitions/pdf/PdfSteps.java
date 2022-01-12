@@ -42,10 +42,10 @@ public class PdfSteps extends BaseSteps implements IPdfSteps {
         abstractPdfSteps.goToNextPdfPage();
     }
 
-    @And("Each chapter of pdf book can be opened from toc pdf screen")
+    @And("Random chapter of pdf book can be opened from toc pdf screen")
     @Override
-    public void checkEachChapterOfPdfBookCanBeOpenedFromTocPdfScreen() {
-        abstractPdfSteps.checkEachChapterOfPdfBookCanBeOpenedFromTocPdfScreen();
+    public void checkThatRandomChapterOfPdfBookCanBeOpenedFromTocPdfScreen() {
+        abstractPdfSteps.checkThatRandomChapterOfPdfBookCanBeOpenedFromTocPdfScreen();
     }
 
     @And("I save pdf page number as {string} on reader pdf screen")
