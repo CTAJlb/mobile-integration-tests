@@ -38,6 +38,9 @@ public class BookDetailsSteps {
 
     @When("Click {} action button on book details screen")
     public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
+            actionButtonKey = EnumActionButtonsForBooksAndAlertsKeys.DOWNLOAD;
+        }
         bookDetailsScreen.clickActionButton(actionButtonKey);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
             if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE) {
@@ -47,8 +50,6 @@ public class BookDetailsSteps {
                 AqualityServices.getLogger().info("Alert appears and dismiss alert");
             }
         }
-        AqualityServices.getConditionalWait().waitFor(() ->
-                !bookDetailsScreen.isActionButtonDisplayed(actionButtonKey), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }
 
     @Then("I check that book contains {} action button on book details screen")

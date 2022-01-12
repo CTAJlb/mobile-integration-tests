@@ -5,7 +5,7 @@ Feature: Read PDF IOS
     And I open Catalog
     And I open search modal
     And I search for 'A grammar of Yauyos Quechua' and save bookName as 'bookNameInfo'
-    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen

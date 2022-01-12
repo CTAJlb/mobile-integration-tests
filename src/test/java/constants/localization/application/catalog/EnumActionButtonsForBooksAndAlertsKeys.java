@@ -13,6 +13,7 @@ public enum EnumActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     RESERVE("reserve"),
     DELETE("delete"),
     RETURN("return"),
+    DOWNLOAD("download"),
     LISTEN("listen"),
     REMOVE("remove"),
     CANCEL_POPUP("cancelPopup");

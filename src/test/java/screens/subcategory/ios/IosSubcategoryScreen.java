@@ -50,11 +50,6 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     @Override
     public List<String> getAllButtonsNames() {
         List<String> listOfNames = getValuesFromListOfLabels(BOOKS_LOCATOR + BOOK_BUTTON_XPATH);
-        //
-        System.out.println("++++++++++++++++++++////////////////////");
-        System.out.println("count-" + listOfNames.size());
-        System.out.println("++++++++++++++++++++////////////////////");
-        //
         AqualityServices.getLogger().info("Found list of buttons names - " + listOfNames.stream().map(Object::toString).collect(Collectors.joining("; ")));
         return listOfNames;
     }

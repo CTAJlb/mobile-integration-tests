@@ -38,18 +38,19 @@ public class CatalogBooksSteps {
     @When("Click {} action button on {} book with {string} bookName on catalog books screen and save book as {string}")
     public void clickActionButtonAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumBookType bookType, String bookNameKey, String bookInfoKey) {
         String bookName = context.get(bookNameKey);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
+            actionButtonKey = EnumActionButtonsForBooksAndAlertsKeys.DOWNLOAD;
+        }
         CatalogBookModel bookInfo = catalogBooksScreen.clickActionButtonAndGetBookInfo(bookType, bookName, actionButtonKey);
         context.add(bookInfoKey, bookInfo);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
-            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE){
+            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE) {
                 alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
-            }else {
+            } else {
                 AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
                 AqualityServices.getLogger().info("Alert appears and dismiss alert");
             }
         }
-        AqualityServices.getConditionalWait().waitFor(() ->
-                !catalogBooksScreen.isActionButtonDisplayed(bookType, bookName, actionButtonKey), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }
 
     @And("{} book with {} action button and {string} bookInfo is present on catalog books screen")
@@ -61,18 +62,19 @@ public class CatalogBooksSteps {
     }
 
     @And("Click {} action button on the first {} book on catalog books screen and save book as {string}")
-    public void clickActionButtonOnTheFirstBookAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumBookType bookType, String bookInfoKey){
+    public void clickActionButtonOnTheFirstBookAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumBookType bookType, String bookInfoKey) {
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
+            actionButtonKey = EnumActionButtonsForBooksAndAlertsKeys.DOWNLOAD;
+        }
         CatalogBookModel bookInfo = catalogBooksScreen.clickActionButtonOnTheFirstBookAndGetBookInfo(bookType, actionButtonKey);
         context.add(bookInfoKey, bookInfo);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
-            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE){
+            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE) {
                 alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
-            }else {
+            } else {
                 AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
                 AqualityServices.getLogger().info("Alert appears and dismiss alert");
             }
         }
-        AqualityServices.getConditionalWait().waitFor(() ->
-                !catalogBooksScreen.isActionButtonForTheFirstBookDisplayed(bookType, actionButtonKey), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }
 }
