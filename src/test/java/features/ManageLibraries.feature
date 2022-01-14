@@ -7,8 +7,8 @@ Feature: Manage Libraries
 
   @tier1 @exclude_ios @oldOs
   Scenario: Navigate by Tutorial
-    When Approve the agreement on eula agreement screen for android
-    Then Each tutorial page can be opened on tutorial screen for android and close tutorial screen
+    Then Tutorial screen is opened
+      And Each tutorial page can be opened on tutorial screen for android and close tutorial screen
       And Welcome screen is opened
 
   @tier1 @oldOs

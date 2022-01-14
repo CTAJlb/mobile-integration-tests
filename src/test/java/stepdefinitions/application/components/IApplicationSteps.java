@@ -11,6 +11,8 @@ public interface IApplicationSteps {
 
     void addAccountFromWelcomeScreen(String libraryName);
 
+    void checkThatTutorialScreenIsOpened();
+
     void checkWelcomeScreenIsOpened();
 
     void checkEachTutorialPageCanBeOpened();

@@ -35,6 +35,11 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     }
 
     @Override
+    public void checkThatTutorialScreenIsOpened(){
+        Assert.assertTrue("Tutorial screen is not opened", tutorialScreen.state().isDisplayed());
+    }
+
+    @Override
     public void restartApp() {
         AqualityServices.getApplication().getDriver().closeApp();
         AqualityServices.getApplication().getDriver().launchApp();

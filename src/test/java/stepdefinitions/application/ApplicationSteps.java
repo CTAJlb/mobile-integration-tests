@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
-    public static final String IOS_APP_BUNDLE_ID = "org.nypl.labs.SimplyE";
-    public static final String GET_CURRENT_PACKAGE_COMMAND = "getCurrentPackage";
     private AbstractApplicationSteps abstractApplicationSteps;
     private ScenarioContext context;
 
@@ -48,10 +46,10 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.addAccountFromWelcomeScreen(libraryName);
     }
 
-    @When("Approve the agreement on eula agreement screen for android")
+    @Then("Tutorial screen is opened")
     @Override
-    public void approveAgreement() {
-        abstractApplicationSteps.approveAgreement();
+    public void checkThatTutorialScreenIsOpened() {
+        abstractApplicationSteps.checkThatTutorialScreenIsOpened();
     }
 
     @Then("Welcome screen is opened")
