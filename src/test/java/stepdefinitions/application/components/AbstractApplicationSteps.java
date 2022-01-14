@@ -34,9 +34,11 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
         alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
     }
 
+    public abstract void checkEachTutorialPageCanBeOpened();
+
     @Override
-    public void checkThatTutorialScreenIsOpened(){
-        Assert.assertTrue("Tutorial screen is not opened", tutorialScreen.state().isDisplayed());
+    public void checkThatTutorialScreenIsOpened() {
+        Assert.assertTrue("Tutorial screen is not opened", tutorialScreen.state().waitForDisplayed());
     }
 
     @Override
@@ -47,15 +49,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     }
 
     @Override
-    public void checkEachTutorialPageCanBeOpened(){
-        tutorialScreen.getListOfContentDescOfTutorialTabs().stream().forEach(contentDesc -> {
-            Assert.assertTrue(String.format("Tab with '%s' contentDesc is not opened", contentDesc), tutorialScreen.isTutorialPageOpened(contentDesc));
-            tutorialScreen.goToNextPage();
-        });
-    }
-
-    @Override
-    public void checkWelcomeScreenIsOpened(){
+    public void checkWelcomeScreenIsOpened() {
         Assert.assertTrue("Welcome screen is not opened", welcomeScreen.state().isDisplayed());
     }
 }

@@ -3,9 +3,12 @@ package stepdefinitions.application.components.impl;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
+import org.junit.Assert;
 import screens.epub.readerEpub.ReaderEpubScreen;
 import screens.pdf.readerPdf.ReaderPdfScreen;
 import stepdefinitions.application.components.AbstractApplicationSteps;
+
+import java.util.List;
 
 @StepsType(platform = PlatformName.IOS)
 public class IosApplicationSteps extends AbstractApplicationSteps {
@@ -27,7 +30,7 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
             if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
                 readerPdfScreen.returnToPreviousScreen();
             } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-              readerPdfScreen.getNavigationBarScreen().tapBackButton();
+                readerPdfScreen.getNavigationBarScreen().tapBackButton();
             }
         }
     }
@@ -37,5 +40,16 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
         tutorialScreen.closeTutorial();
         welcomeScreen.tapFindLibraryButton();
         addAccountScreen.selectLibraryViaSearch(libraryName);
+    }
+
+    @Override
+    public void checkEachTutorialPageCanBeOpened() {
+        List<String> listOfPageNames = tutorialScreen.getListOfPageNames();
+        while (tutorialScreen.getListOfPageNames().size() != 0) {
+            tutorialScreen.getListOfPageNames().stream().forEach(pageName -> {
+                Assert.assertTrue(String.format("Tutorial page '%s' is not opened", pageName), tutorialScreen.isTutorialPageOpened(pageName));
+                tutorialScreen.goToNextPage();
+            });
+        }
     }
 }
