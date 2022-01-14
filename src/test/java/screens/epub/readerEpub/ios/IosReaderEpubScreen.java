@@ -98,17 +98,21 @@ public class IosReaderEpubScreen extends ReaderEpubScreen {
     private String getBookSource() {
         AppiumDriver driver = AqualityServices.getApplication().getDriver();
         Logger logger = AqualityServices.getLogger();
+
         AqualityServices.getConditionalWait().waitFor(() -> {
             Set<String> contextNames = driver.getContextHandles();
-            for (String contextName : contextNames) {
-                logger.info("context - " + contextName);
-            }
             return contextNames.size() > 1;
         });
+
         Set<String> contextNames = driver.getContextHandles();
-        driver.context((String) contextNames.toArray()[1]);
+        logger.info("count of contextHandles-" + contextNames.size());
+
+        contextNames.stream().forEach(contextName -> {
+            System.out.println("context - " + contextName);
+        });
+
+        driver.context((String) contextNames.toArray()[contextNames.size() - 1]);
         String pageSource = driver.getPageSource();
-        AqualityServices.getLogger().info("contextNames.toArray()[1]PageSource-" + pageSource);
         driver.context((String) contextNames.toArray()[0]);
         return pageSource;
     }

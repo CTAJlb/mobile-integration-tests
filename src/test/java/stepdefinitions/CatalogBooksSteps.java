@@ -4,7 +4,6 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.application.EnumBookType;
-import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
@@ -13,8 +12,6 @@ import models.android.CatalogBookModel;
 import org.junit.Assert;
 import screens.alert.AlertScreen;
 import screens.catalog.screen.books.CatalogBooksScreen;
-
-import java.time.Duration;
 
 public class CatalogBooksSteps {
     private final CatalogBooksScreen catalogBooksScreen;
@@ -38,9 +35,6 @@ public class CatalogBooksSteps {
     @When("Click {} action button on {} book with {string} bookName on catalog books screen and save book as {string}")
     public void clickActionButtonAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumBookType bookType, String bookNameKey, String bookInfoKey) {
         String bookName = context.get(bookNameKey);
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
-            actionButtonKey = EnumActionButtonsForBooksAndAlertsKeys.DOWNLOAD;
-        }
         CatalogBookModel bookInfo = catalogBooksScreen.clickActionButtonAndGetBookInfo(bookType, bookName, actionButtonKey);
         context.add(bookInfoKey, bookInfo);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
@@ -63,9 +57,6 @@ public class CatalogBooksSteps {
 
     @And("Click {} action button on the first {} book on catalog books screen and save book as {string}")
     public void clickActionButtonOnTheFirstBookAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumBookType bookType, String bookInfoKey) {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
-            actionButtonKey = EnumActionButtonsForBooksAndAlertsKeys.DOWNLOAD;
-        }
         CatalogBookModel bookInfo = catalogBooksScreen.clickActionButtonOnTheFirstBookAndGetBookInfo(bookType, actionButtonKey);
         context.add(bookInfoKey, bookInfo);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
