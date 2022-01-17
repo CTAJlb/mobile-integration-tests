@@ -27,8 +27,26 @@ Feature: Manage Libraries
     And I remove 'Palace Bookshelf' account
     Then Account 'Palace Bookshelf' is not present on Accounts screen
 
-  @tier2 @oldOs
-  Scenario: Switch library bookshelf
+  @tier2 @oldOs @exclude_ios
+  Scenario: Switch library bookshelf (ANDROID)
+    When I add "Palace Bookshelf" account from welcomeScreen
+      And I add 'LYRASIS Reads' account
+      And I open Catalog
+      And I switch to 'Palace Bookshelf' from side menu
+      And I open categories by chain and chain starts from CategoryScreen:
+        | Fiction            |
+        | Historical Fiction |
+      And Click DOWNLOAD action button on the first EBOOK book on catalog books screen and save book as 'bookInfo'
+      And I open Books
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+    When I open Catalog
+      And I return to previous screen for epub and pdf
+      And I switch to 'LYRASIS Reads' from side menu
+      And I open Books
+    Then There are not books on books screen
+
+  @tier2 @oldOs @exclude_android
+  Scenario: Switch library bookshelf (IOS)
     When I add "Palace Bookshelf" account from welcomeScreen
       And I add 'LYRASIS Reads' account
       And I open Catalog
