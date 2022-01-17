@@ -1,17 +1,17 @@
 Feature: Manage Libraries
 
-  @tier1 @oldOs
+  @tier1
   Scenario: Add Library
     When I add "LYRASIS Reads" account from welcomeScreen
     Then Account 'LYRASIS Reads' is present on Accounts screen
 
-  @tier1 @exclude_ios @oldOs
+  @tier1 @exclude_ios
   Scenario: Navigate by Tutorial
     Then Tutorial screen is opened
       And Each tutorial page can be opened on tutorial screen for android and close tutorial screen
       And Welcome screen is opened
 
-  @tier1 @oldOs
+  @tier1
   Scenario: Switch Library Catalogs
     When I add "Palace Bookshelf" account from welcomeScreen
       And I get names of books on screen and save them as 'nameOfBooks'
@@ -19,7 +19,7 @@ Feature: Manage Libraries
     Then Category rows are loaded
       And List of books on screen is not equal to list of books saved as 'nameOfBooks'
 
-  @tier1 @oldOs
+  @tier1
   Scenario: Remove library
     When I add "LYRASIS Reads" account from welcomeScreen
     And I add 'Palace Bookshelf' account
@@ -27,7 +27,7 @@ Feature: Manage Libraries
     And I remove 'Palace Bookshelf' account
     Then Account 'Palace Bookshelf' is not present on Accounts screen
 
-  @tier2 @oldOs @exclude_ios
+  @tier2 @exclude_ios
   Scenario: Switch library bookshelf (ANDROID)
     When I add "Palace Bookshelf" account from welcomeScreen
       And I add 'LYRASIS Reads' account
@@ -45,7 +45,7 @@ Feature: Manage Libraries
       And I open Books
     Then There are not books on books screen
 
-  @tier2 @oldOs @exclude_android
+  @tier2 @exclude_android
   Scenario: Switch library bookshelf (IOS)
     When I add "Palace Bookshelf" account from welcomeScreen
       And I add 'LYRASIS Reads' account
@@ -63,7 +63,7 @@ Feature: Manage Libraries
       And I open Books
     Then There are not books on books screen
 
-  @logout @returnBooks @tier2 @oldOs
+  @logout @returnBooks @tier2
   Scenario: Switch Library Reservations
     When I add "Carnegie Library of Pittsburgh" account from welcomeScreen
     When I add 'LYRASIS Reads' account
@@ -87,7 +87,7 @@ Feature: Manage Libraries
       And I open Holds
       And There are not books on holds screen
 
-  @logout @tier2 @oldOs
+  @logout @tier2
   Scenario: Store library card
     When I add "LYRASIS Reads" account from welcomeScreen
     Then Account 'LYRASIS Reads' is present on Accounts screen

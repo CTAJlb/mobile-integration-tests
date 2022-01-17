@@ -2,7 +2,6 @@ package stepdefinitions.application;
 
 import com.google.inject.Inject;
 import constants.keysForContext.ContextLibrariesKeys;
-import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -23,11 +22,6 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
     public ApplicationSteps(ScenarioContext context) {
         this.context = context;
         this.abstractApplicationSteps = stepsFactory.getSteps(AbstractApplicationSteps.class);
-    }
-
-    @Then("I click {} button on alert for ios")
-    public void performActionOnAlert(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        abstractApplicationSteps.performActionOnAlert(actionButtonKey);
     }
 
     @And("I return to previous screen for epub and pdf")
@@ -64,8 +58,8 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.checkEachTutorialPageCanBeOpened();
     }
 
-    private void saveLibraryForLogOut(String libraryName){
-        if(libraryName.toLowerCase().equals("LYRASIS Reads".toLowerCase())){
+    private void saveLibraryForLogOut(String libraryName) {
+        if (libraryName.toLowerCase().equals("LYRASIS Reads".toLowerCase())) {
             saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
         }
     }

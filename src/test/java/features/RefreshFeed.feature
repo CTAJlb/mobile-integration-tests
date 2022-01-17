@@ -1,6 +1,6 @@
 Feature: Feed
 
-  @tier2 @oldOs @exclude_ios
+  @tier2 @exclude_ios
   Scenario: Update Bookshelf List (ANDROID)
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open categories by chain and chain starts from CategoryScreen:
@@ -14,7 +14,7 @@ Feature: Feed
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
       And Amount of books is equal to 1 on books screen
 
-  @tier2 @oldOs @exclude_android
+  @tier2 @exclude_android
   Scenario: Update Bookshelf List (IOS)
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open categories by chain and chain starts from CategoryScreen:

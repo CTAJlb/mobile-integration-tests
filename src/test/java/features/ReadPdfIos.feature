@@ -11,7 +11,7 @@ Feature: Read PDF IOS
       And Click READ action button on book details screen
     #Then 'bookInfo' book is present on reader pdf screen
 
-  @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android
   Scenario: Navigate by Page
     Then Pdf page number is 1 on reader pdf screen
     When I go to next page on reader pdf screen
@@ -19,11 +19,11 @@ Feature: Read PDF IOS
     When I go to previous page on reader pdf screen
     Then Pdf page number is 1 on reader pdf screen
 
-  @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android
   Scenario: Navigate by Table of Contents Menu
     Then Random chapter of pdf book can be opened from toc pdf screen
 
-  @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android
   Scenario: Open book to last page read
     When I swipe pdf page forward from 4 to 6 times on reader pdf screen
       And I save pdf page number as 'pageNumber' on reader pdf screen
@@ -41,12 +41,12 @@ Feature: Read PDF IOS
     Then 'bookInfo' book is present on reader pdf screen
       And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
 
-  @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android
   Scenario: Navigate by Bookmarks
     When I open bookmarks pdf screen
     Then Bookmarks pdf screen is opened
 
-  @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android
   Scenario: Navigate by Gallery
     When I open gallery pdf screen
     Then Gallery pdf screen is opened
@@ -54,14 +54,14 @@ Feature: Read PDF IOS
       And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
     Then 'bookInfo' book is present on reader pdf screen
 
-  @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android
   Scenario: Search Pdf Functionality
     When I open search pdf screen
     Then Search pdf screen is opened
     When I search 'contenido' text on search pdf screen
     Then Found lines should contain 'contenido' in themselves on search pdf screen
 
-  @tier1 @exclude_android @oldOs
+  @tier1 @exclude_android
   Scenario: Navigate by Pdf Search Results
     When I open search pdf screen
       And I search 'contenido' text on search pdf screen

@@ -47,6 +47,12 @@ public class BookDetailsSteps {
         }
     }
 
+    @When("Click {} action button on book details screen and click {} action button on alert. Only for ios")
+    public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionBookButtonKey, EnumActionButtonsForBooksAndAlertsKeys actionAlertButtonKey) {
+        bookDetailsScreen.clickActionButton(actionBookButtonKey);
+        alertScreen.waitAndPerformAlertActionIfDisplayed(actionAlertButtonKey);
+    }
+
     @Then("I check that book contains {} action button on book details screen")
     public void checkThatBookContainsActionButton(final EnumActionButtonsForBooksAndAlertsKeys key) {
         boolean isButtonPresent = bookDetailsScreen.isActionButtonDisplayed(key);

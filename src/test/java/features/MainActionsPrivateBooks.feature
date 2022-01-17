@@ -139,8 +139,8 @@ Feature: Main actions private access books
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on epub reader screen
 
-  @logout @returnBooks @tier3 @exclude_android @ignore
-  Scenario: Hold from Book Detail View and Cancel remove from holds tab(IOS)
+  @logout @returnBooks @tier3 @exclude_android
+  Scenario: Hold from Book Detail View and Cancel remove from holds tab (IOS)
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
@@ -148,13 +148,12 @@ Feature: Main actions private access books
       And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
     When Click RESERVE action button on book details screen
-      And I close Book Details for IOSTab
+    Then I check that book contains REMOVE action button on book details screen
+    When Click REMOVE action button on book details screen and click CANCEL action button on alert. Only for ios
+    Then I check that book contains REMOVE action button on book details screen
+    When I close Book Details for IOSTab
       And I open Holds
-    Then Book 'bookInfo' is present in Holds List
-    When I click on the book 'bookInfo' button REMOVE on the holds screen and don't click on the popup button
-    Then I click CANCEL_POPUP button on alert for ios
-      And Book saved as 'bookInfo' should contain REMOVE button at the hold screen
+    Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen

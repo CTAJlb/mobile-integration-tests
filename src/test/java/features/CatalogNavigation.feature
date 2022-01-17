@@ -1,6 +1,6 @@
 Feature: Catalog Navigation
 
-  @tier1 @oldOs
+  @tier1
   Scenario: Return to last library catalog
     When I add "Palace Bookshelf" account from welcomeScreen
       And I add 'LYRASIS Reads' account
@@ -11,7 +11,7 @@ Feature: Catalog Navigation
     Then Category rows are loaded
       And Library 'LYRASIS Reads' is present on Catalog Screen
 
-  @tier1 @oldOs
+  @tier1
   Scenario: Browse Categories
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
@@ -32,7 +32,7 @@ Feature: Catalog Navigation
     When I open first book in Subcategory List and save it as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
 
-  @tier1 @oldOs
+  @tier1
   Scenario: Sort Lists
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
