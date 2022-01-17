@@ -8,7 +8,7 @@ Feature: Read EPUB
 
   @tier1 @exclude_ios
   Scenario: Navigate by Page (ANDROID)
-    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on epub reader screen
@@ -36,7 +36,7 @@ Feature: Read EPUB
 
   @tier1 @exclude_ios
   Scenario: Navigate by bookmarks (ANDROID)
-    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
       And I click on right book corner on epub reader screen
@@ -78,7 +78,7 @@ Feature: Read EPUB
 
   @tier1 @exclude_ios
   Scenario: Delete bookmarks (ANDROID)
-    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
       And I click on right book corner on epub reader screen
@@ -122,7 +122,7 @@ Feature: Read EPUB
 
   @tier1 @exclude_ios
   Scenario: Navigate by Table of Contents Menu (ANDROID)
-    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
     Then Each chapter of epub book can be opened from table of contents
@@ -136,7 +136,7 @@ Feature: Read EPUB
 
   @tier1 @exclude_ios
   Scenario: Navigate View options (ANDROID)
-    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
       And I return to previous screen for epub and pdf
@@ -164,7 +164,7 @@ Feature: Read EPUB
 
   @tier1 @exclude_ios
   Scenario: Change, View Font and Contrast Settings (ANDROID)
-    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
       And I scroll page forward from 7 to 9 times
@@ -230,7 +230,7 @@ Feature: Read EPUB
 
   @tier1 @exclude_ios
   Scenario: Open book to last page read (ANDROID)
-    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
       And I scroll page forward from 1 to 2 times
