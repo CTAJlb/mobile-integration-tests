@@ -4,7 +4,7 @@ Feature: Read PDF
     When I add "Palace Bookshelf" account from welcomeScreen
     And I open Catalog
     And I open search modal
-    And I search for 'Active Calculus Multivariable' and save bookName as 'bookNameInfo'
+    And I search for 'Deep into Pharo' and save bookName as 'bookNameInfo'
 
   @tier1 @exclude_ios
   Scenario: Open document

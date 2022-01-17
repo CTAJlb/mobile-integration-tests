@@ -4,12 +4,12 @@ Feature: Read PDF IOS
     When I add "Palace Bookshelf" account from welcomeScreen
     And I open Catalog
     And I open search modal
-    And I search for 'Active Calculus Multivariable' and save bookName as 'bookNameInfo'
+    And I search for 'Deep into Pharo' and save bookName as 'bookNameInfo'
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
-    #Then 'bookInfo' book is present on reader pdf screen
+    Then 'bookInfo' book is present on reader pdf screen
 
   @tier1 @exclude_android
   Scenario: Navigate by Page
