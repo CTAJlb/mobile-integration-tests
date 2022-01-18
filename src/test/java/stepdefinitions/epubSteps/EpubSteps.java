@@ -97,7 +97,7 @@ public class EpubSteps {
         readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
         tocBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.TOC);
         List<String> chapters = tocBookmarksEpubScreen.getTocEpubScreen().getListOfBookChapters();
-        String chapterName = chapters.get(RandomUtils.nextInt(0, chapters.size()));
+        String chapterName = chapters.get(RandomUtils.nextInt(1, chapters.size()));
         tocBookmarksEpubScreen.getTocEpubScreen().openChapter(chapterName);
         Assert.assertTrue("Chapter name is not correct. ExpectedChapterName-" + chapterName.toLowerCase() + ", ActualChapterName-"
                 + readerEpubScreen.getChapterName().toLowerCase(), readerEpubScreen.getChapterName().toLowerCase().equals(chapterName.toLowerCase()));
