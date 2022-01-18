@@ -256,7 +256,7 @@ Feature: Read EPUB
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
-      And I scroll page forward from 1 to 2 times
+      And I scroll page forward from 7 to 10 times
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And I wait for 3 seconds
       And I return to previous screen for epub and pdf

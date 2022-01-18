@@ -41,7 +41,7 @@ public class AudioPlayerSteps {
     public void downloadHasStarted() {
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
             Integer percentageValue = audioPlayerScreen.getPercentageValue();
-            boolean isPercentageValueNew = AqualityServices.getConditionalWait().waitFor(() -> percentageValue != 0, Duration.ofMillis(5000));
+            boolean isPercentageValueNew = AqualityServices.getConditionalWait().waitFor(() -> percentageValue != 0, Duration.ofMillis(10000));
             Assert.assertTrue("percentageValue did not change", isPercentageValueNew);
         }
     }
