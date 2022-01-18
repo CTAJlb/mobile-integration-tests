@@ -91,22 +91,16 @@ public class EpubSteps {
                 (actualPageNumber == 1 && !actualChapterName.toLowerCase().equals(expectedChapterName.toLowerCase())));
     }
 
-    @And("Each chapter of epub book can be opened from table of contents")
-    public void checkEachChapterCanBeOpenedFromTableOfContents() {
-        SoftAssertions softAssertions = new SoftAssertions();
+    @And("Random chapter of epub can be opened from toc epub screen")
+    public void checkThatRandomChapterCanBeOpenedFromTocEpubScreen() {
         readerEpubScreen.openNavigationBar();
         readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
         tocBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.TOC);
         List<String> chapters = tocBookmarksEpubScreen.getTocEpubScreen().getListOfBookChapters();
-        tocBookmarksEpubScreen.returnToPreviousScreen();
-        for (String chapter : chapters) {
-            readerEpubScreen.openNavigationBar();
-            readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
-            tocBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.TOC);
-            tocBookmarksEpubScreen.getTocEpubScreen().openChapter(chapter);
-            softAssertions.assertThat(chapter.toLowerCase().equals(readerEpubScreen.getChapterName().toLowerCase())).as("ChapterName is not correct. ExpectedChapterName-" + chapter.toLowerCase() + " , ActualChapterName-" + readerEpubScreen.getChapterName().toLowerCase()).isTrue();
-        }
-        softAssertions.assertAll();
+        String chapterName = chapters.get(RandomUtils.nextInt(0, chapters.size()));
+        tocBookmarksEpubScreen.getTocEpubScreen().openChapter(chapterName);
+        Assert.assertTrue("Chapter name is not correct. ExpectedChapterName-" + chapterName.toLowerCase() + ", ActualChapterName-"
+                + readerEpubScreen.getChapterName().toLowerCase(), readerEpubScreen.getChapterName().toLowerCase().equals(chapterName.toLowerCase()));
     }
 
     @When("I open font choices on epub reader screen")

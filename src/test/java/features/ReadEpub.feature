@@ -125,14 +125,14 @@ Feature: Read EPUB
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
-    Then Each chapter of epub book can be opened from table of contents
+    Then Random chapter of epub can be opened from toc epub screen
 
   @tier1 @exclude_android
   Scenario: Navigate by Table of Contents Menu (IOS)
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
-    Then Each chapter of epub book can be opened from table of contents
+    Then Random chapter of epub can be opened from toc epub screen
 
   @tier1 @exclude_ios
   Scenario: Navigate View options (ANDROID)

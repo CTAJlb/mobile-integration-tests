@@ -39,7 +39,7 @@ public class IosTocEpubScreen extends TocEpubScreen {
         return listOfChapters;
     }
 
-    private List<ILabel> getChapters() {
-        return getElementFactory().findElements(By.xpath(CHAPTER_LOC), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
+    private List<IElement> getChapters() {
+        return getElementFactory().findElements(By.xpath(CHAPTER_LOC), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
     }
 }
