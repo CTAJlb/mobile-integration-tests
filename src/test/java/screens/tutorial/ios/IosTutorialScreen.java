@@ -6,6 +6,8 @@ import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import aquality.selenium.core.elements.ElementState;
+import aquality.selenium.core.elements.ElementsCount;
 import constants.application.attributes.IosAttributes;
 import framework.utilities.swipe.SwipeElementUtils;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;
@@ -55,6 +57,6 @@ public class IosTutorialScreen extends TutorialScreen {
     }
 
     private List<ILabel> getListOfIlableOfTutorialTabs() {
-        return getElementFactory().findElements(By.xpath(TUTORIAL_TAB_LOC), ElementType.LABEL);
+        return getElementFactory().findElements(By.xpath(TUTORIAL_TAB_LOC), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
     }
 }
