@@ -27,7 +27,6 @@ public class IosTocEpubScreen extends TocEpubScreen {
     @Override
     public void openChapter(String chapter) {
         ILabel lblChapter = getElementFactory().getLabel(By.xpath(String.format(CHAPTER_BY_NAME_LOC, chapter)), chapter);
-        lblChapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         lblChapter.click();
     }
 

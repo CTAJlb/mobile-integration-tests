@@ -24,14 +24,9 @@ public class AndroidTocEpubScreen extends TocEpubScreen {
         super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"tocLayout\")]"));
     }
 
-    private List<ILabel> getChapters() {
-        return getElementFactory().findElements(By.xpath(CHAPTER_LOC), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
-    }
-
     @Override
     public void openChapter(String chapter) {
         ILabel lblChapter = getElementFactory().getLabel(By.xpath(String.format(CHAPTER_BY_NAME_LOC, chapter)), chapter);
-        lblChapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         lblChapter.click();
     }
 
@@ -41,5 +36,9 @@ public class AndroidTocEpubScreen extends TocEpubScreen {
         AqualityServices.getLogger().info("Found chapters on toc epub - " + listOfChapters.stream().map(Object::toString).collect(Collectors.joining(", ")));
         AqualityServices.getLogger().info("amountOfChapters on toc epub - " + listOfChapters.size());
         return listOfChapters;
+    }
+
+    private List<IElement> getChapters() {
+        return getElementFactory().findElements(By.xpath(CHAPTER_LOC), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
     }
 }
