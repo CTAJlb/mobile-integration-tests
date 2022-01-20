@@ -31,7 +31,7 @@ Feature: Read PDF IOS
       And I return to previous screen for epub and pdf
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on reader pdf screen
-      And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
+      And The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
       And I wait for 3 seconds
     When I restart app
       And I open Books
@@ -39,7 +39,7 @@ Feature: Read PDF IOS
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on reader pdf screen
-      And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
+      And The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
 
   @tier1 @exclude_android
   Scenario: Navigate by Bookmarks
@@ -51,7 +51,7 @@ Feature: Read PDF IOS
     When I open gallery pdf screen
     Then Gallery pdf screen is opened
     When I open random pdf page on gallery pdf screen and save pdf page number as 'pageNumber'
-      And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
+      And The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
     Then 'bookInfo' book is present on reader pdf screen
 
   @tier1 @exclude_android
@@ -67,4 +67,4 @@ Feature: Read PDF IOS
       And I search 'contenido' text on search pdf screen
       And I save page number as 'pageNumber' of the first found text on search pdf screen
       And I open the first found text on search pdf screen
-    Then 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
+    Then The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen

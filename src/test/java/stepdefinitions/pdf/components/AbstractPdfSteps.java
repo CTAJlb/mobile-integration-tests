@@ -95,6 +95,15 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
     }
 
     @Override
+    public void checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(String pageNumberKey){
+        int savedPageNumber = context.get(pageNumberKey);
+        int currentPageNumber = readerPdfScreen.getPageNumber();
+        Assert.assertTrue(  "Saved page number is not equal to current page number on reader pdf screen. SavedPageNumber - " +
+                savedPageNumber + ", currentPageNumber - " + currentPageNumber, savedPageNumber == currentPageNumber);
+
+    }
+
+    @Override
     public void checkThatSavedPdfPageNumberIsGreaterThanCurrentPdfPageNumber(String pageNumberKey) {
         int savedPageNumber = context.get(pageNumberKey);
         int currentPageNumber = readerPdfScreen.getPageNumber();

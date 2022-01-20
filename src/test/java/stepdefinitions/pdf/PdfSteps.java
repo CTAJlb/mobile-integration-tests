@@ -71,6 +71,11 @@ public class PdfSteps extends BaseSteps implements IPdfSteps {
         abstractPdfSteps.checkThatSavedPdfPageNumberIsLessThanCurrentPdfPageNumber(pageNumberKey);
     }
 
+    @Then("The {string} saved page number is equal to the current page number on the reader pdf screen")
+    public void checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(String pageNumberKey) {
+        abstractPdfSteps.checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(pageNumberKey);
+    }
+
     @Then("The {string} saved page number is greater than the current page number on the reader pdf screen")
     public void checkThatSavedPdfPageNumberIsGreaterThanCurrentPdfPageNumber(String pageNumberKey) {
         abstractPdfSteps.checkThatSavedPdfPageNumberIsGreaterThanCurrentPdfPageNumber(pageNumberKey);

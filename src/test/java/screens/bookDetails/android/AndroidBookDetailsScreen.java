@@ -46,7 +46,7 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     @Override
     public boolean isActionButtonDisplayed(EnumActionButtonsForBooksAndAlertsKeys key) {
         IButton button = getActionButton(key);
-        return button.state().isDisplayed();
+        return button.state().waitForDisplayed();
     }
 
     @Override

@@ -49,14 +49,14 @@ Feature: Read PDF
       And I return to previous screen for epub and pdf
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on reader pdf screen
-      And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
+      And The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
     When I restart app
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on reader pdf screen
-      And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
+      And The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
 
   @tier1 @exclude_ios
   Scenario: Close book

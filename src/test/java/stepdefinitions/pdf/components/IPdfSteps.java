@@ -23,6 +23,8 @@ public interface IPdfSteps {
 
     void checkThatSavedPdfPageNumberIsLessThanCurrentPdfPageNumber(String pageNumberKey);
 
+    void checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(String pageNumberKey);
+
     void openGalleryPdfScreen();
 
     void openBookmarksPdfScreen();

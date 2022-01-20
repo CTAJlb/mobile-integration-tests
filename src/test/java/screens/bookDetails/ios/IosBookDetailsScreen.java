@@ -57,7 +57,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
 
     @Override
     public boolean isActionButtonDisplayed(EnumActionButtonsForBooksAndAlertsKeys key) {
-        return getActionButton(key).state().isDisplayed();
+        return getActionButton(key).state().waitForDisplayed();
     }
 
     @Override
