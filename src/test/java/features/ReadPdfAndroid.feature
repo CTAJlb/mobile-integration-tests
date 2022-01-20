@@ -77,7 +77,7 @@ Feature: Read PDF
     Then 'bookInfo' book is present on reader pdf screen
     When I save pdf page number as 'pageNumber' on reader pdf screen
       And Slide page slider RIGHT on reader pdf screen
-    Then 'pageNumber' pdf saved page number should not be equal to current page number on reader pdf screen
+    Then The 'pageNumber' saved page number is less than the current page number on the reader pdf screen
     When I save pdf page number as 'pageNumber' on reader pdf screen
       And Slide page slider LEFT on reader pdf screen
-    Then 'pageNumber' pdf saved page number should not be equal to current page number on reader pdf screen
+    Then The 'pageNumber' saved page number is greater than the current page number on the reader pdf screen

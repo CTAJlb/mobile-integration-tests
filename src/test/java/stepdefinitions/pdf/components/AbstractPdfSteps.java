@@ -87,19 +87,19 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
     }
 
     @Override
-    public void checkPdfSavedPageNumberIsNotEqualsToCurrentPdfPageNumber(String pageNumberKey) {
+    public void checkThatSavedPdfPageNumberIsLessThanCurrentPdfPageNumber(String pageNumberKey) {
         int savedPageNumber = context.get(pageNumberKey);
         int currentPageNumber = readerPdfScreen.getPageNumber();
-        Assert.assertNotEquals("Saved page number is equals to current page number on reader pdf screen. SavedPageNumber - " +
-                savedPageNumber + ", currentPageNumber - " + currentPageNumber, savedPageNumber, currentPageNumber);
+        Assert.assertTrue(  "Saved page number is greater that current page number on reader pdf screen. SavedPageNumber - " +
+                savedPageNumber + ", currentPageNumber - " + currentPageNumber, savedPageNumber < currentPageNumber);
     }
 
     @Override
-    public void checkSavedPdfPageNumberIsEqualsToCurrentPdfPageNumber(String pageNumberKey) {
+    public void checkThatSavedPdfPageNumberIsGreaterThanCurrentPdfPageNumber(String pageNumberKey) {
         int savedPageNumber = context.get(pageNumberKey);
         int currentPageNumber = readerPdfScreen.getPageNumber();
-        Assert.assertEquals("Saved page number is not equals to current page number on reader pdf screen. SavedPageNumber - " +
-                savedPageNumber + ", currentPageNumber - " + currentPageNumber, savedPageNumber, currentPageNumber);
+        Assert.assertTrue("Saved page number is less than current page number on reader pdf screen. SavedPageNumber - " +
+                savedPageNumber + ", currentPageNumber - " + currentPageNumber, savedPageNumber > currentPageNumber);
     }
 
     @Override
