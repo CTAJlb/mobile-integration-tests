@@ -8,6 +8,8 @@ import screens.tutorial.TutorialScreen;
 import screens.welcome.WelcomeScreen;
 import stepdefinitions.BaseSteps;
 
+import java.time.Duration;
+
 public abstract class AbstractApplicationSteps extends BaseSteps implements IApplicationSteps {
     protected final WelcomeScreen welcomeScreen;
     protected final AddAccountScreen addAccountScreen;
@@ -26,7 +28,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     public abstract void addAccountFromWelcomeScreen(String libraryName);
 
     @Override
-    public void checkEachTutorialPageCanBeOpened(){
+    public void checkEachTutorialPageCanBeOpened() {
         tutorialScreen.getListOfPageNames().stream().forEach(pageName -> {
             Assert.assertTrue(String.format("Tutorial page '%s' is not opened", pageName), tutorialScreen.isTutorialPageOpened(pageName));
             tutorialScreen.goToNextPage();
@@ -40,6 +42,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     @Override
     public void restartApp() {
+        AqualityServices.getApplication().getDriver().runAppInBackground(Duration.ofMillis(2000));
         AqualityServices.getApplication().getDriver().closeApp();
         AqualityServices.getApplication().getDriver().launchApp();
         catalogScreen.state().waitForDisplayed();
