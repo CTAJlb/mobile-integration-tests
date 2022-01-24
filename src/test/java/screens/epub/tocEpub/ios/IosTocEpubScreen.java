@@ -27,7 +27,6 @@ public class IosTocEpubScreen extends TocEpubScreen {
     @Override
     public void openChapter(String chapter) {
         ILabel lblChapter = getElementFactory().getLabel(By.xpath(String.format(CHAPTER_BY_NAME_LOC, chapter)), chapter);
-        lblChapter.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         lblChapter.click();
     }
 
@@ -39,7 +38,7 @@ public class IosTocEpubScreen extends TocEpubScreen {
         return listOfChapters;
     }
 
-    private List<ILabel> getChapters() {
-        return getElementFactory().findElements(By.xpath(CHAPTER_LOC), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
+    private List<IElement> getChapters() {
+        return getElementFactory().findElements(By.xpath(CHAPTER_LOC), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
     }
 }

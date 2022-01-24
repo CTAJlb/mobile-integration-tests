@@ -18,12 +18,19 @@ import java.util.List;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosBookDetailsScreen extends BookDetailsScreen {
-    private static final String MAIN_ELEMENT = "//XCUIElementTypeStaticText[@name=//XCUIElementTypeNavigationBar/@name]";
-    private static final String BOOK_MAIN_INFO = "//XCUIElementTypeStaticText[@name=\"Description\"]//preceding-sibling::XCUIElementTypeStaticText[@name]";
-    private static final String BOOK_ACTION_BUTTON_LOC = "//XCUIElementTypeButton[@name=\"%s\"]";
-    private static final String LBL_BOOK_AUTHORS_INFO = String.format("(%1$s)[%%d]", BOOK_MAIN_INFO);
+    private static final String MAIN_ELEMENT =
+            "//XCUIElementTypeStaticText[@name=//XCUIElementTypeNavigationBar/@name]";
+    private static final String BOOK_MAIN_INFO =
+            "//XCUIElementTypeStaticText[@name=\"Description\"]//preceding-sibling::XCUIElementTypeStaticText[@name]";
+    private static final String BOOK_ACTION_BUTTON_LOC =
+            "//XCUIElementTypeButton/XCUIElementTypeStaticText[@name=\"%s\"]";
+    private static final String LBL_BOOK_AUTHORS_INFO =
+            String.format("(%1$s)[%%d]", BOOK_MAIN_INFO);
 
-    private final ILabel lblBookTitleInfo = getElementFactory().getLabel(By.xpath("(//XCUIElementTypeOther//XCUIElementTypeStaticText[@name])[1]"), "Book title");
+    private final ILabel lblBookTitleInfo =
+            getElementFactory().getLabel(By.xpath("(//XCUIElementTypeOther//XCUIElementTypeStaticText[@name])[1]"), "Book title");
+    private final ILabel lblProgressBar =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeProgressIndicator"), "lblProgressBar");
     private final IButton btnCloseBookDetailsOnlyIOSTab =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeButton/XCUIElementTypeStaticText[contains(@name, \"Close\")]"), "Close button");
     private final IButton lblErrorDetails =
@@ -50,13 +57,18 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
 
     @Override
     public boolean isActionButtonDisplayed(EnumActionButtonsForBooksAndAlertsKeys key) {
-        return getActionButton(key).state().isDisplayed();
+        return getActionButton(key).state().waitForDisplayed();
     }
 
     @Override
     public void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKeys) {
         IButton actionButton = getActionButton(buttonKeys);
         actionButton.click();
+        if (buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.GET || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.REMOVE
+                || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.DELETE || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.RETURN
+                || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
+            AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+        }
     }
 
     @Override
@@ -70,6 +82,11 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     @Override
     public boolean isErrorButtonPresent() {
         return lblErrorDetails.state().isDisplayed();
+    }
+
+    @Override
+    public boolean isProgressBarDisplayed() {
+        return lblProgressBar.state().isDisplayed();
     }
 
     @Override

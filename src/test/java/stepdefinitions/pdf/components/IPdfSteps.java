@@ -19,9 +19,11 @@ public interface IPdfSteps {
 
     void slidePdfPageSlider(EntireScreenDragDirection entireScreenDragDirection);
 
-    void checkPdfSavedPageNumberIsNotEqualsToCurrentPdfPageNumber(String pageNumberKey);
+    void checkThatSavedPdfPageNumberIsGreaterThanCurrentPdfPageNumber(String pageNumberKey);
 
-    void checkSavedPdfPageNumberIsEqualsToCurrentPdfPageNumber(String pageNumberKey);
+    void checkThatSavedPdfPageNumberIsLessThanCurrentPdfPageNumber(String pageNumberKey);
+
+    void checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(String pageNumberKey);
 
     void openGalleryPdfScreen();
 

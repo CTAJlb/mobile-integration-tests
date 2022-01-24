@@ -41,7 +41,7 @@ public class AudioPlayerSteps {
     public void downloadHasStarted() {
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
             Integer percentageValue = audioPlayerScreen.getPercentageValue();
-            boolean isPercentageValueNew = AqualityServices.getConditionalWait().waitFor(() -> percentageValue != 0, Duration.ofMillis(5000));
+            boolean isPercentageValueNew = AqualityServices.getConditionalWait().waitFor(() -> percentageValue != 0, Duration.ofMillis(10000));
             Assert.assertTrue("percentageValue did not change", isPercentageValueNew);
         }
     }
@@ -53,10 +53,9 @@ public class AudioPlayerSteps {
 
     @When("Select a random chapter that is not equal to the first chapter and save the chapter as {string}")
     public void selectRandomChapterAndSaveChapter(String keyChapter) {
-        int selectedChapter = RandomUtils.nextInt(2, 5);
-        AqualityServices.getLogger().info("Selected chapter for audiobook: " + selectedChapter);
-        String chapter = audioPlayerScreen.selectChapterAndGetText(selectedChapter - 1);
-        context.add(keyChapter, chapter);
+        String chapterName = audioPlayerScreen.selectChapterAndGetText(RandomUtils.nextInt(1, audioPlayerScreen.getCountOfChapters()));
+        AqualityServices.getLogger().info("Selected chapter for audiobook: " + chapterName);
+        context.add(keyChapter, chapterName);
     }
 
     @When("Select the {int} chapter and save the chapter as {string}")

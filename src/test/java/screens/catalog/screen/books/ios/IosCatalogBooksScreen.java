@@ -1,26 +1,38 @@
 package screens.catalog.screen.books.ios;
 
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.application.EnumBookType;
 import constants.application.attributes.IosAttributes;
+import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.IWorkingWithListOfBooks;
 import screens.catalog.screen.books.CatalogBooksScreen;
 
+import java.time.Duration;
+
 @ScreenType(platform = PlatformName.IOS)
 public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkingWithListOfBooks {
-    private static final String ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther//*[@name=\"%s\"]";
-    private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
-    private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
+    private static final String PROGRESS_BAR_BY_BOOK_NAME_LOC =
+            "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeProgressIndicator";
+    private static final String ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
+            "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"%s\")]";
+    private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
+            ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
+    private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
+            ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
 
-    private static final String ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = "//XCUIElementTypeStaticText/following-sibling::XCUIElementTypeOther//*[@name=\"%s\"]";
-    private static final String BOOK_NAME_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
-    private static final String AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
+    private static final String ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
+            "//XCUIElementTypeStaticText/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"%s\")]";
+    private static final String BOOK_NAME_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
+            ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
+    private static final String AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
+            ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
 
     public IosCatalogBooksScreen() {
         super(By.xpath("//XCUIElementTypeCollectionView"));
@@ -46,6 +58,12 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
                 .setTitle(bookName)
                 .setAuthor(author);
         actionButton.click();
+        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE
+                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN
+                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
+            String bookNameForConditionalWait = bookNameForLocator;
+            AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(bookNameForConditionalWait), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+        }
         return bookInfo;
     }
 
@@ -80,19 +98,12 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         }
         String actionButtonString = actionButtonKey.i18n();
         String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
-        return getBookNameLabelFromListOfBooks(bookNameLoc).state().waitForDisplayed();
+        return getBookNameLabelFromListOfBooks(bookNameLoc).state().isDisplayed();
     }
 
     @Override
-    public boolean isActionButtonDisplayed(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        String bookNameForLocator = bookName;
-        if (EnumBookType.AUDIOBOOK == bookType) {
-            bookNameForLocator = bookNameForLocator + ". Audiobook.";
-        }
-        String actionButtonString = actionButtonKey.i18n();
-        String actionButtonLoc = String.format(ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
-        IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
-        return actionButton.state().isDisplayed();
+    public boolean isProgressBarDisplayed(String bookName) {
+        return getElementFactory().getLabel(By.xpath(String.format(PROGRESS_BAR_BY_BOOK_NAME_LOC, bookName)), "lblProgressBar").state().isDisplayed();
     }
 
     @Override
@@ -112,14 +123,11 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
                 .setTitle(lblBookName.getAttribute(IosAttributes.NAME))
                 .setAuthor(author);
         actionButton.click();
+        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE
+                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN
+                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
+            AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(lblBookName.getAttribute(IosAttributes.NAME)), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+        }
         return bookInfo;
-    }
-
-    @Override
-    public boolean isActionButtonForTheFirstBookDisplayed(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        String actionButtonString = actionButtonKey.i18n();
-        String actionButtonLoc = String.format(ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, actionButtonString);
-        IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
-        return actionButton.state().isDisplayed();
     }
 }

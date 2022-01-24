@@ -1,16 +1,18 @@
 package screens.libraries.ios;
 
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import framework.utilities.swipe.SwipeElementUtils;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import screens.libraries.LibrariesScreen;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosLibrariesScreen extends LibrariesScreen {
-    private static final String LIBRARY_BUTTON_BY_LIBRARY_NAME_LOC =
-            "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeButton";
     private static final String LIBRARY_CELL_BY_LIBRARY_NAME_LOC =
             "//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeCell";
 
@@ -25,16 +27,18 @@ public class IosLibrariesScreen extends LibrariesScreen {
 
     @Override
     public boolean isLibraryPresent(String libraryName) {
-        return getLibraryButton(libraryName).state().isDisplayed();
+        return getLibraryCell(libraryName).state().isDisplayed();
     }
 
-    private IButton getLibraryButton(String libraryName) {
-        return getElementFactory().getButton(By.xpath(String.format(LIBRARY_BUTTON_BY_LIBRARY_NAME_LOC, libraryName)), "btnLibrary");
+    private IButton getLibraryCell(String libraryName) {
+        return getElementFactory().getButton(By.xpath(String.format(LIBRARY_CELL_BY_LIBRARY_NAME_LOC, libraryName)), "libraryCell");
     }
 
     @Override
     public void openLibrary(String libraryName) {
-        getLibraryButton(libraryName).click();
+        Point point = getLibraryCell(libraryName).getElement().getCenter();
+        TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+        action.tap(PointOption.point(point)).perform();
     }
 
     @Override
@@ -44,7 +48,7 @@ public class IosLibrariesScreen extends LibrariesScreen {
 
     @Override
     public void deleteLibrary(String libraryName) {
-        IButton libraryToSwipeLeft = getElementFactory().getButton(By.xpath(String.format(LIBRARY_CELL_BY_LIBRARY_NAME_LOC, libraryName)), "libraryCell");
+        IButton libraryToSwipeLeft = getLibraryCell(libraryName);
         SwipeElementUtils.swipeElementLeft(libraryToSwipeLeft);
         btnDeleteLibrary.click();
     }

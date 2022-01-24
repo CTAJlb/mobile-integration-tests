@@ -7,7 +7,7 @@ import java.util.List;
 
 public abstract class TutorialScreen extends Screen {
     public TutorialScreen(By locator) {
-        super(locator, "Tutorial");
+        super(locator, "TutorialScreen");
     }
 
     public abstract void closeTutorial();
@@ -16,5 +16,5 @@ public abstract class TutorialScreen extends Screen {
 
     public abstract void goToNextPage();
 
-    public abstract List<String> getListOfContentDescOfTutorialTabs();
+    public abstract List<String> getListOfPageNames();
 }

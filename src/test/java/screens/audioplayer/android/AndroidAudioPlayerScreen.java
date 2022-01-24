@@ -5,6 +5,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
+import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
@@ -18,6 +19,7 @@ import screens.audioplayer.AudioPlayerScreen;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
@@ -49,12 +51,12 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
         super(By.xpath(UNIQUE_ELEMENT));
     }
 
-    public List<ILabel> getChapters() {
-        return getElementFactory().findElements(By.xpath(CHAPTERS_LOC), ElementType.LABEL);
+    public List<IElement> getChapters() {
+        return getElementFactory().findElements(By.xpath(CHAPTERS_LOC), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
     }
 
-    public List<ILabel> getChaptersText() {
-        return getElementFactory().findElements(By.xpath(CHAPTERS_TEXT), ElementType.LABEL);
+    public List<IElement> getChaptersText() {
+        return getElementFactory().findElements(By.xpath(CHAPTERS_TEXT), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
     }
 
     @Override
@@ -87,7 +89,7 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public String selectChapterAndGetText(int chapterNumber) {
-        ILabel lblChapterText = getChaptersText().get(chapterNumber);
+        IElement lblChapterText = getChaptersText().get(chapterNumber);
         String chapterText = lblChapterText.getAttribute(AndroidAttributes.TEXT);
         lblChapterText.click();
         return chapterText;

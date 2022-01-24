@@ -27,7 +27,7 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
             if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
                 readerPdfScreen.returnToPreviousScreen();
             } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-              readerPdfScreen.getNavigationBarScreen().tapBackButton();
+                readerPdfScreen.getNavigationBarScreen().tapBackButton();
             }
         }
     }

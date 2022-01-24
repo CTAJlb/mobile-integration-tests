@@ -35,9 +35,9 @@
       "platformVersion": "11.0"
     }
   },
-  "GooglePixel5_12": {
+  "GooglePixel6_12": {
     "capabilities": {
-      "deviceName": "Google Pixel 5",
+      "deviceName": "Google Pixel 6",
       "platformVersion": "12.0"
     }
   }

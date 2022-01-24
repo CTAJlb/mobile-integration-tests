@@ -1,5 +1,4 @@
 package stepdefinitions.application.components;
-import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 
 public interface IApplicationSteps {
 
@@ -7,11 +6,9 @@ public interface IApplicationSteps {
 
     void restartApp();
 
-    void performActionOnAlert(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
-
     void addAccountFromWelcomeScreen(String libraryName);
 
-    void approveAgreement();
+    void checkThatTutorialScreenIsOpened();
 
     void checkWelcomeScreenIsOpened();
 

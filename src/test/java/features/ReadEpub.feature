@@ -5,13 +5,13 @@ Feature: Read EPUB
       And I open Catalog
       And I open search modal
       And I search for 'Flower Fables' and save bookName as 'bookNameInfo'
-      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+
+  @tier1
+  Scenario: Navigate by Page
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on epub reader screen
-
-  @tier1 @oldOs
-  Scenario: Navigate by Page
     When I click on right book corner on epub reader screen
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And I click on right book corner on epub reader screen
@@ -22,7 +22,10 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Navigate by bookmarks
-    When I click on right book corner on epub reader screen
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+      And I click on right book corner on epub reader screen
       And Add bookmark on reader epub screen
     Then Bookmark is displayed on reader epub screen
     When I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
@@ -40,7 +43,10 @@ Feature: Read EPUB
 
   @tier1
   Scenario: Delete bookmarks
-    When I click on right book corner on epub reader screen
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+      And I click on right book corner on epub reader screen
       And Add bookmark on reader epub screen
       And Delete bookmark on reader epub screen
     Then Bookmark is not displayed on reader epub screen
@@ -57,13 +63,19 @@ Feature: Read EPUB
     Then 'chapterNameKey' chapter name is displayed on reader epub screen
       And Bookmark is not displayed on reader epub screen
 
-  @tier1 @oldOs
+  @tier1
   Scenario: Navigate by Table of Contents Menu
-    Then Each chapter of epub book can be opened from table of contents
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+    Then Random chapter of epub can be opened from toc epub screen
 
-  @tier1 @oldOs
+  @tier1
   Scenario: Navigate View options
-    When I return to previous screen for epub and pdf
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+      And I return to previous screen for epub and pdf
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on epub reader screen
     When I open font choices on epub reader screen
@@ -72,9 +84,13 @@ Feature: Read EPUB
       And I open table of contents on epub reader screen
     Then Epub table of contents screen is opened
 
-  @tier1 @oldOs
+  @tier1
   Scenario: Change, View Font and Contrast Settings
-    When I save font size as 'fontSize'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+      And I scroll page forward from 7 to 9 times
+      And I save font size as 'fontSize'
       And I INCREASE_FONT of text
     Then Font size 'fontSize' is increased
     When I save font size as 'fontSize'
@@ -101,16 +117,19 @@ Feature: Read EPUB
       And Book text displays in FONT_DYSLEXIC font
       And Font size 'fontSize' is decreased
 
-  @tier1 @oldOs
+  @tier1
   Scenario: Open book to last page read
-    When I scroll page forward from 1 to 2 times
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+      And I scroll page forward from 7 to 10 times
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And I wait for 3 seconds
       And I return to previous screen for epub and pdf
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on epub reader screen
       And PageNumber 'pageNumberKey' is correct
-    When I click on right book corner on epub reader screen
+      And I scroll page forward from 3 to 4 times
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And I wait for 3 seconds
       And I restart app

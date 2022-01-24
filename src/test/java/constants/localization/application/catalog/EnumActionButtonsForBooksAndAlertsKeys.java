@@ -16,7 +16,7 @@ public enum EnumActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     DOWNLOAD("download"),
     LISTEN("listen"),
     REMOVE("remove"),
-    CANCEL_POPUP("cancelPopup");
+    CANCEL("cancel");
 
     private static final AbstractILocalizationProvider localizationProvider =
             LocalizationProviderFactory.getProvider("catalog.ActionButtonsForBooksAndAlerts");

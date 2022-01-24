@@ -61,15 +61,31 @@ public class AndroidBookmarksEpubScreen extends BookmarksEpubScreen {
     }
 
     @Override
-    public boolean isBookmarkPresent(String bookmarkTitle, String bookmarkDateTime) {
+    public boolean isBookmarkPresent(String expectedBookmarkTitle, String bookmarkDateTime) {
         LocalDateTime expectedLocalDateTime = getExpectedLocalDateTime(bookmarkDateTime);
+        AqualityServices.getLogger().info("expected bookmark info: ");
+        AqualityServices.getLogger().info("expected bookmark title-" + expectedBookmarkTitle);
+        AqualityServices.getLogger().info("actual year-" + expectedLocalDateTime.getYear());
+        AqualityServices.getLogger().info("actual month-" + expectedLocalDateTime.getMonthValue());
+        AqualityServices.getLogger().info("actual dayNumber-" + expectedLocalDateTime.getDayOfMonth());
+        AqualityServices.getLogger().info("actual min-" + expectedLocalDateTime.getMinute());
+        AqualityServices.getLogger().info("actual hour-" + expectedLocalDateTime.getHour());
         boolean isBookmarkPresent = false;
         for (int i = 0; i < getListOfBookmarkTitles().size(); i++) {
+            String actualBookmarkTitle = getListOfBookmarkTitles().get(i);
             LocalDateTime actualLocalDateTime = getActualLocalDateTime(getListOfBookmarkTimeDates().get(i));
-            if (getListOfBookmarkTitles().get(i).toLowerCase().equals(bookmarkTitle.toLowerCase()) && expectedLocalDateTime.getHour() == actualLocalDateTime.getHour()
+            AqualityServices.getLogger().info("bookmark number " + i + " info: ");
+            AqualityServices.getLogger().info("actual bookmark title-" + actualBookmarkTitle);
+            AqualityServices.getLogger().info("actual year-" + actualLocalDateTime.getYear());
+            AqualityServices.getLogger().info("actual month-" + actualLocalDateTime.getMonth().getValue());
+            AqualityServices.getLogger().info("actual dayNumber-" + actualLocalDateTime.getDayOfMonth());
+            AqualityServices.getLogger().info("actual min-" + actualLocalDateTime.getMinute());
+            AqualityServices.getLogger().info("actual hour-" + actualLocalDateTime.getHour());
+            if (actualBookmarkTitle.toLowerCase().equals(expectedBookmarkTitle.toLowerCase()) && expectedLocalDateTime.getHour() == actualLocalDateTime.getHour()
                     && expectedLocalDateTime.getMonthValue() == actualLocalDateTime.getMonthValue() && expectedLocalDateTime.getDayOfMonth() == actualLocalDateTime.getDayOfMonth()
                     && expectedLocalDateTime.getYear() == actualLocalDateTime.getYear()
-                    && (expectedLocalDateTime.getMinute() == actualLocalDateTime.getMinute() || expectedLocalDateTime.getMinute() == actualLocalDateTime.getMinute() + 1)) {
+                    && (expectedLocalDateTime.getMinute() == actualLocalDateTime.getMinute() || expectedLocalDateTime.getMinute() == actualLocalDateTime.getMinute() + 1
+                    || expectedLocalDateTime.getMinute() == actualLocalDateTime.getMinute() + 2)) {
                 isBookmarkPresent = true;
                 break;
             }
@@ -77,13 +93,13 @@ public class AndroidBookmarksEpubScreen extends BookmarksEpubScreen {
         return isBookmarkPresent;
     }
 
-    private LocalDateTime getExpectedLocalDateTime(String stringExpectedDateTime){
+    private LocalDateTime getExpectedLocalDateTime(String stringExpectedDateTime) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("y-M-dd HH:m:s");
         LocalDateTime expectedLocalDateTime = LocalDateTime.parse(deleteSomeCharactersForExpectedDateTime(stringExpectedDateTime), dateTimeFormatter);
         return expectedLocalDateTime;
     }
 
-    private LocalDateTime getActualLocalDateTime(String stringActualDateTime){
+    private LocalDateTime getActualLocalDateTime(String stringActualDateTime) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("y-M-dd HH:m:s");
         LocalDateTime actualLocalDateTime = LocalDateTime.parse(stringActualDateTime, dateTimeFormatter);
         return actualLocalDateTime;

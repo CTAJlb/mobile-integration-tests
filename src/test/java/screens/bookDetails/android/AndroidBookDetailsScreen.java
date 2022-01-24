@@ -1,23 +1,34 @@
 package screens.bookDetails.android;
 
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.swipe.SwipeElementUtils;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.bookDetails.BookDetailsScreen;
 
+import java.time.Duration;
+
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidBookDetailsScreen extends BookDetailsScreen {
-    private static final String BOOK_ACTION_BUTTON_LOC = "//android.widget.Button[@text=\"%s\"]";
-    private final ILabel lblErrorScreen = getElementFactory().getLabel(By.xpath("//android.widget.ScrollView"), "Error Screen");
-    private final ILabel lblBookTitleInfo = getElementFactory().getLabel(By.id("bookDetailTitle"), "Book title");
-    private final ILabel lblBookAuthorsInfo = getElementFactory().getLabel(By.id("bookDetailAuthors"), "Book Authors");
-    private final ILabel lblErrorMessage = getElementFactory().getLabel(By.id("errorDetails"), "Error message");
+    private static final String BOOK_ACTION_BUTTON_LOC =
+            "//android.widget.Button[@text=\"%s\"]";
 
+    private final ILabel lblErrorScreen =
+            getElementFactory().getLabel(By.xpath("//android.widget.ScrollView"), "Error Screen");
+    private final ILabel lblBookTitleInfo =
+            getElementFactory().getLabel(By.id("bookDetailTitle"), "Book title");
+    private final ILabel lblProgressBar =
+            getElementFactory().getLabel(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"bookDetailStatusInProgress\")]"), "lblProgressBar");
+    private final ILabel lblBookAuthorsInfo =
+            getElementFactory().getLabel(By.id("bookDetailAuthors"), "Book Authors");
+    private final ILabel lblErrorMessage =
+            getElementFactory().getLabel(By.id("errorDetails"), "Error message");
     private final IButton btnErrorDetails =
             getElementFactory().getButton(By.xpath("//*[contains(@resource-id,'bookDetailButtons')]//*[contains(@text,'Details')]"), "Error");
 
@@ -35,7 +46,7 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     @Override
     public boolean isActionButtonDisplayed(EnumActionButtonsForBooksAndAlertsKeys key) {
         IButton button = getActionButton(key);
-        return button.state().isDisplayed();
+        return button.state().waitForDisplayed();
     }
 
     @Override
@@ -43,6 +54,11 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
         IButton button = getActionButton(buttonKeys);
         button.state().waitForDisplayed();
         button.click();
+        if (buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.GET || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.REMOVE
+                || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.DELETE || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.RETURN
+                || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
+            AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+        }
     }
 
     @Override
@@ -57,6 +73,11 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     @Override
     public boolean isErrorButtonPresent() {
         return btnErrorDetails.state().isDisplayed();
+    }
+
+    @Override
+    public boolean isProgressBarDisplayed() {
+        return lblProgressBar.state().isDisplayed();
     }
 
     @Override

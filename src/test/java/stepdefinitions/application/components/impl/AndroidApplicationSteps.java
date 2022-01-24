@@ -15,7 +15,6 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
 
     @Override
     public void addAccountFromWelcomeScreen(String libraryName) {
-        eulaAgreementScreen.clickAgree();
         tutorialScreen.closeTutorial();
         welcomeScreen.state().waitForDisplayed();
         welcomeScreen.tapFindLibraryButton();

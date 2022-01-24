@@ -66,16 +66,19 @@ public class PdfSteps extends BaseSteps implements IPdfSteps {
         abstractPdfSteps.slidePdfPageSlider(entireScreenDragDirection);
     }
 
-    @Then("{string} pdf saved page number should not be equal to current page number on reader pdf screen")
-    @Override
-    public void checkPdfSavedPageNumberIsNotEqualsToCurrentPdfPageNumber(String pageNumberKey) {
-        abstractPdfSteps.checkPdfSavedPageNumberIsNotEqualsToCurrentPdfPageNumber(pageNumberKey);
+    @Then("The {string} saved page number is less than the current page number on the reader pdf screen")
+    public void checkThatSavedPdfPageNumberIsLessThanCurrentPdfPageNumber(String pageNumberKey) {
+        abstractPdfSteps.checkThatSavedPdfPageNumberIsLessThanCurrentPdfPageNumber(pageNumberKey);
     }
 
-    @Then("{string} pdf saved page number should be equal to current page number on reader pdf screen")
-    @Override
-    public void checkSavedPdfPageNumberIsEqualsToCurrentPdfPageNumber(String pageNumberKey) {
-        abstractPdfSteps.checkSavedPdfPageNumberIsEqualsToCurrentPdfPageNumber(pageNumberKey);
+    @Then("The {string} saved page number is equal to the current page number on the reader pdf screen")
+    public void checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(String pageNumberKey) {
+        abstractPdfSteps.checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(pageNumberKey);
+    }
+
+    @Then("The {string} saved page number is greater than the current page number on the reader pdf screen")
+    public void checkThatSavedPdfPageNumberIsGreaterThanCurrentPdfPageNumber(String pageNumberKey) {
+        abstractPdfSteps.checkThatSavedPdfPageNumberIsGreaterThanCurrentPdfPageNumber(pageNumberKey);
     }
 
     @When("I open gallery pdf screen")

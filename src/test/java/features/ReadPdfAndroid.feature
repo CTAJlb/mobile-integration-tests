@@ -4,11 +4,11 @@ Feature: Read PDF
     When I add "Palace Bookshelf" account from welcomeScreen
     And I open Catalog
     And I open search modal
-    And I search for 'A grammar of Yauyos Quechua' and save bookName as 'bookNameInfo'
+    And I search for 'Deep into Pharo' and save bookName as 'bookNameInfo'
 
   @tier1 @exclude_ios
   Scenario: Open document
-    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
@@ -17,7 +17,7 @@ Feature: Read PDF
 
   @tier1 @exclude_ios
   Scenario: Navigate by page
-    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
@@ -30,7 +30,7 @@ Feature: Read PDF
 
   @tier1 @exclude_ios
   Scenario: Navigate by Table of Contents Menu
-    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
@@ -39,7 +39,7 @@ Feature: Read PDF
 
   @tier1 @exclude_ios
   Scenario: Open book to last page read
-    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
@@ -49,18 +49,18 @@ Feature: Read PDF
       And I return to previous screen for epub and pdf
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on reader pdf screen
-      And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
+      And The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
     When I restart app
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on reader pdf screen
-      And 'pageNumber' pdf saved page number should be equal to current page number on reader pdf screen
+      And The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
 
   @tier1 @exclude_ios
   Scenario: Close book
-    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
@@ -70,14 +70,14 @@ Feature: Read PDF
 
   @tier1 @exclude_ios
   Scenario: Navigate by Page slider
-    When Click DOWNLOAD action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on reader pdf screen
     When I save pdf page number as 'pageNumber' on reader pdf screen
       And Slide page slider RIGHT on reader pdf screen
-    Then 'pageNumber' pdf saved page number should not be equal to current page number on reader pdf screen
+    Then The 'pageNumber' saved page number is less than the current page number on the reader pdf screen
     When I save pdf page number as 'pageNumber' on reader pdf screen
       And Slide page slider LEFT on reader pdf screen
-    Then 'pageNumber' pdf saved page number should not be equal to current page number on reader pdf screen
+    Then The 'pageNumber' saved page number is greater than the current page number on the reader pdf screen

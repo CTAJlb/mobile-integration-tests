@@ -12,7 +12,7 @@ Feature: Audiobook
     And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Click GET action button on book details screen
 
-  @logout @returnBooks @tier2 @oldOs @tablet
+  @logout @returnBooks @tier2
   Scenario: Navigate by Table of Contents
     When Click LISTEN action button on book details screen
       And Open chapter list for an audiobook
@@ -22,14 +22,14 @@ Feature: Audiobook
       And Pause button is present
       And Book is playing
 
-  @logout @returnBooks @tier2 @oldOs
+  @logout @returnBooks @tier2
   Scenario: Loading chapters
     When Click LISTEN action button on book details screen
     Then Download has started and percentage value increased
     When Open chapter list for an audiobook
     Then All chapters loaded
 
-  @logout @returnBooks @tier2 @oldOs
+  @logout @returnBooks @tier2
   Scenario: Open the audiobook at the last open chapter
     When Click LISTEN action button on book details screen
       And Open chapter list for an audiobook
@@ -49,7 +49,7 @@ Feature: Audiobook
       And I wait for 12 seconds
     Then Chapter is equal to 'chapterKey2' saved chapter
 
-  @logout @returnBooks @tier2 @oldOs
+  @logout @returnBooks @tier2
   Scenario: Playing Audiobook
     Then I check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
@@ -60,7 +60,7 @@ Feature: Audiobook
     Then Play button is present
       And Book is not playing
 
-  @logout @returnBooks @tier2 @oldOs
+  @logout @returnBooks @tier2
   Scenario: Navigate by Audiobook
     When Click LISTEN action button on book details screen
       And I click play button on player screen
@@ -74,7 +74,7 @@ Feature: Audiobook
     When I move to middle part of chapter
     Then Saved play time 'chapterLength' is close to middle part of chapter
 
-  @logout @returnBooks @tier2 @oldOs
+  @logout @returnBooks @tier2
   Scenario Outline: Navigate by Playback Options
     When Click LISTEN action button on book details screen
       And I click play button on player screen

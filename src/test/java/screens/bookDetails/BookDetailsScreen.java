@@ -20,6 +20,8 @@ public abstract class BookDetailsScreen extends Screen {
 
     public abstract boolean isErrorButtonPresent();
 
+    public abstract boolean isProgressBarDisplayed();
+
     public abstract void openErrorDetails();
 
     public abstract void swipeError();
