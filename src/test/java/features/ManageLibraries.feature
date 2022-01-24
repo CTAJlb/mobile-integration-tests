@@ -65,7 +65,7 @@ Feature: Manage Libraries
 
   @logout @returnBooks @tier2
   Scenario: Switch Library Reservations
-    When I add "Carnegie Library of Pittsburgh" account from welcomeScreen
+    When I add "Plumas County Library" account from welcomeScreen
     When I add 'LYRASIS Reads' account
       And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
@@ -83,7 +83,7 @@ Feature: Manage Libraries
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
     When I open Catalog
       And I open Catalog
-      And I switch to 'Carnegie Library of Pittsburgh' from side menu
+      And I switch to 'Plumas County Library' from side menu
       And I open Holds
       And There are not books on holds screen
 
