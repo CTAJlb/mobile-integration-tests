@@ -23,7 +23,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     private static final String BOOK_MAIN_INFO =
             "//XCUIElementTypeStaticText[@name=\"Description\"]//preceding-sibling::XCUIElementTypeStaticText[@name]";
     private static final String BOOK_ACTION_BUTTON_LOC =
-            "//XCUIElementTypeButton[@name=\"%s\"]";
+            "//XCUIElementTypeButton/XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String LBL_BOOK_AUTHORS_INFO =
             String.format("(%1$s)[%%d]", BOOK_MAIN_INFO);
 
