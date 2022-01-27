@@ -98,7 +98,7 @@ public class IosBookmarksEpubScreen extends BookmarksEpubScreen {
     }
 
     private LocalDateTime getActualLocalDateTime(String stringActualDateTime) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("M/d/yy, H:m");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm");
         LocalDateTime actualLocalDateTime = LocalDateTime.parse(deleteSomeCharactersForActualDateTime(stringActualDateTime), dateTimeFormatter);
         return actualLocalDateTime;
     }
@@ -109,6 +109,6 @@ public class IosBookmarksEpubScreen extends BookmarksEpubScreen {
     }
 
     private String deleteSomeCharactersForActualDateTime(String stringActualDateTime) {
-        return stringActualDateTime.split(" - ")[0].replace(" AM", "").replace(" PM", "");
+        return stringActualDateTime.split(" - ")[0];
     }
 }
