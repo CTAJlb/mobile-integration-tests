@@ -68,3 +68,17 @@ Feature: Read PDF IOS
       And I save page number as 'pageNumber' of the first found text on search pdf screen
       And I open the first found text on search pdf screen
     Then The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
+
+  @tier1 @exclude_android
+  Scenario: Navigate by Page slider
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
+    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+    Then 'bookInfo' book is present on reader pdf screen
+    When I save pdf page number as 'pageNumber' on reader pdf screen
+      And Slide page slider RIGHT on reader pdf screen
+    Then The 'pageNumber' saved page number is less than the current page number on the reader pdf screen
+    When I save pdf page number as 'pageNumber' on reader pdf screen
+      And Slide page slider LEFT on reader pdf screen
+    Then The 'pageNumber' saved page number is greater than the current page number on the reader pdf screen
