@@ -162,5 +162,23 @@ Feature: Read PDF IOS
     When Open the 0 bookmark on bookmarks pdf screen
     Then The 'pageNumberInfo' saved page number is equal to the current page number on the reader pdf screen
 
-  @tier1 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Delete pdf bookmarks
+    When I add "LYRASIS Reads" account from welcomeScreen
+    Then Account 'LYRASIS Reads' is present on Accounts screen
+    When I enter credentials for 'LYRASIS Reads' account
+    Then Login is performed successfully
+    When I open Catalog
+    And I open search modal
+    And I search for 'Attack! (Issue 7)' and save bookName as 'bookNameInfo'
+    And I switch to 'eBooks' catalog tab
+    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
+    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    And Click READ action button on book details screen
+    And I go to next page on reader pdf screen
+    And Add bookmark on reader pdf screen
+    And Delete bookmark on reader pdf screen
+    Then Bookmark is not displayed on reader pdf screen
+    And I open bookmarks pdf screen
+    Then Amount of bookmarks is 0 on bookmarks pdf screen

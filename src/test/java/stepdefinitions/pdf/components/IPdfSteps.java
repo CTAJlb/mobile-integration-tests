@@ -5,6 +5,8 @@ import framework.utilities.swipe.directions.EntireScreenDragDirection;
 public interface IPdfSteps {
     void checkPdfBookPresent(String bookInfoKey);
 
+    void checkThatBookmarkIsNotDisplayed();
+
     void checkPdfPageNumberIsEqualTo(int pageNumber);
 
     void checkThatAmountOfBookmarksIsCorrect(int expectedAmountOfBookmarks);
@@ -16,6 +18,8 @@ public interface IPdfSteps {
     void closeTocBookmarksGalleryScreen();
 
     void addBookmarkOnReaderPdfScreen();
+
+    void deleteBookmarkOnReaderPdfScreen();
 
     void goToPreviousPdfPage();
 

@@ -44,27 +44,41 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
     }
 
     @Override
-    public void openBookmark(int bookmarkNumber){
+    public void checkThatBookmarkIsNotDisplayed() {
+        readerPdfScreen.openNavigationBar();
+        readerPdfScreen.openNavigationBar();
+        Assert.assertTrue("Bookmark is displayed on reader pdf screen", !readerPdfScreen.getNavigationBarScreen().isBookmarkDisplayed());
+    }
+
+    @Override
+    public void openBookmark(int bookmarkNumber) {
         tocBookmarksGalleryPdfScreen.getBookmarksPdfScreen().openBookmark(bookmarkNumber);
     }
 
     @Override
-    public void checkThatBookmarkIsDisplayed(){
+    public void checkThatBookmarkIsDisplayed() {
         readerPdfScreen.openNavigationBar();
         readerPdfScreen.openNavigationBar();
         Assert.assertTrue("Bookmark is not displayed on reader pdf screen", readerPdfScreen.getNavigationBarScreen().isBookmarkDisplayed());
     }
 
     @Override
-    public void closeTocBookmarksGalleryScreen(){
+    public void closeTocBookmarksGalleryScreen() {
         tocBookmarksGalleryPdfScreen.tapResumeButton();
     }
 
     @Override
-    public void addBookmarkOnReaderPdfScreen(){
+    public void addBookmarkOnReaderPdfScreen() {
         readerPdfScreen.openNavigationBar();
         readerPdfScreen.openNavigationBar();
         readerPdfScreen.getNavigationBarScreen().tapAddBookmarkButton();
+    }
+
+    @Override
+    public void deleteBookmarkOnReaderPdfScreen() {
+        readerPdfScreen.openNavigationBar();
+        readerPdfScreen.openNavigationBar();
+        readerPdfScreen.getNavigationBarScreen().tapDeleteBookmarkButton();
     }
 
     @Override
@@ -122,17 +136,17 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
     public void checkThatSavedPdfPageNumberIsLessThanCurrentPdfPageNumber(String pageNumberKey) {
         int savedPageNumber = context.get(pageNumberKey);
         int currentPageNumber = readerPdfScreen.getPageNumber();
-        Assert.assertTrue(  "Saved page number is greater that current page number on reader pdf screen. SavedPageNumber - " +
+        Assert.assertTrue("Saved page number is greater that current page number on reader pdf screen. SavedPageNumber - " +
                 savedPageNumber + ", currentPageNumber - " + currentPageNumber, savedPageNumber < currentPageNumber);
     }
 
     @Override
-    public void checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(String pageNumberKey){
+    public void checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(String pageNumberKey) {
         readerPdfScreen.openNavigationBar();
         readerPdfScreen.openNavigationBar();
         int savedPageNumber = context.get(pageNumberKey);
         int currentPageNumber = readerPdfScreen.getPageNumber();
-        Assert.assertTrue(  "Saved page number is not equal to current page number on reader pdf screen. SavedPageNumber - " +
+        Assert.assertTrue("Saved page number is not equal to current page number on reader pdf screen. SavedPageNumber - " +
                 savedPageNumber + ", currentPageNumber - " + currentPageNumber, savedPageNumber == currentPageNumber);
 
     }
