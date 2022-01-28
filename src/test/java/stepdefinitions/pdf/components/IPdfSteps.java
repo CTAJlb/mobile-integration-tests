@@ -7,6 +7,16 @@ public interface IPdfSteps {
 
     void checkPdfPageNumberIsEqualTo(int pageNumber);
 
+    void checkThatAmountOfBookmarksIsCorrect(int expectedAmountOfBookmarks);
+
+    void openBookmark(int bookmarkNumber);
+
+    void checkThatBookmarkIsDisplayed();
+
+    void closeTocBookmarksGalleryScreen();
+
+    void addBookmarkOnReaderPdfScreen();
+
     void goToPreviousPdfPage();
 
     void goToNextPdfPage();

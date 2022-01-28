@@ -30,6 +30,36 @@ public class PdfSteps extends BaseSteps implements IPdfSteps {
         abstractPdfSteps.checkPdfPageNumberIsEqualTo(pageNumber);
     }
 
+    @Then("Amount of bookmarks is {int} on bookmarks pdf screen")
+    @Override
+    public void checkThatAmountOfBookmarksIsCorrect(int expectedAmountOfBookmarks) {
+        abstractPdfSteps.checkThatAmountOfBookmarksIsCorrect(expectedAmountOfBookmarks);
+    }
+
+    @When("Open the {int} bookmark on bookmarks pdf screen")
+    @Override
+    public void openBookmark(int bookmarkNumber) {
+        abstractPdfSteps.openBookmark(bookmarkNumber);
+    }
+
+    @Then("Bookmark is displayed on reader pdf screen")
+    @Override
+    public void checkThatBookmarkIsDisplayed() {
+        abstractPdfSteps.checkThatBookmarkIsDisplayed();
+    }
+
+    @When("Close tocBookmarksGallery pdf screen")
+    @Override
+    public void closeTocBookmarksGalleryScreen() {
+        abstractPdfSteps.closeTocBookmarksGalleryScreen();
+    }
+
+    @When("Add bookmark on reader pdf screen")
+    @Override
+    public void addBookmarkOnReaderPdfScreen() {
+        abstractPdfSteps.addBookmarkOnReaderPdfScreen();
+    }
+
     @When("I go to previous page on reader pdf screen")
     @Override
     public void goToPreviousPdfPage() {
@@ -110,6 +140,8 @@ public class PdfSteps extends BaseSteps implements IPdfSteps {
     public void checkBookmarksPdfScreenIsOpened() {
         abstractPdfSteps.checkBookmarksPdfScreenIsOpened();
     }
+
+
 
     @Then("Search pdf screen is opened")
     @Override
