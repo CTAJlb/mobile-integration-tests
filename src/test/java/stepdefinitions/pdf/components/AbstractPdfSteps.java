@@ -214,7 +214,7 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
         SoftAssertions softAssertions = new SoftAssertions();
         readerPdfScreen.getSearchPdfScreen().getListOfFoundTexts().forEach(foundText -> System.out.println("foundText-" + foundText));
         readerPdfScreen.getSearchPdfScreen().getListOfFoundTexts().forEach(foundText -> softAssertions.assertThat(foundText.toLowerCase().contains(textThatShouldBe.toLowerCase())).
-                as(String.format("Found text '%1$s' does not contain text '%2$s'. ", foundText, textThatShouldBe) + "Found text-" + foundText).isTrue());
+                as(String.format("Found text '%1$s' does not contain text '%2$s'. ", foundText, textThatShouldBe)).isTrue());
         softAssertions.assertAll();
     }
 

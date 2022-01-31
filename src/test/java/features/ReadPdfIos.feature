@@ -87,8 +87,8 @@ Feature: Read PDF IOS
     Then 'bookInfo' book is present on reader pdf screen
     When I open search pdf screen
     Then Search pdf screen is opened
-    When I search 'contenido' text on search pdf screen
-    Then Found lines should contain 'contenido' in themselves on search pdf screen
+    When I search 'replace' text on search pdf screen
+    Then Found lines should contain 'replace' in themselves on search pdf screen
 
   @tier1 @exclude_android
   Scenario: Navigate by Pdf Search Results
@@ -102,7 +102,7 @@ Feature: Read PDF IOS
     And Click READ action button on book details screen
     Then 'bookInfo' book is present on reader pdf screen
     When I open search pdf screen
-      And I search 'contenido' text on search pdf screen
+      And I search 'replace' text on search pdf screen
       And I save page number as 'pageNumber' of the first found text on search pdf screen
       And I open the first found text on search pdf screen
     Then The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
@@ -117,11 +117,6 @@ Feature: Read PDF IOS
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Click READ action button on book details screen
-    Then 'bookInfo' book is present on reader pdf screen
-    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
-    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click READ action button on book details screen
     Then 'bookInfo' book is present on reader pdf screen
     When I save pdf page number as 'pageNumber' on reader pdf screen
       And Slide page slider RIGHT on reader pdf screen
