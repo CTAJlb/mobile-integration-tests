@@ -202,7 +202,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     public void selectPlaybackSpeed(String playbackSpeed) {
         btnPlaybackSpeed.click();
         String speedOptionName = speedName.get(playbackSpeed);
-        getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"" + speedOptionName + "\"]"), speedOptionName).click();
+        getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"" + speedOptionName + "\"]"), speedOptionName).click();
     }
 
     @Override
@@ -215,7 +215,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     public void setTimer(TimerKeys timerSetting) {
         btnTimer.click();
         String buttonName = timerSetting.i18n();
-        getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"" + buttonName + "\"]"), buttonName).click();
+        getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"" + buttonName + "\"]"), buttonName).click();
     }
 
     @Override
