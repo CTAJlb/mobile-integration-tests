@@ -63,6 +63,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     @Override
     public void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKeys) {
         IButton actionButton = getActionButton(buttonKeys);
+        actionButton.state().waitForDisplayed();
         actionButton.click();
         if (buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.GET || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.REMOVE
                 || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.DELETE || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.RETURN

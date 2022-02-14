@@ -2,6 +2,7 @@ package screens.epub.tocBookmarksEpub.ios;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.epub.EnumTabsTocAndBookmarksEpub;
 import org.openqa.selenium.By;
@@ -24,7 +25,9 @@ public class IosTocBookmarksEpubScreen extends TocBookmarksEpubScreen {
 
     @Override
     public void openTab(EnumTabsTocAndBookmarksEpub tab) {
-        getElementFactory().getLabel(By.xpath(String.format("//XCUIElementTypeButton[@name=\"%s\"]", tab.getValue())), "tab").click();
+        ILabel lblTab = getElementFactory().getLabel(By.xpath(String.format("//XCUIElementTypeButton[@name=\"%s\"]", tab.getValue())), "tab");
+        lblTab.state().waitForDisplayed();
+        lblTab.click();
     }
 
     @Override
