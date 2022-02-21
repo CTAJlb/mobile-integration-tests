@@ -63,59 +63,26 @@ Feature: Catalog Navigation
     When I change books visibility to show YOURS_TO_KEEP
     Then All books can be downloaded
 
-  @tier1 @exclude_ios @ignore
-  Scenario: View Book Details
+  @tier1 @ignore @exclude_android
+  Scenario Outline: View Book Details (IOS)
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open search modal
-      And I search for 'Sullivan\'s Promise' and save bookName as 'bookNameInfo'
-      And I switch to 'eBooks' catalog tab
-    #And Open 'EBOOK' book with GET button from Subcategory List View with title 'bookNameInfo' and save it as 'bookInfo'
-    Then Book 'bookInfo' is opened on book details screen
-      And The following values in the information block are present:
-        | key         | value                                           |
-        | PUBLISHED   | 2021-03-05                                      |
-        | PUBLISHER   | Random House Publishing Group                   |
-        | DISTRIBUTOR | Bibliotheca                                     |
-        | CATEGORIES  | Westerns, Western Romance, Contemporary Romance |
-      And Description has text
-    """
-    Two unforgiving lovers reunite for the sake of their child in this fiery contemporary romance from the New York Times bestselling author of Surrender.
-    """
-    When I open related books
-    Then Current category name is 'Related books…'
-      And Count of books in subcategory 'Johnston, Joan' lane is more then 1
-    When I open 'Johnston, Joan' subcategory
-    Then Current category name is 'Johnston, Joan'
-      And Count of books in search result is more then 1
+      And I search for 'Dune' and save bookName as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      Then '<PUBLISHED>' published and '<PUBLISHER>' publisher and '<CATEGORIES>' categories and '<DISTRIBUTOR>' distributor are present on book details screen
+    Scenarios:
+      | PUBLISHED    | PUBLISHER       | CATEGORIES  | DISTRIBUTOR |
+      | 29 May 2007 | Macmillan Audio | Space Opera | Bibliotheca |
 
-  @tier1 @exclude_android @ignore
-  Scenario: View Book Details (iOS)
+  @tier1 @ignore @exclude_ios
+  Scenario Outline: View Book Details
     When I add "LYRASIS Reads" account from welcomeScreen
-      And I open Catalog
-      And I switch to 'LYRASIS Reads' from side menu
-    When I open search modal
-    Then Search modal is opened
-    When I search for 'UnEnchanted' and save bookName as 'bookNameInfo'
-      And I switch to 'eBooks' catalog tab
-    Then Subcategory screen is present
-    #When I open 'EBOOK' book with name 'UnEnchanted' and save it as 'bookInfo'
-    Then Book 'bookInfo' is opened on book details screen
-      And The following values in the information block are present:
-        | key         | value                     |
-        | PUBLISHED   | 29. December 2011         |
-        | PUBLISHER   | Chanda Hahn               |
-        | DISTRIBUTOR | Bibliotheca               |
-        | CATEGORIES  | Fantasy; Folklore; Horror |
-      And Description has text
-    """
-    	Mina Grime is unlucky, unpopular and uncoordinated, that is until she saves her crush's life on a field trip, changing her High School status from loser to hero overnight.
-    	But with her new found fame brings misfortune in the form of an old family curse come to light.
-    	For Mina is descended from the Brothers Grimm and has inherited all of their unfinished fairy tale business. Which includes
-    	trying to outwit a powerful Story from making her its next fairytale victim.To break the fairy tale curse on her family and make these deadly
-    	occurrences stop, Mina must finish the tales until the very Grimm end.
-     """
-    When I open related books
-    Then Count of books in subcategory 'Chanda Hahn' lane is up to 3
-    When I open 'Chanda Hahn' subcategory
-    Then Current category name is 'Chanda Hahn'
-      And Count of books in search result is up to 3
+    And I open search modal
+    And I search for 'Dune' and save bookName as 'bookNameInfo'
+    And I switch to 'Audiobooks' catalog tab
+    And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then '<PUBLISHED>' published and '<PUBLISHER>' publisher and '<CATEGORIES>' categories and '<DISTRIBUTOR>' distributor are present on book details screen
+    Scenarios:
+      | PUBLISHED  | PUBLISHER       | CATEGORIES  | DISTRIBUTOR |
+      | 2007-05-29 | Macmillan Audio | Space Opera | Bibliotheca |

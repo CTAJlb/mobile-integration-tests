@@ -6,6 +6,7 @@ import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import constants.application.attributes.IosAttributes;
 import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import models.android.CatalogBookModel;
@@ -28,7 +29,15 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
             String.format("(%1$s)[%%d]", BOOK_MAIN_INFO);
 
     private final ILabel lblBookTitleInfo =
-            getElementFactory().getLabel(By.xpath("(//XCUIElementTypeOther//XCUIElementTypeStaticText[@name])[1]"), "Book title");
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther//XCUIElementTypeStaticText[@name][1]"), "Book title");
+    private final ILabel lblPublished =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Published\")]/following-sibling::XCUIElementTypeStaticText"), "lblPublished");
+    private final ILabel lblPublisher =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Publisher\")]/following-sibling::XCUIElementTypeStaticText"), "lblPublisher");
+    private final ILabel lblCategories =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Category\")]/following-sibling::XCUIElementTypeStaticText"), "lblCategories");
+    private final ILabel lblDistributor =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Distributed\")]/following-sibling::XCUIElementTypeStaticText"), "lblDistributor");
     private final ILabel lblProgressBar =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeProgressIndicator"), "lblProgressBar");
     private final IButton btnCloseBookDetailsOnlyIOSTab =
@@ -98,6 +107,26 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     @Override
     public void swipeError() {
 
+    }
+
+    @Override
+    public String getPublishedInfo() {
+        return lblPublished.getAttribute(IosAttributes.NAME);
+    }
+
+    @Override
+    public String getPublisherInfo() {
+        return lblPublisher.getAttribute(IosAttributes.NAME);
+    }
+
+    @Override
+    public String getCategoryInfo() {
+        return lblCategories.getAttribute(IosAttributes.NAME);
+    }
+
+    @Override
+    public String getDistributorInfo() {
+        return lblDistributor.getAttribute(IosAttributes.NAME);
     }
 
     @Override

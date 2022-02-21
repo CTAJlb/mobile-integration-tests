@@ -26,5 +26,13 @@ public abstract class BookDetailsScreen extends Screen {
 
     public abstract void swipeError();
 
+    public abstract String getPublishedInfo();
+
+    public abstract String getPublisherInfo();
+
+    public abstract String getCategoryInfo();
+
+    public abstract String getDistributorInfo();
+
     public abstract void closeBookDetailsOnlyForIOSTabIfDisplayed();
 }

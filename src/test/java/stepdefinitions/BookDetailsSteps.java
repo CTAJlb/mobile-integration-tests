@@ -11,6 +11,7 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.alert.AlertScreen;
 import screens.bookDetails.BookDetailsScreen;
@@ -48,9 +49,27 @@ public class BookDetailsSteps {
     }
 
     @When("Click {} action button on book details screen and click {} action button on alert. Only for ios")
-    public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionBookButtonKey, EnumActionButtonsForBooksAndAlertsKeys actionAlertButtonKey) {
+    public void pressActionButtonAndAlertActionButtonOnBookDetailsScreen(EnumActionButtonsForBooksAndAlertsKeys actionBookButtonKey, EnumActionButtonsForBooksAndAlertsKeys actionAlertButtonKey) {
         bookDetailsScreen.clickActionButton(actionBookButtonKey);
         alertScreen.waitAndPerformAlertActionIfDisplayed(actionAlertButtonKey);
+    }
+
+    @Then("{string} published and {string} publisher and {string} categories and {string} distributor are present on book details screen")
+    public void checkThatFollowingInfoIsPresent(String expectedPublished, String expectedPublisher, String expectedCategories, String expectedDistributor) {
+        String actualPublished = bookDetailsScreen.getPublishedInfo();
+        String actualPublisher = bookDetailsScreen.getPublisherInfo();
+        String actualCategories = bookDetailsScreen.getCategoryInfo();
+        String actualDistributor = bookDetailsScreen.getDistributorInfo();
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(expectedPublished.toLowerCase().equals(actualPublished.toLowerCase())).as(String.format("expectedPublished is not equal to " +
+                "actualPublished. expectedPublished - %s, actualPublished - %s", expectedPublished, actualPublished)).isTrue();
+        softAssertions.assertThat(expectedPublisher.toLowerCase().equals(actualPublisher.toLowerCase())).as(String.format("expectedPublisher is not equal to " +
+                "actualPublisher. expectedPublisher - %s, actualPublisher - %s", expectedPublisher, actualPublisher)).isTrue();
+        softAssertions.assertThat(expectedCategories.toLowerCase().equals(actualCategories.toLowerCase())).as(String.format("expectedCategories is not equal to " +
+                "actualCategories. expectedCategories - %s, actualCategories - %s", expectedCategories, actualCategories)).isTrue();
+        softAssertions.assertThat(expectedDistributor.toLowerCase().equals(actualDistributor.toLowerCase())).as(String.format("expectedDistributor is not equal to " +
+                "actualDistributor. expectedDistributor - %s, actualDistributor - %s", expectedDistributor, actualDistributor)).isTrue();
+        softAssertions.assertAll();
     }
 
     @Then("I check that book contains {} action button on book details screen")
