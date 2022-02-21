@@ -4,7 +4,6 @@ import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
-import screens.audiobook.AudioPlayerScreen2;
 
 public class PlaybackSpeedSteps {
     private final ScenarioContext context;

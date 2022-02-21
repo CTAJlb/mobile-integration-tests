@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.When;
-import screens.audiobook.AudioPlayerScreen2;
 
 public class SleepTimerAudiobookSteps {
     private final ScenarioContext context;

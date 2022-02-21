@@ -7,7 +7,6 @@ import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import models.android.CatalogBookModel;
 import org.junit.Assert;
-import screens.audiobook.AudioPlayerScreen2;
 import screens.epub.readerEpub.ReaderEpubScreen;
 import screens.pdf.readerPdf.ReaderPdfScreen;
 

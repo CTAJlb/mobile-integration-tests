@@ -10,6 +10,8 @@ import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
 import org.openqa.selenium.By;
 import screens.audiobook.audioPlayer.AudioPlayerScreen;
+import screens.audiobook.playbackSpeedAudiobook.PlaybackSpeedAudiobookScreen;
+import screens.audiobook.sleepTimerAudiobook.SleepTimerAudiobookScreen;
 
 import java.time.Duration;
 
@@ -34,11 +36,23 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
 
     public AndroidAudioPlayerScreen() {
         super(By.xpath(""));
+        sleepTimerAudiobookScreen = AqualityServices.getScreenFactory().getScreen(SleepTimerAudiobookScreen.class);
+        playbackSpeedAudiobookScreen = AqualityServices.getScreenFactory().getScreen(PlaybackSpeedAudiobookScreen.class);
     }
 
     @Override
     public void openToc() {
         btnMenu.click();
+    }
+
+    @Override
+    public SleepTimerAudiobookScreen getSleepTimerAudiobookScreen() {
+        return sleepTimerAudiobookScreen;
+    }
+
+    @Override
+    public PlaybackSpeedAudiobookScreen getPlaybackSpeedAudiobookScreen() {
+        return playbackSpeedAudiobookScreen;
     }
 
     @Override

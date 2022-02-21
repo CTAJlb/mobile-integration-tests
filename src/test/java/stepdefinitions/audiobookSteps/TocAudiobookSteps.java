@@ -5,7 +5,6 @@ import com.google.inject.Inject;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomUtils;
-import screens.audiobook.AudioPlayerScreen2;
 
 public class TocAudiobookSteps {
     private final ScenarioContext context;

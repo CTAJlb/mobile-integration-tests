@@ -3,15 +3,24 @@ package screens.audiobook.audioPlayer;
 import aquality.appium.mobile.screens.Screen;
 import constants.localization.application.catalog.TimerKeys;
 import org.openqa.selenium.By;
+import screens.audiobook.playbackSpeedAudiobook.PlaybackSpeedAudiobookScreen;
+import screens.audiobook.sleepTimerAudiobook.SleepTimerAudiobookScreen;
 
 import java.time.Duration;
 
 public abstract class AudioPlayerScreen extends Screen {
+    protected SleepTimerAudiobookScreen sleepTimerAudiobookScreen;
+    protected PlaybackSpeedAudiobookScreen playbackSpeedAudiobookScreen;
+
     protected AudioPlayerScreen(By locator) {
         super(locator, "AudioPlayerScreen");
     }
 
     public abstract void openToc();
+
+    public abstract SleepTimerAudiobookScreen getSleepTimerAudiobookScreen();
+
+    public abstract PlaybackSpeedAudiobookScreen getPlaybackSpeedAudiobookScreen();
 
     public abstract void goBack();
 

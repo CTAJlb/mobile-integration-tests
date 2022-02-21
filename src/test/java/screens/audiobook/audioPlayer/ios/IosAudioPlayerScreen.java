@@ -1,5 +1,6 @@
 package screens.audiobook.audioPlayer.ios;
 
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
@@ -10,6 +11,8 @@ import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
 import org.openqa.selenium.By;
 import screens.audiobook.audioPlayer.AudioPlayerScreen;
+import screens.audiobook.playbackSpeedAudiobook.PlaybackSpeedAudiobookScreen;
+import screens.audiobook.sleepTimerAudiobook.SleepTimerAudiobookScreen;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -44,12 +47,25 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     public IosAudioPlayerScreen() {
         super(By.xpath(""));
+        sleepTimerAudiobookScreen = AqualityServices.getScreenFactory().getScreen(SleepTimerAudiobookScreen.class);
+        playbackSpeedAudiobookScreen = AqualityServices.getScreenFactory().getScreen(PlaybackSpeedAudiobookScreen.class);
     }
 
     @Override
     public void openToc() {
         btnMenu.click();
     }
+
+    @Override
+    public SleepTimerAudiobookScreen getSleepTimerAudiobookScreen() {
+        return sleepTimerAudiobookScreen;
+    }
+
+    @Override
+    public PlaybackSpeedAudiobookScreen getPlaybackSpeedAudiobookScreen() {
+        return playbackSpeedAudiobookScreen;
+    }
+
     @Override
     public boolean isTimerSetTo(TimerKeys timerSetting) {
         return false;
