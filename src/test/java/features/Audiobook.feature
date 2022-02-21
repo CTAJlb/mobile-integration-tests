@@ -18,7 +18,7 @@ Feature: Audiobook
   Scenario: Navigate by Table of Contents
     When Open toc audiobook screen
       And Open random chapter on toc audiobook screen and save chapter name as 'chapterNameKey'
-      And I wait for 12 seconds
+      And Wait for 12 seconds
     Then Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
       And Pause button is present on audio player screen
       And Book is playing on audio player screen
@@ -27,19 +27,19 @@ Feature: Audiobook
   Scenario: Open the audiobook at the last open chapter
     When Open toc audiobook screen
       And Open the 2 chapter on toc audiobook screen and save the chapter name as 'chapterNameKey'
-      And I wait for 12 seconds
+      And Wait for 12 seconds
       And Return to previous screen from audio player screen
       And Click LISTEN action button on book details screen
-      And I wait for 12 seconds
+      And Wait for 12 seconds
     Then Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
     When Open toc audiobook screen
       And Open the 4 chapter on toc audiobook screen and save the chapter name as 'chapterNameKey2'
-      And I wait for 12 seconds
+      And Wait for 12 seconds
       And I restart app
       And I open Books
       And Open AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
       And Click LISTEN action button on book details screen
-      And I wait for 12 seconds
+      And Wait for 12 seconds
     Then Chapter name on audio player screen is equal to 'chapterNameKey2' saved chapter name
 
   @logout @returnBooks @tier2
@@ -62,14 +62,14 @@ Feature: Audiobook
       And Skip behind 15 seconds on audio player screen
     Then Playback has been moved behind by 15 seconds from 'timeBehind' seconds on audio player screen
     When Move the slider to the middle of the chapter on audio player screen
-    Then Current play time is middle of 'chapterLength' saved chapter play time
+    Then Current play time is middle of 'chapterLength' saved chapter play time on audio player screen
 
   @logout @returnBooks @tier2
   Scenario Outline: Navigate by Playback Options
     When Tap play button on audio player screen
       And Select <speed>X playback speed on playback speed audiobook screen
       And Save book play time as 'timeAhead' on audio player screen
-      And I wait for <secondsForWaiting> seconds
+      And Wait for <secondsForWaiting> seconds
     Then Playback has been moved forward by <moveForwardSeconds> seconds from 'timeAhead' seconds on audio player screen
       And Current playback speed value is <speed>X on audio player screen
     When Tap pause button on audio player screen

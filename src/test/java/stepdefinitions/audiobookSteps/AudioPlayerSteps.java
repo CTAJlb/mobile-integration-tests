@@ -1,16 +1,14 @@
-package stepdefinitions;
+package stepdefinitions.audiobookSteps;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.RegEx;
-import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.RegExUtil;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
 import screens.audiobook.AudioPlayerScreen2;
 
@@ -19,8 +17,8 @@ import java.time.Duration;
 import static constants.localization.application.catalog.TimerKeys.END_OF_CHAPTER;
 
 public class AudioPlayerSteps {
-    private static final int PING_COUNT_OF_SECONDS = 6;
     private final AudioPlayerScreen2 audioPlayerScreen2;
+    private static final int PING_COUNT_OF_SECONDS = 6;
     private final ScenarioContext context;
     private long diffBetweenTimePointsWhenForward;
     private long diffBetweenTimePointsWhenBehind;
@@ -31,22 +29,9 @@ public class AudioPlayerSteps {
         audioPlayerScreen2 = AqualityServices.getScreenFactory().getScreen(AudioPlayerScreen2.class);
         this.context = context;
     }
-
     @And("Open toc audiobook screen")
     public void openTocAudiobookScreen() {
         audioPlayerScreen2.openToc();
-    }
-
-    @When("Open random chapter on toc audiobook screen and save chapter name as {string}")
-    public void openRandomChapterOnTocAudiobookScreenAndSaveChapterName(String keyChapterName) {
-        String chapterName = audioPlayerScreen2.selectChapterAndGetText(RandomUtils.nextInt(1, audioPlayerScreen2.getCountOfChapters()));
-        context.add(keyChapterName, chapterName);
-    }
-
-    @When("Open the {int} chapter on toc audiobook screen and save the chapter name as {string}")
-    public void openSpecificChapterOnTocAudiobookScreenAndSaveChapterName(int chapterNumber, String keyChapterName) {
-        String chapter = audioPlayerScreen2.selectChapterAndGetText(chapterNumber - 1);
-        context.add(keyChapterName, chapter);
     }
 
     @Then("Chapter name on audio player screen is equal to {string} saved chapter name")
@@ -54,6 +39,10 @@ public class AudioPlayerSteps {
         String expectedChapterName = context.get(keyChapter);
         Assert.assertTrue(String.format("Chapter name on audio player screen is not equal to saved chapter name. " +
                 "Expected chapter name - %s; actual chapter name - %s", expectedChapterName, getChapterName()), expectedChapterName.toLowerCase().equals(getChapterName().toLowerCase()));
+    }
+
+    private String getChapterName() {
+        return RegExUtil.getStringFromFirstGroup(audioPlayerScreen2.getCurrentChapterInfo(), RegEx.AUDIO_BOOK_CURRENT_CHAPTER_TEXT_REGEX);
     }
 
     @And("Tap play button on audio player screen")
@@ -161,38 +150,10 @@ public class AudioPlayerSteps {
         audioPlayerScreen2.moveChapterToMiddle();
     }
 
-    private void setDiffForMiddleOfChapter(long diff) {
-        diffForMiddleOfChapter = diff;
-    }
-
-    @And("I wait for {int} seconds")
-    public void waitForSeconds(Integer secondsCount) {
-        if (secondsCount > 10) {
-            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount / 3));
-            AqualityServices.getApplication().getDriver().getContext();
-            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount / 3));
-            AqualityServices.getApplication().getDriver().getContext();
-            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount / 3));
-        } else {
-            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount));
-        }
-    }
-
-    @And("Select {double}X playback speed on playback speed audiobook screen")
-    public void selectPlaybackSpeedOnPlaybackSpeedAudiobookScreen(Double playbackSpeedDouble) {
-        String playbackSpeed = String.valueOf(playbackSpeedDouble);
-        audioPlayerScreen2.selectPlaybackSpeed(playbackSpeed);
-    }
-
     @And("Current playback speed value is {double}X on audio player screen")
     public void checkCurrentPlaybackSpeedValueIsCorrectOnAudioPlayerScreen(Double playbackSpeedDouble) {
         String playbackSpeed = String.valueOf(playbackSpeedDouble);
         Assert.assertTrue("Current playback speed value is not correct on audio player screen", audioPlayerScreen2.isSpeedOptionSelected(playbackSpeed));
-    }
-
-    @When("Set {} sleep timer on sleep timer audiobook screen")
-    public void setSleepTimerOnSleepTimerAudiobookScreen(TimerKeys timerSetting) {
-        audioPlayerScreen2.setTimer(timerSetting);
     }
 
     @And("Save chapter length as {string} on audio player screen")
@@ -200,7 +161,7 @@ public class AudioPlayerSteps {
         context.add(chapterLength, audioPlayerScreen2.getChapterLength());
     }
 
-    @Then("Current play time is middle of {string} saved chapter play time")
+    @Then("Current play time is middle of {string} saved chapter play time on audio player screen")
     public void checkThatCurrentPlayTimeIsMiddleOfSavedChapterPlayTime(String chapterLengthKey) {
         Duration fullChapterLength = context.get(chapterLengthKey);
         long middleOfChapterInSeconds = fullChapterLength.getSeconds() / 2;
@@ -217,6 +178,10 @@ public class AudioPlayerSteps {
 
     }
 
+    private void setDiffForMiddleOfChapter(long diff) {
+        diffForMiddleOfChapter = diff;
+    }
+
     @Then("Sleep timer is set to endOfChapter on audio player screen")
     public void checkThatSleepTimerIsSetToEndOfChapterOnAudioPLayerScreen() {
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
@@ -224,9 +189,5 @@ public class AudioPlayerSteps {
         } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
             Assert.assertTrue("Timer value is not correct", audioPlayerScreen2.isTimerEqualTo(audioPlayerScreen2.getChapterLength()));
         }
-    }
-
-    private String getChapterName() {
-        return RegExUtil.getStringFromFirstGroup(audioPlayerScreen2.getCurrentChapterInfo(), RegEx.AUDIO_BOOK_CURRENT_CHAPTER_TEXT_REGEX);
     }
 }
