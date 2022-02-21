@@ -15,7 +15,7 @@ Feature: Audiobook
   @logout @returnBooks @tier2
   Scenario: Navigate by Table of Contents
     When Click LISTEN action button on book details screen
-      And Open chapter list for an audiobook
+      And Open toc audiobook screen
     When Select a random chapter that is not equal to the first chapter and save the chapter as 'chapterKey'
       And I wait for 12 seconds
     Then Chapter is equal to 'chapterKey' saved chapter
@@ -23,23 +23,16 @@ Feature: Audiobook
       And Book is playing
 
   @logout @returnBooks @tier2
-  Scenario: Loading chapters
-    When Click LISTEN action button on book details screen
-    Then Download has started and percentage value increased
-    When Open chapter list for an audiobook
-    Then All chapters loaded
-
-  @logout @returnBooks @tier2
   Scenario: Open the audiobook at the last open chapter
     When Click LISTEN action button on book details screen
-      And Open chapter list for an audiobook
+      And Open toc audiobook screen
     When Select the 2 chapter and save the chapter as 'chapterKey'
       And I wait for 12 seconds
       And I return to previous screen for audiobook
       And Click LISTEN action button on book details screen
       And I wait for 12 seconds
     Then Chapter is equal to 'chapterKey' saved chapter
-    When Open chapter list for an audiobook
+    When Open toc audiobook screen
       And Select the 4 chapter and save the chapter as 'chapterKey2'
       And I wait for 12 seconds
       And I restart app

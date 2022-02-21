@@ -12,7 +12,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Assert;
-import screens.audioplayer.AudioPlayerScreen;
+import screens.audiobook.AudioPlayerScreen2;
 
 import java.time.Duration;
 
@@ -20,7 +20,7 @@ import static constants.localization.application.catalog.TimerKeys.END_OF_CHAPTE
 
 public class AudioPlayerSteps {
     private static final int PING_COUNT_OF_SECONDS = 6;
-    private final AudioPlayerScreen audioPlayerScreen;
+    private final AudioPlayerScreen2 audioPlayerScreen2;
     private final ScenarioContext context;
     private long diffBetweenTimePointsWhenForward;
     private long diffBetweenTimePointsWhenBehind;
@@ -28,39 +28,25 @@ public class AudioPlayerSteps {
 
     @Inject
     public AudioPlayerSteps(ScenarioContext context) {
-        audioPlayerScreen = AqualityServices.getScreenFactory().getScreen(AudioPlayerScreen.class);
+        audioPlayerScreen2 = AqualityServices.getScreenFactory().getScreen(AudioPlayerScreen2.class);
         this.context = context;
     }
 
-    @And("Open chapter list for an audiobook")
-    public void openMenuBasedPositionInAudiobook() {
-        audioPlayerScreen.openMenu();
-    }
-
-    @Then("Download has started and percentage value increased")
-    public void downloadHasStarted() {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            Integer percentageValue = audioPlayerScreen.getPercentageValue();
-            boolean isPercentageValueNew = AqualityServices.getConditionalWait().waitFor(() -> percentageValue != 0, Duration.ofMillis(10000));
-            Assert.assertTrue("percentageValue did not change", isPercentageValueNew);
-        }
-    }
-
-    @And("All chapters loaded")
-    public void waitAndCheckAllChaptersLoaded() {
-        audioPlayerScreen.waitAndCheckAllChaptersLoaded();
+    @And("Open toc audiobook screen")
+    public void openTocAudiobookScreen() {
+        audioPlayerScreen2.openToc();
     }
 
     @When("Select a random chapter that is not equal to the first chapter and save the chapter as {string}")
     public void selectRandomChapterAndSaveChapter(String keyChapter) {
-        String chapterName = audioPlayerScreen.selectChapterAndGetText(RandomUtils.nextInt(1, audioPlayerScreen.getCountOfChapters()));
+        String chapterName = audioPlayerScreen2.selectChapterAndGetText(RandomUtils.nextInt(1, audioPlayerScreen2.getCountOfChapters()));
         AqualityServices.getLogger().info("Selected chapter for audiobook: " + chapterName);
         context.add(keyChapter, chapterName);
     }
 
     @When("Select the {int} chapter and save the chapter as {string}")
     public void selectChapterAndSaveChapter(int chapterNumber, String keyChapter) {
-        String chapter = audioPlayerScreen.selectChapterAndGetText(chapterNumber - 1);
+        String chapter = audioPlayerScreen2.selectChapterAndGetText(chapterNumber - 1);
         context.add(keyChapter, chapter);
     }
 
@@ -72,61 +58,60 @@ public class AudioPlayerSteps {
 
     @And("I click play button on player screen")
     public void clickPlayButtonOnPlayerScreen() {
-        audioPlayerScreen.playBook();
+        audioPlayerScreen2.playBook();
     }
 
     @When("I click pause button on player screen")
     public void clickPauseButtonOnPlayerScreen() {
-        audioPlayerScreen.pauseBook();
+        audioPlayerScreen2.pauseBook();
     }
 
     @Then("Pause button is present")
     public void checkPauseButtonIsPresent() {
-        Assert.assertTrue("Pause button is not present", audioPlayerScreen.isPauseButtonPresent());
+        Assert.assertTrue("Pause button is not present", audioPlayerScreen2.isPauseButtonPresent());
     }
 
     @Then("Play button is present")
     public void checkPlayButtonIsPresent() {
-        Assert.assertTrue("Play button is not present", audioPlayerScreen.isPlayButtonPresent());
+        Assert.assertTrue("Play button is not present", audioPlayerScreen2.isPlayButtonPresent());
     }
 
     @And("Book is playing")
     public void checkBookIsPlaying() {
-        audioPlayerScreen.waitForBookLoading();
-        Duration firstTiming = audioPlayerScreen.getCurrentPlayTime();
-        Assert.assertTrue("Book is not playing. Error (if present) - " + audioPlayerScreen.getLoadingStatus(), AqualityServices.getConditionalWait().waitFor(() -> !firstTiming.equals(audioPlayerScreen.getCurrentPlayTime())));
+        Duration firstTiming = audioPlayerScreen2.getCurrentPlayTime();
+        Assert.assertTrue("Book is not playing", AqualityServices.getConditionalWait().waitFor(() -> !firstTiming.equals(audioPlayerScreen2.getCurrentPlayTime())));
     }
 
     @And("Book is not playing")
     public void checkBookIsNotPlaying() {
-        Duration firstTiming = audioPlayerScreen.getCurrentPlayTime();
+        Duration firstTiming = audioPlayerScreen2.getCurrentPlayTime();
         //todo tread sleep
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals("Book is still playing", firstTiming, audioPlayerScreen.getCurrentPlayTime());
+        Assert.assertEquals("Book is still playing", firstTiming, audioPlayerScreen2.getCurrentPlayTime());
     }
 
     @And("I save book play time as {string}")
     public void saveBookPlayTimeAs(String dateKey) {
-        context.add(dateKey, audioPlayerScreen.getCurrentPlayTime());
+        context.add(dateKey, audioPlayerScreen2.getCurrentPlayTime());
     }
 
     @And("I skip ahead 15 seconds")
     public void skipAhead() {
-        audioPlayerScreen.skipAhead();
+        audioPlayerScreen2.skipAhead();
     }
 
     @And("I skip behind 15 seconds")
     public void skipBehind() {
-        audioPlayerScreen.skipBehind();
+        audioPlayerScreen2.skipBehind();
     }
 
     @And("I return to previous screen for audiobook")
     public void returnToPreviousScreen() {
-        audioPlayerScreen.goBack();
+        audioPlayerScreen2.goBack();
     }
 
     @Then("Playback {string} moves forward by {int} seconds increment")
@@ -135,7 +120,7 @@ public class AudioPlayerSteps {
         long secondsBefore = savedDate.getSeconds();
         boolean isResultTrue = false;
         isResultTrue = AqualityServices.getConditionalWait().waitFor(() -> {
-            long diffInSeconds = audioPlayerScreen.getCurrentPlayTime().getSeconds() - secondsBefore;
+            long diffInSeconds = audioPlayerScreen2.getCurrentPlayTime().getSeconds() - secondsBefore;
             boolean isConditionTrue = diffInSeconds >= secondsForward && diffInSeconds <= secondsForward + PING_COUNT_OF_SECONDS;
             setDiffBetweenTimePointsWhenForward(diffInSeconds);
 
@@ -159,7 +144,7 @@ public class AudioPlayerSteps {
         Duration savedDate = context.get(timeKey);
         long secondsBefore = savedDate.getSeconds();
         boolean isResultTrue = AqualityServices.getConditionalWait().waitFor(() -> {
-            long diffInSeconds = secondsBefore - audioPlayerScreen.getCurrentPlayTime().getSeconds();
+            long diffInSeconds = secondsBefore - audioPlayerScreen2.getCurrentPlayTime().getSeconds();
             boolean isConditionTrue = diffInSeconds <= secondsBehind && diffInSeconds >= secondsBehind - PING_COUNT_OF_SECONDS;
             setDiffBetweenTimePointsWhenBehind(diffInSeconds);
 
@@ -172,7 +157,7 @@ public class AudioPlayerSteps {
 
     @And("I move to middle part of chapter")
     public void moveToMiddlePartOfChapter() {
-        audioPlayerScreen.moveChapterToMiddle();
+        audioPlayerScreen2.moveChapterToMiddle();
     }
 
     private void setDiffForMiddleOfChapter(long diff) {
@@ -195,28 +180,28 @@ public class AudioPlayerSteps {
     @And("I select playback speed {double}X")
     public void selectPlaybackSpeed(Double playbackSpeedDouble) {
         String playbackSpeed = String.valueOf(playbackSpeedDouble);
-        audioPlayerScreen.selectPlaybackSpeed(playbackSpeed);
+        audioPlayerScreen2.selectPlaybackSpeed(playbackSpeed);
     }
 
     @And("Current playback speed value is {double}X")
     public void checkCurrentPlaybackSpeedValueIs(Double playbackSpeedDouble) {
         String playbackSpeed = String.valueOf(playbackSpeedDouble);
-        Assert.assertTrue("Current playback speed value is not correct", audioPlayerScreen.isSpeedOptionSelected(playbackSpeed));
+        Assert.assertTrue("Current playback speed value is not correct", audioPlayerScreen2.isSpeedOptionSelected(playbackSpeed));
     }
 
     @When("I set sleep timer as {}")
     public void setSleepTimerAs(TimerKeys timerSetting) {
-        audioPlayerScreen.setTimer(timerSetting);
+        audioPlayerScreen2.setTimer(timerSetting);
     }
 
     @Then("Sleep timer shows time till chapter finish")
     public void checkSleepTimerShowsTimeTillChapterFinish() {
-        Assert.assertTrue("Timer value is not correct", audioPlayerScreen.isTimerEqualTo(audioPlayerScreen.getChapterLength()));
+        Assert.assertTrue("Timer value is not correct", audioPlayerScreen2.isTimerEqualTo(audioPlayerScreen2.getChapterLength()));
     }
 
     @And("I save chapter length as {string}")
     public void saveChapterLengthAs(String chapterLength) {
-        context.add(chapterLength, audioPlayerScreen.getChapterLength());
+        context.add(chapterLength, audioPlayerScreen2.getChapterLength());
     }
 
     @Then("Saved play time {string} is close to middle part of chapter")
@@ -225,7 +210,7 @@ public class AudioPlayerSteps {
         long middleOfChapterInSeconds = fullChapterLength.getSeconds() / 2;
         boolean isResultTrue = false;
         isResultTrue = AqualityServices.getConditionalWait().waitFor(() -> {
-            long currentTimeDifference = audioPlayerScreen.getCurrentPlayTime().getSeconds();
+            long currentTimeDifference = audioPlayerScreen2.getCurrentPlayTime().getSeconds();
             boolean isConditionTrue = currentTimeDifference >= middleOfChapterInSeconds && currentTimeDifference <= middleOfChapterInSeconds + PING_COUNT_OF_SECONDS;
             setDiffForMiddleOfChapter(currentTimeDifference);
             return isConditionTrue;
@@ -239,13 +224,13 @@ public class AudioPlayerSteps {
     @Then("Sleep timer is set to endOfChapter")
     public void checkSleepTimerIsSetTo() {
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
-            Assert.assertTrue("Timer value is not correct", audioPlayerScreen.isTimerSetTo(END_OF_CHAPTER));
+            Assert.assertTrue("Timer value is not correct", audioPlayerScreen2.isTimerSetTo(END_OF_CHAPTER));
         } else if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            Assert.assertTrue("Timer value is not correct", audioPlayerScreen.isTimerEqualTo(audioPlayerScreen.getChapterLength()));
+            Assert.assertTrue("Timer value is not correct", audioPlayerScreen2.isTimerEqualTo(audioPlayerScreen2.getChapterLength()));
         }
     }
 
     private String getChapter() {
-        return RegExUtil.getStringFromFirstGroup(audioPlayerScreen.getCurrentChapterInfo(), RegEx.AUDIO_BOOK_CURRENT_CHAPTER_TEXT_REGEX);
+        return RegExUtil.getStringFromFirstGroup(audioPlayerScreen2.getCurrentChapterInfo(), RegEx.AUDIO_BOOK_CURRENT_CHAPTER_TEXT_REGEX);
     }
 }

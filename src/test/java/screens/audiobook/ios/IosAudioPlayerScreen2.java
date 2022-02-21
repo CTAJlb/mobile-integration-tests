@@ -1,6 +1,5 @@
-package screens.audioplayer.ios;
+package screens.audiobook.ios;
 
-import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
@@ -11,13 +10,11 @@ import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
 import constants.application.attributes.IosAttributes;
 import constants.application.timeouts.AudioBookTimeouts;
-import constants.application.timeouts.BooksTimeouts;
-import constants.application.timeouts.CategoriesTimeouts;
 import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import screens.audioplayer.AudioPlayerScreen;
+import screens.audiobook.AudioPlayerScreen2;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -26,13 +23,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
-public class IosAudioPlayerScreen extends AudioPlayerScreen {
+public class IosAudioPlayerScreen2 extends AudioPlayerScreen2 {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeImage[@name=\"cover_art\"]";
-    private static final String CHECKING_DOWNLOAD = "//XCUIElementTypeAny";
     private static final String CHAPTERS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell";
     private static final String CHAPTERS_TEXT = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[1]";
-    private static final String LOADED_CHAPTERS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeOther[@visible=\"false\"]";
-    private static final int COUNT_OF_CHAPTERS_TO_WAIT_FOR = 3;
     private static final String PLAYBACK_OPTION_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%s\"]";
     private static final String TIME_IN_HOURS_LEFT_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d hour and %d minutes until playback pauses\"]";
     private static final String TIME_IN_SECONDS_LEFT_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d seconds until playback pauses\"]";
@@ -56,21 +50,17 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
             getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton[3]"), "Timer");
     private final ILabel lblCurrentChapter =
             getElementFactory().getLabel(By.xpath("(//XCUIElementTypeStaticText[@name=\"progress_rightLabel\"])[1]"), "Current chapter");
-    private final ILabel lblPercentageValue =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeProgressIndicator/following-sibling::XCUIElementTypeStaticText"), "Percentage Value");
     private final ILabel lblChapterTime =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"progress_rightLabel\" and contains(@value,\":\")]"), "Chapter time", ElementState.EXISTS_IN_ANY_STATE);
     private final ILabel lblCurrentTime =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"progress_leftLabel\"]"), "Current time", ElementState.EXISTS_IN_ANY_STATE);
-    private final ILabel lblDownloadingStatus =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@value=\"Downloading\"]"), "Downloading");
 
     private static Map<String, String> speedName = new HashMap<String, String>() {{
         put("2.0", "Two times normal speed. Fastest.");
         put("0.75", "Three quarters of normal speed. Slower.");
     }};
 
-    public IosAudioPlayerScreen() {
+    public IosAudioPlayerScreen2() {
         super(By.xpath(MAIN_ELEMENT));
     }
 
@@ -83,38 +73,13 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void checkThatChaptersVisible() {
-        Assert.assertTrue("Checking that count of chapters greater than zero", AqualityServices.getConditionalWait().waitFor(() -> getChapters().size() > 0));
-    }
-
-    @Override
-    public void waitAndCheckAllChaptersLoaded() {
-        checkThatChaptersVisible();
-
-        boolean isAllLoadersDisappeared = AqualityServices.getConditionalWait().waitFor(() -> getLabelsForCheckingDownload().size() == 0, Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis()));
-        Assert.assertTrue("Not all chapters loaded", isAllLoadersDisappeared);
-    }
-
-    private List<ILabel> getLabelsForCheckingDownload() {
-        return getElementFactory().findElements(By.xpath(CHECKING_DOWNLOAD), ElementType.LABEL);
-    }
-
-    @Override
-    public void openMenu() {
+    public void openToc() {
         btnMenu.click();
     }
 
     @Override
     public void goBack() {
         btnGoBack.click();
-    }
-
-    @Override
-    public Integer getPercentageValue() {
-        lblPercentageValue.state().waitForDisplayed(Duration.ofMillis(5000));
-        String percentageValueString = lblPercentageValue.getAttribute(IosAttributes.VALUE);
-        percentageValueString = percentageValueString.replace("%", "");
-        return Integer.valueOf(percentageValueString);
     }
 
     @Override
@@ -137,7 +102,6 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public void playBook() {
-        waitForLoadingDisappearing();
         btnPlay.click();
     }
 
@@ -162,11 +126,6 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public String getLoadingStatus() {
-        return "";
-    }
-
-    @Override
     public void skipAhead() {
         btnAhead.click();
     }
@@ -184,18 +143,6 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public Duration getChapterLength() {
         return DateUtils.getDuration(lblChapterTime.getAttribute(IosAttributes.VALUE));
-    }
-
-    @Override
-    public void waitForBookLoading() {
-        lblCurrentChapter.state().waitForDisplayed();
-        waitForLoadingDisappearing();
-    }
-
-    @Override
-    public void waitForLoadingDisappearing() {
-        lblDownloadingStatus.state().waitForDisplayed();
-        lblDownloadingStatus.state().waitForNotExist();
     }
 
     @Override

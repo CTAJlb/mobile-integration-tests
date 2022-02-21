@@ -7,23 +7,21 @@ import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import models.android.CatalogBookModel;
 import org.junit.Assert;
-import screens.audioplayer.AudioPlayerScreen;
+import screens.audiobook.AudioPlayerScreen2;
 import screens.epub.readerEpub.ReaderEpubScreen;
 import screens.pdf.readerPdf.ReaderPdfScreen;
-
-import java.util.Locale;
 
 public class ReaderSteps {
     private final ReaderEpubScreen readerEpubScreen;
     private final ReaderPdfScreen readerPdfScreen;
     private final ScenarioContext context;
-    private final AudioPlayerScreen audioPlayerScreen;
+    private final AudioPlayerScreen2 audioPlayerScreen2;
 
     @Inject
     public ReaderSteps(ScenarioContext context) {
         readerEpubScreen = AqualityServices.getScreenFactory().getScreen(ReaderEpubScreen.class);
         readerPdfScreen = AqualityServices.getScreenFactory().getScreen(ReaderPdfScreen.class);
-        audioPlayerScreen = AqualityServices.getScreenFactory().getScreen(AudioPlayerScreen.class);
+        audioPlayerScreen2 = AqualityServices.getScreenFactory().getScreen(AudioPlayerScreen2.class);
         this.context = context;
     }
 
@@ -47,7 +45,7 @@ public class ReaderSteps {
                 }
                 break;
             case AUDIOBOOK:
-                Assert.assertTrue("AudiobookName is not present on audiobook screen", audioPlayerScreen.isAudiobookNamePresent(bookName));
+                Assert.assertTrue("AudiobookName is not present on audiobook screen", audioPlayerScreen2.isAudiobookNamePresent(bookName));
                 break;
         }
     }

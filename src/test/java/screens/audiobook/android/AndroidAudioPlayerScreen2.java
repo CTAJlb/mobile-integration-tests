@@ -1,6 +1,5 @@
-package screens.audioplayer.android;
+package screens.audiobook.android;
 
-import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
@@ -15,18 +14,17 @@ import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import screens.audioplayer.AudioPlayerScreen;
+import screens.audiobook.AudioPlayerScreen2;
 
 import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.ANDROID)
-public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
+public class AndroidAudioPlayerScreen2 extends AudioPlayerScreen2 {
     private static final String UNIQUE_ELEMENT = "//android.widget.ImageView[contains(@resource-id,\"player_jump_forwards\")]";
     private static final String CHAPTERS_LOC = "//android.widget.RelativeLayout[.//*[contains(@resource-id, \"player_toc_item_view_title\")]]";
     private static final String CHAPTERS_TEXT = "//android.widget.RelativeLayout//android.widget.TextView[contains(@resource-id, \"player_toc_item_view_title\")]";
-    private static final String LOADING_SCREEN_XPATH = "//*[contains(@resource-id,\"player_toc_item_downloading_progress\")]";
     private static final String SPEED_OPTION_XPATH_LOCATOR_PATTERN = "//*[contains(@resource-id, \"player_menu_playback_rate_text\") and @text=\"%sx\"]";
     private static final String TIMER_XPATH_PATTERN_LOCATOR = "//*[contains(@resource-id, \"player_sleep_item_view_name\") and @text=\"%s\"]";
     private static final String TIMER_SETTING_XPATH_LOCATOR_PATTERN = "//*[contains(@resource-id, \"player_menu_sleep\") and @content-desc=\"Set Your Sleep Timer. The Sleep Timer Is Currently Set To Sleep At %s\"]";
@@ -35,7 +33,6 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     private final IButton btnMenu = getElementFactory().getButton(By.id("player_menu_toc"), "Menu");
     private final ILabel lblCurrentChapter = getElementFactory().getLabel(By.id("player_spine_element"), "Current chapter");
     private final ILabel lblCurrentTiming = getElementFactory().getLabel(By.id("player_time"), "Current time");
-    private final ILabel lblLoadingStatus = getElementFactory().getLabel(By.id("player_waiting_buffering"), "Loading status");
     private final ILabel lblChapterLength = getElementFactory().getLabel(By.id("player_time_maximum"), "Chapter length");
     private final IButton btnPlay =
             getElementFactory().getButton(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]"), "Play");
@@ -47,7 +44,7 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     private final IButton btnPlaybackSpeed = getElementFactory().getButton(By.id("player_menu_playback_rate_image"), "Player speed");
     private final IButton btnSleep = getElementFactory().getButton(By.id("player_menu_sleep_image"), "Sleep");
 
-    public AndroidAudioPlayerScreen() {
+    public AndroidAudioPlayerScreen2() {
         super(By.xpath(UNIQUE_ELEMENT));
     }
 
@@ -60,31 +57,13 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void checkThatChaptersVisible() {
-        Assert.assertTrue("Checking that count of chapters greater than zero", AqualityServices.getConditionalWait().waitFor(() -> getChapters().size() > 0));
-    }
-
-    @Override
-    public void waitAndCheckAllChaptersLoaded() {
-        checkThatChaptersVisible();
-        Assert.assertTrue("Book loading wasn't finished", AqualityServices.getConditionalWait().waitFor(() -> getElementFactory().findElements(By.xpath(LOADING_SCREEN_XPATH),
-                ElementType.LABEL).size() == 0, Duration.ofMillis(AudioBookTimeouts.TIMEOUT_AUDIO_BOOK_LOADER_DISAPPEAR.getTimeoutMillis())));
-    }
-
-    @Override
-    public void openMenu() {
+    public void openToc() {
         btnMenu.click();
     }
 
     @Override
     public void goBack() {
         AqualityServices.getApplication().getDriver().navigate().back();
-    }
-
-    @Override
-    public Integer getPercentageValue() {
-        //only for ios
-        return null;
     }
 
     @Override
@@ -129,20 +108,6 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public Duration getCurrentPlayTime() {
         return DateUtils.getDuration(lblCurrentTiming.getText());
-    }
-
-    @Override
-    public String getLoadingStatus() {
-        if (lblLoadingStatus.state().isDisplayed()) {
-            return lblLoadingStatus.getText();
-        } else {
-            return "";
-        }
-    }
-
-    @Override
-    public void waitForLoadingDisappearing() {
-        //only for ios
     }
 
     @Override
@@ -199,10 +164,5 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public Duration getChapterLength() {
         return DateUtils.getDuration(lblChapterLength.getText());
-    }
-
-    @Override
-    public void waitForBookLoading() {
-        lblChapterLength.state().waitForDisplayed();
     }
 }

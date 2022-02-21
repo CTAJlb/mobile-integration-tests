@@ -1,4 +1,4 @@
-package screens.audioplayer;
+package screens.audiobook;
 
 import aquality.appium.mobile.screens.Screen;
 import constants.localization.application.catalog.TimerKeys;
@@ -6,20 +6,14 @@ import org.openqa.selenium.By;
 
 import java.time.Duration;
 
-public abstract class AudioPlayerScreen extends Screen {
-    protected AudioPlayerScreen(By locator) {
+public abstract class AudioPlayerScreen2 extends Screen {
+    protected AudioPlayerScreen2(By locator) {
         super(locator, "Audio player");
     }
 
-    public abstract void checkThatChaptersVisible();
-
-    public abstract void waitAndCheckAllChaptersLoaded();
-
-    public abstract void openMenu();
+    public abstract void openToc();
 
     public abstract void goBack();
-
-    public abstract Integer getPercentageValue();
 
     public abstract String selectChapterAndGetText(int chapterNumber);
 
@@ -37,8 +31,6 @@ public abstract class AudioPlayerScreen extends Screen {
 
     public abstract Duration getCurrentPlayTime();
 
-    public abstract String getLoadingStatus();
-
     public abstract void skipAhead();
 
     public abstract void skipBehind();
@@ -46,10 +38,6 @@ public abstract class AudioPlayerScreen extends Screen {
     public abstract void moveChapterToMiddle();
 
     public abstract Duration getChapterLength();
-
-    public abstract void waitForBookLoading();
-
-    public abstract void waitForLoadingDisappearing();
 
     public abstract void selectPlaybackSpeed(String playbackSpeed);
 
