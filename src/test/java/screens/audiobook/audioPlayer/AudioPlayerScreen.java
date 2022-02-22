@@ -18,32 +18,33 @@ public abstract class AudioPlayerScreen extends Screen {
 
     public abstract void openToc();
 
+    public abstract void openSleepTimer();
+
+    public abstract void openPlaybackSpeed();
+
     public abstract SleepTimerAudiobookScreen getSleepTimerAudiobookScreen();
 
     public abstract PlaybackSpeedAudiobookScreen getPlaybackSpeedAudiobookScreen();
 
-    public abstract void goBack();
+    public abstract void returnToPreviousScreen();
 
-    public abstract void playBook();
+    public abstract void tapPlayBtn();
 
-    public abstract String getCurrentChapterInfo();
-
+    public abstract String getChapterName();
 
     public abstract void skipAhead();
 
     public abstract void skipBehind();
 
-    public abstract void pauseBook();
+    public abstract void tapPauseBtn();
 
     public abstract boolean isPauseButtonPresent();
 
     public abstract boolean isPlayButtonPresent();
 
-    public abstract void moveChapterToMiddle();
+    public abstract Duration getRightTime();
 
-    public abstract Duration getChapterLength();
-
-    public abstract boolean isSpeedOptionSelected(String playbackSpeed);
+    public abstract boolean isPlaybackSpeedPresent(String playbackSpeed);
 
     public abstract boolean isAudiobookNamePresent(String audiobookName);
 
@@ -51,6 +52,5 @@ public abstract class AudioPlayerScreen extends Screen {
 
     public abstract boolean isTimerSetTo(TimerKeys timerSetting);
 
-
-    public abstract Duration getCurrentPlayTime();
+    public abstract Duration getLeftTime();
 }

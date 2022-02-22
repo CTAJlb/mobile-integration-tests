@@ -17,32 +17,50 @@ import java.time.Duration;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
-    private static final String SPEED_OPTION_XPATH_LOCATOR_PATTERN = "//*[contains(@resource-id, \"player_menu_playback_rate_text\") and @text=\"%sx\"]";
-    private static final String AUDIOBOOK_NAME_LOCATOR = "//android.widget.TextView[@text=\"%s\"]";
-    private static final String TIMER_SETTING_XPATH_LOCATOR_PATTERN = "//*[contains(@resource-id, \"player_menu_sleep\") and @content-desc=\"Set Your Sleep Timer. The Sleep Timer Is Currently Set To Sleep At %s\"]";
+    private static final String PLAYBACK_SPEED_LOC = "//*[contains(@resource-id, \"player_menu_playback_rate_text\") and @text=\"%sx\"]";
+    private static final String AUDIOBOOK_NAME_LOC = "//android.widget.TextView[@text=\"%s\"]";
+    private static final String SLEEP_TIMER_LOC = "//*[contains(@resource-id, \"player_menu_sleep\") and @content-desc=\"Set Your Sleep Timer. The Sleep Timer Is Currently Set To Sleep At %s\"]";
 
-    private final IButton btnMenu = getElementFactory().getButton(By.id("player_menu_toc"), "Menu");
+    private final IButton btnPlaybackSpeed =
+            getElementFactory().getButton(By.id("player_menu_playback_rate_image"), "btnPlaybackSpeed");
+    private final IButton btnToc =
+            getElementFactory().getButton(By.id("player_menu_toc"), "btnToc");
     private final IButton btnPause =
-            getElementFactory().getButton(By.xpath("//android.widget.ImageView[@content-desc=\"Pause\"]"), "Pause");
+            getElementFactory().getButton(By.xpath("//android.widget.ImageView[@content-desc=\"Pause\"]"), "btnPause");
     private final IButton btnPlay =
-            getElementFactory().getButton(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]"), "Play");
-    private final IButton btnSkipAhead = getElementFactory().getButton(By.id("player_jump_forwards"), "Move forwards");
-    private final IButton btnSkipBehind = getElementFactory().getButton(By.id("player_jump_backwards"), "Move backwards");
-    private final ILabel lblCurrentChapter = getElementFactory().getLabel(By.id("player_spine_element"), "Current chapter");
-    private final ILabel lblCurrentTiming = getElementFactory().getLabel(By.id("player_time"), "Current time");
-    private final IButton btnProgressButton = getElementFactory().getButton(By.id("player_progress"), "Player progress");
-    private final ILabel lblChapterLength = getElementFactory().getLabel(By.id("player_time_maximum"), "Chapter length");
-
+            getElementFactory().getButton(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]"), "btnPlay");
+    private final IButton btnSkipAhead =
+            getElementFactory().getButton(By.id("player_jump_forwards"), "btnSkipAhead");
+    private final IButton btnSkipBehind =
+            getElementFactory().getButton(By.id("player_jump_backwards"), "btnSkipBehind");
+    private final ILabel lblChapterName =
+            getElementFactory().getLabel(By.id("player_spine_element"), "lblChapterName");
+    private final ILabel lblLeftTime =
+            getElementFactory().getLabel(By.id("player_time"), "lblLeftTime");
+    private final ILabel lblRightTime =
+            getElementFactory().getLabel(By.id("player_time_maximum"), "lblRightTime");
+    private final IButton btnSleepTimer =
+            getElementFactory().getButton(By.id("player_menu_sleep_image"), "btnSleepTimer");
 
     public AndroidAudioPlayerScreen() {
-        super(By.xpath(""));
+        super(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]"));
         sleepTimerAudiobookScreen = AqualityServices.getScreenFactory().getScreen(SleepTimerAudiobookScreen.class);
         playbackSpeedAudiobookScreen = AqualityServices.getScreenFactory().getScreen(PlaybackSpeedAudiobookScreen.class);
     }
 
     @Override
     public void openToc() {
-        btnMenu.click();
+        btnToc.click();
+    }
+
+    @Override
+    public void openSleepTimer() {
+        btnSleepTimer.click();
+    }
+
+    @Override
+    public void openPlaybackSpeed() {
+        btnPlaybackSpeed.click();
     }
 
     @Override
@@ -62,17 +80,17 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public boolean isAudiobookNamePresent(String audiobookName) {
-        boolean isAudiobookNameCorrect = getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME_LOCATOR, audiobookName)), "audiobookName").state().waitForDisplayed();
+        boolean isAudiobookNameCorrect = getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME_LOC, audiobookName)), "audiobookName").state().waitForDisplayed();
         return isAudiobookNameCorrect;
     }
 
     @Override
-    public boolean isSpeedOptionSelected(String playbackSpeed) {
-        return getElementFactory().getButton(By.xpath(String.format(SPEED_OPTION_XPATH_LOCATOR_PATTERN, playbackSpeed)), "Playback speed").state().waitForDisplayed();
+    public boolean isPlaybackSpeedPresent(String playbackSpeed) {
+        return getElementFactory().getButton(By.xpath(String.format(PLAYBACK_SPEED_LOC, playbackSpeed)), "Playback speed").state().waitForDisplayed();
     }
     @Override
-    public Duration getChapterLength() {
-        return DateUtils.getDuration(lblChapterLength.getText());
+    public Duration getRightTime() {
+        return DateUtils.getDuration(lblRightTime.getText());
     }
 
     @Override
@@ -84,11 +102,7 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     public boolean isTimerSetTo(TimerKeys timerSetting) {
         String timerSettingName = timerSetting.i18n();
         timerSettingName = timerSettingName.replace("file", "File");
-        return getElementFactory().getButton(By.xpath(String.format(TIMER_SETTING_XPATH_LOCATOR_PATTERN, timerSettingName)), timerSettingName, ElementState.EXISTS_IN_ANY_STATE).state().waitForDisplayed();
-    }
-    @Override
-    public void moveChapterToMiddle() {
-        btnProgressButton.click();
+        return getElementFactory().getButton(By.xpath(String.format(SLEEP_TIMER_LOC, timerSettingName)), timerSettingName, ElementState.EXISTS_IN_ANY_STATE).state().waitForDisplayed();
     }
     @Override
     public boolean isPauseButtonPresent() {
@@ -97,13 +111,13 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public Duration getCurrentPlayTime() {
-        return DateUtils.getDuration(lblCurrentTiming.getText());
+    public Duration getLeftTime() {
+        return DateUtils.getDuration(lblLeftTime.getText());
     }
 
     @Override
-    public String getCurrentChapterInfo() {
-        return lblCurrentChapter.getText();
+    public String getChapterName() {
+        return lblChapterName.getText();
     }
     @Override
     public void skipBehind() {
@@ -116,17 +130,17 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void goBack() {
+    public void returnToPreviousScreen() {
         AqualityServices.getApplication().getDriver().navigate().back();
     }
 
     @Override
-    public void playBook() {
+    public void tapPlayBtn() {
         btnPlay.click();
     }
 
     @Override
-    public void pauseBook() {
+    public void tapPauseBtn() {
         btnPause.click();
     }
 }

@@ -11,19 +11,16 @@ import java.util.Map;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosPlaybackSpeedAudiobookScreen extends PlaybackSpeedAudiobookScreen {
-    private final IButton btnPlaybackSpeed =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton"), "Playback speed");
     private static Map<String, String> speedName = new HashMap<String, String>() {{
         put("2.0", "Two times normal speed. Fastest.");
         put("0.75", "Three quarters of normal speed. Slower.");
     }};
     public IosPlaybackSpeedAudiobookScreen() {
-        super(By.xpath(""));
+        super(By.xpath("//XCUIElementTypeStaticText[@name=\"Playback Speed\"]"));
     }
 
     @Override
     public void selectPlaybackSpeed(String playbackSpeed) {
-        btnPlaybackSpeed.click();
         String speedOptionName = speedName.get(playbackSpeed);
         getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"" + speedOptionName + "\"]"), speedOptionName).click();
     }

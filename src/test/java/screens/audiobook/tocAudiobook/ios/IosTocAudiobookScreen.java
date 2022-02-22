@@ -13,16 +13,16 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosTocAudiobookScreen extends TocAudiobookScreen {
-    private static final String CHAPTERS_TEXT = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[1]";
-    private static final String CHAPTERS_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell";
+    private static final String CHAPTERS_TEXT_LOC = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[1]";
+    private static final String CHAPTERS_LOC = "//XCUIElementTypeTable//XCUIElementTypeCell";
 
 
     public IosTocAudiobookScreen() {
-        super(By.xpath(""));
+        super(By.xpath("//XCUIElementTypeTable"));
     }
 
     @Override
-    public String selectChapterAndGetText(int chapterNumber) {
+    public String openChapterAndGetChapterName(int chapterNumber) {
         IElement lblChapterText = getChaptersText().get(chapterNumber);
         String chapterText = lblChapterText.getAttribute(IosAttributes.NAME);
         lblChapterText.click();
@@ -30,14 +30,15 @@ public class IosTocAudiobookScreen extends TocAudiobookScreen {
     }
 
     private List<IElement> getChaptersText() {
-        return getElementFactory().findElements(By.xpath(CHAPTERS_TEXT), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
+        return getElementFactory().findElements(By.xpath(CHAPTERS_TEXT_LOC), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
     }
 
     @Override
     public int getCountOfChapters() {
         return getChapters().size();
     }
+
     private List<IElement> getChapters() {
-        return getElementFactory().findElements(By.xpath(CHAPTERS_LOCATOR), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
+        return getElementFactory().findElements(By.xpath(CHAPTERS_LOC), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
     }
 }

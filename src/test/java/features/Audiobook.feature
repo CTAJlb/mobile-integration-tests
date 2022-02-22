@@ -54,15 +54,12 @@ Feature: Audiobook
   @logout @returnBooks @tier2
   Scenario: Navigate by Audiobook
     When Tap play button on audio player screen
-      And Save chapter length as 'chapterLength' on audio player screen
       And Save book play time as 'timeAhead' on audio player screen
       And Skip ahead 15 seconds on audio player screen
     Then Playback has been moved forward by 15 seconds from 'timeAhead' seconds on audio player screen
     When Save book play time as 'timeBehind' on audio player screen
       And Skip behind 15 seconds on audio player screen
     Then Playback has been moved behind by 15 seconds from 'timeBehind' seconds on audio player screen
-    When Move the slider to the middle of the chapter on audio player screen
-    Then Current play time is middle of 'chapterLength' saved chapter play time on audio player screen
 
   @logout @returnBooks @tier2
   Scenario Outline: Navigate by Playback Options

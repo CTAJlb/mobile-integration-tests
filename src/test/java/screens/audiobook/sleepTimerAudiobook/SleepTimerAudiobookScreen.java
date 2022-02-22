@@ -9,5 +9,4 @@ public abstract class SleepTimerAudiobookScreen extends Screen {
         super(locator, "SleepTimerAudiobookScreen");
     }
     public abstract void setTimer(TimerKeys timerSetting);
-
 }

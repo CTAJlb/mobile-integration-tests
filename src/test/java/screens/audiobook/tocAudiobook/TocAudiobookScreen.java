@@ -8,8 +8,7 @@ public abstract class TocAudiobookScreen extends Screen {
         super(locator, "TocAudiobookScreen");
     }
 
-    public abstract String selectChapterAndGetText(int chapterNumber);
+    public abstract String openChapterAndGetChapterName(int chapterNumber);
 
     public abstract int getCountOfChapters();
-
 }
