@@ -1,6 +1,5 @@
 package screens.epub.fontAndBackgroundSettingsEpub.android;
 
-import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.localization.application.reader.ReaderSettingKeys;
@@ -11,7 +10,7 @@ import screens.epub.fontAndBackgroundSettingsEpub.FontAndBackgroundSettingsEpubS
 public class AndroidFontAndBackgroundSettingsEpubScreen extends FontAndBackgroundSettingsEpubScreen {
 
     public AndroidFontAndBackgroundSettingsEpubScreen() {
-        super(By.xpath("//android.widget.FrameLayout[contains(@resource-id,\"setFontSans\")]"));
+        super(By.xpath("//android.widget.FrameLayout[contains(@resource-id,\"custom\")]"));
     }
 
     @Override
@@ -22,10 +21,5 @@ public class AndroidFontAndBackgroundSettingsEpubScreen extends FontAndBackgroun
         }else {
             getElementFactory().getButton(By.xpath(String.format("//android.view.ViewGroup[contains(@resource-id,\"%s\")]", setting)), setting).click();
         }
-    }
-
-    @Override
-    public void closeSettings() {
-        AqualityServices.getApplication().getDriver().navigate().back();
     }
 }

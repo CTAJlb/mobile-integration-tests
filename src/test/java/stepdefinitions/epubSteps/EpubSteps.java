@@ -103,31 +103,31 @@ public class EpubSteps {
                 + readerEpubScreen.getChapterName().toLowerCase(), readerEpubScreen.getChapterName().toLowerCase().equals(chapterName.toLowerCase()));
     }
 
-    @When("I open font choices on epub reader screen")
-    public void openFontChoicesForBook() {
+    @When("Open font and background settings epub screen")
+    public void openEpubSettings() {
         readerEpubScreen.openNavigationBar();
         readerEpubScreen.getNavigationBarEpubScreen().tapFontSettingsButton();
     }
 
-    @And("I open table of contents on epub reader screen")
-    public void openTableOfContents() {
+    @When("Close toc epub screen")
+    public void tocEpubScreen() {
+        tocBookmarksEpubScreen.returnToPreviousScreen();
+    }
+
+    @And("Open toc epub screen")
+    public void openTocEpubScreen() {
         readerEpubScreen.openNavigationBar();
         readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
     }
 
-    @Then("Epub table of contents screen is opened")
-    public void isEpubTableOfContentsOpened() {
-        Assert.assertTrue("Epub table of contents screen is not opened", tocBookmarksEpubScreen.getTocEpubScreen().state().waitForDisplayed());
+    @Then("Toc epub screen is opened")
+    public void tocEpubScreenIsOpened() {
+        Assert.assertTrue("Toc epub screen is not opened", tocBookmarksEpubScreen.getTocEpubScreen().state().waitForDisplayed());
     }
 
-    @Then("Epub font choices screen is opened")
-    public void isFontChoicesScreenOpened() {
-        Assert.assertTrue("Epub font choices screen is not opened", fontAndBackgroundSettingsEpubScreen.state().waitForDisplayed());
-    }
-
-    @When("I close font choices")
-    public void closeFontChoices() {
-        fontAndBackgroundSettingsEpubScreen.closeSettings();
+    @Then("Font and background settings epub screen is opened")
+    public void epubSettingsIsOpened() {
+        Assert.assertTrue("Font and background settings epub screen is not opened", fontAndBackgroundSettingsEpubScreen.state().waitForDisplayed());
     }
 
     @When("I save font size as {string}")
@@ -156,7 +156,6 @@ public class EpubSteps {
         readerEpubScreen.openNavigationBar();
         readerEpubScreen.getNavigationBarEpubScreen().tapFontSettingsButton();
         fontAndBackgroundSettingsEpubScreen.setSetting(readerSettingKey);
-        fontAndBackgroundSettingsEpubScreen.closeSettings();
     }
 
     @And("PageNumber {string} is correct")

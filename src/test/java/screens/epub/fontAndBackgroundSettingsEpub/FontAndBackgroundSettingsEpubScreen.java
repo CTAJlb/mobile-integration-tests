@@ -10,6 +10,4 @@ public abstract class FontAndBackgroundSettingsEpubScreen extends Screen {
     }
 
     public abstract void setSetting(ReaderSettingKeys readerSettingKey);
-
-    public abstract void closeSettings();
 }

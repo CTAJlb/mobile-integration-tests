@@ -78,11 +78,11 @@ Feature: Read EPUB
       And I return to previous screen for epub and pdf
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on epub reader screen
-    When I open font choices on epub reader screen
-    Then Epub font choices screen is opened
-    When I close font choices
-      And I open table of contents on epub reader screen
-    Then Epub table of contents screen is opened
+    When Open toc epub screen
+    Then Toc epub screen is opened
+    When Close toc epub screen
+      And Open font and background settings epub screen
+    Then Font and background settings epub screen is opened
 
   @tier1
   Scenario: Change, View Font and Contrast Settings
@@ -108,7 +108,7 @@ Feature: Read EPUB
     Then The BLACK_TEXT_ON_SEPIA background is correct
     When I change contrast to WHITE_TEXT_ON_BLACK
     Then The WHITE_TEXT_ON_BLACK background is correct
-    When I wait for 3 seconds
+    When Wait for 3 seconds
       And I restart app
       And I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
@@ -124,14 +124,14 @@ Feature: Read EPUB
       And Click READ action button on book details screen
       And I scroll page forward from 7 to 10 times
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
-      And I wait for 3 seconds
+      And Wait for 3 seconds
       And I return to previous screen for epub and pdf
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on epub reader screen
       And PageNumber 'pageNumberKey' is correct
       And I scroll page forward from 3 to 4 times
       And I save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
-      And I wait for 3 seconds
+      And Wait for 3 seconds
       And I restart app
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
