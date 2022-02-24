@@ -43,12 +43,12 @@ Feature: Read PDF IOS
     Then 'bookInfo' book is present on reader pdf screen
     When I swipe pdf page forward from 4 to 6 times on reader pdf screen
       And I save pdf page number as 'pageNumber' on reader pdf screen
-      And I wait for 3 seconds
+      And Wait for 3 seconds
       And I return to previous screen for epub and pdf
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on reader pdf screen
       And The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
-      And I wait for 3 seconds
+      And Wait for 3 seconds
     When I restart app
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen

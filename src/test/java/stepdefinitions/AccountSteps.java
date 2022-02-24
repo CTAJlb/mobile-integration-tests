@@ -7,6 +7,7 @@ import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import screens.catalog.screen.catalog.CatalogScreen;
 import screens.libraries.LibrariesScreen;
 import screens.addaccount.AddAccountScreen;
 import screens.bottommenu.BottomMenu;
@@ -21,6 +22,7 @@ public class AccountSteps {
     private final BottomMenuForm bottomMenuForm;
     private final SettingsScreen settingsScreen;
     private final AddAccountScreen addAccountScreen;
+    private final CatalogScreen catalogScreen;
     private ScenarioContext context;
 
     @Inject
@@ -30,6 +32,7 @@ public class AccountSteps {
         bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
         settingsScreen = AqualityServices.getScreenFactory().getScreen(SettingsScreen.class);
         addAccountScreen = AqualityServices.getScreenFactory().getScreen(AddAccountScreen.class);
+        catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
     }
 
     @When("I add {string} account")
@@ -41,6 +44,7 @@ public class AccountSteps {
         if(libraryName.toLowerCase().equals("LYRASIS Reads".toLowerCase())){
             saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
         }
+        catalogScreen.state().waitForDisplayed();
     }
 
     @Then("Account {string} is present on Accounts screen")
