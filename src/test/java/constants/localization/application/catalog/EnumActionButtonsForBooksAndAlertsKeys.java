@@ -16,6 +16,7 @@ public enum EnumActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     DOWNLOAD("download"),
     LISTEN("listen"),
     REMOVE("remove"),
+    SIGN_OUT("signOut"),
     CANCEL("cancel");
 
     private static final AbstractILocalizationProvider localizationProvider =
