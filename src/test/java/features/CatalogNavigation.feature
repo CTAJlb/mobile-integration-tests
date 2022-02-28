@@ -35,8 +35,6 @@ Feature: Catalog Navigation
   @tier1
   Scenario: Sort Lists
     When I add "LYRASIS Reads" account from welcomeScreen
-      And I open Catalog
-      And I switch to 'LYRASIS Reads' from side menu
     Then Category rows are loaded
     When I switch to 'Audiobooks' catalog tab
     Then Category rows are loaded
@@ -44,7 +42,7 @@ Feature: Catalog Navigation
     When I switch to 'eBooks' catalog tab
     Then Category rows are loaded
     When I open categories by chain and chain starts from CategoryScreen:
-      | BiblioBoard Titles |
+      | Romance |
     Then Subcategory screen is present
     When I sort books by AUTHOR
     Then Subcategory screen is present
