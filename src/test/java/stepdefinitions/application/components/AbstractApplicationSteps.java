@@ -1,6 +1,7 @@
 package stepdefinitions.application.components;
 
 import aquality.appium.mobile.application.AqualityServices;
+import io.cucumber.java.en.And;
 import org.junit.Assert;
 import screens.addaccount.AddAccountScreen;
 import screens.catalog.screen.catalog.CatalogScreen;
@@ -26,6 +27,19 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     public abstract void returnToPreviousScreenForEpubAndPdf();
 
     public abstract void addAccountFromWelcomeScreen(String libraryName);
+
+    @Override
+    public void waitSeveralSeconds(Integer secondsCount) {
+        if (secondsCount > 10) {
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount / 3));
+            AqualityServices.getApplication().getDriver().getContext();
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount / 3));
+            AqualityServices.getApplication().getDriver().getContext();
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount / 3));
+        } else {
+            AqualityServices.getConditionalWait().waitFor(() -> false, Duration.ofSeconds(secondsCount));
+        }
+    }
 
     @Override
     public void checkEachTutorialPageCanBeOpened() {

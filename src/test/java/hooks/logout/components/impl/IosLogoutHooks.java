@@ -1,19 +1,25 @@
 package hooks.logout.components.impl;
 
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import constants.keysForContext.ContextLibrariesKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
 import hooks.logout.components.AbstractLogoutHooks;
+import screens.alert.AlertScreen;
 import screens.bottommenu.BottomMenu;
+import screens.libraries.LibrariesScreen;
 
 import java.util.List;
 
 @StepsType(platform = PlatformName.IOS)
 public class IosLogoutHooks extends AbstractLogoutHooks {
+    private final AlertScreen alertScreen;
 
     public IosLogoutHooks(ScenarioContext context) {
         super(context);
+        alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
     }
 
     @Override
@@ -30,6 +36,9 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
             librariesScreen.openLibrary(library);
             if (accountScreen.isLogoutRequired()) {
                 accountScreen.logOut();
+            }
+            if(alertScreen.state().waitForDisplayed()){
+                alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.SIGN_OUT);
             }
         }
     }

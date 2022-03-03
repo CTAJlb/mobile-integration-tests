@@ -17,7 +17,7 @@ public class ReturningBooksHooks {
         context = scenarioContext;
     }
 
-    @After(value = "@returnBooks", order = 3)
+    @After(value = "@returnBooks", order = 0)
     public void returnBooks() {
         AqualityServices.getLogger().info("Test finished - returning books");
         Map<String, String> map = context.get(ScenarioContextKey.lIST_OF_CREDENTIALS_KEY);

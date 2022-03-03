@@ -3,6 +3,7 @@ package stepdefinitions.application.components.impl;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
+import screens.catalog.screen.catalog.CatalogScreen;
 import screens.epub.readerEpub.ReaderEpubScreen;
 import screens.pdf.readerPdf.ReaderPdfScreen;
 import stepdefinitions.application.components.AbstractApplicationSteps;
@@ -11,11 +12,13 @@ import stepdefinitions.application.components.AbstractApplicationSteps;
 public class IosApplicationSteps extends AbstractApplicationSteps {
     private final ReaderEpubScreen readerEpubScreen;
     private final ReaderPdfScreen readerPdfScreen;
+    private final CatalogScreen catalogScreen;
 
     public IosApplicationSteps() {
         super();
         readerEpubScreen = screenFactory.getScreen(ReaderEpubScreen.class);
         readerPdfScreen = screenFactory.getScreen(ReaderPdfScreen.class);
+        catalogScreen = screenFactory.getScreen(CatalogScreen.class);
     }
 
     @Override
@@ -37,5 +40,6 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
         tutorialScreen.closeTutorial();
         welcomeScreen.tapFindLibraryButton();
         addAccountScreen.selectLibraryViaSearch(libraryName);
+        catalogScreen.state().waitForDisplayed();
     }
 }

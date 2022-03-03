@@ -24,6 +24,7 @@ public class AndroidAddAccountScreen extends AddAccountScreen {
         btnSearch.click();
         AqualityServices.getApplication().getDriver().hideKeyboard();
         txbSearch.clearAndType(libraryName);
+        state().waitForDisplayed();
         getLibraryButton(libraryName).click();
     }
 

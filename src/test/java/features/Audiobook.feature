@@ -6,86 +6,72 @@ Feature: Audiobook
     When I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
-    And I open search modal
-    And I search for 'Down the Hatch' and save bookName as 'bookNameInfo'
-    And I switch to 'Audiobooks' catalog tab
-    And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Click GET action button on book details screen
+      And I open search modal
+      And I search for 'Down the Hatch' and save bookName as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
 
   @logout @returnBooks @tier2
   Scenario: Navigate by Table of Contents
-    When Click LISTEN action button on book details screen
-      And Open chapter list for an audiobook
-    When Select a random chapter that is not equal to the first chapter and save the chapter as 'chapterKey'
-      And I wait for 12 seconds
-    Then Chapter is equal to 'chapterKey' saved chapter
-      And Pause button is present
-      And Book is playing
-
-  @logout @returnBooks @tier2
-  Scenario: Loading chapters
-    When Click LISTEN action button on book details screen
-    Then Download has started and percentage value increased
-    When Open chapter list for an audiobook
-    Then All chapters loaded
+    When Open toc audiobook screen
+      And Open random chapter on toc audiobook screen and save chapter name as 'chapterNameKey'
+      And Wait for 12 seconds
+    Then Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
+      And Pause button is present on audio player screen
+      And Book is playing on audio player screen
 
   @logout @returnBooks @tier2
   Scenario: Open the audiobook at the last open chapter
-    When Click LISTEN action button on book details screen
-      And Open chapter list for an audiobook
-    When Select the 2 chapter and save the chapter as 'chapterKey'
-      And I wait for 12 seconds
-      And I return to previous screen for audiobook
+    When Open toc audiobook screen
+      And Open the 2 chapter on toc audiobook screen and save the chapter name as 'chapterNameKey'
+      And Wait for 12 seconds
+      And Return to previous screen from audio player screen
       And Click LISTEN action button on book details screen
-      And I wait for 12 seconds
-    Then Chapter is equal to 'chapterKey' saved chapter
-    When Open chapter list for an audiobook
-      And Select the 4 chapter and save the chapter as 'chapterKey2'
-      And I wait for 12 seconds
+      And Wait for 12 seconds
+    Then Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
+    When Open toc audiobook screen
+      And Open the 4 chapter on toc audiobook screen and save the chapter name as 'chapterNameKey2'
+      And Wait for 12 seconds
       And I restart app
       And I open Books
       And Open AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
       And Click LISTEN action button on book details screen
-      And I wait for 12 seconds
-    Then Chapter is equal to 'chapterKey2' saved chapter
+      And Wait for 12 seconds
+    Then Chapter name on audio player screen is equal to 'chapterNameKey2' saved chapter name
 
   @logout @returnBooks @tier2
   Scenario: Playing Audiobook
-    Then I check that book contains LISTEN action button on book details screen
-    When Click LISTEN action button on book details screen
-      And I click play button on player screen
-    Then Pause button is present
-      And Book is playing
-    When I click pause button on player screen
-    Then Play button is present
-      And Book is not playing
+    When Tap play button on audio player screen
+    Then Pause button is present on audio player screen
+      And Book is playing on audio player screen
+    When Tap pause button on audio player screen
+    Then Play button is present on audio player screen
+      And Book is not playing on audio player screen
 
   @logout @returnBooks @tier2
   Scenario: Navigate by Audiobook
-    When Click LISTEN action button on book details screen
-      And I click play button on player screen
-      And I save chapter length as 'chapterLength'
-      And I save book play time as 'timeAhead'
-      And I skip ahead 15 seconds
-    Then Playback 'timeAhead' moves forward by 15 seconds increment
-    When I save book play time as 'timeBehind'
-      And I skip behind 15 seconds
-    Then Playback 'timeBehind' moves behind by 15 seconds increment
-    When I move to middle part of chapter
-    Then Saved play time 'chapterLength' is close to middle part of chapter
+    When Tap play button on audio player screen
+      And Save book play time as 'timeAhead' on audio player screen
+      And Skip ahead 15 seconds on audio player screen
+    Then Playback has been moved forward by 15 seconds from 'timeAhead' seconds on audio player screen
+    When Save book play time as 'timeBehind' on audio player screen
+      And Skip behind 15 seconds on audio player screen
+    Then Playback has been moved behind by 15 seconds from 'timeBehind' seconds on audio player screen
 
   @logout @returnBooks @tier2
   Scenario Outline: Navigate by Playback Options
-    When Click LISTEN action button on book details screen
-      And I click play button on player screen
-    When I select playback speed <speed>X
-      And I save book play time as 'timeAhead'
-      And I wait for <secondsForWaiting> seconds
-    Then Playback 'timeAhead' moves forward by <moveForwardSeconds> seconds increment
-      And Current playback speed value is <speed>X
-    When I click pause button on player screen
-    When I set sleep timer as END_OF_CHAPTER
-    Then Sleep timer is set to endOfChapter
+    When Tap play button on audio player screen
+      And Select <speed>X playback speed on playback speed audiobook screen
+      And Save book play time as 'timeAhead' on audio player screen
+      And Wait for <secondsForWaiting> seconds
+    Then Playback has been moved forward by <moveForwardSeconds> seconds from 'timeAhead' seconds on audio player screen
+      And Current playback speed value is <speed>X on audio player screen
+    When Tap pause button on audio player screen
+      And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
+    Then Sleep timer is set to endOfChapter on audio player screen
 
     Scenarios:
       | speed | secondsForWaiting | moveForwardSeconds |

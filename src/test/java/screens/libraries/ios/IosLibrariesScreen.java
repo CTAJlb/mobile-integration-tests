@@ -19,7 +19,7 @@ public class IosLibrariesScreen extends LibrariesScreen {
     private final IButton btnAddLibrary = getElementFactory().getButton(
             By.xpath("//XCUIElementTypeButton[@name=\"Add Library\"]"), "btnAddLibrary");
     private final IButton btnDeleteLibrary =
-            getElementFactory().getButton(By.name("Delete"), "btnDeleteLibrary");
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@label=\"Delete\"]"), "btnDeleteLibrary");
 
     public IosLibrariesScreen() {
         super(By.xpath("//XCUIElementTypeStaticText[@name=\"Libraries\"]"));

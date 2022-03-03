@@ -8,10 +8,13 @@ import constants.RegEx;
 import constants.application.attributes.IosAttributes;
 import framework.utilities.CoordinatesClickUtils;
 import framework.utilities.RegExUtil;
+import framework.utilities.swipe.Direction;
 import framework.utilities.swipe.SwipeElementUtils;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;
 import framework.utilities.swipe.directions.EntireScreenDragDirection;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import screens.pdf.navigationBarPdf.NavigationBarPdfScreen;
 import screens.pdf.readerPdf.ReaderPdfScreen;
 import screens.pdf.searchPdf.SearchPdfScreen;
@@ -23,6 +26,8 @@ public class IosReaderPdfScreen extends ReaderPdfScreen {
     private final SearchPdfScreen searchPdfScreen;
     private final ILabel lblBookName =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeToolbar/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeOther[2]/XCUIElementTypeStaticText"), "lblBookName");
+    private final ILabel lblPageNumberSlider =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther[contains(@value,\"Page\")]"), "lblPageNumberSlider");
     private final ILabel lblPageNumber =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@value,\"/\")]"), "lblPageNumber");
     private final ILabel lblPage =
@@ -89,6 +94,16 @@ public class IosReaderPdfScreen extends ReaderPdfScreen {
 
     @Override
     public void slidePageSlider(EntireScreenDragDirection entireScreenDragDirection) {
-        // only for android
+        openNavigationBar();
+        openNavigationBar();
+        if (entireScreenDragDirection == EntireScreenDragDirection.RIGHT) {
+            Point upperLeft = lblPageNumberSlider.getElement().getLocation();
+            Dimension dimensions = lblPageNumberSlider.getElement().getSize();
+            int y = upperLeft.y + dimensions.height / 2;
+            Direction direction = new Direction().setFrom(new Point(upperLeft.x + dimensions.width + 1, y)).setTo(new Point(upperLeft.x + dimensions.width - 1, y));
+            AqualityServices.getTouchActions().swipe(direction.getFrom(), direction.getTo());
+        } else {
+            SwipeElementUtils.swipeThroughEntireElement(lblPageNumberSlider, EntireElementSwipeDirection.RIGHT);
+        }
     }
 }

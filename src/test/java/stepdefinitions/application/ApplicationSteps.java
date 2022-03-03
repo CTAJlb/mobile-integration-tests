@@ -52,6 +52,12 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.checkWelcomeScreenIsOpened();
     }
 
+    @And("Wait for {int} seconds")
+    @Override
+    public void waitSeveralSeconds(Integer secondsCount) {
+        abstractApplicationSteps.waitSeveralSeconds(secondsCount);
+    }
+
     @Then("Each tutorial page can be opened on tutorial screen for android and close tutorial screen")
     @Override
     public void checkEachTutorialPageCanBeOpened() {

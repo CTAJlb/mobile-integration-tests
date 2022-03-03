@@ -14,10 +14,8 @@ public class IosNavigationBarPdfScreen extends NavigationBarPdfScreen {
             getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[2]"), "btnTocAndBookmarksAndGallery");
     private final IButton btnSearch =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[3]"), "btnSearch");
-    //will be changed
     private final IButton btnAddBookmark =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Add Bookmark\"]"), "btnAddBookmark");
-    //will be changed
     private final IButton btnDeleteBookmark =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Remove Bookmark\"]"), "btnDeleteBookmark");
 
@@ -43,6 +41,7 @@ public class IosNavigationBarPdfScreen extends NavigationBarPdfScreen {
 
     @Override
     public void tapAddBookmarkButton() {
+        btnAddBookmark.state().waitForDisplayed();
         btnAddBookmark.click();
     }
 

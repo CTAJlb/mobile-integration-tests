@@ -7,7 +7,7 @@ import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import models.android.CatalogBookModel;
 import org.junit.Assert;
-import screens.audioplayer.AudioPlayerScreen;
+import screens.audiobook.audioPlayer.AudioPlayerScreen;
 import screens.epub.readerEpub.ReaderEpubScreen;
 import screens.pdf.readerPdf.ReaderPdfScreen;
 
@@ -27,8 +27,8 @@ public class ReaderSteps {
 
 
     private void assertBookNameForPdf(CatalogBookModel catalogBookModel) {
-        String expectedBookName = catalogBookModel.getTitle();
-        String actualBookName = readerPdfScreen.getBookName();
+        String expectedBookName = catalogBookModel.getTitle().toLowerCase();
+        String actualBookName = readerPdfScreen.getBookName().toLowerCase();
         Assert.assertTrue(String.format("BookName(pdf) is not correct. Expected bookName - '%1$s', actualName - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));
     }
 
@@ -51,8 +51,8 @@ public class ReaderSteps {
     }
 
     private void assertBookNameForEpub(CatalogBookModel catalogBookModel) {
-        String expectedBookName = catalogBookModel.getTitle();
-        String actualBookName = readerEpubScreen.getBookName();
+        String expectedBookName = catalogBookModel.getTitle().toLowerCase();
+        String actualBookName = readerEpubScreen.getBookName().toLowerCase();
         Assert.assertTrue(String.format("BookName(epub) is not correct. Expected bookName - '%1$s', actualName - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));
     }
 }

@@ -17,6 +17,7 @@ Feature: Main actions private access books
     When Open EBOOK book with REMOVE action button and 'bookInfo' bookInfo on holds screen
     And Click REMOVE action button on book details screen
     And I open Holds
+    And Wait for 7 seconds
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is not present on holds screen
 
   @logout @returnBooks @tier2
@@ -51,6 +52,7 @@ Feature: Main actions private access books
     When Open EBOOK book with REMOVE action button and 'bookInfo' bookInfo on holds screen
     And Click REMOVE action button on book details screen
     And I open Holds
+    And Wait for 7 seconds
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is not present on holds screen
 
   @logout @returnBooks @tier2
@@ -87,6 +89,7 @@ Feature: Main actions private access books
       And Click RETURN action button on book details screen
       And I close Book Details for IOSTab
       And I open Books
+      And Wait for 7 seconds
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
   @logout @returnBooks @tier2
@@ -108,6 +111,7 @@ Feature: Main actions private access books
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And Click RETURN action button on book details screen
       And I open Books
+      And Wait for 7 seconds
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
   @logout @returnBooks @tier2 @exclude_android

@@ -10,5 +10,5 @@ public abstract class BookmarksPdfScreen extends Screen {
 
     public abstract int getCountOfBookmarks();
 
-    public abstract void openBookmarks(int bookmarksNumber);
+    public abstract void openBookmark(int bookmarkNumber);
 }

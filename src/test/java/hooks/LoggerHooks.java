@@ -25,7 +25,7 @@ public class LoggerHooks {
         AqualityServices.getLogger().info("Session id - " + AqualityServices.getApplication().getDriver().getSessionId().toString());
     }
 
-    @After(order = 1)
+    @After(order = 2)
     public void addLogToScenario(Scenario scenario) {
         Logger logger = Logger.getInstance();
         AqualityServices.getLogger().info("isLoggerNullAfterAnnotation-"+logger);

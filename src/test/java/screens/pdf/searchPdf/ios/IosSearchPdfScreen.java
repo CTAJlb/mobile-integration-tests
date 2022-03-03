@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @ScreenType(platform = PlatformName.IOS)
 public class IosSearchPdfScreen extends SearchPdfScreen {
     private static final String FOUND_TEXT_LOC = "//XCUIElementTypeCell/XCUIElementTypeStaticText[2]";
-    private static final String NUMBER_OF_FOUND_TEXT_LOC = "//XCUIElementTypeCell/XCUIElementTypeStaticText[2]/following-sibling::XCUIElementTypeStaticText";
+    private static final String NUMBER_OF_FOUND_TEXT_LOC = "//XCUIElementTypeCell/XCUIElementTypeStaticText[3]";
 
     private final ITextBox txbSearch = getElementFactory().getTextBox(
             By.xpath("//XCUIElementTypeSearchField"), "txbSearch");
@@ -37,7 +37,7 @@ public class IosSearchPdfScreen extends SearchPdfScreen {
 
     @Override
     public List<String> getListOfFoundTexts() {
-        return getFoundTexts().stream().map(lblText -> lblText.getAttribute(IosAttributes.NAME)).collect(Collectors.toList());
+        return getFoundTexts().stream().limit(5).map(lblText -> lblText.getAttribute(IosAttributes.NAME)).collect(Collectors.toList());
     }
 
     @Override
@@ -52,10 +52,10 @@ public class IosSearchPdfScreen extends SearchPdfScreen {
     }
 
     private List<ILabel> getFoundTexts() {
-        return getElementFactory().findElements(By.xpath(FOUND_TEXT_LOC), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
+        return getElementFactory().findElements(By.xpath(FOUND_TEXT_LOC), ElementType.LABEL);
     }
 
     private List<ILabel> getNumbersOfFoundTexts() {
-        return getElementFactory().findElements(By.xpath(NUMBER_OF_FOUND_TEXT_LOC), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
+        return getElementFactory().findElements(By.xpath(NUMBER_OF_FOUND_TEXT_LOC), ElementType.LABEL);
     }
 }

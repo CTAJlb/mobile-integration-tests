@@ -38,6 +38,50 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
     }
 
     @Override
+    public void checkThatAmountOfBookmarksIsCorrect(int expectedAmountOfBookmarks) {
+        int actualAmountOfBookmarks = tocBookmarksGalleryPdfScreen.getBookmarksPdfScreen().getCountOfBookmarks();
+        Assert.assertTrue(String.format("Amount of bookmarks is not correct on bookmarks pdf screen. ExpectedAmountOfBookmarks-%d, actualAmountOfBookmarks-%d", expectedAmountOfBookmarks, actualAmountOfBookmarks), expectedAmountOfBookmarks == actualAmountOfBookmarks);
+    }
+
+    @Override
+    public void checkThatBookmarkIsNotDisplayed() {
+        readerPdfScreen.openNavigationBar();
+        readerPdfScreen.openNavigationBar();
+        Assert.assertTrue("Bookmark is displayed on reader pdf screen", !readerPdfScreen.getNavigationBarScreen().isBookmarkDisplayed());
+    }
+
+    @Override
+    public void openBookmark(int bookmarkNumber) {
+        tocBookmarksGalleryPdfScreen.getBookmarksPdfScreen().openBookmark(bookmarkNumber);
+    }
+
+    @Override
+    public void checkThatBookmarkIsDisplayed() {
+        readerPdfScreen.openNavigationBar();
+        readerPdfScreen.openNavigationBar();
+        Assert.assertTrue("Bookmark is not displayed on reader pdf screen", readerPdfScreen.getNavigationBarScreen().isBookmarkDisplayed());
+    }
+
+    @Override
+    public void closeTocBookmarksGalleryScreen() {
+        tocBookmarksGalleryPdfScreen.tapResumeButton();
+    }
+
+    @Override
+    public void addBookmarkOnReaderPdfScreen() {
+        readerPdfScreen.openNavigationBar();
+        readerPdfScreen.openNavigationBar();
+        readerPdfScreen.getNavigationBarScreen().tapAddBookmarkButton();
+    }
+
+    @Override
+    public void deleteBookmarkOnReaderPdfScreen() {
+        readerPdfScreen.openNavigationBar();
+        readerPdfScreen.openNavigationBar();
+        readerPdfScreen.getNavigationBarScreen().tapDeleteBookmarkButton();
+    }
+
+    @Override
     public void checkPdfPageNumberIsEqualTo(int pageNumber) {
         int expectedPdfPageNumber = pageNumber;
         int actualPdfPageNumber = readerPdfScreen.getPageNumber();
@@ -71,6 +115,8 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
 
     @Override
     public void savePdfPageNumber(String pageNumberKey) {
+        readerPdfScreen.openNavigationBar();
+        readerPdfScreen.openNavigationBar();
         context.add(pageNumberKey, readerPdfScreen.getPageNumber());
     }
 
@@ -90,15 +136,17 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
     public void checkThatSavedPdfPageNumberIsLessThanCurrentPdfPageNumber(String pageNumberKey) {
         int savedPageNumber = context.get(pageNumberKey);
         int currentPageNumber = readerPdfScreen.getPageNumber();
-        Assert.assertTrue(  "Saved page number is greater that current page number on reader pdf screen. SavedPageNumber - " +
+        Assert.assertTrue("Saved page number is greater that current page number on reader pdf screen. SavedPageNumber - " +
                 savedPageNumber + ", currentPageNumber - " + currentPageNumber, savedPageNumber < currentPageNumber);
     }
 
     @Override
-    public void checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(String pageNumberKey){
+    public void checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(String pageNumberKey) {
+        readerPdfScreen.openNavigationBar();
+        readerPdfScreen.openNavigationBar();
         int savedPageNumber = context.get(pageNumberKey);
         int currentPageNumber = readerPdfScreen.getPageNumber();
-        Assert.assertTrue(  "Saved page number is not equal to current page number on reader pdf screen. SavedPageNumber - " +
+        Assert.assertTrue("Saved page number is not equal to current page number on reader pdf screen. SavedPageNumber - " +
                 savedPageNumber + ", currentPageNumber - " + currentPageNumber, savedPageNumber == currentPageNumber);
 
     }
@@ -120,6 +168,7 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
 
     @Override
     public void openBookmarksPdfScreen() {
+        readerPdfScreen.openNavigationBar();
         readerPdfScreen.openNavigationBar();
         readerPdfScreen.getNavigationBarScreen().openTocBookmarksGallery();
         tocBookmarksGalleryPdfScreen.tapBookmarksButton();
@@ -165,7 +214,7 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
         SoftAssertions softAssertions = new SoftAssertions();
         readerPdfScreen.getSearchPdfScreen().getListOfFoundTexts().forEach(foundText -> System.out.println("foundText-" + foundText));
         readerPdfScreen.getSearchPdfScreen().getListOfFoundTexts().forEach(foundText -> softAssertions.assertThat(foundText.toLowerCase().contains(textThatShouldBe.toLowerCase())).
-                as(String.format("Found text '%1$s' does not contain text '%2$s'. ", foundText, textThatShouldBe) + "Found text-" + foundText).isTrue());
+                as(String.format("Found text '%1$s' does not contain text '%2$s'. ", foundText, textThatShouldBe)).isTrue());
         softAssertions.assertAll();
     }
 

@@ -31,7 +31,7 @@
         "browserstack.networkLogs": true,
         "automationName": "XCUITest",
         "deviceOrientation": "portrait",
-        "locale": "en_US",
+        "locale": "ru_RU",
         "bundleId": ""
       }
     }

@@ -5,6 +5,7 @@ import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import constants.application.attributes.IosAttributes;
 import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.swipe.SwipeElementUtils;
@@ -21,6 +22,14 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
 
     private final ILabel lblErrorScreen =
             getElementFactory().getLabel(By.xpath("//android.widget.ScrollView"), "Error Screen");
+    private final ILabel lblPublished =
+            getElementFactory().getLabel(By.xpath("//android.widget.TableRow/android.widget.TextView[contains(@text,\"Published\")]/following-sibling::android.widget.TextView"), "lblPublished");
+    private final ILabel lblPublisher =
+            getElementFactory().getLabel(By.xpath("//android.widget.TableRow/android.widget.TextView[contains(@text,\"Publisher\")]/following-sibling::android.widget.TextView"), "lblPublisher");
+    private final ILabel lblCategories =
+            getElementFactory().getLabel(By.xpath("//android.widget.TableRow/android.widget.TextView[contains(@text,\"Categories\")]/following-sibling::android.widget.TextView"), "lblCategories");
+    private final ILabel lblDistributor =
+            getElementFactory().getLabel(By.xpath("//android.widget.TableRow/android.widget.TextView[contains(@text,\"Distributor\")]/following-sibling::android.widget.TextView"), "lblDistributor");
     private final ILabel lblBookTitleInfo =
             getElementFactory().getLabel(By.id("bookDetailTitle"), "Book title");
     private final ILabel lblProgressBar =
@@ -88,6 +97,27 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     @Override
     public void swipeError() {
         SwipeElementUtils.swipeThroughEntireElementUp(lblErrorScreen);
+    }
+
+    @Override
+    public String getPublishedInfo() {
+        return lblPublished.getText();
+    }
+
+    @Override
+    public String getPublisherInfo() {
+        return lblPublisher.getText();
+    }
+
+    @Override
+    public String getCategoryInfo() {
+        lblCategories.state().waitForDisplayed();
+        return lblCategories.getText();
+    }
+
+    @Override
+    public String getDistributorInfo() {
+        return lblDistributor.getText();
     }
 
     @Override

@@ -65,11 +65,11 @@ public class AndroidBookmarksEpubScreen extends BookmarksEpubScreen {
         LocalDateTime expectedLocalDateTime = getExpectedLocalDateTime(bookmarkDateTime);
         AqualityServices.getLogger().info("expected bookmark info: ");
         AqualityServices.getLogger().info("expected bookmark title-" + expectedBookmarkTitle);
-        AqualityServices.getLogger().info("actual year-" + expectedLocalDateTime.getYear());
-        AqualityServices.getLogger().info("actual month-" + expectedLocalDateTime.getMonthValue());
-        AqualityServices.getLogger().info("actual dayNumber-" + expectedLocalDateTime.getDayOfMonth());
-        AqualityServices.getLogger().info("actual min-" + expectedLocalDateTime.getMinute());
-        AqualityServices.getLogger().info("actual hour-" + expectedLocalDateTime.getHour());
+        AqualityServices.getLogger().info("expected year-" + expectedLocalDateTime.getYear());
+        AqualityServices.getLogger().info("expected month-" + expectedLocalDateTime.getMonthValue());
+        AqualityServices.getLogger().info("expected dayNumber-" + expectedLocalDateTime.getDayOfMonth());
+        AqualityServices.getLogger().info("expected min-" + expectedLocalDateTime.getMinute());
+        AqualityServices.getLogger().info("expected hour-" + expectedLocalDateTime.getHour());
         boolean isBookmarkPresent = false;
         for (int i = 0; i < getListOfBookmarkTitles().size(); i++) {
             String actualBookmarkTitle = getListOfBookmarkTitles().get(i);

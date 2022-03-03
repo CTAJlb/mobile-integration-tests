@@ -12,5 +12,7 @@ public interface IApplicationSteps {
 
     void checkWelcomeScreenIsOpened();
 
+    void waitSeveralSeconds(Integer secondsCount);
+
     void checkEachTutorialPageCanBeOpened();
 }

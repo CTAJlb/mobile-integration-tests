@@ -24,10 +24,52 @@ public class PdfSteps extends BaseSteps implements IPdfSteps {
         abstractPdfSteps.checkPdfBookPresent(bookInfoKey);
     }
 
+    @When("Bookmark is not displayed on reader pdf screen")
+    @Override
+    public void checkThatBookmarkIsNotDisplayed() {
+        abstractPdfSteps.checkThatBookmarkIsNotDisplayed();
+    }
+
     @Then("Pdf page number is {int} on reader pdf screen")
     @Override
     public void checkPdfPageNumberIsEqualTo(int pageNumber) {
         abstractPdfSteps.checkPdfPageNumberIsEqualTo(pageNumber);
+    }
+
+    @Then("Amount of bookmarks is {int} on bookmarks pdf screen")
+    @Override
+    public void checkThatAmountOfBookmarksIsCorrect(int expectedAmountOfBookmarks) {
+        abstractPdfSteps.checkThatAmountOfBookmarksIsCorrect(expectedAmountOfBookmarks);
+    }
+
+    @When("Open the {int} bookmark on bookmarks pdf screen")
+    @Override
+    public void openBookmark(int bookmarkNumber) {
+        abstractPdfSteps.openBookmark(bookmarkNumber);
+    }
+
+    @Then("Bookmark is displayed on reader pdf screen")
+    @Override
+    public void checkThatBookmarkIsDisplayed() {
+        abstractPdfSteps.checkThatBookmarkIsDisplayed();
+    }
+
+    @When("Close tocBookmarksGallery pdf screen")
+    @Override
+    public void closeTocBookmarksGalleryScreen() {
+        abstractPdfSteps.closeTocBookmarksGalleryScreen();
+    }
+
+    @When("Add bookmark on reader pdf screen")
+    @Override
+    public void addBookmarkOnReaderPdfScreen() {
+        abstractPdfSteps.addBookmarkOnReaderPdfScreen();
+    }
+
+    @When("Delete bookmark on reader pdf screen")
+    @Override
+    public void deleteBookmarkOnReaderPdfScreen() {
+        abstractPdfSteps.deleteBookmarkOnReaderPdfScreen();
     }
 
     @When("I go to previous page on reader pdf screen")
@@ -110,6 +152,7 @@ public class PdfSteps extends BaseSteps implements IPdfSteps {
     public void checkBookmarksPdfScreenIsOpened() {
         abstractPdfSteps.checkBookmarksPdfScreenIsOpened();
     }
+
 
     @Then("Search pdf screen is opened")
     @Override
