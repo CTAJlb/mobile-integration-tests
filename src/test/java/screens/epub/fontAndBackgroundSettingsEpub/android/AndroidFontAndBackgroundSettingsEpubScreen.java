@@ -19,7 +19,7 @@ public class AndroidFontAndBackgroundSettingsEpubScreen extends FontAndBackgroun
         if(ReaderSettingKeys.FONT_DYSLEXIC == readerSettingKey || ReaderSettingKeys.FONT_SERIF == readerSettingKey || ReaderSettingKeys.FONT_SANS == readerSettingKey){
             getElementFactory().getButton(By.xpath(String.format("//android.widget.FrameLayout[contains(@resource-id,\"%s\")]", setting)), setting).click();
         }else {
-            getElementFactory().getButton(By.xpath(String.format("//android.view.ViewGroup[contains(@resource-id,\"%s\")]", setting)), setting).click();
+            getElementFactory().getButton(By.xpath(String.format("//android.widget.LinearLayout/android.view.ViewGroup[contains(@resource-id,\"%s\")]", setting)), setting).click();
         }
     }
 }

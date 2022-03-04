@@ -32,35 +32,6 @@ Feature: Catalog Navigation
     When I open first book in Subcategory List and save it as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
 
-  @tier1
-  Scenario: Sort Lists
-    When I add "LYRASIS Reads" account from welcomeScreen
-    Then Category rows are loaded
-    When I switch to 'Audiobooks' catalog tab
-    Then Category rows are loaded
-      And All present books are audiobooks
-    When I switch to 'eBooks' catalog tab
-    Then Category rows are loaded
-    When I open categories by chain and chain starts from CategoryScreen:
-      | Bibliotheca Test Collection |
-    Then Subcategory screen is present
-    When I sort books by AUTHOR
-    Then Subcategory screen is present
-      And Books are sorted by Author ascending
-    When I sort books by TITLE
-    Then Subcategory screen is present
-      And Books are sorted by Title ascending
-    When I save list of books as 'listOfBooks'
-      And I sort books by RECENTLY_ADDED
-    Then Subcategory screen is present
-      And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
-      And Change books visibility to show AVAILABLE_NOW
-    Then All books can be loaned or downloaded
-    When I change books visibility to show ALL
-    Then Subcategory screen is present
-    When I change books visibility to show YOURS_TO_KEEP
-    Then All books can be downloaded
-
   @tier1 @ignore @exclude_android
   Scenario Outline: View Book Details (IOS)
     When I add "LYRASIS Reads" account from welcomeScreen

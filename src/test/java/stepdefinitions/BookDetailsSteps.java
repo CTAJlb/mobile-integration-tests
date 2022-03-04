@@ -39,6 +39,7 @@ public class BookDetailsSteps {
     public void pressOnBookDetailsScreenAtActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
         bookDetailsScreen.clickActionButton(actionButtonKey);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            addScreenshot();
             if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE) {
                 alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
             } else {

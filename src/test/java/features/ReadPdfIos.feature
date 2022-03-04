@@ -133,7 +133,7 @@ Feature: Read PDF IOS
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search for 'Attack! (Issue 7)' and save bookName as 'bookNameInfo'
+      And I search for 'Munchkin #7 (Issue 7)' and save bookName as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -165,7 +165,7 @@ Feature: Read PDF IOS
     Then Login is performed successfully
     When I open Catalog
     And I open search modal
-    And I search for 'Attack! (Issue 7)' and save bookName as 'bookNameInfo'
+    And I search for 'Munchkin #7 (Issue 7)' and save bookName as 'bookNameInfo'
     And I switch to 'eBooks' catalog tab
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
