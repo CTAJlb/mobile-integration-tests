@@ -149,12 +149,16 @@ public class EpubSteps {
         Assert.assertTrue("Font size is not decreased newFontSize - " + newFontSize + ", oldFontSize - " + oldFontSize, newFontSize < oldFontSize);
     }
 
+    @When("I open font settings")
+    public void openFontSettings() {
+        readerEpubScreen.openNavigationBar();
+        readerEpubScreen.getNavigationBarEpubScreen().tapFontSettingsButton();
+    }
+
     @When("I {} of text")
     @When("I change font style to {}")
     @When("I change contrast to {}")
     public void changeSettingsForFont(ReaderSettingKeys readerSettingKey) {
-        readerEpubScreen.openNavigationBar();
-        readerEpubScreen.getNavigationBarEpubScreen().tapFontSettingsButton();
         fontAndBackgroundSettingsEpubScreen.setSetting(readerSettingKey);
     }
 
