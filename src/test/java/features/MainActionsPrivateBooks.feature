@@ -71,7 +71,7 @@ Feature: Main actions private access books
       And Click REMOVE action button on book details screen
     Then I check that book contains RESERVE action button on book details screen
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @run
   Scenario: Check out from Book Detail View and Return from Books
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -89,7 +89,7 @@ Feature: Main actions private access books
       And Click RETURN action button on book details screen
       And I close Book Details for IOSTab
       And I open Books
-      And Wait for 7 seconds
+      And Wait for 10 seconds
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
   @logout @returnBooks @tier2

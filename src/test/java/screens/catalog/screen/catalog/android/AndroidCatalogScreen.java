@@ -27,7 +27,7 @@ public class AndroidCatalogScreen extends CatalogScreen {
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN =
             "//android.widget.TextView[contains(@resource-id,\"accountTitle\") and @text=\"%s\"]";
     private static final String FEED_LANE_TITLES_LOC = "//*[contains(@resource-id,\"feedLaneTitle\")]";
-    private static final String CATEGORY_NAME_XPATH_LOCATOR = "//android.widget.LinearLayout/android.widget.TextView";
+    private static final String CATEGORY_NAME_XPATH_LOCATOR = "//androidx.recyclerview.widget.RecyclerView//android.widget.LinearLayout/android.widget.TextView[1]";
     private static final String LIBRARY_NAME_LOC = "//android.widget.TextView[@text=\"%s\" and contains(@resource-id,\"feedLibraryText\")]";
 
     private final ILabel lblFirstLaneName = getElementFactory().getLabel(By.xpath(FEED_LANE_TITLES_LOC), "First lane name");
