@@ -12,7 +12,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.android.CatalogBookModel;
 import org.apache.commons.lang3.RandomUtils;
-import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.epub.fontAndBackgroundSettingsEpub.FontAndBackgroundSettingsEpubScreen;
 import screens.epub.readerEpub.ReaderEpubScreen;
