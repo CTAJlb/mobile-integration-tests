@@ -35,6 +35,7 @@ Feature: Distributors
       And Click GET action button on book details screen
     Then I check that book contains <buttonBookDetailsView> action button on book details screen
     When Click <buttonBookDetailsView> action button on book details screen
+      And Wait for 3 seconds
     Then Book 'bookInfo' with <bookType> type is present on epub or pdf or audiobook screen
 
     Scenarios:

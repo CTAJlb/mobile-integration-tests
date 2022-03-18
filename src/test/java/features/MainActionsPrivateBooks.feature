@@ -71,7 +71,7 @@ Feature: Main actions private access books
       And Click REMOVE action button on book details screen
     Then I check that book contains RESERVE action button on book details screen
 
-  @logout @returnBooks @tier2 @run
+  @logout @returnBooks @tier2
   Scenario: Check out from Book Detail View and Return from Books
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -104,6 +104,7 @@ Feature: Main actions private access books
     And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     And Click READ action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Wait for 3 seconds
     Then 'bookInfo' book is present on epub reader screen
     When I return to previous screen for epub and pdf
       And I open Books
@@ -141,6 +142,7 @@ Feature: Main actions private access books
     When I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And Click READ action button on book details screen
+      And Wait for 3 seconds
     Then 'bookInfo' book is present on epub reader screen
 
   @logout @returnBooks @tier3 @exclude_android

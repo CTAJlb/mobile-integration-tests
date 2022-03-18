@@ -37,8 +37,8 @@ public class AudioPlayerSteps {
     @Then("Chapter name on audio player screen is equal to {string} saved chapter name")
     public void checkThatChapterNameOnAudioPlayerScreenIsEqualToSavedChapterName(String keyChapter) {
         String expectedChapterName = context.get(keyChapter);
-        Assert.assertTrue(String.format("Chapter name on audio player screen is not equal to saved chapter name. " +
-                "Expected chapter name - %s; actual chapter name - %s", expectedChapterName, getChapterName()), expectedChapterName.toLowerCase().equals(getChapterName().toLowerCase()));
+        Assert.assertEquals(String.format("Chapter name on audio player screen is not equal to saved chapter name. " +
+                "Expected chapter name - %s; actual chapter name - %s", expectedChapterName, getChapterName()), expectedChapterName.toLowerCase(), getChapterName().toLowerCase());
     }
 
     private String getChapterName() {
