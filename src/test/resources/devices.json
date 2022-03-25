@@ -35,6 +35,12 @@
       "platformVersion": "11.0"
     }
   },
+  "SamsungGalaxyS22Ultra_12": {
+    "capabilities": {
+      "deviceName": "Samsung Galaxy S22 Ultra",
+      "platformVersion": "12.0"
+    }
+  },
   "GooglePixel6_12": {
     "capabilities": {
       "deviceName": "Google Pixel 6",
