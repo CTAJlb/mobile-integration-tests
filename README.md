@@ -2,7 +2,7 @@
 
 This repository contains integration tests for the Android and iOS code of the [Palace](https://thepalaceproject.org/) application
 
-# Structure of framework
+# About framework
 
 JDK 8 is used in this project. As a framework for automation testing was selected [aquality](https://github.com/aquality-automation/aquality-appium-mobile-java) framework.
 
@@ -34,7 +34,7 @@ When you automate tests for both iOS and Android platforms it is good to have on
 
 Framework allows you to run tests on different devices and store their settings (like udid, name, etc.) in JSON files. All devices can be set in [device.json](https://github.com/ThePalaceProject/mobile-integration-tests/blob/main/src/test/resources/devices.json) file. It is possible to set default device for each platform in [settings.json](https://github.com/ThePalaceProject/mobile-integration-tests/blob/main/src/test/resources/settings.json) by defining `deviceKey` property which is a key of device settings from `devices.json` file.
 
-## Structure
+## Structure of project
 
 The common structure of the project:
 
@@ -57,7 +57,7 @@ The common structure of the project:
 * stepdefinitions - steps for the cucumber. Written in the same principle as screens
 * transformers - transformers to the object for the cucumber
 
-## Cucumber + Gherkin
+## Cucumber
 
 Cucumber is used in this project. It is a tool that supports BDD (behavior driver development). Central to the Cucumber BDD approach is its ordinary language parser Gherkin.  It allows expected software behaviors to be specified in a logical language that every person can understand.
 
