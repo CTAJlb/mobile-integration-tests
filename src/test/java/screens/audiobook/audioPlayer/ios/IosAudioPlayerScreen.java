@@ -8,6 +8,8 @@ import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.application.attributes.IosAttributes;
 import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import screens.audiobook.audioPlayer.AudioPlayerScreen;
 import screens.audiobook.playbackSpeedAudiobook.PlaybackSpeedAudiobookScreen;
@@ -47,6 +49,8 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"progress_rightLabel\" and contains(@value,\":\")]"), "lblRightTime");
     private final IButton btnPlaybackSpeed =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton"), "btnPlaybackSpeed");
+    private final ILabel lblPlaybackProgress =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther[@name = \"progress_background\"]"), "Playback progress");
 
 
     public IosAudioPlayerScreen() {
@@ -127,6 +131,12 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public Duration getLeftTime() {
         return DateUtils.getDuration(lblLeftTime.getAttribute(IosAttributes.VALUE));
+    }
+
+    @Override
+    public void tapOnMiddleOfPlaybackBar() {
+        TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+        action.tap(PointOption.point(lblPlaybackProgress.getElement().getCenter().x, lblPlaybackProgress.getElement().getCenter().y)).perform();
     }
 
     @Override

@@ -8,6 +8,8 @@ import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
 import constants.localization.application.catalog.TimerKeys;
 import framework.utilities.DateUtils;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import screens.audiobook.audioPlayer.AudioPlayerScreen;
 import screens.audiobook.playbackSpeedAudiobook.PlaybackSpeedAudiobookScreen;
@@ -41,6 +43,8 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
             getElementFactory().getLabel(By.id("player_time_maximum"), "lblRightTime");
     private final IButton btnSleepTimer =
             getElementFactory().getButton(By.id("player_menu_sleep_image"), "btnSleepTimer");
+    private final ILabel lblPlaybackProgress =
+            getElementFactory().getLabel(By.id("player_progress"), "Playback progress");
 
     public AndroidAudioPlayerScreen() {
         super(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]"));
@@ -113,6 +117,12 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public Duration getLeftTime() {
         return DateUtils.getDuration(lblLeftTime.getText());
+    }
+
+    @Override
+    public void tapOnMiddleOfPlaybackBar() {
+        TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+        action.tap(PointOption.point(lblPlaybackProgress.getElement().getCenter().x, lblPlaybackProgress.getElement().getCenter().y)).perform();
     }
 
     @Override
