@@ -77,3 +77,16 @@ Feature: Audiobook
       | speed | secondsForWaiting | moveForwardSeconds |
       | 2     | 5                 | 10                 |
       | 0.75  | 6                 | 8                  |
+
+  @logout @returnBooks @tier2
+  Scenario: Check time code of track after reload app
+    When Tap play button on audio player screen
+      And Wait for 5 seconds
+      And I tap on the middle of chapter on audio player screen
+      And  Tap pause button on audio player screen
+      And Save book play time as 'timeAhead' on audio player screen
+      And I restart app
+      And I open Books
+      And Open AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
+      And Click LISTEN action button on book details screen
+    Then Play time is the same with 'timeAhead' play time before restart on books detail screen

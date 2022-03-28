@@ -163,4 +163,17 @@ public class AudioPlayerSteps {
             Assert.assertTrue("Timer value is not correct", audioPlayerScreen.isTimerEqualTo(audioPlayerScreen.getRightTime()));
         }
     }
+
+    @And("I tap on the middle of chapter on audio player screen")
+    public void tapOnTheMiddleOfPlaybackBar() {
+        audioPlayerScreen.tapOnMiddleOfPlaybackBar();
+    }
+
+    @Then("Play time is the same with {string} play time before restart on books detail screen")
+    public void checkPlayTimeAfterReload(String dateKey) {
+        Duration playTimeBefore = context.get(dateKey);
+        Duration playTimeAfter = audioPlayerScreen.getLeftTime();
+        Assert.assertEquals("Play time is different. Expected: " + playTimeBefore.getSeconds() + ". Actual:" + playTimeAfter.getSeconds(),
+                playTimeBefore.getSeconds(), playTimeAfter.getSeconds());
+    }
 }

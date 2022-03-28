@@ -53,4 +53,6 @@ public abstract class AudioPlayerScreen extends Screen {
     public abstract boolean isTimerSetTo(TimerKeys timerSetting);
 
     public abstract Duration getLeftTime();
+
+    public abstract void tapOnMiddleOfPlaybackBar();
 }
