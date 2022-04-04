@@ -21,6 +21,7 @@ Feature: Distributors
       | Axis 360           | AUDIOBOOK | Audiobooks |
       | Palace Marketplace | EBOOK     | eBooks     |
       | Palace Marketplace | AUDIOBOOK | Audiobooks |
+      | Biblioboard        | EBOOK     | eBooks     |
 
   @logout @returnBooks @tier2
   Scenario Outline: Check out from Book Detail View
@@ -46,6 +47,8 @@ Feature: Distributors
       | Axis 360           | AUDIOBOOK | Audiobooks | LISTEN                |
       | Palace Marketplace | EBOOK     | eBooks     | READ                  |
       | Palace Marketplace | AUDIOBOOK | Audiobooks | LISTEN                |
+      | Biblioboard        | EBOOK     | eBooks     | READ                  |
+      | Biblioboard        | AUDIOBOOK | Audiobooks | LISTEN                |
 
   @logout @returnBooks @tier2
   Scenario Outline: Return book from Book Detail View
