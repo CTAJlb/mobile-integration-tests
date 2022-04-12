@@ -7,7 +7,7 @@ Feature: Audiobook
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search for 'Down the Hatch' and save bookName as 'bookNameInfo'
+      And I search for 'The Santa Suit' and save bookName as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -90,3 +90,16 @@ Feature: Audiobook
       And Open AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
       And Click LISTEN action button on book details screen
     Then Play time is the same with 'timeAhead' play time before restart on books detail screen
+
+  @logout @returnBooks @tier2
+  Scenario: Check sleep timer
+    When Open toc audiobook screen
+      And Open the 1 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
+      And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
+      And Select 2X playback speed on playback speed audiobook screen
+      And I tap on the middle of chapter on audio player screen
+      And Listen a chapter on audio player screen
+    Then Play button is present on audio player screen
+      When Save the name of chapter as 'nextChapter' on audio player screen
+      And Open toc audiobook screen
+    Then Chapter name next to 'chapterNumber' on toc audiobook screen is equal to 'nextChapter' saved chapter name

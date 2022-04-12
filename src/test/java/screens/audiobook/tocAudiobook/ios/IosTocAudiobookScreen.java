@@ -38,6 +38,12 @@ public class IosTocAudiobookScreen extends TocAudiobookScreen {
         return getChapters().size();
     }
 
+    @Override
+    public String getChapterName(int chapterNumber) {
+        IElement lblChapterName = getChaptersText().get(chapterNumber);
+        return lblChapterName.getAttribute(IosAttributes.NAME);
+    }
+
     private List<IElement> getChapters() {
         return getElementFactory().findElements(By.xpath(CHAPTERS_LOC), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
     }
