@@ -11,4 +11,6 @@ public abstract class TocAudiobookScreen extends Screen {
     public abstract String openChapterAndGetChapterName(int chapterNumber);
 
     public abstract int getCountOfChapters();
+
+    public abstract String getChapterName(int chapterNumber);
 }

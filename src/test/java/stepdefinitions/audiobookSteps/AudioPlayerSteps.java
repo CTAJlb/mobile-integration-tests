@@ -89,6 +89,11 @@ public class AudioPlayerSteps {
         context.add(dateKey, audioPlayerScreen.getLeftTime());
     }
 
+    @And("Save chapter time as {string} on audio player screen")
+    public void saveChapterTime(String chapterTimeKey) {
+        context.add(chapterTimeKey, audioPlayerScreen.getRightTime());
+    }
+
     @And("Skip ahead 15 seconds on audio player screen")
     public void skipAheadOnAudioPlayerScreen() {
         audioPlayerScreen.skipAhead();
@@ -173,7 +178,24 @@ public class AudioPlayerSteps {
     public void checkPlayTimeAfterReload(String dateKey) {
         Duration playTimeBefore = context.get(dateKey);
         Duration playTimeAfter = audioPlayerScreen.getLeftTime();
-        Assert.assertEquals("Play time is different. Expected: " + playTimeBefore.getSeconds() + ". Actual:" + playTimeAfter.getSeconds(),
-                playTimeBefore.getSeconds(), playTimeAfter.getSeconds());
+        Assert.assertEquals("Play time is different. ", playTimeBefore.getSeconds(), playTimeAfter.getSeconds());
+    }
+
+    @And("Listen a chapter on audio player screen")
+    public void waitTheEndOfChapter() {
+        audioPlayerScreen.tapOnMiddleOfPlaybackBar();
+        AqualityServices.getConditionalWait().waitFor(()-> {
+            boolean isNull = false;
+            long timer = audioPlayerScreen.getRightTime().getSeconds();
+            if(timer==0 || audioPlayerScreen.isPlayButtonPresent())
+                isNull = true;
+            return  isNull;
+        });
+    }
+
+    @When("Save the name of chapter as {string} on audio player screen")
+    public void saveChapterName(String chapterNameKey) {
+        String chapterName = audioPlayerScreen.getChapterName();
+        context.add(chapterNameKey, chapterName);
     }
 }
