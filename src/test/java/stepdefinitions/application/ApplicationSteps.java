@@ -46,6 +46,18 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.checkThatTutorialScreenIsOpened();
     }
 
+    @When("Close tutorial screen")
+    @Override
+    public void closeTutorialScreen() {
+        abstractApplicationSteps.closeTutorialScreen();
+    }
+
+    @When("Close welcome screen")
+    @Override
+    public void closeWelcomeScreen() {
+        abstractApplicationSteps.closeWelcomeScreen();
+    }
+
     @Then("Welcome screen is opened")
     @Override
     public void checkWelcomeScreenIsOpened() {

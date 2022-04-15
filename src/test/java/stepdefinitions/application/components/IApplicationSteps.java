@@ -15,4 +15,8 @@ public interface IApplicationSteps {
     void waitSeveralSeconds(Integer secondsCount);
 
     void checkEachTutorialPageCanBeOpened();
+
+    void closeTutorialScreen();
+
+    void closeWelcomeScreen();
 }

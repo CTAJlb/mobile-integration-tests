@@ -28,6 +28,36 @@ public class AndroidAddAccountScreen extends AddAccountScreen {
         getLibraryButton(libraryName).click();
     }
 
+    @Override
+    public void enterLibraryName(String libraryName) {
+
+    }
+
+    @Override
+    public boolean isLibraryPresent(String libraryName) {
+        return true;
+    }
+
+    @Override
+    public void clearSearchField() {
+
+    }
+
+    @Override
+    public boolean isSearchFieldEmpty() {
+return true;
+    }
+
+    @Override
+    public boolean isLibraryContainWord(String word) {
+        return false;
+    }
+
+    @Override
+    public boolean isSearchResultEmpty() {
+        return false;
+    }
+
     private IButton getLibraryButton(String libraryName) {
         return getElementFactory().getButton(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_PATTERN, libraryName)), libraryName);
     }
