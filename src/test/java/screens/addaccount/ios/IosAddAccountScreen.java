@@ -74,10 +74,10 @@ public class IosAddAccountScreen extends AddAccountScreen {
         return getLibrariesNames().isEmpty();
     }
 
-    public List<String> getLibrariesNames() {
-        List<ILabel> buttons = getElementFactory().findElements(By.xpath(LIB_NAME_LOCATOR), ElementType.LABEL);
+    private List<String> getLibrariesNames() {
+        List<ILabel> libraries = getElementFactory().findElements(By.xpath(LIB_NAME_LOCATOR), ElementType.LABEL);
         List<String> names = new ArrayList<>();
-        buttons.forEach(button -> names.add(button.getText().toLowerCase()));
+        libraries.forEach(library -> names.add(library.getText().toLowerCase()));
         return names;
     }
 }

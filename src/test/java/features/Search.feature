@@ -27,7 +27,7 @@ Feature: Search
 
 
   @tier1
-  Scenario Outline: Enter invalid data (29-32)
+  Scenario Outline: Enter invalid data
     When I enter word <data> and save as 'data' on add account screen
     Then Search result is empty on add account screen
 
