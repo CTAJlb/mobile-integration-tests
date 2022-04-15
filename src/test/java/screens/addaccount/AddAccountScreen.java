@@ -9,4 +9,16 @@ public abstract class AddAccountScreen extends Screen {
     }
 
     public abstract void selectLibraryViaSearch(String libraryName);
+
+    public abstract void enterLibraryName(String libraryName);
+
+    public abstract boolean isLibraryPresent(String libraryName);
+
+    public abstract void clearSearchField();
+
+    public abstract boolean isSearchFieldEmpty();
+
+    public abstract boolean isLibraryContainWord(String word);
+
+    public abstract boolean isSearchResultEmpty();
 }

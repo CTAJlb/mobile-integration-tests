@@ -1,7 +1,6 @@
 package stepdefinitions.application.components;
 
 import aquality.appium.mobile.application.AqualityServices;
-import io.cucumber.java.en.And;
 import org.junit.Assert;
 import screens.addaccount.AddAccountScreen;
 import screens.catalog.screen.catalog.CatalogScreen;
@@ -65,5 +64,15 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     @Override
     public void checkWelcomeScreenIsOpened() {
         Assert.assertTrue("Welcome screen is not opened", welcomeScreen.state().isDisplayed());
+    }
+
+    @Override
+    public void closeTutorialScreen() {
+        tutorialScreen.closeTutorial();
+    }
+
+    @Override
+    public void closeWelcomeScreen() {
+        welcomeScreen.tapFindLibraryButton();
     }
 }

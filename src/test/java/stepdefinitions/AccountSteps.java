@@ -47,6 +47,45 @@ public class AccountSteps {
         catalogScreen.state().waitForDisplayed();
     }
 
+    @When("I enter {string} library and save name as {string} on add account screen")
+    public void enterLibName(String libraryName, String libraryNameKey) {
+        context.add(libraryNameKey, libraryName);
+        addAccountScreen.enterLibraryName(libraryName);
+    }
+
+    @When("I enter word {} and save as {string} on add account screen")
+    public void enterData(String word, String infoKey) {
+        context.add(infoKey, word);
+        addAccountScreen.enterLibraryName(word);
+    }
+
+    @Then("Library {string} is present on add account screen")
+    public void isLibraryPresent(String libraryNameKey) {
+        String libraryName = context.get(libraryNameKey);
+        Assert.assertTrue(libraryName + " not found", addAccountScreen.isLibraryPresent(libraryName));
+    }
+
+    @When("Clear search field on add account screen")
+    public void clickDeleteBtn() {
+        addAccountScreen.clearSearchField();
+    }
+
+    @Then("Search field is empty")
+    public void isSearchFieldEmpty() {
+        Assert.assertTrue("Search field is not empty", addAccountScreen.isSearchFieldEmpty());
+    }
+
+    @Then("Libraries contain word {string} on add account screen")
+    public void isLibraryContainWord(String info) {
+        String word = context.get(info);
+        Assert.assertTrue("Search result does not contain libraries with " + word, addAccountScreen.isLibraryContainWord(word));
+    }
+
+    @Then("Search result is empty on add account screen")
+    public void isSearchResultEmpty() {
+        Assert.assertTrue("Search result contains data", addAccountScreen.isSearchResultEmpty());
+    }
+
     @Then("Account {string} is present on Accounts screen")
     public void checkAccountIsPresent(String libraryName) {
         openAccounts();
