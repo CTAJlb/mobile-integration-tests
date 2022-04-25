@@ -7,28 +7,22 @@ Feature: Audiobook
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search for 'The Santa Suit' and save bookName as 'bookNameInfo'
+
+  @logout @returnBooks @tier2 @run
+  Scenario Outline: Open the audiobook at the last open chapter
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
     Then I check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
-
-  @logout @returnBooks @tier2
-  Scenario: Navigate by Table of Contents
-    When Open toc audiobook screen
+      And Open toc audiobook screen
       And Open random chapter on toc audiobook screen and save chapter name as 'chapterNameKey'
       And Wait for 12 seconds
     Then Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
       And Pause button is present on audio player screen
       And Book is playing on audio player screen
-
-  @logout @returnBooks @tier2
-  Scenario: Open the audiobook at the last open chapter
-    When Open toc audiobook screen
-      And Open the 2 chapter on toc audiobook screen and save the chapter name as 'chapterNameKey'
-      And Wait for 12 seconds
-      And Return to previous screen from audio player screen
+    When Return to previous screen from audio player screen
       And Click LISTEN action button on book details screen
       And Wait for 12 seconds
     Then Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
@@ -42,17 +36,25 @@ Feature: Audiobook
       And Wait for 12 seconds
     Then Chapter name on audio player screen is equal to 'chapterNameKey2' saved chapter name
 
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Palace Marketplace |
+      | Axis 360           |
+
   @logout @returnBooks @tier2
-  Scenario: Playing Audiobook
-    When Tap play button on audio player screen
+  Scenario Outline: Navigate by Audiobook
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+      And Tap play button on audio player screen
     Then Pause button is present on audio player screen
-      And Book is playing on audio player screen
     When Tap pause button on audio player screen
     Then Play button is present on audio player screen
       And Book is not playing on audio player screen
-
-  @logout @returnBooks @tier2
-  Scenario: Navigate by Audiobook
     When Tap play button on audio player screen
       And Save book play time as 'timeAhead' on audio player screen
       And Skip ahead 15 seconds on audio player screen
@@ -61,9 +63,21 @@ Feature: Audiobook
       And Skip behind 15 seconds on audio player screen
     Then Playback has been moved behind by 15 seconds from 'timeBehind' seconds on audio player screen
 
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Palace Marketplace |
+      | Axis 360           |
+
   @logout @returnBooks @tier2
   Scenario Outline: Navigate by Playback Options
-    When Tap play button on audio player screen
+    When I search 'available' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+      And Tap play button on audio player screen
       And Select <speed>X playback speed on playback speed audiobook screen
       And Save book play time as 'timeAhead' on audio player screen
       And Wait for <secondsForWaiting> seconds
@@ -79,8 +93,15 @@ Feature: Audiobook
       | 0.75  | 6                 | 8                  |
 
   @logout @returnBooks @tier2
-  Scenario: Check time code of track after reload app
-    When Tap play button on audio player screen
+  Scenario Outline: Check time code of track after reload app
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+      And Open toc audiobook screen
+      And Tap play button on audio player screen
       And Wait for 5 seconds
       And I tap on the middle of chapter on audio player screen
       And  Tap pause button on audio player screen
@@ -91,9 +112,21 @@ Feature: Audiobook
       And Click LISTEN action button on book details screen
     Then Play time is the same with 'timeAhead' play time before restart on books detail screen
 
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Palace Marketplace |
+      | Axis 360           |
+
   @logout @returnBooks @tier2
-  Scenario: Check sleep timer
-    When Open toc audiobook screen
+  Scenario Outline: Check sleep timer
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+      And Open toc audiobook screen
       And Open the 1 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
       And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
       And Select 2X playback speed on playback speed audiobook screen
@@ -103,3 +136,9 @@ Feature: Audiobook
       When Save the name of chapter as 'nextChapter' on audio player screen
       And Open toc audiobook screen
     Then Chapter name next to 'chapterNumber' on toc audiobook screen is equal to 'nextChapter' saved chapter name
+
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Palace Marketplace |
+      | Axis 360           |
