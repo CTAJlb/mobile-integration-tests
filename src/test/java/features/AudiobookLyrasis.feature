@@ -1,4 +1,4 @@
-Feature: Audiobook
+Feature: Audiobook in Lyrasis
 
   Background:
     Given I add "LYRASIS Reads" account from welcomeScreen
@@ -8,7 +8,7 @@ Feature: Audiobook
     When I open Catalog
       And I open search modal
 
-  @logout @returnBooks @tier2 @run
+  @logout @returnBooks @tier2
   Scenario Outline: Open the audiobook at the last open chapter
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -92,7 +92,7 @@ Feature: Audiobook
       | 2     | 5                 | 10                 |
       | 0.75  | 6                 | 8                  |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @run
   Scenario Outline: Check time code of track after reload app
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -100,7 +100,6 @@ Feature: Audiobook
       And Click GET action button on book details screen
     Then I check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
-      And Open toc audiobook screen
       And Tap play button on audio player screen
       And Wait for 5 seconds
       And I tap on the middle of chapter on audio player screen
