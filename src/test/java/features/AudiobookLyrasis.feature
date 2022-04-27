@@ -92,7 +92,7 @@ Feature: Audiobook in Lyrasis
       | 2     | 5                 | 10                 |
       | 0.75  | 6                 | 8                  |
 
-  @logout @returnBooks @tier2 @run
+  @logout @returnBooks @tier2
   Scenario Outline: Check time code of track after reload app
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
