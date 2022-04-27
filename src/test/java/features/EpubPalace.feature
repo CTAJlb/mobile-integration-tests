@@ -1,4 +1,4 @@
-Feature: Read EPUB
+Feature: Read EPUB in Palace Bookshelf
 
   Background:
     When I add "Palace Bookshelf" account from welcomeScreen
