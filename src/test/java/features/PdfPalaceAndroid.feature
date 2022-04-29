@@ -1,4 +1,4 @@
-Feature: Read PDF
+Feature: Read PDF in Palace Bookshelf on Android
 
   Background:
     When I add "Palace Bookshelf" account from welcomeScreen
