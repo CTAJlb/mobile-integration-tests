@@ -12,6 +12,14 @@ public class IosSettingsScreen extends SettingsScreen {
 
     private final IButton btnLibraries = getElementFactory().getButton(
             By.xpath("//XCUIElementTypeButton[@name=\"Libraries\"]"), "btnLibraries");
+    private final IButton btnAboutPalace = getElementFactory().getButton(
+            By.xpath("//XCUIElementTypeButton[@name=\"About Palace\"]"), "About Palace");
+    private final IButton btnPrivacyPolicy = getElementFactory().getButton(
+            By.xpath("//XCUIElementTypeButton[@name=\"Privacy Policy\"]"), "Privacy Policy");
+    private final IButton btnUserAgreement = getElementFactory().getButton(
+            By.xpath("//XCUIElementTypeButton[@name=\"User Agreement\"]"), "User Agreement");
+    private final IButton btnSoftwareLic = getElementFactory().getButton(
+            By.xpath("//XCUIElementTypeButton[@name=\"Software Licenses\"]"), "Software Licenses");
 
     public IosSettingsScreen() {
         super(By.xpath(MAIN_ELEMENT));
@@ -20,5 +28,25 @@ public class IosSettingsScreen extends SettingsScreen {
     @Override
     public void openLibraries() {
         btnLibraries.click();
+    }
+
+    @Override
+    public void openAboutPalace() {
+        btnAboutPalace.click();
+    }
+
+    @Override
+    public void openPrivacyPolicy() {
+        btnPrivacyPolicy.click();
+    }
+
+    @Override
+    public void openUserAgreement() {
+        btnUserAgreement.click();
+    }
+
+    @Override
+    public void openSoftwareLic() {
+        btnSoftwareLic.click();
     }
 }

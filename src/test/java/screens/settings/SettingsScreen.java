@@ -9,4 +9,12 @@ public abstract class SettingsScreen extends Screen {
     }
 
     public abstract void openLibraries();
+
+    public abstract void openAboutPalace();
+
+    public abstract void openPrivacyPolicy();
+
+    public abstract void openUserAgreement();
+
+    public abstract void openSoftwareLic();
 }
