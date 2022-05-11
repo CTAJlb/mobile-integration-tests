@@ -2,6 +2,7 @@ package screens.catalog.screen.books.android;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
@@ -14,6 +15,8 @@ import screens.IWorkingWithListOfBooks;
 import screens.catalog.screen.books.CatalogBooksScreen;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWorkingWithListOfBooks {
@@ -32,6 +35,12 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
             ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
     private static final String AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
             ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[2]";
+    private static final String BOOKS_NAME_LOCATOR =
+            "//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[1]";
+    private final ILabel lblNameOfFirstBook = AqualityServices.getElementFactory().getLabel(
+            By.xpath("//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.TextView[1]"), "Name of first book");
+    private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(
+            By.xpath("//android.widget.TextView[contains(@text, \"No results\")]"), "No results found");
 
     public AndroidCatalogBooksScreen() {
         super(By.id("feedWithGroups"));
@@ -116,5 +125,35 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
             AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(lblBookName.getText()), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         }
         return bookInfo;
+    }
+
+    @Override
+    public boolean isSearchResultsEmpty() {
+        return lblNoResults.state().isDisplayed();
+    }
+
+    @Override
+    public boolean isBooksContainWord(String word) {
+        List<String> books = getBooksName();
+        boolean isContain = true;
+        for (String book: books) {
+            if (!book.contains(word.toLowerCase())) {
+                isContain = false;
+                break;
+            }
+        }
+        return isContain;
+    }
+
+    @Override
+    public String getNameOfFirstBook() {
+        return lblNameOfFirstBook.getText();
+    }
+
+    private List<String> getBooksName() {
+        List<ILabel> lblBooks = getElementFactory().findElements(By.id(BOOKS_NAME_LOCATOR), ElementType.LABEL);
+        List<String> booksName = new ArrayList<>();
+        lblBooks.forEach(book->booksName.add(book.getText().toLowerCase()));
+        return booksName;
     }
 }

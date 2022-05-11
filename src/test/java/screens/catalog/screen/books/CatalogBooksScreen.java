@@ -20,4 +20,10 @@ public abstract class CatalogBooksScreen extends Screen {
     public abstract boolean isProgressBarDisplayed(String bookName);
 
     public abstract CatalogBookModel clickActionButtonOnTheFirstBookAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
+
+    public abstract boolean isSearchResultsEmpty();
+
+    public abstract boolean isBooksContainWord(String word);
+
+    public abstract String getNameOfFirstBook();
 }

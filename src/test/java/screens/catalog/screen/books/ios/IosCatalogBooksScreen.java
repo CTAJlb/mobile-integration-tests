@@ -2,9 +2,11 @@ package screens.catalog.screen.books.ios;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import aquality.selenium.core.elements.interfaces.IElement;
 import constants.application.EnumBookType;
 import constants.application.attributes.IosAttributes;
 import constants.application.timeouts.BooksTimeouts;
@@ -15,6 +17,8 @@ import screens.IWorkingWithListOfBooks;
 import screens.catalog.screen.books.CatalogBooksScreen;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkingWithListOfBooks {
@@ -33,6 +37,11 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
             ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
     private static final String AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
             ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
+    private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(
+            By.xpath("//XCUIElementTypeStaticText[contains(@name, \"No results\")]"), "No results found");
+    private static final String BOOKS_NAME_LOCATOR = "//XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
+    private final ILabel lblNameOfFirstBook = AqualityServices.getElementFactory().getLabel(
+            By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "Name of first book");
 
     public IosCatalogBooksScreen() {
         super(By.xpath("//XCUIElementTypeCollectionView"));
@@ -129,5 +138,43 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
             AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(lblBookName.getAttribute(IosAttributes.NAME)), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         }
         return bookInfo;
+    }
+
+    @Override
+    public boolean isSearchResultsEmpty() {
+        return lblNoResults.state().isDisplayed();
+    }
+
+    @Override
+    public boolean isBooksContainWord(String word) {
+        List<String> books = getBooksName();
+        boolean isContain = true;
+        for (String book: books) {
+            if (!book.contains(word.toLowerCase())) {
+                isContain = false;
+                break;
+            }
+        }
+        return isContain;
+    }
+
+    @Override
+    public String getNameOfFirstBook() {
+        return lblNameOfFirstBook.getText();
+    }
+
+    private List<String> getBooksName() {
+        List<ILabel> lblBooks = getElementFactory().findElements(By.xpath(BOOKS_NAME_LOCATOR), ElementType.LABEL);
+        List<String> booksName = new ArrayList<>();
+        lblBooks.forEach(book->booksName.add(book.getText().toLowerCase()));
+
+
+        for (String s: booksName
+             ) {
+            System.out.println("sdfsf: " + s);
+        }
+
+
+        return booksName;
     }
 }

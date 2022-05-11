@@ -1,5 +1,6 @@
 package screens.useragreement.ios;
 
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import org.openqa.selenium.By;
 import screens.useragreement.UserAgreementScreen;
