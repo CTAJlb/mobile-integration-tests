@@ -27,4 +27,14 @@ public class AndroidSearchModal extends SearchModal {
     public void applySearch() {
         btnSearch.click();
     }
+
+    @Override
+    public void clearSearchField() {
+
+    }
+
+    @Override
+    public boolean isSearchFieldEmpty() {
+        return false;
+    }
 }

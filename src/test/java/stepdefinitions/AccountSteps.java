@@ -70,7 +70,7 @@ public class AccountSteps {
         addAccountScreen.clearSearchField();
     }
 
-    @Then("Search field is empty")
+    @Then("Search field is empty on add account screen")
     public void isSearchFieldEmpty() {
         Assert.assertTrue("Search field is not empty", addAccountScreen.isSearchFieldEmpty());
     }
