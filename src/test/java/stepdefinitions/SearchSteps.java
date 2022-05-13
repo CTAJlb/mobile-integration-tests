@@ -53,6 +53,13 @@ public class SearchSteps {
         Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", searchedText, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
     }
 
+    @When("I enter book {string} and save it as {string}")
+    public void enterTheBook(String bookName, String bookNameKey) {
+        context.add(bookNameKey, bookName);
+        Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().isDisplayed());
+        searchModal.setSearchedText(bookName);
+    }
+
     @When("I search random pdf and save as {string}")
     public void searchForPdf(String bookNameInfoKey) {
         String pdfForSearching = getRandomPdfWithoutBadSymbols();
@@ -66,6 +73,24 @@ public class SearchSteps {
         Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", pdfForSearching, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
     }
 
+    @When("Clear search field on catalog books screen")
+    public void clearSearchField() {
+        searchModal.clearSearchField();
+    }
+
+    @Then("Search field is empty on catalog books screen")
+    public void searchFieldIsEmpty() {
+        searchModal.isSearchFieldEmpty();
+    }
+
+    @When("I enter word {} and save as {string} on catalog books screen")
+    public void enterInfo(String word, String wordKey) {
+        context.add(wordKey, word);
+        Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().isDisplayed());
+        searchModal.setSearchedText(word);
+        searchModal.applySearch();
+        Assert.assertTrue("Search modal is not disappear", searchModal.state().waitForNotDisplayed());
+    }
 
     private String getRandomPdfWithoutBadSymbols() {
         int amount = 0;

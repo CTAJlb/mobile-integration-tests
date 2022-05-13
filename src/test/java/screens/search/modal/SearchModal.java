@@ -11,4 +11,8 @@ public abstract class SearchModal extends Screen {
     public abstract void setSearchedText(String text);
 
     public abstract void applySearch();
+
+    public abstract void clearSearchField();
+
+    public abstract boolean isSearchFieldEmpty();
 }

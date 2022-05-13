@@ -7,6 +7,7 @@ import constants.application.EnumBookType;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.android.CatalogBookModel;
 import org.junit.Assert;
@@ -60,6 +61,30 @@ public class CatalogBooksSteps {
         String bookName = bookInfo.getTitle();
         Assert.assertTrue(String.format("'%s' book with specific action button is not present on catalog books screen", bookName),
                 catalogBooksScreen.isBookDisplayed(bookType, bookName, actionButtonKey));
+    }
+
+    @Then("{} book with {} action button and {string} bookName is present on catalog books screen")
+    public void bookIsDisplayed(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameKey) {
+        String bookName = context.get(bookNameKey);
+        Assert.assertTrue(String.format("'%s' book with specific buttion is not present on catalog books screen", bookName),
+                catalogBooksScreen.isBookDisplayed(bookType, bookName, actionButtonKey));
+    }
+
+    @Then("Books contain word {string} on catalog books screen")
+    public void isBookContainWord(String info) {
+        String word = context.get(info);
+        Assert.assertTrue("Search result does not contain books with " + word, catalogBooksScreen.isBooksContainWord(word));
+    }
+
+    @Then("The first book has {string} bookName on catalog books screen")
+    public void isFirstBookContainWord(String info) {
+        String word = context.get(info);
+        Assert.assertEquals("The book " + word + " is not found", word.toLowerCase(), catalogBooksScreen.getNameOfFirstBook().toLowerCase());
+    }
+
+    @Then("Search result is empty on catalog books screen")
+    public void isSearchEmpty() {
+        Assert.assertTrue("Results are not empty", catalogBooksScreen.isSearchResultsEmpty());
     }
 
     @And("Click {} action button on the first {} book on catalog books screen and save book as {string}")
