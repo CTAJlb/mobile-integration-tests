@@ -19,31 +19,39 @@ import java.util.List;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosBookDetailsScreen extends BookDetailsScreen {
-    private static final String MAIN_ELEMENT =
-            "//XCUIElementTypeStaticText[@name=//XCUIElementTypeNavigationBar/@name]";
-    private static final String BOOK_MAIN_INFO =
-            "//XCUIElementTypeStaticText[@name=\"Description\"]//preceding-sibling::XCUIElementTypeStaticText[@name]";
-    private static final String BOOK_ACTION_BUTTON_LOC =
-            "//XCUIElementTypeButton/XCUIElementTypeStaticText[@name=\"%s\"]";
-    private static final String LBL_BOOK_AUTHORS_INFO =
-            String.format("(%1$s)[%%d]", BOOK_MAIN_INFO);
+    private static final String MAIN_ELEMENT = "//XCUIElementTypeStaticText[@name=//XCUIElementTypeNavigationBar/@name]";
+    private static final String BOOK_MAIN_INFO = "//XCUIElementTypeStaticText[@name=\"Description\"]//preceding-sibling::XCUIElementTypeStaticText[@name]";
+    private static final String BOOK_ACTION_BUTTON_LOC = "//XCUIElementTypeButton/XCUIElementTypeStaticText[@name=\"%s\"]";
+    private static final String LBL_BOOK_AUTHORS_INFO = String.format("(%1$s)[%%d]", BOOK_MAIN_INFO);
+    private static final String LBL_AUTHOR_IN_RELATED_BOOKS = "//XCUIElementTypeTable//XCUIElementTypeStaticText[@name=\"%s\"]";
+    private static final String LBL_LIST_OF_RELATED_BOOKS = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton";
+
 
     private final ILabel lblBookTitleInfo =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther//XCUIElementTypeStaticText[@name][1]"), "Book title");
     private final ILabel lblPublished =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Published\")]/following-sibling::XCUIElementTypeStaticText"), "lblPublished");
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Published\")]/following::XCUIElementTypeStaticText"), "lblPublished");
     private final ILabel lblPublisher =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Publisher\")]/following-sibling::XCUIElementTypeStaticText"), "lblPublisher");
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Publisher\")]/following::XCUIElementTypeStaticText"), "lblPublisher");
     private final ILabel lblCategories =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Category\")]/following-sibling::XCUIElementTypeStaticText"), "lblCategories");
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Categor\")]/following::XCUIElementTypeStaticText"), "lblCategories");
     private final ILabel lblDistributor =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Distributed\")]/following-sibling::XCUIElementTypeStaticText"), "lblDistributor");
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Distributed\")]/following::XCUIElementTypeStaticText"), "lblDistributor");
     private final ILabel lblProgressBar =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeProgressIndicator"), "lblProgressBar");
     private final IButton btnCloseBookDetailsOnlyIOSTab =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeButton/XCUIElementTypeStaticText[contains(@name, \"Close\")]"), "Close button");
     private final IButton lblErrorDetails =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeAlert//XCUIElementTypeStaticText"), "Error details");
+    private final ILabel lblBookCover =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther//XCUIElementTypeImage[1]"), "Book cover");
+    private final ILabel lblTextInDescription =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]/following::XCUIElementTypeTextView"), "Info in description section");
+    private final IButton btnMoreInDescription =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]//following::XCUIElementTypeStaticText[@name=\"More…\"]"), "More btn in Description section");
+    private final IButton btnMoreInRelatedBooks =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeTable//XCUIElementTypeButton[@name=\"More…\"]"), "More button in related books section");
+
 
     public IosBookDetailsScreen() {
         super(By.xpath(MAIN_ELEMENT));
@@ -134,6 +142,38 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
         if (btnCloseBookDetailsOnlyIOSTab.state().isDisplayed()) {
             btnCloseBookDetailsOnlyIOSTab.click();
         }
+    }
+
+    @Override
+    public boolean isBookHasCover() {
+        return lblBookCover.state().isExist();
+    }
+
+    @Override
+    public boolean isDescriptionNotEmpty() {
+        return !lblTextInDescription.getText().isEmpty();
+    }
+
+    @Override
+    public boolean isMoreBtnInDescriptionAvailable() {
+        return btnMoreInDescription.state().isClickable();
+    }
+
+    @Override
+    public boolean isRelatedBooksExists(String authorName) {
+        ILabel lblAuthorInRelatedBooks = getElementFactory().getLabel(By.xpath(String.format(LBL_AUTHOR_IN_RELATED_BOOKS, authorName)), "Author in related books section");
+        return lblAuthorInRelatedBooks.state().isDisplayed();
+    }
+
+    @Override
+    public boolean isListOfBooksDisplayed() {
+        List<ILabel> listOfRelatedBooks = getElementFactory().findElements(By.xpath(LBL_LIST_OF_RELATED_BOOKS), ElementType.LABEL);
+        return listOfRelatedBooks.size() != 0;
+    }
+
+    @Override
+    public boolean isMoreBtnAvailableInRelatedBooks() {
+        return btnMoreInRelatedBooks.state().isClickable();
     }
 
     private IButton getActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKey) {

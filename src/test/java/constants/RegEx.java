@@ -11,4 +11,6 @@ public class RegEx {
     public static final String FONT_SIZE_REGEX_IOS = "--USER__fontSize: (\\d+.\\d+)%;";
     public static final String FONT_NAME_REGEX_IOS = "--USER__fontFamily: (.+?);";
     public static final String BACKGROUND_COLOR_REGEX_IOS = "--USER__appearance: (.+?);";
+    public static final String SYMBOLS_IN_INFO_ABOUT_BOOK = "^[a-zA-Z0-9\\s]*$";
+    public static final String UNNECESSARY_SYMBOLS = "[&/,;\\s]";
 }
