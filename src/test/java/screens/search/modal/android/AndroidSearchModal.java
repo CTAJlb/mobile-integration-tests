@@ -30,11 +30,12 @@ public class AndroidSearchModal extends SearchModal {
 
     @Override
     public void clearSearchField() {
-
+        //only for iOS
     }
 
     @Override
     public boolean isSearchFieldEmpty() {
+        //only for iOS
         return false;
     }
 }

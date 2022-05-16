@@ -35,4 +35,16 @@ public abstract class BookDetailsScreen extends Screen {
     public abstract String getDistributorInfo();
 
     public abstract void closeBookDetailsOnlyForIOSTabIfDisplayed();
+
+    public abstract boolean isBookHasCover();
+
+    public abstract boolean isDescriptionNotEmpty();
+
+    public abstract boolean isMoreBtnInDescriptionAvailable();
+
+    public abstract boolean isRelatedBooksExists(String authorName);
+
+    public abstract boolean isListOfBooksDisplayed();
+
+    public abstract boolean isMoreBtnAvailableInRelatedBooks();
 }

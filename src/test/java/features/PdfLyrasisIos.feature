@@ -7,7 +7,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
     Then Login is performed successfully
     When I open Catalog
 
-  @logout @returnBooks @tier1 @exclude_android @run
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Page Lyrasis
     When I open search modal
       And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
