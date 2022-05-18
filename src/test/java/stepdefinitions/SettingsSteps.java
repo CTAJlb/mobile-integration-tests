@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import screens.aboutpalace.AboutPalaceScreen;
 import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
@@ -70,6 +71,16 @@ public class SettingsSteps {
         userAgreementScreen.isOpened();
     }
 
+    @When("I scroll page to link {string} on user agreement screen")
+    public void scrollToLinkOnAgreement(String link) {
+        userAgreementScreen.scrollThePage(link);
+    }
+
+    @Then("Link {string} is available on user agreement screen")
+    public void isLinkAvailable(String link) {
+        Assert.assertTrue("Link is not available", userAgreementScreen.isLinkAvailable(link));
+    }
+
     @When("I open Software Licenses on settings screen")
     public void openSoftwareLic() {
         settingsScreen.openSoftwareLic();
@@ -78,5 +89,15 @@ public class SettingsSteps {
     @Then("Software Licenses screen is opened")
     public void softwareLicIsOpened() {
         softwareLicScreen.isOpened();
+    }
+
+    @When("I scroll page to link {string} on software licenses screen")
+    public void scrollToLinkOnLic(String link) {
+        softwareLicScreen.scrollThePage(link);
+    }
+
+    @Then("Link {string} is available on software licenses screen")
+    public void isLinkClickable(String link) {
+        Assert.assertTrue("Link is not available", softwareLicScreen.isLinkAvailable(link));
     }
 }

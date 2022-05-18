@@ -10,4 +10,8 @@ public abstract class SoftwareLicScreen extends Screen {
     }
 
     public abstract boolean isOpened();
+
+    public abstract void scrollThePage(String  link);
+
+    public abstract boolean isLinkAvailable(String link);
 }

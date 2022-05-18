@@ -114,8 +114,8 @@ public class BookDetailsSteps {
     @Then("Book {string} has correct title and author name on book details screen")
     public void isBookInfoCorrect(String bookInfoKey) {
         CatalogBookModel bookModel = context.get(bookInfoKey);
-        String bookName = bookModel.getTitle();
-        String authorName = bookModel.getAuthor();
+        String bookName = bookModel.getTitle().replaceAll(RegEx.UNNECESSARY_SYMBOLS, "");
+        String authorName = bookModel.getAuthor().replaceAll(RegEx.UNNECESSARY_SYMBOLS, "");
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(bookName.matches(RegEx.SYMBOLS_IN_INFO_ABOUT_BOOK)).as("Book title has invalid symbols").isTrue();
         softAssertions.assertThat(authorName.matches(RegEx.SYMBOLS_IN_INFO_ABOUT_BOOK)).as("Author name has invalid symbols").isTrue();
