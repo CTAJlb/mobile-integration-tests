@@ -1,4 +1,4 @@
-Feature: Check data in information on book detail view screen
+Feature: Book detail view screen
 
   @tier1
   Scenario Outline: Check of a book title and author in LYRASIS

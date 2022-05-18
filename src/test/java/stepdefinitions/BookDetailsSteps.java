@@ -9,6 +9,7 @@ import constants.keysForContext.ScenarioContextKey;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import framework.utilities.ScreenshotUtils;
+import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -114,8 +115,8 @@ public class BookDetailsSteps {
     @Then("Book {string} has correct title and author name on book details screen")
     public void isBookInfoCorrect(String bookInfoKey) {
         CatalogBookModel bookModel = context.get(bookInfoKey);
-        String bookName = bookModel.getTitle();
-        String authorName = bookModel.getAuthor();
+        String bookName = bookModel.getTitle().replaceAll(RegEx.UNNECESSARY_SYMBOLS, "");
+        String authorName = bookModel.getAuthor().replaceAll(RegEx.UNNECESSARY_SYMBOLS, "");
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(bookName.matches(RegEx.SYMBOLS_IN_INFO_ABOUT_BOOK)).as("Book title has invalid symbols").isTrue();
         softAssertions.assertThat(authorName.matches(RegEx.SYMBOLS_IN_INFO_ABOUT_BOOK)).as("Author name has invalid symbols").isTrue();
@@ -139,6 +140,9 @@ public class BookDetailsSteps {
 
     @Then("Publisher and Categories in Information section are correct on book details screen")
     public void isInformationSectionIsCorrect() {
+        if (AqualityServices.getApplication().getPlatformName()==PlatformName.ANDROID) {
+            SwipeElementUtils.swipeByCoordinatesOfWindow();
+        }
         String publisher = bookDetailsScreen.getPublisherInfo().replaceAll(RegEx.UNNECESSARY_SYMBOLS, "");
         String categories = bookDetailsScreen.getCategoryInfo().replaceAll(RegEx.UNNECESSARY_SYMBOLS, "");
         SoftAssertions softAssertions = new SoftAssertions();
@@ -154,6 +158,9 @@ public class BookDetailsSteps {
 
     @Then("Related books section is displayed on book details screen")
     public void isRelatedBooksExists() {
+        if (AqualityServices.getApplication().getPlatformName()==PlatformName.ANDROID) {
+            SwipeElementUtils.swipeByCoordinatesOfWindow();
+        }
         String authorName = bookDetailsScreen.getBookInfo().getAuthor();
         Assert.assertTrue("Related books section is not displayed", bookDetailsScreen.isRelatedBooksExists(authorName));
     }

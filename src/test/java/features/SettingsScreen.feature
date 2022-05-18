@@ -20,6 +20,11 @@ Feature: Check sections from settings screen
       And I open Settings
       And I open User Agreement on settings screen
     Then User Agreement screen is opened
+    When I scroll page to link "www.copyright.gov" on user agreement screen
+      Then Link "www.copyright.gov" is available on user agreement screen
+    When I scroll page to link "http://thepalaceproject.org/licenses/" on user agreement screen
+      Then Link "http://thepalaceproject.org/licenses/" is available on user agreement screen
+
 
   @tier1
   Scenario: Software Licenses
@@ -27,3 +32,5 @@ Feature: Check sections from settings screen
       And I open Settings
       And I open Software Licenses on settings screen
     Then Software Licenses screen is opened
+    When I scroll page to link "www.apache.org/licenses" on software licenses screen
+      Then Link "www.apache.org/licenses" is available on software licenses screen
