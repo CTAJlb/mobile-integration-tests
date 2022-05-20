@@ -36,6 +36,10 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     private final ILabel lblErrorDetails = getElementFactory().getLabel(By.id("errorDetails"), "Error details");
     private final IButton btnErrorDetails = getElementFactory().getButton(By.id("bookCellErrorButtonDetails"), "Error details");
     private final IButton btnFeedErrorDetails = getElementFactory().getButton(By.id("feedErrorDetails"), "Error details");
+    private final IButton btnSorting =
+            getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView//android.widget.Button"), "Sort button");
+    private final IButton btnBack
+            = getElementFactory().getButton(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"mainToolbar\")]/android.widget.ImageView"), "Back button");
 
     public AndroidSubcategoryScreen() {
         super(By.xpath("//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"feedWithoutGroupsList\")]"));
@@ -92,6 +96,17 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     public boolean isErrorButtonPresent() {
         return isErrorDetailsButtonDisplayed() || isFeedErrorDetailsButtonDisplayed();
     }
+
+    @Override
+    public String getNameOfSorting() {
+        return btnSorting.getText();
+    }
+
+    @Override
+    public void tapBack() {
+        btnBack.click();
+    }
+
 
     @Override
     public List<String> getAuthorsInfo() {

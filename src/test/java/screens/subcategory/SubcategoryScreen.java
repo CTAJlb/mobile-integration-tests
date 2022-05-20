@@ -30,4 +30,8 @@ public abstract class SubcategoryScreen extends Screen {
     public abstract void openCategory(String categoryName);
 
     public abstract boolean isErrorButtonPresent();
+
+    public abstract String getNameOfSorting();
+
+    public abstract void tapBack();
 }

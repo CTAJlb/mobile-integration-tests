@@ -29,6 +29,10 @@ public class AndroidCatalogScreen extends CatalogScreen {
     private static final String FEED_LANE_TITLES_LOC = "//*[contains(@resource-id,\"feedLaneTitle\")]";
     private static final String CATEGORY_NAME_XPATH_LOCATOR = "//androidx.recyclerview.widget.RecyclerView//android.widget.LinearLayout/android.widget.TextView[1]";
     private static final String LIBRARY_NAME_LOC = "//android.widget.TextView[@text=\"%s\" and contains(@resource-id,\"feedLibraryText\")]";
+    private static final String BUTTON_MORE_LOCATOR = "//android.widget.LinearLayout/android.widget.TextView[@text=\"More…\"]";
+    private static final String BOOK_SECTION_LOCATOR_IN_CATALOG =
+            "//androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[%d]/android.widget.LinearLayout/android.widget.TextView[1]";
+    private static final String SECTION_TITLE = "//android.view.ViewGroup/android.widget.TextView[@text=\"%s\"]";
 
     private final ILabel lblFirstLaneName = getElementFactory().getLabel(By.xpath(FEED_LANE_TITLES_LOC), "First lane name");
     private final ILabel lblScreen = getElementFactory().getLabel(By.id("mainFragmentHolder"), "Screen to swipe");
@@ -110,6 +114,30 @@ public class AndroidCatalogScreen extends CatalogScreen {
             currentCategoriesNames = getListOfCategories();
         } while (!bookNames.containsAll(currentCategoriesNames));
         return bookNames;
+    }
+
+    @Override
+    public boolean isMoreBtnPresent() {
+        List<IButton> buttons = getMoreBtn();
+        return buttons.stream().allMatch(button -> button.state().isDisplayed());
+    }
+
+    @Override
+    public String clickToMoreBtn() {
+        List<IButton> buttons = getMoreBtn();
+        int randomNumber = 1 + (int) (Math.random() * buttons.size());
+        String sectionName = getElementFactory().getLabel(By.xpath(String.format(BOOK_SECTION_LOCATOR_IN_CATALOG, randomNumber)), "Book section name").getText();
+        buttons.get(randomNumber - 1).click();
+        return sectionName;
+    }
+
+    @Override
+    public boolean isBookSectionOpened(String sectionName) {
+        return getElementFactory().getLabel(By.xpath(String.format(SECTION_TITLE, sectionName)), "Section title").state().isDisplayed();
+    }
+
+    private List<IButton> getMoreBtn() {
+        return getElementFactory().findElements(By.xpath(BUTTON_MORE_LOCATOR), ElementType.BUTTON);
     }
 
     private List<String> getListOfVisibleBooksNamesInSubcategoryLane(String lineName) {

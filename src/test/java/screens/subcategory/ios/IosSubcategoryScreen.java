@@ -24,14 +24,16 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     private static final String SPECIFIC_SUBCATEGORY_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
     private static final String BOOK_BUTTON_XPATH = BOOKS_LOCATOR + "//XCUIElementTypeButton";
     private static final String AUTHOR_INFO_XPATH = "//XCUIElementTypeStaticText[@name][2]";
-    private static final String BOOK_NAME_XPATH =
-            "//XCUIElementTypeStaticText[1]";
+    private static final String BOOK_NAME_XPATH = "//XCUIElementTypeStaticText[1]";
     private static final int COUNT_OF_ITEMS_TO_WAIT_FOR = 3;
 
     private final ILabel lblFirstBookName =
             getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR + BOOK_NAME_XPATH), "First book name");
     private final ILabel lblFirstBookAuthor =
             getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR + AUTHOR_INFO_XPATH), "First book author");
+    private final IButton btnSorting =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton"), "Sort button");
+    private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Back\"]"), "Back button");
 
     public IosSubcategoryScreen() {
         super(By.xpath("//XCUIElementTypeCollectionView"));
@@ -81,6 +83,16 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     @Override
     public boolean isErrorButtonPresent() {
         return false;
+    }
+
+    @Override
+    public String getNameOfSorting() {
+        return btnSorting.getText();
+    }
+
+    @Override
+    public void tapBack() {
+        btnBack.click();
     }
 
     @Override

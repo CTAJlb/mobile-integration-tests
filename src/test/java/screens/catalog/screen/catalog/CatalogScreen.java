@@ -28,4 +28,10 @@ public abstract class CatalogScreen extends Screen {
     public abstract boolean isLibraryPresent(String libraryName);
 
     public abstract Set<String> getAllCategoriesNames();
+
+    public abstract boolean isMoreBtnPresent();
+
+    public abstract String clickToMoreBtn();
+
+    public abstract boolean isBookSectionOpened(String sectionName);
 }

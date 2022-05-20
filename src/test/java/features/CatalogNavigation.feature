@@ -12,7 +12,7 @@ Feature: Catalog Navigation
       And Library 'LYRASIS Reads' is present on Catalog Screen
 
   @tier1
-  Scenario: Browse Categories
+  Scenario: Browse Categories in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
     Then Category rows are loaded
@@ -32,26 +32,52 @@ Feature: Catalog Navigation
     When I open first book in Subcategory List and save it as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
 
-  @tier1 @ignore @exclude_android
-  Scenario Outline: View Book Details (IOS)
-    When I add "LYRASIS Reads" account from welcomeScreen
-      And I open search modal
-      And I search for 'Dune' and save bookName as 'bookNameInfo'
-      And I switch to 'Audiobooks' catalog tab
-      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      Then '<PUBLISHED>' published and '<PUBLISHER>' publisher and '<CATEGORIES>' categories and '<DISTRIBUTOR>' distributor are present on book details screen
-    Scenarios:
-      | PUBLISHED    | PUBLISHER       | CATEGORIES  | DISTRIBUTOR |
-      | 29 May 2007 | Macmillan Audio | Space Opera | Bibliotheca |
+  @tier1
+  Scenario: Check of the titles of books sections in Palace
+    When I add "Palace Bookshelf" account from welcomeScreen
+      And I open Catalog
+    Then Category rows are loaded
+      And Category names are correct on catalog book screen
 
-  @tier1 @ignore @exclude_ios
-  Scenario Outline: View Book Details
-    When I add "LYRASIS Reads" account from welcomeScreen
-    And I open search modal
-    And I search for 'Dune' and save bookName as 'bookNameInfo'
-    And I switch to 'Audiobooks' catalog tab
-    And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then '<PUBLISHED>' published and '<PUBLISHER>' publisher and '<CATEGORIES>' categories and '<DISTRIBUTOR>' distributor are present on book details screen
+  @tier1
+  Scenario: Check of "More" button in books sections in Palace
+    When I add "Palace Bookshelf" account from welcomeScreen
+      And I open Catalog
+    Then Category rows are loaded
+      And More button is present on each section of books on catalog book screen
+    When I click More button from random book section and save name of section as 'sectionInfo' on catalog book screen
+      Then Book section 'sectionInfo' is opened
+    When I tap Back button on subcategory screen
+
+  @tier1
+  Scenario Outline: Check of books sorting in Palace
+    When I add "Palace Bookshelf" account from welcomeScreen
+      And I open Catalog
+    Then Category rows are loaded
+    When I open categories by chain and chain starts from CategoryScreen:
+      | Our Picks |
+    Then Books are sorted by Author by default on subcategory screen
+      And There are sorting by '<type1>', '<type2>' and '<type3>' on subcategory screen
+
     Scenarios:
-      | PUBLISHED  | PUBLISHER       | CATEGORIES  | DISTRIBUTOR |
-      | 2007-05-29 | Macmillan Audio | Space Opera | Bibliotheca |
+    | type1  | type2          | type3 |
+    | Author | Recently Added | Title |
+
+  @tier1
+  Scenario: Sort Lists in Palace
+    When I add "Palace Bookshelf" account from welcomeScreen
+      And I open Catalog
+    Then Category rows are loaded
+    When I open categories by chain and chain starts from CategoryScreen:
+      | Our Picks |
+    Then Subcategory screen is present
+    When I sort books by AUTHOR
+    Then Subcategory screen is present
+      And Books are sorted by Author ascending
+    When I sort books by TITLE
+    Then Subcategory screen is present
+      And Books are sorted by Title ascending
+    When I save list of books as 'listOfBooks'
+      And I sort books by RECENTLY_ADDED
+    Then Subcategory screen is present
+      And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'

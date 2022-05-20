@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
+import constants.RegEx;
 import constants.keysForContext.ScenarioContextKey;
 import constants.localization.application.catalog.BookActionButtonNames;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
@@ -10,9 +11,9 @@ import framework.utilities.ScenarioContext;
 import framework.utilities.ScreenshotUtils;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
@@ -21,10 +22,7 @@ import screens.catalog.screen.catalog.CatalogScreen;
 import screens.facetedSearch.FacetedSearchScreen;
 import screens.subcategory.SubcategoryScreen;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CatalogSteps {
@@ -49,6 +47,29 @@ public class CatalogSteps {
     public void categoryRowsAreLoaded() {
         boolean isCategoryRowsPresent = catalogScreen.areCategoryRowsLoaded();
         Assert.assertTrue("Category rows are not loaded.", isCategoryRowsPresent);
+    }
+
+    @Then("Category names are correct on catalog book screen")
+    public void isCategoryNamesCorrect() {
+        Set<String > categoriesNames = catalogScreen.getAllCategoriesNames();
+        categoriesNames.forEach(category -> Assert.assertTrue("Category name " + category + " have invalid symbols",
+                category.replaceAll(RegEx.UNNECESSARY_SYMBOLS, "").matches(RegEx.VALID_SYMBOLS_IN_NAMES)));
+    }
+
+    @Then("More button is present on each section of books on catalog book screen")
+    public void isMoreBtnPresent() {
+        Assert.assertTrue("More... button is not displayed on each section", catalogScreen.isMoreBtnPresent());
+    }
+
+    @When("I click More button from random book section and save name of section as {string} on catalog book screen")
+    public void isMoreBtnClickable(String sectionNameKey) {
+        context.add(sectionNameKey, catalogScreen.clickToMoreBtn());
+    }
+
+    @Then("Book section {string} is opened")
+    public void isSectionOpened(String sectionNameKey) {
+        String sectionName = context.get(sectionNameKey);
+        Assert.assertTrue("Book section " + sectionName + " is not opened", catalogScreen.isBookSectionOpened(sectionName));
     }
 
     @Then("Subcategory rows are loaded")
@@ -191,6 +212,21 @@ public class CatalogSteps {
         Assert.assertEquals("Lists of authors is not sorted properly " + list.stream().map(Object::toString).collect(Collectors.joining(", ")), getSurnames(listOfSurnames.stream().sorted().collect(Collectors.toList())), listOfSurnames);
     }
 
+    @Then("Books are sorted by Author by default on subcategory screen")
+    public void isSortingByDefault() {
+        Assert.assertEquals("Books are not sorted by default", "Author", subcategoryScreen.getNameOfSorting());
+    }
+
+    @Then("There are sorting by {string}, {string} and {string} on subcategory screen")
+    public void checkTypeOfSorting(String type1, String type2, String type3) {
+        facetedSearchScreen.sortBy();
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(facetedSearchScreen.getTypeOfSorting(type1)).as("There is no sorting type by " + type1).isEqualTo(type1);
+        softAssertions.assertThat(facetedSearchScreen.getTypeOfSorting(type2)).as("There is no sorting type by " + type2).isEqualTo(type2);
+        softAssertions.assertThat(facetedSearchScreen.getTypeOfSorting(type3)).as("There is no sorting type by " + type3).isEqualTo(type3);
+        softAssertions.assertAll();
+    }
+
     private List<String> getSurnames(List<String> list) {
         List<String> listOfSurnames = new ArrayList<>();
         for (String authorName : list) {
@@ -212,5 +248,10 @@ public class CatalogSteps {
     public void checkThatActionButtonTextEqualToExpected(FacetAvailabilityKeys facetAvailabilityKeys) {
         facetedSearchScreen.openAvailabilityMenu();
         facetedSearchScreen.changeAvailabilityTo(facetAvailabilityKeys);
+    }
+
+    @When("I tap Back button on subcategory screen")
+    public void tapBackBtn() {
+        subcategoryScreen.tapBack();
     }
 }

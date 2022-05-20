@@ -19,6 +19,10 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
     private final IButton btnSortBy =
             getElementFactory().getButton(By.xpath(String.format("(%1$s//XCUIElementTypeButton)[1]", MAIN_ELEMENT)), "Sort by");
 
+    private final BtnGetVariantsOfSorting btnVariantOfSorting = (button ->
+            getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeSheet//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"%s\"]", button)),
+                    String.format("%s type of sorting", button)));
+
     public IosFacetedSearchScreen() {
         super(By.xpath(MAIN_ELEMENT));
     }
@@ -39,6 +43,12 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
     }
 
     @Override
+    public String getTypeOfSorting(String typeOfSorting) {
+        IButton btnTypeOfSorting = btnVariantOfSorting.createBtn(typeOfSorting);
+        return btnTypeOfSorting.getText();
+    }
+
+    @Override
     public void changeSortByTo(FacetSortByKeys key) {
         setFacetSearchSelection(key.i18n());
     }
@@ -46,5 +56,10 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
     private void setFacetSearchSelection(String value) {
         getElementFactory().getButton(By.xpath(String.format(FACET_SEARCH_SELECTION, value)),
                 "Facet search value " + value).click();
+    }
+
+    @FunctionalInterface
+    interface BtnGetVariantsOfSorting {
+        IButton createBtn(String button);
     }
 }

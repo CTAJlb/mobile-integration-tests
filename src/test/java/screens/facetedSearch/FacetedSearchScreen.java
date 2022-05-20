@@ -16,5 +16,7 @@ public abstract class FacetedSearchScreen extends Screen {
 
     public abstract void sortBy();
 
+    public abstract String getTypeOfSorting(String typeOfSorting);
+
     public abstract void changeSortByTo(FacetSortByKeys key);
 }
