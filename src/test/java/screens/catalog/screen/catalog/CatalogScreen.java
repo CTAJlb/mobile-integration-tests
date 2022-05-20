@@ -34,4 +34,8 @@ public abstract class CatalogScreen extends Screen {
     public abstract String clickToMoreBtn();
 
     public abstract boolean isBookSectionOpened(String sectionName);
+
+    public abstract String getTheNameOfBookTypeBtn(String typeOfBookNameBtn);
+
+    public abstract boolean isSectionWithBookTypeOpen(String typeSection);
 }

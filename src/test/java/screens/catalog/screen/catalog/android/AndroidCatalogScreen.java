@@ -3,6 +3,7 @@ package screens.catalog.screen.catalog.android;
 import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import aquality.appium.mobile.elements.Attributes;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
@@ -36,6 +37,9 @@ public class AndroidCatalogScreen extends CatalogScreen {
 
     private final ILabel lblFirstLaneName = getElementFactory().getLabel(By.xpath(FEED_LANE_TITLES_LOC), "First lane name");
     private final ILabel lblScreen = getElementFactory().getLabel(By.id("mainFragmentHolder"), "Screen to swipe");
+    private final GetNameOfBookTypeBtb btnBookNameTypeSection = (button -> getElementFactory().getButton(By.xpath(
+            String.format("//android.widget.RadioGroup[contains(@resource-id, \"feedHeaderTabs\")]/android.widget.RadioButton[@text=\"%s\"]", button)),
+            String.format("%s type of sorting", button)));
 
     public AndroidCatalogScreen() {
         super(By.id("feedWithGroups"));
@@ -136,6 +140,18 @@ public class AndroidCatalogScreen extends CatalogScreen {
         return getElementFactory().getLabel(By.xpath(String.format(SECTION_TITLE, sectionName)), "Section title").state().isDisplayed();
     }
 
+    @Override
+    public String getTheNameOfBookTypeBtn(String typeOfBookNameBtn) {
+        IButton btnNameOfBookType = btnBookNameTypeSection.createBtn(typeOfBookNameBtn);
+        return btnNameOfBookType.getText();
+    }
+
+    @Override
+    public boolean isSectionWithBookTypeOpen(String typeSection) {
+        IButton btnSectionType = btnBookNameTypeSection.createBtn(typeSection);
+        return btnSectionType.getAttribute(Attributes.CHECKED).equals("true");
+    }
+
     private List<IButton> getMoreBtn() {
         return getElementFactory().findElements(By.xpath(BUTTON_MORE_LOCATOR), ElementType.BUTTON);
     }
@@ -165,5 +181,10 @@ public class AndroidCatalogScreen extends CatalogScreen {
 
     private List<aquality.appium.mobile.elements.interfaces.IElement> getLabels(String xpath) {
         return getElementFactory().findElements(By.xpath(xpath), ElementType.LABEL);
+    }
+
+    @FunctionalInterface
+    interface GetNameOfBookTypeBtb {
+        IButton createBtn(String button);
     }
 }

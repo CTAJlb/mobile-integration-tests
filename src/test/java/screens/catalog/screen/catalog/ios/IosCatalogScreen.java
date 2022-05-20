@@ -3,6 +3,7 @@ package screens.catalog.screen.catalog.ios;
 import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import aquality.appium.mobile.elements.Attributes;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.IElement;
@@ -44,6 +45,9 @@ public class IosCatalogScreen extends CatalogScreen {
 
     private final ILabel firstLaneName =
             getElementFactory().getLabel(By.xpath(CATEGORIES_LOCATOR), "First lane name", ElementState.EXISTS_IN_ANY_STATE);
+    private final GetNameOfBookTypeBtb btnBookNameTypeSection = (button ->
+            getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"%s\"]", button)),
+                    String.format("%s type of sorting", button)));
 
     public IosCatalogScreen() {
         super(By.xpath(UNIQUE_ELEMENT));
@@ -148,6 +152,18 @@ public class IosCatalogScreen extends CatalogScreen {
         return getElementFactory().getLabel(By.xpath(String.format(SECTION_TITLE, sectionName)), "Section title").state().isDisplayed();
     }
 
+    @Override
+    public String getTheNameOfBookTypeBtn(String typeOfBookNameBtn) {
+        IButton btnNameOfBookType = btnBookNameTypeSection.createBtn(typeOfBookNameBtn);
+        return btnNameOfBookType.getText();
+    }
+
+    @Override
+    public boolean isSectionWithBookTypeOpen(String typeSection) {
+        IButton btnSectionType = btnBookNameTypeSection.createBtn(typeSection);
+        return btnSectionType.getAttribute(Attributes.VALUE).equals("1");
+    }
+
     private List<IButton> getMoreBtn() {
         return getElementFactory().findElements(By.xpath(BUTTON_MORE_LOCATOR), ElementType.BUTTON);
     }
@@ -169,5 +185,10 @@ public class IosCatalogScreen extends CatalogScreen {
 
     private List<IElement> getElements(String xpath) {
         return getElementFactory().findElements(By.xpath(xpath), ElementType.LABEL, ElementsCount.MORE_THEN_ZERO, ElementState.EXISTS_IN_ANY_STATE);
+    }
+
+    @FunctionalInterface
+    interface GetNameOfBookTypeBtb {
+        IButton createBtn(String button);
     }
 }

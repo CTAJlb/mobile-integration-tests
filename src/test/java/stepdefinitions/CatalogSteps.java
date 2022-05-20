@@ -254,4 +254,17 @@ public class CatalogSteps {
     public void tapBackBtn() {
         subcategoryScreen.tapBack();
     }
+
+    @Then("There are types {string}, {string} and {string} of books on catalog book screen:")
+    public void checkTypesOfBook(String type1, String type2, String type3) {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(catalogScreen.getTheNameOfBookTypeBtn(type1)).as("There is no " + type1 + " book type section ").isEqualTo(type1);
+        softAssertions.assertThat(catalogScreen.getTheNameOfBookTypeBtn(type2)).as("There is no " + type2 + " book type section ").isEqualTo(type2);
+        softAssertions.assertThat(catalogScreen.getTheNameOfBookTypeBtn(type3)).as("There is no " + type3 + " book type section ").isEqualTo(type3);
+    }
+
+    @Then("Section with books of {string} type is opened on catalog book screen")
+    public void isSectionIsOpened(String type) {
+        Assert.assertTrue("Section with books " + type + " type are not opened", catalogScreen.isBookSectionOpened(type));
+    }
 }

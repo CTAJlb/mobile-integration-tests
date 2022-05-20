@@ -48,6 +48,7 @@ Feature: Catalog Navigation
     When I click More button from random book section and save name of section as 'sectionInfo' on catalog book screen
       Then Book section 'sectionInfo' is opened
     When I tap Back button on subcategory screen
+    Then Category rows are loaded
 
   @tier1
   Scenario Outline: Check of books sorting in Palace
@@ -70,6 +71,73 @@ Feature: Catalog Navigation
     Then Category rows are loaded
     When I open categories by chain and chain starts from CategoryScreen:
       | Our Picks |
+    Then Subcategory screen is present
+    When I sort books by AUTHOR
+    Then Subcategory screen is present
+      And Books are sorted by Author ascending
+    When I sort books by TITLE
+    Then Subcategory screen is present
+      And Books are sorted by Title ascending
+    When I save list of books as 'listOfBooks'
+      And I sort books by RECENTLY_ADDED
+    Then Subcategory screen is present
+      And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
+
+  @tier1
+  Scenario Outline: Check of tabs at the top of the screen in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open Catalog
+    Then Category rows are loaded
+      And There are types '<type1>', '<type2>' and '<type3>' of books on catalog book screen:
+      And Section with books of '<type1>' type is opened on catalog book screen
+    When I switch to '<type2>' catalog tab
+    Then Section with books of '<type2>' type is opened on catalog book screen
+    When I switch to '<type3>' catalog tab
+    Then Section with books of '<type3>' type is opened on catalog book screen
+
+    Scenarios:
+    | type1 | type2  | type3      |
+    | All   | eBooks | Audiobooks |
+
+  @tier1
+  Scenario: Check of the titles of books sections in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+    And I open Catalog
+    Then Category rows are loaded
+    And Category names are correct on catalog book screen
+
+  @tier1
+  Scenario: Check of "More" button in books sections in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open Catalog
+    Then Category rows are loaded
+      And More button is present on each section of books on catalog book screen
+    When I click More button from random book section and save name of section as 'sectionInfo' on catalog book screen
+    Then Book section 'sectionInfo' is opened
+    When I tap Back button on subcategory screen
+    Then Category rows are loaded
+
+  @tier1
+  Scenario Outline: Check of books sorting in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+    And I open Catalog
+    Then Category rows are loaded
+    When I open categories by chain and chain starts from CategoryScreen:
+      | Baker & Taylor Axis360 Test |
+    Then Books are sorted by Author by default on subcategory screen
+    And There are sorting by '<type1>', '<type2>' and '<type3>' on subcategory screen
+
+    Scenarios:
+      | type1  | type2          | type3 |
+      | Author | Recently Added | Title |
+
+  @tier1
+  Scenario: Sort Lists in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open Catalog
+    Then Category rows are loaded
+    When I open categories by chain and chain starts from CategoryScreen:
+      | Baker & Taylor Axis360 Test |
     Then Subcategory screen is present
     When I sort books by AUTHOR
     Then Subcategory screen is present
