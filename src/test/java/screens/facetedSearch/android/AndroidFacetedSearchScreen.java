@@ -16,9 +16,13 @@ public class AndroidFacetedSearchScreen extends FacetedSearchScreen {
     private static final String SORTING_BUTTON_XPATH_PATTERN =
             "//android.widget.LinearLayout[contains(@resource-id, \"feedHeaderFacets\")]/android.widget.Button";
 
-    private final IButton btnSortBy = getElementFactory().getButton(By.xpath(SORTING_BUTTON_XPATH_PATTERN + "[2]"), "Sort By");
+    private final IButton btnSortBy =
+            getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button"), "Sort by");
     private final IButton btnAvailability =
             getElementFactory().getButton(By.xpath(MAIN_ELEMENT + "/android.widget.Button[1]"), "Availability");
+    private final BtnGetVariantsOfSorting btnVariantOfSorting = (button ->
+            getElementFactory().getButton(By.xpath(String.format("//android.widget.ListView/android.widget.CheckedTextView[@text=\"%s\"]", button)),
+                    String.format("%s type of button", button)));
 
     public AndroidFacetedSearchScreen() {
         super(By.xpath(MAIN_ELEMENT));
@@ -35,8 +39,19 @@ public class AndroidFacetedSearchScreen extends FacetedSearchScreen {
     }
 
     @Override
+    public void openCollection() {
+        //only for ios
+    }
+
+    @Override
     public void sortBy() {
         btnSortBy.click();
+    }
+
+    @Override
+    public String getTypeVariantsOfBtn(String type) {
+        IButton btnTypeOfSorting = btnVariantOfSorting.createBtn(type);
+        return btnTypeOfSorting.getText();
     }
 
     @Override
@@ -47,5 +62,10 @@ public class AndroidFacetedSearchScreen extends FacetedSearchScreen {
     private void setFacetSearchSelection(String value) {
         getElementFactory().getButton(By.xpath(String.format(FACET_SEARCH_SELECTION, value)),
                 "Facet search value " + value).click();
+    }
+
+    @FunctionalInterface
+    interface BtnGetVariantsOfSorting {
+        IButton createBtn(String button);
     }
 }

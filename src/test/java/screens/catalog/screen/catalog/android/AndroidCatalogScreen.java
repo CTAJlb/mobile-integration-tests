@@ -3,6 +3,7 @@ package screens.catalog.screen.catalog.android;
 import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import aquality.appium.mobile.elements.Attributes;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
@@ -29,9 +30,16 @@ public class AndroidCatalogScreen extends CatalogScreen {
     private static final String FEED_LANE_TITLES_LOC = "//*[contains(@resource-id,\"feedLaneTitle\")]";
     private static final String CATEGORY_NAME_XPATH_LOCATOR = "//androidx.recyclerview.widget.RecyclerView//android.widget.LinearLayout/android.widget.TextView[1]";
     private static final String LIBRARY_NAME_LOC = "//android.widget.TextView[@text=\"%s\" and contains(@resource-id,\"feedLibraryText\")]";
+    private static final String BUTTON_MORE_LOCATOR = "//android.widget.LinearLayout/android.widget.TextView[@text=\"More…\"]";
+    private static final String BOOK_SECTION_LOCATOR_IN_CATALOG =
+            "//androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[%d]/android.widget.LinearLayout/android.widget.TextView[1]";
+    private static final String SECTION_TITLE = "//android.view.ViewGroup/android.widget.TextView[@text=\"%s\"]";
 
     private final ILabel lblFirstLaneName = getElementFactory().getLabel(By.xpath(FEED_LANE_TITLES_LOC), "First lane name");
     private final ILabel lblScreen = getElementFactory().getLabel(By.id("mainFragmentHolder"), "Screen to swipe");
+    private final GetNameOfBookTypeBtb btnBookNameTypeSection = (button -> getElementFactory().getButton(By.xpath(
+            String.format("//android.widget.RadioGroup[contains(@resource-id, \"feedHeaderTabs\")]/android.widget.RadioButton[@text=\"%s\"]", button)),
+            String.format("%s type of sorting", button)));
 
     public AndroidCatalogScreen() {
         super(By.id("feedWithGroups"));
@@ -112,6 +120,42 @@ public class AndroidCatalogScreen extends CatalogScreen {
         return bookNames;
     }
 
+    @Override
+    public boolean isMoreBtnPresent() {
+        List<IButton> buttons = getMoreBtn();
+        return buttons.stream().allMatch(button -> button.state().isDisplayed());
+    }
+
+    @Override
+    public String clickToMoreBtn() {
+        List<IButton> buttons = getMoreBtn();
+        int randomNumber = 1 + (int) (Math.random() * buttons.size());
+        String sectionName = getElementFactory().getLabel(By.xpath(String.format(BOOK_SECTION_LOCATOR_IN_CATALOG, randomNumber)), "Book section name").getText();
+        buttons.get(randomNumber - 1).click();
+        return sectionName;
+    }
+
+    @Override
+    public boolean isBookSectionOpened(String sectionName) {
+        return getElementFactory().getLabel(By.xpath(String.format(SECTION_TITLE, sectionName)), "Section title").state().isDisplayed();
+    }
+
+    @Override
+    public String getTheNameOfBookTypeBtn(String typeOfBookNameBtn) {
+        IButton btnNameOfBookType = btnBookNameTypeSection.createBtn(typeOfBookNameBtn);
+        return btnNameOfBookType.getText();
+    }
+
+    @Override
+    public boolean isSectionWithBookTypeOpen(String typeSection) {
+        IButton btnSectionType = btnBookNameTypeSection.createBtn(typeSection);
+        return btnSectionType.getAttribute(Attributes.CHECKED).equals("true");
+    }
+
+    private List<IButton> getMoreBtn() {
+        return getElementFactory().findElements(By.xpath(BUTTON_MORE_LOCATOR), ElementType.BUTTON);
+    }
+
     private List<String> getListOfVisibleBooksNamesInSubcategoryLane(String lineName) {
         return getValuesFromListOfLabels(String.format(LANE_BY_NAME_LOCATOR_PART, lineName)
                 + BOOK_COVER_IN_LANE_LOCATOR);
@@ -137,5 +181,10 @@ public class AndroidCatalogScreen extends CatalogScreen {
 
     private List<aquality.appium.mobile.elements.interfaces.IElement> getLabels(String xpath) {
         return getElementFactory().findElements(By.xpath(xpath), ElementType.LABEL);
+    }
+
+    @FunctionalInterface
+    interface GetNameOfBookTypeBtb {
+        IButton createBtn(String button);
     }
 }

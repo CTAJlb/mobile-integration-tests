@@ -4,7 +4,6 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.RegEx;
-import constants.application.EnumBookType;
 import constants.keysForContext.ScenarioContextKey;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
@@ -118,8 +117,8 @@ public class BookDetailsSteps {
         String bookName = bookModel.getTitle().replaceAll(RegEx.UNNECESSARY_SYMBOLS, "");
         String authorName = bookModel.getAuthor().replaceAll(RegEx.UNNECESSARY_SYMBOLS, "");
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(bookName.matches(RegEx.SYMBOLS_IN_INFO_ABOUT_BOOK)).as("Book title has invalid symbols").isTrue();
-        softAssertions.assertThat(authorName.matches(RegEx.SYMBOLS_IN_INFO_ABOUT_BOOK)).as("Author name has invalid symbols").isTrue();
+        softAssertions.assertThat(bookName.matches(RegEx.VALID_SYMBOLS_IN_NAMES)).as("Book title has invalid symbols").isTrue();
+        softAssertions.assertThat(authorName.matches(RegEx.VALID_SYMBOLS_IN_NAMES)).as("Author name has invalid symbols").isTrue();
         softAssertions.assertAll();
     }
 
@@ -146,8 +145,8 @@ public class BookDetailsSteps {
         String publisher = bookDetailsScreen.getPublisherInfo().replaceAll(RegEx.UNNECESSARY_SYMBOLS, "");
         String categories = bookDetailsScreen.getCategoryInfo().replaceAll(RegEx.UNNECESSARY_SYMBOLS, "");
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(publisher.matches(RegEx.SYMBOLS_IN_INFO_ABOUT_BOOK)).as("Publisher field has invalid symbols").isTrue();
-        softAssertions.assertThat(categories.matches(RegEx.SYMBOLS_IN_INFO_ABOUT_BOOK)).as("Category field has invalid symbols").isTrue();
+        softAssertions.assertThat(publisher.matches(RegEx.VALID_SYMBOLS_IN_NAMES)).as("Publisher field has invalid symbols").isTrue();
+        softAssertions.assertThat(categories.matches(RegEx.VALID_SYMBOLS_IN_NAMES)).as("Category field has invalid symbols").isTrue();
         softAssertions.assertAll();
     }
 
