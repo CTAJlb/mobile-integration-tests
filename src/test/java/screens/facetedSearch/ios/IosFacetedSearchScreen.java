@@ -18,10 +18,12 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
             getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Availability:\"]/following-sibling::XCUIElementTypeButton[1]"), "Availability");
     private final IButton btnSortBy =
             getElementFactory().getButton(By.xpath(String.format("(%1$s//XCUIElementTypeButton)[1]", MAIN_ELEMENT)), "Sort by");
+    private final IButton btnCollection =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Collection:\"]/following-sibling::XCUIElementTypeButton[1]"), "Collection button");
 
-    private final BtnGetVariantsOfSorting btnVariantOfSorting = (button ->
+    private final CreatingVariantsOfButton variantsOfButton = (button ->
             getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeSheet//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"%s\"]", button)),
-                    String.format("%s type of sorting", button)));
+                    String.format("%s type of button", button)));
 
     public IosFacetedSearchScreen() {
         super(By.xpath(MAIN_ELEMENT));
@@ -38,13 +40,18 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
     }
 
     @Override
+    public void openCollection() {
+        btnCollection.click();
+    }
+
+    @Override
     public void sortBy() {
         btnSortBy.click();
     }
 
     @Override
-    public String getTypeOfSorting(String typeOfSorting) {
-        IButton btnTypeOfSorting = btnVariantOfSorting.createBtn(typeOfSorting);
+    public String getTypeVariantsOfBtn(String type) {
+        IButton btnTypeOfSorting = variantsOfButton.createBtn(type);
         return btnTypeOfSorting.getText();
     }
 
@@ -59,7 +66,7 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
     }
 
     @FunctionalInterface
-    interface BtnGetVariantsOfSorting {
+    interface CreatingVariantsOfButton {
         IButton createBtn(String button);
     }
 }

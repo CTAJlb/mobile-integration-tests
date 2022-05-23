@@ -221,9 +221,38 @@ public class CatalogSteps {
     public void checkTypeOfSorting(String type1, String type2, String type3) {
         facetedSearchScreen.sortBy();
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(facetedSearchScreen.getTypeOfSorting(type1)).as("There is no sorting type by " + type1).isEqualTo(type1);
-        softAssertions.assertThat(facetedSearchScreen.getTypeOfSorting(type2)).as("There is no sorting type by " + type2).isEqualTo(type2);
-        softAssertions.assertThat(facetedSearchScreen.getTypeOfSorting(type3)).as("There is no sorting type by " + type3).isEqualTo(type3);
+        softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(type1)).as("There is no sorting type by " + type1).isEqualTo(type1);
+        softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(type2)).as("There is no sorting type by " + type2).isEqualTo(type2);
+        softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(type3)).as("There is no sorting type by " + type3).isEqualTo(type3);
+        softAssertions.assertAll();
+    }
+
+    @Then("The book availability is ALL by default on subcategory screen")
+    public void isAvailabilityByDefault() {
+        Assert.assertEquals("Book availability is not by default", "All", subcategoryScreen.getAvailability());
+    }
+
+    @Then("There are availability by {string}, {string} and {string} on subcategory screen")
+    public void checkTypeOfAvailability(String type1, String type2, String type3) {
+        facetedSearchScreen.openAvailabilityMenu();
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(type1)).as("There is no sorting type by " + type1).isEqualTo(type1);
+        softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(type2)).as("There is no sorting type by " + type2).isEqualTo(type2);
+        softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(type3)).as("There is no sorting type by " + type3).isEqualTo(type3);
+        softAssertions.assertAll();
+    }
+
+    @When("Collections is Everything by default on subcategory screen")
+    public void isCollectionsByDefault() {
+        Assert.assertEquals("Collection type is not by default", "Everything", subcategoryScreen.getCollectionName());
+    }
+
+    @Then("There are collection type by {string} and {string} on subcategory screen")
+    public void checkTypeOfCollection(String type1, String type2) {
+        facetedSearchScreen.openCollection();
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(type1)).as("There is no sorting type by " + type1).isEqualTo(type1);
+        softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(type2)).as("There is no sorting type by " + type2).isEqualTo(type2);
         softAssertions.assertAll();
     }
 

@@ -149,3 +149,49 @@ Feature: Catalog Navigation
       And I sort books by RECENTLY_ADDED
     Then Subcategory screen is present
       And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
+
+
+  @tier1
+  Scenario Outline: Check of books availability in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open Catalog
+    Then Category rows are loaded
+    When I open categories by chain and chain starts from CategoryScreen:
+      | Baker & Taylor Axis360 Test |
+    Then Subcategory screen is present
+      And The book availability is ALL by default on subcategory screen
+      And There are availability by '<type1>', '<type2>' and '<type3>' on subcategory screen
+
+    Scenarios:
+      | type1 | type2         | type3         |
+      | All   | Available now | Yours to keep |
+
+  @tier1
+  Scenario: Check all types of availability
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open Catalog
+    Then Category rows are loaded
+    When I open categories by chain and chain starts from CategoryScreen:
+      | Baker & Taylor Axis360 Test |
+    Then Subcategory screen is present
+    When Change books visibility to show AVAILABLE_NOW
+    Then All books can be loaned or downloaded
+    When I change books visibility to show ALL
+    Then Subcategory screen is present
+    When I change books visibility to show YOURS_TO_KEEP
+    Then All books can be downloaded
+
+  @tier1 @exclude_android
+  Scenario Outline: Check of books collections
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open Catalog
+    Then Category rows are loaded
+    When I open categories by chain and chain starts from CategoryScreen:
+      | Baker & Taylor Axis360 Test |
+    Then Subcategory screen is present
+      And Collections is Everything by default on subcategory screen
+      And There are collection type by '<type1>' and '<type2>' on subcategory screen
+
+    Scenarios:
+    | type1      | type2         |
+    | Everything | Popular Books |

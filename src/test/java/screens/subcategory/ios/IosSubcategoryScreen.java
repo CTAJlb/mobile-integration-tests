@@ -32,8 +32,12 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     private final ILabel lblFirstBookAuthor =
             getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR + AUTHOR_INFO_XPATH), "First book author");
     private final IButton btnSorting =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton"), "Sort button");
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[1]"), "Sort button");
     private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Back\"]"), "Back button");
+    private final IButton btnAvailability =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[2]"), "Availability button");
+    private final IButton btnCollection =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[3]"), "Collection button");
 
     public IosSubcategoryScreen() {
         super(By.xpath("//XCUIElementTypeCollectionView"));
@@ -93,6 +97,16 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     @Override
     public void tapBack() {
         btnBack.click();
+    }
+
+    @Override
+    public String getAvailability() {
+        return btnAvailability.getText();
+    }
+
+    @Override
+    public String getCollectionName() {
+        return btnCollection.getText();
     }
 
     @Override
