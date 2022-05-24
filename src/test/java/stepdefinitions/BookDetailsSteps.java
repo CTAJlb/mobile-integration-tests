@@ -157,10 +157,10 @@ public class BookDetailsSteps {
 
     @Then("Related books section is displayed on book details screen")
     public void isRelatedBooksExists() {
+        String authorName = bookDetailsScreen.getBookInfo().getAuthor();
         if (AqualityServices.getApplication().getPlatformName()==PlatformName.ANDROID) {
             SwipeElementUtils.swipeByCoordinatesOfWindow();
         }
-        String authorName = bookDetailsScreen.getBookInfo().getAuthor();
         Assert.assertTrue("Related books section is not displayed", bookDetailsScreen.isRelatedBooksExists(authorName));
     }
 
@@ -172,5 +172,13 @@ public class BookDetailsSteps {
     @Then("More button in related books section is available on book details screen")
     public void isMoreBtnInRelatedBooksAvailable() {
         Assert.assertTrue("More button in related books section is not available", bookDetailsScreen.isMoreBtnAvailableInRelatedBooks());
+    }
+
+    @When("Tap More... button in related books on book details view")
+    public void tapMoreBtnInRelatedBooks() {
+        if (AqualityServices.getApplication().getPlatformName()==PlatformName.ANDROID) {
+            SwipeElementUtils.swipeByCoordinatesOfWindow();
+        }
+        bookDetailsScreen.tapMoreBtnInRelatedBooks();
     }
 }
