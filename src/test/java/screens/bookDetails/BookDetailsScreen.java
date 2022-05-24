@@ -47,4 +47,6 @@ public abstract class BookDetailsScreen extends Screen {
     public abstract boolean isListOfBooksDisplayed();
 
     public abstract boolean isMoreBtnAvailableInRelatedBooks();
+
+    public abstract void tapMoreBtnInRelatedBooks();
 }
