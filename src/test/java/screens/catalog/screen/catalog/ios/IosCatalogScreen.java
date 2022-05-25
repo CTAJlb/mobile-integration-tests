@@ -48,6 +48,8 @@ public class IosCatalogScreen extends CatalogScreen {
     private final GetNameOfBookTypeBtb btnBookNameTypeSection = (button ->
             getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"%s\"]", button)),
                     String.format("%s type of sorting", button)));
+    private final IButton btnLogo =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"Change Library\")]"), "Logo");
 
     public IosCatalogScreen() {
         super(By.xpath(UNIQUE_ELEMENT));
@@ -156,6 +158,11 @@ public class IosCatalogScreen extends CatalogScreen {
     public String getTheNameOfBookTypeBtn(String typeOfBookNameBtn) {
         IButton btnNameOfBookType = btnBookNameTypeSection.createBtn(typeOfBookNameBtn);
         return btnNameOfBookType.getText();
+    }
+
+    @Override
+    public void tapTheLogo() {
+        btnLogo.click();
     }
 
     @Override

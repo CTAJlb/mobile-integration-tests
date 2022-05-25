@@ -5,7 +5,7 @@ Feature: Manage Libraries
     When I add "LYRASIS Reads" account from welcomeScreen
     Then Account 'LYRASIS Reads' is present on Accounts screen
 
-  @tier1 @exclude_ios
+  @tier1
   Scenario: Navigate by Tutorial
     Then Tutorial screen is opened
       And Each tutorial page can be opened on tutorial screen for android and close tutorial screen
@@ -96,3 +96,26 @@ Feature: Manage Libraries
     When I open account 'LYRASIS Reads'
       And I click the log out button on the account screen
     Then Logout is performed successfully
+
+  @tier1
+  Scenario: Logo: Add library: Check of adding a library
+    When I add "Palace Bookshelf" account from welcomeScreen
+    Then Category rows are loaded
+    When I add 'LYRASIS Reads' account by the logo
+    Then Category rows are loaded
+
+
+
+  @tier1
+  Scenario: Add Library by logo and check of sorting libraries
+    When I add "Palace Bookshelf" account from welcomeScreen
+      And I add 'LYRASIS Reads' account
+    Then Category rows are loaded
+    When I add 'Plumas County Library' account
+    Then Category rows are loaded
+    When I add 'Escondido Public Library' account
+    Then Category rows are loaded
+    When я нажимаю на лого
+    Then библиотеки д б в алфавитном порядке
+    When я нажимаю закрыть
+    Then каталог есть

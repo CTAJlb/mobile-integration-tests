@@ -40,6 +40,12 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.addAccountFromWelcomeScreen(libraryName);
     }
 
+    @When("I add {string} account by the logo")
+    public void addAccountByTheLogo(String libraryName) {
+        saveLibraryForLogOut(libraryName);
+        abstractApplicationSteps.addAccountByTheLogo(libraryName);
+    }
+
     @Then("Tutorial screen is opened")
     @Override
     public void checkThatTutorialScreenIsOpened() {

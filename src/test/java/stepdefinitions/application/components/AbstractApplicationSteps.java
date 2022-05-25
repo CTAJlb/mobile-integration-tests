@@ -4,6 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import org.junit.Assert;
 import screens.addaccount.AddAccountScreen;
 import screens.catalog.screen.catalog.CatalogScreen;
+import screens.findyourlibraryscreen.FindYourLibScreen;
 import screens.tutorial.TutorialScreen;
 import screens.welcome.WelcomeScreen;
 import stepdefinitions.BaseSteps;
@@ -15,17 +16,21 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     protected final AddAccountScreen addAccountScreen;
     protected final CatalogScreen catalogScreen;
     protected final TutorialScreen tutorialScreen;
+    protected final FindYourLibScreen findYourLibScreen;
 
     public AbstractApplicationSteps() {
         welcomeScreen = AqualityServices.getScreenFactory().getScreen(WelcomeScreen.class);
         addAccountScreen = AqualityServices.getScreenFactory().getScreen(AddAccountScreen.class);
         catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
         tutorialScreen = AqualityServices.getScreenFactory().getScreen(TutorialScreen.class);
+        findYourLibScreen = AqualityServices.getScreenFactory().getScreen(FindYourLibScreen.class);
     }
 
     public abstract void returnToPreviousScreenForEpubAndPdf();
 
     public abstract void addAccountFromWelcomeScreen(String libraryName);
+
+    public abstract void addAccountByTheLogo(String libraryName);
 
     @Override
     public void waitSeveralSeconds(Integer secondsCount) {
