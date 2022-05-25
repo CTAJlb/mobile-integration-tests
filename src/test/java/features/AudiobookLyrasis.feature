@@ -41,6 +41,7 @@ Feature: Audiobook in Lyrasis
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+      | Biblioboard        |
 
   @logout @returnBooks @tier2
   Scenario Outline: Navigate by Audiobook
@@ -68,6 +69,7 @@ Feature: Audiobook in Lyrasis
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+      | Biblioboard        |
 
   @logout @returnBooks @tier2
   Scenario Outline: Navigate by Playback Options
@@ -116,6 +118,7 @@ Feature: Audiobook in Lyrasis
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+      | Biblioboard        |
 
   @logout @returnBooks @tier2
   Scenario Outline: Check sleep timer
@@ -141,3 +144,4 @@ Feature: Audiobook in Lyrasis
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
+      | Biblioboard        |
