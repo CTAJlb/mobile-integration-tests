@@ -2,11 +2,11 @@ package screens.bookDetails.android;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import aquality.appium.mobile.elements.Attributes;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.application.attributes.IosAttributes;
 import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.swipe.SwipeElementUtils;
@@ -16,6 +16,7 @@ import screens.bookDetails.BookDetailsScreen;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Objects;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidBookDetailsScreen extends BookDetailsScreen {
@@ -78,6 +79,7 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
                 || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
             AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         }
+        AqualityServices.getConditionalWait().waitFor(() -> !isDownloadedProgressComplete(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
     }
 
     @Override
@@ -97,6 +99,11 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     @Override
     public boolean isProgressBarDisplayed() {
         return lblProgressBar.state().isDisplayed();
+    }
+
+    @Override
+    public boolean isDownloadedProgressComplete() {
+        return Objects.equals(lblProgressBar.getAttribute(Attributes.VALUE), "90%");
     }
 
     @Override

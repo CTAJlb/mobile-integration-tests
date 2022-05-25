@@ -2,11 +2,11 @@ package screens.catalog.screen.books.ios;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import aquality.appium.mobile.elements.Attributes;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import aquality.selenium.core.elements.interfaces.IElement;
 import constants.application.EnumBookType;
 import constants.application.attributes.IosAttributes;
 import constants.application.timeouts.BooksTimeouts;
@@ -19,6 +19,7 @@ import screens.catalog.screen.books.CatalogBooksScreen;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkingWithListOfBooks {
@@ -72,6 +73,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
                 || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
             String bookNameForConditionalWait = bookNameForLocator;
             AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(bookNameForConditionalWait), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+            AqualityServices.getConditionalWait().waitFor(() -> !isDownloadingProgressComplete(bookNameForConditionalWait), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         }
         return bookInfo;
     }
@@ -113,6 +115,11 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     @Override
     public boolean isProgressBarDisplayed(String bookName) {
         return getElementFactory().getLabel(By.xpath(String.format(PROGRESS_BAR_BY_BOOK_NAME_LOC, bookName)), "lblProgressBar").state().isDisplayed();
+    }
+
+    @Override
+    public boolean isDownloadingProgressComplete(String bookName) {
+        return Objects.equals(getElementFactory().getLabel(By.xpath(String.format(PROGRESS_BAR_BY_BOOK_NAME_LOC, bookName)), "lblProgressBar").getAttribute(Attributes.VALUE), "90%");
     }
 
     @Override
