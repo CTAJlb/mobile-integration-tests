@@ -20,4 +20,32 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
         welcomeScreen.tapFindLibraryButton();
         addAccountScreen.selectLibraryViaSearch(libraryName);
     }
+
+    @Override
+    public void addAccountByTheLogo(String libraryName) {
+        catalogScreen.tapTheLogo();
+        findYourLibScreen.tapAddLibrary();
+        addAccountScreen.selectLibraryViaSearch(libraryName);
+        catalogScreen.state().waitForDisplayed();
+    }
+
+    @Override
+    public void tapTheLogo() {
+        catalogScreen.tapTheLogo();
+    }
+
+    @Override
+    public void tapToLibrary(String libName) {
+
+    }
+
+    @Override
+    public boolean isSortingInAlphabetical(int amountOfLibraries) {
+        return findYourLibScreen.isSortingAlphabetical(amountOfLibraries);
+    }
+
+    @Override
+    public void tapCloseBtn() {
+        //only for iOS
+    }
 }

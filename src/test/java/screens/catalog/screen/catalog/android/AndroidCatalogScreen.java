@@ -40,6 +40,8 @@ public class AndroidCatalogScreen extends CatalogScreen {
     private final GetNameOfBookTypeBtb btnBookNameTypeSection = (button -> getElementFactory().getButton(By.xpath(
             String.format("//android.widget.RadioGroup[contains(@resource-id, \"feedHeaderTabs\")]/android.widget.RadioButton[@text=\"%s\"]", button)),
             String.format("%s type of sorting", button)));
+    private final IButton btnLogo =
+            getElementFactory().getButton(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"mainToolbar\")]/android.widget.ImageView"), "Logo");
 
     public AndroidCatalogScreen() {
         super(By.id("feedWithGroups"));
@@ -144,6 +146,11 @@ public class AndroidCatalogScreen extends CatalogScreen {
     public String getTheNameOfBookTypeBtn(String typeOfBookNameBtn) {
         IButton btnNameOfBookType = btnBookNameTypeSection.createBtn(typeOfBookNameBtn);
         return btnNameOfBookType.getText();
+    }
+
+    @Override
+    public void tapTheLogo() {
+        btnLogo.click();
     }
 
     @Override

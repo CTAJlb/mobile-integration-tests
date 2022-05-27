@@ -37,5 +37,7 @@ public abstract class CatalogScreen extends Screen {
 
     public abstract String getTheNameOfBookTypeBtn(String typeOfBookNameBtn);
 
+    public abstract void tapTheLogo();
+
     public abstract boolean isSectionWithBookTypeOpen(String typeSection);
 }

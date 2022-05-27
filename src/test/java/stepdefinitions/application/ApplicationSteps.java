@@ -7,12 +7,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import stepdefinitions.BaseSteps;
 import stepdefinitions.application.components.AbstractApplicationSteps;
 import stepdefinitions.application.components.IApplicationSteps;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
     private AbstractApplicationSteps abstractApplicationSteps;
@@ -38,6 +40,45 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
     public void addAccountFromWelcomeScreen(String libraryName) {
         saveLibraryForLogOut(libraryName);
         abstractApplicationSteps.addAccountFromWelcomeScreen(libraryName);
+    }
+
+    @When("I add {string} account by the logo")
+    public void addAccountByTheLogo(String libraryName) {
+        saveLibraryForLogOut(libraryName);
+        abstractApplicationSteps.addAccountByTheLogo(libraryName);
+    }
+
+    @When("I tap the logo on catalog screen")
+    public void tapTheLogo() {
+        abstractApplicationSteps.tapTheLogo();
+    }
+
+    @When("I add libraries by the logo:")
+    public void addSevLibraries(List<String> libraries){
+        libraries.forEach(library ->
+                abstractApplicationSteps.addAccountByTheLogo(library)
+        );
+    }
+
+    @When("I save {int} amount as {string}")
+    public void addAmountOfLibraries(int listSize, String sizeKey) {
+        context.add(sizeKey, listSize);
+    }
+
+    @Then("The sorting of {string} libraries is alphabetical on find your library screen")
+    public void isSortingCorrect(String amountKey) {
+        int amount = context.get(amountKey);
+        Assert.assertTrue("The list of libraries is not in alphabetical ored", abstractApplicationSteps.isSortingInAlphabetical(amount));
+    }
+
+    @When("I tap close button on find your library screen")
+    public void tapCloseBtn() {
+        abstractApplicationSteps.tapCloseBtn();
+    }
+
+    @When("I choose {string} library on find your library screen")
+    public void chooseLibrary(String libName) {
+        abstractApplicationSteps.tapToLibrary(libName);
     }
 
     @Then("Tutorial screen is opened")
