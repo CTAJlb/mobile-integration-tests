@@ -14,5 +14,11 @@ public abstract class LibrariesScreen extends Screen {
 
     public abstract void addLibrary();
 
+    public abstract boolean isAddLibraryBtnDisplayed();
+
     public abstract void deleteLibrary(String libraryName);
+
+    public abstract boolean isLibrariesAreSorted();
+
+    public abstract boolean isLibrarySettingsOpened(String libraryName);
 }

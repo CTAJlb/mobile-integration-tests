@@ -28,7 +28,7 @@ public class AndroidSettingsScreen extends SettingsScreen {
 
     @Override
     public void openAboutPalace() {
-
+        //only for iOS
     }
 
     @Override

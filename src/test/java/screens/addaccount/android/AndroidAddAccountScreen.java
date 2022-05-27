@@ -7,6 +7,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import com.google.common.collect.Ordering;
 import org.openqa.selenium.By;
 import screens.addaccount.AddAccountScreen;
 
@@ -20,6 +21,7 @@ public class AndroidAddAccountScreen extends AddAccountScreen {
     public static final String LIBRARY_BUTTON_LOCATOR_PATTERN = "//android.widget.TextView[contains(@text, \"%s\")]";
     public static final String LIB_NAME_LOCATOR = "//android.view.ViewGroup//android.widget.TextView[1]";
     public final IButton btnClearText = getElementFactory().getButton(By.id("search_close_btn"), "Clear text button");
+    private final ILabel lblAddLibrary = getElementFactory().getLabel(By.xpath("//android.view.ViewGroup/android.widget.TextView[@text=\"Add Library\"]"), "Add Library button");
 
     public AndroidAddAccountScreen() {
         super(By.id("accountRegistryTitle"));
@@ -75,12 +77,24 @@ public class AndroidAddAccountScreen extends AddAccountScreen {
         return getLibrariesNames().isEmpty();
     }
 
+    @Override
+    public boolean isAddLibScreenOpened() {
+        return lblAddLibrary.state().isDisplayed();
+    }
+
+    @Override
+    public boolean isSortingOfLibrariesCorrect() {
+        List<String > libraries = getLibrariesNames();
+        libraries.remove(0);
+        return Ordering.natural().isOrdered(libraries);
+    }
+
     private IButton getLibraryButton(String libraryName) {
         return getElementFactory().getButton(By.xpath(String.format(LIBRARY_BUTTON_LOCATOR_PATTERN, libraryName)), libraryName);
     }
 
     private List<String> getLibrariesNames() {
-        List<ILabel> libraries = getElementFactory().findElements(By.xpath(String.format(LIB_NAME_LOCATOR)), ElementType.LABEL);
+        List<ILabel> libraries = getElementFactory().findElements(By.xpath(LIB_NAME_LOCATOR), ElementType.LABEL);
         List<String> names = new ArrayList<>();
         libraries.forEach(library -> names.add(library.getText().toLowerCase()));
         return names;

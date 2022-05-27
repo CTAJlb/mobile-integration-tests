@@ -1,9 +1,14 @@
 Feature: Manage Libraries
 
   @tier1
-  Scenario: Add Library
-    When I add "LYRASIS Reads" account from welcomeScreen
-    Then Account 'LYRASIS Reads' is present on Accounts screen
+  Scenario: Settings: Add library: general checks
+    When I add "Palace Bookshelf" account from welcomeScreen
+      And I open Settings
+      And I open Libraries on settings screen
+    Then Button Add Library is displayed on libraries screen
+    When I click Add library button on libraries screen
+    Then Add library screen is opened
+      And Libraries are sorted in alphabetical order on add account screen
 
   @tier1
   Scenario: Navigate by Tutorial
@@ -12,7 +17,12 @@ Feature: Manage Libraries
       And Welcome screen is opened
 
   @tier1
-  Scenario: Switch Library Catalogs
+  Scenario: Welcome screen: Add Library
+    When I add "LYRASIS Reads" account from welcomeScreen
+    Then Account 'LYRASIS Reads' is present on Accounts screen
+
+  @tier1
+  Scenario: Settings: Add library
     When I add "Palace Bookshelf" account from welcomeScreen
       And I get names of books on screen and save them as 'nameOfBooks'
       And I add 'LYRASIS Reads' account
@@ -20,7 +30,22 @@ Feature: Manage Libraries
       And List of books on screen is not equal to list of books saved as 'nameOfBooks'
 
   @tier1
-  Scenario: Remove library
+  Scenario: Settings: Add Library: Check of the added libraries sorting
+    When I add "Palace Bookshelf" account from welcomeScreen
+      And I add libraries through settings:
+        | LYRASIS Reads            |
+        | Plumas County Library    |
+        | Escondido Public Library |
+        | Granby Public Library    |
+        | Victorville City Library |
+      And I open Settings
+      And I open Libraries on settings screen
+    Then Libraries are sorted in alphabetical order on libraries screen
+    When I click to 'Escondido Public Library' and save library name as 'libraryInfo' on libraries screen
+    Then The screen with settings for 'libraryInfo' library is opened
+
+  @tier1
+  Scenario: Settings: Libraries: Remove library
     When I add "LYRASIS Reads" account from welcomeScreen
     And I add 'Palace Bookshelf' account
     And I switch to 'LYRASIS Reads' from side menu
