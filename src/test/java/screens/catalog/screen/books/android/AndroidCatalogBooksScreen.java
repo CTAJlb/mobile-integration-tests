@@ -2,7 +2,6 @@ package screens.catalog.screen.books.android;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
-import aquality.appium.mobile.elements.Attributes;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
@@ -18,7 +17,6 @@ import screens.catalog.screen.books.CatalogBooksScreen;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWorkingWithListOfBooks {
@@ -69,7 +67,6 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
                 || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE)
         {
             AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(bookName), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
-            AqualityServices.getConditionalWait().waitFor(() -> !isDownloadingProgressComplete(bookName), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         }
         return bookInfo;
     }
@@ -103,11 +100,6 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     @Override
     public boolean isProgressBarDisplayed(String bookName) {
         return getElementFactory().getLabel(By.xpath(String.format(PROGRESS_BAR_BY_BOOK_NAME_LOC, bookName)), "lblProgressBar").state().isDisplayed();
-    }
-
-    @Override
-    public boolean isDownloadingProgressComplete(String bookName) {
-        return Objects.equals(getElementFactory().getLabel(By.xpath(String.format(PROGRESS_BAR_BY_BOOK_NAME_LOC, bookName)), "lblProgressBar").getAttribute(Attributes.VALUE), "90%");
     }
 
     @Override

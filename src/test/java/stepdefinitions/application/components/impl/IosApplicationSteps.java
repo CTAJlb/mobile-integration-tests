@@ -53,4 +53,24 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
         addAccountScreen.selectLibraryViaSearch(libraryName);
         catalogScreen.state().waitForDisplayed();
     }
+
+    @Override
+    public void tapTheLogo() {
+        catalogScreen.tapTheLogo();
+    }
+
+    @Override
+    public void tapToLibrary(String libName) {
+        findYourLibScreen.tapToLibrary(libName);
+    }
+
+    @Override
+    public boolean isSortingInAlphabetical(int amountOfLibraries) {
+        return findYourLibScreen.isSortingAlphabetical(amountOfLibraries);
+    }
+
+    @Override
+    public void tapCloseBtn() {
+        findYourLibScreen.tapCloseBtn();
+    }
 }

@@ -104,18 +104,29 @@ Feature: Manage Libraries
     When I add 'LYRASIS Reads' account by the logo
     Then Category rows are loaded
 
-
+  @tier1
+  Scenario: Logo: Add Library: check of sorting libraries
+    When I add "Palace Bookshelf" account from welcomeScreen
+      And I add libraries by the logo:
+        | LYRASIS Reads            |
+        | Plumas County Library    |
+        | Escondido Public Library |
+        | Granby Public Library    |
+        | Victorville City Library |
+    And I save 5 amount as 'amountKey'
+    When I tap the logo on catalog screen
+    Then The sorting of 'amountKey' libraries is alphabetical on find your library screen
+    When I tap close button on find your library screen
+    Then Category rows are loaded
 
   @tier1
-  Scenario: Add Library by logo and check of sorting libraries
+  Scenario: Logo: Switch library
     When I add "Palace Bookshelf" account from welcomeScreen
-      And I add 'LYRASIS Reads' account
     Then Category rows are loaded
-    When I add 'Plumas County Library' account
+    When I add libraries by the logo:
+      | LYRASIS Reads            |
+      | Plumas County Library    |
+      | Escondido Public Library |
+      And I tap the logo on catalog screen
+      And I choose 'Palace Bookshelf' library on find your library screen
     Then Category rows are loaded
-    When I add 'Escondido Public Library' account
-    Then Category rows are loaded
-    When я нажимаю на лого
-    Then библиотеки д б в алфавитном порядке
-    When я нажимаю закрыть
-    Then каталог есть

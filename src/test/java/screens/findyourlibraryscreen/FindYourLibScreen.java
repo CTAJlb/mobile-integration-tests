@@ -10,4 +10,10 @@ public abstract class FindYourLibScreen extends Screen {
     }
 
     public abstract void tapAddLibrary();
+
+    public abstract void tapToLibrary(String libName);
+
+    public abstract boolean isSortingAlphabetical(int amountOfLibraries);
+
+    public abstract void tapCloseBtn();
 }

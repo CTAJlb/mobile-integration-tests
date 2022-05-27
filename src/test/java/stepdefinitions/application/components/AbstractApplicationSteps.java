@@ -32,6 +32,14 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     public abstract void addAccountByTheLogo(String libraryName);
 
+    public abstract void tapTheLogo();
+
+    public abstract void tapToLibrary(String libName);
+
+    public abstract boolean isSortingInAlphabetical(int amountOfLibraries);
+
+    public abstract void tapCloseBtn();
+
     @Override
     public void waitSeveralSeconds(Integer secondsCount) {
         if (secondsCount > 10) {
