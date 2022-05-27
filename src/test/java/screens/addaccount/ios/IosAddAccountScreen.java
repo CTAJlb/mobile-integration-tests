@@ -6,6 +6,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import com.google.common.collect.Ordering;
 import org.openqa.selenium.By;
 import screens.addaccount.AddAccountScreen;
 
@@ -19,6 +20,7 @@ public class IosAddAccountScreen extends AddAccountScreen {
     public static final String LIBRARY_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[contains(@name, \"%s\")]";
     private static final String LIB_NAME_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[2]";
     private final IButton btnClearText = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Clear text\"]"), "Clear text button");
+    private final ILabel lblAddLibrary = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[@name=\"Add Library\"]"), "Add Library label");
 
     public IosAddAccountScreen() {
         super(By.xpath(MAIN_ELEMENT));
@@ -72,6 +74,18 @@ public class IosAddAccountScreen extends AddAccountScreen {
     @Override
     public boolean isSearchResultEmpty() {
         return getLibrariesNames().isEmpty();
+    }
+
+    @Override
+    public boolean isAddLibScreenOpened() {
+        return lblAddLibrary.state().isDisplayed();
+    }
+
+    @Override
+    public boolean isSortingOfLibrariesCorrect() {
+        List<String > libraries = getLibrariesNames();
+        libraries.remove(0);
+        return Ordering.natural().isOrdered(libraries);
     }
 
     private List<String> getLibrariesNames() {

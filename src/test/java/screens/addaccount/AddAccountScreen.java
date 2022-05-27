@@ -21,4 +21,8 @@ public abstract class AddAccountScreen extends Screen {
     public abstract boolean isLibraryContainWord(String word);
 
     public abstract boolean isSearchResultEmpty();
+
+    public abstract boolean isAddLibScreenOpened();
+
+    public abstract boolean isSortingOfLibrariesCorrect();
 }

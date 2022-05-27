@@ -47,6 +47,53 @@ public class AccountSteps {
         catalogScreen.state().waitForDisplayed();
     }
 
+    @Then("Button Add Library is displayed on libraries screen")
+    public void isBtnAddLibDisplayed() {
+        Assert.assertTrue("Add library button is not displayed", librariesScreen.isAddLibraryBtnDisplayed());
+    }
+
+    @When("I click Add library button on libraries screen")
+    public void clickAddLibrary() {
+        librariesScreen.addLibrary();
+    }
+
+    @Then("Add library screen is opened")
+    public void isAddLibraryScreenOpened() {
+        Assert.assertTrue("Add Library screen is not opened", addAccountScreen.isAddLibScreenOpened());
+    }
+
+    @Then("Libraries are sorted in alphabetical order on add account screen")
+    public void isSortingCorrect() {
+        Assert.assertTrue("Libraries are not sorted in alphabetical order", addAccountScreen.isSortingOfLibrariesCorrect());
+    }
+
+    @When("I add libraries through settings:")
+    public void addSeveralLibraries(List<String > libraries) {
+        libraries.forEach(library -> {
+            openAccounts();
+            librariesScreen.addLibrary();
+            addAccountScreen.selectLibraryViaSearch(library);
+            catalogScreen.state().waitForDisplayed();
+        });
+    }
+
+    @Then("Libraries are sorted in alphabetical order on libraries screen")
+    public void isLibrariesSorted() {
+        Assert.assertTrue("Libraries are not sorted in alphabetical order", librariesScreen.isLibrariesAreSorted());
+    }
+
+    @When("I click to {string} and save library name as {string} on libraries screen")
+    public void clickToLibrary(String libraryName, String libraryNameKay) {
+        context.add(libraryNameKay, libraryName);
+        librariesScreen.openLibrary(libraryName);
+    }
+
+    @Then("The screen with settings for 'libraryInfo' library is opened")
+    public void isLibraryScreenOpened(String libraryNameKey) {
+        String libraryName = context.get(libraryNameKey);
+        Assert.assertTrue("The screen with settings of library " + libraryName + " is not opened", librariesScreen.isLibrarySettingsOpened(libraryName));
+    }
+
     @When("I enter {string} library and save name as {string} on add account screen")
     public void enterLibName(String libraryName, String libraryNameKey) {
         context.add(libraryNameKey, libraryName);

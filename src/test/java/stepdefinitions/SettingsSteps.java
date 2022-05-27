@@ -41,6 +41,11 @@ public class SettingsSteps {
         bottomMenuForm.open(BottomMenu.SETTINGS);
     }
 
+    @When("I open Libraries on settings screen")
+    public void openLibraries() {
+        settingsScreen.openLibraries();
+    }
+
     @When("I open About Palace on settings screen")
     public void openAboutPalace() {
         settingsScreen.openAboutPalace();
