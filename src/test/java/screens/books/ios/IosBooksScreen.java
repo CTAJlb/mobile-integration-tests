@@ -21,6 +21,7 @@ public class IosBooksScreen extends BooksScreen implements IWorkingWithListOfBoo
     private static final String BOOKS_LOC = "//XCUIElementTypeCollectionView//XCUIElementTypeCell";
     private static final String ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"%s\")]";
     private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
+    private final ILabel lblMyBooks = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"My Books\"]"), "My books");
 
     private ILabel mainBooksElementCollection = getElementFactory().getLabel(
             By.xpath("//XCUIElementTypeCollectionView"), "Elements collection container");
@@ -67,6 +68,11 @@ public class IosBooksScreen extends BooksScreen implements IWorkingWithListOfBoo
         String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
         ILabel lblBookName = getBookNameLabelFromListOfBooks(bookNameLoc);
         lblBookName.click();
+    }
+
+    @Override
+    public boolean isBooksScreenOpened() {
+        return lblMyBooks.state().isDisplayed();
     }
 
     private List<IElement> getListOfBooks() {

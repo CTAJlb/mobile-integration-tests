@@ -3,6 +3,7 @@ package stepdefinitions.application.components.impl;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
+import screens.bottommenu.BottomMenuForm;
 import screens.catalog.screen.catalog.CatalogScreen;
 import screens.epub.readerEpub.ReaderEpubScreen;
 import screens.findyourlibraryscreen.FindYourLibScreen;
@@ -15,6 +16,7 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
     private final ReaderPdfScreen readerPdfScreen;
     private final CatalogScreen catalogScreen;
     private final FindYourLibScreen findYourLibScreen;
+    private final BottomMenuForm bottomMenuForm;
 
     public IosApplicationSteps() {
         super();
@@ -22,6 +24,7 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
         readerPdfScreen = screenFactory.getScreen(ReaderPdfScreen.class);
         catalogScreen = screenFactory.getScreen(CatalogScreen.class);
         findYourLibScreen = screenFactory.getScreen(FindYourLibScreen.class);
+        bottomMenuForm = screenFactory.getScreen(BottomMenuForm.class);
     }
 
     @Override
@@ -72,5 +75,15 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
     @Override
     public void tapCloseBtn() {
         findYourLibScreen.tapCloseBtn();
+    }
+
+    @Override
+    public boolean isMenuBarDisplayed() {
+        return bottomMenuForm.isMenuDisplayed();
+    }
+
+    @Override
+    public String getTypeOfButton(String type) {
+        return bottomMenuForm.getTypeOfTab(type);
     }
 }

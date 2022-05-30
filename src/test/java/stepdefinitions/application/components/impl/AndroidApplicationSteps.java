@@ -48,4 +48,14 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
     public void tapCloseBtn() {
         //only for iOS
     }
+
+    @Override
+    public boolean isMenuBarDisplayed() {
+        return bottomMenuForm.isMenuDisplayed();
+    }
+
+    @Override
+    public String getTypeOfButton(String type) {
+        return bottomMenuForm.getTypeOfTab(type);
+    }
 }

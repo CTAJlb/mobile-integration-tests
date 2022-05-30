@@ -2,6 +2,7 @@ package screens.settings.android;
 
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
+import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import org.openqa.selenium.By;
 import screens.settings.SettingsScreen;
@@ -16,6 +17,7 @@ public class AndroidSettingsScreen extends SettingsScreen {
             By.xpath("//android.widget.TextView[@text=\"User Agreement\"]"), "User Agreement");
     private final IButton btnSoftwareLic = getElementFactory().getButton(
             By.xpath("//android.widget.TextView[@text=\"Software Licenses\"]"), "Software Licenses");
+    private final ILabel lblSettings = getElementFactory().getLabel(By.xpath("//android.widget.TextView"), "Settings");
 
     public AndroidSettingsScreen() {
         super(By.xpath("//android.widget.TextView[contains(@text, \"App info\")]"));
@@ -44,5 +46,10 @@ public class AndroidSettingsScreen extends SettingsScreen {
     @Override
     public void openSoftwareLic() {
         btnSoftwareLic.click();
+    }
+
+    @Override
+    public boolean isSettingsScreenOpened() {
+        return lblSettings.state().isDisplayed();
     }
 }

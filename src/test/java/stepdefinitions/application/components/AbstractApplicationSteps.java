@@ -3,6 +3,7 @@ package stepdefinitions.application.components;
 import aquality.appium.mobile.application.AqualityServices;
 import org.junit.Assert;
 import screens.addaccount.AddAccountScreen;
+import screens.bottommenu.BottomMenuForm;
 import screens.catalog.screen.catalog.CatalogScreen;
 import screens.findyourlibraryscreen.FindYourLibScreen;
 import screens.tutorial.TutorialScreen;
@@ -17,6 +18,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     protected final CatalogScreen catalogScreen;
     protected final TutorialScreen tutorialScreen;
     protected final FindYourLibScreen findYourLibScreen;
+    protected final BottomMenuForm bottomMenuForm;
 
     public AbstractApplicationSteps() {
         welcomeScreen = AqualityServices.getScreenFactory().getScreen(WelcomeScreen.class);
@@ -24,6 +26,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
         catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
         tutorialScreen = AqualityServices.getScreenFactory().getScreen(TutorialScreen.class);
         findYourLibScreen = AqualityServices.getScreenFactory().getScreen(FindYourLibScreen.class);
+        bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
     }
 
     public abstract void returnToPreviousScreenForEpubAndPdf();
@@ -39,6 +42,10 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     public abstract boolean isSortingInAlphabetical(int amountOfLibraries);
 
     public abstract void tapCloseBtn();
+
+    public abstract boolean isMenuBarDisplayed();
+
+    public abstract String getTypeOfButton(String type);
 
     @Override
     public void waitSeveralSeconds(Integer secondsCount) {
