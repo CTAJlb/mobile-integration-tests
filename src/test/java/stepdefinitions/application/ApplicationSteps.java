@@ -7,6 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import stepdefinitions.BaseSteps;
 import stepdefinitions.application.components.AbstractApplicationSteps;
@@ -115,6 +116,19 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
     @Override
     public void checkEachTutorialPageCanBeOpened() {
         abstractApplicationSteps.checkEachTutorialPageCanBeOpened();
+    }
+
+    @Then("There is a menu bar at the bottom of the screen")
+    public void isBottomMenuDisplayed() {
+        Assert.assertTrue("Bottom menu is not displayed", abstractApplicationSteps.isMenuBarDisplayed());
+    }
+
+    @Then("There are tabs {string}, {string} and {string} on application screen")
+    public void areTabsExists(String tab1, String tab2, String tab3) {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(abstractApplicationSteps.getTypeOfButton(tab1)).as("There is no " + tab1 + " tab").isEqualTo(tab1);
+        softAssertions.assertThat(abstractApplicationSteps.getTypeOfButton(tab2)).as("There is no " + tab2 + " tab").isEqualTo(tab2);
+        softAssertions.assertThat(abstractApplicationSteps.getTypeOfButton(tab3)).as("There is no " + tab3 + " tab").isEqualTo(tab3);
     }
 
     private void saveLibraryForLogOut(String libraryName) {

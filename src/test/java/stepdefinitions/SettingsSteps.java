@@ -41,6 +41,11 @@ public class SettingsSteps {
         bottomMenuForm.open(BottomMenu.SETTINGS);
     }
 
+    @Then("Settings screen is opened")
+    public void isSettingsScreenOpened(){
+        Assert.assertTrue("Settings screen is not opened", settingsScreen.isSettingsScreenOpened());
+    }
+
     @When("I open Libraries on settings screen")
     public void openLibraries() {
         settingsScreen.openLibraries();

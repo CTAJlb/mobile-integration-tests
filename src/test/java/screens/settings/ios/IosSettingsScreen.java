@@ -2,6 +2,7 @@ package screens.settings.ios;
 
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
+import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import org.openqa.selenium.By;
 import screens.settings.SettingsScreen;
@@ -10,6 +11,8 @@ import screens.settings.SettingsScreen;
 public class IosSettingsScreen extends SettingsScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeNavigationBar[@name=\"Settings\"]";
 
+    private  final ILabel lblSettings = getElementFactory().getLabel(
+            By.xpath("//XCUIElementTypeNavigationBar[@name=\"Settings\"]"), "Settings");
     private final IButton btnLibraries = getElementFactory().getButton(
             By.xpath("//XCUIElementTypeButton[@name=\"Libraries\"]"), "btnLibraries");
     private final IButton btnAboutPalace = getElementFactory().getButton(
@@ -48,5 +51,10 @@ public class IosSettingsScreen extends SettingsScreen {
     @Override
     public void openSoftwareLic() {
         btnSoftwareLic.click();
+    }
+
+    @Override
+    public boolean isSettingsScreenOpened() {
+        return lblSettings.state().isDisplayed();
     }
 }

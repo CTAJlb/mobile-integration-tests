@@ -36,6 +36,11 @@ public class BooksSteps {
         bottomMenuForm.open(BottomMenu.BOOKS);
     }
 
+    @Then("Books screen is loaded")
+    public void isBooksScreenOpened() {
+        Assert.assertTrue("My books screen is not opened", booksScreen.isBooksScreenOpened());
+    }
+
     @When("Open {} book with {} action button and {string} bookInfo on books screen")
     public void openBook(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);

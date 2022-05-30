@@ -22,9 +22,10 @@ public class AndroidBooksScreen extends BooksScreen implements IWorkingWithListO
     private static final String ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
     private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
 
-    private ILabel mainBooksElementCollection = getElementFactory().getLabel(
+    private final ILabel mainBooksElementCollection = getElementFactory().getLabel(
             By.xpath("//android.view.ViewGroup[contains(@resource-id,\"feedWithoutGroupsRefresh\")]"), "Elements collection container");
-    private ILabel lblNoBooks = getElementFactory().getLabel(By.id("feedEmptyText"), "No Books Present");
+    private final ILabel lblNoBooks = getElementFactory().getLabel(By.id("feedEmptyText"), "No Books Present");
+    private final ILabel lblMyBooks = getElementFactory().getLabel(By.xpath("//android.widget.TextView[@text\"My Books\"]"), "My Books");
 
     public AndroidBooksScreen() {
         super(By.xpath("//android.widget.TextView[@text=\"Books\"]"));
@@ -58,6 +59,11 @@ public class AndroidBooksScreen extends BooksScreen implements IWorkingWithListO
         String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButtonString);
         ILabel lblBookName = getBookNameLabelFromListOfBooks(bookNameLoc);
         lblBookName.click();
+    }
+
+    @Override
+    public boolean isBooksScreenOpened() {
+        return lblMyBooks.state().isDisplayed();
     }
 
     private List<IElement> getListOfBooks() {

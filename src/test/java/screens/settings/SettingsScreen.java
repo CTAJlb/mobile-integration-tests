@@ -17,4 +17,6 @@ public abstract class SettingsScreen extends Screen {
     public abstract void openUserAgreement();
 
     public abstract void openSoftwareLic();
+
+    public abstract boolean isSettingsScreenOpened();
 }
