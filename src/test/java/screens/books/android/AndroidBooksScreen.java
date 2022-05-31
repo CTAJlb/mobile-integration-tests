@@ -25,7 +25,8 @@ public class AndroidBooksScreen extends BooksScreen implements IWorkingWithListO
     private final ILabel mainBooksElementCollection = getElementFactory().getLabel(
             By.xpath("//android.view.ViewGroup[contains(@resource-id,\"feedWithoutGroupsRefresh\")]"), "Elements collection container");
     private final ILabel lblNoBooks = getElementFactory().getLabel(By.id("feedEmptyText"), "No Books Present");
-    private final ILabel lblMyBooks = getElementFactory().getLabel(By.xpath("//android.widget.TextView[@text\"My Books\"]"), "My Books");
+    private final ILabel lblMyBooks = getElementFactory().getLabel(
+            By.xpath("//android.view.ViewGroup[contains(@resource-id,\"mainToolbar\")]/android.widget.TextView"), "My Books");
 
     public AndroidBooksScreen() {
         super(By.xpath("//android.widget.TextView[@text=\"Books\"]"));

@@ -131,6 +131,15 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         softAssertions.assertThat(abstractApplicationSteps.getTypeOfButton(tab3)).as("There is no " + tab3 + " tab").isEqualTo(tab3);
     }
 
+    @Then("There are tabs {string}, {string}, {string} and {string} on application screen")
+    public void areTabInLyrExists(String tab1, String tab2, String tab3, String tab4) {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(abstractApplicationSteps.getTypeOfButton(tab1)).as("There is no " + tab1 + " tab").isEqualTo(tab1);
+        softAssertions.assertThat(abstractApplicationSteps.getTypeOfButton(tab2)).as("There is no " + tab2 + " tab").isEqualTo(tab2);
+        softAssertions.assertThat(abstractApplicationSteps.getTypeOfButton(tab3)).as("There is no " + tab3 + " tab").isEqualTo(tab3);
+        softAssertions.assertThat(abstractApplicationSteps.getTypeOfButton(tab4)).as("There is no " + tab4 + " tab").isEqualTo(tab4);
+    }
+
     private void saveLibraryForLogOut(String libraryName) {
         if (libraryName.toLowerCase().equals("LYRASIS Reads".toLowerCase())) {
             saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);

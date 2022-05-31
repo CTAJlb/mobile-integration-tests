@@ -15,4 +15,6 @@ public abstract class HoldsScreen extends Screen {
     public abstract boolean isBookDisplayed(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
     public abstract void openBook(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
+
+    public abstract boolean isHoldsScreenOpened();
 }

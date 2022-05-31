@@ -15,6 +15,8 @@ public class AndroidHoldsScreen extends HoldsScreen implements IWorkingWithListO
     private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
 
     private final ILabel lblNoBooks = getElementFactory().getLabel(By.id("feedEmptyText"), "No Books Present");
+    private final ILabel lblHolds = getElementFactory().getLabel(
+            By.xpath("//android.view.ViewGroup[contains(@resource-id,\"mainToolbar\")]/android.widget.TextView"), "Reservations");
 
     public AndroidHoldsScreen() {
         super(By.xpath("//android.widget.TextView[@text=\"Holds\"]"));
@@ -38,5 +40,10 @@ public class AndroidHoldsScreen extends HoldsScreen implements IWorkingWithListO
         String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButtonString);
         ILabel lblBookName = getBookNameLabelFromListOfBooks(bookNameLoc);
         lblBookName.click();
+    }
+
+    @Override
+    public boolean isHoldsScreenOpened() {
+        return lblHolds.state().isDisplayed();
     }
 }

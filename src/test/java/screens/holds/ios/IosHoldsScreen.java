@@ -16,6 +16,7 @@ public class IosHoldsScreen extends HoldsScreen implements IWorkingWithListOfBoo
 
     private final ILabel lblNoBooks = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download.\"]"),
             "No Books Present");
+    private final ILabel lblHolds = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"Reservations\"]"), "Reservations");
 
     public IosHoldsScreen() {
         super(By.xpath("//XCUIElementTypeStaticText[@name=\"Reservations\"]"));
@@ -47,5 +48,10 @@ public class IosHoldsScreen extends HoldsScreen implements IWorkingWithListOfBoo
         String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
         ILabel lblBookName = getBookNameLabelFromListOfBooks(bookNameLoc);
         lblBookName.click();
+    }
+
+    @Override
+    public boolean isHoldsScreenOpened() {
+        return lblHolds.state().isDisplayed();
     }
 }
