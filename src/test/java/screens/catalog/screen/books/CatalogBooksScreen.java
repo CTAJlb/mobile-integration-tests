@@ -26,4 +26,6 @@ public abstract class CatalogBooksScreen extends Screen {
     public abstract boolean isBooksContainWord(String word);
 
     public abstract String getNameOfFirstBook();
+
+    public abstract boolean isActionButtonDisplayed(String bookName, EnumActionButtonsForBooksAndAlertsKeys key);
 }

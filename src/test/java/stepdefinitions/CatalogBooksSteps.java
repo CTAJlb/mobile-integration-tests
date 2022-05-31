@@ -33,6 +33,12 @@ public class CatalogBooksSteps {
         context.add(bookInfoKey, bookInfo);
     }
 
+    @Then("I check that book {string} contains {} action button on catalog book screen")
+    public void isBookContainBtn(String bookNameKey, final EnumActionButtonsForBooksAndAlertsKeys key) {
+        String bookName = context.get(bookNameKey);
+        Assert.assertTrue("Button " + key + " is not displayed", catalogBooksScreen.isActionButtonDisplayed(bookName, key));
+    }
+
     @When("Click {} action button on {} book with {string} bookName on catalog books screen and save book as {string}")
     public void clickActionButtonAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumBookType bookType, String bookNameKey, String bookInfoKey) {
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {

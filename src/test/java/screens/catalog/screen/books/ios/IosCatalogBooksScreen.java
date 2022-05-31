@@ -29,7 +29,6 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
             ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
     private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
             ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
-
     private static final String ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
             "//XCUIElementTypeStaticText/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"%s\")]";
     private static final String BOOK_NAME_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
@@ -162,6 +161,11 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         return lblNameOfFirstBook.getText();
     }
 
+    @Override
+    public boolean isActionButtonDisplayed(String bookName, EnumActionButtonsForBooksAndAlertsKeys key) {
+        return getActionButton(bookName, key).state().isDisplayed();
+    }
+
     private List<String> getBooksName() {
         List<ILabel> lblBooks = getElementFactory().findElements(By.xpath(BOOKS_NAME_LOCATOR), ElementType.LABEL);
         List<String> booksName = new ArrayList<>();
@@ -172,8 +176,11 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
              ) {
             System.out.println("sdfsf: " + s);
         }
-
-
         return booksName;
+    }
+
+    private IButton getActionButton(String bookName, EnumActionButtonsForBooksAndAlertsKeys buttonKey) {
+        String key = buttonKey.i18n();
+        return getElementFactory().getButton(By.xpath(String.format(ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, key)), key);
     }
 }
