@@ -6,6 +6,7 @@ import constants.application.EnumBookType;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.android.CatalogBookModel;
 import org.junit.Assert;
@@ -31,6 +32,11 @@ public class HoldsSteps {
     @When("I open Holds")
     public void openHolds() {
         bottomMenuForm.open(BottomMenu.HOLDS);
+    }
+
+    @Then("Holds screen is loaded")
+    public void isHoldsOpened() {
+        Assert.assertTrue("Reservations screen is not opened", holdsScreen.isHoldsScreenOpened());
     }
 
     @And("There are not books on holds screen")
