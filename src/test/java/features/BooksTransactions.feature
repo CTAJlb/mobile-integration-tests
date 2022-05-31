@@ -40,6 +40,28 @@ Feature: Books transactions in Palace Bookshelf
     Then 'bookInfo' book is present on epub reader screen
 
   @tier2 @exclude_ios
+  Scenario: Get a book from Subcategory List View and Return from Books (ANDROID)
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    And I open Books
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+    And Click DELETE action button on book details screen
+    And I close Book Details for IOSTab
+    And I open Books
+    Then EBOOK book with GET action button and 'bookInfo' bookInfo is not present on books screen
+
+  @tier2 @exclude_android
+  Scenario: Get a book from Subcategory List View and Return from Books (IOS)
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    And I open Books
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+    And Click DELETE action button on book details screen
+    And I close Book Details for IOSTab
+    And I open Books
+    Then EBOOK book with GET action button and 'bookInfo' bookInfo is not present on books screen
+
+  @tier2 @exclude_ios
   Scenario: Get a book from Book Detail View and Return from Books (ANDROID)
     When Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     And Click GET action button on book details screen
@@ -92,25 +114,3 @@ Feature: Books transactions in Palace Bookshelf
     And Click GET action button on book details screen
     And Click READ action button on book details screen
     Then 'bookInfo' book is present on epub reader screen
-
-  @tier2 @exclude_ios
-  Scenario: Get a book from Subcategory List View and Return from Books (ANDROID)
-    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And I open Books
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
-    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-    And Click DELETE action button on book details screen
-    And I close Book Details for IOSTab
-    And I open Books
-    Then EBOOK book with GET action button and 'bookInfo' bookInfo is not present on books screen
-
-  @tier2 @exclude_android
-  Scenario: Get a book from Subcategory List View and Return from Books (IOS)
-    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And I open Books
-    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
-    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-    And Click DELETE action button on book details screen
-    And I close Book Details for IOSTab
-    And I open Books
-    Then EBOOK book with GET action button and 'bookInfo' bookInfo is not present on books screen
