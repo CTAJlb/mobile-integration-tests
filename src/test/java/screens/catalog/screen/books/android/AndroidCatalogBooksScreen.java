@@ -150,10 +150,20 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
         return lblNameOfFirstBook.getText();
     }
 
+    @Override
+    public boolean isActionButtonDisplayed(String bookName, EnumActionButtonsForBooksAndAlertsKeys key) {
+        return getActionButton(bookName, key).state().isDisplayed();
+    }
+
     private List<String> getBooksName() {
         List<ILabel> lblBooks = getElementFactory().findElements(By.id(BOOKS_NAME_LOCATOR), ElementType.LABEL);
         List<String> booksName = new ArrayList<>();
         lblBooks.forEach(book->booksName.add(book.getText().toLowerCase()));
         return booksName;
+    }
+
+    private IButton getActionButton(String bookName, EnumActionButtonsForBooksAndAlertsKeys buttonKey) {
+        String key = buttonKey.i18n();
+        return getElementFactory().getButton(By.xpath(String.format(ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, key)), key);
     }
 }
