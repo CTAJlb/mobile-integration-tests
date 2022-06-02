@@ -49,6 +49,8 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
             getElementFactory().getLabel(By.xpath("//android.widget.TextView[@text=\"Description\"]/following::android.widget.TextView"), "Info in description section");
     private final IButton btnMoreInRelatedBooks =
             getElementFactory().getButton(By.xpath("//android.widget.FrameLayout//android.widget.TextView[@text=\"More…\"]"), "More button in related books section");
+    private final IButton btnMoreInDescription =
+            getElementFactory().getButton(By.xpath("//android.widget.TextView[@text=\"Description\"]//following::android.widget.TextView[@text=\"More…\"]"), "More button");
 
     public AndroidBookDetailsScreen() {
         super(By.id("bookDetailCover"));
@@ -147,8 +149,7 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
 
     @Override
     public boolean isMoreBtnInDescriptionAvailable() {
-        //only on iOS
-        return false;
+        return btnMoreInDescription.state().isClickable();
     }
 
     @Override

@@ -1,17 +1,22 @@
 package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import framework.utilities.feedXMLUtil.GettingBookUtil;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import screens.catalog.form.MainCatalogToolbarForm;
+import screens.catalog.screen.books.CatalogBooksScreen;
 import screens.catalog.screen.catalog.CatalogScreen;
 import screens.search.modal.SearchModal;
 import screens.subcategory.SubcategoryScreen;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,6 +25,7 @@ public class SearchSteps {
     private final SearchModal searchModal;
     private final SubcategoryScreen subcategoryScreen;
     private final CatalogScreen catalogScreen;
+    private final CatalogBooksScreen catalogBooksScreen;
     private ScenarioContext context;
 
     @Inject
@@ -29,6 +35,7 @@ public class SearchSteps {
         searchModal = AqualityServices.getScreenFactory().getScreen(SearchModal.class);
         subcategoryScreen = AqualityServices.getScreenFactory().getScreen(SubcategoryScreen.class);
         catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
+        catalogBooksScreen = AqualityServices.getScreenFactory().getScreen(CatalogBooksScreen.class);
     }
 
     @When("I open search modal")
@@ -36,6 +43,11 @@ public class SearchSteps {
         catalogScreen.state().waitForDisplayed();
         mainCatalogToolbarForm.openSearchModal();
         searchModal.state().waitForDisplayed();
+    }
+
+    @When("I return back from search modal")
+    public void returnBack() {
+
     }
 
     @Then("Search modal is opened")
@@ -51,6 +63,30 @@ public class SearchSteps {
         searchModal.applySearch();
         Assert.assertTrue("Search modal is not disappear", searchModal.state().waitForNotDisplayed());
         Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", searchedText, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
+    }
+
+    @When("I search several books and save them in list as {string}:")
+    public void searchSeveralBooks(String listKey, List<String> listOfBooks) {
+        List<String> savedBooks = new ArrayList<>();
+        listOfBooks.forEach(book -> {
+            savedBooks.add(book);
+            searchModal.setSearchedText(book);
+            searchModal.applySearch();
+            Assert.assertTrue("Search modal is not disappear", searchModal.state().waitForNotDisplayed());
+            Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", book, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
+            catalogBooksScreen.clickActionButton(EnumActionButtonsForBooksAndAlertsKeys.GET, book);
+            if(AqualityServices.getApplication().getPlatformName()==PlatformName.IOS) {
+                searchModal.clearSearchField();
+            }
+            if(AqualityServices.getApplication().getPlatformName()==PlatformName.ANDROID) {
+                mainCatalogToolbarForm.openSearchModal();
+                searchModal.state().waitForDisplayed();
+            }
+        });
+        if(AqualityServices.getApplication().getPlatformName()==PlatformName.IOS) {
+            searchModal.clickBackBtn();
+        }
+        context.add(listKey, savedBooks);
     }
 
     @When("I enter book {string} and save it as {string}")

@@ -15,4 +15,6 @@ public abstract class SearchModal extends Screen {
     public abstract void clearSearchField();
 
     public abstract boolean isSearchFieldEmpty();
+
+    public abstract void clickBackBtn();
 }

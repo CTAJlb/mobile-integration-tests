@@ -139,6 +139,17 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     }
 
     @Override
+    public void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName) {
+        String actionButtonString = actionButtonKey.i18n();
+        getActionButtonFromListOfBooks(String.format(ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButtonString)).click();
+        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE
+                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN
+                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
+            AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(bookName), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+        }
+    }
+
+    @Override
     public boolean isSearchResultsEmpty() {
         return lblNoResults.state().isDisplayed();
     }
@@ -170,12 +181,6 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         List<ILabel> lblBooks = getElementFactory().findElements(By.xpath(BOOKS_NAME_LOCATOR), ElementType.LABEL);
         List<String> booksName = new ArrayList<>();
         lblBooks.forEach(book->booksName.add(book.getText().toLowerCase()));
-
-
-        for (String s: booksName
-             ) {
-            System.out.println("sdfsf: " + s);
-        }
         return booksName;
     }
 

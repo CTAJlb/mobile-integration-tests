@@ -16,6 +16,7 @@ public class IosSearchModal extends SearchModal {
             "Search value input");
     private final IButton btnSearch = getElementFactory().getButton(By.xpath(MAIN_ELEMENT), "Search");
     private final IButton btnClearSearch = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Clear text\"]"), "Clear text button");
+    private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Back\"]"), "Back button");
 
     public IosSearchModal() {
         super(By.xpath(MAIN_ELEMENT));
@@ -39,5 +40,10 @@ public class IosSearchModal extends SearchModal {
     @Override
     public boolean isSearchFieldEmpty() {
         return txbSearch.getText().isEmpty();
+    }
+
+    @Override
+    public void clickBackBtn() {
+        btnBack.click();
     }
 }
