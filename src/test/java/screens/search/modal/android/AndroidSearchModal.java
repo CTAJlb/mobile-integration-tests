@@ -38,4 +38,9 @@ public class AndroidSearchModal extends SearchModal {
         //only for iOS
         return false;
     }
+
+    @Override
+    public void clickBackBtn() {
+        //only for iOS
+    }
 }

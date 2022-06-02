@@ -1,4 +1,4 @@
-Feature: Main actions private access books
+Feature: Reservation of book in LYRASIS
 
   @logout @returnBooks @tier2
   Scenario: Hold from Subcategory List View and Remove a Reserved Book from Holds
@@ -11,13 +11,13 @@ Feature: Main actions private access books
       And I switch to 'eBooks' catalog tab
       And Click RESERVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on catalog books screen
-    And I close Book Details for IOSTab
+      And I close Book Details for IOSTab
     When I open Holds
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
     When Open EBOOK book with REMOVE action button and 'bookInfo' bookInfo on holds screen
-    And Click REMOVE action button on book details screen
-    And I open Holds
-    And Wait for 7 seconds
+      And Click REMOVE action button on book details screen
+      And I open Holds
+      And Wait for 7 seconds
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is not present on holds screen
 
   @logout @returnBooks @tier2
@@ -29,8 +29,8 @@ Feature: Main actions private access books
       And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
-    And Click RESERVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Click REMOVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click RESERVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click REMOVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with RESERVE action button and 'bookInfo' bookInfo is present on catalog books screen
 
   @logout @returnBooks @tier2
@@ -50,9 +50,9 @@ Feature: Main actions private access books
     When I open Holds
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
     When Open EBOOK book with REMOVE action button and 'bookInfo' bookInfo on holds screen
-    And Click REMOVE action button on book details screen
-    And I open Holds
-    And Wait for 7 seconds
+      And Click REMOVE action button on book details screen
+      And I open Holds
+      And Wait for 7 seconds
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is not present on holds screen
 
   @logout @returnBooks @tier2
@@ -101,9 +101,9 @@ Feature: Main actions private access books
       And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
-    And Click READ action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
+      And Click READ action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Wait for 3 seconds
     Then 'bookInfo' book is present on epub reader screen
     When I return to previous screen for epub and pdf
@@ -124,9 +124,9 @@ Feature: Main actions private access books
       And I open search modal
       And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
-    And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Click RETURN action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And EBOOK book with GET action button and 'bookInfo' bookInfo is present on catalog books screen
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click RETURN action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And EBOOK book with GET action button and 'bookInfo' bookInfo is present on catalog books screen
 
   @logout @returnBooks @tier2
   Scenario: Check out from Subcategory List View and Read from Books
