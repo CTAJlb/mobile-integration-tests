@@ -88,7 +88,7 @@ public class AccountSteps {
         librariesScreen.openLibrary(libraryName);
     }
 
-    @Then("The screen with settings for 'libraryInfo' library is opened")
+    @Then("The screen with settings for {string} library is opened")
     public void isLibraryScreenOpened(String libraryNameKey) {
         String libraryName = context.get(libraryNameKey);
         Assert.assertTrue("The screen with settings of library " + libraryName + " is not opened", librariesScreen.isLibrarySettingsOpened(libraryName));

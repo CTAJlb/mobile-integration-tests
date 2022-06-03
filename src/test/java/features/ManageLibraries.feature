@@ -130,7 +130,7 @@ Feature: Manage Libraries
     Then Category rows are loaded
 
   @tier1
-  Scenario: Logo: Add Library: check of sorting libraries
+  Scenario: Logo: Add Library: Check of sorting libraries
     When I add "Palace Bookshelf" account from welcomeScreen
       And I add libraries by the logo:
         | LYRASIS Reads            |

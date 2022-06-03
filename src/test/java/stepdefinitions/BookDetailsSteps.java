@@ -22,9 +22,9 @@ import screens.bookDetails.BookDetailsScreen;
 import java.util.Optional;
 
 public class BookDetailsSteps {
-    private ScenarioContext context;
-    private BookDetailsScreen bookDetailsScreen;
-    private AlertScreen alertScreen;
+    private final ScenarioContext context;
+    private final BookDetailsScreen bookDetailsScreen;
+    private final AlertScreen alertScreen;
 
     @Inject
     public BookDetailsSteps(ScenarioContext context) {
@@ -65,13 +65,13 @@ public class BookDetailsSteps {
         String actualCategories = bookDetailsScreen.getCategoryInfo();
         String actualDistributor = bookDetailsScreen.getDistributorInfo();
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(expectedPublished.toLowerCase().equals(actualPublished.toLowerCase())).as(String.format("expectedPublished is not equal to " +
+        softAssertions.assertThat(expectedPublished.equalsIgnoreCase(actualPublished)).as(String.format("expectedPublished is not equal to " +
                 "actualPublished. expectedPublished - %s, actualPublished - %s", expectedPublished, actualPublished)).isTrue();
-        softAssertions.assertThat(expectedPublisher.toLowerCase().equals(actualPublisher.toLowerCase())).as(String.format("expectedPublisher is not equal to " +
+        softAssertions.assertThat(expectedPublisher.equalsIgnoreCase(actualPublisher)).as(String.format("expectedPublisher is not equal to " +
                 "actualPublisher. expectedPublisher - %s, actualPublisher - %s", expectedPublisher, actualPublisher)).isTrue();
-        softAssertions.assertThat(expectedCategories.toLowerCase().equals(actualCategories.toLowerCase())).as(String.format("expectedCategories is not equal to " +
+        softAssertions.assertThat(expectedCategories.equalsIgnoreCase(actualCategories)).as(String.format("expectedCategories is not equal to " +
                 "actualCategories. expectedCategories - %s, actualCategories - %s", expectedCategories, actualCategories)).isTrue();
-        softAssertions.assertThat(expectedDistributor.toLowerCase().equals(actualDistributor.toLowerCase())).as(String.format("expectedDistributor is not equal to " +
+        softAssertions.assertThat(expectedDistributor.equalsIgnoreCase(actualDistributor)).as(String.format("expectedDistributor is not equal to " +
                 "actualDistributor. expectedDistributor - %s, actualDistributor - %s", expectedDistributor, actualDistributor)).isTrue();
         softAssertions.assertAll();
     }
@@ -152,7 +152,8 @@ public class BookDetailsSteps {
 
     @Then("Distributor is equal to {string} on book details screen")
     public void isDistributorCorrect(String distributor) {
-        Assert.assertEquals("Distributor is not correct", distributor, bookDetailsScreen.getDistributorInfo());
+        String distributorFromScreen = bookDetailsScreen.getDistributorInfo();
+        Assert.assertEquals("Distributor is not correct", distributor.toLowerCase(), distributorFromScreen.toLowerCase());
     }
 
     @Then("Related books section is displayed on book details screen")

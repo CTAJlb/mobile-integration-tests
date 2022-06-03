@@ -26,7 +26,7 @@ public class AndroidBooksScreen extends BooksScreen implements IWorkingWithListO
     private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
 
     private final ILabel mainBooksElementCollection = getElementFactory().getLabel(
-            By.xpath("//android.view.ViewGroup[contains(@resource-id,\"feedWithoutGroupsRefresh\")]"), "Elements collection container");
+            By.xpath("//android.view.ViewGroup[contains(@resource-id,\"feedContentRefresh\")]"), "Elements collection container");
     private final ILabel lblNoBooks = getElementFactory().getLabel(By.id("feedEmptyText"), "No Books Present");
     private final ILabel lblMyBooks = getElementFactory().getLabel(
             By.xpath("//android.view.ViewGroup[contains(@resource-id,\"mainToolbar\")]/android.widget.TextView"), "My Books");
