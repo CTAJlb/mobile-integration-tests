@@ -40,7 +40,7 @@ public class IosCatalogScreen extends CatalogScreen {
     private static final String CATEGORY_XPATH_PATTERN = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final String BUTTON_MORE_LOCATOR = "//XCUIElementTypeButton/XCUIElementTypeStaticText[@name=\"More…\"]";
     private static final String BOOK_SECTION_LOCATOR_IN_CATALOG = "//XCUIElementTypeTable/XCUIElementTypeOther[%d]/XCUIElementTypeButton[1]";
-    private static final String SECTION_TITLE = "//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[@name=\"%s\"]";
+    private static final String SECTION_TITLE = "//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"%s\"]";
     private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR = 5;
 
     private final ILabel firstLaneName =
@@ -151,7 +151,7 @@ public class IosCatalogScreen extends CatalogScreen {
 
     @Override
     public boolean isBookSectionOpened(String sectionName) {
-        return getElementFactory().getLabel(By.xpath(String.format(SECTION_TITLE, sectionName)), "Section title").state().isDisplayed();
+        return getElementFactory().getLabel(By.xpath(String.format(SECTION_TITLE, sectionName)), "Section title").getAttribute(Attributes.VALUE).equals("1");
     }
 
     @Override
