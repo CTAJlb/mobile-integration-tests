@@ -39,8 +39,6 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Distributed\")]/following::XCUIElementTypeStaticText"), "lblDistributor");
     private final ILabel lblProgressBar =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeProgressIndicator"), "lblProgressBar");
-    private final ILabel lblDownloadingProgress =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"Downloading\"]/following-sibling::XCUIElementTypeStaticText"), "Percentage of downloading");
     private final IButton btnCloseBookDetailsOnlyIOSTab =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeButton/XCUIElementTypeStaticText[contains(@name, \"Close\")]"), "Close button");
     private final IButton lblErrorDetails =
@@ -89,9 +87,6 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
                 || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
             AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         }
-        if (buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.GET) {
-            AqualityServices.getConditionalWait().waitFor(() -> !isDownloadingAlmostDone(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
-        }
     }
 
     @Override
@@ -110,13 +105,6 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     @Override
     public boolean isProgressBarDisplayed() {
         return lblProgressBar.state().isDisplayed();
-    }
-
-    @Override
-    public boolean isDownloadingAlmostDone() {
-        String percentageString = lblDownloadingProgress.getText().replaceAll("%", "");
-        int percentage = Integer.parseInt(percentageString);
-        return percentage > 90;
     }
 
     @Override

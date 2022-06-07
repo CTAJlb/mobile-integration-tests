@@ -1,12 +1,17 @@
 package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.keysForContext.ContextLibrariesKeys;
+import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
+import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import screens.account.AccountScreen;
+import screens.alert.AlertScreen;
 import screens.catalog.screen.catalog.CatalogScreen;
 import screens.libraries.LibrariesScreen;
 import screens.addaccount.AddAccountScreen;
@@ -23,6 +28,8 @@ public class AccountSteps {
     private final SettingsScreen settingsScreen;
     private final AddAccountScreen addAccountScreen;
     private final CatalogScreen catalogScreen;
+    private final AccountScreen accountScreen;
+    private final AlertScreen alertScreen;
     private ScenarioContext context;
 
     @Inject
@@ -33,6 +40,8 @@ public class AccountSteps {
         settingsScreen = AqualityServices.getScreenFactory().getScreen(SettingsScreen.class);
         addAccountScreen = AqualityServices.getScreenFactory().getScreen(AddAccountScreen.class);
         catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
+        accountScreen = AqualityServices.getScreenFactory().getScreen(AccountScreen.class);
+        alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
     }
 
     @When("I add {string} account")
@@ -154,6 +163,47 @@ public class AccountSteps {
     public void openAccount(String libraryName) {
         openAccounts();
         librariesScreen.openLibrary(libraryName);
+    }
+
+    @When("I open User license agreement on account screen")
+    public void openLicAgreement(){
+        accountScreen.openLicenseAgreement();
+    }
+
+    @Then("User License Agreement link is opened")
+    public void isUserLicAgreementOpened() {
+        Assert.assertTrue("User License Agreement is not opened", accountScreen.isLinkOpened());
+    }
+
+    @When("I open Content Licenses on account screen")
+    public void openAccountLicenses() {
+        if(AqualityServices.getApplication().getPlatformName()== PlatformName.ANDROID) {
+            SwipeElementUtils.swipeByCoordinatesOfWindow();
+        }
+        accountScreen.openContentLicenses();
+    }
+
+    @Then("Content Licenses screen is opened")
+    public void isContentLicensesOpened() {
+        Assert.assertTrue("Content Licenses is not opened", accountScreen.isContentLicOpened());
+    }
+
+    @When("I open Advanced on account screen")
+    public void openAdvanced(){
+        accountScreen.openAdvanced();
+    }
+
+    @Then("Advanced screen contains {string} button")
+    public void isAdvancedContainsButton(String buttonName) {
+        Assert.assertTrue("Advanced screen does not contain " + buttonName + " button", accountScreen.isButtonDisplayed(buttonName));
+    }
+
+    @When("I click {string} button")
+    public void clickDelete(String buttonName) {
+        accountScreen.clickDelete(buttonName);
+        if(alertScreen.state().waitForDisplayed()) {
+            alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.CANCEL);
+        }
     }
 
     private void saveLibraryInContext(String key, String libraryName) {
