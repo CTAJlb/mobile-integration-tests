@@ -19,4 +19,6 @@ public abstract class SettingsScreen extends Screen {
     public abstract void openSoftwareLic();
 
     public abstract boolean isSettingsScreenOpened();
+
+    public abstract void openLibrary(String libraryName);
 }

@@ -18,6 +18,7 @@ public class AndroidSettingsScreen extends SettingsScreen {
     private final IButton btnSoftwareLic = getElementFactory().getButton(
             By.xpath("//android.widget.TextView[@text=\"Software Licenses\"]"), "Software Licenses");
     private final ILabel lblSettings = getElementFactory().getLabel(By.xpath("//android.widget.TextView"), "Settings");
+    private final String LIBRARY_LOCATOR = "//android.widget.LinearLayout//android.widget.TextView[@text=\"%s\"]";
 
     public AndroidSettingsScreen() {
         super(By.xpath("//android.widget.TextView[contains(@text, \"App info\")]"));
@@ -51,5 +52,10 @@ public class AndroidSettingsScreen extends SettingsScreen {
     @Override
     public boolean isSettingsScreenOpened() {
         return lblSettings.state().isDisplayed();
+    }
+
+    @Override
+    public void openLibrary(String libraryName) {
+        getElementFactory().getButton(By.xpath(String.format(LIBRARY_LOCATOR, libraryName)), "Library " + libraryName).click();
     }
 }

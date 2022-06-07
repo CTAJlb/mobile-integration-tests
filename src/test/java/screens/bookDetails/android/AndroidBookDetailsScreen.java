@@ -37,8 +37,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
             getElementFactory().getLabel(By.id("bookDetailTitle"), "Book title");
     private final ILabel lblProgressBar =
             getElementFactory().getLabel(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"bookDetailStatusInProgress\")]"), "lblProgressBar");
-    private final ILabel lblDownloadingProgress =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id), \"inProgressText\")]"), "Percentage of downloading");
     private final ILabel lblBookAuthorsInfo =
             getElementFactory().getLabel(By.id("bookDetailAuthors"), "Book Authors");
     private final ILabel lblErrorMessage =
@@ -81,9 +79,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
                 || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
             AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         }
-        if(buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.GET) {
-            AqualityServices.getConditionalWait().waitFor(() -> !isDownloadingAlmostDone(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
-        }
     }
 
     @Override
@@ -103,13 +98,6 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     @Override
     public boolean isProgressBarDisplayed() {
         return lblProgressBar.state().isDisplayed();
-    }
-
-    @Override
-    public boolean isDownloadingAlmostDone() {
-        String percentageString = lblDownloadingProgress.getText().replaceAll("%", "");
-        int percentage = Integer.parseInt(percentageString);
-        return percentage > 90;
     }
 
     @Override

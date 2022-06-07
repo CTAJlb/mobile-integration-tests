@@ -51,6 +51,12 @@ public class SettingsSteps {
         settingsScreen.openLibraries();
     }
 
+    @When("I open {string} library on setting screen")
+    public void openLibrary(String libraryName) {
+        settingsScreen.openLibrary(libraryName);
+    }
+
+
     @When("I open About Palace on settings screen")
     public void openAboutPalace() {
         settingsScreen.openAboutPalace();

@@ -34,6 +34,9 @@ public class AndroidAccountScreen extends AccountScreen {
     private final ITextBox txbPin = getElementFactory().getTextBox(By.id("authBasicPassField"), "Pin");
     private final ILabel lblLoading =
             getElementFactory().getLabel(By.id("accountLoginProgressBar"), "Login loading status bar");
+    private final IButton btnContentLicenses = getElementFactory().getButton(By.xpath("//android.widget.TextView[@text=\"Content Licenses\"]"), "Content Licenses");
+    private final ILabel lblLibrariesAndPalaces =
+            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@text, \"Libraries are palaces\")]"), "\tLibraries are palaces for the people");
 
     public AndroidAccountScreen() {
         super(By.id("auth"));
@@ -78,6 +81,43 @@ public class AndroidAccountScreen extends AccountScreen {
     @Override
     public boolean isLogoutRequired() {
         return btnLogout.state().isDisplayed();
+    }
+
+    @Override
+    public void openLicenseAgreement() {
+        //only for iOS
+    }
+
+    @Override
+    public boolean isLinkOpened() {
+        //only for iOS
+        return true;
+    }
+
+    @Override
+    public void openContentLicenses() {
+        btnContentLicenses.click();
+    }
+
+    @Override
+    public boolean isContentLicOpened() {
+        return lblLibrariesAndPalaces.state().isDisplayed();
+    }
+
+    @Override
+    public void openAdvanced() {
+        //only for iOS
+    }
+
+    @Override
+    public boolean isButtonDisplayed(String buttonName) {
+        //only for iOS
+        return true;
+    }
+
+    @Override
+    public void clickDelete(String button) {
+        //for iOS
     }
 
     private String getLoginButtonText() {

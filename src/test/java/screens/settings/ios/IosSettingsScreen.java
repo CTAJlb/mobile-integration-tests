@@ -23,6 +23,7 @@ public class IosSettingsScreen extends SettingsScreen {
             By.xpath("//XCUIElementTypeButton[@name=\"User Agreement\"]"), "User Agreement");
     private final IButton btnSoftwareLic = getElementFactory().getButton(
             By.xpath("//XCUIElementTypeButton[@name=\"Software Licenses\"]"), "Software Licenses");
+    private final String libraryLocator = "//XCUIElementTypeTable//XCUIElementTypeStaticText[@name=\"%s\"]";
 
     public IosSettingsScreen() {
         super(By.xpath(MAIN_ELEMENT));
@@ -56,5 +57,10 @@ public class IosSettingsScreen extends SettingsScreen {
     @Override
     public boolean isSettingsScreenOpened() {
         return lblSettings.state().isDisplayed();
+    }
+
+    @Override
+    public void openLibrary(String libraryName) {
+        getElementFactory().getButton(By.xpath(String.format(libraryLocator, libraryName)), "Library " + libraryName).click();
     }
 }
