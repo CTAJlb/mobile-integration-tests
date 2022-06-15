@@ -167,6 +167,11 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
     }
 
     @Override
+    public void switchToGalleryPdfScreen() {
+        tocBookmarksGalleryPdfScreen.tapGalleryButton();
+    }
+
+    @Override
     public void openBookmarksPdfScreen() {
         readerPdfScreen.openNavigationBar();
         readerPdfScreen.openNavigationBar();
@@ -175,8 +180,37 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
     }
 
     @Override
+    public void switchToListOfContents() {
+        tocBookmarksGalleryPdfScreen.tapTocButton();
+    }
+
+    @Override
     public void checkBookmarksPdfScreenIsOpened() {
         Assert.assertTrue("Bookmarks pdf screen is not opened", tocBookmarksGalleryPdfScreen.getBookmarksPdfScreen().state().isDisplayed());
+    }
+
+    @Override
+    public void openRandomChapterAndSavePageNumber(String pageNumberKey) {
+        List<String > listOfChapters = tocPdfScreen.getListOfBookChapters();
+        int numbersOfChapters = listOfChapters.size();
+        if (numbersOfChapters == 0) {
+            throw new RuntimeException("size of the listOfBookChapters for toc pdf == 0");
+        }
+        int randomChapter = RandomUtils.nextInt(0, numbersOfChapters);
+        context.add(pageNumberKey, tocPdfScreen.getChapterNumber(listOfChapters.get(randomChapter)));
+        tocPdfScreen.openChapter(listOfChapters.get(randomChapter));
+    }
+
+    @Override
+    public void isChapterOpened(String pageNumberKey) {
+        int actualPageNumber = context.get(pageNumberKey);
+        int expectedPageNumber = readerPdfScreen.getPageNumber();
+        Assert.assertEquals("Chapter with " + actualPageNumber + " is not opened", expectedPageNumber, actualPageNumber);
+    }
+
+    @Override
+    public void openTOC() {
+        readerPdfScreen.openToc();
     }
 
     @Override
@@ -195,6 +229,11 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
     }
 
     @Override
+    public void closeSearchScreen() {
+        readerPdfScreen.getSearchPdfScreen().closeSearchScreen();
+    }
+
+    @Override
     public void checkSearchPdfScreenIsOpened() {
         Assert.assertTrue("search pdf screen is not opened", readerPdfScreen.getSearchPdfScreen().state().isDisplayed());
     }
@@ -205,8 +244,44 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
     }
 
     @Override
+    public void checkTocPdfScreenIsOpened() {
+        Assert.assertTrue("toc pdf screen is not opened", tocBookmarksGalleryPdfScreen.getTocPdfScreen().state().isDisplayed());
+    }
+
+    @Override
     public void searchTextOnSearchPdfScreen(String text) {
         readerPdfScreen.getSearchPdfScreen().findTextInDocument(text);
+    }
+
+    @Override
+    public void enterTextOnSearchLine(String text) {
+        readerPdfScreen.getSearchPdfScreen().enterText(text);
+    }
+
+    @Override
+    public void deleteTextFromSearchLine() {
+        readerPdfScreen.getSearchPdfScreen().deleteText();
+    }
+
+    @Override
+    public void isSearchFieldEmpty() {
+        Assert.assertTrue("Search field is not empty", readerPdfScreen.getSearchPdfScreen().isSearchFieldEmpty());
+    }
+
+    @Override
+    public void enterData(String word, String infoKey) {
+        readerPdfScreen.getSearchPdfScreen().enterText(word);
+        context.add(infoKey, word);
+    }
+
+    @Override
+    public void isSearchResultEmpty() {
+        Assert.assertTrue("Search results is not empty", readerPdfScreen.getSearchPdfScreen().isSearchResultsEmpty());
+    }
+
+    @Override
+    public void isSearchResultShown() {
+        Assert.assertFalse("Search result is empty", readerPdfScreen.getSearchPdfScreen().isSearchResultsEmpty());
     }
 
     @Override
