@@ -129,10 +129,46 @@ public class PdfSteps extends BaseSteps implements IPdfSteps {
         abstractPdfSteps.openGalleryPdfScreen();
     }
 
+    @When("I switch to Gallery on pdf screen")
+    @Override
+    public void switchToGalleryPdfScreen() {
+        abstractPdfSteps.switchToGalleryPdfScreen();
+    }
+
     @When("I open bookmarks pdf screen")
     @Override
     public void openBookmarksPdfScreen() {
         abstractPdfSteps.openBookmarksPdfScreen();
+    }
+
+    @When("I open table of contents")
+    @Override
+    public void openTOC() {
+        abstractPdfSteps.openTOC();
+    }
+
+    @When("I switch to List of contents on pdf screen")
+    @Override
+    public void switchToListOfContents() {
+        abstractPdfSteps.switchToListOfContents();
+    }
+
+    @Then("TOC pdf screen is opened")
+    @Override
+    public void checkTocPdfScreenIsOpened() {
+        abstractPdfSteps.checkTocPdfScreenIsOpened();
+    }
+
+    @When("I open random chapter on list of contents pdf screen and save pdf page number as {string}")
+    @Override
+    public void openRandomChapterAndSavePageNumber(String pageNumberKey) {
+        abstractPdfSteps.openRandomChapterAndSavePageNumber(pageNumberKey);
+    }
+
+    @Then("Chapter with {string} is opened on pdf screen")
+    @Override
+    public void isChapterOpened(String pageNumberKey) {
+        abstractPdfSteps.isChapterOpened(pageNumberKey);
     }
 
     @When("I open random pdf page on gallery pdf screen and save pdf page number as {string}")
@@ -160,6 +196,12 @@ public class PdfSteps extends BaseSteps implements IPdfSteps {
         abstractPdfSteps.checkSearchPdfScreenIsOpened();
     }
 
+    @When("I close pdf search screen")
+    @Override
+    public void closeSearchScreen() {
+        abstractPdfSteps.closeSearchScreen();
+    }
+
     @Then("Gallery pdf screen is opened")
     @Override
     public void checkGalleryPdfScreenIsOpened() {
@@ -170,6 +212,42 @@ public class PdfSteps extends BaseSteps implements IPdfSteps {
     @Override
     public void searchTextOnSearchPdfScreen(String text) {
         abstractPdfSteps.searchTextOnSearchPdfScreen(text);
+    }
+
+    @When("I enter {string} text on search pdf screen")
+    @Override
+    public void enterTextOnSearchLine(String text) {
+        abstractPdfSteps.enterTextOnSearchLine(text);
+    }
+
+    @When("I delete text in search line on search pdf screen")
+    @Override
+    public void deleteTextFromSearchLine() {
+        abstractPdfSteps.deleteTextFromSearchLine();
+    }
+
+    @Then("Search field is empty on search pdf screen")
+    @Override
+    public void isSearchFieldEmpty() {
+        abstractPdfSteps.isSearchFieldEmpty();
+    }
+
+    @When("I enter word {} and save as {string} on search pdf screen")
+    @Override
+    public void enterData(String word, String infoKey) {
+        abstractPdfSteps.enterData(word, infoKey);
+    }
+
+    @Then("Search result is empty on search pdf screen")
+    @Override
+    public void isSearchResultEmpty() {
+        abstractPdfSteps.isSearchResultEmpty();
+    }
+
+    @Then("Search result is shown on search pdf screen")
+    @Override
+    public void isSearchResultShown() {
+        abstractPdfSteps.isSearchResultShown();
     }
 
     @Then("Found lines should contain {string} in themselves on search pdf screen")

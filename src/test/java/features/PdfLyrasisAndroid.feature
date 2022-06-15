@@ -44,7 +44,7 @@ Feature: Read PDF in LYRASIS Reads on Android
       And The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
 
   @logout @returnBooks @tier1 @exclude_ios
-  Scenario: Navigate by Page slider
+  Scenario: Navigate by Page slider Lyrasis
     When I open search modal
       And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -57,3 +57,15 @@ Feature: Read PDF in LYRASIS Reads on Android
     When I save pdf page number as 'pageNumber' on reader pdf screen
       And Slide page slider LEFT on reader pdf screen
     Then The 'pageNumber' saved page number is greater than the current page number on the reader pdf screen
+
+  @logout @returnBooks @tier1 @exclude_ios
+  Scenario: Navigate by Chapters Lirasis
+    When I open search modal
+      And I search for 'Mountains' and save bookName as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
+    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+      And I open table of contents
+      And I open random chapter on list of contents pdf screen and save pdf page number as 'pageNumberInfo'
+    Then Chapter with 'pageNumberInfo' is opened on pdf screen

@@ -80,7 +80,7 @@ Feature: Search libraries and books
     Then The first book has 'info' bookName on catalog books screen
 
     Scenarios:
-      |word           |
+      | word          |
       | el gato negro |
       | EL GATO NEGRO |
       | eL gAto NeGrO |

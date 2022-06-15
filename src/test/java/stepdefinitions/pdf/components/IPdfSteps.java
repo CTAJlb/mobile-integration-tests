@@ -43,9 +43,17 @@ public interface IPdfSteps {
 
     void openBookmarksPdfScreen();
 
+    void openTOC();
+
+    void openRandomChapterAndSavePageNumber(String pageNumberKey);
+
+    void isChapterOpened(String pageNumberKey);
+
     void openRandomPdfPageAndSavePageNumberOnGalleryScreen(String pageNumberKey);
 
     void openSearchPdfScreen();
+
+    void closeSearchScreen();
 
     void checkBookmarksPdfScreenIsOpened();
 
@@ -55,9 +63,27 @@ public interface IPdfSteps {
 
     void searchTextOnSearchPdfScreen(String text);
 
+    void enterTextOnSearchLine(String text);
+
+    void deleteTextFromSearchLine();
+
+    void isSearchFieldEmpty();
+
+    void enterData(String word, String infoKey);
+
+    void isSearchResultEmpty();
+
+    void isSearchResultShown();
+
     void checkThatPdfFoundLinesContainText(String textThatShouldBe);
 
     void openTheFirstFoundText();
 
     void savePageNumberOfTheFirstFoundText(String pageNumberKey);
+
+    void switchToListOfContents();
+
+    void checkTocPdfScreenIsOpened();
+
+    void switchToGalleryPdfScreen();
 }
