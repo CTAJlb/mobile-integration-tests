@@ -15,4 +15,9 @@ public class AndroidSleepTimerAudiobookScreen extends PlaybackSpeedAudiobookScre
     public void selectPlaybackSpeed(String playbackSpeed) {
         getElementFactory().getButton(By.xpath("//*[@text=\"" + playbackSpeed + "x\"]"), "Playback speed").click();
     }
+
+    @Override
+    public void closePlaybackScreen() {
+        //only for iOS
+    }
 }

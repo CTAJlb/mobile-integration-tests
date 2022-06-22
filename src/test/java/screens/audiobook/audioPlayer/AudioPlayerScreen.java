@@ -55,4 +55,12 @@ public abstract class AudioPlayerScreen extends Screen {
     public abstract Duration getLeftTime();
 
     public abstract void tapOnMiddleOfPlaybackBar();
+
+    public abstract boolean isLineRemainingDisplayed();
+
+    public abstract String getPlaySpeedValue();
+
+    public abstract void stretchPlaySliderForward();
+
+    public abstract void stretchPlaySliderBack();
 }

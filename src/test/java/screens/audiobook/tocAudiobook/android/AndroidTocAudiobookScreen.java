@@ -22,7 +22,7 @@ public class AndroidTocAudiobookScreen extends TocAudiobookScreen {
 
     @Override
     public String openChapterAndGetChapterName(int chapterNumber) {
-        IElement lblChapterText = getChaptersText().get(chapterNumber);
+        IElement lblChapterText = getChapters().get(chapterNumber);
         String chapterText = lblChapterText.getAttribute(AndroidAttributes.TEXT);
         lblChapterText.click();
         return chapterText;
@@ -35,15 +35,16 @@ public class AndroidTocAudiobookScreen extends TocAudiobookScreen {
 
     @Override
     public String getChapterName(int chapterNumber) {
-        IElement lblChapterName = getChaptersText().get(chapterNumber);
+        IElement lblChapterName = getChapters().get(chapterNumber);
         return lblChapterName.getAttribute(AndroidAttributes.TEXT);
+    }
+
+    @Override
+    public void swipeToTheEndOfTOC() {
+//        List<String> chaptersNames
     }
 
     private List<IElement> getChapters() {
         return getElementFactory().findElements(By.xpath(CHAPTERS_LOC), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
-    }
-
-    public List<IElement> getChaptersText() {
-        return getElementFactory().findElements(By.xpath(CHAPTERS_TEXT_LOC), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
     }
 }

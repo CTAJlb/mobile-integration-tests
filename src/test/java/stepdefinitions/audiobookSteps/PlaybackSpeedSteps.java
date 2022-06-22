@@ -4,6 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.When;
 import screens.audiobook.audioPlayer.AudioPlayerScreen;
 
 public class PlaybackSpeedSteps {
@@ -21,5 +22,10 @@ public class PlaybackSpeedSteps {
         String playbackSpeed = String.valueOf(playbackSpeedDouble);
         audioPlayerScreen.openPlaybackSpeed();
         audioPlayerScreen.getPlaybackSpeedAudiobookScreen().selectPlaybackSpeed(playbackSpeed);
+    }
+
+    @When("Close playback speed screen")
+    public void cancelPlaybackSpeed() {
+        audioPlayerScreen.getPlaybackSpeedAudiobookScreen().closePlaybackScreen();
     }
 }

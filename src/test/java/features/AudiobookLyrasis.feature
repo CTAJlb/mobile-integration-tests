@@ -92,7 +92,9 @@ Feature: Audiobook in Lyrasis
     Scenarios:
       | speed | secondsForWaiting | moveForwardSeconds |
       | 2     | 5                 | 10                 |
-      | 0.75  | 6                 | 8                  |
+      | 0.75  | 8                 | 6                  |
+      | 1.25  | 8                 | 10                  |
+      | 1.50  | 6                 | 9                  |
 
   @logout @returnBooks @tier2
   Scenario Outline: Check time code of track after reload app
@@ -125,7 +127,7 @@ Feature: Audiobook in Lyrasis
       | Biblioboard        |
 
   @logout @returnBooks @tier2
-  Scenario Outline: Check sleep timer
+  Scenario Outline: Check end of chapter sleep timer
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -149,3 +151,126 @@ Feature: Audiobook in Lyrasis
       | Palace Marketplace |
       | Axis 360           |
       | Biblioboard        |
+
+  @logout @returnBooks @tier2 @exclude_android
+  Scenario Outline: Check of line for time remaining
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+    Then Line for time remaining is displayed on audio player screen
+
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Palace Marketplace |
+      | Axis 360           |
+      | Biblioboard        |
+
+  @logout @returnBooks @tier2
+  Scenario Outline: Check of switching to the next time
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+      And Open toc audiobook screen
+      And Open the 1 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
+      And Select 2X playback speed on playback speed audiobook screen
+      And Listen a chapter on audio player screen
+    Then Next chapter play automatically and chapter name is not 'chapterName' on audio player screen
+
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Palace Marketplace |
+      | Axis 360           |
+      | Biblioboard        |
+
+  @logout @returnBooks @tier2
+  Scenario Outline: Check of file numbers
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+      And Open toc audiobook screen
+      And Open the 4 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
+    Then Chapter number is 'chapterNumber' on audio player screen
+
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Palace Marketplace |
+      | Axis 360           |
+      | Biblioboard        |
+
+  @logout @returnBooks @tier2
+  Scenario Outline: Check playback speed
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+    Then The speed by default is 1.0
+    When Open playback speed on audio player screen
+      And Close playback speed screen
+    Then Play button is present on audio player screen
+
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Palace Marketplace |
+      | Axis 360           |
+      | Biblioboard        |
+
+  @logout @returnBooks @tier2
+  Scenario Outline: Check sleep timer
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+      And Open sleep timer on audio player screen
+      And Close sleep timer screen
+    Then Play button is present on audio player screen
+
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Palace Marketplace |
+      | Axis 360           |
+      | Biblioboard        |
+
+  @logout @returnBooks @tier2
+  Scenario Outline: Check time tracking line
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+      And Save book play time as 'timeInfo' on audio player screen
+      And Tap play button on audio player screen
+      And I stretch slider on the time tracking line forward on audio player screen
+      And Tap pause button on audio player screen
+    Then Playing time is not equal to 'timeInfo' on audio playing screen
+    When Save book play time as 'timeInfo2' on audio player screen
+      And Tap play button on audio player screen
+      And I stretch slider on the time tracking line back on audio player screen
+      And Tap pause button on audio player screen
+    Then Playing time is not equal to 'timeInfo2' on audio playing screen
+
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Palace Marketplace |
+      | Axis 360           |
+      | Biblioboard        |
+
