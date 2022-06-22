@@ -38,6 +38,8 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     private final IButton btnFeedErrorDetails = getElementFactory().getButton(By.id("feedErrorDetails"), "Error details");
     private final IButton btnSorting =
             getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button[2]"), "Sort button");
+    private final IButton btnSortingPalace =
+            getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button"), "Sort button");
     private final IButton btnBack
             = getElementFactory().getButton(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"mainToolbar\")]/android.widget.ImageView"), "Back button");
     private final IButton btnAvailability =
@@ -100,7 +102,10 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
-    public String getNameOfSorting() {
+    public String getNameOfSorting(String library) {
+        if(library.equals("Palace Bookshelf")) {
+            return btnSortingPalace.getText();
+        }
         return btnSorting.getText();
     }
 

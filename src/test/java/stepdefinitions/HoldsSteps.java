@@ -74,6 +74,11 @@ public class HoldsSteps {
         holdsScreen.openBook(bookType, bookName, actionButtonKey);
     }
 
+    @Then("Books are sorted by Title by default on holds screen")
+    public void checkDefaultSorting() {
+        Assert.assertEquals("Book are not sorting by default", "Title", holdsScreen.getNameOfSorting());
+    }
+
     @Then("Books are sorted by Title ascending on holds screen")
     public void areBooksSortedByTitleOnHolds() {
         List<String> titlesList = holdsScreen.getListOfTitles();
@@ -86,9 +91,9 @@ public class HoldsSteps {
         Assert.assertEquals("Books are not sorted by author", authorsList.stream().sorted().collect(Collectors.toList()), authorsList);
     }
 
-    @Then("There are sorting by {string} and {string} on holds screen")
-    public void checkTypeOfSorting(String title, String author) {
-        facetedSearchScreen.sortBy();
+    @Then("There are sorting by {string} and {string} in {string} on holds screen")
+    public void checkTypeOfSorting(String title, String author, String library) {
+        holdsScreen.sortBy();
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(title)).as("There is no sorting by " + title).isEqualTo(title);
         softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(author)).as("There is no sorting by " + author).isEqualTo(author);

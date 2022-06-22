@@ -90,7 +90,7 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
-    public String getNameOfSorting() {
+    public String getNameOfSorting(String library) {
         return btnSorting.getText();
     }
 

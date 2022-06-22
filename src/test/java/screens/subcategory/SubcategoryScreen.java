@@ -31,7 +31,7 @@ public abstract class SubcategoryScreen extends Screen {
 
     public abstract boolean isErrorButtonPresent();
 
-    public abstract String getNameOfSorting();
+    public abstract String getNameOfSorting(String library);
 
     public abstract void tapBack();
 

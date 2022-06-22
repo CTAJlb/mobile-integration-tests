@@ -23,4 +23,8 @@ public abstract class HoldsScreen extends Screen {
     public abstract List<String> getListOfAuthors();
 
     public abstract List<String> getListOfTitles();
+
+    public abstract String getNameOfSorting();
+
+    public abstract void sortBy();
 }
