@@ -89,3 +89,25 @@ Feature: Reservation of book in LYRASIS
     When I close Book Details for IOSTab
       And I open Holds
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
+
+  @logout @returnBooks @tier2 @exclude_ios
+    Scenario: Check books sorting in Reservations
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I open search modal
+      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And I open Catalog
+      And I open search modal
+      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo2'
+      And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo2' bookName on catalog books screen and save book as 'bookInfo2'
+      And Clear search field on catalog books screen
+      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo3'
+      And Click RESERVE action button on EBOOK book with 'bookNameInfo3' bookName on catalog books screen and save book as 'bookInfo3'
+      And I open Holds
+    Then Books are sorted by Title ascending on holds screen
+      And There are sorting by 'Title' and 'Author' on holds screen
+    When I sort books by AUTHOR
+    Then Books are sorted by Author ascending on holds screen
