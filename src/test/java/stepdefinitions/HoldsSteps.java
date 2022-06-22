@@ -74,6 +74,11 @@ public class HoldsSteps {
         holdsScreen.openBook(bookType, bookName, actionButtonKey);
     }
 
+    @Then("Books are sorted by Title by default on holds screen")
+    public void checkDefaultSorting() {
+        Assert.assertEquals("Book are not sorting by default", "Title", holdsScreen.getNameOfSorting());
+    }
+
     @Then("Books are sorted by Title ascending on holds screen")
     public void areBooksSortedByTitleOnHolds() {
         List<String> titlesList = holdsScreen.getListOfTitles();
