@@ -53,7 +53,7 @@ public class CatalogSteps {
     public void isCategoryNamesCorrect() {
         Set<String > categoriesNames = catalogScreen.getAllCategoriesNames();
         categoriesNames.forEach(category -> Assert.assertTrue("Category name " + category + " have invalid symbols",
-                category.replaceAll(RegEx.UNNECESSARY_SYMBOLS, "").matches(RegEx.VALID_SYMBOLS_IN_NAMES)));
+                category.matches(RegEx.VALID_CATEGORY_NAME)));
     }
 
     @Then("More button is present on each section of books on catalog book screen")
