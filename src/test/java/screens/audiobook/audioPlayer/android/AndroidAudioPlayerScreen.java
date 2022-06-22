@@ -45,6 +45,10 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
             getElementFactory().getButton(By.id("player_menu_sleep_image"), "btnSleepTimer");
     private final ILabel lblPlaybackProgress =
             getElementFactory().getLabel(By.id("player_progress"), "Playback progress");
+    private final IButton btnPlaySpeed =
+            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id, \"playback_rate_text\")]"), "Button play speed");
+    private final IButton btnSlider =
+            getElementFactory().getButton(By.xpath("//"), "Time slider");
 
     public AndroidAudioPlayerScreen() {
         super(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]"));
@@ -123,6 +127,27 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     public void tapOnMiddleOfPlaybackBar() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
         action.tap(PointOption.point(lblPlaybackProgress.getElement().getCenter().x, lblPlaybackProgress.getElement().getCenter().y)).perform();
+    }
+
+    @Override
+    public boolean isLineRemainingDisplayed() {
+        //only for iOS
+        return true;
+    }
+
+    @Override
+    public String getPlaySpeedValue() {
+        return btnPlaySpeed.getText();
+    }
+
+    @Override
+    public void stretchPlaySliderBack() {
+        //only for iOS
+    }
+
+    @Override
+    public void stretchPlaySliderForward() {
+        //only for iOS
     }
 
     @Override

@@ -22,4 +22,9 @@ public class SleepTimerAudiobookSteps {
         audioPlayerScreen.openSleepTimer();
         audioPlayerScreen.getSleepTimerAudiobookScreen().setTimer(timerSetting);
     }
+
+    @When("Close sleep timer screen")
+    public void closeSleepTimer() {
+        audioPlayerScreen.getSleepTimerAudiobookScreen().closeSleepTimer();
+    }
 }

@@ -9,10 +9,13 @@ import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.audiobook.audioPlayer.AudioPlayerScreen;
 
 import java.time.Duration;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static constants.localization.application.catalog.TimerKeys.END_OF_CHAPTER;
 
@@ -72,6 +75,26 @@ public class AudioPlayerSteps {
                 AqualityServices.getConditionalWait().waitFor(() -> !firstTiming.equals(audioPlayerScreen.getLeftTime())));
     }
 
+    @Then("The speed by default is 1.0")
+    public void isPlaySpeedNormal() {
+        if(AqualityServices.getApplication().getPlatformName()==PlatformName.IOS) {
+            Assert.assertEquals("Play speed is not default", "Normal speed.", audioPlayerScreen.getPlaySpeedValue());
+        }
+        else {
+            Assert.assertEquals("Play speed is not default", "1.0x", audioPlayerScreen.getPlaySpeedValue());
+        }
+    }
+
+    @When("Open playback speed on audio player screen")
+    public void openPlaybackSpeed() {
+        audioPlayerScreen.openPlaybackSpeed();
+    }
+
+    @When("Open sleep timer on audio player screen")
+    public void openSleepTimer() {
+        audioPlayerScreen.openSleepTimer();
+    }
+
     @And("Book is not playing on audio player screen")
     public void checkThatBookIsNotPlayingOnAudioPlayerScreen() {
         Duration firstTiming = audioPlayerScreen.getLeftTime();
@@ -102,6 +125,21 @@ public class AudioPlayerSteps {
     @And("Skip behind 15 seconds on audio player screen")
     public void skipBehindOnAudioPlayerScreen() {
         audioPlayerScreen.skipBehind();
+    }
+
+    @When("I stretch slider on the time tracking line forward on audio player screen")
+    public void stretchSliderForward() {
+        audioPlayerScreen.stretchPlaySliderForward();
+    }
+
+    @When("I stretch slider on the time tracking line back on audio player screen")
+    public void stretchSliderBack() {
+        audioPlayerScreen.stretchPlaySliderBack();
+    }
+
+    @Then("Playing time is not equal to {string} on audio playing screen")
+    public void compareTimes(String timeKey) {
+        Assert.assertNotEquals("Times are equals", context.get(timeKey), audioPlayerScreen.getLeftTime());
     }
 
     @And("Return to previous screen from audio player screen")
@@ -197,5 +235,28 @@ public class AudioPlayerSteps {
     public void saveChapterName(String chapterNameKey) {
         String chapterName = audioPlayerScreen.getChapterName();
         context.add(chapterNameKey, chapterName);
+    }
+
+    @Then("Line for time remaining is displayed on audio player screen")
+    public void isLineRemainingDisplayed() {
+        Assert.assertTrue("Line for time remaining is not displayed", audioPlayerScreen.isLineRemainingDisplayed());
+    }
+
+    @Then("Next chapter play automatically and chapter name is not {string} on audio player screen")
+    public void isChapterPlaying(String chapterNameKey) {
+        String chapterName = context.get(chapterNameKey);
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(audioPlayerScreen.isPlayButtonPresent()).as("Play button is not displayed").isTrue();
+        softAssertions.assertThat(audioPlayerScreen.getChapterName().equals(chapterName)).as("Chapter name does not change").isFalse();
+    }
+
+    @Then("Chapter number is {string} on audio player screen")
+    public void checkChapterNumber(String chapterNumberKey) {
+        int expectedChapterNumber = context.get(chapterNumberKey);
+        String chapterName = audioPlayerScreen.getChapterName();
+        Pattern pattern = Pattern.compile(RegEx.AUDIOBOOK_CURRENT_FILE_NUMBER);
+        Matcher matcher = pattern.matcher(chapterName);
+        int actualChapterNumber = Integer.parseInt(matcher.group());
+        Assert.assertEquals("Chapter number is not " + expectedChapterNumber, expectedChapterNumber, actualChapterNumber);
     }
 }

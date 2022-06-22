@@ -7,5 +7,8 @@ public abstract class PlaybackSpeedAudiobookScreen extends Screen {
     protected PlaybackSpeedAudiobookScreen(By locator) {
         super(locator, "PlaybackSpeedAudiobookScreen");
     }
+
     public abstract void selectPlaybackSpeed(String playbackSpeed);
+
+    public abstract void closePlaybackScreen();
 }

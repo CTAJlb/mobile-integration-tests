@@ -11,6 +11,7 @@ import framework.utilities.DateUtils;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import screens.audiobook.audioPlayer.AudioPlayerScreen;
 import screens.audiobook.playbackSpeedAudiobook.PlaybackSpeedAudiobookScreen;
 import screens.audiobook.sleepTimerAudiobook.SleepTimerAudiobookScreen;
@@ -51,6 +52,12 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
             getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton"), "btnPlaybackSpeed");
     private final ILabel lblPlaybackProgress =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther[@name = \"progress_background\"]"), "Playback progress");
+    private final ILabel lblLineRemaining =
+            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"remaining in the book\")]"), "Line remaining");
+    private final IButton btnPlaySpeed =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[contains(@name, \"speed\")]"), "Button play speed");
+    private final IButton btnSlider =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeOther[@name=\"progress_bar\"]"), "Slider");
 
 
     public IosAudioPlayerScreen() {
@@ -137,6 +144,30 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     public void tapOnMiddleOfPlaybackBar() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
         action.tap(PointOption.point(lblPlaybackProgress.getElement().getCenter().x, lblPlaybackProgress.getElement().getCenter().y)).perform();
+    }
+
+    @Override
+    public boolean isLineRemainingDisplayed() {
+        return lblLineRemaining.state().isDisplayed();
+    }
+
+    @Override
+    public String getPlaySpeedValue() {
+        return btnPlaySpeed.getText();
+    }
+
+    @Override
+    public void stretchPlaySliderForward() {
+        int x = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getX();
+        int y = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getY();
+        btnSlider.getTouchActions().swipeWithLongPress(new Point((int) x * 8, (int) y));
+    }
+
+    @Override
+    public void stretchPlaySliderBack() {
+        double x = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getX();
+        double y = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getY();
+        btnSlider.getTouchActions().swipeWithLongPress(new Point((int) (x * 0.2), (int) y));
     }
 
     @Override

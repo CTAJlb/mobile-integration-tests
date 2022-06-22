@@ -178,8 +178,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @logout @returnBooks @tier1 @exclude_android
   Scenario Outline: Check invalid data in searching
     When I open search modal
-    And I search for 'Mountains' and save bookName as 'bookNameInfo'
-#    And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+    And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen

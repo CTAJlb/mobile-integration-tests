@@ -5,9 +5,11 @@ import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.application.attributes.IosAttributes;
+import framework.utilities.swipe.SwipeElementUtils;
 import org.openqa.selenium.By;
 import screens.audiobook.tocAudiobook.TocAudiobookScreen;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +32,7 @@ public class IosTocAudiobookScreen extends TocAudiobookScreen {
     }
 
     private List<IElement> getChaptersText() {
-        return getElementFactory().findElements(By.xpath(CHAPTERS_TEXT_LOC), ElementType.LABEL).stream().limit(5).collect(Collectors.toList());
+        return getElementFactory().findElements(By.xpath(CHAPTERS_TEXT_LOC), ElementType.LABEL);
     }
 
     @Override
@@ -42,6 +44,30 @@ public class IosTocAudiobookScreen extends TocAudiobookScreen {
     public String getChapterName(int chapterNumber) {
         IElement lblChapterName = getChaptersText().get(chapterNumber);
         return lblChapterName.getAttribute(IosAttributes.NAME);
+    }
+
+    @Override
+    public void swipeToTheEndOfTOC() {
+        List<String> chapterNames = new ArrayList<>();
+        String chapterName;
+
+        do {
+            chapterNames.clear();
+            chapterNames = getChapterNames();
+            chapterName = chapterNames.get(chapterNames.size() - 1);
+            SwipeElementUtils.swipeByCoordinatesOfWindow();
+            chapterNames.clear();
+            chapterNames = getChapterNames();
+        } while (!chapterName.equals(chapterNames.get(chapterNames.size() - 1)));
+
+        System.out.println("Name: " + chapterName);
+    }
+
+    private List<String> getChapterNames() {
+        List<IElement> chapters = getChaptersText();
+        List<String> chapterNames = new ArrayList<>();
+        chapters.forEach(chapter -> chapterNames.add(chapter.getText()));
+        return chapterNames;
     }
 
     private List<IElement> getChapters() {

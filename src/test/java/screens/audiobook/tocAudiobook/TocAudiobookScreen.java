@@ -13,4 +13,6 @@ public abstract class TocAudiobookScreen extends Screen {
     public abstract int getCountOfChapters();
 
     public abstract String getChapterName(int chapterNumber);
+
+    public abstract void swipeToTheEndOfTOC();
 }
