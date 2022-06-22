@@ -109,6 +109,6 @@ Feature: Reservation of book in LYRASIS
       And I open Holds
     Then Books are sorted by Title by default on holds screen
     Then Books are sorted by Title ascending on holds screen
-      And There are sorting by 'Title' and 'Author' on holds screen
-    When I sort books by AUTHOR
+      And There are sorting by 'Title' and 'Author' in 'LYRASIS Reads' on holds screen
+    When I sort books by AUTHOR in 'LYRASIS Reads'
     Then Books are sorted by Author ascending on holds screen

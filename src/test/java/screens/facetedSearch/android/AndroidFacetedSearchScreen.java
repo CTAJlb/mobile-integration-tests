@@ -18,6 +18,8 @@ public class AndroidFacetedSearchScreen extends FacetedSearchScreen {
 
     private final IButton btnSortBy =
             getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button[2]"), "Sort by");
+    private final IButton btnSortByPalace =
+            getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button"), "Sort by in Palace");
     private final IButton btnAvailability =
             getElementFactory().getButton(By.xpath(MAIN_ELEMENT + "/android.widget.Button[1]"), "Availability");
     private final BtnGetVariantsOfSorting btnVariantOfSorting = (button ->
@@ -44,7 +46,10 @@ public class AndroidFacetedSearchScreen extends FacetedSearchScreen {
     }
 
     @Override
-    public void sortBy() {
+    public void sortBy(String library) {
+        if (library == "Palace Bookshelf") {
+            btnSortByPalace.click();
+        }
         btnSortBy.click();
     }
 

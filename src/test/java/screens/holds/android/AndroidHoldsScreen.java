@@ -82,4 +82,9 @@ public class AndroidHoldsScreen extends HoldsScreen implements IWorkingWithListO
     public String getNameOfSorting() {
         return btnSort.getText();
     }
+
+    @Override
+    public void sortBy() {
+        btnSort.click();
+    }
 }

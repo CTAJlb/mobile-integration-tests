@@ -46,7 +46,7 @@ Feature: Catalog Navigation
     Then Category rows are loaded
       And More button is present on each section of books on catalog book screen
     When I click More button from random book section and save name of section as 'sectionInfo' on catalog book screen
-      Then Book section 'sectionInfo' is opened
+    Then Book section 'sectionInfo' is opened
     When I tap Back button on subcategory screen
     Then Category rows are loaded
 
@@ -57,8 +57,8 @@ Feature: Catalog Navigation
     Then Category rows are loaded
     When I open categories by chain and chain starts from CategoryScreen:
       | Our Picks |
-    Then Books are sorted by Author by default on subcategory screen
-      And There are sorting by '<type1>', '<type2>' and '<type3>' on subcategory screen
+    Then Books are sorted by Author by default on subcategory screen in 'Palace Bookshelf'
+      And There are sorting by '<type1>', '<type2>' and '<type3>' in 'Palace Bookshelf' on subcategory screen
 
     Scenarios:
     | type1  | type2          | type3 |
@@ -72,14 +72,14 @@ Feature: Catalog Navigation
     When I open categories by chain and chain starts from CategoryScreen:
       | Our Picks |
     Then Subcategory screen is present
-    When I sort books by AUTHOR
+    When I sort books by AUTHOR in 'Palace Bookshelf'
     Then Subcategory screen is present
       And Books are sorted by Author ascending
-    When I sort books by TITLE
+    When I sort books by TITLE in 'Palace Bookshelf'
     Then Subcategory screen is present
       And Books are sorted by Title ascending
     When I save list of books as 'listOfBooks'
-      And I sort books by RECENTLY_ADDED
+      And I sort books by RECENTLY_ADDED in 'Palace Bookshelf'
     Then Subcategory screen is present
       And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
 
@@ -124,8 +124,8 @@ Feature: Catalog Navigation
     Then Category rows are loaded
     When I open categories by chain and chain starts from CategoryScreen:
       | Baker & Taylor Axis360 Test |
-    Then Books are sorted by Author by default on subcategory screen
-    And There are sorting by '<type1>', '<type2>' and '<type3>' on subcategory screen
+    Then Books are sorted by Author by default on subcategory screen in 'LYRASIS Reads'
+    And There are sorting by '<type1>', '<type2>' and '<type3>' in 'LYRASIS Reads' on subcategory screen
 
     Scenarios:
       | type1  | type2          | type3 |
@@ -139,14 +139,14 @@ Feature: Catalog Navigation
     When I open categories by chain and chain starts from CategoryScreen:
       | Baker & Taylor Axis360 Test |
     Then Subcategory screen is present
-    When I sort books by AUTHOR
+    When I sort books by AUTHOR in 'LYRASIS Reads'
     Then Subcategory screen is present
       And Books are sorted by Author ascending
-    When I sort books by TITLE
+    When I sort books by TITLE in 'LYRASIS Reads'
     Then Subcategory screen is present
       And Books are sorted by Title ascending
     When I save list of books as 'listOfBooks'
-      And I sort books by RECENTLY_ADDED
+      And I sort books by RECENTLY_ADDED in 'LYRASIS Reads'
     Then Subcategory screen is present
       And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
 

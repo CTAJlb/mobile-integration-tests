@@ -45,7 +45,7 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
     }
 
     @Override
-    public void sortBy() {
+    public void sortBy(String library) {
         btnSortBy.click();
     }
 

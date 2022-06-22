@@ -1,6 +1,7 @@
 package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.RegEx;
 import constants.keysForContext.ScenarioContextKey;
@@ -174,9 +175,9 @@ public class CatalogSteps {
         Assert.assertTrue("Not all present books are audiobooks", catalogScreen.getListOfBooksNames().stream().allMatch(x -> x.toLowerCase().contains("audiobook")));
     }
 
-    @And("I sort books by {}")
-    public void sortBooksBy(FacetSortByKeys sortingCategory) {
-        facetedSearchScreen.sortBy();
+    @And("I sort books by {} in {string}")
+    public void sortBooksBy(FacetSortByKeys sortingCategory, String library) {
+        facetedSearchScreen.sortBy(library);
         facetedSearchScreen.changeSortByTo(sortingCategory);
     }
 
@@ -212,14 +213,17 @@ public class CatalogSteps {
         Assert.assertEquals("Lists of authors is not sorted properly " + list.stream().map(Object::toString).collect(Collectors.joining(", ")), getSurnames(listOfSurnames.stream().sorted().collect(Collectors.toList())), listOfSurnames);
     }
 
-    @Then("Books are sorted by Author by default on subcategory screen")
-    public void isSortingByDefault() {
-        Assert.assertEquals("Books are not sorted by default", "Author", subcategoryScreen.getNameOfSorting());
+    @Then("Books are sorted by Author by default on subcategory screen in {string}")
+    public void isSortedByDefaultInPalace(String libraryName) {
+        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            Assert.assertEquals("Books are not sorted by default", "Author", subcategoryScreen.getNameOfSorting(libraryName));
+        }
+        Assert.assertEquals("Books are not sorted by default", "Author", subcategoryScreen.getNameOfSorting(libraryName));
     }
 
-    @Then("There are sorting by {string}, {string} and {string} on subcategory screen")
-    public void checkTypeOfSorting(String type1, String type2, String type3) {
-        facetedSearchScreen.sortBy();
+    @Then("There are sorting by {string}, {string} and {string} in {string} on subcategory screen")
+    public void checkTypeOfSorting(String type1, String type2, String type3, String library) {
+        facetedSearchScreen.sortBy(library);
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(type1)).as("There is no sorting type by " + type1).isEqualTo(type1);
         softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(type2)).as("There is no sorting type by " + type2).isEqualTo(type2);
@@ -294,6 +298,6 @@ public class CatalogSteps {
 
     @Then("Section with books of {string} type is opened on catalog book screen")
     public void isSectionIsOpened(String type) {
-        Assert.assertTrue("Section with books " + type + " type are not opened", catalogScreen.isBookSectionOpened(type));
+        Assert.assertTrue("Section with books " + type + " type are not opened", catalogScreen.isSectionWithBookTypeOpen(type));
     }
 }

@@ -85,4 +85,9 @@ public class IosHoldsScreen extends HoldsScreen implements IWorkingWithListOfBoo
         //only for Android
         return null;
     }
+
+    @Override
+    public void sortBy() {
+        //only for Android
+    }
 }
