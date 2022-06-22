@@ -5,6 +5,8 @@ import constants.application.EnumBookType;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import org.openqa.selenium.By;
 
+import java.util.List;
+
 public abstract class HoldsScreen extends Screen {
     protected HoldsScreen(By locator) {
         super(locator, "Holds");
@@ -17,4 +19,8 @@ public abstract class HoldsScreen extends Screen {
     public abstract void openBook(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
     public abstract boolean isHoldsScreenOpened();
+
+    public abstract List<String> getListOfAuthors();
+
+    public abstract List<String> getListOfTitles();
 }

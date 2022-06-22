@@ -9,6 +9,8 @@ import org.openqa.selenium.By;
 import screens.IWorkingWithListOfBooks;
 import screens.holds.HoldsScreen;
 
+import java.util.List;
+
 @ScreenType(platform = PlatformName.IOS)
 public class IosHoldsScreen extends HoldsScreen implements IWorkingWithListOfBooks {
     private static final String ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = "//XCUIElementTypeStaticText[@name=\"%s\"]/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"%s\")]";
@@ -53,5 +55,17 @@ public class IosHoldsScreen extends HoldsScreen implements IWorkingWithListOfBoo
     @Override
     public boolean isHoldsScreenOpened() {
         return lblHolds.state().isDisplayed();
+    }
+
+    @Override
+    public List<String> getListOfAuthors() {
+        //only for Android
+        return null;
+    }
+
+    @Override
+    public List<String> getListOfTitles() {
+        //only for Android
+        return null;
     }
 }
