@@ -209,7 +209,7 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier2 @exclude_android
   Scenario Outline: Check playback speed
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -229,8 +229,8 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2
-  Scenario Outline: Check sleep timer
+  @logout @returnBooks @tier2 @exclude_android
+  Scenario Outline: Check closing sleep timer
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -273,4 +273,3 @@ Feature: Audiobook in Lyrasis
       | Palace Marketplace |
       | Axis 360           |
       | Biblioboard        |
-

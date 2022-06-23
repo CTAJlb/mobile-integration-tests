@@ -11,6 +11,7 @@ import framework.utilities.DateUtils;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import screens.audiobook.audioPlayer.AudioPlayerScreen;
 import screens.audiobook.playbackSpeedAudiobook.PlaybackSpeedAudiobookScreen;
 import screens.audiobook.sleepTimerAudiobook.SleepTimerAudiobookScreen;
@@ -47,8 +48,6 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
             getElementFactory().getLabel(By.id("player_progress"), "Playback progress");
     private final IButton btnPlaySpeed =
             getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id, \"playback_rate_text\")]"), "Button play speed");
-    private final IButton btnSlider =
-            getElementFactory().getButton(By.xpath("//"), "Time slider");
 
     public AndroidAudioPlayerScreen() {
         super(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]"));
@@ -142,12 +141,16 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public void stretchPlaySliderBack() {
-        //only for iOS
+        int x = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getX();
+        int y = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getY();
+        lblPlaybackProgress.getTouchActions().swipeWithLongPress(new Point((int) (x * 0.2), y));
     }
 
     @Override
     public void stretchPlaySliderForward() {
-        //only for iOS
+        int x = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getX();
+        int y = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getY();
+        lblPlaybackProgress.getTouchActions().swipeWithLongPress(new Point(x * 8, y));
     }
 
     @Override

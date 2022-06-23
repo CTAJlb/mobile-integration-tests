@@ -160,7 +160,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     public void stretchPlaySliderForward() {
         int x = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getX();
         int y = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getY();
-        btnSlider.getTouchActions().swipeWithLongPress(new Point((int) x * 8, (int) y));
+        btnSlider.getTouchActions().swipeWithLongPress(new Point(x * 8, y));
     }
 
     @Override
