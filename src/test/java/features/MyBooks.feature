@@ -25,7 +25,7 @@ Feature: My books module
       And I return back from search modal
       And I open Books
     Then Books are sorted by Author ascending on books screen
-    When I sort books by TITLE
+    When I sort books by TITLE in 'Palace Bookshelf'
     Then Books are sorted by Title ascending on books screen
 
   @logout @returnBooks @trier1

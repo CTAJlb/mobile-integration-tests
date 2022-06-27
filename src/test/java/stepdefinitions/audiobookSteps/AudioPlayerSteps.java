@@ -9,13 +9,12 @@ import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.audiobook.audioPlayer.AudioPlayerScreen;
 
 import java.time.Duration;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static constants.localization.application.catalog.TimerKeys.END_OF_CHAPTER;
 
@@ -254,9 +253,7 @@ public class AudioPlayerSteps {
     public void checkChapterNumber(String chapterNumberKey) {
         int expectedChapterNumber = context.get(chapterNumberKey);
         String chapterName = audioPlayerScreen.getChapterName();
-        Pattern pattern = Pattern.compile(RegEx.AUDIOBOOK_CURRENT_FILE_NUMBER);
-        Matcher matcher = pattern.matcher(chapterName);
-        int actualChapterNumber = Integer.parseInt(matcher.group());
+        int actualChapterNumber = Integer.parseInt(StringUtils.substringBetween(chapterName, "file ", " of"));
         Assert.assertEquals("Chapter number is not " + expectedChapterNumber, expectedChapterNumber, actualChapterNumber);
     }
 }

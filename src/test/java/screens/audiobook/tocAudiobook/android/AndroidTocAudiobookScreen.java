@@ -13,8 +13,7 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidTocAudiobookScreen extends TocAudiobookScreen {
-    private static final String CHAPTERS_TEXT_LOC = "//android.widget.RelativeLayout//android.widget.TextView[contains(@resource-id, \"player_toc_item_view_title\")]";
-    private static final String CHAPTERS_LOC = "//android.widget.RelativeLayout[.//*[contains(@resource-id, \"player_toc_item_view_title\")]]";
+    private static final String CHAPTERS_LOC = "//android.widget.RelativeLayout//*[contains(@resource-id, \"player_toc_item_view_title\")]";
 
     public AndroidTocAudiobookScreen() {
         super(By.xpath("//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"list\")]"));
@@ -41,7 +40,7 @@ public class AndroidTocAudiobookScreen extends TocAudiobookScreen {
 
     @Override
     public void swipeToTheEndOfTOC() {
-//        List<String> chaptersNames
+
     }
 
     private List<IElement> getChapters() {
