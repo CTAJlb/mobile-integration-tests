@@ -5,6 +5,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
 import constants.localization.application.facetedSearch.FacetSortByKeys;
+import constants.util.UtilConstants;
 import org.openqa.selenium.By;
 import screens.facetedSearch.FacetedSearchScreen;
 
@@ -47,10 +48,11 @@ public class AndroidFacetedSearchScreen extends FacetedSearchScreen {
 
     @Override
     public void sortBy(String library) {
-        if (library == "Palace Bookshelf") {
+        if (library.equals(UtilConstants.PALACE_BOOKSHELF)) {
             btnSortByPalace.click();
+        } else {
+            btnSortBy.click();
         }
-        btnSortBy.click();
     }
 
     @Override
