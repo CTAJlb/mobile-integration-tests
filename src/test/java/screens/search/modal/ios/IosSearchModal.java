@@ -43,7 +43,7 @@ public class IosSearchModal extends SearchModal {
     }
 
     @Override
-    public void clickBackBtn() {
+    public void closeSearchScreen() {
         btnBack.click();
     }
 }

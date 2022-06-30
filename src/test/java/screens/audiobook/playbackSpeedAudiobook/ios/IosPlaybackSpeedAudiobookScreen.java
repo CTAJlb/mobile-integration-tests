@@ -17,6 +17,9 @@ public class IosPlaybackSpeedAudiobookScreen extends PlaybackSpeedAudiobookScree
     private static Map<String, String> speedName = new HashMap<String, String>() {{
         put("2.0", "Two times normal speed. Fastest.");
         put("0.75", "Three quarters of normal speed. Slower.");
+        put("1.25", "One and one quarter faster than normal speed.");
+        put("1.50", "One and a half times faster than normal speed.");
+
     }};
     public IosPlaybackSpeedAudiobookScreen() {
         super(By.xpath("//XCUIElementTypeStaticText[@name=\"Playback Speed\"]"));
