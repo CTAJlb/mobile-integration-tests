@@ -40,6 +40,9 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
             if(alertScreen.state().waitForDisplayed()){
                 alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.SIGN_OUT);
             }
+            if (alertScreen.state().waitForDisplayed()) {
+                alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.SIGN_OUT);
+            }
         }
     }
 }

@@ -102,7 +102,7 @@ public class IosAccountScreen extends AccountScreen {
 
     @Override
     public boolean isContentLicOpened() {
-        return lblLibrariesAndPalaces.state().isDisplayed();
+        return lblLibrariesAndPalaces.state().waitForDisplayed();
     }
 
     @Override

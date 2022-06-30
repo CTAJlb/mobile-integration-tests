@@ -47,7 +47,7 @@ public class SearchSteps {
 
     @When("I return back from search modal")
     public void returnBack() {
-
+        searchModal.closeSearchScreen();
     }
 
     @Then("Search modal is opened")
@@ -84,7 +84,7 @@ public class SearchSteps {
             }
         });
         if(AqualityServices.getApplication().getPlatformName()==PlatformName.IOS) {
-            searchModal.clickBackBtn();
+            searchModal.closeSearchScreen();
         }
         context.add(listKey, savedBooks);
     }

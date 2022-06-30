@@ -27,12 +27,12 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class CatalogSteps {
-    private BottomMenuForm bottomMenuForm;
-    private CatalogScreen catalogScreen;
-    private SubcategoryScreen subcategoryScreen;
-    private MainCatalogToolbarForm mainCatalogToolbarForm;
-    private FacetedSearchScreen facetedSearchScreen;
-    private ScenarioContext context;
+    private final BottomMenuForm bottomMenuForm;
+    private final CatalogScreen catalogScreen;
+    private final SubcategoryScreen subcategoryScreen;
+    private final MainCatalogToolbarForm mainCatalogToolbarForm;
+    private final FacetedSearchScreen facetedSearchScreen;
+    private final ScenarioContext context;
 
     @Inject
     public CatalogSteps(ScenarioContext context) {
@@ -54,7 +54,7 @@ public class CatalogSteps {
     public void isCategoryNamesCorrect() {
         Set<String > categoriesNames = catalogScreen.getAllCategoriesNames();
         categoriesNames.forEach(category -> Assert.assertTrue("Category name " + category + " have invalid symbols",
-                category.matches(RegEx.VALID_CATEGORY_NAME)));
+                category.matches(RegEx.VALID_SYMBOLS_IN_CATALOG_NAMES)));
     }
 
     @Then("More button is present on each section of books on catalog book screen")
@@ -143,7 +143,7 @@ public class CatalogSteps {
 
     @When("I open categories by chain and chain starts from CategoryScreen:")
     public void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain) {
-        categoriesChain.stream().forEach(categoryName -> {
+        categoriesChain.forEach(categoryName -> {
             if (catalogScreen.state().waitForDisplayed()) {
                 catalogScreen.openCategory(categoryName);
             } else {

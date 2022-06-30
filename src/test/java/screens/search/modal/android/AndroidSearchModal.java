@@ -13,6 +13,8 @@ public class AndroidSearchModal extends SearchModal {
             getElementFactory().getTextBox(By.xpath("//*[contains(@resource-id,\"searchDialogText\")]"), "Search value input");
     private final IButton btnSearch =
             getElementFactory().getButton(By.xpath("//*[contains(@resource-id,\"buttonPanel\")]//android.widget.Button[contains(@text,'SEARCH')]"), "Apply search");
+    private final IButton btnCancel =
+            getElementFactory().getButton(By.xpath("//android.widget.Button[@text=\"CANCEL\"]"), "Cancel button");
 
     public AndroidSearchModal() {
         super(By.xpath("//*[contains(@resource-id,\"parentPanel\")]"));
@@ -40,7 +42,7 @@ public class AndroidSearchModal extends SearchModal {
     }
 
     @Override
-    public void clickBackBtn() {
-        //only for iOS
+    public void closeSearchScreen() {
+        btnCancel.click();
     }
 }

@@ -117,8 +117,8 @@ public class BookDetailsSteps {
         String bookName = bookModel.getTitle();
         String authorName = bookModel.getAuthor();
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(bookName.matches(RegEx.VALID_AUTHOR_OR_TITLE_OR_PUBLISHER)).as("Book title has invalid symbols").isTrue();
-        softAssertions.assertThat(authorName.matches(RegEx.VALID_AUTHOR_OR_TITLE_OR_PUBLISHER)).as("Author name has invalid symbols").isTrue();
+        softAssertions.assertThat(bookName.matches(RegEx.VALID_AUTHOR_OR_TITLE)).as("Book title has invalid symbols").isTrue();
+        softAssertions.assertThat(authorName.matches(RegEx.VALID_AUTHOR_OR_TITLE)).as("Author name has invalid symbols").isTrue();
         softAssertions.assertAll();
     }
 
@@ -143,10 +143,10 @@ public class BookDetailsSteps {
             SwipeElementUtils.swipeByCoordinatesOfWindow();
         }
         String publisher = bookDetailsScreen.getPublisherInfo();
-        String categories = bookDetailsScreen.getCategoryInfo().replaceAll(RegEx.UNNECESSARY_SYMBOLS, "");
+        String categories = bookDetailsScreen.getCategoryInfo();
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(publisher.matches(RegEx.VALID_AUTHOR_OR_TITLE_OR_PUBLISHER)).as("Publisher field has invalid symbols").isTrue();
-        softAssertions.assertThat(categories.matches(RegEx.VALID_SYMBOLS_IN_NAMES)).as("Category field has invalid symbols").isTrue();
+        softAssertions.assertThat(publisher.matches(RegEx.VALID_PUBLISHER_OR_CATEGORY_NAME)).as("Publisher field has invalid symbols").isTrue();
+        softAssertions.assertThat(categories.matches(RegEx.VALID_PUBLISHER_OR_CATEGORY_NAME)).as("Category field has invalid symbols").isTrue();
         softAssertions.assertAll();
     }
 
