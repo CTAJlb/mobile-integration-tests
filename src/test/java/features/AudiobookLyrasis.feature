@@ -199,7 +199,6 @@ Feature: Audiobook in Lyrasis
     Then I check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
       And Open toc audiobook screen
-      And Wait for 10 seconds
       And Open the 4 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
     Then Chapter number is 'chapterNumber' on audio player screen
 

@@ -46,9 +46,4 @@ public class TocAudiobookSteps {
         String cutChapterName = chapterNameFromScreen.substring(0, chapterNameFromScreen.indexOf('(') - 1);
         Assert.assertEquals("Chapter does not change to next. ", cutChapterName, chapterNameFromToc);
     }
-
-    @When("I swipe toc to the end on toc audiobook screen")
-    public void swipeToTheEndOfToc () {
-        tocAudiobookScreen.swipeToTheEndOfTOC();
-    }
 }
