@@ -83,9 +83,6 @@ public class SearchSteps {
                 searchModal.state().waitForDisplayed();
             }
         });
-        if(AqualityServices.getApplication().getPlatformName()==PlatformName.IOS) {
-            searchModal.closeSearchScreen();
-        }
         context.add(listKey, savedBooks);
     }
 
