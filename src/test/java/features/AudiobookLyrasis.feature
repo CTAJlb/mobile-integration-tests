@@ -72,31 +72,6 @@ Feature: Audiobook in Lyrasis
       | Biblioboard        |
 
   @logout @returnBooks @tier2
-  Scenario Outline: Navigate by Playback Options
-    When I search 'available' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
-      And I switch to 'Audiobooks' catalog tab
-      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click GET action button on book details screen
-    Then I check that book contains LISTEN action button on book details screen
-    When Click LISTEN action button on book details screen
-      And Tap play button on audio player screen
-      And Select <speed>X playback speed on playback speed audiobook screen
-      And Save book play time as 'timeAhead' on audio player screen
-      And Wait for <secondsForWaiting> seconds
-    Then Playback has been moved forward by <moveForwardSeconds> seconds from 'timeAhead' seconds on audio player screen
-      And Current playback speed value is <speed>X on audio player screen
-    When Tap pause button on audio player screen
-      And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
-    Then Sleep timer is set to endOfChapter on audio player screen
-
-    Scenarios:
-      | speed | secondsForWaiting | moveForwardSeconds |
-      | 2     | 5                 | 10                 |
-      | 0.75  | 8                 | 6                  |
-      | 1.25  | 8                 | 10                  |
-      | 1.50  | 6                 | 9                  |
-
-  @logout @returnBooks @tier2
   Scenario Outline: Check time code of track after reload app
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -107,7 +82,7 @@ Feature: Audiobook in Lyrasis
       And Tap play button on audio player screen
       And Wait for 5 seconds
       And I tap on the middle of chapter on audio player screen
-      And  Tap pause button on audio player screen
+      And Tap pause button on audio player screen
       And Save book play time as 'timeAhead' on audio player screen
       And Return to previous screen from audio player screen
       And Click LISTEN action button on book details screen
@@ -237,7 +212,9 @@ Feature: Audiobook in Lyrasis
       And Click GET action button on book details screen
     Then I check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
-      And Open sleep timer on audio player screen
+      And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
+    Then Sleep timer is set to endOfChapter on audio player screen
+    When Open sleep timer on audio player screen
       And Close sleep timer screen
     Then Play button is present on audio player screen
 
@@ -273,3 +250,45 @@ Feature: Audiobook in Lyrasis
       | Palace Marketplace |
       | Axis 360           |
       | Biblioboard        |
+
+  @logout @returnBooks @tier2Scenario:
+  Scenario Outline: Playback speed: Check of 0.75 speed
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+      And Select <speed>X playback speed on playback speed audiobook screen
+      Then Current playback speed value is <speed>X on audio player screen
+    When Return to previous screen from audio player screen
+      And Click LISTEN action button on book details screen
+    Then Current playback speed value is <speed>X on audio player screen
+    When I restart app
+      And I open Books
+      And Open AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
+      And Click LISTEN action button on book details screen
+    Then Current playback speed value is <speed>X on audio player screen
+    When Tap play button on audio player screen
+      And Save book play time as 'timeAhead' on audio player screen
+      And Wait for <secondsForWaiting> seconds
+    Then Playback has been moved forward by <moveForwardSeconds> seconds from 'timeAhead' seconds on audio player screen
+
+    Scenarios:
+      | distributor        | speed | secondsForWaiting | moveForwardSeconds |
+      | Bibliotheca        | 0.75  | 8                 | 6                  |
+      | Bibliotheca        | 1.25  | 8                 | 10                 |
+      | Bibliotheca        | 1.50  | 6                 | 9                  |
+      | Bibliotheca        | 2     | 5                 | 10                 |
+      | Palace Marketplace | 0.75  | 8                 | 6                  |
+      | Palace Marketplace | 1.25  | 8                 | 10                 |
+      | Palace Marketplace | 1.50  | 6                 | 9                  |
+      | Palace Marketplace | 2     | 5                 | 10                 |
+      | Axis 360           | 0.75  | 8                 | 6                  |
+      | Axis 360           | 1.25  | 8                 | 10                 |
+      | Axis 360           | 1.50  | 6                 | 9                  |
+      | Axis 360           | 2     | 5                 | 10                 |
+      | Biblioboard        | 0.75  | 8                 | 6                  |
+      | Biblioboard        | 1.25  | 8                 | 10                 |
+      | Biblioboard        | 1.50  | 6                 | 9                  |
+      | Biblioboard        | 2     | 5                 | 10                 |
