@@ -251,7 +251,7 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2Scenario:
+  @logout @returnBooks @tier2
   Scenario Outline: Playback speed: Check of 0.75 speed
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
