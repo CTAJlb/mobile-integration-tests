@@ -12,6 +12,8 @@ import java.util.Map;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosPlaybackSpeedAudiobookScreen extends PlaybackSpeedAudiobookScreen {
+    private static final String PLAYBACK_SPEED = "//XCUIElementTypeButton[@name=\"%s\"]";
+
     private final IButton btnCancel = AqualityServices.getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Cancel\"]"), "cancel button");
 
     private static Map<String, String> speedName = new HashMap<String, String>() {{
@@ -28,7 +30,7 @@ public class IosPlaybackSpeedAudiobookScreen extends PlaybackSpeedAudiobookScree
     @Override
     public void selectPlaybackSpeed(String playbackSpeed) {
         String speedOptionName = speedName.get(playbackSpeed);
-        getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"" + speedOptionName + "\"]"), speedOptionName).click();
+        getElementFactory().getButton(By.xpath(String.format(PLAYBACK_SPEED, speedOptionName)), speedOptionName).click();
     }
 
     @Override
