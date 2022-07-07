@@ -7,13 +7,15 @@ import screens.audiobook.playbackSpeedAudiobook.PlaybackSpeedAudiobookScreen;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidSleepTimerAudiobookScreen extends PlaybackSpeedAudiobookScreen {
+    private static final String PLAYBACK_SPEED = "//*[@text=\"%sx\"]";
+
     public AndroidSleepTimerAudiobookScreen() {
         super(By.xpath("//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"list\")]"));
     }
 
     @Override
     public void selectPlaybackSpeed(String playbackSpeed) {
-        getElementFactory().getButton(By.xpath("//*[@text=\"" + playbackSpeed + "x\"]"), "Playback speed").click();
+        getElementFactory().getButton(By.xpath(String.format(PLAYBACK_SPEED, playbackSpeed)), "Playback speed").click();
     }
 
     @Override
