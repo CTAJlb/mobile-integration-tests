@@ -260,7 +260,7 @@ Feature: Audiobook in Lyrasis
     Then I check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
       And Select <speed>X playback speed on playback speed audiobook screen
-      Then Current playback speed value is <speed>X on audio player screen
+    Then Current playback speed value is <speed>X on audio player screen
     When Return to previous screen from audio player screen
       And Click LISTEN action button on book details screen
     Then Current playback speed value is <speed>X on audio player screen
