@@ -13,5 +13,5 @@ public class RegEx {
     public static final String BACKGROUND_COLOR_REGEX_IOS = "--USER__appearance: (.+?);";
     public static final String VALID_SYMBOLS_IN_CATALOG_NAMES = "([a-zA-Z0-9&\\s:']*)";
     public static final String VALID_AUTHOR_OR_TITLE = "([a-zA-Z0-9-.:]*)([a-zA-Z0-9&,;:.\\s]*)([a-zA-Z0-9-.:()]*)";
-    public static final String VALID_PUBLISHER_OR_CATEGORY_NAME = "([a-zA-Z0-9&\\s-,;'.]*)([a-zA-Z,&\\s;:'.]*)([a-zA-Z0-9,\\s-'.]*)";
+    public static final String VALID_PUBLISHER_OR_CATEGORY_NAME = "([a-zA-Z0-9&\\s-,;'./]*)([a-zA-Z,&\\s;:'.]*)([a-zA-Z0-9,\\s-'.]*)";
 }
