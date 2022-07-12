@@ -19,24 +19,24 @@ Feature: Read EPUB in Lyrasis
       And I open font settings
       And I INCREASE_FONT of text
     Then Font size 'fontSize' is increased
-    When I return to previous screen for epub and pdf
-      And Click READ action button on book details screen
-    Then Font size 'fontSize' is increased
     When I restart app
       And I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then Font size 'fontSize' is increased
+    When I return to previous screen from epub
       And Click READ action button on book details screen
     Then Font size 'fontSize' is increased
     When I save font size as 'fontSize'
       And I open font settings
       And I DECREASE_FONT of text
     Then Font size 'fontSize' is decreased
-    When I return to previous screen for epub and pdf
-      And Click READ action button on book details screen
-    Then Font size 'fontSize' is decreased
     When I restart app
       And I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then Font size 'fontSize' is decreased
+    When I return to previous screen from epub
       And Click READ action button on book details screen
     Then Font size 'fontSize' is decreased
 
@@ -56,34 +56,34 @@ Feature: Read EPUB in Lyrasis
       And I open font settings
       And I change font style to FONT_SERIF
     Then Book text displays in FONT_SERIF font
-    When I return to previous screen for epub and pdf
-      And Click READ action button on book details screen
-    Then Book text displays in FONT_SERIF font
     When I restart app
       And I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then Book text displays in FONT_SERIF font
+    When I return to previous screen from epub
       And Click READ action button on book details screen
     Then Book text displays in FONT_SERIF font
     When I open font settings
       And I change font style to FONT_SANS
     Then Book text displays in FONT_SANS font
-    When I return to previous screen for epub and pdf
-      And Click READ action button on book details screen
-    Then Book text displays in FONT_SANS font
     When I restart app
       And I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then Book text displays in FONT_SANS font
+    When I return to previous screen from epub
       And Click READ action button on book details screen
     Then Book text displays in FONT_SANS font
     When I open font settings
       And I change font style to FONT_DYSLEXIC
     Then Book text displays in FONT_DYSLEXIC font
-    When I return to previous screen for epub and pdf
-      And Click READ action button on book details screen
-    Then Book text displays in FONT_DYSLEXIC font
     When I restart app
       And I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then Book text displays in FONT_DYSLEXIC font
+    When I return to previous screen from epub
       And Click READ action button on book details screen
     Then Book text displays in FONT_DYSLEXIC font
 
@@ -103,34 +103,34 @@ Feature: Read EPUB in Lyrasis
       And I open font settings
     When I change contrast to BLACK_TEXT_ON_WHITE
     Then The BLACK_TEXT_ON_WHITE background is correct
-    When I return to previous screen for epub and pdf
-      And Click READ action button on book details screen
-    Then The BLACK_TEXT_ON_WHITE background is correct
     When I restart app
       And I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then The BLACK_TEXT_ON_WHITE background is correct
+    When I return to previous screen from epub
       And Click READ action button on book details screen
     Then The BLACK_TEXT_ON_WHITE background is correct
     When I open font settings
       And I change contrast to BLACK_TEXT_ON_SEPIA
     Then The BLACK_TEXT_ON_SEPIA background is correct
-    When I return to previous screen for epub and pdf
-      And Click READ action button on book details screen
-    Then The BLACK_TEXT_ON_SEPIA background is correct
     When I restart app
       And I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then The BLACK_TEXT_ON_SEPIA background is correct
+    When I return to previous screen from epub
       And Click READ action button on book details screen
     Then The BLACK_TEXT_ON_SEPIA background is correct
     When I open font settings
       And I change contrast to WHITE_TEXT_ON_BLACK
     Then The WHITE_TEXT_ON_BLACK background is correct
-    When I return to previous screen for epub and pdf
-      And Click READ action button on book details screen
-    Then The WHITE_TEXT_ON_BLACK background is correct
     When I restart app
       And I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then The WHITE_TEXT_ON_BLACK background is correct
+    When I return to previous screen from epub
       And Click READ action button on book details screen
     Then The WHITE_TEXT_ON_BLACK background is correct
 

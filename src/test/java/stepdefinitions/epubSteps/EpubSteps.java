@@ -98,8 +98,8 @@ public class EpubSteps {
         List<String> chapters = tocBookmarksEpubScreen.getTocEpubScreen().getListOfBookChapters();
         String chapterName = chapters.get(RandomUtils.nextInt(1, chapters.size()));
         tocBookmarksEpubScreen.getTocEpubScreen().openChapter(chapterName);
-        Assert.assertTrue("Chapter name is not correct. ExpectedChapterName-" + chapterName.toLowerCase() + ", ActualChapterName-"
-                + readerEpubScreen.getChapterName().toLowerCase(), readerEpubScreen.getChapterName().toLowerCase().equals(chapterName.toLowerCase()));
+        Assert.assertEquals("Chapter name is not correct. ExpectedChapterName-" + chapterName.toLowerCase() + ", ActualChapterName-"
+                + readerEpubScreen.getChapterName().toLowerCase(), readerEpubScreen.getChapterName().toLowerCase(), chapterName.toLowerCase());
     }
 
     @When("Open font and background settings epub screen")
@@ -148,6 +148,12 @@ public class EpubSteps {
         Assert.assertTrue("Font size is not decreased newFontSize - " + newFontSize + ", oldFontSize - " + oldFontSize, newFontSize < oldFontSize);
     }
 
+    @When("I return to previous screen from epub")
+    public void returnToPreviousScreen() {
+        readerEpubScreen.openNavigationBar();
+        readerEpubScreen.getNavigationBarEpubScreen().returnToPreviousScreen();
+    }
+
     @When("I open font settings")
     public void openFontSettings() {
         readerEpubScreen.openNavigationBar();
@@ -172,16 +178,15 @@ public class EpubSteps {
     public void swipePageForward(int minValue, int maxValue) {
         int randomScrollsCount = RandomUtils.nextInt(minValue, maxValue);
         AqualityServices.getLogger().info("Scrolling " + randomScrollsCount + " times on reader epub screen");
-        IntStream.range(0, randomScrollsCount).forEachOrdered(i -> {
-            readerEpubScreen.clickRightCorner();
-        });
+        IntStream.range(0, randomScrollsCount).forEachOrdered(i -> readerEpubScreen.clickRightCorner());
     }
 
     @Then("The {} background is correct")
     public void checkBackgroundHasSpecificColor(BackgroundColorKeys fontBackgroundKey) {
         String expectedBackgroundColor = fontBackgroundKey.i18n();
         String actualBackgroundColor = readerEpubScreen.getBackgroundColor();
-        Assert.assertTrue("BackgroundColor is not correct, actualBackgroundColor-" + actualBackgroundColor + ", expectedBackgroundColor-" + expectedBackgroundColor, actualBackgroundColor.toLowerCase().equals(expectedBackgroundColor.toLowerCase()));
+        Assert.assertEquals("BackgroundColor is not correct, actualBackgroundColor-" + actualBackgroundColor + ", expectedBackgroundColor-" + expectedBackgroundColor,
+                actualBackgroundColor.toLowerCase(), expectedBackgroundColor.toLowerCase());
 
     }
 
@@ -189,6 +194,7 @@ public class EpubSteps {
     public void bookTextDisplaysInSerifFont(FontNameKeys fontNameKey) {
         String expectedFontName = fontNameKey.i18n();
         String actualFontName = readerEpubScreen.getFontName();
-        Assert.assertTrue("Book fontName is not correct, actualFontName-" + actualFontName + ", expectedFontName-" + expectedFontName, actualFontName.toLowerCase().equals(expectedFontName.toLowerCase()));
+        Assert.assertEquals("Book fontName is not correct, actualFontName-" + actualFontName + ", expectedFontName-" + expectedFontName,
+                actualFontName.toLowerCase(), expectedFontName.toLowerCase());
     }
 }
