@@ -9,7 +9,7 @@ Feature: Read EPUB in Lyrasis
       And I open search modal
 
   @logout @returnBooks @tier1
-  Scenario Outline: Check of increasing and reducing the text size
+  Scenario Outline: Font settings: Check of increasing and reducing the text size
     When I search 'available' book of distributor '<distributor>' and bookType 'EBOOK' and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -47,7 +47,7 @@ Feature: Read EPUB in Lyrasis
       | Axis 360           |
 
   @logout @returnBooks @tier1
-  Scenario Outline: Text settings: Check of font style
+  Scenario Outline: Font settings: Check of font style
     When I search 'available' book of distributor '<distributor>' and bookType 'EBOOK' and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -94,7 +94,7 @@ Feature: Read EPUB in Lyrasis
       | Axis 360           |
 
   @logout @returnBooks @tier1
-  Scenario Outline: Text settings: Check of text theme
+  Scenario Outline: Font settings: Check of text theme
     When I search 'available' book of distributor '<distributor>' and bookType 'EBOOK' and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'

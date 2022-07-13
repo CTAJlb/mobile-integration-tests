@@ -85,7 +85,7 @@ Feature: Read EPUB in Palace Bookshelf
     Then Font and background settings epub screen is opened
 
   @tier1
-  Scenario: Change, View Font and Contrast Settings
+  Scenario: Font settings: Check of increasing and reducing the text size
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
@@ -94,29 +94,105 @@ Feature: Read EPUB in Palace Bookshelf
       And I open font settings
       And I INCREASE_FONT of text
     Then Font size 'fontSize' is increased
+    When I restart app
+      And I open Books
+      And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then Font size 'fontSize' is increased
+    When I return to previous screen from epub
+      And Click READ action button on book details screen
+    Then Font size 'fontSize' is increased
     When I save font size as 'fontSize'
       And I DECREASE_FONT of text
     Then Font size 'fontSize' is decreased
-    When I change font style to FONT_SERIF
+    When I restart app
+      And I open Books
+      And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then Font size 'fontSize' is decreased
+    When I return to previous screen from epub
+      And Click READ action button on book details screen
+    Then Font size 'fontSize' is decreased
+
+  @tier1
+  Scenario: Font settings: Check of font style
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+      And I scroll page forward from 7 to 9 times
+      And I open font settings
+      And I change font style to FONT_SERIF
     Then Book text displays in FONT_SERIF font
-    When I change font style to FONT_SANS
+    When I restart app
+      And I open Books
+      And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then Book text displays in FONT_SERIF font
+    When I return to previous screen from epub
+      And Click READ action button on book details screen
+    Then Book text displays in FONT_SERIF font
+    When I open font settings
+      And I change font style to FONT_SANS
     Then Book text displays in FONT_SANS font
-    When I change font style to FONT_DYSLEXIC
+    When I restart app
+      And I open Books
+      And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then Book text displays in FONT_SANS font
+    When I return to previous screen from epub
+      And Click READ action button on book details screen
+    Then Book text displays in FONT_SANS font
+    When I open font settings
+      And I change font style to FONT_DYSLEXIC
     Then Book text displays in FONT_DYSLEXIC font
-    When I change contrast to BLACK_TEXT_ON_WHITE
+    When I restart app
+      And I open Books
+      And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then Book text displays in FONT_DYSLEXIC font
+    When I return to previous screen from epub
+      And Click READ action button on book details screen
+    Then Book text displays in FONT_DYSLEXIC font
+
+  @tier1
+  Scenario: Font settings: Check of text theme
+    When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+      And I scroll page forward from 7 to 9 times
+      And I open font settings
+      And I change contrast to BLACK_TEXT_ON_WHITE
     Then The BLACK_TEXT_ON_WHITE background is correct
-    When I change contrast to BLACK_TEXT_ON_SEPIA
+    When I restart app
+      And I open Books
+      And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then The BLACK_TEXT_ON_WHITE background is correct
+    When I return to previous screen from epub
+      And Click READ action button on book details screen
+    Then The BLACK_TEXT_ON_WHITE background is correct
+    When I open font settings
+      And I change contrast to BLACK_TEXT_ON_SEPIA
     Then The BLACK_TEXT_ON_SEPIA background is correct
-    When I change contrast to WHITE_TEXT_ON_BLACK
+    When I restart app
+      And I open Books
+      And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then The BLACK_TEXT_ON_SEPIA background is correct
+    When I return to previous screen from epub
+      And Click READ action button on book details screen
+    Then The BLACK_TEXT_ON_SEPIA background is correct
+    When I open font settings
+      And I change contrast to WHITE_TEXT_ON_BLACK
     Then The WHITE_TEXT_ON_BLACK background is correct
-    When Wait for 3 seconds
-      And I restart app
+    When I restart app
       And I open Books
       And Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
       And Click READ action button on book details screen
     Then The WHITE_TEXT_ON_BLACK background is correct
-      And Book text displays in FONT_DYSLEXIC font
-      And Font size 'fontSize' is decreased
+    When I return to previous screen from epub
+      And Click READ action button on book details screen
+    Then The WHITE_TEXT_ON_BLACK background is correct
 
   @tier1
   Scenario: Open book to last page read
