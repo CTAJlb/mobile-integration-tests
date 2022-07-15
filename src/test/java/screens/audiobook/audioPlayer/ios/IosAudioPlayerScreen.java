@@ -22,7 +22,7 @@ import java.util.Map;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosAudioPlayerScreen extends AudioPlayerScreen {
-    private static final String PLAYBACK_SPEED_LOC = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%s\"]";
+    private static final String PLAYBACK_SPEED_LOC = "//XCUIElementTypeToolbar//XCUIElementTypeButton[contains(@name, \"%s\")]";
     private static final String AUDIOBOOK_NAME__LOC = "//XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String TIME_IN_HOURS_LEFT_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d hour and %d minutes until playback pauses\"]";
     private static final String TIME_IN_MINUTES_LEFT_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d minutes and %d seconds until playback pauses\"]";
@@ -98,8 +98,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public boolean isAudiobookNamePresent(String audiobookName) {
-        boolean isAudiobookNamePresent = getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME__LOC, audiobookName)), "audiobookName").state().waitForDisplayed();
-        return isAudiobookNamePresent;
+        return getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME__LOC, audiobookName)), "audiobookName").state().waitForDisplayed();
     }
 
     private static Map<String, String> speedName = new HashMap<String, String>() {{
