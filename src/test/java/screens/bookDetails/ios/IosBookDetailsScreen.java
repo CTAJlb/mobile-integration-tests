@@ -90,6 +90,12 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
+    public void clickActionButtonForCancelTheAction(EnumActionButtonsForBooksAndAlertsKeys buttonKeys) {
+        IButton actionButton = getActionButton(buttonKeys);
+        actionButton.click();
+    }
+
+    @Override
     public String getErrorDetails() {
         if (isErrorButtonPresent()) {
             return lblErrorDetails.getText();

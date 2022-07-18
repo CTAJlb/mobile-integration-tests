@@ -16,6 +16,8 @@ public abstract class BookDetailsScreen extends Screen {
 
     public abstract void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKeys);
 
+    public abstract void clickActionButtonForCancelTheAction(EnumActionButtonsForBooksAndAlertsKeys buttonKeys);
+
     public abstract String getErrorDetails();
 
     public abstract boolean isErrorButtonPresent();

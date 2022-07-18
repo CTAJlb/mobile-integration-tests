@@ -82,6 +82,12 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
+    public void clickActionButtonForCancelTheAction(EnumActionButtonsForBooksAndAlertsKeys buttonKeys) {
+        IButton button = getActionButton(buttonKeys);
+        button.click();
+    }
+
+    @Override
     public String getErrorDetails() {
         if (lblErrorMessage.state().isDisplayed()) {
             return lblErrorMessage.getText();

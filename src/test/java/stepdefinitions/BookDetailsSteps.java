@@ -54,15 +54,21 @@ public class BookDetailsSteps {
     }
 
     @When("Click {} button but cancel the action by clicking {} button on the alert")
-    public void cancelBookReturn(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonCancel) {
+    public void cancelBookReturningAndRemoving(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumActionButtonsForBooksAndAlertsKeys alertButtonCancel) {
         bookDetailsScreen.clickActionButton(actionButtonKey);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
             addScreenshot();
             if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE ||
                     actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE) {
-                alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonCancel);
+                alertScreen.waitAndPerformAlertActionIfDisplayed(alertButtonCancel);
             }
         }
+    }
+
+    @When("Click {} action button and cancel downloading by click {} button on book detail screen")
+    public void cancelBookDownloading(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonCancel) {
+        bookDetailsScreen.clickActionButtonForCancelTheAction(actionButtonKey);
+        bookDetailsScreen.clickActionButtonForCancelTheAction(actionButtonCancel);
     }
 
     @When("Click {} action button on book details screen and click {} action button on alert. Only for ios")
