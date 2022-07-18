@@ -119,3 +119,32 @@ Feature: My books module
       And Click READ action button on book details screen
       And Wait for 3 seconds
     Then 'bookInfo' book is present on epub reader screen
+
+  @logout @returnBooks @tier2 @exclude_android
+  Scenario Outline: Alert: Check of Cancel button after Return button tapping
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I open search modal
+      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
+      And I switch to '<tabName>' catalog tab
+      And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+      And I open Books
+    Then <bookType> book with <buttonBook> action button and 'bookInfo' bookInfo is present on books screen
+    When Open <bookType> book with <buttonBook> action button and 'bookInfo' bookInfo on books screen
+      And Click RETURN button but cancel the action by clicking CANCEL button on the alert
+      And I open Books
+    Then <bookType> book with <buttonBook> action button and 'bookInfo' bookInfo is present on books screen
+
+    Scenarios:
+    | distributor        | bookType  | tabName    | buttonBook |
+    | Bibliotheca        | EBOOK     | eBooks     | READ       |
+    | Bibliotheca        | AUDIOBOOK | Audiobooks | LISTEN     |
+    | Axis 360           | EBOOK     | eBooks     | READ       |
+    | Axis 360           | AUDIOBOOK | Audiobooks | LISTEN     |
+    | Palace Marketplace | EBOOK     | eBooks     | READ       |
+    | Palace Marketplace | AUDIOBOOK | Audiobooks | LISTEN     |
+    | Biblioboard        | EBOOK     | eBooks     | READ       |
+    | Biblioboard        | AUDIOBOOK | Audiobooks | LISTEN     |

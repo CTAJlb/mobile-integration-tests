@@ -112,3 +112,32 @@ Feature: Reservation of book in LYRASIS
       And There are sorting by 'Title' and 'Author' in 'LYRASIS Reads' on holds screen
     When I sort books by AUTHOR in 'LYRASIS Reads'
     Then Books are sorted by Author ascending on holds screen
+
+  @logout @returnBooks @tier2 @exclude_android
+  Scenario Outline: Alert: Check of Cancel button after Remove button tapping
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I open search modal
+      And I search 'unavailable' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
+      And I switch to '<tabName>' catalog tab
+      And Open <bookType> book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click RESERVE action button on book details screen
+      And I open Holds
+    Then <bookType> book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
+    When Open <bookType> book with REMOVE action button and 'bookInfo' bookInfo on holds screen
+      And Click REMOVE button but cancel the action by clicking CANCEL button on the alert
+      And I open Holds
+    Then <bookType> book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
+
+    Scenarios:
+      | distributor        | bookType  | tabName    |
+      | Bibliotheca        | EBOOK     | eBooks     |
+      | Bibliotheca        | AUDIOBOOK | Audiobooks |
+      | Axis 360           | EBOOK     | eBooks     |
+      | Axis 360           | AUDIOBOOK | Audiobooks |
+      | Palace Marketplace | EBOOK     | eBooks     |
+      | Palace Marketplace | AUDIOBOOK | Audiobooks |
+      | Biblioboard        | EBOOK     | eBooks     |
+      | Biblioboard        | AUDIOBOOK | Audiobooks |
