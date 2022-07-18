@@ -43,11 +43,24 @@ public class BookDetailsSteps {
         bookDetailsScreen.clickActionButton(actionButtonKey);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
             addScreenshot();
-            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE) {
+            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE ||
+                    actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE) {
                 alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
             } else {
                 AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
                 AqualityServices.getLogger().info("Alert appears and dismiss alert");
+            }
+        }
+    }
+
+    @When("Click {} button but cancel the action by clicking {} button on the alert")
+    public void cancelBookReturn(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumActionButtonsForBooksAndAlertsKeys actionButtonCancel) {
+        bookDetailsScreen.clickActionButton(actionButtonKey);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            addScreenshot();
+            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE ||
+                    actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE) {
+                alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonCancel);
             }
         }
     }
