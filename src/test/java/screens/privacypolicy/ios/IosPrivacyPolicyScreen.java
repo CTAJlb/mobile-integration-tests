@@ -18,6 +18,6 @@ public class IosPrivacyPolicyScreen extends PrivacyPolicyScreen {
 
     @Override
     public boolean isOpened() {
-        return lblPrivacyPolicy.state().isDisplayed();
+        return lblPrivacyPolicy.state().waitForDisplayed();
     }
 }

@@ -19,7 +19,7 @@ public class IosSoftwareLicScreen extends SoftwareLicScreen {
 
     @Override
     public boolean isOpened() {
-        return lblLicense.state().isDisplayed();
+        return lblLicense.state().waitForDisplayed();
     }
 
     @Override

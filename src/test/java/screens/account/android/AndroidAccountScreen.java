@@ -101,7 +101,7 @@ public class AndroidAccountScreen extends AccountScreen {
 
     @Override
     public boolean isContentLicOpened() {
-        return lblLibrariesAndPalaces.state().isDisplayed();
+        return lblLibrariesAndPalaces.state().waitForDisplayed();
     }
 
     @Override
