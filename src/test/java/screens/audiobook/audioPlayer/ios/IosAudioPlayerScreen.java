@@ -47,7 +47,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private final ILabel lblLeftTime =
             getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"progress_leftLabel\"]"), "lblLeftTime");
     private final ILabel lblRightTime =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"progress_rightLabel\" and contains(@value,\":\")]"), "lblRightTime");
+            getElementFactory().getLabel(By.xpath("(//XCUIElementTypeStaticText[@name=\"progress_rightLabel\"])[2]"), "lblRightTime");
     private final IButton btnPlaybackSpeed =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton"), "btnPlaybackSpeed");
     private final ILabel lblPlaybackProgress =
@@ -118,7 +118,10 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     public boolean isTimerEqualTo(Duration chapterLength) {
         int seconds = (int) chapterLength.getSeconds() % 60;
         int minutes = (int) (chapterLength.toMinutes() >= 60 ? chapterLength.toMinutes() % 60 : chapterLength.toMinutes());
-        return getElementFactory().getButton(By.xpath(String.format(TIME_IN_HOURS_LEFT_XPATH_LOCATOR, (int) chapterLength.toHours(), minutes)), "Timer").state().isDisplayed() || getElementFactory().getButton(By.xpath(String.format(TIME_IN_MINUTES_LEFT_XPATH_LOCATOR, minutes, seconds)), "Timer").state().isDisplayed() || getElementFactory().getButton(By.xpath(String.format(TIME_IN_SECONDS_LEFT_XPATH_LOCATOR, seconds)), "Timer").state().isDisplayed();
+        return getElementFactory().getButton(By.xpath(String.format(TIME_IN_HOURS_LEFT_XPATH_LOCATOR,
+                (int) chapterLength.toHours(), minutes)), "Timer").state().isDisplayed() ||
+                getElementFactory().getButton(By.xpath(String.format(TIME_IN_MINUTES_LEFT_XPATH_LOCATOR, minutes, seconds)), "Timer").state().isDisplayed() ||
+                getElementFactory().getButton(By.xpath(String.format(TIME_IN_SECONDS_LEFT_XPATH_LOCATOR, seconds)), "Timer").state().isDisplayed();
     }
 
     @Override
@@ -128,6 +131,8 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public Duration getRightTime() {
+        System.out.println("time: " + lblRightTime.getAttribute(IosAttributes.VALUE));
+
         return DateUtils.getDuration(lblRightTime.getAttribute(IosAttributes.VALUE));
     }
 
