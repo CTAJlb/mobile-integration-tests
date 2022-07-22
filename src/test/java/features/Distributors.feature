@@ -86,7 +86,7 @@ Feature: Distributors
       And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    And Click GET action button and cancel downloading by click CANCEL button on book detail screen
+      And Click GET action button and cancel downloading by click CANCEL button on book detail screen
     Then I check that book contains DOWNLOAD action button on book details screen
       And I check that book contains RETURN action button on book details screen
 

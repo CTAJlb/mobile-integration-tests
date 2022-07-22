@@ -19,7 +19,7 @@ public class IosUserAgreementScreen extends UserAgreementScreen {
 
     @Override
     public boolean isOpened() {
-        return lblAgreement.state().isDisplayed();
+        return lblAgreement.state().waitForDisplayed();
     }
 
     @Override

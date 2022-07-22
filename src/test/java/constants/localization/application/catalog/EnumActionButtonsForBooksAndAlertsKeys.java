@@ -13,12 +13,12 @@ public enum EnumActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     RESERVE("reserve"),
     DELETE("delete"),
     RETURN("return"),
+    CANCEL("cancel"),
     DOWNLOAD("download"),
     LISTEN("listen"),
     REMOVE("remove"),
     SIGN_OUT("signOut"),
     NOT_NOW("notNow"),
-    CANCEL("cancel"),
     OK("ok");
 
     private static final AbstractILocalizationProvider localizationProvider =
