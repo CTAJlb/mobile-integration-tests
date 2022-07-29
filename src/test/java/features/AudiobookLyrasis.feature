@@ -184,7 +184,7 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2 @exclude_android
+  @logout @returnBooks @tier2
   Scenario Outline: Check playback speed
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -204,7 +204,7 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2 @exclude_android
+  @logout @returnBooks @tier2
   Scenario Outline: Check closing sleep timer
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab

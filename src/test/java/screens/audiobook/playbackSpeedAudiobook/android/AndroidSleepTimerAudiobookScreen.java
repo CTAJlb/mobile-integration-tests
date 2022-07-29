@@ -1,6 +1,7 @@
 package screens.audiobook.playbackSpeedAudiobook.android;
 
 import aquality.appium.mobile.application.PlatformName;
+import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import org.openqa.selenium.By;
 import screens.audiobook.playbackSpeedAudiobook.PlaybackSpeedAudiobookScreen;
@@ -8,6 +9,8 @@ import screens.audiobook.playbackSpeedAudiobook.PlaybackSpeedAudiobookScreen;
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidSleepTimerAudiobookScreen extends PlaybackSpeedAudiobookScreen {
     private static final String PLAYBACK_SPEED = "//*[@text=\"%sx\"]";
+
+    private final IButton btnCancel = getElementFactory().getButton(By.xpath("//android.widget.TextView[@text=\"Cancel\"]"), "Cancel button");
 
     public AndroidSleepTimerAudiobookScreen() {
         super(By.xpath("//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"list\")]"));
@@ -20,6 +23,6 @@ public class AndroidSleepTimerAudiobookScreen extends PlaybackSpeedAudiobookScre
 
     @Override
     public void closePlaybackScreen() {
-        //only for iOS
+        btnCancel.click();
     }
 }
