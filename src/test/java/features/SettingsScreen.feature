@@ -52,7 +52,7 @@ Feature: Check sections from settings screen
       And I open Content Licenses on account screen
     Then Content Licenses screen is opened
 
-  @logout @tier1
+  @logout @tier1 @exclude_android
   Scenario: Setting: Advanced
     When I add 'LYRASIS Reads' account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -62,5 +62,6 @@ Feature: Check sections from settings screen
       And I open 'LYRASIS Reads' library on setting screen
     When I open Advanced on account screen
     Then Advanced screen contains "Delete Server Data" button
-    When I click "Delete Server Data" button
+    When I click "Delete Server Data" button and cancel it on Advanced screen
+    Then Advanced screen contains "Delete Server Data" button
 

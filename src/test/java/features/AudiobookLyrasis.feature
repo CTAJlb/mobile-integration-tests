@@ -81,7 +81,7 @@ Feature: Audiobook in Lyrasis
     When Click LISTEN action button on book details screen
       And Tap play button on audio player screen
       And Wait for 5 seconds
-      And I tap on the middle of chapter on audio player screen
+      And I stretch slider on the time tracking line forward on audio player screen
       And Tap pause button on audio player screen
       And Save book play time as 'timeAhead' on audio player screen
       And Return to previous screen from audio player screen
@@ -113,7 +113,7 @@ Feature: Audiobook in Lyrasis
       And Open the 1 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
       And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
       And Select 2X playback speed on playback speed audiobook screen
-      And I tap on the middle of chapter on audio player screen
+      And I stretch slider on the time tracking line forward on audio player screen
       And Listen a chapter on audio player screen
     Then Play button is present on audio player screen
       When Save the name of chapter as 'nextChapter' on audio player screen
@@ -243,6 +243,31 @@ Feature: Audiobook in Lyrasis
       And I stretch slider on the time tracking line back on audio player screen
       And Tap pause button on audio player screen
     Then Playing time is not equal to 'timeInfo2' on audio playing screen
+
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Palace Marketplace |
+      | Axis 360           |
+      | Biblioboard        |
+
+  @logout @returnBooks @tier2
+  Scenario Outline: Check of not rewinding forward by tapping on time bar
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+      And I stretch slider on the time tracking line forward on audio player screen
+      And Wait for 5 seconds
+      And Save book play time as 'timeBehind' on audio player screen
+      And I tap on the time bar forward on audio player screen
+      And Save book play time as 'timeForward' on audio player screen
+    Then Play times 'timeBehind' and 'timeForward' are equals
+    When I tap on the time bar back on audio player screen
+      And Save book play time as 'timeBackward' on audio player screen
+    Then Play times 'timeBehind' and 'timeBackward' are equals
 
     Scenarios:
       | distributor        |

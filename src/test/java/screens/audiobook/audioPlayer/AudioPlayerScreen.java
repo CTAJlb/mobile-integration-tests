@@ -54,7 +54,9 @@ public abstract class AudioPlayerScreen extends Screen {
 
     public abstract Duration getLeftTime();
 
-    public abstract void tapOnMiddleOfPlaybackBar();
+    public abstract void tapOnPlayBarForward();
+
+    public abstract void tapOnPlayBarBackward();
 
     public abstract boolean isLineRemainingDisplayed();
 

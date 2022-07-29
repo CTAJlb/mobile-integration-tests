@@ -92,7 +92,7 @@ public class IosAccountScreen extends AccountScreen {
 
     @Override
     public boolean isLinkOpened() {
-        return lblCodeConduct.state().isDisplayed();
+        return lblCodeConduct.state().waitForDisplayed();
     }
 
     @Override

@@ -17,6 +17,6 @@ public class IosAbPalaceScreen extends AboutPalaceScreen {
 
     @Override
     public boolean isOpened() {
-        return lblAboutPalace.state().isDisplayed();
+        return lblAboutPalace.state().waitForDisplayed();
     }
 }

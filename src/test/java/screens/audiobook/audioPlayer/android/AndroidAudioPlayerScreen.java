@@ -87,8 +87,7 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public boolean isAudiobookNamePresent(String audiobookName) {
-        boolean isAudiobookNameCorrect = getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME_LOC, audiobookName)), "audiobookName").state().waitForDisplayed();
-        return isAudiobookNameCorrect;
+        return getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME_LOC, audiobookName)), "audiobookName").state().waitForDisplayed();
     }
 
     @Override
@@ -123,9 +122,15 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void tapOnMiddleOfPlaybackBar() {
+    public void tapOnPlayBarForward() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        action.tap(PointOption.point(lblPlaybackProgress.getElement().getCenter().x, lblPlaybackProgress.getElement().getCenter().y)).perform();
+        action.tap(PointOption.point((int) (lblPlaybackProgress.getElement().getCenter().x * 1.25), lblPlaybackProgress.getElement().getCenter().y)).perform();
+    }
+
+    @Override
+    public void tapOnPlayBarBackward() {
+        TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+        action.tap(PointOption.point((int) (lblPlaybackProgress.getElement().getCenter().x * 0.2), lblPlaybackProgress.getElement().getCenter().y)).perform();
     }
 
     @Override
