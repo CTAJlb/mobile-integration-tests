@@ -141,7 +141,7 @@ Feature: Manage Libraries
     And I save 5 amount as 'amountKey'
     When I tap the logo on catalog screen
     Then The sorting of 'amountKey' libraries is alphabetical on find your library screen
-    When I tap close button on find your library screen
+    When I tap cancel button on find your library screen
     Then Category rows are loaded
 
   @tier1

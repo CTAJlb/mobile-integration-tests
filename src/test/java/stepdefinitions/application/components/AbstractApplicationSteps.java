@@ -41,7 +41,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     public abstract boolean isSortingInAlphabetical(int amountOfLibraries);
 
-    public abstract void tapCloseBtn();
+    public abstract void tapCancelBtn();
 
     public abstract boolean isMenuBarDisplayed();
 
@@ -62,7 +62,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     @Override
     public void checkEachTutorialPageCanBeOpened() {
-        tutorialScreen.getListOfPageNames().stream().forEach(pageName -> {
+        tutorialScreen.getListOfPageNames().forEach(pageName -> {
             Assert.assertTrue(String.format("Tutorial page '%s' is not opened", pageName), tutorialScreen.isTutorialPageOpened(pageName));
             tutorialScreen.goToNextPage();
         });

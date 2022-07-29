@@ -15,5 +15,5 @@ public abstract class FindYourLibScreen extends Screen {
 
     public abstract boolean isSortingAlphabetical(int amountOfLibraries);
 
-    public abstract void tapCloseBtn();
+    public abstract void tapCancelBtn();
 }

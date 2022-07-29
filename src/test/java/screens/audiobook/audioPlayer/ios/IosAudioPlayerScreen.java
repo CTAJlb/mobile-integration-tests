@@ -101,7 +101,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
         return getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME__LOC, audiobookName)), "audiobookName").state().waitForDisplayed();
     }
 
-    private static Map<String, String> speedName = new HashMap<String, String>() {{
+    private static final Map<String, String> speedName = new HashMap<String, String>() {{
         put("2.0", "Two times normal speed. Fastest.");
         put("0.75", "Three quarters of normal speed. Slower.");
         put("1.25", "One and one quarter faster than normal speed.");
@@ -131,8 +131,6 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public Duration getRightTime() {
-        System.out.println("time: " + lblRightTime.getAttribute(IosAttributes.VALUE));
-
         return DateUtils.getDuration(lblRightTime.getAttribute(IosAttributes.VALUE));
     }
 
@@ -147,9 +145,15 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
-    public void tapOnMiddleOfPlaybackBar() {
+    public void tapOnPlayBarForward() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        action.tap(PointOption.point(lblPlaybackProgress.getElement().getCenter().x, lblPlaybackProgress.getElement().getCenter().y)).perform();
+        action.tap(PointOption.point((int) (lblPlaybackProgress.getElement().getCenter().x * 1.25), lblPlaybackProgress.getElement().getCenter().y)).perform();
+    }
+
+    @Override
+    public void tapOnPlayBarBackward() {
+        TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+        action.tap(PointOption.point((int) (lblPlaybackProgress.getElement().getCenter().x * 0.2), lblPlaybackProgress.getElement().getCenter().y)).perform();
     }
 
     @Override

@@ -30,7 +30,7 @@ public class AccountSteps {
     private final CatalogScreen catalogScreen;
     private final AccountScreen accountScreen;
     private final AlertScreen alertScreen;
-    private ScenarioContext context;
+    private final ScenarioContext context;
 
     @Inject
     public AccountSteps(ScenarioContext context) {
@@ -50,7 +50,7 @@ public class AccountSteps {
         librariesScreen.addLibrary();
         addAccountScreen.selectLibraryViaSearch(libraryName);
 
-        if(libraryName.toLowerCase().equals("LYRASIS Reads".toLowerCase())){
+        if(libraryName.equalsIgnoreCase("LYRASIS Reads")){
             saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
         }
         catalogScreen.state().waitForDisplayed();
@@ -198,7 +198,7 @@ public class AccountSteps {
         Assert.assertTrue("Advanced screen does not contain " + buttonName + " button", accountScreen.isButtonDisplayed(buttonName));
     }
 
-    @When("I click {string} button")
+    @When("I click {string} button and cancel it on Advanced screen")
     public void clickDelete(String buttonName) {
         accountScreen.clickDelete(buttonName);
         if(alertScreen.state().waitForDisplayed()) {

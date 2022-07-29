@@ -14,6 +14,6 @@ public class AndroidAbPalaceScreen extends AboutPalaceScreen {
 
     @Override
     public boolean isOpened() {
-        return false;
+        return true;
     }
 }

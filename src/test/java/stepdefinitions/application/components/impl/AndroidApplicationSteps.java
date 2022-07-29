@@ -45,8 +45,8 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
     }
 
     @Override
-    public void tapCloseBtn() {
-        //only for iOS
+    public void tapCancelBtn() {
+        findYourLibScreen.tapCancelBtn();
     }
 
     @Override

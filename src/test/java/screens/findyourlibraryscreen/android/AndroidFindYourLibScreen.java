@@ -16,6 +16,8 @@ public class AndroidFindYourLibScreen extends FindYourLibScreen {
 
     private final IButton btnAddLib =
             getElementFactory().getButton(By.xpath("//android.widget.LinearLayout//android.widget.TextView[@text=\"Add Library\"]"), "Add library btn");
+    private final IButton btnCancel =
+            getElementFactory().getButton(By.xpath("//android.widget.TextView[@text=\"Cancel\"]"), "Close button");
     private final CreatingLibraryLocator libraryLocator = (index ->
             getElementFactory().getLabel(By.xpath(String.format(
                     "//android.widget.LinearLayout//androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[%d]/android.widget.LinearLayout/android.widget.TextView[1]", index)), "Library")
@@ -42,8 +44,8 @@ public class AndroidFindYourLibScreen extends FindYourLibScreen {
     }
 
     @Override
-    public void tapCloseBtn() {
-        //only for iOS
+    public void tapCancelBtn() {
+        btnCancel.click();
     }
 
     private List<String > getListOfLibraries(int listSize) {

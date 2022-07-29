@@ -73,8 +73,8 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
     }
 
     @Override
-    public void tapCloseBtn() {
-        findYourLibScreen.tapCloseBtn();
+    public void tapCancelBtn() {
+        findYourLibScreen.tapCancelBtn();
     }
 
     @Override
