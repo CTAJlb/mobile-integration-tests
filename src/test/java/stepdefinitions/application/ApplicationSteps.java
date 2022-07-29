@@ -15,11 +15,10 @@ import stepdefinitions.application.components.IApplicationSteps;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
-    private AbstractApplicationSteps abstractApplicationSteps;
-    private ScenarioContext context;
+    private final AbstractApplicationSteps abstractApplicationSteps;
+    private final ScenarioContext context;
 
     @Inject
     public ApplicationSteps(ScenarioContext context) {
@@ -56,8 +55,7 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
 
     @When("I add libraries by the logo:")
     public void addSevLibraries(List<String> libraries){
-        libraries.forEach(library ->
-                abstractApplicationSteps.addAccountByTheLogo(library)
+        libraries.forEach(abstractApplicationSteps::addAccountByTheLogo
         );
     }
 
@@ -72,9 +70,9 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         Assert.assertTrue("The list of libraries is not in alphabetical ored", abstractApplicationSteps.isSortingInAlphabetical(amount));
     }
 
-    @When("I tap close button on find your library screen")
+    @When("I tap cancel button on find your library screen")
     public void tapCloseBtn() {
-        abstractApplicationSteps.tapCloseBtn();
+        abstractApplicationSteps.tapCancelBtn();
     }
 
     @When("I choose {string} library on find your library screen")
@@ -141,7 +139,7 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
     }
 
     private void saveLibraryForLogOut(String libraryName) {
-        if (libraryName.toLowerCase().equals("LYRASIS Reads".toLowerCase())) {
+        if (libraryName.equalsIgnoreCase("LYRASIS Reads")) {
             saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
         }
     }

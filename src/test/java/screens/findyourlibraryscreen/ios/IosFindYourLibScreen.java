@@ -19,7 +19,7 @@ public class IosFindYourLibScreen extends FindYourLibScreen {
     private final CreatingLibraryLocator libraryLocator = (index ->
             getElementFactory().getLabel(By.xpath(
                     String.format("//XCUIElementTypeSheet//XCUIElementTypeScrollView[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[%d]/XCUIElementTypeButton", index)), "Library"));
-    private final IButton btnClose =
+    private final IButton btnCancel =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeSheet//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"Cancel\"]"), "Close button");
     private final String LIBRARY_NAME = "//XCUIElementTypeSheet//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"%s\"]";
 
@@ -45,8 +45,8 @@ public class IosFindYourLibScreen extends FindYourLibScreen {
     }
 
     @Override
-    public void tapCloseBtn() {
-        btnClose.click();
+    public void tapCancelBtn() {
+        btnCancel.click();
     }
 
     private List<String > getListOfLibraries(int listSize) {
