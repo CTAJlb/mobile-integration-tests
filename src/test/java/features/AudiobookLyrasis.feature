@@ -233,15 +233,16 @@ Feature: Audiobook in Lyrasis
       And Click GET action button on book details screen
     Then I check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
-      And Save book play time as 'timeInfo' on audio player screen
-      And Tap play button on audio player screen
-      And I stretch slider on the time tracking line forward on audio player screen
+    Then Audio player screen of book 'bookInfo' is opened
+    When Tap play button on audio player screen
       And Tap pause button on audio player screen
+      And Save book play time as 'timeInfo' on audio player screen
+      And I stretch slider on the time tracking line forward on audio player screen
+      And Wait for 5 seconds
     Then Playing time is not equal to 'timeInfo' on audio playing screen
     When Save book play time as 'timeInfo2' on audio player screen
-      And Tap play button on audio player screen
       And I stretch slider on the time tracking line back on audio player screen
-      And Tap pause button on audio player screen
+      And Wait for 5 seconds
     Then Playing time is not equal to 'timeInfo2' on audio playing screen
 
     Scenarios:
@@ -252,13 +253,16 @@ Feature: Audiobook in Lyrasis
       | Biblioboard        |
 
   @logout @returnBooks @tier2
-  Scenario Outline: Check of not rewinding forward by tapping on time bar
+  Scenario Outline: Check of not rewinding forward and back by tapping on time bar
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
     Then I check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
+    Then Audio player screen of book 'bookInfo' is opened
+    When Tap play button on audio player screen
+      And Tap pause button on audio player screen
       And I stretch slider on the time tracking line forward on audio player screen
       And Wait for 5 seconds
       And Save book play time as 'timeBehind' on audio player screen

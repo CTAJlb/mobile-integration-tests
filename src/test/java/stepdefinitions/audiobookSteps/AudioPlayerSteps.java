@@ -9,6 +9,7 @@ import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import models.android.CatalogBookModel;
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -30,6 +31,14 @@ public class AudioPlayerSteps {
         audioPlayerScreen = AqualityServices.getScreenFactory().getScreen(AudioPlayerScreen.class);
         this.context = context;
     }
+
+    @Then("Audio player screen of book {string} is opened")
+    public void isPlayerOpened(String bookInfoKey) {
+        CatalogBookModel bookInfo = context.get(bookInfoKey);
+        String bookName = bookInfo.getTitle();
+        Assert.assertTrue("Player of book " + bookName + " is not opened", audioPlayerScreen.isPlayerOpened(bookName));
+    }
+
     @And("Open toc audiobook screen")
     public void openTocAudiobookScreen() {
         audioPlayerScreen.openToc();
@@ -137,7 +146,8 @@ public class AudioPlayerSteps {
 
     @Then("Playing time is not equal to {string} on audio playing screen")
     public void compareTimes(String timeKey) {
-        Assert.assertNotEquals("Times are equals", context.get(timeKey), audioPlayerScreen.getLeftTime());
+        Duration time = context.get(timeKey);
+        Assert.assertNotEquals("Times are equals", time.getSeconds(), audioPlayerScreen.getLeftTime().getSeconds());
     }
 
     @Then("Play times {string} and {string} are equals")
