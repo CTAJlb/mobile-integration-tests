@@ -16,6 +16,8 @@ public abstract class AudioPlayerScreen extends Screen {
         super(locator, "AudioPlayerScreen");
     }
 
+    public abstract boolean isPlayerOpened(String bookName);
+
     public abstract void openToc();
 
     public abstract void openSleepTimer();

@@ -45,7 +45,7 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     private final IButton btnSleepTimer =
             getElementFactory().getButton(By.id("player_menu_sleep_image"), "btnSleepTimer");
     private final ILabel lblPlaybackProgress =
-            getElementFactory().getLabel(By.id("player_progress"), "Playback progress");
+            getElementFactory().getLabel(By.xpath("//android.widget.SeekBar"), "Playback progress");
     private final IButton btnPlaySpeed =
             getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id, \"playback_rate_text\")]"), "Button play speed");
 
@@ -53,6 +53,11 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
         super(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]"));
         sleepTimerAudiobookScreen = AqualityServices.getScreenFactory().getScreen(SleepTimerAudiobookScreen.class);
         playbackSpeedAudiobookScreen = AqualityServices.getScreenFactory().getScreen(PlaybackSpeedAudiobookScreen.class);
+    }
+
+    @Override
+    public boolean isPlayerOpened(String bookName) {
+        return getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME_LOC, bookName)), "Book name").state().waitForDisplayed();
     }
 
     @Override
@@ -123,14 +128,18 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public void tapOnPlayBarForward() {
+        double xPositionFurtherFromCenter = lblPlaybackProgress.getElement().getCenter().x * 1.25;
+        double yPosition = lblPlaybackProgress.getElement().getCenter().y;
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        action.tap(PointOption.point((int) (lblPlaybackProgress.getElement().getCenter().x * 1.25), lblPlaybackProgress.getElement().getCenter().y)).perform();
+        action.tap(PointOption.point((int) xPositionFurtherFromCenter, (int) yPosition)).perform();
     }
 
     @Override
     public void tapOnPlayBarBackward() {
+        double xPositionCloserThanCenter = lblPlaybackProgress.getElement().getCenter().x * 0.2;
+        double yPosition = lblPlaybackProgress.getElement().getCenter().y;
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        action.tap(PointOption.point((int) (lblPlaybackProgress.getElement().getCenter().x * 0.2), lblPlaybackProgress.getElement().getCenter().y)).perform();
+        action.tap(PointOption.point((int) xPositionCloserThanCenter, (int) yPosition)).perform();
     }
 
     @Override
@@ -146,16 +155,20 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public void stretchPlaySliderBack() {
-        int x = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getX();
-        int y = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getY();
-        lblPlaybackProgress.getTouchActions().swipeWithLongPress(new Point((int) (x * 0.2), y));
+        int startX = (int) (AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getSize().getWidth() * 0.5);
+        int startY = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getY();
+        int endX = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getX();
+        TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+        action.longPress(PointOption.point(new Point(startX, startY))).moveTo(PointOption.point(endX, startY)).release().perform();
     }
 
     @Override
     public void stretchPlaySliderForward() {
-        int x = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getX();
-        int y = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getY();
-        lblPlaybackProgress.getTouchActions().swipeWithLongPress(new Point(x * 8, y));
+        int startX = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getX();
+        int startY = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getY();
+        int endX = (int) (startX + (AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getSize().getWidth()) * 0.5);
+        TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+        action.longPress(PointOption.point(new Point(startX, startY))).moveTo(PointOption.point(endX, startY)).release().perform();
     }
 
     @Override

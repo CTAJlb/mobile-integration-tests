@@ -11,7 +11,6 @@ import framework.utilities.DateUtils;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
 import screens.audiobook.audioPlayer.AudioPlayerScreen;
 import screens.audiobook.playbackSpeedAudiobook.PlaybackSpeedAudiobookScreen;
 import screens.audiobook.sleepTimerAudiobook.SleepTimerAudiobookScreen;
@@ -23,7 +22,7 @@ import java.util.Map;
 @ScreenType(platform = PlatformName.IOS)
 public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private static final String PLAYBACK_SPEED_LOC = "//XCUIElementTypeToolbar//XCUIElementTypeButton[contains(@name, \"%s\")]";
-    private static final String AUDIOBOOK_NAME__LOC = "//XCUIElementTypeStaticText[@name=\"%s\"]";
+    private static final String AUDIOBOOK_NAME_LOC = "//XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String TIME_IN_HOURS_LEFT_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d hour and %d minutes until playback pauses\"]";
     private static final String TIME_IN_MINUTES_LEFT_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d minutes and %d seconds until playback pauses\"]";
     private static final String TIME_IN_SECONDS_LEFT_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d seconds until playback pauses\"]";
@@ -67,6 +66,11 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
+    public boolean isPlayerOpened(String bookName) {
+        return getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME_LOC, bookName)), "Book name").state().waitForDisplayed();
+    }
+
+    @Override
     public void openToc() {
         btnToc.click();
     }
@@ -98,7 +102,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public boolean isAudiobookNamePresent(String audiobookName) {
-        return getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME__LOC, audiobookName)), "audiobookName").state().waitForDisplayed();
+        return getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME_LOC, audiobookName)), "audiobookName").state().waitForDisplayed();
     }
 
     private static final Map<String, String> speedName = new HashMap<String, String>() {{
@@ -146,14 +150,18 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public void tapOnPlayBarForward() {
+        double xPositionFurtherFromCenter = lblPlaybackProgress.getElement().getCenter().x * 1.25;
+        double yPosition = lblPlaybackProgress.getElement().getCenter().y;
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        action.tap(PointOption.point((int) (lblPlaybackProgress.getElement().getCenter().x * 1.25), lblPlaybackProgress.getElement().getCenter().y)).perform();
+        action.tap(PointOption.point((int) xPositionFurtherFromCenter, (int) yPosition)).perform();
     }
 
     @Override
     public void tapOnPlayBarBackward() {
+        double xPositionCloserThanCenter = lblPlaybackProgress.getElement().getCenter().x * 0.2;
+        double yPosition = lblPlaybackProgress.getElement().getCenter().y;
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        action.tap(PointOption.point((int) (lblPlaybackProgress.getElement().getCenter().x * 0.2), lblPlaybackProgress.getElement().getCenter().y)).perform();
+        action.tap(PointOption.point((int) xPositionCloserThanCenter, (int) yPosition)).perform();
     }
 
     @Override
@@ -168,16 +176,20 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public void stretchPlaySliderForward() {
-        int x = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getX();
-        int y = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getY();
-        btnSlider.getTouchActions().swipeWithLongPress(new Point(x * 8, y));
+        int startX = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getX();
+        int startY = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getY();
+        int endX = (startX + (AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getSize().getWidth()) * 8);
+        TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+        action.longPress(PointOption.point(startX, startY)).moveTo(PointOption.point(endX, startY)).release().perform();
     }
 
     @Override
     public void stretchPlaySliderBack() {
-        double x = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getX();
-        double y = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getY();
-        btnSlider.getTouchActions().swipeWithLongPress(new Point((int) (x * 0.2), (int) y));
+        double startX = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getX() * 8;
+        double startY = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getY();
+        double endX = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getX() * 0.2;
+        TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+        action.longPress(PointOption.point((int) startX, (int) startY)).moveTo(PointOption.point((int) endX, (int) startY)).release().perform();
     }
 
     @Override
