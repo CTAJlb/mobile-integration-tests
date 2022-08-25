@@ -6,6 +6,7 @@ import screens.addaccount.AddAccountScreen;
 import screens.bottommenu.BottomMenuForm;
 import screens.catalog.screen.catalog.CatalogScreen;
 import screens.findyourlibraryscreen.FindYourLibScreen;
+import screens.settings.SettingsScreen;
 import screens.tutorial.TutorialScreen;
 import screens.welcome.WelcomeScreen;
 import stepdefinitions.BaseSteps;
@@ -19,6 +20,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     protected final TutorialScreen tutorialScreen;
     protected final FindYourLibScreen findYourLibScreen;
     protected final BottomMenuForm bottomMenuForm;
+    protected final SettingsScreen settingsScreen;
 
     public AbstractApplicationSteps() {
         welcomeScreen = AqualityServices.getScreenFactory().getScreen(WelcomeScreen.class);
@@ -27,7 +29,10 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
         tutorialScreen = AqualityServices.getScreenFactory().getScreen(TutorialScreen.class);
         findYourLibScreen = AqualityServices.getScreenFactory().getScreen(FindYourLibScreen.class);
         bottomMenuForm = AqualityServices.getScreenFactory().getScreen(BottomMenuForm.class);
+        settingsScreen = AqualityServices.getScreenFactory().getScreen(SettingsScreen.class);
     }
+
+    public abstract void turnOnTestMode(String libraryName);
 
     public abstract void returnToPreviousScreenForEpubAndPdf();
 
