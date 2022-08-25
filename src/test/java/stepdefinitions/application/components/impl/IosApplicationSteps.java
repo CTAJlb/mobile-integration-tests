@@ -3,11 +3,13 @@ package stepdefinitions.application.components.impl;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
+import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
 import screens.catalog.screen.catalog.CatalogScreen;
 import screens.epub.readerEpub.ReaderEpubScreen;
 import screens.findyourlibraryscreen.FindYourLibScreen;
 import screens.pdf.readerPdf.ReaderPdfScreen;
+import screens.settings.SettingsScreen;
 import stepdefinitions.application.components.AbstractApplicationSteps;
 
 @StepsType(platform = PlatformName.IOS)
@@ -17,6 +19,7 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
     private final CatalogScreen catalogScreen;
     private final FindYourLibScreen findYourLibScreen;
     private final BottomMenuForm bottomMenuForm;
+    private final SettingsScreen settingsScreen;
 
     public IosApplicationSteps() {
         super();
@@ -25,6 +28,16 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
         catalogScreen = screenFactory.getScreen(CatalogScreen.class);
         findYourLibScreen = screenFactory.getScreen(FindYourLibScreen.class);
         bottomMenuForm = screenFactory.getScreen(BottomMenuForm.class);
+        settingsScreen = screenFactory.getScreen(SettingsScreen.class);
+    }
+
+    @Override
+    public void turnOnTestMode(String libraryName) {
+        tutorialScreen.closeTutorial();
+        welcomeScreen.tapFindLibraryButton();
+        addAccountScreen.selectLibraryViaSearch(libraryName);
+        bottomMenuForm.open(BottomMenu.SETTINGS);
+        settingsScreen.openTestMode();
     }
 
     @Override

@@ -3,10 +3,20 @@ package stepdefinitions.application.components.impl;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import factories.steps.StepsType;
+import screens.bottommenu.BottomMenu;
 import stepdefinitions.application.components.AbstractApplicationSteps;
 
 @StepsType(platform = PlatformName.ANDROID)
 public class AndroidApplicationSteps extends AbstractApplicationSteps {
+
+    @Override
+    public void turnOnTestMode(String libraryName) {
+        tutorialScreen.closeTutorial();
+        welcomeScreen.tapFindLibraryButton();
+        addAccountScreen.selectLibraryViaSearch(libraryName);
+        bottomMenuForm.open(BottomMenu.SETTINGS);
+        settingsScreen.openTestMode();
+    }
 
     @Override
     public void returnToPreviousScreenForEpubAndPdf() {

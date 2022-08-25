@@ -26,6 +26,11 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         this.abstractApplicationSteps = stepsFactory.getSteps(AbstractApplicationSteps.class);
     }
 
+    @When("I turn on test mode in {string} library")
+    public void turnOnTestMode(String libraryName) {
+        abstractApplicationSteps.turnOnTestMode(libraryName);
+    }
+
     @And("I return to previous screen for epub and pdf")
     public void returnToPreviousScreenForEpubAndPdf() {
         abstractApplicationSteps.returnToPreviousScreenForEpubAndPdf();

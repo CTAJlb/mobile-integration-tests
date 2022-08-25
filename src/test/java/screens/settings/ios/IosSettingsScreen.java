@@ -1,9 +1,13 @@
 package screens.settings.ios;
 
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.TapOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import org.openqa.selenium.By;
 import screens.settings.SettingsScreen;
 
@@ -23,6 +27,11 @@ public class IosSettingsScreen extends SettingsScreen {
             By.xpath("//XCUIElementTypeButton[@name=\"User Agreement\"]"), "User Agreement");
     private final IButton btnSoftwareLic = getElementFactory().getButton(
             By.xpath("//XCUIElementTypeButton[@name=\"Software Licenses\"]"), "Software Licenses");
+    private final IButton lblPalaceVersion = getElementFactory().getButton(
+            By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Palace version\")]"), "Palace version");
+    private final IButton btnTesting = getElementFactory().getButton(
+            By.xpath("//XCUIElementTypeButton[@name=\"Testing\"]"), "Testing button");
+
     private final String libraryLocator = "//XCUIElementTypeTable//XCUIElementTypeStaticText[@name=\"%s\"]";
 
     public IosSettingsScreen() {
@@ -62,5 +71,13 @@ public class IosSettingsScreen extends SettingsScreen {
     @Override
     public void openLibrary(String libraryName) {
         getElementFactory().getButton(By.xpath(String.format(libraryLocator, libraryName)), "Library " + libraryName).click();
+    }
+
+    @Override
+    public void openTestMode() {
+        TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
+        action.tap(TapOptions.tapOptions().withTapsCount(7).withElement(ElementOption.element(lblPalaceVersion.getElement()))).
+                perform();
+        btnTesting.click();
     }
 }
