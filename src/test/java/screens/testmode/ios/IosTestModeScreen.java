@@ -9,7 +9,7 @@ import screens.testmode.TestModeScreen;
 @ScreenType(platform = PlatformName.IOS)
 public class IosTestModeScreen extends TestModeScreen {
     private final IButton btnHiddenLibraries = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeSwitch[name=\"Enable Hidden Libraries\"]"), "Hidden libraries button");
+            By.xpath("//XCUIElementTypeSwitch[@name=\"Enable Hidden Libraries\"]"), "Hidden libraries button");
 
     public IosTestModeScreen() {
         super(By.xpath("//XCUIElementTypeStaticText[name=\"Testing\"]"));
