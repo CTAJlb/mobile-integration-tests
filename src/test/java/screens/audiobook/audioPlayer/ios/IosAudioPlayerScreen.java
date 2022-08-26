@@ -56,7 +56,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private final IButton btnPlaySpeed =
             getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[contains(@name, \"speed\")]"), "Button play speed");
     private final IButton btnSlider =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeOther[@name=\"progress_bar\"]"), "Slider");
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeOther[@name=\"progress_grip\"]"), "Slider");
 
 
     public IosAudioPlayerScreen() {
@@ -130,7 +130,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public boolean isPlayButtonPresent() {
-        return btnPlay.state().isDisplayed();
+        return btnPlay.state().waitForDisplayed();
     }
 
     @Override
@@ -140,7 +140,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public boolean isPauseButtonPresent() {
-        return btnPause.state().isDisplayed();
+        return btnPause.state().waitForDisplayed();
     }
 
     @Override
@@ -178,16 +178,16 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     public void stretchPlaySliderForward() {
         int startX = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getX();
         int startY = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getY();
-        int endX = (startX + (AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getSize().getWidth()) * 8);
+        int endX = (startX + 100);
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        action.longPress(PointOption.point(startX, startY)).moveTo(PointOption.point(endX, startY)).release().perform();
+        action.press(PointOption.point(startX, startY)).moveTo(PointOption.point(endX, startY)).release().perform();
     }
 
     @Override
     public void stretchPlaySliderBack() {
         double startX = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getX() * 8;
         double startY = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getY();
-        double endX = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getX() * 0.2;
+        double endX = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getX() * 0.15;
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
         action.longPress(PointOption.point((int) startX, (int) startY)).moveTo(PointOption.point((int) endX, (int) startY)).release().perform();
     }

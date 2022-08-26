@@ -21,4 +21,6 @@ public abstract class SettingsScreen extends Screen {
     public abstract boolean isSettingsScreenOpened();
 
     public abstract void openLibrary(String libraryName);
+
+    public abstract void openTestMode();
 }
