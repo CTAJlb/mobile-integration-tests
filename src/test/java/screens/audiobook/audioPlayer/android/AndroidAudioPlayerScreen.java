@@ -48,6 +48,8 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
             getElementFactory().getLabel(By.xpath("//android.widget.SeekBar"), "Playback progress");
     private final IButton btnPlaySpeed =
             getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id, \"playback_rate_text\")]"), "Button play speed");
+    private final ILabel lblPlayerDownloading =
+            getElementFactory().getLabel(By.xpath("//android.widget.ProgressBar[contains(@resource-id, \"player_downloading\")]"), "Player downloading");
 
     public AndroidAudioPlayerScreen() {
         super(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]"));
@@ -57,6 +59,9 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public boolean isPlayerOpened(String bookName) {
+        if(lblPlayerDownloading.state().isDisplayed()) {
+            btnPlay.state().waitForDisplayed();
+        }
         return getElementFactory().getLabel(By.xpath(String.format(AUDIOBOOK_NAME_LOC, bookName)), "Book name").state().waitForDisplayed();
     }
 

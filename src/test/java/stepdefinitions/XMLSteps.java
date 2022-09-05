@@ -24,8 +24,8 @@ public class XMLSteps {
         subcategoryScreen = AqualityServices.getScreenFactory().getScreen(SubcategoryScreen.class);
     }
 
-    @And("I search {string} book of distributor {string} and bookType {string} and save as {string}")
-    public void searchFor(String availabilityType, String distributor, String bookType, String bookNameInfoKey) {
+    @And("I search {string} book of distributor {string} and bookType {string} from {string} and save as {string}")
+    public void searchFor(String availabilityType, String distributor, String bookType, String library, String bookNameInfoKey) {
         String bookName = getRandomBookNameWithoutBadSymbols(availabilityType, distributor, bookType);
         AqualityServices.getLogger().info("randomBookName: " + bookName);
         context.add(bookNameInfoKey, bookName);
