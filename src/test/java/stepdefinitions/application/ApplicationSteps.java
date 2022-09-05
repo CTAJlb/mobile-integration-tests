@@ -1,7 +1,6 @@
 package stepdefinitions.application;
 
 import com.google.inject.Inject;
-import constants.keysForContext.ContextLibrariesKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -13,7 +12,6 @@ import stepdefinitions.BaseSteps;
 import stepdefinitions.application.components.AbstractApplicationSteps;
 import stepdefinitions.application.components.IApplicationSteps;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
@@ -43,13 +41,11 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
 
     @Given("I add {string} account from welcomeScreen")
     public void addAccountFromWelcomeScreen(String libraryName) {
-        saveLibraryForLogOut(libraryName);
         abstractApplicationSteps.addAccountFromWelcomeScreen(libraryName);
     }
 
     @When("I add {string} account by the logo")
     public void addAccountByTheLogo(String libraryName) {
-        saveLibraryForLogOut(libraryName);
         abstractApplicationSteps.addAccountByTheLogo(libraryName);
     }
 
@@ -141,20 +137,5 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         softAssertions.assertThat(abstractApplicationSteps.getTypeOfButton(tab2)).as("There is no " + tab2 + " tab").isEqualTo(tab2);
         softAssertions.assertThat(abstractApplicationSteps.getTypeOfButton(tab3)).as("There is no " + tab3 + " tab").isEqualTo(tab3);
         softAssertions.assertThat(abstractApplicationSteps.getTypeOfButton(tab4)).as("There is no " + tab4 + " tab").isEqualTo(tab4);
-    }
-
-    private void saveLibraryForLogOut(String libraryName) {
-        if (libraryName.equalsIgnoreCase("LYRASIS Reads")) {
-            saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
-        }
-    }
-
-    private void saveLibraryInContext(String key, String libraryName) {
-        List<String> listOfLibraries = context.containsKey(key)
-                ? context.get(key)
-                : new ArrayList<>();
-
-        listOfLibraries.add(libraryName);
-        context.add(key, listOfLibraries);
     }
 }
