@@ -10,7 +10,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Page Lyrasis
     When I open search modal
-      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -25,7 +25,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Open book to last page read Lyrasis
     When I open search modal
-      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -49,7 +49,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Gallery Lyrasis
     When I open search modal
-      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -64,7 +64,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Search Pdf Functionality Lyrasis
     When I open search modal
-      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -88,7 +88,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Pdf Search Results Lyrasis
     When I open search modal
-      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -103,7 +103,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Page slider Lyrasis
     When I open search modal
-      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -119,7 +119,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Bookmarks Functionality Lyrasis
     When I open search modal
-      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -148,7 +148,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Check table of contents in Lyrasis
     When I open search modal
-      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -164,7 +164,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Chapters in Lyrasis
     When I open search modal
-    And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+    And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -178,7 +178,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @logout @returnBooks @tier1 @exclude_android
   Scenario Outline: Check invalid data in searching
     When I open search modal
-    And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+    And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -200,7 +200,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
   @logout @returnBooks @tier1 @exclude_android
   Scenario Outline: Check valid data in searching
     When I open search modal
-      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen

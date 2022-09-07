@@ -10,7 +10,7 @@ Feature: Read PDF in LYRASIS Reads on Android
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Open pages Lyrasis
     When I open search modal
-      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -24,7 +24,7 @@ Feature: Read PDF in LYRASIS Reads on Android
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Open book to last page read Lyrasis
     When I open search modal
-      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -46,7 +46,7 @@ Feature: Read PDF in LYRASIS Reads on Android
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Navigate by Page slider Lyrasis
     When I open search modal
-      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'

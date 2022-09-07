@@ -35,7 +35,7 @@ Feature: My books module
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And I open Books
@@ -53,7 +53,7 @@ Feature: My books module
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     When Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -74,7 +74,7 @@ Feature: My books module
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -97,7 +97,7 @@ Feature: My books module
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click RETURN action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -110,7 +110,7 @@ Feature: My books module
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'available' book of distributor 'Bibliotheca' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -127,7 +127,7 @@ Feature: My books module
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
+      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen

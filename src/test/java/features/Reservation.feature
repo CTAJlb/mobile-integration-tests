@@ -7,7 +7,7 @@ Feature: Reservation of book in LYRASIS
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click RESERVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on catalog books screen
@@ -27,7 +27,7 @@ Feature: Reservation of book in LYRASIS
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Click RESERVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click REMOVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -40,7 +40,7 @@ Feature: Reservation of book in LYRASIS
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
     When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -62,7 +62,7 @@ Feature: Reservation of book in LYRASIS
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search 'unavailable' book of distributor 'Axis 360' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I search 'unavailable' book of distributor 'Axis 360' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
     Then Subcategory screen is present
     When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -78,7 +78,7 @@ Feature: Reservation of book in LYRASIS
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo'
+      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
       And Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
@@ -97,14 +97,14 @@ Feature: Reservation of book in LYRASIS
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo'
+      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And I open Catalog
       And I open search modal
-      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' and save as 'bookNameInfo2'
+      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo2'
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo2' bookName on catalog books screen and save book as 'bookInfo2'
       And Clear search field on catalog books screen
-      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' and save as 'bookNameInfo3'
+      And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo3'
       And Click RESERVE action button on EBOOK book with 'bookNameInfo3' bookName on catalog books screen and save book as 'bookInfo3'
       And I open Holds
     Then Books are sorted by Title by default on holds screen
@@ -120,7 +120,7 @@ Feature: Reservation of book in LYRASIS
     Then Login is performed successfully
     When I open Catalog
       And I open search modal
-      And I search 'unavailable' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
+      And I search 'unavailable' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open <bookType> book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click RESERVE action button on book details screen
