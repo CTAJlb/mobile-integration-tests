@@ -5,7 +5,7 @@ Feature: Book detail view screen
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
       And I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
+      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
@@ -29,7 +29,7 @@ Feature: Book detail view screen
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
       And I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
+      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
@@ -52,7 +52,7 @@ Feature: Book detail view screen
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
       And I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
+      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
@@ -76,7 +76,7 @@ Feature: Book detail view screen
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
       And I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' and save as 'bookNameInfo'
+      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
