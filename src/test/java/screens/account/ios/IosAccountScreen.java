@@ -28,7 +28,7 @@ public class IosAccountScreen extends AccountScreen {
             By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, AccountScreenLoginStatus.LOG_OUT.i18n())),
             "Log out");
     private final IButton btnApproveSignOut = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"Sign Out\"]"),
+            By.xpath("//XCUIElementTypeButton[@name=\"Sign out\"]"),
             "Log out approve");
     private final ITextBox txbCard = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeTextField[@value]"), "Card");
     private final ITextBox txbPin = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeSecureTextField[@value]"), "Pin");
