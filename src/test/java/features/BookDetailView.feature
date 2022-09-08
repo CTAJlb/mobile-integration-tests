@@ -184,3 +184,60 @@ Feature: Book detail view screen
 #    Then List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
 #    When I sort books by TITLE
 #    Then Books are sorted by Title ascending
+
+  @tier1
+  Scenario: Check of a book title and author in Overdrive
+    When I turn on test mode in "Palace Bookshelf" library
+      And I open Catalog
+      And I add "A1QA Test Library" account by the logo
+    Then Account "A1QA Test Library" is present on Accounts screen
+    When I open Catalog
+      And I open search modal
+      And I search for "The Woman in White" and save bookName as 'bookNameInfo'
+      And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then Book 'bookInfo' is opened on book details screen
+      And Book 'bookInfo' has correct title and author name on book details screen
+      And The book cover is displayed on book details screen
+
+  @tier1
+  Scenario: Check of a "More..." button in Description section in Overdrive
+    When I turn on test mode in "Palace Bookshelf" library
+      And I open Catalog
+      And I add "A1QA Test Library" account by the logo
+    Then Account "A1QA Test Library" is present on Accounts screen
+    When I open Catalog
+      And I open search modal
+      And I search for "The Oregon Trail" and save bookName as 'bookNameInfo'
+      And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then Book 'bookInfo' is opened on book details screen
+      And Description is not empty in book details screen
+      And Button More in Description is available on book details screen
+
+  @tier1
+  Scenario: Check fields in Information section in Overdrive
+    When I turn on test mode in "Palace Bookshelf" library
+      And I open Catalog
+      And I add "A1QA Test Library" account by the logo
+    Then Account "A1QA Test Library" is present on Accounts screen
+    When I open Catalog
+      And I open search modal
+      And I search for "The Count of Monte Cristo" and save bookName as 'bookNameInfo'
+      And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then Book 'bookInfo' is opened on book details screen
+      And Publisher and Categories in Information section are correct on book details screen
+      And Distributor is equal to '<distributor>' on book details screen
+
+  @tier1
+  Scenario: Check related books section in Overdrive
+    When I turn on test mode in "Palace Bookshelf" library
+      And I open Catalog
+      And I add "A1QA Test Library" account by the logo
+    Then Account "A1QA Test Library" is present on Accounts screen
+    When I open Catalog
+      And I open search modal
+      And I search for "The Woman in White" and save bookName as 'bookNameInfo'
+      And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then Book 'bookInfo' is opened on book details screen
+      And Related books section is displayed on book details screen
+      And There is a list of related books on book details screen
+      And More button in related books section is available on book details screen
