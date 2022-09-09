@@ -1,4 +1,4 @@
-Feature: Tests for Audiobooks from Overdrive in A1QA library
+Feature: Audiobooks in A1QA library
 
   Background:
     Given I turn on test mode in "Palace Bookshelf" library

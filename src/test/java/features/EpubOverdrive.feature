@@ -2,7 +2,8 @@ Feature: Read EPUB from Overdrive in A1QA
 
   Background:
     Given I turn on test mode in "Palace Bookshelf" library
-    When I open Catalog
+    When Enable hidden libraries
+      And I open Catalog
       And I add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
     When I enter credentials for "A1QA Test Library" account
