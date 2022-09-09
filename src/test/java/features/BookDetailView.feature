@@ -188,6 +188,7 @@ Feature: Book detail view screen
   @tier1
   Scenario: Check of a book title and author in Overdrive
     When I turn on test mode in "Palace Bookshelf" library
+      And Enable hidden libraries
       And I open Catalog
       And I add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
@@ -202,6 +203,7 @@ Feature: Book detail view screen
   @tier1
   Scenario: Check of a "More..." button in Description section in Overdrive
     When I turn on test mode in "Palace Bookshelf" library
+      And Enable hidden libraries
       And I open Catalog
       And I add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
@@ -216,6 +218,7 @@ Feature: Book detail view screen
   @tier1
   Scenario: Check fields in Information section in Overdrive
     When I turn on test mode in "Palace Bookshelf" library
+      And Enable hidden libraries
       And I open Catalog
       And I add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
@@ -230,6 +233,7 @@ Feature: Book detail view screen
   @tier1
   Scenario: Check related books section in Overdrive
     When I turn on test mode in "Palace Bookshelf" library
+      And Enable hidden libraries
       And I open Catalog
       And I add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
