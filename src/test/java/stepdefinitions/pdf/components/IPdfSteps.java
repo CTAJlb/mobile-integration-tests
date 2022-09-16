@@ -3,7 +3,7 @@ package stepdefinitions.pdf.components;
 import framework.utilities.swipe.directions.EntireScreenDragDirection;
 
 public interface IPdfSteps {
-    void checkPdfBookPresent(String bookInfoKey);
+    void checkPdfBookPresent(String bookInfoKey);  //+
 
     void checkThatBookmarkIsNotDisplayed();
 
@@ -39,11 +39,11 @@ public interface IPdfSteps {
 
     void checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(String pageNumberKey);
 
-    void openGalleryPdfScreen();
+    void openGalleryPdfScreen();        //+
 
     void openBookmarksPdfScreen();
 
-    void openTOC();
+    void openTOC();         //+
 
     void openRandomChapterAndSavePageNumber(String pageNumberKey);
 
@@ -59,7 +59,7 @@ public interface IPdfSteps {
 
     void checkSearchPdfScreenIsOpened();
 
-    void checkGalleryPdfScreenIsOpened();
+    void checkGalleryPdfScreenIsOpened();           //+
 
     void searchTextOnSearchPdfScreen(String text);
 
@@ -85,5 +85,5 @@ public interface IPdfSteps {
 
     void checkTocPdfScreenIsOpened();
 
-    void switchToGalleryPdfScreen();
+    void switchToGalleryPdfScreen();        //+
 }

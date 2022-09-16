@@ -30,6 +30,11 @@ public class IosNavigationBarPdfScreen extends NavigationBarPdfScreen {
     }
 
     @Override
+    public void openTOC() {
+
+    }
+
+    @Override
     public void openTocBookmarksGallery() {
         btnTocAndBookmarksAndGallery.click();
     }

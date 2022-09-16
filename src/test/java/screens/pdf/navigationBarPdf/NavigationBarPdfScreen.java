@@ -10,6 +10,12 @@ public abstract class NavigationBarPdfScreen extends Screen {
 
     public abstract void tapBackButton();
 
+    public abstract void openTOC();
+
+
+
+
+
     public abstract void openTocBookmarksGallery();
 
     public abstract void tapSearchButton();

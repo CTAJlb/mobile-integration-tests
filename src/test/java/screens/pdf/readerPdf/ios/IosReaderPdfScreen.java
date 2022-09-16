@@ -18,7 +18,6 @@ import org.openqa.selenium.Point;
 import screens.pdf.navigationBarPdf.NavigationBarPdfScreen;
 import screens.pdf.readerPdf.ReaderPdfScreen;
 import screens.pdf.searchPdf.SearchPdfScreen;
-import screens.pdf.tocBookmarksGalleryPdf.TocBookmarksGalleryPdfScreen;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosReaderPdfScreen extends ReaderPdfScreen {
@@ -38,6 +37,12 @@ public class IosReaderPdfScreen extends ReaderPdfScreen {
         navigationBarPdfScreen = AqualityServices.getScreenFactory().getScreen(NavigationBarPdfScreen.class);
         searchPdfScreen = AqualityServices.getScreenFactory().getScreen(SearchPdfScreen.class);
     }
+
+    @Override
+    public boolean isReaderOpened() {
+        return true;
+    }
+
 
     @Override
     public String getBookName() {
@@ -60,13 +65,6 @@ public class IosReaderPdfScreen extends ReaderPdfScreen {
     @Override
     public void goToPreviousPage() {
         SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.LEFT);
-    }
-
-    @Override
-    public void openToc() {
-        openNavigationBar();
-        navigationBarPdfScreen.openTocBookmarksGallery();
-        AqualityServices.getScreenFactory().getScreen(TocBookmarksGalleryPdfScreen.class).tapTocButton();
     }
 
     @Override

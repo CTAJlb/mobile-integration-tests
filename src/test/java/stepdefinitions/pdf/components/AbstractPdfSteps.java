@@ -100,17 +100,17 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
 
     @Override
     public void checkThatRandomChapterOfPdfBookCanBeOpenedFromTocPdfScreen() {
-        readerPdfScreen.openToc();
-        List<String> chapters = tocPdfScreen.getListOfBookChapters();
-        if (chapters.size() == 0) {
-            throw new RuntimeException("size of the listOfBookChapters for toc pdf == 0");
-        }
-        int randomChapterNumber = RandomUtils.nextInt(2, (int) chapters.stream().limit(5).count());
-        int expectedChapterNumber = tocPdfScreen.getChapterNumber(chapters.get(randomChapterNumber));
-        tocPdfScreen.openChapter(chapters.get(randomChapterNumber));
+//        readerPdfScreen.openToc();
+//        List<String> chapters = tocPdfScreen.getListOfBookChapters();
+//        if (chapters.size() == 0) {
+//            throw new RuntimeException("size of the listOfBookChapters for toc pdf == 0");
+//        }
+//        int randomChapterNumber = RandomUtils.nextInt(2, (int) chapters.stream().limit(5).count());
+//        int expectedChapterNumber = tocPdfScreen.getChapterNumber(chapters.get(randomChapterNumber));
+//        tocPdfScreen.openChapter(chapters.get(randomChapterNumber));
         int actualChapterNumber = readerPdfScreen.getPageNumber();
-        Assert.assertTrue("Pdf chapter number is not correct on reader pdf screen. Expected - " + expectedChapterNumber
-                + ", actual - " + actualChapterNumber, actualChapterNumber == expectedChapterNumber);
+//        Assert.assertTrue("Pdf chapter number is not correct on reader pdf screen. Expected - " + expectedChapterNumber
+//                + ", actual - " + actualChapterNumber, actualChapterNumber == expectedChapterNumber);
     }
 
     @Override
@@ -191,14 +191,14 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
 
     @Override
     public void openRandomChapterAndSavePageNumber(String pageNumberKey) {
-        List<String > listOfChapters = tocPdfScreen.getListOfBookChapters();
-        int numbersOfChapters = listOfChapters.size();
-        if (numbersOfChapters == 0) {
-            throw new RuntimeException("size of the listOfBookChapters for toc pdf == 0");
-        }
-        int randomChapter = RandomUtils.nextInt(0, numbersOfChapters);
-        context.add(pageNumberKey, tocPdfScreen.getChapterNumber(listOfChapters.get(randomChapter)));
-        tocPdfScreen.openChapter(listOfChapters.get(randomChapter));
+//        List<String > listOfChapters = tocPdfScreen.getListOfBookChapters();
+//        int numbersOfChapters = listOfChapters.size();
+//        if (numbersOfChapters == 0) {
+//            throw new RuntimeException("size of the listOfBookChapters for toc pdf == 0");
+//        }
+//        int randomChapter = RandomUtils.nextInt(0, numbersOfChapters);
+//        context.add(pageNumberKey, tocPdfScreen.getChapterNumber(listOfChapters.get(randomChapter)));
+//        tocPdfScreen.openChapter(listOfChapters.get(randomChapter));
     }
 
     @Override
@@ -210,7 +210,8 @@ public abstract class AbstractPdfSteps extends BaseSteps implements IPdfSteps {
 
     @Override
     public void openTOC() {
-        readerPdfScreen.openToc();
+
+//        readerPdfScreen.openToc();
     }
 
     @Override

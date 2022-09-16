@@ -27,6 +27,42 @@ public class IosTocPdfScreen extends TocPdfScreen {
         super(By.xpath("//XCUIElementTypeTable"));
     }
 
+
+    @Override
+    public boolean isTOCOpened() {
+        return false;
+    }
+
+    @Override
+    public void openThumbnails() {
+
+    }
+
+    @Override
+    public boolean areThumbnailDisplayed() {
+        return false;
+    }
+
+    @Override
+    public int openRandomThumbnail() {
+        return 0;
+    }
+
+    @Override
+    public void returnToReaderPdfScreen() {
+        AqualityServices.getScreenFactory().getScreen(TocBookmarksGalleryPdfScreen.class).tapResumeButton();
+    }
+
+    @Override
+    public boolean isThumbnailOpened(int number) {
+        return false;
+    }
+
+    @Override
+    public boolean isTOCClosed() {
+        return false;
+    }
+
     public List<String> getListOfBookChapters() {
         List<String> listOfChapters = getChapters().stream().map(chapter -> chapter.getAttribute(IosAttributes.NAME)).collect(Collectors.toList());
         AqualityServices.getLogger().info("Found chapters on toc pdf - " + listOfChapters.stream().map(Object::toString).collect(Collectors.joining(", ")));
@@ -46,11 +82,6 @@ public class IosTocPdfScreen extends TocPdfScreen {
         ILabel lblChapterNumber = getElementFactory().getLabel(By.xpath(String.format(CHAPTER_NUMBER_BY_NAME_LOC, chapter)), chapter);
         lblChapterNumber.getTouchActions().scrollToElement(SwipeDirection.DOWN);
         return Integer.parseInt(lblChapterNumber.getAttribute(IosAttributes.NAME));
-    }
-
-    @Override
-    public void returnToReaderPdfScreen() {
-        AqualityServices.getScreenFactory().getScreen(TocBookmarksGalleryPdfScreen.class).tapResumeButton();
     }
 
     private List<ILabel> getChapters() {

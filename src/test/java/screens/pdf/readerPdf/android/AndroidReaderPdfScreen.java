@@ -16,23 +16,51 @@ import screens.pdf.searchPdf.SearchPdfScreen;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidReaderPdfScreen extends ReaderPdfScreen {
+    private final NavigationBarPdfScreen navigationBarPdfScreen;
+    private final ILabel lblViewer =
+            getElementFactory().getLabel(By.xpath("//android.view.View[@resource-id=\"viewerContainer\"]"), "Content viewer");
     private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"title_textView\")]"), "lblBookName");
+            getElementFactory().getLabel(By.xpath("//android.view.ViewGroup/android.widget.TextView"), "Book name");
+
+
+
+
+
+
+
     private final ILabel lblPageNumberSlider =
             getElementFactory().getLabel(By.xpath("//*[contains(@resource-id,\"pdfView\")]//android.widget.TextView"), "lblPageNumberSlider");
     private final ILabel lblPage =
             getElementFactory().getLabel(By.xpath("//android.widget.FrameLayout"), "lblPage");
-    private final IButton btnToc =
-            getElementFactory().getButton(By.xpath("//android.widget.ImageView[contains(@resource-id,\"reader_toc\")]"), "btnToc");
 
     public AndroidReaderPdfScreen() {
         super(By.xpath("//*[contains(@resource-id,\"pdfView\")]"));
+        navigationBarPdfScreen = AqualityServices.getScreenFactory().getScreen(NavigationBarPdfScreen.class);
+    }
+
+    @Override
+    public NavigationBarPdfScreen getNavigationBarScreen() {
+        return navigationBarPdfScreen;
+    }
+
+    @Override
+    public boolean isReaderOpened() {
+        return lblViewer.state().waitForDisplayed();
     }
 
     @Override
     public String getBookName() {
         return lblBookName.getText();
     }
+
+
+
+
+
+
+
+
+
 
     @Override
     public int getPageNumber() {
@@ -45,10 +73,7 @@ public class AndroidReaderPdfScreen extends ReaderPdfScreen {
         SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.RIGHT);
     }
 
-    @Override
-    public void openToc(){
-        btnToc.click();
-    }
+
 
     @Override
     public void goToPreviousPage() {
@@ -74,12 +99,6 @@ public class AndroidReaderPdfScreen extends ReaderPdfScreen {
     @Override
     public void openNavigationBar() {
         //only for ios
-    }
-
-    @Override
-    public NavigationBarPdfScreen getNavigationBarScreen() {
-        //only for ios
-        return null;
     }
 
     @Override

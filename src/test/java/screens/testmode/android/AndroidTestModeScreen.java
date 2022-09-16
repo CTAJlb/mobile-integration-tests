@@ -10,7 +10,7 @@ import screens.testmode.TestModeScreen;
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidTestModeScreen extends TestModeScreen {
     private final IButton btnHiddenLibraries = getElementFactory().getButton(
-            By.xpath("//android.widget.Switch[@text=\"Enable Hidden Libraries\"]"), "Hidden libraries button");
+            By.xpath("//android.widget.Switch[contains(@text,\"Enable Hidden Libraries\")]"), "Hidden libraries button");
 
     public AndroidTestModeScreen() {
         super(By.xpath("//android.widget.TextView[@text=\"Debug options\"]"));
