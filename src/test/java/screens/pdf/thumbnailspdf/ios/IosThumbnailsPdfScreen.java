@@ -1,4 +1,4 @@
-package screens.pdf.thumbnailspdf.android;
+package screens.pdf.thumbnailspdf.ios;
 
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
@@ -11,13 +11,13 @@ import screens.pdf.thumbnailspdf.ThumbnailsPdfScreen;
 
 import java.util.List;
 
-@ScreenType(platform = PlatformName.ANDROID)
-public class AndroidThumbnailsPdfScreen extends ThumbnailsPdfScreen {
-    private static final String THUMBNAIL_LOC = "//android.view.View[contains(@content-desc, \"Thumbnail of Page\")]";
-    private static final String THUMBNAIL_NUMBER_LOC = "//android.view.View[@content-desc=\"Thumbnail of Page %d\"]";
+@ScreenType(platform = PlatformName.IOS)
+public class IosThumbnailsPdfScreen extends ThumbnailsPdfScreen {
+    private static final String THUMBNAIL_LOC = "//XCUIElementTypeCollectionView/XCUIElementTypeCell";
+    private static final String THUMBNAIL_NUMBER_LOC = THUMBNAIL_LOC + "/XCUIElementTypeStaticText[@name=\"%d\"]";
 
-    public AndroidThumbnailsPdfScreen() {
-        super(By.xpath("//android.view.View[@resource-id=\"thumbnailView\"]"));
+    public IosThumbnailsPdfScreen() {
+        super(By.xpath("//XCUIElementTypeCollectionView"));
     }
 
     @Override

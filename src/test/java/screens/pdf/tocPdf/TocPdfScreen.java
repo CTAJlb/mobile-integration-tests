@@ -10,4 +10,5 @@ public abstract class TocPdfScreen extends Screen {
 
     public abstract int openRandomChapter();
 
+    public abstract boolean areChaptersDisplayed();
 }

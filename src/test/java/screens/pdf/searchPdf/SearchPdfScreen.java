@@ -24,16 +24,5 @@ public abstract class SearchPdfScreen extends Screen {
 
     public abstract int openRandomFoundText();
 
-
-
-
-
-
-    public abstract void findTextInDocument(String text);
-
-    public abstract void openTheFirstFoundText();
-
-    public abstract int getNumberOfTheFirstFoundText();
-
-    public abstract boolean isSearchResultsEmpty();
+    public abstract boolean isSearchResultEmpty();
 }

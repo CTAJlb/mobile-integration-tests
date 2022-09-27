@@ -40,18 +40,7 @@ public class AndroidNavigationBarPdfScreen extends NavigationBarPdfScreen {
     }
 
     @Override
-    public void tapAddBookmarkButton() {
+    public void tapBookmarkButton() {
         //only for ios
-    }
-
-    @Override
-    public void tapDeleteBookmarkButton() {
-        //only for ios
-    }
-
-    @Override
-    public boolean isBookmarkDisplayed() {
-        //only for ios
-        return false;
     }
 }

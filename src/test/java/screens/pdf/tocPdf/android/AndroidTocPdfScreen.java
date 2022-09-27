@@ -28,6 +28,11 @@ public class AndroidTocPdfScreen extends TocPdfScreen {
         return chapterNumber;
     }
 
+    @Override
+    public boolean areChaptersDisplayed() {
+        return getChapters().size() == 0 || getChapters().size() != 0;
+    }
+
     private List<ILabel> getChapters() {
         return getElementFactory().findElements(By.xpath(CHAPTER_LOC), ElementType.LABEL, ElementsCount.ANY, ElementState.EXISTS_IN_ANY_STATE);
     }

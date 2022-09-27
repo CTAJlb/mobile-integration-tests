@@ -19,16 +19,16 @@ public class IosBookmarksPdfScreen extends BookmarksPdfScreen {
 
     @Override
     public int getCountOfBookmarks() {
-        return getListOfILableOfBookmarks().size();
+        return getListOfBookmarks().size();
     }
 
     @Override
     public void openBookmark(int bookmarkNumber) {
-        ILabel lblBookmarks = getListOfILableOfBookmarks().get(bookmarkNumber);
+        ILabel lblBookmarks = getListOfBookmarks().get(bookmarkNumber);
         lblBookmarks.click();
     }
 
-    private List<ILabel> getListOfILableOfBookmarks() {
+    private List<ILabel> getListOfBookmarks() {
         return getElementFactory().findElements(By.xpath(BOOKMARK_LOC), ElementType.LABEL);
     }
 }

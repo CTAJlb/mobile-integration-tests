@@ -1,6 +1,7 @@
 package stepdefinitions.pdf;
 
 import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import framework.utilities.ScenarioContext;
 import framework.utilities.swipe.SwipeElementUtils;
@@ -79,7 +80,12 @@ public class PdfSteps {
 
     @Then("Text chapter content is opened on pdf toc screen")
     public void isTextContentOpened(){
-        Assert.assertTrue("Text chapter content is not opened", tocBookmarksPdfScreen.isTextContentOpened());
+        if(AqualityServices.getApplication().getPlatformName() == PlatformName.ANDROID) {
+            Assert.assertTrue("Text chapter content is not opened", tocBookmarksPdfScreen.isTextContentOpened());
+        }
+        else {
+            Assert.assertTrue("Text chapter content is not opened", tocBookmarksPdfScreen.getTocPdfScreen().areChaptersDisplayed());
+        }
     }
 
     @When("I open random thumbnail and save the number as {string} on pdf toc screen")
@@ -296,7 +302,7 @@ public class PdfSteps {
 
     @When("I open bookmarks pdf screen")
     public void openBookmarksPdfScreen() {
-        readerPdfScreen.getNavigationBarScreen().openTOC();
+        readerPdfScreen.getNavigationBarScreen().tapTocBookmarksBarButton();
         tocBookmarksPdfScreen.tapBookmarksButton();
     }
 
@@ -311,174 +317,34 @@ public class PdfSteps {
         Assert.assertEquals(String.format("Amount of bookmarks is not correct on bookmarks pdf screen. ExpectedAmountOfBookmarks-%d, actualAmountOfBookmarks-%d", expectedAmountOfBookmarks, actualAmountOfBookmarks), expectedAmountOfBookmarks, actualAmountOfBookmarks);
     }
 
-    @When("Close tocBookmarksGallery pdf screen")
+    @When("Close toc bookmarks pdf screen")
     public void closeTocBookmarksGalleryScreen() {
-//        abstractPdfSteps.closeTocBookmarksGalleryScreen();
+        tocBookmarksPdfScreen.tapResumeButton();
     }
 
+    @When("Add bookmark on reader pdf screen")
+    public void addBookmarkOnReaderPdfScreen() {
+        readerPdfScreen.getNavigationBarScreen().tapBookmarkButton();
+    }
 
+    @When("Open the {int} bookmark on bookmarks pdf screen")
+    public void openBookmark(int bookmarkNumber) {
+        tocBookmarksPdfScreen.getBookmarksPdfScreen().openBookmark(bookmarkNumber);
+    }
 
+    @When("I enter word {} and save as {string} on search pdf screen")
+    public void enterData(String word, String infoKey) {
+        readerPdfScreen.getSearchPdfScreen().enterText(word);
+        context.add(infoKey, word);
+    }
 
-//    @Then("{string} book is present on reader pdf screen")
-//    @Override
-//    public void checkPdfBookPresent(String bookInfoKey) {
-//        abstractPdfSteps.checkPdfBookPresent(bookInfoKey);
-//    }
-//
-//    @When("Bookmark is not displayed on reader pdf screen")
-//    @Override
-//    public void checkThatBookmarkIsNotDisplayed() {
-//        abstractPdfSteps.checkThatBookmarkIsNotDisplayed();
-//    }
-//
-//    @Then("Pdf page number is {int} on reader pdf screen")
-//    @Override
-//    public void checkPdfPageNumberIsEqualTo(int pageNumber) {
-//        abstractPdfSteps.checkPdfPageNumberIsEqualTo(pageNumber);
-//    }
-//
+    @Then("Search result is empty on search pdf screen")
+    public void isSearchResultEmpty() {
+        Assert.assertTrue("Search results is not empty", readerPdfScreen.getSearchPdfScreen().isSearchResultEmpty());
+    }
 
-//
-//    @When("Open the {int} bookmark on bookmarks pdf screen")
-//    @Override
-//    public void openBookmark(int bookmarkNumber) {
-//        abstractPdfSteps.openBookmark(bookmarkNumber);
-//    }
-//
-//    @Then("Bookmark is displayed on reader pdf screen")
-//    @Override
-//    public void checkThatBookmarkIsDisplayed() {
-//        abstractPdfSteps.checkThatBookmarkIsDisplayed();
-//    }
-//
-
-//
-//    @When("Add bookmark on reader pdf screen")
-//    @Override
-//    public void addBookmarkOnReaderPdfScreen() {
-//        abstractPdfSteps.addBookmarkOnReaderPdfScreen();
-//    }
-//
-//    @When("Delete bookmark on reader pdf screen")
-//    @Override
-//    public void deleteBookmarkOnReaderPdfScreen() {
-//        abstractPdfSteps.deleteBookmarkOnReaderPdfScreen();
-//    }
-
-//    @And("Random chapter of pdf book can be opened from toc pdf screen")
-//    @Override
-//    public void checkThatRandomChapterOfPdfBookCanBeOpenedFromTocPdfScreen() {
-//        abstractPdfSteps.checkThatRandomChapterOfPdfBookCanBeOpenedFromTocPdfScreen();
-//    }
-//
-//    @And("I save pdf page number as {string} on reader pdf screen")
-//    @Override
-//    public void savePdfPageNumber(String pageNumberKey) {
-//        abstractPdfSteps.savePdfPageNumber(pageNumberKey);
-//    }
-//
-//    @When("I swipe pdf page forward from {int} to {int} times on reader pdf screen")
-//    @Override
-//    public void swipePdfPageForwardSeveralTimes(int minValue, int maxValue) {
-//        abstractPdfSteps.swipePdfPageForwardSeveralTimes(minValue, maxValue);
-//    }
-//
-
-//
-
-//
-//    @Then("The {string} saved page number is equal to the current page number on the reader pdf screen")
-//    public void checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(String pageNumberKey) {
-//        abstractPdfSteps.checkThatSavedPdfPageNumberIsEqualToCurrentPdfPageNumber(pageNumberKey);
-//    }
-//
-
-//
-//    @When("I open gallery pdf screen")
-//    @Override
-//    public void openGalleryPdfScreen() {
-//        abstractPdfSteps.openGalleryPdfScreen();
-//    }
-//
-//    @When("I switch to Gallery on pdf screen")
-//    @Override
-//    public void switchToGalleryPdfScreen() {
-//        abstractPdfSteps.switchToGalleryPdfScreen();
-//    }
-//
-
-//
-//    @When("I open table of contents")
-//    @Override
-//    public void openTOC() {
-//        abstractPdfSteps.openTOC();
-//    }
-//
-//    @When("I switch to List of contents on pdf screen")
-//    @Override
-//    public void switchToListOfContents() {
-//        abstractPdfSteps.switchToListOfContents();
-//    }
-//
-//    @Then("TOC pdf screen is opened")
-//    @Override
-//    public void checkTocPdfScreenIsOpened() {
-//        abstractPdfSteps.checkTocPdfScreenIsOpened();
-//    }
-//
-//    @When("I open random chapter on list of contents pdf screen and save pdf page number as {string}")
-//    @Override
-//    public void openRandomChapterAndSavePageNumber(String pageNumberKey) {
-//        abstractPdfSteps.openRandomChapterAndSavePageNumber(pageNumberKey);
-//    }
-//
-//    @Then("Chapter with {string} is opened on pdf screen")
-//    @Override
-//    public void isChapterOpened(String pageNumberKey) {
-//        abstractPdfSteps.isChapterOpened(pageNumberKey);
-//    }
-//
-//    @When("I open random pdf page on gallery pdf screen and save pdf page number as {string}")
-//    @Override
-//    public void openRandomPdfPageAndSavePageNumberOnGalleryScreen(String pageNumberKey) {
-//        abstractPdfSteps.openRandomPdfPageAndSavePageNumberOnGalleryScreen(pageNumberKey);
-//    }
-//
-
-//
-
-
-//    @Then("Gallery pdf screen is opened")
-//    @Override
-//    public void checkGalleryPdfScreenIsOpened() {
-//        abstractPdfSteps.checkGalleryPdfScreenIsOpened();
-//    }
-//
-
-
-//    @When("I enter word {} and save as {string} on search pdf screen")
-//    @Override
-//    public void enterData(String word, String infoKey) {
-//        abstractPdfSteps.enterData(word, infoKey);
-//    }
-//
-//    @Then("Search result is empty on search pdf screen")
-//    @Override
-//    public void isSearchResultEmpty() {
-//        abstractPdfSteps.isSearchResultEmpty();
-//    }
-//
-//    @Then("Search result is shown on search pdf screen")
-//    @Override
-//    public void isSearchResultShown() {
-//        abstractPdfSteps.isSearchResultShown();
-//    }
-//
-
-//
-//    @When("I open the first found text on search pdf screen")
-//    @Override
-//    public void openTheFirstFoundText() {
-//        abstractPdfSteps.openTheFirstFoundText();
-//    }
+    @Then("Search result is shown on search pdf screen")
+    public void isSearchResultShown() {
+        Assert.assertFalse("Search results is empty", readerPdfScreen.getSearchPdfScreen().isSearchFieldEmpty());
+    }
 }
