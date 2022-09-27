@@ -8,21 +8,23 @@ import screens.pdf.navigationBarPdf.NavigationBarPdfScreen;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosNavigationBarPdfScreen extends NavigationBarPdfScreen {
+    private final IButton btnToc =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"List\"]"), "Table of content button");
     private final IButton btnBack =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "btnBack");
-    private final IButton btnTocAndBookmarksAndGallery =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[2]"), "btnTocAndBookmarksAndGallery");
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Back\"]"), "Back button");
     private final IButton btnSearch =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[3]"), "btnSearch");
-    private final IButton btnAddBookmark =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Add Bookmark\"]"), "btnAddBookmark");
-    private final IButton btnDeleteBookmark =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Remove Bookmark\"]"), "btnDeleteBookmark");
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Search\"]"), "Search button");
+    private final IButton btnBookmark =
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Bookmark\"]"), "Bookmark button");
 
     public IosNavigationBarPdfScreen() {
         super(By.xpath("//XCUIElementTypeNavigationBar"));
     }
 
+    @Override
+    public void tapTocBookmarksBarButton() {
+        btnToc.click();
+    }
 
     @Override
     public void tapBackButton() {
@@ -30,8 +32,8 @@ public class IosNavigationBarPdfScreen extends NavigationBarPdfScreen {
     }
 
     @Override
-    public void openTocBookmarksGallery() {
-        btnTocAndBookmarksAndGallery.click();
+    public void tapSettingsButton() {
+        //only for android
     }
 
     @Override
@@ -40,18 +42,8 @@ public class IosNavigationBarPdfScreen extends NavigationBarPdfScreen {
     }
 
     @Override
-    public void tapAddBookmarkButton() {
-        btnAddBookmark.state().waitForDisplayed();
-        btnAddBookmark.click();
-    }
-
-    @Override
-    public void tapDeleteBookmarkButton() {
-        btnDeleteBookmark.click();
-    }
-
-    @Override
-    public boolean isBookmarkDisplayed() {
-        return btnDeleteBookmark.state().isDisplayed();
+    public void tapBookmarkButton() {
+        btnBookmark.state().waitForDisplayed();
+        btnBookmark.click();
     }
 }

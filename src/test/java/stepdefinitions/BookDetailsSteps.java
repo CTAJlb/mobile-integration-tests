@@ -127,7 +127,7 @@ public class BookDetailsSteps {
 
     @Then("Book {string} is opened on book details screen")
     public void isBookOpened(String bookInfoKey) {
-        Assert.assertEquals("Expected book is not opened", Optional.ofNullable(context.get(bookInfoKey)).orElse(bookInfoKey), bookDetailsScreen.getBookInfo());
+        Assert.assertEquals("Expected book is not opened", Optional.ofNullable(context.get(bookInfoKey)).orElse(bookInfoKey), bookDetailsScreen.getBookInfo().getTitle());
     }
 
     @Then("Book {string} has correct title and author name on book details screen")

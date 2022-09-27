@@ -11,23 +11,25 @@ public abstract class ReaderPdfScreen extends Screen {
         super(locator, "ReaderPdf");
     }
 
+    public abstract NavigationBarPdfScreen getNavigationBarScreen();
+
+    public abstract SearchPdfScreen getSearchPdfScreen();
+
+    public abstract boolean isReaderOpened();
+
     public abstract String getBookName();
 
-    public abstract int getPageNumber();
+    public abstract int  getPageNumber();
+
+    public abstract int getLastPageNumber();
 
     public abstract void goToNextPage();
 
     public abstract void goToPreviousPage();
 
-    public abstract void openToc();
-
     public abstract void returnToPreviousScreen();
 
     public abstract void openNavigationBar();
-
-    public abstract NavigationBarPdfScreen getNavigationBarScreen();
-
-    public abstract SearchPdfScreen getSearchPdfScreen();
 
     public abstract void slidePageSlider(EntireScreenDragDirection entireScreenDragDirection);
 }
