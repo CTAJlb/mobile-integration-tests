@@ -19,14 +19,9 @@ public abstract class ReaderPdfScreen extends Screen {
 
     public abstract String getBookName();
 
+    public abstract int  getPageNumber();
 
-
-
-
-
-
-
-    public abstract int getPageNumber();
+    public abstract int getLastPageNumber();
 
     public abstract void goToNextPage();
 
@@ -35,8 +30,6 @@ public abstract class ReaderPdfScreen extends Screen {
     public abstract void returnToPreviousScreen();
 
     public abstract void openNavigationBar();
-
-
 
     public abstract void slidePageSlider(EntireScreenDragDirection entireScreenDragDirection);
 }

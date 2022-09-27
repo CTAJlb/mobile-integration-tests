@@ -12,9 +12,16 @@ public class AndroidNavigationBarPdfScreen extends NavigationBarPdfScreen {
             getElementFactory().getButton(By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]"), "Back button");
     private final IButton btnToc =
             getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuTOC\")]"), "Table of content");
+    private final IButton btnSettings =
+            getElementFactory().getButton(By.xpath("//android.widget.TextView[@content-desc=\"Settings\"]"), "Settings");
 
     public AndroidNavigationBarPdfScreen() {
         super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"pdf_toolbar\")]"));
+    }
+
+    @Override
+    public void tapTocBookmarksBarButton() {
+        btnToc.click();
     }
 
     @Override
@@ -23,33 +30,28 @@ public class AndroidNavigationBarPdfScreen extends NavigationBarPdfScreen {
     }
 
     @Override
-    public void openTOC() {
-        btnToc.click();
-    }
-
-
-    @Override
-    public void openTocBookmarksGallery() {
-
+    public void tapSettingsButton() {
+        btnSettings.click();
     }
 
     @Override
     public void tapSearchButton() {
-
+        //only for ios
     }
 
     @Override
     public void tapAddBookmarkButton() {
-
+        //only for ios
     }
 
     @Override
     public void tapDeleteBookmarkButton() {
-
+        //only for ios
     }
 
     @Override
     public boolean isBookmarkDisplayed() {
+        //only for ios
         return false;
     }
 }
