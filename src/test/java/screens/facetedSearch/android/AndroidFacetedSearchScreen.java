@@ -3,8 +3,8 @@ package screens.facetedSearch.android;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
-import constants.localization.application.facetedSearch.FacetSortByKeys;
+import enums.localization.facetedsearch.FacetAvailabilityKeys;
+import enums.localization.facetedsearch.FacetSortByKeys;
 import constants.util.UtilConstants;
 import org.openqa.selenium.By;
 import screens.facetedSearch.FacetedSearchScreen;
@@ -14,15 +14,11 @@ public class AndroidFacetedSearchScreen extends FacetedSearchScreen {
     private static final String MAIN_ELEMENT = "//*[contains(@resource-id,\"feedHeaderFacets\")]";
     private static final String FACET_SEARCH_SELECTION = "//*[contains(@resource-id,\"select_dialog_listview\")]"
             + "//*[@text=\"%1$s\"]";
-    private static final String SORTING_BUTTON_XPATH_PATTERN =
-            "//android.widget.LinearLayout[contains(@resource-id, \"feedHeaderFacets\")]/android.widget.Button";
+    private static final String SORTING_BUTTON_XPATH_PATTERN = "//android.widget.LinearLayout[contains(@resource-id, \"feedHeaderFacets\")]/android.widget.Button";
 
-    private final IButton btnSortBy =
-            getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button[2]"), "Sort by");
-    private final IButton btnSortByPalace =
-            getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button"), "Sort by in Palace");
-    private final IButton btnAvailability =
-            getElementFactory().getButton(By.xpath(MAIN_ELEMENT + "/android.widget.Button[1]"), "Availability");
+    private final IButton btnSortBy = getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button[2]"), "Sort by");
+    private final IButton btnSortByPalace = getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button"), "Sort by in Palace");
+    private final IButton btnAvailability = getElementFactory().getButton(By.xpath(MAIN_ELEMENT + "/android.widget.Button[1]"), "Availability");
     private final BtnGetVariantsOfSorting btnVariantOfSorting = (button ->
             getElementFactory().getButton(By.xpath(String.format("//android.widget.ListView/android.widget.CheckedTextView[@text=\"%s\"]", button)),
                     String.format("%s type of button", button)));

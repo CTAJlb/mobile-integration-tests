@@ -6,9 +6,9 @@ import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.application.attributes.IosAttributes;
-import constants.application.timeouts.BooksTimeouts;
-import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
+import constants.applicationattributes.IosAttributes;
+import enums.timeouts.BooksTimeouts;
+import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import models.android.CatalogBookModel;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -26,32 +26,18 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     private static final String LBL_AUTHOR_IN_RELATED_BOOKS = "//XCUIElementTypeTable//XCUIElementTypeStaticText[@name=\"%s\"]";
     private static final String LBL_LIST_OF_RELATED_BOOKS = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton";
 
-
-    private final ILabel lblBookTitleInfo =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther//XCUIElementTypeStaticText[@name][1]"), "Book title");
-    private final ILabel lblPublished =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Published\")]/following::XCUIElementTypeStaticText"), "lblPublished");
-    private final ILabel lblPublisher =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Publisher\")]/following::XCUIElementTypeStaticText"), "lblPublisher");
-    private final ILabel lblCategories =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Categor\")]/following::XCUIElementTypeStaticText"), "lblCategories");
-    private final ILabel lblDistributor =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Distributed\")]/following::XCUIElementTypeStaticText"), "lblDistributor");
-    private final ILabel lblProgressBar =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeProgressIndicator"), "lblProgressBar");
-    private final IButton btnCloseBookDetailsOnlyIOSTab =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton/XCUIElementTypeStaticText[contains(@name, \"Close\")]"), "Close button");
-    private final IButton lblErrorDetails =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeAlert//XCUIElementTypeStaticText"), "Error details");
-    private final ILabel lblBookCover =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther//XCUIElementTypeImage[1]"), "Book cover");
-    private final ILabel lblTextInDescription =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]/following::XCUIElementTypeTextView"), "Info in description section");
-    private final IButton btnMoreInDescription =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]//following::XCUIElementTypeStaticText[@name=\"More…\"]"), "More btn in Description section");
-    private final IButton btnMoreInRelatedBooks =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeTable//XCUIElementTypeButton[@name=\"More…\"]"), "More button in related books section");
-
+    private final ILabel lblBookTitleInfo = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther//XCUIElementTypeStaticText[@name][1]"), "Book title");
+    private final ILabel lblPublished = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Published\")]/following::XCUIElementTypeStaticText"), "lblPublished");
+    private final ILabel lblPublisher = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Publisher\")]/following::XCUIElementTypeStaticText"), "lblPublisher");
+    private final ILabel lblCategories = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Categor\")]/following::XCUIElementTypeStaticText"), "lblCategories");
+    private final ILabel lblDistributor = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name,\"Distributed\")]/following::XCUIElementTypeStaticText"), "lblDistributor");
+    private final ILabel lblProgressBar = getElementFactory().getLabel(By.xpath("//XCUIElementTypeProgressIndicator"), "lblProgressBar");
+    private final IButton btnCloseBookDetailsOnlyIOSTab = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton/XCUIElementTypeStaticText[contains(@name, \"Close\")]"), "Close button");
+    private final IButton lblErrorDetails = getElementFactory().getButton(By.xpath("//XCUIElementTypeAlert//XCUIElementTypeStaticText"), "Error details");
+    private final ILabel lblBookCover = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther//XCUIElementTypeImage[1]"), "Book cover");
+    private final ILabel lblTextInDescription = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]/following::XCUIElementTypeTextView"), "Info in description section");
+    private final IButton btnMoreInDescription = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Description\"]//following::XCUIElementTypeStaticText[@name=\"More…\"]"), "More btn in Description section");
+    private final IButton btnMoreInRelatedBooks = getElementFactory().getButton(By.xpath("//XCUIElementTypeTable//XCUIElementTypeButton[@name=\"More…\"]"), "More button in related books section");
 
     public IosBookDetailsScreen() {
         super(By.xpath(MAIN_ELEMENT));

@@ -1,7 +1,7 @@
 package screens.audiobook.audioPlayer;
 
 import aquality.appium.mobile.screens.Screen;
-import constants.localization.application.catalog.TimerKeys;
+import enums.localization.catalog.TimerKeys;
 import org.openqa.selenium.By;
 import screens.audiobook.playbackSpeedAudiobook.PlaybackSpeedAudiobookScreen;
 import screens.audiobook.sleepTimerAudiobook.SleepTimerAudiobookScreen;

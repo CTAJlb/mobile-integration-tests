@@ -1,13 +1,13 @@
 package models.android;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 @Data
+@NoArgsConstructor
 @Accessors(chain = true)
 public class CatalogBookModel {
-    public CatalogBookModel() {}
-
     private String imageTitle;
     private String title;
     private String author;

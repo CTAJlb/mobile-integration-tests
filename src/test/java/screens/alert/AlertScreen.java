@@ -1,7 +1,7 @@
 package screens.alert;
 
 import aquality.appium.mobile.screens.Screen;
-import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
+import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import org.openqa.selenium.By;
 
 public abstract class AlertScreen extends Screen {

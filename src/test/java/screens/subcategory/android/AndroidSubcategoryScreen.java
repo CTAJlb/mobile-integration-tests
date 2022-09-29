@@ -7,7 +7,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
-import constants.application.attributes.AndroidAttributes;
+import constants.applicationattributes.AndroidAttributes;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.subcategory.SubcategoryScreen;
@@ -20,30 +20,20 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     private static final String BOOKS_LOCATOR = "//android.widget.ImageView[contains(@resource-id,\"bookCellIdleCover\")]";
     private static final String SPECIFIC_SUBCATEGORY_LOCATOR = "//*[contains(@resource-id, \"feedLaneTitle\") and @text=\"%1$s\"]";
     private static final String FEED_LANE_TITLES_LOC = "//*[contains(@resource-id,\"feedLaneTitle\")]";
-    public static final String BOOK_BUTTON_XPATH =
-            "//android.widget.LinearLayout[contains(@resource-id,\"bookCellIdleButtons\")]/android.widget.Button";
-    private static final String AUTHOR_INFO_XPATH =
-            "//android.widget.TextView[contains(@resource-id, \"bookCellIdleAuthor\")]";
-    private static final String BOOK_NAME_XPATH =
-            "//android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
+    public static final String BOOK_BUTTON_XPATH = "//android.widget.LinearLayout[contains(@resource-id,\"bookCellIdleButtons\")]/android.widget.Button";
+    private static final String AUTHOR_INFO_XPATH = "//android.widget.TextView[contains(@resource-id, \"bookCellIdleAuthor\")]";
+    private static final String BOOK_NAME_XPATH = "//android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
 
-    private final ILabel lblFirstBookImageCover =
-            getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR), "First book image info");
-    private final ILabel lblFirstBookTitle =
-            getElementFactory().getLabel(By.xpath(BOOK_NAME_XPATH), "First book title");
-    private final ILabel lblFirstBookAuthor =
-            getElementFactory().getLabel(By.xpath(AUTHOR_INFO_XPATH), "First book author");
+    private final ILabel lblFirstBookImageCover = getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR), "First book image info");
+    private final ILabel lblFirstBookTitle = getElementFactory().getLabel(By.xpath(BOOK_NAME_XPATH), "First book title");
+    private final ILabel lblFirstBookAuthor = getElementFactory().getLabel(By.xpath(AUTHOR_INFO_XPATH), "First book author");
     private final ILabel lblErrorDetails = getElementFactory().getLabel(By.id("errorDetails"), "Error details");
     private final IButton btnErrorDetails = getElementFactory().getButton(By.id("bookCellErrorButtonDetails"), "Error details");
     private final IButton btnFeedErrorDetails = getElementFactory().getButton(By.id("feedErrorDetails"), "Error details");
-    private final IButton btnSorting =
-            getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button[2]"), "Sort button");
-    private final IButton btnSortingPalace =
-            getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button"), "Sort button");
-    private final IButton btnBack
-            = getElementFactory().getButton(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"mainToolbar\")]/android.widget.ImageView"), "Back button");
-    private final IButton btnAvailability =
-            getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView//android.widget.Button[1]"), "Availability button");
+    private final IButton btnSorting = getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button[2]"), "Sort button");
+    private final IButton btnSortingPalace = getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button"), "Sort button");
+    private final IButton btnBack = getElementFactory().getButton(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"mainToolbar\")]/android.widget.ImageView"), "Back button");
+    private final IButton btnAvailability = getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView//android.widget.Button[1]"), "Availability button");
 
     public AndroidSubcategoryScreen() {
         super(By.xpath("//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"feedWithoutGroupsList\")]"));

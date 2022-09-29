@@ -6,7 +6,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.application.attributes.IosAttributes;
+import constants.applicationattributes.IosAttributes;
 import org.openqa.selenium.By;
 import screens.pdf.searchPdf.SearchPdfScreen;
 
@@ -15,10 +15,8 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosSearchPdfScreen extends SearchPdfScreen {
-    private final IButton btnDone =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Done\"]"), "Apply search");
-    private final ITextBox txbSearchLine =
-            getElementFactory().getTextBox(By.xpath("//XCUIElementTypeTextField[@value=\"Search\"]"), "Search line");
+    private final IButton btnDone = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Done\"]"), "Apply search");
+    private final ITextBox txbSearchLine = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeTextField[@value=\"Search\"]"), "Search line");
 
     private static final String FOUND_TEXT_LOC = "//XCUIElementTypeCell/XCUIElementTypeStaticText[1]";
     private static final String FOUND_TEXT_NUMBER_LOC = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"%d\"]";

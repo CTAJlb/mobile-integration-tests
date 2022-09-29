@@ -16,14 +16,10 @@ public class IosTocBookmarksPdfScreen extends TocBookmarksPdfScreen {
     private final ThumbnailsPdfScreen thumbnailsPdfScreen;
     private final BookmarksPdfScreen bookmarksPdfScreen;
 
-    private final IButton btnResume =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Resume\"]"), "Resume button");
-    private final IButton btnThumbnails =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"Mission Control\"]"), "Thumbnails button");
-    private final IButton btnToc =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"List\"]"), "Toc button");
-    private final IButton btnBookmarks =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"Bookmark\"]"), "Bookmarks button");
+    private final IButton btnResume = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Resume\"]"), "Resume button");
+    private final IButton btnThumbnails = getElementFactory().getButton(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"Mission Control\"]"), "Thumbnails button");
+    private final IButton btnToc = getElementFactory().getButton(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"List\"]"), "Toc button");
+    private final IButton btnBookmarks = getElementFactory().getButton(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"Bookmark\"]"), "Bookmarks button");
 
     public IosTocBookmarksPdfScreen() {
         super(By.xpath("//XCUIElementTypeButton[@name = \"Resume\"]"));

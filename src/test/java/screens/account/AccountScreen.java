@@ -15,7 +15,15 @@ public abstract class AccountScreen extends Screen {
 
     public abstract boolean isLogoutSuccessful();
 
-    public abstract void logOut();
+    public abstract void tapLogOut();
+
+    public abstract String getTextFromPinTxb();
+
+    public abstract String getTextFromCardTxb();
+
+    public abstract String getTextFromLogInButton();
+
+    public abstract void tapApproveSignOut();
 
     public abstract boolean isLogoutRequired();
 

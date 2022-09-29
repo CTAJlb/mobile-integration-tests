@@ -3,8 +3,8 @@ package screens.facetedSearch.ios;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
-import constants.localization.application.facetedSearch.FacetSortByKeys;
+import enums.localization.facetedsearch.FacetAvailabilityKeys;
+import enums.localization.facetedsearch.FacetSortByKeys;
 import org.openqa.selenium.By;
 import screens.facetedSearch.FacetedSearchScreen;
 
@@ -14,12 +14,9 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeCollectionView/preceding-sibling::XCUIElementTypeOther";
     private static final String FACET_SEARCH_SELECTION = "//XCUIElementTypeButton[@name=\"%1$s\"]";
 
-    private final IButton availabilityButton =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Availability:\"]/following-sibling::XCUIElementTypeButton[1]"), "Availability");
-    private final IButton btnSortBy =
-            getElementFactory().getButton(By.xpath(String.format("(%1$s//XCUIElementTypeButton)[1]", MAIN_ELEMENT)), "Sort by");
-    private final IButton btnCollection =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Collection:\"]/following-sibling::XCUIElementTypeButton[1]"), "Collection button");
+    private final IButton availabilityButton = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Availability:\"]/following-sibling::XCUIElementTypeButton[1]"), "Availability");
+    private final IButton btnSortBy = getElementFactory().getButton(By.xpath(String.format("(%1$s//XCUIElementTypeButton)[1]", MAIN_ELEMENT)), "Sort by");
+    private final IButton btnCollection = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Collection:\"]/following-sibling::XCUIElementTypeButton[1]"), "Collection button");
 
     private final CreatingVariantsOfButton variantsOfButton = (button ->
             getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeSheet//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"%s\"]", button)),

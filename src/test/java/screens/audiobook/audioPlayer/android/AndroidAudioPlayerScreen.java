@@ -6,7 +6,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
-import constants.localization.application.catalog.TimerKeys;
+import enums.localization.catalog.TimerKeys;
 import framework.utilities.DateUtils;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
@@ -24,32 +24,19 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     private static final String AUDIOBOOK_NAME_LOC = "//android.widget.TextView[@text=\"%s\"]";
     private static final String SLEEP_TIMER_LOC = "//*[contains(@resource-id, \"player_menu_sleep\") and @content-desc=\"Set Your Sleep Timer. The Sleep Timer Is Currently Set To Sleep At %s\"]";
 
-    private final IButton btnPlaybackSpeed =
-            getElementFactory().getButton(By.id("player_menu_playback_rate_image"), "btnPlaybackSpeed");
-    private final IButton btnToc =
-            getElementFactory().getButton(By.id("player_menu_toc"), "btnToc");
-    private final IButton btnPause =
-            getElementFactory().getButton(By.xpath("//android.widget.ImageView[@content-desc=\"Pause\"]"), "btnPause");
-    private final IButton btnPlay =
-            getElementFactory().getButton(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]"), "btnPlay");
-    private final IButton btnSkipAhead =
-            getElementFactory().getButton(By.id("player_jump_forwards"), "btnSkipAhead");
-    private final IButton btnSkipBehind =
-            getElementFactory().getButton(By.id("player_jump_backwards"), "btnSkipBehind");
-    private final ILabel lblChapterName =
-            getElementFactory().getLabel(By.id("player_spine_element"), "lblChapterName");
-    private final ILabel lblLeftTime =
-            getElementFactory().getLabel(By.id("player_time"), "lblLeftTime");
-    private final ILabel lblRightTime =
-            getElementFactory().getLabel(By.id("player_time_maximum"), "lblRightTime");
-    private final IButton btnSleepTimer =
-            getElementFactory().getButton(By.id("player_menu_sleep_image"), "btnSleepTimer");
-    private final ILabel lblPlaybackProgress =
-            getElementFactory().getLabel(By.xpath("//android.widget.SeekBar"), "Playback progress");
-    private final IButton btnPlaySpeed =
-            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id, \"playback_rate_text\")]"), "Button play speed");
-    private final ILabel lblPlayerDownloading =
-            getElementFactory().getLabel(By.xpath("//android.widget.ProgressBar[contains(@resource-id, \"player_downloading\")]"), "Player downloading");
+    private final IButton btnPlaybackSpeed = getElementFactory().getButton(By.id("player_menu_playback_rate_image"), "btnPlaybackSpeed");
+    private final IButton btnToc = getElementFactory().getButton(By.id("player_menu_toc"), "btnToc");
+    private final IButton btnPause = getElementFactory().getButton(By.xpath("//android.widget.ImageView[@content-desc=\"Pause\"]"), "btnPause");
+    private final IButton btnPlay = getElementFactory().getButton(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]"), "btnPlay");
+    private final IButton btnSkipAhead = getElementFactory().getButton(By.id("player_jump_forwards"), "btnSkipAhead");
+    private final IButton btnSkipBehind = getElementFactory().getButton(By.id("player_jump_backwards"), "btnSkipBehind");
+    private final ILabel lblChapterName = getElementFactory().getLabel(By.id("player_spine_element"), "lblChapterName");
+    private final ILabel lblLeftTime = getElementFactory().getLabel(By.id("player_time"), "lblLeftTime");
+    private final ILabel lblRightTime = getElementFactory().getLabel(By.id("player_time_maximum"), "lblRightTime");
+    private final IButton btnSleepTimer = getElementFactory().getButton(By.id("player_menu_sleep_image"), "btnSleepTimer");
+    private final ILabel lblPlaybackProgress = getElementFactory().getLabel(By.xpath("//android.widget.SeekBar"), "Playback progress");
+    private final IButton btnPlaySpeed = getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id, \"playback_rate_text\")]"), "Button play speed");
+    private final ILabel lblPlayerDownloading = getElementFactory().getLabel(By.xpath("//android.widget.ProgressBar[contains(@resource-id, \"player_downloading\")]"), "Player downloading");
 
     public AndroidAudioPlayerScreen() {
         super(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]"));

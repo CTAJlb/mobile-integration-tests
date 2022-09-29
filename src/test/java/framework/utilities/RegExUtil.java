@@ -31,6 +31,12 @@ public class RegExUtil {
         }
     }
 
+    public static String deleteBracketsFromText(String text) {
+        text = text.replaceAll("\\(", "");
+        text = text.replaceAll("\\)", "");
+        return text;
+    }
+
     public static int getIntFromFirstGroup(String text, String regex) {
         return Integer.parseInt(getStringFromFirstGroup(text, regex));
     }

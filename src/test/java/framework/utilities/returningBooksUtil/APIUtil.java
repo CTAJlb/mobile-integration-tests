@@ -9,6 +9,7 @@ import retrofit2.converter.jaxb.JaxbConverterFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class APIUtil {
@@ -27,9 +28,18 @@ public class APIUtil {
 
     private static ArrayList<String> getListOfBooksInAccount(String authHeader) {
         ArrayList<String> booksForReturning = new ArrayList<>();
-        OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(connectTimeout, TimeUnit.SECONDS).readTimeout(readTimeout, TimeUnit.SECONDS).writeTimeout(writeTimeout, TimeUnit.SECONDS).build();
-        GetBooksAPIMethods getBooksAPIMethods = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(JaxbConverterFactory.create()).
-                client(client).build().create(GetBooksAPIMethods.class);
+        OkHttpClient client = new OkHttpClient()
+                .newBuilder()
+                .connectTimeout(connectTimeout, TimeUnit.SECONDS)
+                .readTimeout(readTimeout, TimeUnit.SECONDS)
+                .writeTimeout(writeTimeout, TimeUnit.SECONDS).build();
+        GetBooksAPIMethods getBooksAPIMethods = new Retrofit
+                .Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(JaxbConverterFactory.create())
+                .client(client)
+                .build()
+                .create(GetBooksAPIMethods.class);
         Response<APIPageXMLModel> response = null;
 
         try {
@@ -66,18 +76,19 @@ public class APIUtil {
         return booksForReturning;
     }
 
-    public static void enterBookAfterOpeningAccount(String barcode, String pin) {
+    public static int enterBooks(String barcode, String pin) {
         String authHeader = getAuthHeader(barcode, pin);
-        AqualityServices.getLogger().info("There are books on the account after opening account: ");
-        ArrayList<String> listOfBooksAfterOpeningAccount = getListOfBooksInAccount(authHeader);
-        AqualityServices.getLogger().info("Count of books on the account after opening account: " + listOfBooksAfterOpeningAccount.size());
+        AqualityServices.getLogger().info("There are books on the account: ");
+        ArrayList<String> listOfBooks = getListOfBooksInAccount(authHeader);
+        return listOfBooks.size();
+    }
+
+    public static void enterBookAfterOpeningAccount(String barcode, String pin) {
+        AqualityServices.getLogger().info("Count of books on the account after opening account: " + enterBooks(barcode, pin));
     }
 
     public static void enterBooksAfterReturningBooks(String barcode, String pin) {
-        String authHeader = getAuthHeader(barcode, pin);
-        AqualityServices.getLogger().info("There are books on the account after returning books: ");
-        ArrayList<String> listOfBooksAfterReturningBooks = getListOfBooksInAccount(authHeader);
-        AqualityServices.getLogger().info("Count of books on the account after returning books: " + listOfBooksAfterReturningBooks.size());
+        AqualityServices.getLogger().info("Count of books on the account after returning books: " + enterBooks(barcode, pin));
     }
 
     private static void sendRequestsForReturningBooks(String authHeader, ArrayList<String> booksForReturning) {
@@ -91,7 +102,7 @@ public class APIUtil {
                 try {
                     getBooksAPIMethods.returnBooks(authHeader, path).execute();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    AqualityServices.getLogger().error(e + e.getMessage());
                 }
             }
         }

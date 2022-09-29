@@ -1,7 +1,7 @@
 package screens.epub.fontAndBackgroundSettingsEpub;
 
 import aquality.appium.mobile.screens.Screen;
-import constants.localization.application.reader.ReaderSettingKeys;
+import enums.localization.reader.ReaderSettingKeys;
 import org.openqa.selenium.By;
 
 public abstract class FontAndBackgroundSettingsEpubScreen extends Screen {

@@ -13,24 +13,17 @@ import screens.settings.SettingsScreen;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosSettingsScreen extends SettingsScreen {
+    private static final int NUMBER_OF_CLICKS_FOR_OPENING_TEST_MODE = 7;
     private static final String MAIN_ELEMENT = "//XCUIElementTypeNavigationBar[@name=\"Settings\"]";
 
-    private  final ILabel lblSettings = getElementFactory().getLabel(
-            By.xpath("//XCUIElementTypeNavigationBar[@name=\"Settings\"]"), "Settings");
-    private final IButton btnLibraries = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"Libraries\"]"), "btnLibraries");
-    private final IButton btnAboutPalace = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"About Palace\"]"), "About Palace");
-    private final IButton btnPrivacyPolicy = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"Privacy Policy\"]"), "Privacy Policy");
-    private final IButton btnUserAgreement = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"User Agreement\"]"), "User Agreement");
-    private final IButton btnSoftwareLic = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"Software Licenses\"]"), "Software Licenses");
-    private final IButton lblPalaceVersion = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Palace version\")]"), "Palace version");
-    private final IButton btnTesting = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"Testing\"]"), "Testing button");
+    private  final ILabel lblSettings = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar[@name=\"Settings\"]"), "Settings");
+    private final IButton btnLibraries = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Libraries\"]"), "btnLibraries");
+    private final IButton btnAboutPalace = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"About Palace\"]"), "About Palace");
+    private final IButton btnPrivacyPolicy = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Privacy Policy\"]"), "Privacy Policy");
+    private final IButton btnUserAgreement = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"User Agreement\"]"), "User Agreement");
+    private final IButton btnSoftwareLic = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Software Licenses\"]"), "Software Licenses");
+    private final IButton lblPalaceVersion = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Palace version\")]"), "Palace version");
+    private final IButton btnTesting = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Testing\"]"), "Testing button");
 
     private final String libraryLocator = "//XCUIElementTypeTable//XCUIElementTypeStaticText[@name=\"%s\"]";
 
@@ -76,7 +69,7 @@ public class IosSettingsScreen extends SettingsScreen {
     @Override
     public void openTestMode() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        action.tap(TapOptions.tapOptions().withTapsCount(7).withElement(ElementOption.element(lblPalaceVersion.getElement()))).
+        action.tap(TapOptions.tapOptions().withTapsCount(NUMBER_OF_CLICKS_FOR_OPENING_TEST_MODE).withElement(ElementOption.element(lblPalaceVersion.getElement()))).
                 perform();
         btnTesting.click();
     }

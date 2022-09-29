@@ -8,7 +8,7 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
-import constants.application.attributes.IosAttributes;
+import constants.applicationattributes.IosAttributes;
 import framework.utilities.swipe.SwipeElementUtils;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;
 import io.appium.java_client.TouchAction;
@@ -22,10 +22,8 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosTutorialScreen extends TutorialScreen {
-    private final IButton btnCloseTutorial =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Close\"]"), "btnCloseTutorial");
-    private final ILabel lblPage =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeWindow"), "lblPage");
+    private final IButton btnCloseTutorial = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Close\"]"), "btnCloseTutorial");
+    private final ILabel lblPage = getElementFactory().getLabel(By.xpath("//XCUIElementTypeWindow"), "lblPage");
 
     private static final String TUTORIAL_TAB_BY_NAME_LOC = "//XCUIElementTypeImage[contains(@name,\"%s\")]";
     private static final String TUTORIAL_TAB_LOC = "//XCUIElementTypeImage[contains(@name,\"Step\")]";

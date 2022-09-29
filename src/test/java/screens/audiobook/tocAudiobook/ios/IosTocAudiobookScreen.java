@@ -4,7 +4,7 @@ import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.application.attributes.IosAttributes;
+import constants.applicationattributes.IosAttributes;
 import org.openqa.selenium.By;
 import screens.audiobook.tocAudiobook.TocAudiobookScreen;
 

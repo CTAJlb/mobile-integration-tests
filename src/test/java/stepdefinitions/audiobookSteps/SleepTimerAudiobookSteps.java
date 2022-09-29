@@ -2,7 +2,7 @@ package stepdefinitions.audiobookSteps;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
-import constants.localization.application.catalog.TimerKeys;
+import enums.localization.catalog.TimerKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.When;
 import screens.audiobook.audioPlayer.AudioPlayerScreen;

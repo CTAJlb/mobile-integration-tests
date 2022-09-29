@@ -1,8 +1,8 @@
 package screens.facetedSearch;
 
 import aquality.appium.mobile.screens.Screen;
-import constants.localization.application.facetedSearch.FacetAvailabilityKeys;
-import constants.localization.application.facetedSearch.FacetSortByKeys;
+import enums.localization.facetedsearch.FacetAvailabilityKeys;
+import enums.localization.facetedsearch.FacetSortByKeys;
 import org.openqa.selenium.By;
 
 public abstract class FacetedSearchScreen extends Screen {

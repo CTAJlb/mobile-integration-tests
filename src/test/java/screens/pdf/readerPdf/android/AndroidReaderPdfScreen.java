@@ -12,10 +12,12 @@ import org.openqa.selenium.By;
 import screens.pdf.navigationBarPdf.NavigationBarPdfScreen;
 import screens.pdf.readerPdf.ReaderPdfScreen;
 import screens.pdf.searchPdf.SearchPdfScreen;
+import screens.pdf.settingspdf.SettingsPdfScreen;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidReaderPdfScreen extends ReaderPdfScreen {
     private final NavigationBarPdfScreen navigationBarPdfScreen;
+    private final SettingsPdfScreen settingsPdfScreen;
     private final ILabel lblViewer =
             getElementFactory().getLabel(By.xpath("//android.view.View[@resource-id=\"viewerContainer\"]"), "Content viewer");
     private final ILabel lblBookName =
@@ -31,6 +33,7 @@ public class AndroidReaderPdfScreen extends ReaderPdfScreen {
     public AndroidReaderPdfScreen() {
         super(By.xpath("//android.view.View[@resource-id=\"viewerContainer\"]"));
         navigationBarPdfScreen = AqualityServices.getScreenFactory().getScreen(NavigationBarPdfScreen.class);
+        settingsPdfScreen = AqualityServices.getScreenFactory().getScreen(SettingsPdfScreen.class);
     }
 
     @Override
@@ -87,5 +90,10 @@ public class AndroidReaderPdfScreen extends ReaderPdfScreen {
     public SearchPdfScreen getSearchPdfScreen() {
         //only for ios
         return null;
+    }
+
+    @Override
+    public SettingsPdfScreen getSettingsPdfScreen() {
+        return settingsPdfScreen;
     }
 }

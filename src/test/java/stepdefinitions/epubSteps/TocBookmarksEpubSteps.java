@@ -2,7 +2,7 @@ package stepdefinitions.epubSteps;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
-import constants.epub.EnumTabsTocAndBookmarksEpub;
+import enums.epub.EnumTabsTocAndBookmarksEpub;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;

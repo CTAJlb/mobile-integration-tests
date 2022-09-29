@@ -5,7 +5,7 @@ import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.RegEx;
-import constants.application.attributes.IosAttributes;
+import constants.applicationattributes.IosAttributes;
 import framework.utilities.CoordinatesClickUtils;
 import framework.utilities.RegExUtil;
 import framework.utilities.swipe.Direction;
@@ -18,21 +18,17 @@ import org.openqa.selenium.Point;
 import screens.pdf.navigationBarPdf.NavigationBarPdfScreen;
 import screens.pdf.readerPdf.ReaderPdfScreen;
 import screens.pdf.searchPdf.SearchPdfScreen;
+import screens.pdf.settingspdf.SettingsPdfScreen;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosReaderPdfScreen extends ReaderPdfScreen {
     private final NavigationBarPdfScreen navigationBarPdfScreen;
     private final SearchPdfScreen searchPdfScreen;
-    private final ILabel lblImage =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeImage"), "Image of the page");
-    private final ILabel lblPageNumber =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@value,\"/\")]"), "lblPageNumber");
-    private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeToolbar/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeOther[2]/XCUIElementTypeStaticText"), "lblBookName");
-    private final ILabel lblPageNumberSlider =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther[contains(@value,\"Page\")]"), "lblPageNumberSlider");
-    private final ILabel lblPage =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeTextView"), "lblPage");
+    private final ILabel lblImage = getElementFactory().getLabel(By.xpath("//XCUIElementTypeImage"), "Image of the page");
+    private final ILabel lblPageNumber = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@value,\"/\")]"), "lblPageNumber");
+    private final ILabel lblBookName = getElementFactory().getLabel(By.xpath("//XCUIElementTypeToolbar/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeOther[2]/XCUIElementTypeStaticText"), "lblBookName");
+    private final ILabel lblPageNumberSlider = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther[contains(@value,\"Page\")]"), "lblPageNumberSlider");
+    private final ILabel lblPage = getElementFactory().getLabel(By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeTextView"), "lblPage");
 
     public IosReaderPdfScreen() {
         super(By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeTextView"));
@@ -94,6 +90,12 @@ public class IosReaderPdfScreen extends ReaderPdfScreen {
     @Override
     public SearchPdfScreen getSearchPdfScreen() {
         return searchPdfScreen;
+    }
+
+    @Override
+    public SettingsPdfScreen getSettingsPdfScreen() {
+        //only for android
+        return null;
     }
 
     @Override

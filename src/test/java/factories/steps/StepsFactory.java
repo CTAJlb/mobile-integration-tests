@@ -29,7 +29,8 @@ public class StepsFactory implements IStepsFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <T extends BaseSteps> T getSteps(Class<T> clazz, Object... args) {
-        Class<?> tClass = getPlatformClasses().stream()
+        Class<?> tClass = getPlatformClasses()
+                .stream()
                 .filter(clazz::isAssignableFrom)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(
@@ -48,7 +49,8 @@ public class StepsFactory implements IStepsFactory {
             Reflections reflections = new Reflections(packageName);
             try {
                 PlatformName platformName = AqualityServices.getApplicationProfile().getPlatformName();
-                classes.addAll(reflections.getTypesAnnotatedWith(StepsType.class).stream()
+                classes.addAll(reflections.getTypesAnnotatedWith(StepsType.class)
+                        .stream()
                         .filter(clazz -> clazz.getAnnotation(StepsType.class).platform() == platformName)
                         .collect(Collectors.toSet()));
             } catch (ReflectionsException e) {

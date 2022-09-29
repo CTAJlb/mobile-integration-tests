@@ -9,7 +9,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
-import constants.application.attributes.AndroidAttributes;
+import constants.applicationattributes.AndroidAttributes;
 import framework.utilities.swipe.SwipeElementUtils;
 import org.openqa.selenium.By;
 import screens.catalog.screen.catalog.CatalogScreen;
@@ -22,26 +22,23 @@ import java.util.stream.Collectors;
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidCatalogScreen extends CatalogScreen {
     private static final String CATEGORY_LOCATOR = "//*[contains(@resource-id, \"feedLaneTitle\") and @text=\"%1$s\"]";
-    private static final String LANE_BY_NAME_LOCATOR_PART =
-            CATEGORY_LOCATOR + "/following-sibling::*[contains(@resource-id,\"feedLaneCoversScroll\")]";
+    private static final String LANE_BY_NAME_LOCATOR_PART = CATEGORY_LOCATOR + "/following-sibling::*[contains(@resource-id,\"feedLaneCoversScroll\")]";
     private static final String BOOK_COVER_IN_LANE_LOCATOR = "/android.widget.LinearLayout";
-    private static final String LIBRARY_BUTTON_LOCATOR_PATTERN =
-            "//android.widget.TextView[contains(@resource-id,\"accountTitle\") and @text=\"%s\"]";
+    private static final String LIBRARY_BUTTON_LOCATOR_PATTERN = "//android.widget.TextView[contains(@resource-id,\"accountTitle\") and @text=\"%s\"]";
     private static final String FEED_LANE_TITLES_LOC = "//*[contains(@resource-id,\"feedLaneTitle\")]";
     private static final String CATEGORY_NAME_XPATH_LOCATOR = "//androidx.recyclerview.widget.RecyclerView//android.widget.LinearLayout/android.widget.TextView[1]";
     private static final String LIBRARY_NAME_LOC = "//android.widget.TextView[@text=\"%s\" and contains(@resource-id,\"feedLibraryText\")]";
     private static final String BUTTON_MORE_LOCATOR = "//android.widget.LinearLayout/android.widget.TextView[@text=\"More…\"]";
-    private static final String BOOK_SECTION_LOCATOR_IN_CATALOG =
-            "//androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[%d]/android.widget.LinearLayout/android.widget.TextView[1]";
+    private static final String BOOK_SECTION_LOCATOR_IN_CATALOG = "//androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[%d]/android.widget.LinearLayout/android.widget.TextView[1]";
     private static final String SECTION_TITLE = "//android.view.ViewGroup/android.widget.TextView[@text=\"%s\"]";
+    private static final String CATALOG_TAB = "//android.widget.RadioButton[@text=\"%s\"]";
 
     private final ILabel lblFirstLaneName = getElementFactory().getLabel(By.xpath(FEED_LANE_TITLES_LOC), "First lane name");
     private final ILabel lblScreen = getElementFactory().getLabel(By.id("mainFragmentHolder"), "Screen to swipe");
     private final GetNameOfBookTypeBtb btnBookNameTypeSection = (button -> getElementFactory().getButton(By.xpath(
             String.format("//android.widget.RadioGroup[contains(@resource-id, \"feedHeaderTabs\")]/android.widget.RadioButton[@text=\"%s\"]", button)),
             String.format("%s type of sorting", button)));
-    private final IButton btnLogo =
-            getElementFactory().getButton(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"mainToolbar\")]/android.widget.ImageView"), "Logo");
+    private final IButton btnLogo = getElementFactory().getButton(By.xpath("//android.view.ViewGroup[contains(@resource-id, \"mainToolbar\")]/android.widget.ImageView"), "Logo");
 
     public AndroidCatalogScreen() {
         super(By.id("feedWithGroups"));
@@ -81,7 +78,7 @@ public class AndroidCatalogScreen extends CatalogScreen {
 
     @Override
     public void switchToCatalogTab(String catalogTab) {
-        getElementFactory().getButton(By.xpath(String.format("//android.widget.RadioButton[@text=\"%s\"]", catalogTab)), catalogTab).click();
+        getElementFactory().getButton(By.xpath(String.format(CATALOG_TAB, catalogTab)), catalogTab).click();
     }
 
     @Override
@@ -156,7 +153,7 @@ public class AndroidCatalogScreen extends CatalogScreen {
     @Override
     public boolean isSectionWithBookTypeOpen(String typeSection) {
         IButton btnSectionType = btnBookNameTypeSection.createBtn(typeSection);
-        return btnSectionType.getAttribute(Attributes.CHECKED).equals("true");
+        return btnSectionType.getAttribute(Attributes.CHECKED).equals(Boolean.TRUE.toString());
     }
 
     private List<IButton> getMoreBtn() {

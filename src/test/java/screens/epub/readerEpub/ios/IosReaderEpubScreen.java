@@ -6,7 +6,7 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.logging.Logger;
 import constants.RegEx;
-import constants.application.attributes.IosAttributes;
+import constants.applicationattributes.IosAttributes;
 import framework.utilities.CoordinatesClickUtils;
 import framework.utilities.RegExUtil;
 import io.appium.java_client.AppiumDriver;
@@ -20,12 +20,9 @@ import java.util.Set;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosReaderEpubScreen extends ReaderEpubScreen {
-    private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "lblBookName");
-    private final ILabel lblPageNumberAndChapterName =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"Page\")]"), "lblPageNumberAndChapterName");
-    private final ILabel lblPage =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "lblPage");
+    private final ILabel lblBookName = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "lblBookName");
+    private final ILabel lblPageNumberAndChapterName = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"Page\")]"), "lblPageNumberAndChapterName");
+    private final ILabel lblPage = getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "lblPage");
 
     public IosReaderEpubScreen() {
         super(By.xpath("//*[contains(@name,\"Page\")]"));
@@ -61,7 +58,7 @@ public class IosReaderEpubScreen extends ReaderEpubScreen {
     @Override
     public String getChapterName() {
         String pageNumberAndChapterNameRegEx = lblPageNumberAndChapterName.getAttribute(IosAttributes.NAME);
-        pageNumberAndChapterNameRegEx = deleteBracketsFromText(pageNumberAndChapterNameRegEx);
+        pageNumberAndChapterNameRegEx = RegExUtil.deleteBracketsFromText(pageNumberAndChapterNameRegEx);
         return RegExUtil.getStringFromThirdGroup(pageNumberAndChapterNameRegEx, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
     }
 
@@ -80,15 +77,11 @@ public class IosReaderEpubScreen extends ReaderEpubScreen {
     @Override
     public String getPageNumber() {
         String pageNumberAndChapterNameRegEx = lblPageNumberAndChapterName.getAttribute(IosAttributes.NAME);
-        pageNumberAndChapterNameRegEx = deleteBracketsFromText(pageNumberAndChapterNameRegEx);
+        pageNumberAndChapterNameRegEx = RegExUtil.deleteBracketsFromText(pageNumberAndChapterNameRegEx);
         return RegExUtil.getStringFromFirstGroup(pageNumberAndChapterNameRegEx, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
     }
 
-    private static String deleteBracketsFromText(String text) {
-        text = text.replaceAll("\\(", "");
-        text = text.replaceAll("\\)", "");
-        return text;
-    }
+
 
     @Override
     public double getFontSize() {
