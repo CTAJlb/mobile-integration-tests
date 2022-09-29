@@ -5,6 +5,7 @@ import framework.utilities.swipe.directions.EntireScreenDragDirection;
 import org.openqa.selenium.By;
 import screens.pdf.navigationBarPdf.NavigationBarPdfScreen;
 import screens.pdf.searchPdf.SearchPdfScreen;
+import screens.pdf.settingspdf.SettingsPdfScreen;
 
 public abstract class ReaderPdfScreen extends Screen {
     public ReaderPdfScreen(By locator) {
@@ -14,6 +15,8 @@ public abstract class ReaderPdfScreen extends Screen {
     public abstract NavigationBarPdfScreen getNavigationBarScreen();
 
     public abstract SearchPdfScreen getSearchPdfScreen();
+
+    public abstract SettingsPdfScreen getSettingsPdfScreen();
 
     public abstract boolean isReaderOpened();
 

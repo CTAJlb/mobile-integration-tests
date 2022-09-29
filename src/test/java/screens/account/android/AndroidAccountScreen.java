@@ -6,16 +6,13 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.application.timeouts.AuthorizationTimeouts;
 import constants.application.timeouts.BooksTimeouts;
 import constants.localization.application.account.AccountScreenLoginStatus;
 import framework.configuration.Credentials;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import screens.account.AccountScreen;
 
 import java.time.Duration;
-import java.util.Collections;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidAccountScreen extends AccountScreen {
@@ -65,17 +62,28 @@ public class AndroidAccountScreen extends AccountScreen {
     }
 
     @Override
-    public void logOut() {
-        final String loginTextBeforeLogout = txbCard.getText();
-        final String passwordTextBeforeLogout = txbPin.getText();
+    public void tapLogOut() {
         btnLogout.click();
-        AqualityServices.getConditionalWait().waitFor(() ->
-                        btnLogin.getText().equals(AccountScreenLoginStatus.LOG_IN.i18n())
-                                && !txbCard.getText().equals(loginTextBeforeLogout)
-                                && !txbPin.getText().equals(passwordTextBeforeLogout),
-                Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getTimeoutMillis()),
-                Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getPollingMillis()),
-                Collections.singletonList(NoSuchElementException.class));
+    }
+
+    @Override
+    public String getTextFromPinTxb() {
+        return txbPin.getText();
+    }
+
+    @Override
+    public String getTextFromCardTxb() {
+        return txbCard.getText();
+    }
+
+    @Override
+    public String getTextFromLogInButton() {
+        return btnLogin.getText();
+    }
+
+    @Override
+    public void tapApproveSignOut() {
+        //only for ios
     }
 
     @Override

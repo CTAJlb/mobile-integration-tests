@@ -61,7 +61,7 @@ public class IosReaderEpubScreen extends ReaderEpubScreen {
     @Override
     public String getChapterName() {
         String pageNumberAndChapterNameRegEx = lblPageNumberAndChapterName.getAttribute(IosAttributes.NAME);
-        pageNumberAndChapterNameRegEx = deleteBracketsFromText(pageNumberAndChapterNameRegEx);
+        pageNumberAndChapterNameRegEx = RegExUtil.deleteBracketsFromText(pageNumberAndChapterNameRegEx);
         return RegExUtil.getStringFromThirdGroup(pageNumberAndChapterNameRegEx, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
     }
 
@@ -80,15 +80,11 @@ public class IosReaderEpubScreen extends ReaderEpubScreen {
     @Override
     public String getPageNumber() {
         String pageNumberAndChapterNameRegEx = lblPageNumberAndChapterName.getAttribute(IosAttributes.NAME);
-        pageNumberAndChapterNameRegEx = deleteBracketsFromText(pageNumberAndChapterNameRegEx);
+        pageNumberAndChapterNameRegEx = RegExUtil.deleteBracketsFromText(pageNumberAndChapterNameRegEx);
         return RegExUtil.getStringFromFirstGroup(pageNumberAndChapterNameRegEx, RegEx.PAGE_NUMBER_AND_CHAPTER_NAME_REGEX_FOR_IOS);
     }
 
-    private static String deleteBracketsFromText(String text) {
-        text = text.replaceAll("\\(", "");
-        text = text.replaceAll("\\)", "");
-        return text;
-    }
+
 
     @Override
     public double getFontSize() {

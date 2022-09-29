@@ -1,12 +1,17 @@
 package hooks.logout.components.impl;
 
+import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import constants.application.timeouts.AuthorizationTimeouts;
 import constants.keysForContext.ContextLibrariesKeys;
+import constants.localization.application.account.AccountScreenLoginStatus;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
 import hooks.logout.components.AbstractLogoutHooks;
 import screens.bottommenu.BottomMenu;
 
+import java.time.Duration;
+import java.util.Collections;
 import java.util.List;
 
 @StepsType(platform = PlatformName.ANDROID)
@@ -29,7 +34,16 @@ public class AndroidLogoutHooks extends AbstractLogoutHooks {
             settingsScreen.openLibraries();
             librariesScreen.openLibrary(library);
             if (accountScreen.isLogoutRequired()) {
-                accountScreen.logOut();
+                final String cardTextBeforeLogout = accountScreen.getTextFromCardTxb();
+                final String pinTextBeforeLogout = accountScreen.getTextFromPinTxb();
+                accountScreen.tapLogOut();
+                AqualityServices.getConditionalWait().waitFor(() ->
+                        accountScreen.getTextFromLogInButton().equals(AccountScreenLoginStatus.LOG_IN.i18n())
+                            && !accountScreen.getTextFromCardTxb().equals(cardTextBeforeLogout)
+                            && !accountScreen.getTextFromPinTxb().equals(pinTextBeforeLogout),
+                        Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getTimeoutMillis()),
+                        Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getPollingMillis()),
+                        Collections.singletonList(NoSuchMethodException.class));
             }
         }
     }

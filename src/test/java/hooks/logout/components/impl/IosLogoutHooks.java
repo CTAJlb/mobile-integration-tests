@@ -2,16 +2,20 @@ package hooks.logout.components.impl;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import constants.application.timeouts.AuthorizationTimeouts;
 import constants.keysForContext.ContextLibrariesKeys;
+import constants.localization.application.account.AccountScreenLoginStatus;
 import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
 import hooks.logout.components.AbstractLogoutHooks;
 import screens.alert.AlertScreen;
 import screens.bottommenu.BottomMenu;
-import screens.libraries.LibrariesScreen;
 
+import java.time.Duration;
+import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @StepsType(platform = PlatformName.IOS)
 public class IosLogoutHooks extends AbstractLogoutHooks {
@@ -35,13 +39,21 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
             settingsScreen.openLibraries();
             librariesScreen.openLibrary(library);
             if (accountScreen.isLogoutRequired()) {
-                accountScreen.logOut();
-            }
-            if(alertScreen.state().waitForDisplayed()){
-                alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.SIGN_OUT);
-            }
-            if (alertScreen.state().waitForDisplayed()) {
-                alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.SIGN_OUT);
+                final String cardTextBeforeLogout = accountScreen.getTextFromCardTxb();
+                final String pinTextBeforeLogout = accountScreen.getTextFromPinTxb();
+                accountScreen.tapLogOut();
+                accountScreen.tapApproveSignOut();
+                if(alertScreen.state().waitForDisplayed()){
+                    alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.SIGN_OUT);
+                }
+                AqualityServices.getConditionalWait().waitFor(() ->
+                        accountScreen.getTextFromLogInButton().equals(AccountScreenLoginStatus.LOG_IN.i18n())
+                            && !accountScreen.getTextFromCardTxb().equals(cardTextBeforeLogout)
+                            && !accountScreen.getTextFromPinTxb().equals(pinTextBeforeLogout),
+                        Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getTimeoutMillis()),
+                        Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getPollingMillis()),
+                        Collections.singletonList(NoSuchElementException.class));
+
             }
         }
     }

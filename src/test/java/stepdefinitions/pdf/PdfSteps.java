@@ -11,14 +11,12 @@ import io.cucumber.java.en.When;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.pdf.readerPdf.ReaderPdfScreen;
-import screens.pdf.settingspdf.SettingsPdfScreen;
 import screens.pdf.tocbookmarkspdf.TocBookmarksPdfScreen;
 import screens.pdf.tocPdf.TocPdfScreen;
 
 public class PdfSteps {
     private final ReaderPdfScreen readerPdfScreen;
     private final TocPdfScreen tocPdfScreen;
-    private final SettingsPdfScreen settingsPdfScreen;
     private final TocBookmarksPdfScreen tocBookmarksPdfScreen;
     private final ScenarioContext context;
 
@@ -26,7 +24,6 @@ public class PdfSteps {
     public PdfSteps(ScenarioContext context) {
         readerPdfScreen = AqualityServices.getScreenFactory().getScreen(ReaderPdfScreen.class);
         tocPdfScreen = AqualityServices.getScreenFactory().getScreen(TocPdfScreen.class);
-        settingsPdfScreen = AqualityServices.getScreenFactory().getScreen(SettingsPdfScreen.class);
         tocBookmarksPdfScreen = AqualityServices.getScreenFactory().getScreen(TocBookmarksPdfScreen.class);
         this.context = context;
     }
@@ -126,7 +123,7 @@ public class PdfSteps {
 
     @Then("PDF settings screen is opened")
     public void isSettingsOpened() {
-        settingsPdfScreen.isOpened();
+        readerPdfScreen.getSettingsPdfScreen().isOpened();
     }
 
     @When("I save the number of the last page as {string} on pdf reader screen")
@@ -136,12 +133,12 @@ public class PdfSteps {
 
     @When("I tap Go to last page button on pdf settings screen")
     public void tapGoToLastPage(){
-        settingsPdfScreen.tapGoToLastPage();
+        readerPdfScreen.getSettingsPdfScreen().tapGoToLastPage();
     }
 
     @When("I tap Go to first page button on pdf settings screen")
     public void tapGoToFirstPage() {
-        settingsPdfScreen.tapGoToFirstPage();
+        readerPdfScreen.getSettingsPdfScreen().tapGoToFirstPage();
     }
 
     @Then("The first page is opened on pdf reader screen")
@@ -151,19 +148,19 @@ public class PdfSteps {
 
     @When("I tap Vertical scrolling on pdf settings screen")
     public void tapVerticalScrolling(){
-        settingsPdfScreen.tapVerticalScrolling();
+        readerPdfScreen.getSettingsPdfScreen().tapVerticalScrolling();
     }
 
     @Then("Vertical scrolling is chosen on settings screen")
     public void isVerticalScrollingChosen() {
-        Assert.assertTrue("Vertical scrolling is not chosen", settingsPdfScreen.isVerticalScrollingChosen());
+        Assert.assertTrue("Vertical scrolling is not chosen", readerPdfScreen.getSettingsPdfScreen().isVerticalScrollingChosen());
     }
 
     @Then("Spreads options are available on settings screen")
     public void areSpreadsAvailable() {
-        Assert.assertTrue("No spreads option is not available", settingsPdfScreen.isNoSpreadsAvailable());
-        Assert.assertTrue("Odd spreads option is not available", settingsPdfScreen.isOddSpreadsAvailable());
-        Assert.assertTrue("Even spreads is not available", settingsPdfScreen.isEvenSpreadsAvailable());
+        Assert.assertTrue("No spreads option is not available", readerPdfScreen.getSettingsPdfScreen().isNoSpreadsAvailable());
+        Assert.assertTrue("Odd spreads option is not available", readerPdfScreen.getSettingsPdfScreen().isOddSpreadsAvailable());
+        Assert.assertTrue("Even spreads is not available", readerPdfScreen.getSettingsPdfScreen().isEvenSpreadsAvailable());
     }
 
     @When("I save page number as {string} on pdf reader screen")
@@ -184,34 +181,34 @@ public class PdfSteps {
 
     @When("I tap Horizontal scrolling on pdf settings screen")
     public void tapHorizontalScrolling() {
-        settingsPdfScreen.tapHorizontalScrolling();
+        readerPdfScreen.getSettingsPdfScreen().tapHorizontalScrolling();
     }
 
     @Then("Horizontal scrolling is chosen on settings screen")
     public void isHorizontalScrollingChosen(){
-        Assert.assertTrue("Horizontal scrolling is not chosen", settingsPdfScreen.isHorizontalScrollingChosen());
+        Assert.assertTrue("Horizontal scrolling is not chosen", readerPdfScreen.getSettingsPdfScreen().isHorizontalScrollingChosen());
     }
 
     @Then("Spreads options are not available on settings screen")
     public void areSpreadsUnavailable() {
-        Assert.assertEquals("No spreads option is available", settingsPdfScreen.isNoSpreadsAvailable(), Boolean.FALSE);
-        Assert.assertEquals("Odd spreads option is available", settingsPdfScreen.isOddSpreadsAvailable(), Boolean.FALSE);
-        Assert.assertEquals("Even spreads is available", settingsPdfScreen.isEvenSpreadsAvailable(), Boolean.FALSE);
+        Assert.assertEquals("No spreads option is available", readerPdfScreen.getSettingsPdfScreen().isNoSpreadsAvailable(), Boolean.FALSE);
+        Assert.assertEquals("Odd spreads option is available", readerPdfScreen.getSettingsPdfScreen().isOddSpreadsAvailable(), Boolean.FALSE);
+        Assert.assertEquals("Even spreads is available", readerPdfScreen.getSettingsPdfScreen().isEvenSpreadsAvailable(), Boolean.FALSE);
     }
 
     @When("I tap Wrapped scrolling on pdf settings screen")
     public void tapWrappedScrolling(){
-        settingsPdfScreen.tapWrappedScrolling();
+        readerPdfScreen.getSettingsPdfScreen().tapWrappedScrolling();
     }
 
     @Then("Wrapped scrolling is chosen on settings screen")
     public void isWrappedScrollingChosen(){
-        Assert.assertTrue("Wrapped scrolling is not chosen", settingsPdfScreen.isWrappedScrollingChosen());
+        Assert.assertTrue("Wrapped scrolling is not chosen", readerPdfScreen.getSettingsPdfScreen().isWrappedScrollingChosen());
     }
 
     @Then("Vertical scrolling is chosen by default on settings screen")
     public void checkDefaultScrolling(){
-        Assert.assertTrue("Vertical scrolling is not default", settingsPdfScreen.isVerticalScrollingChosen());
+        Assert.assertTrue("Vertical scrolling is not default", readerPdfScreen.getSettingsPdfScreen().isVerticalScrollingChosen());
     }
 
     @When("I go to next page on reader pdf screen")

@@ -18,6 +18,7 @@ import org.openqa.selenium.Point;
 import screens.pdf.navigationBarPdf.NavigationBarPdfScreen;
 import screens.pdf.readerPdf.ReaderPdfScreen;
 import screens.pdf.searchPdf.SearchPdfScreen;
+import screens.pdf.settingspdf.SettingsPdfScreen;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosReaderPdfScreen extends ReaderPdfScreen {
@@ -94,6 +95,12 @@ public class IosReaderPdfScreen extends ReaderPdfScreen {
     @Override
     public SearchPdfScreen getSearchPdfScreen() {
         return searchPdfScreen;
+    }
+
+    @Override
+    public SettingsPdfScreen getSettingsPdfScreen() {
+        //only for android
+        return null;
     }
 
     @Override
