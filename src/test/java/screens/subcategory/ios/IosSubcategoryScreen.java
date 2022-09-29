@@ -8,7 +8,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
-import constants.application.timeouts.CategoriesTimeouts;
+import enums.timeouts.CategoriesTimeouts;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.subcategory.SubcategoryScreen;

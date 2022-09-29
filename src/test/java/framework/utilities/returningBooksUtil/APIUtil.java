@@ -91,7 +91,7 @@ public class APIUtil {
                 try {
                     getBooksAPIMethods.returnBooks(authHeader, path).execute();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    AqualityServices.getLogger().error(e + e.getMessage());
                 }
             }
         }

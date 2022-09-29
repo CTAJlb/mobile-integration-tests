@@ -220,7 +220,7 @@ public class XMLUtil {
                 try {
                     Thread.sleep(threadSleepTime);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    AqualityServices.getLogger().error(e + e.getMessage());
                 }
             } else {
                 break;
@@ -272,7 +272,7 @@ public class XMLUtil {
         try {
             response = xmlapiMethods.getFeed(url).execute();
         } catch (IOException e) {
-            e.printStackTrace();
+            AqualityServices.getLogger().error(e + e.getMessage());
         }
 
         if (response.body() == null) {

@@ -6,7 +6,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.localization.application.account.AccountScreenLoginStatus;
+import enums.localization.account.AccountScreenLoginStatus;
 import framework.configuration.Credentials;
 import org.openqa.selenium.By;
 import screens.account.AccountScreen;

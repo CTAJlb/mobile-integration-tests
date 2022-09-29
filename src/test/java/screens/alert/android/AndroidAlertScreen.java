@@ -2,7 +2,7 @@ package screens.alert.android;
 
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
+import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import org.openqa.selenium.By;
 import screens.alert.AlertScreen;
 

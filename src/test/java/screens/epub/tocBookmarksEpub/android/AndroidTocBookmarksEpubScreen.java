@@ -3,7 +3,7 @@ package screens.epub.tocBookmarksEpub.android;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.epub.EnumTabsTocAndBookmarksEpub;
+import enums.epub.EnumTabsTocAndBookmarksEpub;
 import org.openqa.selenium.By;
 import screens.epub.bookmarksEpub.BookmarksEpubScreen;
 import screens.epub.tocBookmarksEpub.TocBookmarksEpubScreen;

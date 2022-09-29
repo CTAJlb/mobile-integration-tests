@@ -1,7 +1,7 @@
 package screens.epub.tocBookmarksEpub;
 
 import aquality.appium.mobile.screens.Screen;
-import constants.epub.EnumTabsTocAndBookmarksEpub;
+import enums.epub.EnumTabsTocAndBookmarksEpub;
 import org.openqa.selenium.By;
 import screens.epub.bookmarksEpub.BookmarksEpubScreen;
 import screens.epub.tocEpub.TocEpubScreen;

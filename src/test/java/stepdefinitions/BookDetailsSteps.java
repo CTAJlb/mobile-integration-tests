@@ -5,7 +5,7 @@ import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.RegEx;
 import constants.keysForContext.ScenarioContextKey;
-import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
+import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import framework.utilities.ScreenshotUtils;
 import framework.utilities.swipe.SwipeElementUtils;

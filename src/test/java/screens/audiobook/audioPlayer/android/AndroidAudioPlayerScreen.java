@@ -6,7 +6,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
-import constants.localization.application.catalog.TimerKeys;
+import enums.localization.catalog.TimerKeys;
 import framework.utilities.DateUtils;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;

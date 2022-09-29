@@ -8,7 +8,7 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.ElementState;
 import aquality.selenium.core.elements.ElementsCount;
-import constants.application.attributes.IosAttributes;
+import constants.applicationattributes.IosAttributes;
 import framework.utilities.swipe.SwipeElementUtils;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;
 import io.appium.java_client.TouchAction;

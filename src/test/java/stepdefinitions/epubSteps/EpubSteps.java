@@ -2,10 +2,10 @@ package stepdefinitions.epubSteps;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
-import constants.epub.EnumTabsTocAndBookmarksEpub;
-import constants.localization.application.reader.BackgroundColorKeys;
-import constants.localization.application.reader.FontNameKeys;
-import constants.localization.application.reader.ReaderSettingKeys;
+import enums.epub.EnumTabsTocAndBookmarksEpub;
+import enums.localization.reader.BackgroundColorKeys;
+import enums.localization.reader.FontNameKeys;
+import enums.localization.reader.ReaderSettingKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;

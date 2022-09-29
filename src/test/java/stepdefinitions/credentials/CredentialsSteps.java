@@ -1,7 +1,7 @@
 package stepdefinitions.credentials;
 
 import com.google.inject.Inject;
-import constants.keysForContext.ContextLibrariesKeys;
+import enums.keysforcontext.ContextLibrariesKeys;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;

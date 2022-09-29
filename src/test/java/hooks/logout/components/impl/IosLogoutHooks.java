@@ -2,10 +2,10 @@ package hooks.logout.components.impl;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
-import constants.application.timeouts.AuthorizationTimeouts;
-import constants.keysForContext.ContextLibrariesKeys;
-import constants.localization.application.account.AccountScreenLoginStatus;
-import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
+import enums.timeouts.AuthorizationTimeouts;
+import enums.keysforcontext.ContextLibrariesKeys;
+import enums.localization.account.AccountScreenLoginStatus;
+import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import factories.steps.StepsType;
 import framework.utilities.ScenarioContext;
 import hooks.logout.components.AbstractLogoutHooks;

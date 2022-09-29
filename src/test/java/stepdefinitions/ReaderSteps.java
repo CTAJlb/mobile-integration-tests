@@ -2,7 +2,7 @@ package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
-import constants.application.EnumBookType;
+import enums.EnumBookType;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import models.android.CatalogBookModel;

@@ -17,7 +17,7 @@ import screens.audiobook.audioPlayer.AudioPlayerScreen;
 
 import java.time.Duration;
 
-import static constants.localization.application.catalog.TimerKeys.END_OF_CHAPTER;
+import static enums.localization.catalog.TimerKeys.END_OF_CHAPTER;
 
 public class AudioPlayerSteps {
     private final AudioPlayerScreen audioPlayerScreen;

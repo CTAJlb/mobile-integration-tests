@@ -5,7 +5,7 @@ import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import constants.RegEx;
-import constants.application.attributes.IosAttributes;
+import constants.applicationattributes.IosAttributes;
 import framework.utilities.CoordinatesClickUtils;
 import framework.utilities.RegExUtil;
 import framework.utilities.swipe.Direction;

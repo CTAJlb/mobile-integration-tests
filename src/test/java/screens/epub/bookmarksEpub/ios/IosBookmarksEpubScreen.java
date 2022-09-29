@@ -6,7 +6,7 @@ import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.application.attributes.IosAttributes;
+import constants.applicationattributes.IosAttributes;
 import framework.utilities.swipe.SwipeElementUtils;
 import org.openqa.selenium.By;
 import screens.epub.bookmarksEpub.BookmarksEpubScreen;

@@ -1,8 +1,8 @@
 package screens.catalog.screen.books;
 
 import aquality.appium.mobile.screens.Screen;
-import constants.application.EnumBookType;
-import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
+import enums.EnumBookType;
+import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 

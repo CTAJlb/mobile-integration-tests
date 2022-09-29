@@ -1,6 +1,6 @@
 package models.android;
 
-import constants.localization.application.bookdetals.BookDetailsScreenInformationBlockKeys;
+import enums.localization.bookdetails.BookDetailsScreenInformationBlockKeys;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

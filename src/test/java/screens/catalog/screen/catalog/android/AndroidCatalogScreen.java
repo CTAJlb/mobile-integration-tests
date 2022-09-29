@@ -9,7 +9,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.elements.interfaces.IElement;
-import constants.application.attributes.AndroidAttributes;
+import constants.applicationattributes.AndroidAttributes;
 import framework.utilities.swipe.SwipeElementUtils;
 import org.openqa.selenium.By;
 import screens.catalog.screen.catalog.CatalogScreen;

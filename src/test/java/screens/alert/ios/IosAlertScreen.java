@@ -3,7 +3,7 @@ package screens.alert.ios;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import constants.localization.application.catalog.EnumActionButtonsForBooksAndAlertsKeys;
+import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import org.openqa.selenium.By;
 import screens.alert.AlertScreen;
 
