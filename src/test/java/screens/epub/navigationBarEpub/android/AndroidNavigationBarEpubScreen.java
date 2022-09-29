@@ -8,16 +8,11 @@ import screens.epub.navigationBarEpub.NavigationBarEpubScreen;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidNavigationBarEpubScreen extends NavigationBarEpubScreen {
-    private final IButton btnFontSettings =
-            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuSettings\")]"), "btnFontSettings");
-    private final IButton btnTOC =
-            getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuTOC\")]"), "btnChapters");
-    private final IButton btnAddBookmark =
-            getElementFactory().getButton(By.xpath("//android.widget.TextView[@content-desc=\"Create a bookmark for the current page\"]"), "btnAddBookmark");
-    private final IButton btnDeleteBookmark =
-            getElementFactory().getButton(By.xpath("//android.widget.TextView[@content-desc=\"Delete the bookmark for the current page\"]"), "btnDeleteBookmark");
-    private final IButton btnBack =
-            getElementFactory().getButton(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"readerToolbar\")]/android.widget.ImageButton"), "btnBack");
+    private final IButton btnFontSettings = getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuSettings\")]"), "btnFontSettings");
+    private final IButton btnTOC = getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuTOC\")]"), "btnChapters");
+    private final IButton btnAddBookmark = getElementFactory().getButton(By.xpath("//android.widget.TextView[@content-desc=\"Create a bookmark for the current page\"]"), "btnAddBookmark");
+    private final IButton btnDeleteBookmark = getElementFactory().getButton(By.xpath("//android.widget.TextView[@content-desc=\"Delete the bookmark for the current page\"]"), "btnDeleteBookmark");
+    private final IButton btnBack = getElementFactory().getButton(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"readerToolbar\")]/android.widget.ImageButton"), "btnBack");
 
     public AndroidNavigationBarEpubScreen() {
         super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"readerToolbar\")]"));

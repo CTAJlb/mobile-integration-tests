@@ -20,27 +20,16 @@ import java.util.List;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWorkingWithListOfBooks {
-    private static final String PROGRESS_BAR_BY_BOOK_NAME_LOC =
-            "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.ProgressBar";
-    private static final String ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
-            "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
-    private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
-            ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
-    private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
-            ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[2]";
-
-    private static final String ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
-            "//android.widget.TextView/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
-    private static final String BOOK_NAME_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
-            ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
-    private static final String AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
-            ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[2]";
-    private static final String BOOKS_NAME_LOCATOR =
-            "//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[1]";
-    private final ILabel lblNameOfFirstBook = AqualityServices.getElementFactory().getLabel(
-            By.xpath("//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.TextView[1]"), "Name of first book");
-    private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(
-            By.xpath("//android.widget.TextView[contains(@text, \"No results\")]"), "No results found");
+    private static final String PROGRESS_BAR_BY_BOOK_NAME_LOC = "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.ProgressBar";
+    private static final String ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
+    private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
+    private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[2]";
+    private static final String ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = "//android.widget.TextView/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
+    private static final String BOOK_NAME_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
+    private static final String AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[2]";
+    private static final String BOOKS_NAME_LOCATOR = "//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[1]";
+    private final ILabel lblNameOfFirstBook = AqualityServices.getElementFactory().getLabel(By.xpath("//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.TextView[1]"), "Name of first book");
+    private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@text, \"No results\")]"), "No results found");
 
     public AndroidCatalogBooksScreen() {
         super(By.id("feedWithGroups"));

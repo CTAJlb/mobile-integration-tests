@@ -27,36 +27,21 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private static final String TIME_IN_MINUTES_LEFT_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d minutes and %d seconds until playback pauses\"]";
     private static final String TIME_IN_SECONDS_LEFT_XPATH_LOCATOR = "//XCUIElementTypeToolbar//XCUIElementTypeButton[@name=\"%d seconds until playback pauses\"]";
 
-    private final IButton btnSleepTimer =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton[3]"), "btnSleepTimer");
-    private final IButton btnToc =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Table of Contents\"]"), "btnToc");
-    private final IButton btnPlay =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@label=\"Play\"]"), "btnPlay");
-    private final IButton btnPause =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@label=\"Pause\"]"), "btnPause");
-    private final IButton btnBack =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "btnBack");
-    private final IButton btnSkipBehind =
-            getElementFactory().getButton(By.name("skip_back"), "btnSkipBehind");
-    private final IButton btnSkipAhead =
-            getElementFactory().getButton(By.name("skip_forward"), "btnSkipAhead");
-    private final ILabel lblChapterName =
-            getElementFactory().getLabel(By.xpath("(//XCUIElementTypeStaticText[@name=\"progress_rightLabel\"])[1]"), "lblChapterName");
-    private final ILabel lblLeftTime =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"progress_leftLabel\"]"), "lblLeftTime");
-    private final ILabel lblRightTime =
-            getElementFactory().getLabel(By.xpath("(//XCUIElementTypeStaticText[@name=\"progress_rightLabel\"])[2]"), "lblRightTime");
-    private final IButton btnPlaybackSpeed =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton"), "btnPlaybackSpeed");
-    private final ILabel lblPlaybackProgress =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther[@name = \"progress_background\"]"), "Playback progress");
-    private final ILabel lblLineRemaining =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"remaining in the book\")]"), "Line remaining");
-    private final IButton btnPlaySpeed =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[contains(@name, \"speed\")]"), "Button play speed");
-    private final IButton btnSlider =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeOther[@name=\"progress_grip\"]"), "Slider");
+    private final IButton btnSleepTimer = getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton[3]"), "btnSleepTimer");
+    private final IButton btnToc = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Table of Contents\"]"), "btnToc");
+    private final IButton btnPlay = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@label=\"Play\"]"), "btnPlay");
+    private final IButton btnPause = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@label=\"Pause\"]"), "btnPause");
+    private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "btnBack");
+    private final IButton btnSkipBehind = getElementFactory().getButton(By.name("skip_back"), "btnSkipBehind");
+    private final IButton btnSkipAhead = getElementFactory().getButton(By.name("skip_forward"), "btnSkipAhead");
+    private final ILabel lblChapterName = getElementFactory().getLabel(By.xpath("(//XCUIElementTypeStaticText[@name=\"progress_rightLabel\"])[1]"), "lblChapterName");
+    private final ILabel lblLeftTime = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"progress_leftLabel\"]"), "lblLeftTime");
+    private final ILabel lblRightTime = getElementFactory().getLabel(By.xpath("(//XCUIElementTypeStaticText[@name=\"progress_rightLabel\"])[2]"), "lblRightTime");
+    private final IButton btnPlaybackSpeed = getElementFactory().getButton(By.xpath("//XCUIElementTypeToolbar//XCUIElementTypeButton"), "btnPlaybackSpeed");
+    private final ILabel lblPlaybackProgress = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther[@name = \"progress_background\"]"), "Playback progress");
+    private final ILabel lblLineRemaining = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"remaining in the book\")]"), "Line remaining");
+    private final IButton btnPlaySpeed = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[contains(@name, \"speed\")]"), "Button play speed");
+    private final IButton btnSlider = getElementFactory().getButton(By.xpath("//XCUIElementTypeOther[@name=\"progress_grip\"]"), "Slider");
 
 
     public IosAudioPlayerScreen() {

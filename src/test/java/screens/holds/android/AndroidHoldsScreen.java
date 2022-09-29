@@ -19,19 +19,15 @@ import java.util.List;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidHoldsScreen extends HoldsScreen implements IWorkingWithListOfBooks {
-    private static final String ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
-            "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
-    private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC =
-            ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
+    private static final String ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = "//android.widget.TextView[@text=\"%s\"]/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
+    private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
     private static final String BOOK_LOC = "//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout";
     private static final String BOOK_TITLE = BOOK_LOC + "/android.view.ViewGroup/android.widget.TextView[1]";
     private static final String BOOK_AUTHOR = BOOK_LOC + "/android.view.ViewGroup/android.widget.TextView[2]";
 
     private final ILabel lblNoBooks = getElementFactory().getLabel(By.id("feedEmptyText"), "No Books Present");
-    private final ILabel lblHolds =
-            getElementFactory().getLabel(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"mainToolbar\")]/android.widget.TextView"), "Reservations");
-    private final IButton btnSort =
-            getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button"), "Sorting button");
+    private final ILabel lblHolds = getElementFactory().getLabel(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"mainToolbar\")]/android.widget.TextView"), "Reservations");
+    private final IButton btnSort = getElementFactory().getButton(By.xpath("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.Button"), "Sorting button");
 
     public AndroidHoldsScreen() {
         super(By.xpath("//android.widget.TextView[@text=\"Holds\"]"));

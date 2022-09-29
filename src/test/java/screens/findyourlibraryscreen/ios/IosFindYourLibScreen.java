@@ -14,13 +14,10 @@ import java.util.List;
 @ScreenType(platform = PlatformName.IOS)
 public class IosFindYourLibScreen extends FindYourLibScreen {
 
-    private final IButton btnAddLib =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeSheet[@name=\"Find Your Library\"]//XCUIElementTypeButton[@name=\"Add Library\"]"), "Add library btn");
+    private final IButton btnAddLib = getElementFactory().getButton(By.xpath("//XCUIElementTypeSheet[@name=\"Find Your Library\"]//XCUIElementTypeButton[@name=\"Add Library\"]"), "Add library btn");
     private final CreatingLibraryLocator libraryLocator = (index ->
-            getElementFactory().getLabel(By.xpath(
-                    String.format("//XCUIElementTypeSheet//XCUIElementTypeScrollView[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[%d]/XCUIElementTypeButton", index)), "Library"));
-    private final IButton btnCancel =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeSheet//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"Cancel\"]"), "Close button");
+            getElementFactory().getLabel(By.xpath(String.format("//XCUIElementTypeSheet//XCUIElementTypeScrollView[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[%d]/XCUIElementTypeButton", index)), "Library"));
+    private final IButton btnCancel = getElementFactory().getButton(By.xpath("//XCUIElementTypeSheet//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"Cancel\"]"), "Close button");
     private final String LIBRARY_NAME = "//XCUIElementTypeSheet//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"%s\"]";
 
     public IosFindYourLibScreen() {
@@ -53,7 +50,7 @@ public class IosFindYourLibScreen extends FindYourLibScreen {
         List<String > libraries = new ArrayList<>();
         int index = 1;
         int end = 0;
-        while (end < listSize + 1) {
+        while (end <= listSize) {
             ILabel lblLibrary = libraryLocator.createLbl(index);
             libraries.add(lblLibrary.getText());
             index+=2;

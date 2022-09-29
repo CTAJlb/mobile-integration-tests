@@ -11,13 +11,9 @@ import screens.catalog.form.MainCatalogToolbarForm;
 public class IosMainCatalogToolbarForm extends MainCatalogToolbarForm {
     private static final String MAIN_ELEMENT_LOC = "//XCUIElementTypeNavigationBar";
 
-    private final IButton btnChooseAnotherLibrary =
-            getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC + "//XCUIElementTypeButton[@name=\"Change Library Account\"]"),
-                    "Change library account");
-    private final ILabel lblCategoryAndCatalogName =
-            getElementFactory().getLabel(By.xpath(MAIN_ELEMENT_LOC + "/XCUIElementTypeButton[1]/following-sibling::*"), "Catalog name");
-    private final IButton btnSearch = getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC +
-            "//XCUIElementTypeButton[@name=\"Search\"]"), "Search");
+    private final IButton btnChooseAnotherLibrary = getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC + "//XCUIElementTypeButton[@name=\"Change Library Account\"]"), "Change library account");
+    private final ILabel lblCategoryAndCatalogName = getElementFactory().getLabel(By.xpath(MAIN_ELEMENT_LOC + "/XCUIElementTypeButton[1]/following-sibling::*"), "Catalog name");
+    private final IButton btnSearch = getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC + "//XCUIElementTypeButton[@name=\"Search\"]"), "Search");
 
     public IosMainCatalogToolbarForm() {
         super(By.xpath(MAIN_ELEMENT_LOC));

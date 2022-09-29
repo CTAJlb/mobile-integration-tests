@@ -13,7 +13,6 @@ import models.android.CatalogBookModel;
 import org.openqa.selenium.By;
 import screens.subcategory.SubcategoryScreen;
 
-import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -133,7 +132,7 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     public boolean areSubcategoryRowsLoaded() {
         return AqualityServices.getConditionalWait().waitFor(() ->
                         getElementFactory().findElements(By.xpath(SUBCATEGORY_ROWS_LOCATOR), ElementType.LABEL).size() > 0,
-                Duration.ofMillis(CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis()));
+                (CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis()));
     }
 
     private List<String> getValuesFromListOfLabels(String xpath) {

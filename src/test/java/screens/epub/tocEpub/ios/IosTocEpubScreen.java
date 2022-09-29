@@ -1,13 +1,10 @@
 package screens.epub.tocEpub.ios;
 
-import aquality.appium.mobile.actions.SwipeDirection;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import aquality.selenium.core.elements.ElementState;
-import aquality.selenium.core.elements.ElementsCount;
 import aquality.selenium.core.elements.interfaces.IElement;
 import org.openqa.selenium.By;
 import screens.epub.tocEpub.TocEpubScreen;

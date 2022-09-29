@@ -15,10 +15,8 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidTutorialScreen extends TutorialScreen {
-    private final IButton btnCloseTutorial =
-            getElementFactory().getButton(By.xpath("//android.widget.ImageView[contains(@resource-id,\"skip_button\")]"), "btnCloseTutorial");
-    private final ILabel lblPage =
-            getElementFactory().getLabel(By.xpath("//android.widget.ImageView[@content-desc=\"Tutorial page\"]"), "lblPage");
+    private final IButton btnCloseTutorial = getElementFactory().getButton(By.xpath("//android.widget.ImageView[contains(@resource-id,\"skip_button\")]"), "btnCloseTutorial");
+    private final ILabel lblPage = getElementFactory().getLabel(By.xpath("//android.widget.ImageView[@content-desc=\"Tutorial page\"]"), "lblPage");
 
     private static final String TUTORIAL_TAB_BY_NAME_LOC = "//android.widget.LinearLayout[contains(@content-desc,\"%s\")]";
     private static final String TUTORIAL_TAB_LOC = "//android.widget.LinearLayout[@content-desc]";

@@ -15,14 +15,10 @@ import screens.settings.SettingsScreen;
 public class AndroidSettingsScreen extends SettingsScreen {
     private static final String LIBRARY_LOCATOR = "//android.widget.LinearLayout//android.widget.TextView[@text=\"%s\"]";
 
-    private final IButton librariesBtn = getElementFactory().getButton(
-            By.xpath("//android.widget.TextView[contains(@text, \"Libraries\")]"), "Accounts");
-    private final IButton btnPrivacyPolicy = getElementFactory().getButton(
-            By.xpath("//android.widget.TextView[@text=\"Privacy Policy\"]"), "Privacy Policy");
-    private final IButton btnUserAgreement = getElementFactory().getButton(
-            By.xpath("//android.widget.TextView[@text=\"User Agreement\"]"), "User Agreement");
-    private final IButton btnSoftwareLic = getElementFactory().getButton(
-            By.xpath("//android.widget.TextView[@text=\"Software Licenses\"]"), "Software Licenses");
+    private final IButton librariesBtn = getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@text, \"Libraries\")]"), "Accounts");
+    private final IButton btnPrivacyPolicy = getElementFactory().getButton(By.xpath("//android.widget.TextView[@text=\"Privacy Policy\"]"), "Privacy Policy");
+    private final IButton btnUserAgreement = getElementFactory().getButton(By.xpath("//android.widget.TextView[@text=\"User Agreement\"]"), "User Agreement");
+    private final IButton btnSoftwareLic = getElementFactory().getButton(By.xpath("//android.widget.TextView[@text=\"Software Licenses\"]"), "Software Licenses");
     private final ILabel lblSettings = getElementFactory().getLabel(By.xpath("//android.widget.TextView"), "Settings");
     private final IButton btnCommit = getElementFactory().getButton(By.xpath("//android.widget.TextView[@text=\"Commit\"]"), "Commit button");
     private final IButton btnDebugOptions = getElementFactory().getButton(By.xpath("//android.widget.TextView[@text=\"Debug options\"]"), "Debug options button");

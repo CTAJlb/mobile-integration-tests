@@ -12,12 +12,9 @@ import screens.pdf.tocbookmarkspdf.TocBookmarksPdfScreen;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidTocBookmarksPdfScreen extends TocBookmarksPdfScreen {
-    private final IButton btnThumbnails =
-            getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"viewThumbnail\"]"), "TOC with thumbnails");
-    private final IButton btnChapters =
-            getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"viewOutline\"]"), "Chapter content");
-    private final IButton btnOnTheRight =
-            getElementFactory().getButton(By.xpath("//android.view.View[@resource-id=\"outlineOptionsContainer\"]"), "Button on the right corner");
+    private final IButton btnThumbnails = getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"viewThumbnail\"]"), "TOC with thumbnails");
+    private final IButton btnChapters = getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"viewOutline\"]"), "Chapter content");
+    private final IButton btnOnTheRight = getElementFactory().getButton(By.xpath("//android.view.View[@resource-id=\"outlineOptionsContainer\"]"), "Button on the right corner");
 
     private final TocPdfScreen tocPdfScreen;
     private final ThumbnailsPdfScreen thumbnailsPdfScreen;

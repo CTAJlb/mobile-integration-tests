@@ -9,22 +9,14 @@ import screens.pdf.settingspdf.SettingsPdfScreen;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidSettingsPdfScreen extends SettingsPdfScreen {
-    private final IButton btnFirstPage =
-            getElementFactory().getButton(By.xpath("//android.widget.Button[@resource-id=\"firstPage\"]"), "First page button");
-    private final IButton btnLastPage =
-            getElementFactory().getButton(By.xpath("//android.widget.Button[@resource-id=\"lastPage\"]"), "Last page button");
-    private final IButton btnVerticalScrolling =
-            getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"scrollVertical\"]"), "Vertical scrolling");
-    private final IButton btnHorizontalScrolling =
-            getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"scrollHorizontal\"]"), "Horizontal scrolling");
-    private final IButton btnWrappedScrolling =
-            getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"scrollWrapped\"]"), "Wrapped scrolling");
-    private final IButton btnNoSpreads =
-            getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"spreadNone\"]"), "No spreads");
-    private final IButton btnOddSpreads =
-            getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"spreadOdd\"]"), "Odd spreads");
-    private final IButton btnEvenSpreads =
-            getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"spreadEven\"]"), "Even spreads");
+    private final IButton btnFirstPage = getElementFactory().getButton(By.xpath("//android.widget.Button[@resource-id=\"firstPage\"]"), "First page button");
+    private final IButton btnLastPage = getElementFactory().getButton(By.xpath("//android.widget.Button[@resource-id=\"lastPage\"]"), "Last page button");
+    private final IButton btnVerticalScrolling = getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"scrollVertical\"]"), "Vertical scrolling");
+    private final IButton btnHorizontalScrolling = getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"scrollHorizontal\"]"), "Horizontal scrolling");
+    private final IButton btnWrappedScrolling = getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"scrollWrapped\"]"), "Wrapped scrolling");
+    private final IButton btnNoSpreads = getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"spreadNone\"]"), "No spreads");
+    private final IButton btnOddSpreads = getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"spreadOdd\"]"), "Odd spreads");
+    private final IButton btnEvenSpreads = getElementFactory().getButton(By.xpath("//android.widget.RadioButton[@resource-id=\"spreadEven\"]"), "Even spreads");
 
     public AndroidSettingsPdfScreen() {
         super(By.xpath("//android.view.View[@resource-id=\"secondaryToolbar\"]"));

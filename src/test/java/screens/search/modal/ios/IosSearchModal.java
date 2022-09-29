@@ -11,9 +11,7 @@ import screens.search.modal.SearchModal;
 public class IosSearchModal extends SearchModal {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeButton[@name=\"Search\"]";
 
-    private final ITextBox txbSearch = getElementFactory().getTextBox(
-            By.xpath("//XCUIElementTypeSearchField[contains(@name, \"Search\")]"),
-            "Search value input");
+    private final ITextBox txbSearch = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeSearchField[contains(@name, \"Search\")]"), "Search value input");
     private final IButton btnSearch = getElementFactory().getButton(By.xpath(MAIN_ELEMENT), "Search");
     private final IButton btnClearSearch = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Clear text\"]"), "Clear text button");
     private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Back\"]"), "Back button");

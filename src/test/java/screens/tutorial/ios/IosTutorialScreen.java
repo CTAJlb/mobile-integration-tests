@@ -22,10 +22,8 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosTutorialScreen extends TutorialScreen {
-    private final IButton btnCloseTutorial =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Close\"]"), "btnCloseTutorial");
-    private final ILabel lblPage =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeWindow"), "lblPage");
+    private final IButton btnCloseTutorial = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Close\"]"), "btnCloseTutorial");
+    private final ILabel lblPage = getElementFactory().getLabel(By.xpath("//XCUIElementTypeWindow"), "lblPage");
 
     private static final String TUTORIAL_TAB_BY_NAME_LOC = "//XCUIElementTypeImage[contains(@name,\"%s\")]";
     private static final String TUTORIAL_TAB_LOC = "//XCUIElementTypeImage[contains(@name,\"Step\")]";

@@ -16,23 +16,15 @@ public class IosAccountScreen extends AccountScreen {
     private static final String LOGIN_BTN_LOC_PATTERN = "//XCUIElementTypeStaticText[@name=\"%1$s\"]\n";
     private static final String BUTTON_LOCATOR = "//XCUIElementTypeStaticText[@name=\"%s\"]";
 
-    private final IButton btnLogin = getElementFactory().getButton(
-            By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, AccountScreenLoginStatus.LOG_IN.i18n())),
-            "Log in");
-    private final IButton btnLogout = getElementFactory().getButton(
-            By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, AccountScreenLoginStatus.LOG_OUT.i18n())),
-            "Log out");
-    private final IButton btnApproveSignOut = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"Sign out\"]"),
-            "Log out approve");
+    private final IButton btnLogin = getElementFactory().getButton(By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, AccountScreenLoginStatus.LOG_IN.i18n())),"Log in");
+    private final IButton btnLogout = getElementFactory().getButton(By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, AccountScreenLoginStatus.LOG_OUT.i18n())),"Log out");
+    private final IButton btnApproveSignOut = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Sign out\"]"),"Log out approve");
     private final ITextBox txbCard = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeTextField[@value]"), "Card");
     private final ITextBox txbPin = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeSecureTextField[@value]"), "Pin");
-    private final IButton btnLicAgreement = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[contains(@name, \"User License Agreement\")]"), "User License Agreement");
+    private final IButton btnLicAgreement = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[contains(@name, \"User License Agreement\")]"), "User License Agreement");
     private final ILabel lblCodeConduct = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"Code of Conduct\"]"), "Code of Conduct");
     private final IButton btnContentLicenses = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"ContentLicenses\"]"), "Content Licenses");
-    private final ILabel lblLibrariesAndPalaces =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Libraries are palaces\")]"), "\tLibraries are palaces for the people");
+    private final ILabel lblLibrariesAndPalaces =getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Libraries are palaces\")]"), "\tLibraries are palaces for the people");
     private final IButton btnAdvanced = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Advanced\"]"), "Advanced button");
 
     public IosAccountScreen() {

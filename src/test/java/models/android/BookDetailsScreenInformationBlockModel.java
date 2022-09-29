@@ -2,15 +2,15 @@ package models.android;
 
 import enums.localization.bookdetails.BookDetailsScreenInformationBlockKeys;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.Map;
 
 @Data
+@NoArgsConstructor
 @Accessors(chain = true)
 public class BookDetailsScreenInformationBlockModel {
-    public BookDetailsScreenInformationBlockModel() {}
-
     private BookDetailsScreenInformationBlockKeys key;
     private String value;
 

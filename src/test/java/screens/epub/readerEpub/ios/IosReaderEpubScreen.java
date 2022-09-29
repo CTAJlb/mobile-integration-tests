@@ -20,12 +20,9 @@ import java.util.Set;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosReaderEpubScreen extends ReaderEpubScreen {
-    private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "lblBookName");
-    private final ILabel lblPageNumberAndChapterName =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"Page\")]"), "lblPageNumberAndChapterName");
-    private final ILabel lblPage =
-            getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "lblPage");
+    private final ILabel lblBookName = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "lblBookName");
+    private final ILabel lblPageNumberAndChapterName = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"Page\")]"), "lblPageNumberAndChapterName");
+    private final ILabel lblPage = getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "lblPage");
 
     public IosReaderEpubScreen() {
         super(By.xpath("//*[contains(@name,\"Page\")]"));

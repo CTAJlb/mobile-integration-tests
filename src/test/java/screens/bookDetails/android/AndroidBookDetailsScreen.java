@@ -20,37 +20,22 @@ import java.util.List;
 public class AndroidBookDetailsScreen extends BookDetailsScreen {
     private static final String BOOK_ACTION_BUTTON_LOC = "//android.widget.Button[@text=\"%s\"]";
     private static final String LBL_AUTHOR_IN_RELATED_BOOKS = "//android.widget.FrameLayout//android.widget.TextView[@text=\"%s\"]";
-    private static final String LBL_LIST_OF_RELATED_BOOKS =
-            "//androidx.recyclerview.widget.RecyclerView[contains(@resource-id, \"feedLaneCoversScroll\")]/android.widget.LinearLayout";
+    private static final String LBL_LIST_OF_RELATED_BOOKS = "//androidx.recyclerview.widget.RecyclerView[contains(@resource-id, \"feedLaneCoversScroll\")]/android.widget.LinearLayout";
 
-    private final ILabel lblErrorScreen =
-            getElementFactory().getLabel(By.xpath("//android.widget.ScrollView"), "Error Screen");
-    private final ILabel lblPublished =
-            getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Published\")]/following-sibling::android.widget.TextView"), "lblPublished");
-    private final ILabel lblPublisher =
-            getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Publisher\")]/following::android.widget.TextView"), "lblPublisher");
-    private final ILabel lblCategories =
-            getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Categor\")]/following::android.widget.TextView"), "lblCategories");
-    private final ILabel lblDistributor =
-            getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Distributor\")]/following::android.widget.TextView"), "lblDistributor");
-    private final ILabel lblBookTitleInfo =
-            getElementFactory().getLabel(By.id("bookDetailTitle"), "Book title");
-    private final ILabel lblProgressBar =
-            getElementFactory().getLabel(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"bookDetailStatusInProgress\")]"), "lblProgressBar");
-    private final ILabel lblBookAuthorsInfo =
-            getElementFactory().getLabel(By.id("bookDetailAuthors"), "Book Authors");
-    private final ILabel lblErrorMessage =
-            getElementFactory().getLabel(By.id("errorDetails"), "Error message");
-    private final IButton btnErrorDetails =
-            getElementFactory().getButton(By.xpath("//*[contains(@resource-id,'bookDetailButtons')]//*[contains(@text,'Details')]"), "Error");
-    private final ILabel lblBookCover =
-            getElementFactory().getLabel(By.xpath("//android.widget.ImageView[contains(@resource-id, \"bookDetailCoverImage\")]"), "Book cover");
-    private final ILabel lblTextInDescription =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[@text=\"Description\"]/following::android.widget.TextView"), "Info in description section");
-    private final IButton btnMoreInRelatedBooks =
-            getElementFactory().getButton(By.xpath("//android.widget.FrameLayout//android.widget.TextView[@text=\"More…\"]"), "More button in related books section");
-    private final IButton btnMoreInDescription =
-            getElementFactory().getButton(By.xpath("//android.widget.TextView[@text=\"Description\"]//following::android.widget.TextView[@text=\"More…\"]"), "More button");
+    private final ILabel lblErrorScreen = getElementFactory().getLabel(By.xpath("//android.widget.ScrollView"), "Error Screen");
+    private final ILabel lblPublished = getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Published\")]/following-sibling::android.widget.TextView"), "lblPublished");
+    private final ILabel lblPublisher = getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Publisher\")]/following::android.widget.TextView"), "lblPublisher");
+    private final ILabel lblCategories = getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Categor\")]/following::android.widget.TextView"), "lblCategories");
+    private final ILabel lblDistributor = getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Distributor\")]/following::android.widget.TextView"), "lblDistributor");
+    private final ILabel lblBookTitleInfo = getElementFactory().getLabel(By.id("bookDetailTitle"), "Book title");
+    private final ILabel lblProgressBar = getElementFactory().getLabel(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"bookDetailStatusInProgress\")]"), "lblProgressBar");
+    private final ILabel lblBookAuthorsInfo = getElementFactory().getLabel(By.id("bookDetailAuthors"), "Book Authors");
+    private final ILabel lblErrorMessage = getElementFactory().getLabel(By.id("errorDetails"), "Error message");
+    private final IButton btnErrorDetails = getElementFactory().getButton(By.xpath("//*[contains(@resource-id,'bookDetailButtons')]//*[contains(@text,'Details')]"), "Error");
+    private final ILabel lblBookCover = getElementFactory().getLabel(By.xpath("//android.widget.ImageView[contains(@resource-id, \"bookDetailCoverImage\")]"), "Book cover");
+    private final ILabel lblTextInDescription = getElementFactory().getLabel(By.xpath("//android.widget.TextView[@text=\"Description\"]/following::android.widget.TextView"), "Info in description section");
+    private final IButton btnMoreInRelatedBooks = getElementFactory().getButton(By.xpath("//android.widget.FrameLayout//android.widget.TextView[@text=\"More…\"]"), "More button in related books section");
+    private final IButton btnMoreInDescription = getElementFactory().getButton(By.xpath("//android.widget.TextView[@text=\"Description\"]//following::android.widget.TextView[@text=\"More…\"]"), "More button");
 
     public AndroidBookDetailsScreen() {
         super(By.id("bookDetailCover"));

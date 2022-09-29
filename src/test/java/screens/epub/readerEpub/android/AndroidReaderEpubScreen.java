@@ -19,14 +19,10 @@ import java.util.Set;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidReaderEpubScreen extends ReaderEpubScreen {
-    private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"titleText\")]"), "lblBookName");
-    private final ILabel lblPageNumber =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_page\")]"), "lblPageNumber");
-    private final ILabel lblPage =
-            getElementFactory().getLabel(By.xpath("//android.webkit.WebView[1]"), "lblPage");
-    private final ILabel lblChapterName =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_title\")]"), "lblChapterName");
+    private final ILabel lblBookName = getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"titleText\")]"), "lblBookName");
+    private final ILabel lblPageNumber = getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_page\")]"), "lblPageNumber");
+    private final ILabel lblPage = getElementFactory().getLabel(By.xpath("//android.webkit.WebView[1]"), "lblPage");
+    private final ILabel lblChapterName = getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_title\")]"), "lblChapterName");
 
     public AndroidReaderEpubScreen() {
         super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"readerToolbar\")]"));

@@ -12,15 +12,9 @@ public class AndroidMainCatalogToolbarForm extends MainCatalogToolbarForm {
     private static final String MAIN_ELEMENT_LOC = "//*[contains(@resource-id,\"mainToolbar\")]";
     private static final String CATEGORY_INFO_LOCATOR_PART = MAIN_ELEMENT_LOC + "/android.widget.TextView";
 
-    private final IButton btnChooseAnotherLibrary =
-            getElementFactory().getButton(
-                    By.xpath(MAIN_ELEMENT_LOC +
-                            "/android.widget.ImageView"),
-                    "Menu");
-    private final ILabel lblCategoryName =
-            getElementFactory().getLabel(By.xpath(CATEGORY_INFO_LOCATOR_PART), "Category name");
-    private final IButton btnSearch =
-            getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC + "//*[contains(@resource-id,\"catalogMenuActionSearch\")]"), "Search");
+    private final IButton btnChooseAnotherLibrary = getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC + "/android.widget.ImageView"), "Menu");
+    private final ILabel lblCategoryName = getElementFactory().getLabel(By.xpath(CATEGORY_INFO_LOCATOR_PART), "Category name");
+    private final IButton btnSearch = getElementFactory().getButton(By.xpath(MAIN_ELEMENT_LOC + "//*[contains(@resource-id,\"catalogMenuActionSearch\")]"), "Search");
 
     public AndroidMainCatalogToolbarForm() {
         super(By.xpath(MAIN_ELEMENT_LOC));

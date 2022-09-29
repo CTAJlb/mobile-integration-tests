@@ -19,15 +19,12 @@ import java.util.List;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosLibrariesScreen extends LibrariesScreen {
-    private static final String LIBRARY_CELL_BY_LIBRARY_NAME_LOC =
-            "//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeCell";
+    private static final String LIBRARY_CELL_BY_LIBRARY_NAME_LOC = "//XCUIElementTypeStaticText[@name=\"%s\"]/parent::XCUIElementTypeCell";
     private static final String LIB_NAME_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[2]";
     private static final String LIB_NAME_ON_LIB_SETTINGS = "//XCUIElementTypeStaticText[@name=\"%s\"]";
 
-    private final IButton btnAddLibrary = getElementFactory().getButton(
-            By.xpath("//XCUIElementTypeButton[@name=\"Add Library\"]"), "btnAddLibrary");
-    private final IButton btnDeleteLibrary =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@label=\"Delete\"]"), "btnDeleteLibrary");
+    private final IButton btnAddLibrary = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Add Library\"]"), "btnAddLibrary");
+    private final IButton btnDeleteLibrary = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@label=\"Delete\"]"), "btnDeleteLibrary");
 
     public IosLibrariesScreen() {
         super(By.xpath("//XCUIElementTypeStaticText[@name=\"Libraries\"]"));
