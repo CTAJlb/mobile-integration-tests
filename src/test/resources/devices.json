@@ -5,6 +5,12 @@
       "platformVersion": "15"
     }
   },
+  "iPhone14_16": {
+    "capabilities": {
+      "deviceName": "iPhone 14",
+      "platformVersion": "16"
+    }
+  },
   "iPhone8_13": {
     "capabilities": {
       "deviceName": "iPhone 8",
