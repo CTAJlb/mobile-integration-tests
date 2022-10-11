@@ -150,7 +150,7 @@ Feature: My books module
     | Biblioboard        | AUDIOBOOK | Audiobooks | LISTEN     |
 
   @logout @returnBooks @tier2
-  Scenario: Check buttons under the book title in LYRASIS
+  Scenario Outline: Check buttons under the book title in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
@@ -170,3 +170,10 @@ Feature: My books module
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
       And EBOOK book with RETURN action button and 'bookInfo' bookInfo is present on books screen
+
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Axis 360           |
+      | Palace Marketplace |
+      | Biblioboard        |
