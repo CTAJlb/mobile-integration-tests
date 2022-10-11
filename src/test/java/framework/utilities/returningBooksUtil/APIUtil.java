@@ -1,6 +1,7 @@
 package framework.utilities.returningBooksUtil;
 
 import aquality.appium.mobile.application.AqualityServices;
+import framework.configuration.Credentials;
 import okhttp3.OkHttpClient;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -9,7 +10,6 @@ import retrofit2.converter.jaxb.JaxbConverterFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class APIUtil {
@@ -18,8 +18,8 @@ public class APIUtil {
     private static final int readTimeout = 120;
     private static final int writeTimeout = 120;
 
-    public static void returnBooks(String barcode, String pin) {
-        String authHeader = getAuthHeader(barcode, pin);
+    public static void returnBooks(Credentials credentials) {
+        String authHeader = getAuthHeader(credentials);
         AqualityServices.getLogger().info("There are books on the account for returning: ");
         ArrayList<String> booksForReturning = getListOfBooksInAccount(authHeader);
         AqualityServices.getLogger().info("Count of books on the account for returning: " + booksForReturning.size());
@@ -28,11 +28,7 @@ public class APIUtil {
 
     private static ArrayList<String> getListOfBooksInAccount(String authHeader) {
         ArrayList<String> booksForReturning = new ArrayList<>();
-        OkHttpClient client = new OkHttpClient()
-                .newBuilder()
-                .connectTimeout(connectTimeout, TimeUnit.SECONDS)
-                .readTimeout(readTimeout, TimeUnit.SECONDS)
-                .writeTimeout(writeTimeout, TimeUnit.SECONDS).build();
+        OkHttpClient client = makeHttpClient();
         GetBooksAPIMethods getBooksAPIMethods = new Retrofit
                 .Builder()
                 .baseUrl(BASE_URL)
@@ -76,25 +72,29 @@ public class APIUtil {
         return booksForReturning;
     }
 
-    public static int enterBooks(String barcode, String pin) {
-        String authHeader = getAuthHeader(barcode, pin);
+    public static int enterBooks(Credentials credentials) {
+        String authHeader = getAuthHeader(credentials);
         AqualityServices.getLogger().info("There are books on the account: ");
         ArrayList<String> listOfBooks = getListOfBooksInAccount(authHeader);
         return listOfBooks.size();
     }
 
-    public static void enterBookAfterOpeningAccount(String barcode, String pin) {
-        AqualityServices.getLogger().info("Count of books on the account after opening account: " + enterBooks(barcode, pin));
+    public static void enterBookAfterOpeningAccount(Credentials credentials) {
+        AqualityServices.getLogger().info("Count of books on the account after opening account: " + enterBooks(credentials));
     }
 
-    public static void enterBooksAfterReturningBooks(String barcode, String pin) {
-        AqualityServices.getLogger().info("Count of books on the account after returning books: " + enterBooks(barcode, pin));
+    public static void enterBooksAfterReturningBooks(Credentials credentials) {
+        AqualityServices.getLogger().info("Count of books on the account after returning books: " + enterBooks(credentials));
     }
 
     private static void sendRequestsForReturningBooks(String authHeader, ArrayList<String> booksForReturning) {
-        OkHttpClient client = new OkHttpClient().newBuilder().connectTimeout(connectTimeout, TimeUnit.SECONDS).readTimeout(readTimeout, TimeUnit.SECONDS).writeTimeout(writeTimeout, TimeUnit.SECONDS).build();
-        ReturnBooksAPIMethods getBooksAPIMethods = new Retrofit.Builder().baseUrl(BASE_URL).client(client).build().
-                create(ReturnBooksAPIMethods.class);
+        OkHttpClient client = makeHttpClient();
+        ReturnBooksAPIMethods getBooksAPIMethods = new Retrofit
+                .Builder()
+                .baseUrl(BASE_URL)
+                .client(client)
+                .build()
+                .create(ReturnBooksAPIMethods.class);
 
         if (booksForReturning.size() != 0) {
             for (String bookUrl : booksForReturning) {
@@ -108,9 +108,18 @@ public class APIUtil {
         }
     }
 
-    private static String getAuthHeader(String barcode, String pin) {
-        String base = barcode + ":" + pin;
-        String authHeader = "Basic " + Base64.getEncoder().encodeToString(base.getBytes());
-        return authHeader;
+    private static String getAuthHeader(Credentials credentials) {
+        String barcode = credentials.getBarcode();
+        String pin = credentials.getPin();
+        return "Basic " + Base64.getEncoder().encodeToString(credentials.makeBaseForAuthHeader(barcode, pin).getBytes());
+    }
+
+    private static OkHttpClient makeHttpClient() {
+        return new OkHttpClient()
+                .newBuilder()
+                .connectTimeout(connectTimeout, TimeUnit.SECONDS)
+                .readTimeout(readTimeout, TimeUnit.SECONDS)
+                .writeTimeout(writeTimeout, TimeUnit.SECONDS)
+                .build();
     }
 }

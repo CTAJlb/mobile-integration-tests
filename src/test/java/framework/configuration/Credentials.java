@@ -6,4 +6,10 @@ import lombok.Data;
 public class Credentials {
     private String barcode;
     private String pin;
+
+    public String makeBaseForAuthHeader(String barcode, String pin) {
+        this.barcode = barcode;
+        this.pin = pin;
+        return barcode + ":" + pin;
+    }
 }

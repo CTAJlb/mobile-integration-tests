@@ -24,29 +24,29 @@ Feature: Read PDF in LYRARIS Reads on IOS
       And I go to previous page on reader pdf screen
     Then Page number decreased by 1 from 'pageInfo2' on pdf reader screen
 
-#  @logout @returnBooks @tier1 @exclude_android
-#  Scenario: Open book to last page read Lyrasis
-#    When I open search modal
-#      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
-#      And I switch to 'eBooks' catalog tab
-#      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-#    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
-#    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-#      And Click READ action button on book details screen
-#    When I swipe pdf page forward from 4 to 6 times on reader pdf screen
-#      And I save pdf page number as 'pageNumber' on reader pdf screen
-#      And Wait for 3 seconds
-#      And I return to previous screen for epub and pdf
-#      And Click READ action button on book details screen
-#    Then The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
-#    When Wait for 3 seconds
-#    And I restart app
-#      And I open Books
-#    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
-#    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-#      And Click READ action button on book details screen
-#    Then 'bookInfo' book is present on reader pdf screen
-#      And The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
+  @logout @returnBooks @tier1 @exclude_android
+  Scenario: Open book to last page read Lyrasis
+    When I open search modal
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
+    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+    Then Reader pdf screen is opened
+    When I swipe pdf page forward from 4 to 6 times on reader pdf screen
+      And I save page number as 'pageNumber' on pdf reader screen
+      And I return to previous screen for epub and pdf
+      And Click READ action button on book details screen
+    Then Reader pdf screen is opened
+      And Page number is equal to 'pageNumber' on pdf reader screen
+    And I restart app
+      And I open Books
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then Reader pdf screen is opened
+      And Page number is equal to 'pageNumber' on pdf reader screen
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario: Navigate by Thumbnails Lyrasis
@@ -73,7 +73,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
     Then Reader pdf screen is opened
-      And I open search pdf screen
+    When I open search pdf screen
     Then Search pdf screen is opened
     When I close pdf search screen
     Then Reader pdf screen is opened
@@ -130,7 +130,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
     When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
     Then Reader pdf screen is opened
-      And I open bookmarks pdf screen
+    When I open bookmarks pdf screen
     Then Bookmarks pdf screen is opened
       And Amount of bookmarks is 0 on bookmarks pdf screen
     When Close toc bookmarks pdf screen

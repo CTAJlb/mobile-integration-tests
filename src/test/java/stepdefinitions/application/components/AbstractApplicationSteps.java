@@ -1,6 +1,7 @@
 package stepdefinitions.application.components;
 
 import aquality.appium.mobile.application.AqualityServices;
+import enums.timeouts.RestartAppTimeouts;
 import org.junit.Assert;
 import screens.addaccount.AddAccountScreen;
 import screens.bottommenu.BottomMenuForm;
@@ -80,7 +81,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     @Override
     public void restartApp() {
-        AqualityServices.getApplication().getDriver().runAppInBackground(Duration.ofMillis(2000));
+        AqualityServices.getApplication().getDriver().runAppInBackground(RestartAppTimeouts.TIMEOUT_RESTART_APPLICATION.getTimeoutRestart());
         AqualityServices.getApplication().getDriver().closeApp();
         AqualityServices.getApplication().getDriver().launchApp();
         catalogScreen.state().waitForDisplayed();

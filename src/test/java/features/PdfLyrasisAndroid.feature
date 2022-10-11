@@ -110,9 +110,9 @@ Feature: Read PDF in LYRASIS Reads on Android
       And I save page number as 'pageInfo' on pdf reader screen
       And I scroll page down on pdf reader screen
     Then Page number is not equal to 'pageInfo' on pdf reader screen
-#    When I save page number as 'pageInfo2' on pdf reader screen
-#      And I scroll page up
-#    Then Page number is not equal to 'pageInfo2' on pdf reader screen
+    When I save page number as 'pageInfo2' on pdf reader screen
+      And I scroll page up on pdf reader screen
+    Then Page number is not equal to 'pageInfo2' on pdf reader screen
 
   @logout @returnBooks @tier1 @exclude_ios
     Scenario: Settings: Check of Horizontal scrolling
@@ -128,13 +128,13 @@ Feature: Read PDF in LYRASIS Reads on Android
       And I open pdf settings screen on pdf reader screen
     Then Horizontal scrolling is chosen on settings screen
       And Spreads options are not available on settings screen
-#    When I open pdf settings screen on pdf reader screen
-#      And I save page number as 'pageInfo' on pdf reader screen
-#      And I scroll to the next page
-#    Then Page number is not equal to 'pageInfo'
-#    When I save page number as 'pageInfo2' on pdf reader screen
-#      And I scroll to the previous page
-#    Then Page number is not equal to 'pageInfo2'
+    When I open pdf settings screen on pdf reader screen
+      And I save page number as 'pageInfo' on pdf reader screen
+      And I go to next page on reader pdf screen
+    Then Page number is not equal to 'pageInfo' on pdf reader screen
+    When I save page number as 'pageInfo2' on pdf reader screen
+      And I go to previous page on reader pdf screen
+    Then Page number is not equal to 'pageInfo2' on pdf reader screen
 
   @logout @returnBooks @tier1 @exclude_ios
   Scenario: Settings: Check of Wrapped scrolling
@@ -151,32 +151,32 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then Wrapped scrolling is chosen on settings screen
       And Spreads options are available on settings screen
     When I open pdf settings screen on pdf reader screen
-#    And I save page number as 'pageInfo' on pdf reader screen
-#    And I scroll to the next page
-#    Then Page number is not equal to 'pageInfo'
-#    When I save page number as 'pageInfo2' on pdf reader screen
-#    And I scroll to the previous page
-#    Then Page number is not equal to 'pageInfo2'
+    And I save page number as 'pageInfo' on pdf reader screen
+    And I go to next page on reader pdf screen
+    Then Page number is not equal to 'pageInfo' on pdf reader screen
+    When I save page number as 'pageInfo2' on pdf reader screen
+    And I go to previous page on reader pdf screen
+    Then Page number is not equal to 'pageInfo2' on pdf reader screen
 
-
-#  @ignore @logout @returnBooks @tier1 @exclude_ios
-#  Scenario: Open book to last page read Lyrasis
-#    When I open search modal
-#      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
-#      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-#    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
-#    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-#      And Click READ action button on book details screen
-#      And I swipe pdf page forward from 7 to 10 times on reader pdf screen
-#      And I save pdf page number as 'pageNumber' on reader pdf screen
-#      And I return to previous screen for epub and pdf
-#      And Click READ action button on book details screen
-#    Then 'bookInfo' book is present on reader pdf screen
-#      And The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
-#    When I restart app
-#      And I open Books
-#    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
-#    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-#      And Click READ action button on book details screen
-#    Then 'bookInfo' book is present on reader pdf screen
-#      And The 'pageNumber' saved page number is equal to the current page number on the reader pdf screen
+  @ignore @logout @returnBooks @tier1 @exclude_ios
+  Scenario: Open book to last page read Lyrasis
+    When I open search modal
+      And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
+    When Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click READ action button on book details screen
+    Then Reader pdf screen is opened
+      When I swipe pdf page down from 7 to 10 times on reader pdf screen
+      And I save page number as 'pageNumber' on pdf reader screen
+      And I return to previous screen for epub and pdf
+      And Click READ action button on book details screen
+    Then Reader pdf screen is opened
+      And Page number is equal to 'pageNumber' on pdf reader screen
+    When I restart app
+      And I open Books
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+    Then Reader pdf screen is opened
+      And Page number is equal to 'pageNumber' on pdf reader screen
