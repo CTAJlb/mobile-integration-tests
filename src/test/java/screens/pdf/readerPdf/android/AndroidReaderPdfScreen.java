@@ -72,6 +72,16 @@ public class AndroidReaderPdfScreen extends ReaderPdfScreen {
     }
 
     @Override
+    public void swipePageDown() {
+        SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.DOWN);
+    }
+
+    @Override
+    public void swipePageUp() {
+        SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.UP);
+    }
+
+    @Override
     public void slidePageSlider(EntireScreenDragDirection entireScreenDragDirection) {
         //only for ios
     }

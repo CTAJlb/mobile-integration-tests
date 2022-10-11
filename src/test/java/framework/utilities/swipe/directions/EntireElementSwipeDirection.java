@@ -2,51 +2,37 @@ package framework.utilities.swipe.directions;
 
 import aquality.appium.mobile.elements.interfaces.IElement;
 import framework.utilities.swipe.Direction;
+import lombok.AllArgsConstructor;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
-public enum EntireElementSwipeDirection {
-    UP {
-        @Override
-        public Direction getSwipeDirection(IElement element) {
-            Point upperLeft = element.getElement().getLocation();
-            Dimension dimensions = element.getElement().getSize();
-            return new Direction()
-                    .setFrom(new Point(upperLeft.x + dimensions.width / 2, upperLeft.y))
-                    .setTo(new Point(upperLeft.x + dimensions.width / 2, upperLeft.y + dimensions.height));
-        }
-    },
-    DOWN {
-        @Override
-        public Direction getSwipeDirection(IElement element) {
-            Point upperLeft = element.getElement().getLocation();
-            Dimension dimensions = element.getElement().getSize();
-            return new Direction()
-                    .setFrom(new Point(upperLeft.x + dimensions.width / 2, upperLeft.y + dimensions.height))
-                    .setTo(new Point(upperLeft.x + dimensions.width / 2, upperLeft.y));
-        }
-    },
-    LEFT {
-        @Override
-        public Direction getSwipeDirection(IElement element) {
-            Point upperLeft = element.getElement().getLocation();
-            Dimension dimensions = element.getElement().getSize();
-            int y = upperLeft.y + dimensions.height / 2;
-            return new Direction()
-                    .setFrom(new Point(upperLeft.x + dimensions.width / 4, y))
-                    .setTo(new Point(upperLeft.x + dimensions.width - 1, y));
-        }
-    },
-    RIGHT {
-        @Override
-        public Direction getSwipeDirection(IElement element) {
-            Point upperLeft = element.getElement().getLocation();
-            Dimension dimensions = element.getElement().getSize();
-            return new Direction()
-                    .setFrom(new Point(upperLeft.x + dimensions.width - dimensions.width / 4, upperLeft.y + dimensions.height / 4))
-                    .setTo(new Point(upperLeft.x, upperLeft.y + dimensions.height / 4));
-        }
-    };
+import java.util.function.BiFunction;
 
-    public abstract Direction getSwipeDirection(IElement element);
+@AllArgsConstructor
+public enum EntireElementSwipeDirection {
+    UP((point, dimension) -> new Direction()
+            .setFrom(new Point(point.x + dimension.width / 2, point.y))
+            .setTo(new Point(point.x + dimension.width / 2, point.y + dimension.height))
+    ),
+
+    DOWN((point, dimension) -> new Direction()
+            .setFrom(new Point(point.x + dimension.width / 2, point.y + dimension.height))
+            .setTo(new Point(point.x + dimension.width / 2, point.y))
+    ),
+    LEFT((point, dimension) -> new Direction()
+            .setFrom(new Point(point.x + dimension.width / 4, point.y))
+            .setTo(new Point(point.x + dimension.width - 1, point.y))
+    ),
+    RIGHT((point, dimension) -> new Direction()
+            .setFrom(new Point(point.x + dimension.width - dimension.width / 4, point.y + dimension.height / 4))
+            .setTo(new Point(point.x, point.y + dimension.height / 4))
+    );
+
+    private final BiFunction<Point, Dimension, Direction> pointFunction;
+
+    public Direction getSwipeDirection(IElement element) {
+        Point upperLeft = element.getElement().getLocation();
+        Dimension dimensions = element.getElement().getSize();
+        return this.pointFunction.apply(upperLeft, dimensions);
+    }
 }

@@ -3,9 +3,11 @@ package framework.utilities.swipe.directions;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import framework.utilities.swipe.Direction;
+import lombok.AllArgsConstructor;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 
+@AllArgsConstructor
 public enum EntireScreenDragDirection {
     UP {
         @Override

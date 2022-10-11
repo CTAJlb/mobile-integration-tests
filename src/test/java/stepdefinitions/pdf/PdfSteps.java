@@ -4,15 +4,17 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import framework.utilities.ScenarioContext;
-import framework.utilities.swipe.SwipeElementUtils;
 import framework.utilities.swipe.directions.EntireScreenDragDirection;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.lang3.RandomUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.pdf.readerPdf.ReaderPdfScreen;
 import screens.pdf.tocbookmarkspdf.TocBookmarksPdfScreen;
 import screens.pdf.tocPdf.TocPdfScreen;
+
+import java.util.stream.IntStream;
 
 public class PdfSteps {
     private final ReaderPdfScreen readerPdfScreen;
@@ -170,7 +172,12 @@ public class PdfSteps {
 
     @When("I scroll page down on pdf reader screen")
     public void scrollPageDown() {
-        SwipeElementUtils.swipeByCoordinatesOfWindow();
+        readerPdfScreen.swipePageDown();
+    }
+
+    @When("I scroll page up on pdf reader screen")
+    public void scrollPageUp(){
+        readerPdfScreen.swipePageUp();
     }
 
     @Then("Page number is not equal to {string} on pdf reader screen")
@@ -214,6 +221,20 @@ public class PdfSteps {
     @When("I go to next page on reader pdf screen")
     public void goToNextPdfPage() {
         readerPdfScreen.goToNextPage();
+    }
+
+    @When("I swipe pdf page forward from {int} to {int} times on reader pdf screen")
+    public void swipePageForwardSeveralTimes(int minValue, int maxValue) {
+        int swipeCount = RandomUtils.nextInt(minValue, maxValue);
+        AqualityServices.getLogger().info("Swipe " + swipeCount + " times on reader pdf screen");
+        IntStream.range(0, swipeCount).forEach(i -> readerPdfScreen.goToNextPage());
+    }
+
+    @When("I swipe pdf page down from {int} to {int} times on reader pdf screen")
+    public void swipePageDownSeveralTimes(int minValue, int maxValue) {
+        int swipeCount = RandomUtils.nextInt(minValue, maxValue);
+        AqualityServices.getLogger().info("Swipe " + swipeCount + " times on reader pdf screen");
+        IntStream.range(0, swipeCount).forEach(i -> readerPdfScreen.swipePageDown());
     }
 
     @Then("Page number increased by 1 from {string} on pdf reader screen")

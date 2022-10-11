@@ -75,6 +75,16 @@ public class IosReaderPdfScreen extends ReaderPdfScreen {
     }
 
     @Override
+    public void swipePageDown() {
+        SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.DOWN);
+    }
+
+    @Override
+    public void swipePageUp() {
+        SwipeElementUtils.swipeThroughEntireElement(lblPage, EntireElementSwipeDirection.UP);
+    }
+
+    @Override
     public void returnToPreviousScreen() {
         openNavigationBar();
         navigationBarPdfScreen.tapBackButton();

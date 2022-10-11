@@ -30,6 +30,10 @@ public abstract class ReaderPdfScreen extends Screen {
 
     public abstract void goToPreviousPage();
 
+    public abstract void swipePageDown();
+
+    public abstract void swipePageUp();
+
     public abstract void returnToPreviousScreen();
 
     public abstract void openNavigationBar();

@@ -148,3 +148,32 @@ Feature: My books module
     | Palace Marketplace | AUDIOBOOK | Audiobooks | LISTEN     |
     | Biblioboard        | EBOOK     | eBooks     | READ       |
     | Biblioboard        | AUDIOBOOK | Audiobooks | LISTEN     |
+
+  @logout @returnBooks @tier2
+  Scenario Outline: Check buttons under the book title in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I open search modal
+      And I search 'available' book of distributor '<distributor>' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+      And I switch to 'eBooks' catalog tab
+      And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on catalog books screen
+    When I open Books
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+      And EBOOK book with RETURN action button and 'bookInfo' bookInfo is present on books screen
+    When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
+      And Click READ action button on book details screen
+      And Wait for 5 seconds
+      And I restart app
+      And I open Books
+    Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
+      And EBOOK book with RETURN action button and 'bookInfo' bookInfo is present on books screen
+
+    Scenarios:
+      | distributor        |
+      | Bibliotheca        |
+      | Axis 360           |
+      | Palace Marketplace |
+      | Biblioboard        |
