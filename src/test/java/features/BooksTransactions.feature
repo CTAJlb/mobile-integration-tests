@@ -16,7 +16,7 @@ Feature: Books transactions in Palace Bookshelf
   @tier2 @exclude_ios
   Scenario: Get a book from Subcategory List View and Return from Subcategory List View (ANDROID)
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click DELETE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click RETURN action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with GET action button and 'bookInfo' bookInfo is present on catalog books screen
 
   @tier2 @exclude_android
@@ -45,7 +45,7 @@ Feature: Books transactions in Palace Bookshelf
     And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-    And Click DELETE action button on book details screen
+    And Click RETURN action button on book details screen
     And I close Book Details for IOSTab
     And I open Books
     Then EBOOK book with GET action button and 'bookInfo' bookInfo is not present on books screen
@@ -69,7 +69,7 @@ Feature: Books transactions in Palace Bookshelf
       And I open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
     When Open EBOOK book with READ action button and 'bookInfo' bookInfo on books screen
-      And Click DELETE action button on book details screen
+      And Click RETURN action button on book details screen
       And I close Book Details for IOSTab
       And I open Books
     Then EBOOK book with GET action button and 'bookInfo' bookInfo is not present on books screen
@@ -91,7 +91,7 @@ Feature: Books transactions in Palace Bookshelf
   Scenario: Get a book from Book Detail View and Return from Book Detail View (ANDROID)
     When Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
-      And Click DELETE action button on book details screen
+      And Click RETURN action button on book details screen
     Then I check that book contains GET action button on book details screen
 
   @tier2 @exclude_android

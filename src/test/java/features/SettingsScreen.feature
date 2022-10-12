@@ -1,6 +1,6 @@
 Feature: Check sections from settings screen
 
-  @tier1
+  @tier1 @exclude_android
   Scenario: About Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Settings
