@@ -9,7 +9,7 @@ import screens.pdf.navigationBarPdf.NavigationBarPdfScreen;
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidNavigationBarPdfScreen extends NavigationBarPdfScreen {
     private final IButton btnBack =
-            getElementFactory().getButton(By.xpath("//android.widget.ImageButton[@content-desc=\"Navigate up\"]"), "Back button");
+            getElementFactory().getButton(By.xpath("//android.widget.ImageButton[@content-desc=\"Back\"]"), "Back button");
     private final IButton btnToc =
             getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id,\"readerMenuTOC\")]"), "Table of content");
     private final IButton btnSettings =
