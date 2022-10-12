@@ -11,7 +11,7 @@ Feature: Books transactions in Palace Bookshelf
     Then I check that book 'bookNameInfo' contains GET action button on catalog book screen
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then I check that book 'bookNameInfo' contains READ action button on catalog book screen
-      And I check that book 'bookNameInfo' contains DELETE action button on catalog book screen
+      And I check that book 'bookNameInfo' contains RETURN action button on catalog book screen
 
   @tier2 @exclude_ios
   Scenario: Get a book from Subcategory List View and Return from Subcategory List View (ANDROID)

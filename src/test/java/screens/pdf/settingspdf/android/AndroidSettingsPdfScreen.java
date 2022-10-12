@@ -44,7 +44,7 @@ public class AndroidSettingsPdfScreen extends SettingsPdfScreen {
 
     @Override
     public boolean isVerticalScrollingChosen() {
-        return btnVerticalScrolling.getAttribute(Attributes.VALUE).equals(Boolean.TRUE.toString());
+        return btnVerticalScrolling.getAttribute(Attributes.CHECKED).equals(Boolean.TRUE.toString());
     }
 
     @Override
@@ -69,7 +69,7 @@ public class AndroidSettingsPdfScreen extends SettingsPdfScreen {
 
     @Override
     public boolean isHorizontalScrollingChosen() {
-        return btnHorizontalScrolling.getAttribute(Attributes.VALUE).equals(Boolean.TRUE.toString());
+        return btnHorizontalScrolling.getAttribute(Attributes.CHECKED).equals(Boolean.TRUE.toString());
     }
 
     @Override
@@ -79,6 +79,6 @@ public class AndroidSettingsPdfScreen extends SettingsPdfScreen {
 
     @Override
     public boolean isWrappedScrollingChosen() {
-        return btnWrappedScrolling.getAttribute(Attributes.VALUE).equals(Boolean.TRUE.toString());
+        return btnWrappedScrolling.getAttribute(Attributes.CHECKED).equals(Boolean.TRUE.toString());
     }
 }
