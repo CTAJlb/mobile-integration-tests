@@ -19,9 +19,9 @@ public class AndroidAccountScreen extends AccountScreen {
     private static final String BTN_LOGIN_ID = "authBasicLogin";
     private static final String LOGIN_BTN_LOC_PATTERN = "//*[contains(@resource-id,\"" + BTN_LOGIN_ID + "\") and @text=\"%1$s\"]";
 
-    private final IButton btnLogin = getElementFactory().getButton(By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, AccountScreenLoginStatus.LOG_IN.i18n())),"Log in");
+    private final IButton btnLogin = getElementFactory().getButton(By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, AccountScreenLoginStatus.SIGN_IN.i18n())),"Log in");
     private final IButton btnLoginAction = getElementFactory().getButton(By.id(BTN_LOGIN_ID), "Log ... action");
-    private final IButton btnLogout = getElementFactory().getButton(By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, AccountScreenLoginStatus.LOG_OUT.i18n())),"Log out");
+    private final IButton btnLogout = getElementFactory().getButton(By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, AccountScreenLoginStatus.SIGN_OUT.i18n())),"Log out");
     private final IButton btnLogInError = getElementFactory().getButton(By.id("accountLoginButtonErrorDetails"), "Error info");
     private final ITextBox txbCard = getElementFactory().getTextBox(By.id("authBasicUserField"), "Card");
     private final ITextBox txbPin = getElementFactory().getTextBox(By.id("authBasicPassField"), "Pin");
@@ -46,13 +46,13 @@ public class AndroidAccountScreen extends AccountScreen {
         lblLoading.state().waitForNotDisplayed();
         AqualityServices.getConditionalWait().waitFor(() ->
                 btnLogout.state().isDisplayed() || btnLogInError.state().isDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
-        return getLoginButtonText().equals(AccountScreenLoginStatus.LOG_OUT.i18n());
+        return getLoginButtonText().equals(AccountScreenLoginStatus.SIGN_OUT.i18n());
     }
 
     @Override
     public boolean isLogoutSuccessful() {
         return AqualityServices.getConditionalWait().waitFor(() ->
-                getLoginButtonText().equals(AccountScreenLoginStatus.LOG_IN.i18n()));
+                getLoginButtonText().equals(AccountScreenLoginStatus.SIGN_IN.i18n()));
     }
 
     @Override
