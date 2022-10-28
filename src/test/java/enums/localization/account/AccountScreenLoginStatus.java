@@ -10,8 +10,8 @@ import java.util.Locale;
 
 @AllArgsConstructor
 public enum AccountScreenLoginStatus implements LocalizedValue {
-    LOG_IN("login"),
-    LOG_OUT("logout");
+    SIGN_IN("sign_in"),
+    SIGN_OUT("sign_out");
 
     private static final AbstractILocalizationProvider localizationProvider =
             LocalizationProviderFactory.getProvider("account.AccountScreenLoginStatus");
