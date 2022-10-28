@@ -47,7 +47,7 @@ jobs:
     - name: Upload report
       uses: actions/upload-artifact@v2.1.4
       with:
-        name: allure-report
+        name: allure-report-1
         path: allure-report/
       if: success() || failure()
   
@@ -70,6 +70,6 @@ jobs:
     - name: Upload report
       uses: actions/upload-artifact@v2.1.4
       with:
-        name: allure-report
+        name: allure-report-2
         path: allure-report/
       if: success() || failure()
