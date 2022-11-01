@@ -93,7 +93,7 @@ Feature: Audiobook in Lyrasis
     When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Open toc audiobook screen
-      And Open the 1 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
+      And Open the 2 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
       And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
       And Select 2X playback speed on playback speed audiobook screen
       And I stretch slider on the time tracking line forward on audio player screen
@@ -160,7 +160,7 @@ Feature: Audiobook in Lyrasis
     When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Open toc audiobook screen
-      And Open the 4 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
+      And Open the 3 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
     Then Chapter number is 'chapterNumber' on audio player screen
 
     Scenarios:
