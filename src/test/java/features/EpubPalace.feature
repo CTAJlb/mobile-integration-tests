@@ -6,7 +6,7 @@ Feature: Read EPUB in Palace Bookshelf
       And I open search modal
       And I search for 'Flower Fables' and save bookName as 'bookNameInfo'
 
-  @tier1
+  @tier2
   Scenario: Navigate by Page
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -20,7 +20,7 @@ Feature: Read EPUB in Palace Bookshelf
       And I click on left book corner on epub reader screen
     Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
 
-  @tier1
+  @tier2
   Scenario: Navigate by bookmarks
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -41,7 +41,7 @@ Feature: Read EPUB in Palace Bookshelf
     When Open random bookmark and save chapter name as 'chapterNameKey3' on bookmarks epub screen
     Then 'chapterNameKey3' chapter name is displayed on reader epub screen
 
-  @tier1
+  @tier2
   Scenario: Delete bookmarks
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -63,14 +63,14 @@ Feature: Read EPUB in Palace Bookshelf
     Then 'chapterNameKey' chapter name is displayed on reader epub screen
       And Bookmark is not displayed on reader epub screen
 
-  @tier1
+  @tier2
   Scenario: Navigate by Table of Contents Menu
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
     Then Random chapter of epub can be opened from toc epub screen
 
-  @tier1
+  @tier2
   Scenario: Navigate View options
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -84,7 +84,7 @@ Feature: Read EPUB in Palace Bookshelf
       And Open font and background settings epub screen
     Then Font and background settings epub screen is opened
 
-  @tier1
+  @tier2
   Scenario: Font settings: Check of increasing and reducing the text size
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -114,7 +114,7 @@ Feature: Read EPUB in Palace Bookshelf
       And Click READ action button on book details screen
     Then Font size 'fontSize' is decreased
 
-  @tier1
+  @tier2
   Scenario: Font settings: Check of font style
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -154,7 +154,7 @@ Feature: Read EPUB in Palace Bookshelf
       And Click READ action button on book details screen
     Then Book text displays in FONT_DYSLEXIC font
 
-  @tier1
+  @tier2
   Scenario: Font settings: Check of text theme
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -194,7 +194,7 @@ Feature: Read EPUB in Palace Bookshelf
       And Click READ action button on book details screen
     Then The WHITE_TEXT_ON_BLACK background is correct
 
-  @tier1
+  @tier2
   Scenario: Open book to last page read
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'

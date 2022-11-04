@@ -1,6 +1,6 @@
 Feature: Distributors
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario Outline: Hold from Book Detail View
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -23,7 +23,7 @@ Feature: Distributors
       | Palace Marketplace | AUDIOBOOK | Audiobooks |
       | Biblioboard        | EBOOK     | eBooks     |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario Outline: Check out from Book Detail View
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -50,7 +50,7 @@ Feature: Distributors
       | Biblioboard        | EBOOK     | eBooks     | READ                  |
       | Biblioboard        | AUDIOBOOK | Audiobooks | LISTEN                |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario Outline: Return book from Book Detail View
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -76,7 +76,7 @@ Feature: Distributors
       | Biblioboard        | AUDIOBOOK | Audiobooks | 
     
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario Outline: Check of canceling the downloading from book details view
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account

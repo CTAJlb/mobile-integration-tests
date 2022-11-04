@@ -1,6 +1,6 @@
 Feature: My books module
 
-  @tier1
+  @tier2
   Scenario: Check of added books in Palace
     When I add 'Palace Bookshelf' account from welcomeScreen
       And I open search modal
@@ -13,7 +13,7 @@ Feature: My books module
     And I open Books
     Then Added books from 'listOfBooks' are displayed on books screen
 
-  @tier1
+  @tier2
   Scenario: Check of sorting in Palace
     When I add 'Palace Bookshelf' account from welcomeScreen
       And I open search modal
@@ -46,7 +46,7 @@ Feature: My books module
       And I open Books
     Then EBOOK book with GET action button and 'bookInfo' bookInfo is not present on books screen
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario: Get a book from Book Detail View and Return from Books in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -67,7 +67,7 @@ Feature: My books module
       And Wait for 10 seconds
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario: Get a book from Subcategory List View and Return from Books in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -90,7 +90,7 @@ Feature: My books module
       And Wait for 7 seconds
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is not present on books screen
 
-  @logout @returnBooks @tier2 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Get a book from Subcategory List View and Return from Subcategory List View in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -103,7 +103,7 @@ Feature: My books module
       And Click RETURN action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And EBOOK book with GET action button and 'bookInfo' bookInfo is present on catalog books screen
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario: Get a book from Subcategory List View and Read from Books in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -120,7 +120,7 @@ Feature: My books module
       And Wait for 3 seconds
     Then 'bookInfo' book is present on epub reader screen
 
-  @logout @returnBooks @tier2 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android
   Scenario Outline: Alert: Check of Cancel button after Return button tapping
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -149,7 +149,7 @@ Feature: My books module
     | Biblioboard        | EBOOK     | eBooks     | READ       |
     | Biblioboard        | AUDIOBOOK | Audiobooks | LISTEN     |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario Outline: Check buttons under the book title in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account

@@ -1,6 +1,6 @@
 Feature: Manage Libraries
 
-  @tier1
+  @tier2
   Scenario: Settings: Add library: general checks
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Settings
@@ -10,18 +10,18 @@ Feature: Manage Libraries
     Then Add library screen is opened
       And Libraries are sorted in alphabetical order on add account screen
 
-  @tier1
+  @tier2
   Scenario: Navigate by Tutorial
     Then Tutorial screen is opened
       And Each tutorial page can be opened on tutorial screen for android and close tutorial screen
       And Welcome screen is opened
 
-  @tier1
+  @tier2
   Scenario: Welcome screen: Add Library
     When I add "LYRASIS Reads" account from welcomeScreen
     Then Account 'LYRASIS Reads' is present on Accounts screen
 
-  @tier1
+  @tier2
   Scenario: Settings: Add library
     When I add "Palace Bookshelf" account from welcomeScreen
       And I get names of books on screen and save them as 'nameOfBooks'
@@ -29,7 +29,7 @@ Feature: Manage Libraries
     Then Category rows are loaded
       And List of books on screen is not equal to list of books saved as 'nameOfBooks'
 
-  @tier1
+  @tier2
   Scenario: Settings: Add Library: Check of the added libraries sorting
     When I add "Palace Bookshelf" account from welcomeScreen
       And I add libraries through settings:
@@ -44,7 +44,7 @@ Feature: Manage Libraries
     When I click to 'Escondido Public Library' and save library name as 'libraryInfo' on libraries screen
     Then The screen with settings for 'libraryInfo' library is opened
 
-  @tier1
+  @tier2
   Scenario: Settings: Libraries: Remove library
     When I add "LYRASIS Reads" account from welcomeScreen
     And I add 'Palace Bookshelf' account
@@ -88,7 +88,7 @@ Feature: Manage Libraries
       And I open Books
     Then There are not books on books screen
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario: Switch Library Reservations
     When I add "Plumas County Library" account from welcomeScreen
     When I add 'LYRASIS Reads' account
@@ -112,7 +112,7 @@ Feature: Manage Libraries
       And I open Holds
       And There are not books on holds screen
 
-  @logout @tier2
+  @logout @tier1
   Scenario: Store library card
     When I add "LYRASIS Reads" account from welcomeScreen
     Then Account 'LYRASIS Reads' is present on Accounts screen
@@ -122,14 +122,14 @@ Feature: Manage Libraries
       And I click the log out button on the account screen
     Then Logout is performed successfully
 
-  @tier1
+  @tier2
   Scenario: Logo: Add library: Check of adding a library
     When I add "Palace Bookshelf" account from welcomeScreen
     Then Category rows are loaded
     When I add 'LYRASIS Reads' account by the logo
     Then Category rows are loaded
 
-  @tier1
+  @tier2
   Scenario: Logo: Add Library: Check of sorting libraries
     When I add "Palace Bookshelf" account from welcomeScreen
       And I add libraries by the logo:
@@ -144,7 +144,7 @@ Feature: Manage Libraries
     When I tap cancel button on find your library screen
     Then Category rows are loaded
 
-  @tier1
+  @tier2
   Scenario: Logo: Switch library
     When I add "Palace Bookshelf" account from welcomeScreen
     Then Category rows are loaded

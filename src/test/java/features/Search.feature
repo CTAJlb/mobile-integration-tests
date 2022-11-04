@@ -1,6 +1,6 @@
 Feature: Search libraries and books
 
-  @tier1
+  @tier2
   Scenario: Find a library and delete it
     When Tutorial screen is opened
       And Close tutorial screen
@@ -10,7 +10,7 @@ Feature: Search libraries and books
     When Clear search field on add account screen
     Then Search field is empty on add account screen
 
-  @tier1
+  @tier2
   Scenario Outline: Check that library name contains one or more entered latin letters
     When Tutorial screen is opened
       And Close tutorial screen
@@ -26,8 +26,7 @@ Feature: Search libraries and books
     |LYRASIS |
     |lYrAsIs |
 
-
-  @tier1
+  @tier2
   Scenario Outline: Enter invalid data
     When Tutorial screen is opened
       And Close tutorial screen
@@ -44,14 +43,14 @@ Feature: Search libraries and books
     |@                                    |
     |$!                                   |
 
-  @tier1
+  @tier2
   Scenario: Find a book in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open search modal
       And I search for 'El gato negro' and save bookName as 'bookNameInfo'
     Then EBOOK book with GET action button and 'bookNameInfo' bookName is present on catalog books screen
 
-  @tier1
+  @tier2
   Scenario: Delete a book from search bar in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open search modal
@@ -59,7 +58,7 @@ Feature: Search libraries and books
     When Clear search field on catalog books screen
     Then Search field is empty on catalog books screen
 
-  @tier1
+  @tier2
   Scenario Outline: Check that books from search result contain one or more entered latin letters or numeric in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open search modal
@@ -72,7 +71,7 @@ Feature: Search libraries and books
     | a             |
     | 1            |
 
-  @tier1
+  @tier2
   Scenario Outline: Find a book with name in different font cases in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open search modal
@@ -85,8 +84,7 @@ Feature: Search libraries and books
       | EL GATO NEGRO |
       | eL gAto NeGrO |
 
-
-  @tier1
+  @tier2
   Scenario Outline: Enter invalid data in book name in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open search modal
@@ -101,14 +99,14 @@ Feature: Search libraries and books
     | @$                                    |
     | !                                     |
 
-   @tier1
+   @tier2
    Scenario: Find a book in LYRASIS
      When I add "LYRASIS Reads" account from welcomeScreen
      And I open search modal
      And I search for 'Silk Road' and save bookName as 'bookNameInfo'
      Then EBOOK book with GET action button and 'bookNameInfo' bookName is present on catalog books screen
 
-  @tier1
+  @tier2
   Scenario: Delete a book from search bar in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
     And I open search modal
@@ -116,7 +114,7 @@ Feature: Search libraries and books
     When Clear search field on catalog books screen
     Then Search field is empty on catalog books screen
 
-  @tier1
+  @tier2
   Scenario Outline: Check that books from search result contain one or more entered latin letters or numeric in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
     And I open search modal
@@ -129,7 +127,7 @@ Feature: Search libraries and books
       | a             |
       | 1            |
 
-  @tier1
+  @tier2
   Scenario Outline: Find a book with name in different font cases in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
     And I open search modal
@@ -142,8 +140,7 @@ Feature: Search libraries and books
       | SILK ROAD |
       | SiLk rOaD |
 
-
-  @tier1
+  @tier2
   Scenario Outline: Enter invalid data in book name in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
     And I open search modal

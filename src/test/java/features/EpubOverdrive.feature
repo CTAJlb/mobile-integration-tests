@@ -11,7 +11,7 @@ Feature: Read EPUB from Overdrive in A1QA
     When I open Catalog
       And I open search modal
 
-  @logout @returnBooks @tier1
+  @logout @returnBooks @tier2
   Scenario: Epub: Font settings: Check of increasing and reducing the text size
     When I search for "The Woman in White" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -43,7 +43,7 @@ Feature: Read EPUB from Overdrive in A1QA
       And Click READ action button on book details screen
     Then Font size 'fontSize' is decreased
 
-  @logout @returnBooks @tier1
+  @logout @returnBooks @tier2
   Scenario: Epub: Font settings: Check of font style
     When I search for "A Game of Thrones" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -84,7 +84,7 @@ Feature: Read EPUB from Overdrive in A1QA
       And Click READ action button on book details screen
     Then Book text displays in FONT_DYSLEXIC font
 
-  @logout @returnBooks @tier1
+  @logout @returnBooks @tier2
   Scenario: Epub: Font settings: Check of text theme
     When I search for "The Adventures of Sherlock Holmes" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -125,7 +125,7 @@ Feature: Read EPUB from Overdrive in A1QA
       And Click READ action button on book details screen
     Then The WHITE_TEXT_ON_BLACK background is correct
 
-  @logout @returnBooks @tier1
+  @logout @returnBooks @tier2
   Scenario: Epub: Open book to last page read
     When I search for "Romeo and Juliet" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -149,7 +149,7 @@ Feature: Read EPUB from Overdrive in A1QA
     Then 'bookInfo' book is present on epub reader screen
       And PageNumber 'pageNumberKey' is correct
 
-  @logout @returnBooks @tier1
+  @logout @returnBooks @tier2
   Scenario: Epub: Navigate by Page
     When I search for "The Book Thief" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -164,7 +164,7 @@ Feature: Read EPUB from Overdrive in A1QA
       And I click on left book corner on epub reader screen
     Then Previous page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
 
-  @logout @returnBooks @tier1
+  @logout @returnBooks @tier2
   Scenario: Epub: Navigate by bookmarks
     When I search for "Moby Dick" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -186,7 +186,7 @@ Feature: Read EPUB from Overdrive in A1QA
     When Open random bookmark and save chapter name as 'chapterNameKey3' on bookmarks epub screen
     Then 'chapterNameKey3' chapter name is displayed on reader epub screen
 
-  @logout @returnBooks @tier1
+  @logout @returnBooks @tier2
   Scenario: Epub: Delete bookmarks
     When I search for "Little Women" and save bookName as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'

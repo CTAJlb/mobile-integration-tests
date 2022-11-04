@@ -6,7 +6,7 @@ Feature: Books transactions in Palace Bookshelf
       And I open search modal
       And I search for 'Flower Fables' and save bookName as 'bookNameInfo'
 
-  @tier1
+  @tier2
   Scenario: Check of GET button
     Then I check that book 'bookNameInfo' contains GET action button on catalog book screen
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
