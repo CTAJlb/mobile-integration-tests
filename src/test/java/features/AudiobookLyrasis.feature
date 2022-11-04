@@ -8,7 +8,7 @@ Feature: Audiobook in Lyrasis
     When I open Catalog
       And I open search modal
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario Outline: Open the audiobook at the last open chapter and check time code
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -54,7 +54,7 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario Outline: Navigate by Audiobook
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -83,7 +83,7 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario Outline: Check end of chapter sleep timer
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -110,7 +110,7 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android
   Scenario Outline: Check of line for time remaining
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -128,7 +128,7 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario Outline: Check of switching to the next time
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -150,7 +150,7 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario Outline: Check of file numbers
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -170,7 +170,7 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario Outline: Check playback speed and sleep timer
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -196,7 +196,7 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario Outline: Check time tracking line
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -225,7 +225,7 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2 @run
+  @logout @returnBooks @tier1
   Scenario Outline: Check of not rewinding forward and back by tapping on time bar
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
@@ -255,7 +255,7 @@ Feature: Audiobook in Lyrasis
       | Axis 360           |
       | Biblioboard        |
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario Outline: Playback speed: Check of playback speed
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab

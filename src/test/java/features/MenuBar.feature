@@ -1,6 +1,6 @@
 Feature: Menu Bar
 
-  @tier1
+  @tier2
   Scenario Outline: Check of menu bar in Palace
     When I add 'Palace Bookshelf' account from welcomeScreen
     Then There is a menu bar at the bottom of the screen
@@ -10,7 +10,7 @@ Feature: Menu Bar
       | tab1    | tab2     | tab3     |
       | Catalog | My Books | Settings |
 
-  @tier1
+  @tier2
   Scenario: Check of the tabs in Palace
     When I add 'Palace Bookshelf' account from welcomeScreen
       And I open Catalog
@@ -20,7 +20,7 @@ Feature: Menu Bar
     When I open Settings
     Then Settings screen is opened
 
-  @tier1
+  @tier2
   Scenario Outline: Check of menu bar in LYRASIS
     When I add 'LYRASIS Reads' account from welcomeScreen
     Then There is a menu bar at the bottom of the screen
@@ -30,7 +30,7 @@ Feature: Menu Bar
       | tab1    | tab2     | tab3         | tab4     |
       | Catalog | My Books | Reservations | Settings |
 
-  @tier1
+  @tier2
   Scenario: Check of the tabs in LYRASIS
     When I add 'LYRASIS Reads' account from welcomeScreen
     And I open Catalog

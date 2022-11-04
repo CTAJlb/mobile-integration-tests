@@ -1,6 +1,6 @@
 Feature: Reservation of book in LYRASIS
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario: Hold from Subcategory List View and Remove a Reserved Book from Holds
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -20,7 +20,7 @@ Feature: Reservation of book in LYRASIS
       And Wait for 7 seconds
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is not present on holds screen
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario: Hold from Subcategory List View and Remove a Reserved Book from Subcategory List View
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -33,7 +33,7 @@ Feature: Reservation of book in LYRASIS
       And Click REMOVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then EBOOK book with RESERVE action button and 'bookInfo' bookInfo is present on catalog books screen
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario: Hold from Book Detail View and and Remove a Reserved Book from Holds
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -55,7 +55,7 @@ Feature: Reservation of book in LYRASIS
       And Wait for 7 seconds
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is not present on holds screen
 
-  @logout @returnBooks @tier2
+  @logout @returnBooks @tier1
   Scenario: Hold from Book Detail View and Remove a Reserved Book from Book Detail View
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -71,7 +71,7 @@ Feature: Reservation of book in LYRASIS
       And Click REMOVE action button on book details screen
     Then I check that book contains RESERVE action button on book details screen
 
-  @logout @returnBooks @tier3 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android
   Scenario: Hold from Book Detail View and Cancel remove from holds tab (IOS)
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -90,7 +90,7 @@ Feature: Reservation of book in LYRASIS
       And I open Holds
     Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
 
-  @logout @returnBooks @tier2 @exclude_ios
+  @logout @returnBooks @tier1 @exclude_ios
     Scenario: Check books sorting in Reservations
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account
@@ -113,7 +113,7 @@ Feature: Reservation of book in LYRASIS
     When I sort books by AUTHOR in 'LYRASIS Reads'
     Then Books are sorted by Author ascending on holds screen
 
-  @logout @returnBooks @tier2 @exclude_android
+  @logout @returnBooks @tier1 @exclude_android
   Scenario Outline: Alert: Check of Cancel button after Remove button tapping
     When I add "LYRASIS Reads" account from welcomeScreen
       And I enter credentials for 'LYRASIS Reads' account

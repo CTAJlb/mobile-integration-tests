@@ -11,7 +11,7 @@ Feature: Read PDF in Palace Bookshelf on IOS
       And Click READ action button on book details screen
     Then Reader pdf screen is opened
 
-  @tier1 @exclude_android
+  @tier2 @exclude_android
   Scenario: Navigate by Page
     Then I save page number as 'pageInfo' on pdf reader screen
     When I go to next page on reader pdf screen
@@ -20,7 +20,7 @@ Feature: Read PDF in Palace Bookshelf on IOS
       And I go to previous page on reader pdf screen
     Then Page number decreased by 1 from 'pageInfo2' on pdf reader screen
 
-  @tier1 @exclude_android
+  @tier2 @exclude_android
   Scenario: Open book to last page read
     When I swipe pdf page forward from 4 to 6 times on reader pdf screen
       And I save page number as 'pageNumber' on pdf reader screen
@@ -36,14 +36,14 @@ Feature: Read PDF in Palace Bookshelf on IOS
     Then Reader pdf screen is opened
       And Page number is equal to 'pageNumber' on pdf reader screen
 
-  @tier1 @exclude_android
+  @tier2 @exclude_android
   Scenario: Navigate by Thumbnails
     When I open table of contents on pdf reader screen
     Then There are content list with thumbnails and chapter content on pdf toc screen
     When I open random thumbnail and save the number as 'pageInfo' on pdf toc screen
     Then Page number is equal to 'pageInfo' on pdf reader screen
 
-  @tier1 @exclude_android
+  @tier2 @exclude_android
   Scenario: Search Pdf Functionality
     When I open search pdf screen
     Then Search pdf screen is opened
@@ -58,14 +58,14 @@ Feature: Read PDF in Palace Bookshelf on IOS
     Then Found lines should contain 'try' in themselves on search pdf screen
     When I close pdf search screen
 
-  @tier1 @exclude_android
+  @tier2 @exclude_android
   Scenario: Navigate by Pdf Search Results
     When I open search pdf screen
     And I enter 'try' text on search pdf screen
     And I open random found text and save page number as 'pageNumber' on search pdf screen
     Then Page number is equal to 'pageNumber' on pdf reader screen
 
-  @tier1 @exclude_android
+  @tier2 @exclude_android
   Scenario: Navigate by Page slider
     When I save page number as 'pageNumber' on pdf reader screen
     And Slide page slider RIGHT on reader pdf screen
@@ -74,7 +74,7 @@ Feature: Read PDF in Palace Bookshelf on IOS
     And Slide page slider LEFT on reader pdf screen
     Then The 'pageNumber' saved page number is greater than the current page number on the reader pdf screen
 
-  @tier1 @exclude_android
+  @tier2 @exclude_android
   Scenario: Navigate by pdf bookmarks
     When I open bookmarks pdf screen
     Then Bookmarks pdf screen is opened
@@ -96,7 +96,7 @@ Feature: Read PDF in Palace Bookshelf on IOS
     When Open the 0 bookmark on bookmarks pdf screen
     Then Page number is equal to 'pageNumberInfo' on pdf reader screen
 
-  @tier1 @exclude_android
+  @tier2 @exclude_android
   Scenario: Check table of contents in Lyrasis
     When I open table of contents on pdf reader screen
       And I open text chapter content on pdf toc screen
@@ -104,7 +104,7 @@ Feature: Read PDF in Palace Bookshelf on IOS
     When I open content with thumbnails on pdf toc screen
     Then Thumbnails of the book pages are displayed
 
-  @tier1 @exclude_android
+  @tier2 @exclude_android
   Scenario: Navigate by Chapters in Lyrasis
     When I open table of contents on pdf reader screen
       And I open text chapter content on pdf toc screen

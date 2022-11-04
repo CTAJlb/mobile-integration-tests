@@ -1,6 +1,6 @@
 Feature: Catalog Navigation
 
-  @tier1
+  @tier2
   Scenario: Return to last library catalog
     When I add "Palace Bookshelf" account from welcomeScreen
       And I add 'LYRASIS Reads' account
@@ -11,7 +11,7 @@ Feature: Catalog Navigation
     Then Category rows are loaded
       And Library 'LYRASIS Reads' is present on Catalog Screen
 
-  @tier1
+  @tier2
   Scenario: Browse Categories in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
@@ -32,14 +32,14 @@ Feature: Catalog Navigation
     When I open first book in Subcategory List and save it as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
 
-  @tier1
+  @tier2
   Scenario: Check of the titles of books sections in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
     Then Category rows are loaded
       And Category names are correct on catalog book screen
 
-  @tier1
+  @tier2
   Scenario: Check of "More" button in books sections in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
@@ -50,7 +50,7 @@ Feature: Catalog Navigation
     When I tap Back button on subcategory screen
     Then Category rows are loaded
 
-  @tier1
+  @tier2
   Scenario Outline: Check of books sorting in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
@@ -64,7 +64,7 @@ Feature: Catalog Navigation
     | type1  | type2          | type3 |
     | Author | Recently Added | Title |
 
-  @tier1
+  @tier2
   Scenario: Sort Lists in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
@@ -83,7 +83,7 @@ Feature: Catalog Navigation
     Then Subcategory screen is present
       And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
 
-  @tier1
+  @tier2
   Scenario Outline: Check of tabs at the top of the screen in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
@@ -99,14 +99,14 @@ Feature: Catalog Navigation
     | type1 | type2  | type3      |
     | All   | eBooks | Audiobooks |
 
-  @tier1
+  @tier2
   Scenario: Check of the titles of books sections in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
     And I open Catalog
     Then Category rows are loaded
     And Category names are correct on catalog book screen
 
-  @tier1
+  @tier2
   Scenario: Check of "More" button in books sections in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
@@ -117,7 +117,7 @@ Feature: Catalog Navigation
     When I tap Back button on subcategory screen
     Then Category rows are loaded
 
-  @tier1
+  @tier2
   Scenario Outline: Check of books sorting in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
     And I open Catalog
@@ -131,7 +131,7 @@ Feature: Catalog Navigation
       | type1  | type2          | type3 |
       | Author | Recently Added | Title |
 
-  @tier1
+  @tier2
   Scenario: Sort Lists in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
@@ -151,7 +151,7 @@ Feature: Catalog Navigation
       And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
 
 
-  @tier1
+  @tier2
   Scenario Outline: Check of books availability in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
@@ -166,7 +166,7 @@ Feature: Catalog Navigation
       | type1 | type2         | type3         |
       | All   | Available now | Yours to keep |
 
-  @tier1
+  @tier2
   Scenario: Check all types of availability
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
@@ -181,7 +181,7 @@ Feature: Catalog Navigation
     When I change books visibility to show YOURS_TO_KEEP
     Then All books can be downloaded
 
-  @tier1 @exclude_android
+  @tier2 @exclude_android
   Scenario Outline: Check of books collections
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog
