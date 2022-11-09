@@ -56,6 +56,7 @@ Feature: Book detail view screen
       And I switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookNameInfo' is opened on book details screen
+      And Publisher and Categories in Information section are displayed on book details screen
       And Publisher and Categories in Information section are correct on book details screen
       And Distributor is equal to '<distributor>' on book details screen
 

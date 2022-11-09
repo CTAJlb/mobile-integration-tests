@@ -40,4 +40,6 @@ public abstract class AccountScreen extends Screen {
     public abstract boolean isButtonDisplayed(String buttonName);
 
     public abstract void clickDelete(String button);
+
+    public abstract void closeAccountScreen();
 }

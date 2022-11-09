@@ -8,7 +8,7 @@ Feature: Read PDF in LYRASIS Reads on Android
     When I open Catalog
 
   @logout @returnBooks @tier1 @exclude_ios
-  Scenario: Check of book title and back button
+  Scenario: Check of book title and back button in Lyrasis
     When I open search modal
       And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -21,7 +21,7 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then Book "bookNameInfo" is opened on book details screen
 
   @logout @returnBooks @tier1 @exclude_ios
-    Scenario: Check table of contents
+    Scenario: Check table of contents in Lyrasis
     When I open search modal
       And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -41,7 +41,7 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then PDF toc screen is closed
 
   @logout @returnBooks @tier1 @exclude_ios
-    Scenario: TOC: Contents with thumbnails: Check of Contents list and navigation
+    Scenario: TOC: Contents with thumbnails: Check of Contents list and navigation in Lyrasis
     When I open search modal
       And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -57,7 +57,7 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then Page number is equal to 'pageInfo' on pdf reader screen
 
   @logout @returnBooks @tier1 @exclude_ios
-    Scenario: TOC: Contents with text: Check of list of chapters and navigation
+    Scenario: TOC: Contents with text: Check of list of chapters and navigation in Lyrasis
     When I open search modal
       And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -73,7 +73,7 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then Page number is equal to 'pageInfo' on pdf reader screen
 
   @logout @returnBooks @tier1 @exclude_ios
-    Scenario: Check of settings screen and page navigation
+    Scenario: Check of settings screen and page navigation in Lyrasis
     When I open search modal
       And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -93,7 +93,7 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then The first page is opened on pdf reader screen
 
   @logout @returnBooks @tier1 @exclude_ios
-    Scenario: Settings: Check of Vertical scrolling
+    Scenario: Settings: Check of Vertical scrolling in Lyrasis
     When I open search modal
       And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -115,7 +115,7 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then Page number is not equal to 'pageInfo2' on pdf reader screen
 
   @logout @returnBooks @tier1 @exclude_ios
-    Scenario: Settings: Check of Horizontal scrolling
+    Scenario: Settings: Check of Horizontal scrolling in Lyrasis
     When I open search modal
       And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -137,7 +137,7 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then Page number is not equal to 'pageInfo2' on pdf reader screen
 
   @logout @returnBooks @tier1 @exclude_ios
-  Scenario: Settings: Check of Wrapped scrolling
+  Scenario: Settings: Check of Wrapped scrolling in Lyrasis
     When I open search modal
       And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -159,7 +159,7 @@ Feature: Read PDF in LYRASIS Reads on Android
     Then Page number is not equal to 'pageInfo2' on pdf reader screen
 
   @ignore @logout @returnBooks @tier1 @exclude_ios
-  Scenario: Open book to last page read Lyrasis
+  Scenario: Open book to last page read in Lyrasis
     When I open search modal
       And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'

@@ -19,8 +19,6 @@ import org.junit.Assert;
 import screens.alert.AlertScreen;
 import screens.bookDetails.BookDetailsScreen;
 
-import java.util.Optional;
-
 public class BookDetailsSteps {
     private final ScenarioContext context;
     private final BookDetailsScreen bookDetailsScreen;
@@ -127,7 +125,15 @@ public class BookDetailsSteps {
 
     @Then("Book {string} is opened on book details screen")
     public void isBookOpened(String bookInfoKey) {
-        Assert.assertEquals("Expected book is not opened", Optional.ofNullable(context.get(bookInfoKey)).orElse(bookInfoKey), bookDetailsScreen.getBookInfo().getTitle());
+        CatalogBookModel bookModel = context.get(bookInfoKey);
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(bookDetailsScreen.getBookInfo().getTitle())
+                .as("Expected book is not opened. Book title is wrong")
+                .isEqualTo(bookModel.getTitle());
+        softAssertions.assertThat(bookDetailsScreen.getBookInfo().getAuthor())
+                .as("Expected book is not opened. Author is wrong")
+                .isEqualTo(bookModel.getAuthor());
+        softAssertions.assertAll();
     }
 
     @Then("Book {string} has correct title and author name on book details screen")
@@ -156,15 +162,28 @@ public class BookDetailsSteps {
         Assert.assertTrue("More button is not available", bookDetailsScreen.isMoreBtnInDescriptionAvailable());
     }
 
-    @Then("Publisher and Categories in Information section are correct on book details screen")
-    public void isInformationSectionIsCorrect() {
+    @Then("Publisher and Categories in Information section are displayed on book details screen")
+    public void isInformationSectionFull() {
+        SoftAssertions softAssertions = new SoftAssertions();
         if (AqualityServices.getApplication().getPlatformName()==PlatformName.ANDROID) {
             SwipeElementUtils.swipeByCoordinatesOfWindow();
         }
-        String publisher = bookDetailsScreen.getPublisherInfo();
-        String categories = bookDetailsScreen.getCategoryInfo();
+
+        softAssertions.assertThat(bookDetailsScreen.isPublisherInfoExist()).as("Publisher field is not displayed").isTrue();
+        softAssertions.assertThat(bookDetailsScreen.isCategoryInfoExist()).as("Categories field is not displayed").isTrue();
+        softAssertions.assertAll();
+    }
+
+    @Then("Publisher and Categories in Information section are correct on book details screen")
+    public void isInformationSectionIsCorrect() {
         SoftAssertions softAssertions = new SoftAssertions();
+        if (AqualityServices.getApplication().getPlatformName()==PlatformName.ANDROID) {
+            SwipeElementUtils.swipeByCoordinatesOfWindow();
+        }
+
+        String publisher = bookDetailsScreen.getPublisherInfo();
         softAssertions.assertThat(publisher.matches(RegEx.VALID_PUBLISHER_OR_CATEGORY_NAME)).as("Publisher field has invalid symbols").isTrue();
+        String categories = bookDetailsScreen.getCategoryInfo();
         softAssertions.assertThat(categories.matches(RegEx.VALID_PUBLISHER_OR_CATEGORY_NAME)).as("Category field has invalid symbols").isTrue();
         softAssertions.assertAll();
     }

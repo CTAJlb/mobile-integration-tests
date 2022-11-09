@@ -112,9 +112,19 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
+    public boolean isPublisherInfoExist() {
+        return lblPublisher.state().waitForDisplayed();
+    }
+
+    @Override
     public String getCategoryInfo() {
         lblCategories.state().waitForDisplayed();
         return lblCategories.getText();
+    }
+
+    @Override
+    public boolean isCategoryInfoExist() {
+        return lblCategories.state().waitForDisplayed();
     }
 
     @Override

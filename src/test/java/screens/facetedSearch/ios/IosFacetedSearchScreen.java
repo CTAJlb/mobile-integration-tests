@@ -19,7 +19,7 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
     private final IButton btnCollection = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Collection:\"]/following-sibling::XCUIElementTypeButton[1]"), "Collection button");
 
     private final CreatingVariantsOfButton variantsOfButton = (button ->
-            getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeSheet//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"%s\"]", button)),
+            getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeOther//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"%s\"]", button)),
                     String.format("%s type of button", button)));
 
     public IosFacetedSearchScreen() {

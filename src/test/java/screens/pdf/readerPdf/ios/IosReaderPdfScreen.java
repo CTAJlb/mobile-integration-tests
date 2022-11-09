@@ -24,7 +24,6 @@ import screens.pdf.settingspdf.SettingsPdfScreen;
 public class IosReaderPdfScreen extends ReaderPdfScreen {
     private final NavigationBarPdfScreen navigationBarPdfScreen;
     private final SearchPdfScreen searchPdfScreen;
-    private final ILabel lblImage = getElementFactory().getLabel(By.xpath("//XCUIElementTypeImage"), "Image of the page");
     private final ILabel lblPageNumber = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@value,\"/\")]"), "lblPageNumber");
     private final ILabel lblBookName = getElementFactory().getLabel(By.xpath("//XCUIElementTypeToolbar/parent::XCUIElementTypeOther/preceding-sibling::XCUIElementTypeOther[2]/XCUIElementTypeStaticText"), "lblBookName");
     private final ILabel lblPageNumberSlider = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther[contains(@value,\"Page\")]"), "lblPageNumberSlider");
@@ -43,7 +42,7 @@ public class IosReaderPdfScreen extends ReaderPdfScreen {
 
     @Override
     public boolean isReaderOpened() {
-        return lblImage.state().waitForDisplayed();
+        return lblPage.state().waitForDisplayed();
     }
 
 

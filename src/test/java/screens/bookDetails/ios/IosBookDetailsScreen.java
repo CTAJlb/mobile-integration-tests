@@ -120,8 +120,18 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     }
 
     @Override
+    public boolean isPublisherInfoExist() {
+        return lblPublisher.state().waitForDisplayed();
+    }
+
+    @Override
     public String getCategoryInfo() {
         return lblCategories.getAttribute(IosAttributes.NAME);
+    }
+
+    @Override
+    public boolean isCategoryInfoExist() {
+        return lblCategories.state().waitForDisplayed();
     }
 
     @Override

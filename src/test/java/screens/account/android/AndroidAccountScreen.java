@@ -122,6 +122,11 @@ public class AndroidAccountScreen extends AccountScreen {
         //for iOS
     }
 
+    @Override
+    public void closeAccountScreen() {
+        //for iOS
+    }
+
     private String getLoginButtonText() {
         return btnLoginAction.state().waitForDisplayed() ? btnLoginAction.getText() : "";
     }

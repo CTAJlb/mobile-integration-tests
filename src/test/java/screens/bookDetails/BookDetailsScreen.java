@@ -32,7 +32,11 @@ public abstract class BookDetailsScreen extends Screen {
 
     public abstract String getPublisherInfo();
 
+    public abstract boolean isPublisherInfoExist();
+
     public abstract String getCategoryInfo();
+
+    public abstract boolean isCategoryInfoExist();
 
     public abstract String getDistributorInfo();
 
