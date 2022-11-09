@@ -54,7 +54,7 @@ Feature: Book detail view screen
       And I open search modal
       And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
-      And Open bookType book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookNameInfo' is opened on book details screen
       And Publisher and Categories in Information section are displayed on book details screen
       And Publisher and Categories in Information section are correct on book details screen
