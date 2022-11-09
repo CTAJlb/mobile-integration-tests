@@ -26,6 +26,7 @@ public class IosAccountScreen extends AccountScreen {
     private final IButton btnContentLicenses = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"ContentLicenses\"]"), "Content Licenses");
     private final ILabel lblLibrariesAndPalaces =getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Libraries are palaces\")]"), "\tLibraries are palaces for the people");
     private final IButton btnAdvanced = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Advanced\"]"), "Advanced button");
+    private final IButton btnCancel = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeButton[@name=\"Cancel\"]"), "Cancel button");
 
     public IosAccountScreen() {
         super(By.xpath("//XCUIElementTypeNavigationBar[@name=\"Account\"]"));
@@ -115,5 +116,10 @@ public class IosAccountScreen extends AccountScreen {
     @Override
     public void clickDelete(String button) {
         getElementFactory().getButton(By.xpath(String.format(BUTTON_LOCATOR, button)), "Button " + button).click();
+    }
+
+    @Override
+    public void closeAccountScreen() {
+        btnCancel.click();
     }
 }

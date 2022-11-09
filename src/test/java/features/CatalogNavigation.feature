@@ -4,10 +4,9 @@ Feature: Catalog Navigation
   Scenario: Return to last library catalog
     When I add "Palace Bookshelf" account from welcomeScreen
       And I add 'LYRASIS Reads' account
-      And I open Catalog
-      And I switch to 'LYRASIS Reads' from side menu
     Then Category rows are loaded
     When I restart app
+      And I close account screen
     Then Category rows are loaded
       And Library 'LYRASIS Reads' is present on Catalog Screen
 

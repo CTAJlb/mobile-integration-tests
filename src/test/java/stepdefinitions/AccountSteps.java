@@ -115,6 +115,11 @@ public class AccountSteps {
         addAccountScreen.enterLibraryName(word);
     }
 
+    @When("I close account screen")
+    public void closeAccount(){
+        accountScreen.closeAccountScreen();
+    }
+
     @Then("Library {string} is present on add account screen")
     public void isLibraryPresent(String libraryNameKey) {
         String libraryName = context.get(libraryNameKey);

@@ -151,7 +151,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
     Then Page number is equal to 'pageNumberInfo' on pdf reader screen
 
   @logout @returnBooks @tier1 @exclude_android
-  Scenario: Check table of contents in Lyrasis
+  Scenario: Check table of contents Lyrasis
     When I open search modal
       And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -167,7 +167,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
     Then Thumbnails of the book pages are displayed
 
   @logout @returnBooks @tier1 @exclude_android
-  Scenario: Navigate by Chapters in Lyrasis
+  Scenario: Navigate by Chapters Lyrasis
     When I open search modal
     And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -182,7 +182,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
     Then Page number is equal to 'pageNumberInfo' on pdf reader screen
 
   @logout @returnBooks @tier1 @exclude_android
-  Scenario Outline: Check invalid data in searching
+  Scenario Outline: Check invalid data in searching Lyrasis
     When I open search modal
     And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab
@@ -205,7 +205,7 @@ Feature: Read PDF in LYRARIS Reads on IOS
       | @!&                                   |
 
   @logout @returnBooks @tier1 @exclude_android
-  Scenario Outline: Check valid data in searching
+  Scenario Outline: Check valid data in searching Lyrasis
     When I open search modal
       And I search 'available' book of distributor 'Biblioboard' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab

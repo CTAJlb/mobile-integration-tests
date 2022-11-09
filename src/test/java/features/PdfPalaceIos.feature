@@ -97,7 +97,7 @@ Feature: Read PDF in Palace Bookshelf on IOS
     Then Page number is equal to 'pageNumberInfo' on pdf reader screen
 
   @tier2 @exclude_android
-  Scenario: Check table of contents in Lyrasis
+  Scenario: Check table of contents
     When I open table of contents on pdf reader screen
       And I open text chapter content on pdf toc screen
     Then Text chapter content is opened on pdf toc screen
@@ -105,7 +105,7 @@ Feature: Read PDF in Palace Bookshelf on IOS
     Then Thumbnails of the book pages are displayed
 
   @tier2 @exclude_android
-  Scenario: Navigate by Chapters in Lyrasis
+  Scenario: Navigate by Chapters
     When I open table of contents on pdf reader screen
       And I open text chapter content on pdf toc screen
       And I open random chapter and save the number as 'pageNumberInfo' on pdf toc screen
