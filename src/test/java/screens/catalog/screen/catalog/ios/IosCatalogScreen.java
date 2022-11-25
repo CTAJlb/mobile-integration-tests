@@ -44,7 +44,7 @@ public class IosCatalogScreen extends CatalogScreen {
             getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"%s\"]", button)),
                     String.format("%s type of sorting", button)));
     private final IButton btnLogo =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"Change Library\")]"), "Logo");
+            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"SwitchLibrary\")]"), "Logo");
 
     public IosCatalogScreen() {
         super(By.xpath(UNIQUE_ELEMENT));

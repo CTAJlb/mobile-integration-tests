@@ -8,7 +8,7 @@ Feature: Book detail view screen
       And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookNameInfo' is opened on book details screen
+    Then Book 'bookInfo' is opened on book details screen
       And Book 'bookInfo' has correct title and author name on book details screen
       And The book cover is displayed on book details screen
 
@@ -32,7 +32,7 @@ Feature: Book detail view screen
       And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookNameInfo' is opened on book details screen
+    Then Book 'bookInfo' is opened on book details screen
       And Description is not empty in book details screen
       And Button More in Description is available on book details screen
 
@@ -55,7 +55,7 @@ Feature: Book detail view screen
       And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookNameInfo' is opened on book details screen
+    Then Book 'bookInfo' is opened on book details screen
       And Publisher and Categories in Information section are displayed on book details screen
       And Publisher and Categories in Information section are correct on book details screen
       And Distributor is equal to '<distributor>' on book details screen
@@ -80,7 +80,7 @@ Feature: Book detail view screen
       And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookNameInfo' is opened on book details screen
+    Then Book 'bookInfo' is opened on book details screen
       And Related books section is displayed on book details screen
       And There is a list of related books on book details screen
       And More button in related books section is available on book details screen
@@ -132,7 +132,7 @@ Feature: Book detail view screen
       And I open search modal
       And I search for "Persuasion" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookNameInfo' is opened on book details screen
+    Then Book 'bookInfo' is opened on book details screen
       And Book 'bookInfo' has correct title and author name on book details screen
       And The book cover is displayed on book details screen
 
@@ -143,7 +143,7 @@ Feature: Book detail view screen
       And I open search modal
       And I search for "Persuasion" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookNameInfo' is opened on book details screen
+    Then Book 'bookInfo' is opened on book details screen
       And Description is not empty in book details screen
       And Button More in Description is available on book details screen
 
@@ -154,7 +154,7 @@ Feature: Book detail view screen
       And I open search modal
       And I search for "Persuasion" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookNameInfo' is opened on book details screen
+    Then Book 'bookInfo' is opened on book details screen
       And Publisher and Categories in Information section are correct on book details screen
 
   @tier2
@@ -164,7 +164,7 @@ Feature: Book detail view screen
       And I open search modal
       And I search for "Persuasion" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookNameInfo' is opened on book details screen
+    Then Book 'bookInfo' is opened on book details screen
       And Related books section is displayed on book details screen
       And There is a list of related books on book details screen
       And More button in related books section is available on book details screen
@@ -197,7 +197,7 @@ Feature: Book detail view screen
       And I open search modal
       And I search for "The Woman in White" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookNameInfo' is opened on book details screen
+    Then Book 'bookInfo' is opened on book details screen
       And Book 'bookInfo' has correct title and author name on book details screen
       And The book cover is displayed on book details screen
 
@@ -212,7 +212,7 @@ Feature: Book detail view screen
       And I open search modal
       And I search for "The Oregon Trail" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookNameInfo' is opened on book details screen
+    Then Book 'bookInfo' is opened on book details screen
       And Description is not empty in book details screen
       And Button More in Description is available on book details screen
 
@@ -227,7 +227,7 @@ Feature: Book detail view screen
       And I open search modal
       And I search for "The Count of Monte Cristo" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookNameInfo' is opened on book details screen
+    Then Book 'bookInfo' is opened on book details screen
       And Publisher and Categories in Information section are correct on book details screen
       And Distributor is equal to 'Overdrive' on book details screen
 
@@ -242,7 +242,7 @@ Feature: Book detail view screen
       And I open search modal
       And I search for "The Woman in White" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then Book 'bookNameInfo' is opened on book details screen
+    Then Book 'bookInfo' is opened on book details screen
       And Related books section is displayed on book details screen
       And There is a list of related books on book details screen
       And More button in related books section is available on book details screen

@@ -15,7 +15,7 @@ Feature: Read PDF in Palace Bookshelf on Android
     Then Reader pdf screen is opened
       And The book name is 'bookNameInfo' on pdf reader screen
     When I close pdf reader by back button
-    Then Book "bookNameInfo" is opened on book details screen
+    Then Book "bookInfo" is opened on book details screen
 
   @tier2 @exclude_ios
   Scenario: Check table of contents Palace

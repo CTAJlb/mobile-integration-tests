@@ -19,6 +19,11 @@ public class TocAudiobookSteps {
         this.context = context;
     }
 
+    @Then("The first chapter is loaded")
+    public void isChapterLoaded(){
+        Assert.assertTrue("The first chapter is not loaded", tocAudiobookScreen.isTheFirstChapterLoaded());
+    }
+
     @When("Open random chapter on toc audiobook screen and save chapter name as {string}")
     public void openRandomChapterOnTocAudiobookScreenAndSaveChapterName(String keyChapterName) {
         String chapterName = tocAudiobookScreen.openChapterAndGetChapterName(RandomUtils.nextInt(1, tocAudiobookScreen.getCountOfChapters()));

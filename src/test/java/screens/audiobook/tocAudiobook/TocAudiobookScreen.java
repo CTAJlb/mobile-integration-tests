@@ -8,6 +8,7 @@ public abstract class TocAudiobookScreen extends Screen {
         super(locator, "TocAudiobookScreen");
     }
 
+    public abstract boolean isTheFirstChapterLoaded();
     public abstract String openChapterAndGetChapterName(int chapterNumber);
 
     public abstract int getCountOfChapters();
