@@ -17,11 +17,17 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidTocAudiobookScreen extends TocAudiobookScreen {
+    private final ILabel lblTheFirstChapter = getElementFactory().getLabel(By.xpath("//androidx.recyclerview.widget.RecyclerView//android.widget.LinearLayout[1]"), "The first chapter");
     private static final String CHAPTERS_LOC = "//android.widget.LinearLayout//*[contains(@resource-id, \"player_toc_item_view_title\")]";
     private static final String DOWNLOADING_PROGRESS_LOC = "//androidx.recyclerview.widget.RecyclerView//android.widget.RelativeLayout[%d]//android.view.View";
 
     public AndroidTocAudiobookScreen() {
         super(By.xpath("//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"list\")]"));
+    }
+
+    @Override
+    public boolean isTheFirstChapterLoaded() {
+        return lblTheFirstChapter.state().waitForEnabled();
     }
 
     @Override

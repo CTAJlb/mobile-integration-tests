@@ -130,7 +130,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
 
     @Override
     public boolean isSearchResultsEmpty() {
-        return lblNoResults.state().isDisplayed();
+        return lblNoResults.state().waitForDisplayed();
     }
 
     @Override
