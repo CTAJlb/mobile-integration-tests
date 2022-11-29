@@ -4,6 +4,10 @@
 name: Test Run
 
 on:
+  push:
+    branches-ignore:
+      - '!allure'
+
   workflow_dispatch:
     inputs:
       test_tag:
@@ -58,7 +62,7 @@ jobs:
         path: gh-pages
 
     - name: Allure Report action from marketplace
-      uses: simple-elf/allure-report-action@master
+      uses: simple-elf/allure-report-action@main
       if: success() || failure()
       id: allure-report
       with:
@@ -76,15 +80,15 @@ jobs:
         PUBLISH_BRANCH: gh-pages
         PUBLISH_DIR: allure-history
 
-    - name: Post the link to the report
-      if: success() || failure()
-      uses: Sibz/github-status-action@v1
-      with:
-        authToken: ${{secrets.PERSONAL_TOKEN}}
-        context: 'Test report'
-        state: 'success'
-        sha: ${{ github.event.pull_request.head.sha }}
-        target_url: simple-elf.github.io/github-allure-history/${{ github.run_number }}
+#    - name: Post the link to the report
+#      if: success() || failure()
+#      uses: Sibz/github-status-action@v1
+#      with:
+#        authToken: ${{secrets.PERSONAL_TOKEN}}
+#        context: 'Test report'
+#        state: 'success'
+#        sha: ${{ github.event.pull_request.head.sha }}
+#        target_url: simple-elf.github.io/github-allure-history/${{ github.run_number }}
 
 #    - name: Upload report
 #      uses: actions/upload-artifact@v3
