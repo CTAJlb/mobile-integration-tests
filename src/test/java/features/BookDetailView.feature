@@ -125,7 +125,7 @@ Feature: Book detail view screen
 #      | Biblioboard        | EBOOK     | eBooks     |
 #      | Biblioboard        | AUDIOBOOK | Audiobooks |
 
-  @tier2
+  @tier3
   Scenario: Check of a book title and author in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
@@ -136,7 +136,7 @@ Feature: Book detail view screen
       And Book 'bookInfo' has correct title and author name on book details screen
       And The book cover is displayed on book details screen
 
-  @tier2
+  @tier3
   Scenario: Check of a "More..." button in Description section in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
@@ -147,7 +147,7 @@ Feature: Book detail view screen
       And Description is not empty in book details screen
       And Button More in Description is available on book details screen
 
-  @tier2
+  @tier3
   Scenario: Check fields in Information section in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
@@ -157,7 +157,7 @@ Feature: Book detail view screen
     Then Book 'bookInfo' is opened on book details screen
       And Publisher and Categories in Information section are correct on book details screen
 
-  @tier2
+  @tier3
   Scenario: Check related books section in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
@@ -186,7 +186,7 @@ Feature: Book detail view screen
 #    When I sort books by TITLE
 #    Then Books are sorted by Title ascending
 
-  @tier2
+  @tier3
   Scenario: Check of a book title and author in Overdrive
     When I turn on test mode in "Palace Bookshelf" library
       And Enable hidden libraries
@@ -201,7 +201,7 @@ Feature: Book detail view screen
       And Book 'bookInfo' has correct title and author name on book details screen
       And The book cover is displayed on book details screen
 
-  @tier2
+  @tier3
   Scenario: Check of a "More..." button in Description section in Overdrive
     When I turn on test mode in "Palace Bookshelf" library
       And Enable hidden libraries
@@ -216,7 +216,7 @@ Feature: Book detail view screen
       And Description is not empty in book details screen
       And Button More in Description is available on book details screen
 
-  @tier2
+  @tier3
   Scenario: Check fields in Information section in Overdrive
     When I turn on test mode in "Palace Bookshelf" library
       And Enable hidden libraries
@@ -231,7 +231,7 @@ Feature: Book detail view screen
       And Publisher and Categories in Information section are correct on book details screen
       And Distributor is equal to 'Overdrive' on book details screen
 
-  @tier2
+  @tier3
   Scenario: Check related books section in Overdrive
     When I turn on test mode in "Palace Bookshelf" library
       And Enable hidden libraries
