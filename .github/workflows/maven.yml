@@ -1,8 +1,8 @@
 # This workflow will build a test Java + JUnit + Appium + BrowserStack project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-run-name: ${{github.event.inputs.device_name_and_version}}
 #name: Test Run
+run-name: Test ${{github.event.inputs.device_name_and_version}}
 
 on:
 
