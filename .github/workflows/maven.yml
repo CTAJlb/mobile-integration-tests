@@ -1,7 +1,8 @@
 # This workflow will build a test Java + JUnit + Appium + BrowserStack project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Test Run
+run-name: ${{github.event.inputs.device_name_and_version}}
+#name: Test Run
 
 on:
 
@@ -14,7 +15,7 @@ on:
       bs_app_link:
         description: 'app_url of uploaded to BS link'
         required: true
-        default: 'bs://8f566db51922fcbccc31e4fe980936dab47dd281'
+        default: 'bs://adb0d8d825d283f9160eea27f2a01f1e78c6bba2'
       build_name:
         description: 'build name of given application'
         required: true
