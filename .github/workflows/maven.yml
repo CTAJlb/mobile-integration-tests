@@ -30,18 +30,11 @@ on:
         default: 'SamsungGalaxyS21Ultra_11'
 
 jobs:
-  build:
-#    name: "${{github.event.inputs.device_name_and_version}} part 1"
-    name: "${{ steps.current-time.outputs.time }}"
+  first_job:
+    name: "${{github.event.inputs.device_name_and_version}} part 1"
     runs-on: ubuntu-latest
-    steps:
-      - name: Get current time
-        uses: josStorer/get-current-time@v2.0.2
-        id: current-time
-        with:
-          format: YYYYMMDD-HH
-          utcOffset: "+03:00"
 
+    steps:
       - uses: actions/checkout@v3
 
       - name: Set up JDK 11
@@ -52,12 +45,8 @@ jobs:
 
       - name: Run tests
         if: always()
-        run: mvn clean test -Daquality.buildName="${{github.event.inputs.build_name}}" -DdriverSettings.${{github.event.inputs.platform_name}}.deviceKey=${{github.event.inputs.device_name_and_version}} -Daquality.token=${{secrets.TRACKING_API_TOKEN}} -Daquality.suiteName="${{github.event.inputs.platform_name}} - ${{github.event.inputs.test_tag}}" -Daquality.environment="${{github.event.inputs.platform_name}}" -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -DremoteConnectionUrl=${{secrets.remoteConnectionUrl}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.user"=${{secrets.BROWSERSTACK_USER}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.key"=${{secrets.BROWSERSTACK_KEY}} -DplatformName=${{github.event.inputs.platform_name}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities.app=${{github.event.inputs.bs_app_link}} -Dcucumber.options="--tags '(${{github.event.inputs.test_tag}} and not @ignore) and not @exclude_${{github.event.inputs.platform_name}} and not @tier2 and not @tier1'"
+        run: mvn clean test -Daquality.buildName="${{github.event.inputs.build_name}}" -DdriverSettings.${{github.event.inputs.platform_name}}.deviceKey=${{github.event.inputs.device_name_and_version}} -Daquality.token=${{secrets.TRACKING_API_TOKEN}} -Daquality.suiteName="${{github.event.inputs.platform_name}} - ${{github.event.inputs.test_tag}}" -Daquality.environment="${{github.event.inputs.platform_name}}" -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -DremoteConnectionUrl=${{secrets.remoteConnectionUrl}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.user"=${{secrets.BROWSERSTACK_USER}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.key"=${{secrets.BROWSERSTACK_KEY}} -DplatformName=${{github.event.inputs.platform_name}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities.app=${{github.event.inputs.bs_app_link}} -Dcucumber.options="--tags '(${{github.event.inputs.test_tag}} and not @ignore) and not @exclude_${{github.event.inputs.platform_name}} and not @tier2'"
         continue-on-error: true
-
-#    - name: Generate Allure Report
-#      uses: AEkaterina/action-allure-report@v0.1.1
-#      if: success() || failure()
 
       - name: Get Allure history
         uses: actions/checkout@v2
@@ -70,11 +59,8 @@ jobs:
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
-#        id: allure-report
         with:
           allure_results: allure-results
-#          gh_pages: gh-pages
-#          allure_report: allure-report
           allure_history: allure-history
           keep_reports: 10
 
@@ -86,43 +72,44 @@ jobs:
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
 
-#    - name: Post the link to the report
-#      if: success() || failure()
-#      uses: Sibz/github-status-action@v1
-#      with:
-#        authToken: ${{secrets.PERSONAL_TOKEN}}
-#        context: 'Test report'
-#        state: 'success'
-#        sha: ${{ github.event.pull_request.head.sha }}
-#        target_url: simple-elf.github.io/github-allure-history/${{ github.run_number }}
+  second_job:
+    name: "${{github.event.inputs.device_name_and_version}} part 2"
+    runs-on: ubuntu-latest
 
-#    - name: Upload report
-#      uses: actions/upload-artifact@v3
-#      with:
-#       name: allure-report-1
-#       path: allure-report/
-#      if: success() || failure()
-  
-#  second_job:
-#   name: "${{github.event.inputs.device_name_and_version}} part 2"
-#   runs-on: ubuntu-latest
-#   timeout-minutes: 600
-#
-#   steps:
-#   - uses: actions/checkout@v3
-#   - name: Set up JDK 11
-#     uses: actions/setup-java@v3
-#     with:
-#       distribution: 'temurin'
-#       java-version: 11
-#   - name: Run tests
-#     run: mvn clean test -Daquality.buildName="${{github.event.inputs.build_name}}" -DdriverSettings.${{github.event.inputs.platform_name}}.deviceKey=${{github.event.inputs.device_name_and_version}} -Daquality.token=${{secrets.TRACKING_API_TOKEN}} -Daquality.suiteName="${{github.event.inputs.platform_name}} - ${{github.event.inputs.test_tag}}" -Daquality.environment="${{github.event.inputs.platform_name}}" -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -DremoteConnectionUrl=${{secrets.remoteConnectionUrl}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.user"=${{secrets.BROWSERSTACK_USER}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.key"=${{secrets.BROWSERSTACK_KEY}} -DplatformName=${{github.event.inputs.platform_name}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities.app=${{github.event.inputs.bs_app_link}} -Dcucumber.options="--tags '(${{github.event.inputs.test_tag}} and not @ignore) and not @exclude_${{github.event.inputs.platform_name}} and not @tier1'"
-#   - name: Generate Allure Report
-#     uses: AEkaterina/action-allure-report@v0.1.1
-#     if: success() || failure()
-#   - name: Upload report
-#     uses: actions/upload-artifact@v3
-#     with:
-#       name: allure-report-2
-#       path: allure-report/
-#     if: success() || failure()
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 11
+
+      - name: Run tests
+        if: always()
+        run: mvn clean test -Daquality.buildName="${{github.event.inputs.build_name}}" -DdriverSettings.${{github.event.inputs.platform_name}}.deviceKey=${{github.event.inputs.device_name_and_version}} -Daquality.token=${{secrets.TRACKING_API_TOKEN}} -Daquality.suiteName="${{github.event.inputs.platform_name}} - ${{github.event.inputs.test_tag}}" -Daquality.environment="${{github.event.inputs.platform_name}}" -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.LYRASISReads."android".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."ios".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis1}}=${{secrets.BookPinLyrasis1}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis2}}=${{secrets.BookPinLyrasis2}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis3}}=${{secrets.BookPinLyrasis3}} -Dcredentials.A1QATestLibrary."android".${{secrets.BookCardLyrasis4}}=${{secrets.BookPinLyrasis4}} -DremoteConnectionUrl=${{secrets.remoteConnectionUrl}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.user"=${{secrets.BROWSERSTACK_USER}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities."browserstack.key"=${{secrets.BROWSERSTACK_KEY}} -DplatformName=${{github.event.inputs.platform_name}} -DdriverSettings.${{github.event.inputs.platform_name}}.capabilities.app=${{github.event.inputs.bs_app_link}} -Dcucumber.options="--tags '(${{github.event.inputs.test_tag}} and not @ignore) and not @exclude_${{github.event.inputs.platform_name}} and not @tier1'"
+        continue-on-error: true
+
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Allure Report action from marketplace
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          keep_reports: 10
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
