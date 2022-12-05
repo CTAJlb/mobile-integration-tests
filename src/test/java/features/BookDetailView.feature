@@ -125,7 +125,7 @@ Feature: Book detail view screen
 #      | Biblioboard        | EBOOK     | eBooks     |
 #      | Biblioboard        | AUDIOBOOK | Audiobooks |
 
-  @tier2
+  @tier3
   Scenario: Check of a book title and author in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
