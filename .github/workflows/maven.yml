@@ -53,8 +53,8 @@ jobs:
         if: always()
         continue-on-error: true
         with:
-          ref: gh-pages_1
-          path: gh-pages_1
+          ref: gh-pages
+          path: gh-pages
 
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
@@ -96,7 +96,7 @@ jobs:
         continue-on-error: true
         with:
           ref: gh-pages_2
-          path: gh-pages_2
+          path: gh-pages
 
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
