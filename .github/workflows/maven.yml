@@ -60,9 +60,10 @@ jobs:
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
+          gh_pages: gh-pages_1
           allure_results: allure-results
           allure_history: allure-history
-          keep_reports: 10
+          keep_reports: 5
 
       - name: Deploy report to Github Pages
         if: always()
@@ -104,7 +105,7 @@ jobs:
         with:
           allure_results: allure-results
           allure_history: allure-history
-          keep_reports: 10
+          keep_reports: 5
 
       - name: Deploy report to Github Pages
         if: always()
