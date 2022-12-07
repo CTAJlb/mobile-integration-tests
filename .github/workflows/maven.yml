@@ -49,18 +49,18 @@ jobs:
         continue-on-error: true
 
       - name: Get Allure history
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         if: always()
         continue-on-error: true
         with:
-          ref: gh-pages1
-          path: gh-pages1
+          ref: gh-pages
+          path: gh-pages
 
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
-          gh_pages: gh-pages
+          gh_pages: gh-pages1
           allure_results: allure-results
           allure_history: allure-history
           keep_reports: 5
