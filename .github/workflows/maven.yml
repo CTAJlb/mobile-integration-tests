@@ -53,14 +53,14 @@ jobs:
         if: always()
         continue-on-error: true
         with:
-          ref: gh-pages_1
-          path: gh-pages_1
+          ref: gh-pages
+          path: gh-pages
 
       - name: Allure Report action from marketplace
         uses: simple-elf/allure-report-action@master
         if: always()
         with:
-          gh_pages: gh-pages_1
+          gh_pages: gh-pages
           allure_results: allure-results
           allure_history: allure-history
           keep_reports: 5
@@ -70,7 +70,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v2
         env:
           PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          PUBLISH_BRANCH: gh-pages_1
+          PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
 
 #  second_job:
