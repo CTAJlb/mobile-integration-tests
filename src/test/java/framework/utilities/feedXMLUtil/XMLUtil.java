@@ -76,7 +76,12 @@ public class XMLUtil {
             }
 
             for (EntryXML entry : feedModel.getEntries()) {
-                boolean isEnLanguagePresent = entry.getLanguage().toLowerCase().equals("en");
+
+                if (entry.getLanguage() == null)
+                    continue;
+
+                boolean isEnLanguagePresent = entry.getLanguage().equals("en");
+
                 if (!isEnLanguagePresent) {
                     continue;
                 }
@@ -85,11 +90,11 @@ public class XMLUtil {
 
                 if (isPdfTypePresentAndPdfAvailabilityPresent) {
                     LinkFromEntry link = entry.getLinksFromEntry().stream().filter(filterlink -> filterlink.getAvailabilityPDF() != null && filterlink.getListOfIndirectAcquisition() != null).findFirst().get();
-                    List<String> listApplicationTypes = link.getListOfIndirectAcquisition().stream().map(indirectAcquisition -> indirectAcquisition.getType()).collect(Collectors.toList());
+                    List<String> listApplicationTypes = link.getListOfIndirectAcquisition().stream().map(IndirectAcquisition::getType).collect(Collectors.toList());
                     String pdfAvailability = link.getAvailabilityPDF().getStatus();
 
                     if (listApplicationTypes.stream().anyMatch(applicationType -> applicationType.toLowerCase().equals("application/pdf".toLowerCase()))
-                            && !listApplicationTypes.stream().anyMatch(applicationType -> applicationType.toLowerCase().equals("application/epub+zip".toLowerCase()))
+                            && listApplicationTypes.stream().noneMatch(applicationType -> applicationType.toLowerCase().equals("application/epub+zip".toLowerCase()))
                             && pdfAvailability.toLowerCase().equals("available".toLowerCase())) {
                         String[] arrayBookType = entry.getBookType().split("/");
                         String bookType = arrayBookType[arrayBookType.length - 1];
@@ -153,10 +158,9 @@ public class XMLUtil {
     }
 
     private ArrayList<BookModel> getListAvailablePdfWithoutRepetitions(ArrayList<BookModel> arrayList) {
-        Set<BookModel> setAvailablePdf = arrayList.stream().collect(Collectors.toSet());
-        ArrayList<BookModel> arrayListAvailablePdf = new ArrayList<>(setAvailablePdf);
+        Set<BookModel> setAvailablePdf = new HashSet<>(arrayList);
 
-        return arrayListAvailablePdf;
+        return new ArrayList<>(setAvailablePdf);
     }
 
     public synchronized String getRandomPdf() {
@@ -249,7 +253,7 @@ public class XMLUtil {
 
     private HashMap<String, List<BookModel>> getHashMapForAvailableAndUnavailableBooksWithSpecificType(ArrayList<BookModel> arrayList, String bookType) {
 
-        Set<String> setDistributors = arrayList.stream().map(book -> book.getDistributorName()).collect(Collectors.toSet());
+        Set<String> setDistributors = arrayList.stream().map(BookModel::getDistributorName).collect(Collectors.toSet());
 
         HashMap<String, List<BookModel>> hashMap = new HashMap<>();
 
