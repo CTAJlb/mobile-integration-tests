@@ -147,7 +147,7 @@ Feature: Book detail view screen
       And Description is not empty in book details screen
       And Button More in Description is available on book details screen
 
-  @tier3
+  @tier2
   Scenario: Check fields in Information section in Palace
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open Catalog
