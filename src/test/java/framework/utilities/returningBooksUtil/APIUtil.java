@@ -41,7 +41,7 @@ public class APIUtil {
         try {
             response = getBooksAPIMethods.getBooks(authHeader).execute();
         } catch (IOException e) {
-            e.printStackTrace();
+            AqualityServices.getLogger().error(e + e.getMessage());
         }
 
         APIPageXMLModel apiPageXMLModel = response.body();
