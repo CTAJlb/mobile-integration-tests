@@ -15,11 +15,15 @@ public abstract class CatalogBooksScreen extends Screen {
 
     public abstract CatalogBookModel openBookAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
+    public abstract void openBook(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName);
+
     public abstract boolean isBookDisplayed(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
     public abstract boolean isProgressBarDisplayed(String bookName);
 
     public abstract CatalogBookModel clickActionButtonOnTheFirstBookAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
+
+    public abstract CatalogBookModel clickActionButtonOnABookAndGetBookInfo(int bookNumber, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
     public abstract void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName);
 
@@ -30,4 +34,6 @@ public abstract class CatalogBooksScreen extends Screen {
     public abstract String getNameOfFirstBook();
 
     public abstract boolean isActionButtonDisplayed(String bookName, EnumActionButtonsForBooksAndAlertsKeys key);
+
+    public abstract int getNumberOfBooksOnTheScreen();
 }

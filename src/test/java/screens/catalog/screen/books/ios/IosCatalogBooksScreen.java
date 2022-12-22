@@ -26,9 +26,13 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
     private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
     private static final String ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = "//XCUIElementTypeStaticText/following-sibling::XCUIElementTypeOther/XCUIElementTypeButton[contains(@name,\"%s\")]";
+    private static final String ACTION_BUTTON_ON_A_BOOK_BY_NUMBER_IN_THE_LIST = "//XCUIElementTypeCell[%d]//XCUIElementTypeButton";
     private static final String BOOK_NAME_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[1]";
+    private static final String BOOK_NAME_BY_NUMBER_IN_THE_LIST = "//XCUIElementTypeCell[%d]//XCUIElementTypeOther//XCUIElementTypeStaticText[1]";
     private static final String AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
+    private static final String AUTHOR_OF_THE_BOOK_BY_NUMBER_IN_THE_LIST = "//XCUIElementTypeCell[%d]//XCUIElementTypeOther//XCUIElementTypeStaticText[2]";
     private static final String BOOKS_NAME_LOCATOR = "//XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
+    private static final String BOOKS_LOCATOR = "//XCUIElementTypeCell";
 
     private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"No results\")]"), "No results found");
     private final ILabel lblNameOfFirstBook = AqualityServices.getElementFactory().getLabel(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "Name of first book");
@@ -47,7 +51,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         String actionButtonLoc = String.format(ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
         IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
         ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString)), "lblAuthor");
-        String author = "";
+        String author;
         if (!lblAuthor.state().isDisplayed()) {
             author = null;
         } else {
@@ -76,7 +80,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
         ILabel lblBookName = getBookNameLabelFromListOfBooks(bookNameLoc);
         ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString)), "lblAuthor");
-        String author = "";
+        String author;
         if (!lblAuthor.state().isDisplayed()) {
             author = null;
         } else {
@@ -87,6 +91,13 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
                 .setAuthor(author);
         lblBookName.click();
         return bookInfo;
+    }
+
+    @Override
+    public void openBook(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName) {
+        String actionButton = actionButtonKey.i18n();
+        ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButton)), "action button");
+        lblBookName.click();
     }
 
     @Override
@@ -112,12 +123,31 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
         ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, actionButtonString)), "lblAuthor");
         ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, actionButtonString)), "lblBookName");
-        String author = "";
+        String author;
         if (!lblAuthor.state().isDisplayed()) {
             author = null;
         } else {
             author = lblAuthor.getAttribute(IosAttributes.NAME);
         }
+        CatalogBookModel bookInfo = new CatalogBookModel()
+                .setTitle(lblBookName.getAttribute(IosAttributes.NAME))
+                .setAuthor(author);
+        actionButton.click();
+        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE
+                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN
+                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
+            AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(lblBookName.getAttribute(IosAttributes.NAME)), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+        }
+        return bookInfo;
+    }
+
+    @Override
+    public CatalogBookModel clickActionButtonOnABookAndGetBookInfo(int bookNumber, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        String actionButtonLoc = String.format(ACTION_BUTTON_ON_A_BOOK_BY_NUMBER_IN_THE_LIST, bookNumber);
+        IButton actionButton = getElementFactory().getButton(By.xpath(actionButtonLoc), "Action button");
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_OF_THE_BOOK_BY_NUMBER_IN_THE_LIST, bookNumber)), "Book author");
+        ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_BY_NUMBER_IN_THE_LIST, bookNumber)), "Book name");
+        String author = !lblAuthor.state().isDisplayed() ? null : lblAuthor.getText();
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(lblBookName.getAttribute(IosAttributes.NAME))
                 .setAuthor(author);
@@ -167,6 +197,15 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     @Override
     public boolean isActionButtonDisplayed(String bookName, EnumActionButtonsForBooksAndAlertsKeys key) {
         return getActionButton(bookName, key).state().isDisplayed();
+    }
+
+    @Override
+    public int getNumberOfBooksOnTheScreen() {
+        return getBooksList().size();
+    }
+
+    private List<ILabel> getBooksList(){
+        return getElementFactory().findElements(By.xpath(BOOKS_LOCATOR), ElementType.LABEL);
     }
 
     private List<String> getBooksName() {
