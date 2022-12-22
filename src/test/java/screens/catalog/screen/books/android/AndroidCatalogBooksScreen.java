@@ -25,9 +25,12 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     private static final String BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
     private static final String AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[2]";
     private static final String ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = "//android.widget.TextView/following-sibling::android.widget.LinearLayout//*[@text=\"%s\"]";
+    private static final String ACTION_BUTTON_ON_A_BOOK_BY_NUMBER_IN_THE_LIST = "//android.widget.FrameLayout[%d]//android.widget.Button";
     private static final String BOOK_NAME_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[1]";
+    private static final String BOOK_NAME_BY_NUMBER_IN_THE_LIST = "//android.widget.FrameLayout[%d]//android.view.ViewGroup//android.widget.TextView[1]";
+    private static final String AUTHOR_OF_THE_BOOK_BY_NUMBER_IN_THE_LIST = "//android.widget.FrameLayout[%d]//android.view.ViewGroup//android.widget.TextView[2]";
     private static final String AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[2]";
-    private static final String BOOKS_NAME_LOCATOR = "//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout/android.view.ViewGroup/android.widget.TextView[1]";
+    private static final String BOOKS_LOCATOR = "//android.view.ViewGroup[contains(@resource-id, \"bookCellIdle\")]";
     private final ILabel lblNameOfFirstBook = AqualityServices.getElementFactory().getLabel(By.xpath("//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.TextView[1]"), "Name of first book");
     private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@text, \"No results\")]"), "No results found");
 
@@ -41,7 +44,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
         String actionButtonLoc = String.format(ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButtonString);
         IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
         ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButtonString)), "lblAuthor");
-        String author = "";
+        String author;
         if (!lblAuthor.state().isDisplayed()) {
             author = null;
         } else {
@@ -66,7 +69,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
         String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButtonString);
         ILabel lblBookName = getBookNameLabelFromListOfBooks(bookNameLoc);
         ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButtonString)), "lblAuthor");
-        String author = "";
+        String author;
         if (!lblAuthor.state().isDisplayed()) {
             author = null;
         } else {
@@ -77,6 +80,13 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
                 .setAuthor(author);
         lblBookName.click();
         return bookInfo;
+    }
+
+    @Override
+    public void openBook(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName) {
+        String actionButton = actionButtonKey.i18n();
+        ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButton)), "Book name");
+        lblBookName.click();
     }
 
     @Override
@@ -98,12 +108,31 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
         IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
         ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, actionButtonString)), "lblAuthor");
         ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, actionButtonString)), "lblBookName");
-        String author = "";
+        String author;
         if (!lblAuthor.state().isDisplayed()) {
             author = null;
         } else {
             author = lblAuthor.getText();
         }
+        CatalogBookModel bookInfo = new CatalogBookModel()
+                .setTitle(lblBookName.getText())
+                .setAuthor(author);
+        actionButton.click();
+        if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE
+                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN
+                || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
+            AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(lblBookName.getText()), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
+        }
+        return bookInfo;
+    }
+
+    @Override
+    public CatalogBookModel clickActionButtonOnABookAndGetBookInfo(int bookNumber, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
+        String actionButtonLoc = String.format(ACTION_BUTTON_ON_A_BOOK_BY_NUMBER_IN_THE_LIST, bookNumber);
+        IButton actionButton = getElementFactory().getButton(By.xpath(actionButtonLoc), "Action button");
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_OF_THE_BOOK_BY_NUMBER_IN_THE_LIST, bookNumber)), "Author");
+        ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_BY_NUMBER_IN_THE_LIST, bookNumber)), "BookName");
+        String author = !lblAuthor.state().isDisplayed() ? null : lblAuthor.getText();
         CatalogBookModel bookInfo = new CatalogBookModel()
                 .setTitle(lblBookName.getText())
                 .setAuthor(author);
@@ -156,8 +185,16 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
         return getActionButton(bookName, key).state().isDisplayed();
     }
 
+    @Override
+    public int getNumberOfBooksOnTheScreen() {
+        return getBooksList().size();
+    }
+
+    private List<ILabel> getBooksList() {
+        return getElementFactory().findElements(By.xpath(BOOKS_LOCATOR), ElementType.LABEL);
+    }
     private List<String> getBooksName() {
-        List<ILabel> lblBooks = getElementFactory().findElements(By.id(BOOKS_NAME_LOCATOR), ElementType.LABEL);
+        List<ILabel> lblBooks = getBooksList();
         List<String> booksName = new ArrayList<>();
         lblBooks.forEach(book->booksName.add(book.getText().toLowerCase()));
         return booksName;

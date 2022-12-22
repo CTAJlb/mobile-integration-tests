@@ -119,19 +119,6 @@ Feature: Audiobooks in A1QA library
     Then Next chapter play automatically and chapter name is not 'chapterName' on audio player screen
 
   @logout @returnBooks @tier2
-  Scenario: Audiobooks: Check of file numbers
-    When I search for "Pride and Prejudice" and save bookName as 'bookNameInfo'
-      And I switch to 'Audiobooks' catalog tab
-      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click GET action button on book details screen
-    Then I check that book contains LISTEN action button on book details screen
-    When Click LISTEN action button on book details screen
-    Then Audio player screen of book 'bookInfo' is opened
-    When Open toc audiobook screen
-      And Open the 4 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
-    Then Chapter number is 'chapterNumber' on audio player screen
-
-  @logout @returnBooks @tier2
   Scenario: Audiobooks: Check closing playback speed and sleep timer
     When I search for "The Lost Symbol" and save bookName as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab

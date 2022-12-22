@@ -33,6 +33,12 @@ public class CatalogBooksSteps {
         context.add(bookInfoKey, bookInfo);
     }
 
+    @When("Open book with {} action button and {string} bookName on catalog books screen")
+    public void openBook(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookNameInfoKey) {
+        String bookName = context.get(bookNameInfoKey);
+        catalogBooksScreen.openBook(actionButtonKey, bookName);
+    }
+
     @Then("I check that book {string} contains {} action button on catalog book screen")
     public void isBookContainBtn(String bookNameKey, final EnumActionButtonsForBooksAndAlertsKeys key) {
         String bookName = context.get(bookNameKey);
@@ -95,13 +101,6 @@ public class CatalogBooksSteps {
 
     @And("Click {} action button on the first {} book on catalog books screen and save book as {string}")
     public void clickActionButtonOnTheFirstBookAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, EnumBookType bookType, String bookInfoKey) {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            try {
-                Thread.sleep(15000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
         CatalogBookModel bookInfo = catalogBooksScreen.clickActionButtonOnTheFirstBookAndGetBookInfo(bookType, actionButtonKey);
         context.add(bookInfoKey, bookInfo);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
@@ -112,5 +111,26 @@ public class CatalogBooksSteps {
                 AqualityServices.getLogger().info("Alert appears and dismiss alert");
             }
         }
+    }
+
+    @When("Click {} action button on random book from the catalog book screen and save book as {string}")
+    public void clickActionBtnOnRandomBookAndSaveBookInfo(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
+        int bookNumber = (int) (Math.random() * catalogBooksScreen.getNumberOfBooksOnTheScreen()) + 1;
+        CatalogBookModel bookInfo = catalogBooksScreen.clickActionButtonOnABookAndGetBookInfo(bookNumber, actionButtonKey);
+        context.add(bookInfoKey, bookInfo);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE) {
+                alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
+            } else {
+                AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+                AqualityServices.getLogger().info("Alert appears and dismiss alert");
+            }
+        }
+    }
+
+    @When("Save book name of the book {string} as {string} on catalog book screen")
+    public void saveTheNameOfBook(String bookInfoKey, String bookNameInfoKey) {
+        CatalogBookModel bookModel = context.get(bookInfoKey);
+        context.add(bookNameInfoKey, bookModel.getTitle());
     }
 }
