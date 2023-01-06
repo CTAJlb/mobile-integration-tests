@@ -17,6 +17,7 @@ public abstract class CatalogBooksScreen extends Screen {
 
     public abstract void openBook(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName);
 
+    public abstract CatalogBookModel openBookAndGetBookInfo(int bookNumber);
     public abstract boolean isBookDisplayed(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
     public abstract boolean isProgressBarDisplayed(String bookName);
