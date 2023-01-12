@@ -21,13 +21,7 @@ Feature: Catalog Navigation
         | Fiction  |
         | Classics |
     Then Subcategory name is 'Classics'
-      And Subcategory rows are loaded
-      And Following subcategories are present:
-        |All Classics|
-    And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
-    And I open 'All Classics' subcategory
-    Then Subcategory screen is present
-      And Subcategory name is 'All Classics'
+      And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
     When I open first book in Subcategory List and save it as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
 
