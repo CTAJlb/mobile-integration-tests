@@ -17,7 +17,6 @@ import framework.utilities.swipe.SwipeElementUtils;
 import org.openqa.selenium.By;
 import screens.catalog.screen.catalog.CatalogScreen;
 
-import java.time.Duration;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,9 +26,9 @@ import java.util.stream.Collectors;
 public class IosCatalogScreen extends CatalogScreen {
     private static final String LANE_BY_NAME_LOCATOR_PART = "(//XCUIElementTypeOther[.//XCUIElementTypeButton[@name=\"%1$s\"]]/following-sibling::XCUIElementTypeCell)[1]";
     private static final String BOOK_COVER_IN_LANE_LOCATOR = "/XCUIElementTypeButton";
-    private static final String UNIQUE_ELEMENT = "//XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"Change Library Account\")]";
-    private static final String SPECIFIC_CATEGORY_LOCATOR = UNIQUE_ELEMENT + "/parent::XCUIElementTypeNavigationBar/following-sibling::XCUIElementTypeOther//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
-    private static final String CATEGORIES_LOCATOR = UNIQUE_ELEMENT + "/parent::XCUIElementTypeNavigationBar/following-sibling::XCUIElementTypeOther//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
+    private static final String UNIQUE_ELEMENT = "//XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"AccessibilitySwitchLibrary\")]";
+    private static final String CATEGORY_LOCATOR = UNIQUE_ELEMENT + "/parent::XCUIElementTypeNavigationBar/following-sibling::XCUIElementTypeOther//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
+    private static final String CURRENT_CATEGORY_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final String BOOKS_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton[@name]";
     private static final String CATEGORY_XPATH_PATTERN = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
@@ -39,7 +38,7 @@ public class IosCatalogScreen extends CatalogScreen {
     private static final int COUNT_OF_CATEGORIES_TO_WAIT_FOR = 5;
 
     private final ILabel firstLaneName =
-            getElementFactory().getLabel(By.xpath(CATEGORIES_LOCATOR), "First lane name", ElementState.EXISTS_IN_ANY_STATE);
+            getElementFactory().getLabel(By.xpath(CATEGORY_LOCATOR), "First lane name", ElementState.EXISTS_IN_ANY_STATE);
     private final GetNameOfBookTypeBtb btnBookNameTypeSection = (button ->
             getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"%s\"]", button)),
                     String.format("%s type of sorting", button)));
@@ -65,7 +64,7 @@ public class IosCatalogScreen extends CatalogScreen {
     @Override
     public boolean areCategoryRowsLoaded() {
         return AqualityServices.getConditionalWait().waitFor(() ->
-                        getElementFactory().findElements(By.xpath(CATEGORIES_LOCATOR), ElementType.LABEL).size() > 0,
+                        getElementFactory().findElements(By.xpath(CATEGORY_LOCATOR), ElementType.LABEL).size() > 0,
                 CategoriesTimeouts.TIMEOUT_WAIT_UNTIL_CATEGORY_PAGE_LOAD.getTimeoutMillis());
     }
 
@@ -85,7 +84,7 @@ public class IosCatalogScreen extends CatalogScreen {
     }
 
     private IButton getCategoryButton(String categoryName) {
-        return getElementFactory().getButton(By.xpath(String.format(SPECIFIC_CATEGORY_LOCATOR, categoryName)), categoryName);
+        return getElementFactory().getButton(By.xpath(String.format(CURRENT_CATEGORY_LOCATOR, categoryName)), categoryName);
     }
 
     @Override

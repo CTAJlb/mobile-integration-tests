@@ -129,7 +129,7 @@ public class BookDetailsSteps {
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(bookDetailsScreen.getBookInfo().getTitle())
                 .as("Expected book is not opened. Book title is wrong")
-                .isEqualTo(bookModel.getTitle());
+                .isEqualTo(bookModel.getTitle().replace(". Audiobook.", ""));
         softAssertions.assertThat(bookDetailsScreen.getBookInfo().getAuthor())
                 .as("Expected book is not opened. Author is wrong")
                 .isEqualTo(bookModel.getAuthor());

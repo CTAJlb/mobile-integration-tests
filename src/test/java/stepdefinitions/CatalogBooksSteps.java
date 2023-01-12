@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import enums.EnumBookType;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
+import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -13,6 +14,8 @@ import models.android.CatalogBookModel;
 import org.junit.Assert;
 import screens.alert.AlertScreen;
 import screens.catalog.screen.books.CatalogBooksScreen;
+
+import java.util.Random;
 
 public class CatalogBooksSteps {
     private final CatalogBooksScreen catalogBooksScreen;
@@ -31,6 +34,19 @@ public class CatalogBooksSteps {
         String bookName = context.get(bookNameKey);
         CatalogBookModel bookInfo = catalogBooksScreen.openBookAndGetBookInfo(bookType, bookName, actionButtonKey);
         context.add(bookInfoKey, bookInfo);
+    }
+
+    @When("Open random book on catalog book screen and save book as {string}")
+    public void openRandomBookAndSaveBookInfo(String bookInfoKey) {
+        Random random = new Random();
+        int bookNumber = random.nextInt(catalogBooksScreen.getNumberOfBooksOnTheScreen() - 4) + 4;
+        CatalogBookModel bookInfo = catalogBooksScreen.openBookAndGetBookInfo(bookNumber);
+        context.add(bookInfoKey, bookInfo);
+    }
+
+    @When("I swipe catalog of books down on catalog book screen")
+    public void swipeDown() {
+        SwipeElementUtils.swipeByCoordinatesOfWindow();
     }
 
     @When("Open book with {} action button and {string} bookName on catalog books screen")

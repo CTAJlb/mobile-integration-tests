@@ -6,6 +6,7 @@ import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import constants.applicationattributes.IosAttributes;
 import enums.EnumBookType;
 import enums.timeouts.BooksTimeouts;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
@@ -87,6 +88,23 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
         String actionButton = actionButtonKey.i18n();
         ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButton)), "Book name");
         lblBookName.click();
+    }
+
+    @Override
+    public CatalogBookModel openBookAndGetBookInfo(int bookNumber) {
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_OF_THE_BOOK_BY_NUMBER_IN_THE_LIST, bookNumber)), "lblAuthor");
+        ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_BY_NUMBER_IN_THE_LIST, bookNumber)), "lblBookName");
+        String author;
+        if (!lblAuthor.state().isDisplayed()) {
+            author = null;
+        } else {
+            author = lblAuthor.getAttribute(IosAttributes.NAME);
+        }
+        CatalogBookModel bookInfo = new CatalogBookModel()
+                .setTitle(lblBookName.getAttribute(IosAttributes.NAME))
+                .setAuthor(author);
+        lblBookName.click();
+        return bookInfo;
     }
 
     @Override

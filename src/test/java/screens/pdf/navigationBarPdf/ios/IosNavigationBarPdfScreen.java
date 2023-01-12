@@ -8,14 +8,10 @@ import screens.pdf.navigationBarPdf.NavigationBarPdfScreen;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosNavigationBarPdfScreen extends NavigationBarPdfScreen {
-    private final IButton btnToc =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"List\"]"), "Table of content button");
-    private final IButton btnBack =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Back\"]"), "Back button");
-    private final IButton btnSearch =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Search\"]"), "Search button");
-    private final IButton btnBookmark =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Bookmark\"]"), "Bookmark button");
+    private final IButton btnToc = getElementFactory().getButton(By.xpath("//XCUIElementTypeOther[@name=\"Back\"]//XCUIElementTypeButton[@name=\"List\"]"), "Table of content button");
+    private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Back\"]"), "Back button");
+    private final IButton btnSearch = getElementFactory().getButton(By.xpath("//XCUIElementTypeOther[@name=\"Search\"]//XCUIElementTypeButton[@name=\"Search\"]"), "Search button");
+    private final IButton btnBookmark = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Bookmark\"]"), "Bookmark button");
 
     public IosNavigationBarPdfScreen() {
         super(By.xpath("//XCUIElementTypeNavigationBar"));

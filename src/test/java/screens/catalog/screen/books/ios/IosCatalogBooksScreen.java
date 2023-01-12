@@ -32,7 +32,6 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     private static final String AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
     private static final String AUTHOR_OF_THE_BOOK_BY_NUMBER_IN_THE_LIST = "//XCUIElementTypeCell[%d]//XCUIElementTypeOther//XCUIElementTypeStaticText[2]";
     private static final String BOOKS_NAME_LOCATOR = "//XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
-    private static final String BOOKS_LOCATOR = "//XCUIElementTypeCell";
 
     private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"No results\")]"), "No results found");
     private final ILabel lblNameOfFirstBook = AqualityServices.getElementFactory().getLabel(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "Name of first book");
@@ -98,6 +97,23 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         String actionButton = actionButtonKey.i18n();
         ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButton)), "action button");
         lblBookName.click();
+    }
+
+    @Override
+    public CatalogBookModel openBookAndGetBookInfo(int bookNumber) {
+        ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_OF_THE_BOOK_BY_NUMBER_IN_THE_LIST, bookNumber)), "lblAuthor");
+        ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_BY_NUMBER_IN_THE_LIST, bookNumber)), "lblBookName");
+        String author;
+        if (!lblAuthor.state().isDisplayed()) {
+            author = null;
+        } else {
+            author = lblAuthor.getAttribute(IosAttributes.NAME);
+        }
+        CatalogBookModel bookInfo = new CatalogBookModel()
+                .setTitle(lblBookName.getAttribute(IosAttributes.NAME))
+                .setAuthor(author);
+        lblBookName.click();
+        return bookInfo;
     }
 
     @Override
@@ -205,7 +221,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     }
 
     private List<ILabel> getBooksList(){
-        return getElementFactory().findElements(By.xpath(BOOKS_LOCATOR), ElementType.LABEL);
+        return getElementFactory().findElements(By.xpath(BOOKS_NAME_LOCATOR), ElementType.LABEL);
     }
 
     private List<String> getBooksName() {
