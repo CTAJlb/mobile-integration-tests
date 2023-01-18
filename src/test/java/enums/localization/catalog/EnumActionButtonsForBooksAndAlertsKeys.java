@@ -22,7 +22,8 @@ public enum EnumActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     SIGN_OUT("signOut"),
     NOT_NOW("notNow"),
     OK("ok"),
-    VIEW_SAMPLE("view_sample");
+    VIEW_SAMPLE("view_sample"),
+    ALLOW("allow");
 
     private static final AbstractILocalizationProvider localizationProvider =
             LocalizationProviderFactory.getProvider("catalog.ActionButtonsForBooksAndAlerts");
