@@ -53,7 +53,6 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
                         Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getTimeoutMillis()),
                         Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getPollingMillis()),
                         Collections.singletonList(NoSuchElementException.class));
-
             }
         }
     }

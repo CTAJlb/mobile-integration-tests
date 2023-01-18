@@ -2,7 +2,9 @@ package stepdefinitions.application.components.impl;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import factories.steps.StepsType;
+import screens.alert.AlertScreen;
 import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
 import screens.catalog.screen.catalog.CatalogScreen;
@@ -20,6 +22,7 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
     private final FindYourLibScreen findYourLibScreen;
     private final BottomMenuForm bottomMenuForm;
     private final SettingsScreen settingsScreen;
+    private final AlertScreen alertScreen;
 
     public IosApplicationSteps() {
         super();
@@ -29,6 +32,7 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
         findYourLibScreen = screenFactory.getScreen(FindYourLibScreen.class);
         bottomMenuForm = screenFactory.getScreen(BottomMenuForm.class);
         settingsScreen = screenFactory.getScreen(SettingsScreen.class);
+        alertScreen = screenFactory.getScreen(AlertScreen.class);
     }
 
     @Override
@@ -56,6 +60,11 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
 
     @Override
     public void addAccountFromWelcomeScreen(String libraryName) {
+        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            if (alertScreen.state().waitForDisplayed()) {
+                alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.ALLOW);
+            }
+        }
         tutorialScreen.closeTutorial();
         welcomeScreen.tapFindLibraryButton();
         addAccountScreen.selectLibraryViaSearch(libraryName);

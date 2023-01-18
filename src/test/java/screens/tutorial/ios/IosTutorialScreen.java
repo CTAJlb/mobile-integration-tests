@@ -1,6 +1,5 @@
 package screens.tutorial.ios;
 
-import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
@@ -11,10 +10,7 @@ import aquality.selenium.core.elements.ElementsCount;
 import constants.applicationattributes.IosAttributes;
 import framework.utilities.swipe.SwipeElementUtils;
 import framework.utilities.swipe.directions.EntireElementSwipeDirection;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
 import screens.tutorial.TutorialScreen;
 
 import java.util.List;
@@ -34,9 +30,7 @@ public class IosTutorialScreen extends TutorialScreen {
 
     @Override
     public void closeTutorial() {
-        Point point = btnCloseTutorial.getElement().getCenter();
-        TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        action.tap(PointOption.point(point)).perform();
+        btnCloseTutorial.click();
     }
 
     @Override
