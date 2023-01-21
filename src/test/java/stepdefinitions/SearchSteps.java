@@ -1,7 +1,6 @@
 package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
-import aquality.appium.mobile.application.PlatformName;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
 import framework.utilities.feedXMLUtil.GettingBookUtil;
@@ -61,7 +60,6 @@ public class SearchSteps {
         Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().isDisplayed());
         searchModal.setSearchedText(searchedText);
         searchModal.applySearch();
-        Assert.assertTrue("Search modal is not disappear", searchModal.state().waitForNotDisplayed());
         Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", searchedText, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
     }
 
@@ -72,16 +70,9 @@ public class SearchSteps {
             savedBooks.add(book);
             searchModal.setSearchedText(book);
             searchModal.applySearch();
-            Assert.assertTrue("Search modal is not disappear", searchModal.state().waitForNotDisplayed());
             Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", book, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
             catalogBooksScreen.clickActionButton(EnumActionButtonsForBooksAndAlertsKeys.GET, book);
-            if(AqualityServices.getApplication().getPlatformName()==PlatformName.IOS) {
-                searchModal.clearSearchField();
-            }
-            if(AqualityServices.getApplication().getPlatformName()==PlatformName.ANDROID) {
-                mainCatalogToolbarForm.openSearchModal();
-                searchModal.state().waitForDisplayed();
-            }
+            searchModal.clearSearchField();
         });
         context.add(listKey, savedBooks);
     }
@@ -99,10 +90,8 @@ public class SearchSteps {
         AqualityServices.getLogger().info("randomPdf: " + pdfForSearching);
         context.add(bookNameInfoKey, pdfForSearching);
 
-        Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().waitForDisplayed());
         searchModal.setSearchedText(pdfForSearching);
         searchModal.applySearch();
-        Assert.assertTrue("Search modal is not disappear", searchModal.state().waitForNotDisplayed());
         Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", pdfForSearching, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
     }
 

@@ -32,7 +32,6 @@ public class XMLSteps {
         Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().waitForDisplayed());
         searchModal.setSearchedText(bookName);
         searchModal.applySearch();
-        Assert.assertTrue("Search modal is not disappear", searchModal.state().waitForNotDisplayed());
         Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", bookName, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
     }
 
