@@ -17,7 +17,7 @@ public class AndroidSearchModal extends SearchModal {
     private final IButton btnClearSearchField = getElementFactory().getButton(By.xpath("//android.widget.ImageView[contains(@resource-id,\"search_close_btn\")]"), "Clear search field btn");
 
     public AndroidSearchModal() {
-        super(By.xpath("//*[contains(@resource-id,\"parentPanel\")]"));
+        super(By.xpath("//*[contains(@resource-id,\"search_src_text\")]"));
     }
 
     @Override
