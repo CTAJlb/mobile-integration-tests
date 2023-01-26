@@ -1,6 +1,7 @@
 package stepdefinitions.application.components;
 
 import aquality.appium.mobile.application.AqualityServices;
+import enums.localization.translation.Spanish;
 import enums.timeouts.RestartAppTimeouts;
 import org.junit.Assert;
 import screens.addaccount.AddAccountScreen;
@@ -85,6 +86,11 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
         AqualityServices.getApplication().getDriver().closeApp();
         AqualityServices.getApplication().getDriver().launchApp();
         catalogScreen.state().waitForDisplayed();
+    }
+
+    @Override
+    public void checkTranslationOnWelcomeScreen(){
+        Assert.assertEquals("Find your library button is not translated", Spanish.FIND_YOUR_LIBRARY.i18n(), welcomeScreen.getTextFromButtonFindYourLibrary());
     }
 
     @Override

@@ -156,6 +156,36 @@ public class AndroidCatalogScreen extends CatalogScreen {
         return btnSectionType.getAttribute(Attributes.CHECKED).equals(Boolean.TRUE.toString());
     }
 
+    @Override
+    public String getTextFromCatalogLbl() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromMoreBtn() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromAllTab() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromAudiobooksTab() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromEpubTab() {
+        //for ios
+        return null;
+    }
+
     private List<IButton> getMoreBtn() {
         return getElementFactory().findElements(By.xpath(BUTTON_MORE_LOCATOR), ElementType.BUTTON);
     }

@@ -18,4 +18,10 @@ public class AndroidWelcomeScreen extends WelcomeScreen {
     public void tapFindLibraryButton() {
         btnFindLibrary.click();
     }
+
+    @Override
+    public String getTextFromButtonFindYourLibrary() {
+        //for ios
+        return null;
+    }
 }

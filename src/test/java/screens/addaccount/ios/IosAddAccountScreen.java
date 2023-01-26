@@ -20,7 +20,9 @@ public class IosAddAccountScreen extends AddAccountScreen {
     public static final String LIBRARY_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[contains(@name, \"%s\")]";
     private static final String LIB_NAME_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[2]";
     private final IButton btnClearText = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Clear text\"]"), "Clear text button");
-    private final ILabel lblAddLibrary = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[@name=\"Add Library\"]"), "Add Library label");
+    private final ILabel lblAddLibrary = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText"), "Add Library label");
+    private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton"), "Back button");
+
 
     public IosAddAccountScreen() {
         super(By.xpath(MAIN_ELEMENT));
@@ -86,6 +88,16 @@ public class IosAddAccountScreen extends AddAccountScreen {
         List<String > libraries = getLibrariesNames();
         libraries.remove(0);
         return Ordering.natural().isOrdered(libraries);
+    }
+
+    @Override
+    public String getTextFromBackBtn() {
+        return btnBack.getText();
+    }
+
+    @Override
+    public String getTextFromAddLibraryLbl() {
+        return lblAddLibrary.getText();
     }
 
     private List<String> getLibrariesNames() {

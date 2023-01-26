@@ -105,6 +105,12 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.checkWelcomeScreenIsOpened();
     }
 
+    @Then("Elements on welcome screen are translated correctly")
+    @Override
+    public void checkTranslationOnWelcomeScreen(){
+        abstractApplicationSteps.checkTranslationOnWelcomeScreen();
+    }
+
     @And("Wait for {int} seconds")
     @Override
     public void waitSeveralSeconds(Integer secondsCount) {

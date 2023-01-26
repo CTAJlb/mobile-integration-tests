@@ -8,6 +8,7 @@ import constants.keysForContext.ScenarioContextKey;
 import constants.localization.catalog.BookActionButtonNames;
 import enums.localization.facetedsearch.FacetAvailabilityKeys;
 import enums.localization.facetedsearch.FacetSortByKeys;
+import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import framework.utilities.ScreenshotUtils;
 import io.cucumber.java.Scenario;
@@ -101,6 +102,16 @@ public class CatalogSteps {
     public void openCatalog() {
         bottomMenuForm.open(BottomMenu.CATALOG);
         catalogScreen.state().waitForDisplayed();
+    }
+
+    @Then("Elements on Catalog screen are translated correctly")
+    public void checkTranslationOnCatalogScreen() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(catalogScreen.getTextFromCatalogLbl()).as("Catalog label is not translated").isEqualTo(Spanish.CATALOG.i18n());
+        softAssertions.assertThat(catalogScreen.getTextFromMoreBtn()).as("More... button is not translated").isEqualTo(Spanish.MORE.i18n());
+        softAssertions.assertThat(catalogScreen.getTextFromAllTab()).as("All tab is not translated").isEqualTo(Spanish.ALL.i18n());
+        softAssertions.assertThat(catalogScreen.getTextFromEpubTab()).as("EBooks tab is not translated").isEqualTo(Spanish.EBOOKS.i18n());
+        softAssertions.assertThat(catalogScreen.getTextFromAudiobooksTab()).as("Audiobooks tab is not translated").isEqualTo(Spanish.AUDIOBOOKS.i18n());
     }
 
     @And("Library {string} is present on Catalog Screen")

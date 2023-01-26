@@ -2,10 +2,12 @@ package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
+import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import framework.utilities.feedXMLUtil.GettingBookUtil;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.catalog.form.MainCatalogToolbarForm;
 import screens.catalog.screen.books.CatalogBooksScreen;
@@ -47,6 +49,13 @@ public class SearchSteps {
     @When("I return back from search modal")
     public void returnBack() {
         searchModal.closeSearchScreen();
+    }
+
+    @Then("Elements on Search screen are translated correctly")
+    public void checkTranslationOnSearchScreen(){
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(searchModal.getTextFromBackButton()).as("Back button is not translated").isEqualTo(Spanish.BACK.i18n());
+        softAssertions.assertThat(searchModal.getTextFromSearchField()).as("Search field is not translated").isEqualTo(Spanish.SEARCH.i18n());
     }
 
     @Then("Search modal is opened")

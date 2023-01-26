@@ -40,4 +40,14 @@ public abstract class CatalogScreen extends Screen {
     public abstract void tapTheLogo();
 
     public abstract boolean isSectionWithBookTypeOpen(String typeSection);
+
+    public abstract String getTextFromCatalogLbl();
+
+    public abstract String getTextFromMoreBtn();
+
+    public abstract String getTextFromAllTab();
+
+    public abstract String getTextFromAudiobooksTab();
+
+    public abstract String getTextFromEpubTab();
 }
