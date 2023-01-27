@@ -31,44 +31,48 @@ Feature: Localization testing
     When I add "LYRASIS Reads" account from welcomeScreen
     Then Category rows are loaded
     When I tap the logo on catalog screen
-    Then Find your library screen is opened
-    And Find your library label, add library and cancel buttons are translated on find your library screen
+    Then Elements on Find your library screen are translated correctly
 
   @tier3
   Scenario: Spanish: Subcategory screen
     When I add "LYRASIS Reads" account from welcomeScreen
     Then Category rows are loaded
     When I open 'Audible Studios' category
-    Then Items from subcategory screen are translated on subcategory screen
+    Then Elements on subcategory screen are translated correctly
 
   @tie3
   Scenario: Spanish: Categories in Sort by
     When I add "LYRASIS Reads" account from welcomeScreen
     Then Category rows are loaded
     When I open 'Audible Studios' category
-    And I open Sort by sorting on catalog screen in "LYRASIS Reads" library
-    Then Sort options are translated on subcategory screen
+      And I open Sort by on catalog screen
+    Then Elements on Sort by tab are translated correctly
 
   @tier3
   Scenario: Spanish: Categories in Availability
     When I add "LYRASIS Reads" account from welcomeScreen
     Then Category rows are loaded
     When I open 'Audible Studios' category
-
+      And I open Availability on catalog screen
+    Then Elements on Availability tab are translated correctly
 
   @tier3:
   Scenario: Spanish: Categories in Collection
     When I add "LYRASIS Reads" account from welcomeScreen
     Then Category rows are loaded
     When I open 'Audible Studios' category
+      And I open Collection on catalog screen
+    Then Elements on Collection tab are translated correctly
 
   @tier3
   Scenario: Spanish: Bottom Menu
     When I add "LYRASIS Reads" account from welcomeScreen
     Then Category rows are loaded
+      And Elements on Bottom menu are translated correctly
 
   @tier3
   Scenario: Spanish: Book details view screen
+
 
   @tier3
   Scenario: Spanish: epub: reader screen

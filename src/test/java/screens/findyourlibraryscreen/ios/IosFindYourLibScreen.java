@@ -15,9 +15,12 @@ import java.util.List;
 public class IosFindYourLibScreen extends FindYourLibScreen {
 
     private final IButton btnAddLib = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"Add Library\"]"), "Add library btn");
+    private final IButton btnAddLibSpanish = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"Añadir biblioteca\"]"), "Add library btn in Spanish");
     private final CreatingLibraryLocator libraryLocator = (index ->
             getElementFactory().getLabel(By.xpath(String.format("//XCUIElementTypeSheet//XCUIElementTypeScrollView[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[%d]/XCUIElementTypeButton", index)), "Library"));
     private final IButton btnCancel = getElementFactory().getButton(By.xpath("//XCUIElementTypeSheet//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"Cancel\"]"), "Close button");
+    private final IButton btnCancelSpanish = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"Cancelar\"]"), "Cancel btn in Spanish");
+    private final ILabel lblFindYourLibSpanish = getElementFactory().getLabel(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeStaticText[@name=\"Encuentra tu biblioteca\"]"), "Find your library lbl in Spanish");
     private static final String LIBRARY_NAME = "//XCUIElementTypeSheet//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"%s\"]";
 
     public IosFindYourLibScreen() {
@@ -44,6 +47,21 @@ public class IosFindYourLibScreen extends FindYourLibScreen {
     @Override
     public void tapCancelBtn() {
         btnCancel.click();
+    }
+
+    @Override
+    public String getTextFromFindYourLibraryLbl() {
+        return lblFindYourLibSpanish.getText();
+    }
+
+    @Override
+    public String getTextFromAddLibraryBtn() {
+        return btnAddLibSpanish.getText();
+    }
+
+    @Override
+    public String getTextFromCancelBtn() {
+        return btnCancelSpanish.getText();
     }
 
     private List<String > getListOfLibraries(int listSize) {

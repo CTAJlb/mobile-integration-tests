@@ -33,6 +33,30 @@ public class AndroidBottomMenuForm extends BottomMenuForm {
         return typeOfButton.createBtn(type).getText();
     }
 
+    @Override
+    public String getTextFromCatalogBtn() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromMyBooksBtn() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromReservationsBtn() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromSettingsBtn() {
+        //for ios
+        return null;
+    }
+
     private IButton getButton(BottomMenu bottomMenuItem) {
         String itemName = bottomMenuItem.getItemName();
         return getElementFactory().getButton(By.id(itemName), itemName);

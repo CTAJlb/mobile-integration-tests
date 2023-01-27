@@ -23,4 +23,6 @@ public interface IApplicationSteps {
     void closeTutorialScreen();
 
     void closeWelcomeScreen();
+
+    void checkFindYourLibScreenTranslation();
 }

@@ -9,6 +9,8 @@ import constants.util.UtilConstants;
 import org.openqa.selenium.By;
 import screens.facetedSearch.FacetedSearchScreen;
 
+import java.util.List;
+
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidFacetedSearchScreen extends FacetedSearchScreen {
     private static final String MAIN_ELEMENT = "//*[contains(@resource-id,\"feedHeaderFacets\")]";
@@ -40,6 +42,17 @@ public class AndroidFacetedSearchScreen extends FacetedSearchScreen {
     @Override
     public void openCollection() {
         //only for ios
+    }
+
+    @Override
+    public void openSortBy() {
+        //for ios
+    }
+
+    @Override
+    public List<String> getOptionsInTabs() {
+        //for ios
+        return null;
     }
 
     @Override

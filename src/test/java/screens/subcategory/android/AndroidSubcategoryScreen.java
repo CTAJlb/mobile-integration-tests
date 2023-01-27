@@ -105,6 +105,12 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
+    public String getTextFromBackBtn() {
+        //for ios
+        return null;
+    }
+
+    @Override
     public String getAvailability() {
         return btnAvailability.getText();
     }
@@ -115,6 +121,23 @@ public class AndroidSubcategoryScreen extends SubcategoryScreen {
         return null;
     }
 
+    @Override
+    public String getTextFromSortByTab() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromAvailabilityTab() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromCollectionTab() {
+        //for ios
+        return null;
+    }
 
     @Override
     public List<String> getAuthorsInfo() {

@@ -10,6 +10,10 @@ import screens.bottommenu.BottomMenuForm;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosBottomMenuForm extends BottomMenuForm {
+    private final IButton btnCatalog = getElementFactory().getButton(By.xpath("//XCUIElementTypeTabBar/XCUIElementTypeButton[1]"), "Catalog btn");
+    private final IButton btnMyBooks = getElementFactory().getButton(By.xpath("//XCUIElementTypeTabBar/XCUIElementTypeButton[2]"), "My Books btn");
+    private final IButton btnReservations = getElementFactory().getButton(By.xpath("//XCUIElementTypeTabBar/XCUIElementTypeButton[3]"), "Reservations btn");
+    private final IButton btnSettings = getElementFactory().getButton(By.xpath("//XCUIElementTypeTabBar/XCUIElementTypeButton[4]"), "Settings btn");
     private static final String BOTTOM_MENU_ELEMENT_PATTERN_LOC = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final String MAIN_ELEMENT = String.format(BOTTOM_MENU_ELEMENT_PATTERN_LOC, BottomMenu.CATALOG.getItemName())
             + "/parent::XCUIElementTypeTabBar";
@@ -33,6 +37,26 @@ public class IosBottomMenuForm extends BottomMenuForm {
     @Override
     public String getTypeOfTab(String type) {
         return typeOfButton.createBtn(type).getText();
+    }
+
+    @Override
+    public String getTextFromCatalogBtn() {
+        return btnCatalog.getText();
+    }
+
+    @Override
+    public String getTextFromMyBooksBtn() {
+        return btnMyBooks.getText();
+    }
+
+    @Override
+    public String getTextFromReservationsBtn() {
+        return btnReservations.getText();
+    }
+
+    @Override
+    public String getTextFromSettingsBtn() {
+        return btnSettings.getText();
     }
 
     private IButton getButton(BottomMenu bottomMenuItem) {

@@ -42,7 +42,7 @@ public class IosCatalogScreen extends CatalogScreen {
     private final GetNameOfBookTypeBtb btnBookNameTypeSection = (button ->
             getElementFactory().getButton(By.xpath(String.format("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"%s\"]", button)),
                     String.format("%s type of sorting", button)));
-    private final IButton btnLogo = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[contains(@name, \"SwitchLibrary\")]"), "Logo");
+    private final IButton btnLogo = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Logo");
     private final ILabel lblCatalog = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText"), "Catalog label");
     private final IButton btnAll = getElementFactory().getButton(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[1]"), "All button");
     private final IButton btnEbooks = getElementFactory().getButton(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[2]"), "Ebooks button");

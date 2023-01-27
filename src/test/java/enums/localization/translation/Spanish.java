@@ -15,6 +15,9 @@ public enum Spanish implements LocalizedValue {
     ADD_ACCOUNT("add_account"),
     BACK("back"),
     CATALOG("catalog"),
+    MY_BOOKS("my_books"),
+    RESERVATIONS("reservations"),
+    SETTINGS("settings"),
     MORE("more"),
     ALL("all"),
     EBOOKS("ebooks"),
@@ -25,6 +28,13 @@ public enum Spanish implements LocalizedValue {
     AVAILABILITY("availability"),
     SORT_BY("sort_by"),
     COLLECTION("collection"),
+    TITLE("title"),
+    RECENTLY_ADDED("recently_added"),
+    AUTHOR("author"),
+    AVAILABLE_NOW("available_now"),
+    YOURS_TO_KEEP("yours_to_keep"),
+    POPULAR_BOOKS("popular_books"),
+    EVERYTHING("everything"),
     GET("get"),
     RESERVE("reserve");
 

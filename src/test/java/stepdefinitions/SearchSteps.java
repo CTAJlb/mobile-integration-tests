@@ -56,6 +56,7 @@ public class SearchSteps {
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(searchModal.getTextFromBackButton()).as("Back button is not translated").isEqualTo(Spanish.BACK.i18n());
         softAssertions.assertThat(searchModal.getTextFromSearchField()).as("Search field is not translated").isEqualTo(Spanish.SEARCH.i18n());
+        softAssertions.assertAll();
     }
 
     @Then("Search modal is opened")
