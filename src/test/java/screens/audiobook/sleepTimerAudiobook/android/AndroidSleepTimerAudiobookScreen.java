@@ -19,7 +19,7 @@ public class AndroidSleepTimerAudiobookScreen extends SleepTimerAudiobookScreen 
 
     @Override
     public void setTimer(TimerKeys timerSetting) {
-        String timerSettingName = timerSetting.i18n().replace("Chapter", "chapter");
+        String timerSettingName = timerSetting.getDefaultLocalizedValue().replace("Chapter", "chapter");
         getElementFactory().getButton(By.xpath(String.format(SLEEP_TIMER_LOC, timerSettingName)), timerSettingName).click();
     }
 

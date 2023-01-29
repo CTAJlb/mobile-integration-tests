@@ -183,7 +183,7 @@ public class EpubSteps {
 
     @Then("The {} background is correct")
     public void checkBackgroundHasSpecificColor(BackgroundColorKeys fontBackgroundKey) {
-        String expectedBackgroundColor = fontBackgroundKey.i18n();
+        String expectedBackgroundColor = fontBackgroundKey.getDefaultLocalizedValue();
         String actualBackgroundColor = readerEpubScreen.getBackgroundColor();
         Assert.assertEquals("BackgroundColor is not correct, actualBackgroundColor-" + actualBackgroundColor + ", expectedBackgroundColor-" + expectedBackgroundColor,
                 actualBackgroundColor.toLowerCase(), expectedBackgroundColor.toLowerCase());
@@ -192,7 +192,7 @@ public class EpubSteps {
 
     @Then("Book text displays in {} font")
     public void bookTextDisplaysInSerifFont(FontNameKeys fontNameKey) {
-        String expectedFontName = fontNameKey.i18n();
+        String expectedFontName = fontNameKey.getDefaultLocalizedValue();
         String actualFontName = readerEpubScreen.getFontName();
         Assert.assertEquals("Book fontName is not correct, actualFontName-" + actualFontName + ", expectedFontName-" + expectedFontName,
                 actualFontName.toLowerCase(), expectedFontName.toLowerCase());

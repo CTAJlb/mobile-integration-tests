@@ -2,6 +2,7 @@ package framework.utilities.returningBooksUtil;
 
 import aquality.appium.mobile.application.AqualityServices;
 import framework.configuration.Credentials;
+import framework.utilities.PropertyUtils;
 import okhttp3.OkHttpClient;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -13,10 +14,7 @@ import java.util.Base64;
 import java.util.concurrent.TimeUnit;
 
 public class APIUtil {
-    private static final String BASE_URL = "https://gorgon.tpp-qa.lyrasistechnology.org";
-    private static final int connectTimeout = 120;
-    private static final int readTimeout = 120;
-    private static final int writeTimeout = 120;
+    private static final PropertyUtils propertyUtils = new PropertyUtils("src/main/resources/apiConfig.properties");
 
     public static void returnBooks(Credentials credentials) {
         String authHeader = getAuthHeader(credentials);
@@ -27,11 +25,12 @@ public class APIUtil {
     }
 
     private static ArrayList<String> getListOfBooksInAccount(String authHeader) {
+
         ArrayList<String> booksForReturning = new ArrayList<>();
         OkHttpClient client = makeHttpClient();
         GetBooksAPIMethods getBooksAPIMethods = new Retrofit
                 .Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(propertyUtils.getProperty("base_url"))
                 .addConverterFactory(JaxbConverterFactory.create())
                 .client(client)
                 .build()
@@ -91,14 +90,14 @@ public class APIUtil {
         OkHttpClient client = makeHttpClient();
         ReturnBooksAPIMethods getBooksAPIMethods = new Retrofit
                 .Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl(propertyUtils.getProperty("base_url"))
                 .client(client)
                 .build()
                 .create(ReturnBooksAPIMethods.class);
 
         if (booksForReturning.size() != 0) {
             for (String bookUrl : booksForReturning) {
-                String path = bookUrl.replace(BASE_URL + "/", "");
+                String path = bookUrl.replace(propertyUtils.getProperty("base_url") + "/", "");
                 try {
                     getBooksAPIMethods.returnBooks(authHeader, path).execute();
                 } catch (IOException e) {
@@ -117,9 +116,9 @@ public class APIUtil {
     private static OkHttpClient makeHttpClient() {
         return new OkHttpClient()
                 .newBuilder()
-                .connectTimeout(connectTimeout, TimeUnit.SECONDS)
-                .readTimeout(readTimeout, TimeUnit.SECONDS)
-                .writeTimeout(writeTimeout, TimeUnit.SECONDS)
+                .connectTimeout(Long.parseLong(propertyUtils.getProperty("connection_timeout")), TimeUnit.SECONDS)
+                .readTimeout(Long.parseLong(propertyUtils.getProperty("read_timeout")), TimeUnit.SECONDS)
+                .writeTimeout(Long.parseLong(propertyUtils.getProperty("write_timeout")), TimeUnit.SECONDS)
                 .build();
     }
 }

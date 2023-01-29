@@ -19,12 +19,12 @@ public enum BackgroundColorKeys implements LocalizedValue {
             LocalizationProviderFactory.getProvider("reader.FontBackgroundKeys");
 
     @Override
-    public String i18n() {
+    public String getDefaultLocalizedValue() {
         return localizationProvider.getLocalization(color);
     }
 
     @Override
-    public String i18n(@NonNull Locale locale) {
+    public String getLocalizedValueOfSpecificLocale(@NonNull Locale locale) {
         return localizationProvider.getLocalization(color, locale);
     }
 }

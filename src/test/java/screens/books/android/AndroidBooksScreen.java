@@ -42,7 +42,7 @@ public class AndroidBooksScreen extends BooksScreen implements IWorkingWithListO
 
     @Override
     public boolean isBookDisplayed(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
         String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButtonString);
         return getBookNameLabelFromListOfBooks(bookNameLoc).state().waitForDisplayed();
     }
@@ -59,7 +59,7 @@ public class AndroidBooksScreen extends BooksScreen implements IWorkingWithListO
 
     @Override
     public void openBook(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
         String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButtonString);
         ILabel lblBookName = getBookNameLabelFromListOfBooks(bookNameLoc);
         lblBookName.click();

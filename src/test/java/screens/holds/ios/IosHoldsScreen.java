@@ -42,7 +42,7 @@ public class IosHoldsScreen extends HoldsScreen implements IWorkingWithListOfBoo
         if (EnumBookType.AUDIOBOOK == bookType) {
             bookNameForLocator = bookNameForLocator + ". Audiobook.";
         }
-        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
         String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
         return getBookNameLabelFromListOfBooks(bookNameLoc).state().waitForDisplayed();
     }
@@ -53,7 +53,7 @@ public class IosHoldsScreen extends HoldsScreen implements IWorkingWithListOfBoo
         if (EnumBookType.AUDIOBOOK == bookType) {
             bookNameForLocator = bookNameForLocator + ". Audiobook.";
         }
-        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
         String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
         ILabel lblBookName = getBookNameLabelFromListOfBooks(bookNameLoc);
         lblBookName.click();

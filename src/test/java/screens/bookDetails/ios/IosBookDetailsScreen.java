@@ -184,7 +184,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
     }
 
     private IButton getActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKey) {
-        String key = buttonKey.i18n();
+        String key = buttonKey.getDefaultLocalizedValue();
         return getElementFactory().getButton(By.xpath(String.format(BOOK_ACTION_BUTTON_LOC, key)), key);
     }
 }

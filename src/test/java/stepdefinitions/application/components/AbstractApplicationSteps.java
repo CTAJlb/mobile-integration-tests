@@ -91,7 +91,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     @Override
     public void checkTranslationOnWelcomeScreen(){
-        Assert.assertEquals("Find your library button is not translated", Spanish.FIND_YOUR_LIBRARY.i18n(), welcomeScreen.getTextFromButtonFindYourLibrary());
+        Assert.assertEquals("Find your library button is not translated", Spanish.FIND_YOUR_LIBRARY.getDefaultLocalizedValue(), welcomeScreen.getTextFromButtonFindYourLibrary());
     }
 
     @Override

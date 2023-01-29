@@ -36,7 +36,7 @@ public class AndroidFacetedSearchScreen extends FacetedSearchScreen {
 
     @Override
     public void changeAvailabilityTo(FacetAvailabilityKeys key) {
-        setFacetSearchSelection(key.i18n());
+        setFacetSearchSelection(key.getDefaultLocalizedValue());
     }
 
     @Override
@@ -72,7 +72,7 @@ public class AndroidFacetedSearchScreen extends FacetedSearchScreen {
 
     @Override
     public void changeSortByTo(FacetSortByKeys key) {
-        setFacetSearchSelection(key.i18n());
+        setFacetSearchSelection(key.getDefaultLocalizedValue());
     }
 
     private void setFacetSearchSelection(String value) {

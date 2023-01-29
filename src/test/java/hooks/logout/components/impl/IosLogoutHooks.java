@@ -47,7 +47,7 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
                     alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.SIGN_OUT);
                 }
                 AqualityServices.getConditionalWait().waitFor(() ->
-                        accountScreen.getTextFromLogInButton().equals(AccountScreenLoginStatus.SIGN_IN.i18n())
+                        accountScreen.getTextFromLogInButton().equals(AccountScreenLoginStatus.SIGN_IN.getDefaultLocalizedValue())
                             && !accountScreen.getTextFromCardTxb().equals(cardTextBeforeLogout)
                             && !accountScreen.getTextFromPinTxb().equals(pinTextBeforeLogout),
                         Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getTimeoutMillis()),

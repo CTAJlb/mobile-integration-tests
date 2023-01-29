@@ -97,7 +97,7 @@ public class BookDetailsSteps {
     public void checkThatBookContainsActionButton(final EnumActionButtonsForBooksAndAlertsKeys key) {
         boolean isButtonPresent = bookDetailsScreen.isActionButtonDisplayed(key);
         addScreenshotIfErrorPresent(isButtonPresent);
-        Assert.assertTrue(String.format("Button '%1$s' is not present on book details screen. Error (if present) - %2$s", key.i18n(), getErrorDetails()), isButtonPresent);
+        Assert.assertTrue(String.format("Button '%1$s' is not present on book details screen. Error (if present) - %2$s", key.getDefaultLocalizedValue(), getErrorDetails()), isButtonPresent);
     }
 
     private String getErrorDetails() {

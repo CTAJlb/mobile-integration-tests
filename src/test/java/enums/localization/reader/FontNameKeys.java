@@ -19,12 +19,12 @@ public enum FontNameKeys implements LocalizedValue {
             LocalizationProviderFactory.getProvider("reader.FontNameKeys");
 
     @Override
-    public String i18n() {
+    public String getDefaultLocalizedValue() {
         return localizationProvider.getLocalization(fontName);
     }
 
     @Override
-    public String i18n(@NonNull Locale locale) {
+    public String getLocalizedValueOfSpecificLocale(@NonNull Locale locale) {
         return localizationProvider.getLocalization(fontName, locale);
     }
 }

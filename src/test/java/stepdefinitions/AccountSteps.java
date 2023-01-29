@@ -125,8 +125,8 @@ public class AccountSteps {
     @Then("Elements on add account screen are translated correctly")
     public void checkTranslationOnAddAccountScreen() {
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(addAccountScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(Spanish.BACK.i18n());
-        softAssertions.assertThat(addAccountScreen.getTextFromAddLibraryLbl()).as("Add library label is not translated").isEqualTo(Spanish.ADD_LIBRARY.i18n());
+        softAssertions.assertThat(addAccountScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(Spanish.BACK.getDefaultLocalizedValue());
+        softAssertions.assertThat(addAccountScreen.getTextFromAddLibraryLbl()).as("Add library label is not translated").isEqualTo(Spanish.ADD_LIBRARY.getDefaultLocalizedValue());
         softAssertions.assertAll();
     }
 

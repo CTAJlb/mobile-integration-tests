@@ -54,8 +54,8 @@ public class SearchSteps {
     @Then("Elements on Search screen are translated correctly")
     public void checkTranslationOnSearchScreen(){
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(searchModal.getTextFromBackButton()).as("Back button is not translated").isEqualTo(Spanish.BACK.i18n());
-        softAssertions.assertThat(searchModal.getTextFromSearchField()).as("Search field is not translated").isEqualTo(Spanish.SEARCH.i18n());
+        softAssertions.assertThat(searchModal.getTextFromBackButton()).as("Back button is not translated").isEqualTo(Spanish.BACK.getDefaultLocalizedValue());
+        softAssertions.assertThat(searchModal.getTextFromSearchField()).as("Search field is not translated").isEqualTo(Spanish.SEARCH.getDefaultLocalizedValue());
         softAssertions.assertAll();
     }
 
