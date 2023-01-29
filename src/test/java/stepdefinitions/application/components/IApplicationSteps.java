@@ -14,6 +14,8 @@ public interface IApplicationSteps {
 
     void checkWelcomeScreenIsOpened();
 
+    void checkTranslationOnWelcomeScreen();
+
     void waitSeveralSeconds(Integer secondsCount);
 
     void checkEachTutorialPageCanBeOpened();
@@ -21,4 +23,6 @@ public interface IApplicationSteps {
     void closeTutorialScreen();
 
     void closeWelcomeScreen();
+
+    void checkFindYourLibScreenTranslation();
 }

@@ -26,17 +26,15 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     private static final String BOOK_NAME_XPATH = "//XCUIElementTypeStaticText[1]";
     private static final int COUNT_OF_ITEMS_TO_WAIT_FOR = 3;
 
-    private final ILabel lblFirstBookName =
-            getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR + BOOK_NAME_XPATH), "First book name");
-    private final ILabel lblFirstBookAuthor =
-            getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR + AUTHOR_INFO_XPATH), "First book author");
-    private final IButton btnSorting =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[1]"), "Sort button");
-    private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Back\"]"), "Back button");
-    private final IButton btnAvailability =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[2]"), "Availability button");
-    private final IButton btnCollection =
-            getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[3]"), "Collection button");
+    private final ILabel lblFirstBookName = getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR + BOOK_NAME_XPATH), "First book name");
+    private final ILabel lblFirstBookAuthor = getElementFactory().getLabel(By.xpath(BOOKS_LOCATOR + AUTHOR_INFO_XPATH), "First book author");
+    private final ILabel lblSorting = getElementFactory().getLabel(By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "Sort by label");
+    private final IButton btnSorting = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[1]"), "Sort by button");
+    private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Back button");
+    private final ILabel lblAvailability = getElementFactory().getLabel(By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeStaticText[2]"), "Availability label");
+    private final IButton btnAvailability = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[2]"), "Availability button");
+    private final ILabel lblCollection = getElementFactory().getLabel(By.xpath("//XCUIElementTypeScrollView/XCUIElementTypeOther/XCUIElementTypeStaticText[3]"), "Collection label");
+    private final IButton btnCollection = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[3]"), "Collection button");
 
     public IosSubcategoryScreen() {
         super(By.xpath("//XCUIElementTypeCollectionView"));
@@ -99,6 +97,11 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     }
 
     @Override
+    public String getTextFromBackBtn() {
+        return btnBack.getText();
+    }
+
+    @Override
     public String getAvailability() {
         return btnAvailability.getText();
     }
@@ -106,6 +109,21 @@ public class IosSubcategoryScreen extends SubcategoryScreen {
     @Override
     public String getCollectionName() {
         return btnCollection.getText();
+    }
+
+    @Override
+    public String getTextFromSortByTab() {
+        return lblSorting.getText();
+    }
+
+    @Override
+    public String getTextFromAvailabilityTab() {
+        return lblAvailability.getText();
+    }
+
+    @Override
+    public String getTextFromCollectionTab() {
+        return lblCollection.getText();
     }
 
     @Override

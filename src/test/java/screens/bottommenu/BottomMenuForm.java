@@ -13,4 +13,12 @@ public abstract class BottomMenuForm extends Screen {
     public abstract boolean isMenuDisplayed();
 
     public abstract String getTypeOfTab(String type);
+
+    public abstract String getTextFromCatalogBtn();
+
+    public abstract String getTextFromMyBooksBtn();
+
+    public abstract String getTextFromReservationsBtn();
+
+    public abstract String getTextFromSettingsBtn();
 }

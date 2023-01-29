@@ -5,10 +5,12 @@ import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import enums.keysforcontext.ContextLibrariesKeys;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
+import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.account.AccountScreen;
 import screens.alert.AlertScreen;
@@ -118,6 +120,14 @@ public class AccountSteps {
     @When("I close account screen")
     public void closeAccount(){
         accountScreen.closeAccountScreen();
+    }
+
+    @Then("Elements on add account screen are translated correctly")
+    public void checkTranslationOnAddAccountScreen() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(addAccountScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(Spanish.BACK.i18n());
+        softAssertions.assertThat(addAccountScreen.getTextFromAddLibraryLbl()).as("Add library label is not translated").isEqualTo(Spanish.ADD_LIBRARY.i18n());
+        softAssertions.assertAll();
     }
 
     @Then("Library {string} is present on add account screen")

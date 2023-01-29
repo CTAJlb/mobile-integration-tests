@@ -1,7 +1,9 @@
 package stepdefinitions.application.components;
 
 import aquality.appium.mobile.application.AqualityServices;
+import enums.localization.translation.Spanish;
 import enums.timeouts.RestartAppTimeouts;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.addaccount.AddAccountScreen;
 import screens.bottommenu.BottomMenuForm;
@@ -88,6 +90,11 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     }
 
     @Override
+    public void checkTranslationOnWelcomeScreen(){
+        Assert.assertEquals("Find your library button is not translated", Spanish.FIND_YOUR_LIBRARY.i18n(), welcomeScreen.getTextFromButtonFindYourLibrary());
+    }
+
+    @Override
     public void checkWelcomeScreenIsOpened() {
         Assert.assertTrue("Welcome screen is not opened", welcomeScreen.state().isDisplayed());
     }
@@ -100,5 +107,13 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     @Override
     public void closeWelcomeScreen() {
         welcomeScreen.tapFindLibraryButton();
+    }
+
+    public void checkFindYourLibScreenTranslation() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(findYourLibScreen.getTextFromFindYourLibraryLbl()).as("Find your library label is not translated").isEqualTo(Spanish.FIND_YOUR_LIBRARY);
+        softAssertions.assertThat(findYourLibScreen.getTextFromAddLibraryBtn()).as("Add library button is not translated").isEqualTo(Spanish.ADD_LIBRARY);
+        softAssertions.assertThat(findYourLibScreen.getTextFromCancelBtn()).as("Cancel button is not translated").isEqualTo(Spanish.CANCEL);
+        softAssertions.assertAll();
     }
 }

@@ -54,6 +54,12 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.tapTheLogo();
     }
 
+    @Then("Elements on Find your library screen are translated correctly")
+    @Override
+    public void checkFindYourLibScreenTranslation() {
+        abstractApplicationSteps.checkFindYourLibScreenTranslation();
+    }
+
     @When("I add libraries by the logo:")
     public void addSevLibraries(List<String> libraries){
         libraries.forEach(abstractApplicationSteps::addAccountByTheLogo
@@ -103,6 +109,12 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
     @Override
     public void checkWelcomeScreenIsOpened() {
         abstractApplicationSteps.checkWelcomeScreenIsOpened();
+    }
+
+    @Then("Elements on welcome screen are translated correctly")
+    @Override
+    public void checkTranslationOnWelcomeScreen(){
+        abstractApplicationSteps.checkTranslationOnWelcomeScreen();
     }
 
     @And("Wait for {int} seconds")

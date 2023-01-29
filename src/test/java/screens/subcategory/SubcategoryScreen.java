@@ -35,7 +35,15 @@ public abstract class SubcategoryScreen extends Screen {
 
     public abstract void tapBack();
 
+    public abstract String getTextFromBackBtn();
+
     public abstract String getAvailability();
 
     public abstract String getCollectionName();
+
+    public abstract String getTextFromSortByTab();
+
+    public abstract String getTextFromAvailabilityTab();
+
+    public abstract String getTextFromCollectionTab();
 }

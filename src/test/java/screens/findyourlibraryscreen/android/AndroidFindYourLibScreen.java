@@ -46,6 +46,24 @@ public class AndroidFindYourLibScreen extends FindYourLibScreen {
         btnCancel.click();
     }
 
+    @Override
+    public String getTextFromFindYourLibraryLbl() {
+        // for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromAddLibraryBtn() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromCancelBtn() {
+        //for ios
+        return null;
+    }
+
     private List<String > getListOfLibraries(int listSize) {
         List<String > libraries = new ArrayList<>();
         int index = 1;

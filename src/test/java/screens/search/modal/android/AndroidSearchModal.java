@@ -47,4 +47,16 @@ public class AndroidSearchModal extends SearchModal {
         if (txbSearch.state().isDisplayed())
             btnClearSearchField.click();
     }
+
+    @Override
+    public String getTextFromBackButton() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromSearchField() {
+        //for ios
+        return null;
+    }
 }
