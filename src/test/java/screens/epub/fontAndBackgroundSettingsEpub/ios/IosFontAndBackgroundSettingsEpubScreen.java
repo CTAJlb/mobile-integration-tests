@@ -17,7 +17,7 @@ public class IosFontAndBackgroundSettingsEpubScreen extends FontAndBackgroundSet
 
     @Override
     public void setSetting(ReaderSettingKeys readerSettingKey) {
-        String setting = readerSettingKey.i18n();
+        String setting = readerSettingKey.getDefaultLocalizedValue();
         getElementFactory().getButton(By.xpath(String.format(SETTING_LOC, setting)), setting).click();
     }
 }

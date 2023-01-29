@@ -103,7 +103,7 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
 
     @Override
     public boolean isTimerSetTo(TimerKeys timerSetting) {
-        String timerSettingName = timerSetting.i18n();
+        String timerSettingName = timerSetting.getDefaultLocalizedValue();
         timerSettingName = timerSettingName.replace("file", "File");
         return getElementFactory().getButton(By.xpath(String.format(SLEEP_TIMER_LOC, timerSettingName)), timerSettingName, ElementState.EXISTS_IN_ANY_STATE).state().waitForDisplayed();
     }

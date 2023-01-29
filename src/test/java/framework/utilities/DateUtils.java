@@ -1,6 +1,10 @@
 package framework.utilities;
 
+import constants.RegEx;
+
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,5 +18,19 @@ public class DateUtils {
             formattedString = "PT" + parts.get(0) + "M" + parts.get(1) + "S";
         }
         return Duration.parse(formattedString);
+    }
+
+    public static LocalDateTime getExpectedLocalDateTime(String stringExpectedDateTime) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(RegEx.DATE_TIME_FORMAT);
+        return LocalDateTime.parse(deleteSomeCharactersForExpectedDateTime(stringExpectedDateTime), dateTimeFormatter);
+    }
+
+    public static LocalDateTime getActualLocalDateTime(String stringActualDateTime) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(RegEx.DATE_TIME_FORMAT);
+        return LocalDateTime.parse(stringActualDateTime, dateTimeFormatter);
+    }
+
+    private static String deleteSomeCharactersForExpectedDateTime(String stringExpectedDateTime) {
+        return stringExpectedDateTime.split("\\+")[0].replace("T", " ");
     }
 }

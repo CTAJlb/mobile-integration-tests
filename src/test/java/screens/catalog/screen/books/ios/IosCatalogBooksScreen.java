@@ -46,7 +46,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         if (EnumBookType.AUDIOBOOK == bookType) {
             bookNameForLocator = bookNameForLocator + ". Audiobook.";
         }
-        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
         String actionButtonLoc = String.format(ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
         IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
         ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString)), "lblAuthor");
@@ -75,7 +75,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         if (EnumBookType.AUDIOBOOK == bookType) {
             bookNameForLocator = bookNameForLocator + ". Audiobook.";
         }
-        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
         String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
         ILabel lblBookName = getBookNameLabelFromListOfBooks(bookNameLoc);
         ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString)), "lblAuthor");
@@ -94,7 +94,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
 
     @Override
     public void openBook(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName) {
-        String actionButton = actionButtonKey.i18n();
+        String actionButton = actionButtonKey.getDefaultLocalizedValue();
         ILabel lblBookName = getElementFactory().getLabel(By.xpath(String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButton)), "action button");
         lblBookName.click();
     }
@@ -122,7 +122,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
         if (EnumBookType.AUDIOBOOK == bookType) {
             bookNameForLocator = bookNameForLocator + ". Audiobook.";
         }
-        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
         String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
         return getBookNameLabelFromListOfBooks(bookNameLoc).state().isDisplayed();
     }
@@ -134,7 +134,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
 
     @Override
     public CatalogBookModel clickActionButtonOnTheFirstBookAndGetBookInfo(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
         String actionButtonLoc = String.format(ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, actionButtonString);
         IButton actionButton = getActionButtonFromListOfBooks(actionButtonLoc);
         ILabel lblAuthor = getElementFactory().getLabel(By.xpath(String.format(AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, actionButtonString)), "lblAuthor");
@@ -178,7 +178,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
 
     @Override
     public void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName) {
-        String actionButtonString = actionButtonKey.i18n();
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
         getActionButtonFromListOfBooks(String.format(ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButtonString)).click();
         if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.GET || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE
                 || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN
@@ -232,7 +232,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     }
 
     private IButton getActionButton(String bookName, EnumActionButtonsForBooksAndAlertsKeys buttonKey) {
-        String key = buttonKey.i18n();
+        String key = buttonKey.getDefaultLocalizedValue();
         return getElementFactory().getButton(By.xpath(String.format(ACTION_BUTTON_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, key)), key);
     }
 }

@@ -6,11 +6,11 @@ import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import framework.utilities.DateUtils;
 import org.openqa.selenium.By;
 import screens.epub.bookmarksEpub.BookmarksEpubScreen;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,7 +62,7 @@ public class AndroidBookmarksEpubScreen extends BookmarksEpubScreen {
 
     @Override
     public boolean isBookmarkPresent(String expectedBookmarkTitle, String bookmarkDateTime) {
-        LocalDateTime expectedLocalDateTime = getExpectedLocalDateTime(bookmarkDateTime);
+        LocalDateTime expectedLocalDateTime = DateUtils.getExpectedLocalDateTime(bookmarkDateTime);
         AqualityServices.getLogger().info("expected bookmark info: ");
         AqualityServices.getLogger().info("expected bookmark title-" + expectedBookmarkTitle);
         AqualityServices.getLogger().info("expected year-" + expectedLocalDateTime.getYear());
@@ -73,7 +73,7 @@ public class AndroidBookmarksEpubScreen extends BookmarksEpubScreen {
         boolean isBookmarkPresent = false;
         for (int i = 0; i < getListOfBookmarkTitles().size(); i++) {
             String actualBookmarkTitle = getListOfBookmarkTitles().get(i);
-            LocalDateTime actualLocalDateTime = getActualLocalDateTime(getListOfBookmarkTimeDates().get(i));
+            LocalDateTime actualLocalDateTime = DateUtils.getActualLocalDateTime(getListOfBookmarkTimeDates().get(i));
             AqualityServices.getLogger().info("bookmark number " + i + " info: ");
             AqualityServices.getLogger().info("actual bookmark title-" + actualBookmarkTitle);
             AqualityServices.getLogger().info("actual year-" + actualLocalDateTime.getYear());
@@ -91,22 +91,5 @@ public class AndroidBookmarksEpubScreen extends BookmarksEpubScreen {
             }
         }
         return isBookmarkPresent;
-    }
-
-    private LocalDateTime getExpectedLocalDateTime(String stringExpectedDateTime) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("y-M-dd HH:m:s");
-        LocalDateTime expectedLocalDateTime = LocalDateTime.parse(deleteSomeCharactersForExpectedDateTime(stringExpectedDateTime), dateTimeFormatter);
-        return expectedLocalDateTime;
-    }
-
-    private LocalDateTime getActualLocalDateTime(String stringActualDateTime) {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("y-M-dd HH:m:s");
-        LocalDateTime actualLocalDateTime = LocalDateTime.parse(stringActualDateTime, dateTimeFormatter);
-        return actualLocalDateTime;
-    }
-
-    private String deleteSomeCharactersForExpectedDateTime(String stringExpectedDateTime) {
-        String expectedBookmarkDateTime = stringExpectedDateTime.split("\\+")[0].replace("T", " ");
-        return expectedBookmarkDateTime;
     }
 }

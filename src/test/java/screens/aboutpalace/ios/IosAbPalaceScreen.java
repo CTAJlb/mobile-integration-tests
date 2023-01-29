@@ -9,7 +9,7 @@ import screens.aboutpalace.AboutPalaceScreen;
 @ScreenType(platform = PlatformName.IOS)
 public class IosAbPalaceScreen extends AboutPalaceScreen {
 
-    private final ILabel lblAboutPalace = getElementFactory().getLabel(By.xpath("//XCUIElementTypeImage[@name=\"\tThe Palace Project\"]"), "About Palace label");
+    private final ILabel lblAboutPalace = getElementFactory().getLabel(By.xpath("//XCUIElementTypeImage[@name=\"The Palace Project\"]"), "About Palace label");
 
     public IosAbPalaceScreen() {
         super(By.xpath("//XCUIElementTypeNavigationBar[@name=\"About Palace\"]"));

@@ -1,6 +1,5 @@
 package screens.facetedSearch.ios;
 
-import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
 import aquality.appium.mobile.elements.interfaces.IButton;
@@ -39,7 +38,7 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
 
     @Override
     public void changeAvailabilityTo(FacetAvailabilityKeys key) {
-        setFacetSearchSelection(key.i18n());
+        setFacetSearchSelection(key.getDefaultLocalizedValue());
     }
 
     @Override
@@ -72,7 +71,7 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
 
     @Override
     public void changeSortByTo(FacetSortByKeys key) {
-        setFacetSearchSelection(key.i18n());
+        setFacetSearchSelection(key.getDefaultLocalizedValue());
     }
 
     private void setFacetSearchSelection(String value) {

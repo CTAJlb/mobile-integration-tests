@@ -38,7 +38,7 @@ public class AndroidLogoutHooks extends AbstractLogoutHooks {
                 final String pinTextBeforeLogout = accountScreen.getTextFromPinTxb();
                 accountScreen.tapLogOut();
                 AqualityServices.getConditionalWait().waitFor(() ->
-                        accountScreen.getTextFromLogInButton().equals(AccountScreenLoginStatus.SIGN_IN.i18n())
+                        accountScreen.getTextFromLogInButton().equals(AccountScreenLoginStatus.SIGN_IN.getDefaultLocalizedValue())
                             && !accountScreen.getTextFromCardTxb().equals(cardTextBeforeLogout)
                             && !accountScreen.getTextFromPinTxb().equals(pinTextBeforeLogout),
                         Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getTimeoutMillis()),

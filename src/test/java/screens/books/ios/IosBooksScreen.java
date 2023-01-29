@@ -42,12 +42,8 @@ public class IosBooksScreen extends BooksScreen implements IWorkingWithListOfBoo
 
     @Override
     public boolean isBookDisplayed(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        String bookNameForLocator = bookName;
-        if (EnumBookType.AUDIOBOOK == bookType) {
-            bookNameForLocator = bookNameForLocator + ". Audiobook.";
-        }
-        String actionButtonString = actionButtonKey.i18n();
-        String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
+        String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButtonString);
         return getBookNameLabelFromListOfBooks(bookNameLoc).state().waitForDisplayed();
     }
 
@@ -63,12 +59,8 @@ public class IosBooksScreen extends BooksScreen implements IWorkingWithListOfBoo
 
     @Override
     public void openBook(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey) {
-        String bookNameForLocator = bookName;
-        if (EnumBookType.AUDIOBOOK == bookType) {
-            bookNameForLocator = bookNameForLocator + ". Audiobook.";
-        }
-        String actionButtonString = actionButtonKey.i18n();
-        String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookNameForLocator, actionButtonString);
+        String actionButtonString = actionButtonKey.getDefaultLocalizedValue();
+        String bookNameLoc = String.format(BOOK_NAME_BY_BOOK_NAME_AND_BUTTON_NAME_LOC, bookName, actionButtonString);
         ILabel lblBookName = getBookNameLabelFromListOfBooks(bookNameLoc);
         lblBookName.click();
     }

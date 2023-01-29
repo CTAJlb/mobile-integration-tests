@@ -15,7 +15,7 @@ public class AndroidFontAndBackgroundSettingsEpubScreen extends FontAndBackgroun
 
     @Override
     public void setSetting(ReaderSettingKeys readerSettingKey) {
-        String setting = readerSettingKey.i18n();
+        String setting = readerSettingKey.getDefaultLocalizedValue();
         if(ReaderSettingKeys.FONT_DYSLEXIC == readerSettingKey || ReaderSettingKeys.FONT_SERIF == readerSettingKey || ReaderSettingKeys.FONT_SANS == readerSettingKey){
             getElementFactory().getButton(By.xpath(String.format("//android.widget.FrameLayout[contains(@resource-id,\"%s\")]", setting)), setting).click();
         }else {

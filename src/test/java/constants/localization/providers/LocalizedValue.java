@@ -11,7 +11,7 @@ public interface LocalizedValue {
      *
      * @return localized value
      */
-    String i18n();
+    String getDefaultLocalizedValue();
 
     /**
      * Localized value in the specific locale
@@ -19,5 +19,5 @@ public interface LocalizedValue {
      * @param locale specific locale
      * @return localized value
      */
-    String i18n(@NonNull Locale locale);
+    String getLocalizedValueOfSpecificLocale(@NonNull Locale locale);
 }

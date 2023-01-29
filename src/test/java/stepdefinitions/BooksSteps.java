@@ -1,6 +1,7 @@
 package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import enums.EnumBookType;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
@@ -65,6 +66,9 @@ public class BooksSteps {
     public void openBook(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && bookType == EnumBookType.AUDIOBOOK) {
+            bookName = bookName + ". Audiobook.";
+        }
         booksScreen.openBook(bookType, bookName, actionButtonKey);
     }
 
@@ -72,6 +76,9 @@ public class BooksSteps {
     public void isBookNotPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && bookType == EnumBookType.AUDIOBOOK) {
+            bookName = bookName + ". Audiobook.";
+        }
         Assert.assertFalse(String.format("'%s' book with specific action button is present on books screen", bookName),
                 booksScreen.isBookDisplayed(bookType, bookName, actionButtonKey));
     }
@@ -80,6 +87,9 @@ public class BooksSteps {
     public void isBookPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && bookType == EnumBookType.AUDIOBOOK) {
+            bookName = bookName + ". Audiobook.";
+        }
         Assert.assertTrue(String.format("'%s' book with specific action button is not present on books screen", bookName),
                 booksScreen.isBookDisplayed(bookType, bookName, actionButtonKey));
     }

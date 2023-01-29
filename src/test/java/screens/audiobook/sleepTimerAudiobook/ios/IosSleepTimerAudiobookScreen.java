@@ -17,7 +17,7 @@ public class IosSleepTimerAudiobookScreen extends SleepTimerAudiobookScreen {
 
     @Override
     public void setTimer(TimerKeys timerSetting) {
-        String buttonName = timerSetting.i18n();
+        String buttonName = timerSetting.getDefaultLocalizedValue();
         getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"" + buttonName + "\"]"), buttonName).click();
     }
 

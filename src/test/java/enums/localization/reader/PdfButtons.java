@@ -18,12 +18,12 @@ public enum PdfButtons implements LocalizedValue {
             LocalizationProviderFactory.getProvider("reader.PdfButtons");
 
     @Override
-    public String i18n() {
+    public String getDefaultLocalizedValue() {
         return localizationProvider.getLocalization(button);
     }
 
     @Override
-    public String i18n(@NonNull Locale locale) {
+    public String getLocalizedValueOfSpecificLocale(@NonNull Locale locale) {
         return localizationProvider.getLocalization(button, locale);
     }
 }

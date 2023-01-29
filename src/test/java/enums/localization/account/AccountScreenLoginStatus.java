@@ -19,12 +19,12 @@ public enum AccountScreenLoginStatus implements LocalizedValue {
     private final String key;
 
     @Override
-    public String i18n() {
+    public String getDefaultLocalizedValue() {
         return localizationProvider.getLocalization(key);
     }
 
     @Override
-    public String i18n(@NonNull Locale locale) {
+    public String getLocalizedValueOfSpecificLocale(@NonNull Locale locale) {
         return localizationProvider.getLocalization(key, locale);
     }
 }
