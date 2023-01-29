@@ -112,13 +112,9 @@ public class IosReaderPdfScreen extends ReaderPdfScreen {
         openNavigationBar();
         openNavigationBar();
         if (entireScreenDragDirection == EntireScreenDragDirection.RIGHT) {
-            Point upperLeft = lblPageNumberSlider.getElement().getLocation();
-            Dimension dimensions = lblPageNumberSlider.getElement().getSize();
-            int y = upperLeft.y + dimensions.height / 2;
-            Direction direction = new Direction().setFrom(new Point(upperLeft.x + dimensions.width + 1, y)).setTo(new Point(upperLeft.x + dimensions.width - 1, y));
-            AqualityServices.getTouchActions().swipe(direction.getFrom(), direction.getTo());
-        } else {
             SwipeElementUtils.swipeThroughEntireElement(lblPageNumberSlider, EntireElementSwipeDirection.RIGHT);
+        } else {
+            SwipeElementUtils.swipeThroughEntireElement(lblPageNumberSlider, EntireElementSwipeDirection.LEFT);
         }
     }
 }
