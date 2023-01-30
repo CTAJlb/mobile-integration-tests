@@ -212,7 +212,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
 
     @Override
     public boolean isActionButtonDisplayed(String bookName, EnumActionButtonsForBooksAndAlertsKeys key) {
-        return getActionButton(bookName, key).state().isDisplayed();
+        return getActionButton(bookName, key).state().waitForDisplayed();
     }
 
     @Override
