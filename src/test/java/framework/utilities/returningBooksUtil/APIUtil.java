@@ -14,7 +14,7 @@ import java.util.Base64;
 import java.util.concurrent.TimeUnit;
 
 public class APIUtil {
-    private static final PropertyUtils propertyUtils = new PropertyUtils("src/main/resources/apiConfig.properties");
+    private static final PropertyUtils propertyUtils = new PropertyUtils("src/test/resources/apiConfig.properties");
 
     public static void returnBooks(Credentials credentials) {
         String authHeader = getAuthHeader(credentials);
