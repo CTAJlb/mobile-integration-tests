@@ -27,4 +27,8 @@ public abstract class HoldsScreen extends Screen {
     public abstract String getNameOfSorting();
 
     public abstract void sortBy();
+
+    public abstract String getTextFromHoldsHeader();
+
+    public abstract String getTextFromInformationLbl();
 }

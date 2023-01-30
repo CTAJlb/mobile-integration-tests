@@ -23,4 +23,16 @@ public abstract class SettingsScreen extends Screen {
     public abstract void openLibrary(String libraryName);
 
     public abstract void openTestMode();
+
+    public abstract String getTextFromSettingsHeader();
+
+    public abstract String getTextFromLibrariesBtn();
+
+    public abstract String getTextFromAboutAppBtn();
+
+    public abstract String getTextFromPrivacyPolicyBtn();
+
+    public abstract String getTextFromUserAgreementBtn();
+
+    public abstract String getTextFromSoftwareLicensesBtn();
 }

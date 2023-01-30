@@ -36,7 +36,23 @@ public enum Spanish implements LocalizedValue {
     POPULAR_BOOKS("popular_books"),
     EVERYTHING("everything"),
     GET("get"),
-    RESERVE("reserve");
+    RESERVE("reserve"),
+    BOOK_AVAILABILITY("book_availability"),
+    DESCRIPTION("description"),
+    INFORMATION("information"),
+    PUBLISHED("published"),
+    PUBLISHER("publisher"),
+    PAGE("page"),
+    TOC("toc"),
+    CONTENTS("contents"),
+    BOOKMARKS("bookmarks"),
+    INFO_BOOKMARKS("info_bookmarks"),
+    LIBRARIES("libraries"),
+    ABOUT_PALACE("about_palace"),
+    PRIVACY_POLICY("privacy_policy"),
+    USER_AGREEMENT("user_agreement"),
+    SOFTWARE_LICENSES("software_licenses"),
+    RESERVE_INFO("reserve_info");
 
     private static final AbstractILocalizationProvider localizationProvider =
             LocalizationProviderFactory.getProvider("translation.Spanish");

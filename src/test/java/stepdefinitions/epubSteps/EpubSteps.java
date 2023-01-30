@@ -6,12 +6,14 @@ import enums.epub.EnumTabsTocAndBookmarksEpub;
 import enums.localization.reader.BackgroundColorKeys;
 import enums.localization.reader.FontNameKeys;
 import enums.localization.reader.ReaderSettingKeys;
+import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.android.CatalogBookModel;
 import org.apache.commons.lang3.RandomUtils;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.epub.fontAndBackgroundSettingsEpub.FontAndBackgroundSettingsEpubScreen;
 import screens.epub.readerEpub.ReaderEpubScreen;
@@ -56,6 +58,15 @@ public class EpubSteps {
     public void savePageNumberAndChapterName(String pageNumberKey, String chapterNameKey) {
         context.add(pageNumberKey, readerEpubScreen.getPageNumber());
         context.add(chapterNameKey, readerEpubScreen.getChapterName());
+    }
+
+    @Then("Elements on Reader epub screen are translated correctly")
+    public void checkTranslationOnReaderScreen() {
+        readerEpubScreen.openNavigationBar();
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(readerEpubScreen.getTextFromPageLbl().contains(Spanish.PAGE.getDefaultLocalizedValue())).as("Page label is not translated").isTrue();
+        softAssertions.assertThat(readerEpubScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(Spanish.BACK.getDefaultLocalizedValue());
+        softAssertions.assertAll();
     }
 
     @Then("Next page is opened and old page has {string} pageNumber and {string} chapterName on epub reader screen")

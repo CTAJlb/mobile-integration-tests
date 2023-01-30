@@ -23,9 +23,8 @@ public class IosHoldsScreen extends HoldsScreen implements IWorkingWithListOfBoo
     private static final String BOOK_AUTHOR = "//XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[2]";
     private static final String BOOK_TITLE = "//XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
 
-    private final ILabel lblNoBooks = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"When you reserve a book from the catalog, it will show up here. Look here from time to time to see if your book is available to download.\"]"),
-            "No Books Present");
-    private final ILabel lblHolds = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"Reservations\"]"), "Reservations");
+    private final ILabel lblNoBooks = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText"), "No Books Present");
+    private final ILabel lblHolds = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText"), "Reservations");
 
     public IosHoldsScreen() {
         super(By.xpath("//XCUIElementTypeStaticText[@name=\"Reservations\"]"));
@@ -81,5 +80,15 @@ public class IosHoldsScreen extends HoldsScreen implements IWorkingWithListOfBoo
     @Override
     public void sortBy() {
         //only for Android
+    }
+
+    @Override
+    public String getTextFromHoldsHeader() {
+        return lblHolds.getText();
+    }
+
+    @Override
+    public String getTextFromInformationLbl() {
+        return lblNoBooks.getText();
     }
 }

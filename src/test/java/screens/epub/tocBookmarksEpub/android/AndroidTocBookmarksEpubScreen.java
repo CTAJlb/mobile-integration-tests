@@ -36,4 +36,24 @@ public class AndroidTocBookmarksEpubScreen extends TocBookmarksEpubScreen {
     public BookmarksEpubScreen getBookmarksEpubScreen() {
         return bookmarksEpubScreen;
     }
+
+    @Override
+    public String getTextFromBackBtn() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromTOCLabel() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromContentsBtn() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromBookmarksBtn() {
+        return null;
+    }
 }

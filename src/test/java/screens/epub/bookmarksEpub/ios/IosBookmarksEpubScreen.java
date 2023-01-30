@@ -21,6 +21,8 @@ public class IosBookmarksEpubScreen extends BookmarksEpubScreen {
     private static final String BOOKMARK_TITLE_LOC = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[1]";
     private static final String BOOKMARK_DATE_TIME_LOC = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[2]";
 
+    private final ILabel lblInfo = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText"), "Information label");
+
     private final IButton btnDelete =
             getElementFactory().getButton(By.name("Delete"), "btnDelete");
 
@@ -89,6 +91,11 @@ public class IosBookmarksEpubScreen extends BookmarksEpubScreen {
             }
         }
         return isBookmarkPresent;
+    }
+
+    @Override
+    public String getTextFromInformationLbl() {
+        return lblInfo.getText();
     }
 
     private LocalDateTime getExpectedLocalDateTime(String stringExpectedDateTime) {

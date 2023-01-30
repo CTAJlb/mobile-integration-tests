@@ -69,4 +69,34 @@ public class AndroidSettingsScreen extends SettingsScreen {
                 perform();
         btnDebugOptions.click();
     }
+
+    @Override
+    public String getTextFromSettingsHeader() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromLibrariesBtn() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromAboutAppBtn() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromPrivacyPolicyBtn() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromUserAgreementBtn() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromSoftwareLicensesBtn() {
+        return null;
+    }
 }

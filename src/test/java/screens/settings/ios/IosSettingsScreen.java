@@ -16,7 +16,7 @@ public class IosSettingsScreen extends SettingsScreen {
     private static final int NUMBER_OF_CLICKS_FOR_OPENING_TEST_MODE = 7;
     private static final String MAIN_ELEMENT = "//XCUIElementTypeNavigationBar[@name=\"Settings\"]";
 
-    private  final ILabel lblSettings = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar[@name=\"Settings\"]"), "Settings");
+    private  final ILabel lblSettings = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar"), "Settings");
     private final IButton btnLibraries = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Libraries\"]"), "btnLibraries");
     private final IButton btnAboutPalace = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"About Palace\"]"), "About Palace");
     private final IButton btnPrivacyPolicy = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Privacy Policy\"]"), "Privacy Policy");
@@ -72,5 +72,35 @@ public class IosSettingsScreen extends SettingsScreen {
         action.tap(TapOptions.tapOptions().withTapsCount(NUMBER_OF_CLICKS_FOR_OPENING_TEST_MODE).withElement(ElementOption.element(lblPalaceVersion.getElement()))).
                 perform();
         btnTesting.click();
+    }
+
+    @Override
+    public String getTextFromSettingsHeader() {
+        return lblSettings.getText();
+    }
+
+    @Override
+    public String getTextFromLibrariesBtn() {
+        return btnLibraries.getText();
+    }
+
+    @Override
+    public String getTextFromAboutAppBtn() {
+        return btnAboutPalace.getText();
+    }
+
+    @Override
+    public String getTextFromPrivacyPolicyBtn() {
+        return btnPrivacyPolicy.getText();
+    }
+
+    @Override
+    public String getTextFromUserAgreementBtn() {
+        return btnUserAgreement.getText();
+    }
+
+    @Override
+    public String getTextFromSoftwareLicensesBtn() {
+        return btnSoftwareLic.getText();
     }
 }
