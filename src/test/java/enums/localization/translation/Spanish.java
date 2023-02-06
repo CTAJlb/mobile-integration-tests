@@ -10,7 +10,6 @@ import java.util.Locale;
 
 @AllArgsConstructor
 public enum Spanish implements LocalizedValue {
-
     FIND_YOUR_LIBRARY("find_your_library"),
     ADD_ACCOUNT("add_account"),
     BACK("back"),
@@ -52,7 +51,26 @@ public enum Spanish implements LocalizedValue {
     PRIVACY_POLICY("privacy_policy"),
     USER_AGREEMENT("user_agreement"),
     SOFTWARE_LICENSES("software_licenses"),
-    RESERVE_INFO("reserve_info");
+    RESERVE_INFO("reserve_info"),
+    ACCOUNT("account"),
+    LIBRARY_CARD("library_card"),
+    LOG_IN("log_in"),
+    PASSWORD("password"),
+    FORGET_PASSWORD("forget_password"),
+    USER_AGREEMENT_LINK("user_agreement_link"),
+    NO_ACCOUNT("no_account"),
+    CREATE_CARD("create_card"),
+    REPORT_A_PROBLEM("report_a_problem"),
+    CONTENT_LICENSES("content_licenses"),
+    DONE("done"),
+    SEARCH_PDF("search_pdf"),
+    RESUME("resume"),
+    NO_BOOKMARKS("no_bookmarks"),
+    LINE_REMAINING("line_remaining"),
+    PLAYBACK_SPEED("playback_speed"),
+    SLEEP_TIMER("sleep_timer"),
+    OFF("off"),
+    END_OF_CHAPTER("end_of_chapter");
 
     private static final AbstractILocalizationProvider localizationProvider =
             LocalizationProviderFactory.getProvider("translation.Spanish");
