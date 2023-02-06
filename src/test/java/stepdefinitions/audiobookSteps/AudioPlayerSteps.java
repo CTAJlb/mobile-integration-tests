@@ -4,6 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.RegEx;
+import enums.localization.translation.Spanish;
 import framework.utilities.RegExUtil;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
@@ -39,7 +40,15 @@ public class AudioPlayerSteps {
         Assert.assertTrue("Player of book " + bookName + " is not opened", audioPlayerScreen.isPlayerOpened(bookName));
     }
 
-    @And("Open toc audiobook screen")
+    @Then("Elements on Audio Player screen are translated correctly")
+    public void checkTranslationOnAudioPlayerScreen() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(audioPlayerScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(Spanish.BACK.getDefaultLocalizedValue());
+        softAssertions.assertThat(audioPlayerScreen.getTextFromLineRemainingLbl()).as("Time remaining label is not translated").contains(Spanish.LINE_REMAINING.getDefaultLocalizedValue());
+        softAssertions.assertAll();
+    }
+
+    @When("Open toc audiobook screen")
     public void openTocAudiobookScreen() {
         audioPlayerScreen.openToc();
     }
@@ -97,9 +106,27 @@ public class AudioPlayerSteps {
         audioPlayerScreen.openPlaybackSpeed();
     }
 
+    @Then("Elements on Playback speed are translated correctly")
+    public void checkTranslationOnPlaybackSpeedScreen(){
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(audioPlayerScreen.getPlaybackSpeedAudiobookScreen().getTextFromPlaybackSpeedLbl()).as("Playback speed is not translated").isEqualTo(Spanish.PLAYBACK_SPEED.getDefaultLocalizedValue());
+        softAssertions.assertThat(audioPlayerScreen.getPlaybackSpeedAudiobookScreen().getTextFromCancelBtn()).as("Cancel button is not translated").isEqualTo(Spanish.CANCEL.getDefaultLocalizedValue());
+        softAssertions.assertAll();
+    }
+
     @When("Open sleep timer on audio player screen")
     public void openSleepTimer() {
         audioPlayerScreen.openSleepTimer();
+    }
+
+    @Then("Elements on Sleep timer screen are translated correctly")
+    public void checkTranslationOnSleepTimerScreen() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(audioPlayerScreen.getSleepTimerAudiobookScreen().getTextFromSleepTimerLabel()).as("Sleep timer label is not translated").isEqualTo(Spanish.SLEEP_TIMER.getDefaultLocalizedValue());
+        softAssertions.assertThat(audioPlayerScreen.getSleepTimerAudiobookScreen().getTextFromOffBtn()).as("Off button is not translated").isEqualTo(Spanish.OFF.getDefaultLocalizedValue());
+        softAssertions.assertThat(audioPlayerScreen.getSleepTimerAudiobookScreen().getTextFromEndOfChapterBtn()).as("End of chapter is not translated").isEqualTo(Spanish.END_OF_CHAPTER.getDefaultLocalizedValue());
+        softAssertions.assertThat(audioPlayerScreen.getSleepTimerAudiobookScreen().getTextFromCancelBtn()).as("Cancel button is not translated").isEqualTo(Spanish.CANCEL.getDefaultLocalizedValue());
+        softAssertions.assertAll();
     }
 
     @And("Book is not playing on audio player screen")

@@ -180,6 +180,23 @@ public class AccountSteps {
         librariesScreen.openLibrary(libraryName);
     }
 
+    @Then("Elements on Account screen are translated correctly")
+    public void checkTranslationOnAccountScreen() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(accountScreen.getTextFromLibrariesBtn()).as("Libraries button is not translated").isEqualTo(Spanish.LIBRARIES.getDefaultLocalizedValue());
+        softAssertions.assertThat(accountScreen.getTextFromAccountHeader()).as("Account is not translated").isEqualTo(Spanish.ACCOUNT.getDefaultLocalizedValue());
+        softAssertions.assertThat(accountScreen.getTextFromCardTxb()).as("Library card is not translated").isEqualTo(Spanish.LIBRARY_CARD.getDefaultLocalizedValue());
+        softAssertions.assertThat(accountScreen.getTextFromPinTxb()).as("Password is not translated").isEqualTo(Spanish.PASSWORD.getDefaultLocalizedValue());
+        softAssertions.assertThat(accountScreen.getTextFromLogInButton()).as("Sign in button is not translated").isEqualTo(Spanish.LOG_IN.getDefaultLocalizedValue());
+        softAssertions.assertThat(accountScreen.getTextFromForgetPasswordLbl()).as("Forget password label is not translated").isEqualTo(Spanish.FORGET_PASSWORD.getDefaultLocalizedValue());
+        softAssertions.assertThat(accountScreen.getTextFromLicenseAgreementLink()).as("License agreement link is not translated").isEqualTo(Spanish.USER_AGREEMENT_LINK.getDefaultLocalizedValue());
+        softAssertions.assertThat(accountScreen.getTextFromNoAccountLbl()).as("No account label is not translated").isEqualTo(Spanish.NO_ACCOUNT.getDefaultLocalizedValue());
+        softAssertions.assertThat(accountScreen.getTextFromReportAboutProblemBtn()).as("Report a problem button is not translated").isEqualTo(Spanish.REPORT_A_PROBLEM.getDefaultLocalizedValue());
+        softAssertions.assertThat(accountScreen.getTextFromCreateCardBtn()).as("Create card button is not translated").isEqualTo(Spanish.CREATE_CARD.getDefaultLocalizedValue());
+        softAssertions.assertThat(accountScreen.getTextFromContentLicensesLbl()).as("Content licenses label is not translated").isEqualTo(Spanish.CONTENT_LICENSES.getDefaultLocalizedValue());
+        softAssertions.assertAll();
+    }
+
     @When("I open User license agreement on account screen")
     public void openLicAgreement(){
         accountScreen.openLicenseAgreement();

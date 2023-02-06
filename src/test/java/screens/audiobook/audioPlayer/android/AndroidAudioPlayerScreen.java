@@ -155,6 +155,16 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     }
 
     @Override
+    public String getTextFromBackBtn() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromLineRemainingLbl() {
+        return null;
+    }
+
+    @Override
     public void stretchPlaySliderForward() {
         int startX = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getX();
         int startY = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getY();

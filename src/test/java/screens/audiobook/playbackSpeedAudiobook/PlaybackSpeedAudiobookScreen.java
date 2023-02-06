@@ -11,4 +11,8 @@ public abstract class PlaybackSpeedAudiobookScreen extends Screen {
     public abstract void selectPlaybackSpeed(String playbackSpeed);
 
     public abstract void closePlaybackScreen();
+
+    public abstract String getTextFromPlaybackSpeedLbl();
+
+    public abstract String getTextFromCancelBtn();
 }

@@ -21,6 +21,7 @@ public enum EnumActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     CANCEL("cancel"),
     DOWNLOAD("download"),
     LISTEN("listen"),
+    LISTEN_ES("listen_es"),
     REMOVE("remove"),
     SIGN_OUT("signOut"),
     NOT_NOW("notNow"),

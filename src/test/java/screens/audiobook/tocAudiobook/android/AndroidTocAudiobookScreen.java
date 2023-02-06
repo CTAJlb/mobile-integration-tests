@@ -51,6 +51,16 @@ public class AndroidTocAudiobookScreen extends TocAudiobookScreen {
         return lblChapterName.getAttribute(AndroidAttributes.TEXT);
     }
 
+    @Override
+    public String getTextFromBackBtn() {
+        return null;
+    }
+
+    @Override
+    public void clickBackBtn() {
+
+    }
+
     private List<IElement> getChapters() {
         return getElementFactory().findElements(By.xpath(CHAPTERS_LOC), ElementType.LABEL).stream().limit(10).collect(Collectors.toList());
     }

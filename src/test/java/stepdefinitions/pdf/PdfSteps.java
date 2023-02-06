@@ -3,6 +3,7 @@ package stepdefinitions.pdf;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
+import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import framework.utilities.swipe.directions.EntireScreenDragDirection;
 import io.cucumber.java.en.Then;
@@ -264,6 +265,14 @@ public class PdfSteps {
         Assert.assertTrue("Search screen is not opened", readerPdfScreen.getSearchPdfScreen().isSearchPdfScreenOpened());
     }
 
+    @Then("Elements on pdf search screen are translated correctly")
+    public void checkTranslationOfSearchPDFScreen() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(readerPdfScreen.getSearchPdfScreen().getTextFromDoneBtn()).as("Done button is not translated").isEqualTo(Spanish.DONE.getDefaultLocalizedValue());
+        softAssertions.assertThat(readerPdfScreen.getSearchPdfScreen().getTextFromSearchTxb()).as("Search field is not translated").isEqualTo(Spanish.SEARCH_PDF.getDefaultLocalizedValue());
+        softAssertions.assertAll();
+    }
+
     @When("I close pdf search screen")
     public void closeSearchScreen() {
         readerPdfScreen.getSearchPdfScreen().closeSearchScreen();
@@ -327,6 +336,14 @@ public class PdfSteps {
     @Then("Bookmarks pdf screen is opened")
     public void checkBookmarksPdfScreenIsOpened() {
         Assert.assertTrue("Bookmarks pdf screen is not opened", tocBookmarksPdfScreen.getBookmarksPdfScreen().state().waitForDisplayed());
+    }
+
+    @Then("Elements on pdf bookmarks screen are translated correctly")
+    public void checkTranslationOnPDFBookmarksScreen() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(tocBookmarksPdfScreen.getTextFromResumeBtn()).as("Resume button is not translated").isEqualTo(Spanish.RESUME.getDefaultLocalizedValue());
+        softAssertions.assertThat(tocBookmarksPdfScreen.getBookmarksPdfScreen().getTextFromBookmarksScreen()).as("No bookmarks text is not translated").isEqualTo(Spanish.NO_BOOKMARKS.getDefaultLocalizedValue());
+        softAssertions.assertAll();
     }
 
     @Then("Amount of bookmarks is {int} on bookmarks pdf screen")

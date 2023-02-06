@@ -85,4 +85,9 @@ public class AndroidTocBookmarksPdfScreen extends TocBookmarksPdfScreen {
     public void tapTocButton() {
         btnChapters.click();
     }
+
+    @Override
+    public String getTextFromResumeBtn() {
+        return null;
+    }
 }

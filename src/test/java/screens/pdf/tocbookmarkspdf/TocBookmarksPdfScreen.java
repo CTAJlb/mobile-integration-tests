@@ -34,4 +34,6 @@ public abstract class TocBookmarksPdfScreen extends Screen {
     public abstract void tapThumbnailsButton();
 
     public abstract void tapTocButton();
+
+    public abstract String getTextFromResumeBtn();
 }

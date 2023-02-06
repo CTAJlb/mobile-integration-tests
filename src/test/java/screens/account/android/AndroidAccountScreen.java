@@ -127,6 +127,46 @@ public class AndroidAccountScreen extends AccountScreen {
         //for iOS
     }
 
+    @Override
+    public String getTextFromLibrariesBtn() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromAccountHeader() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromForgetPasswordLbl() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromLicenseAgreementLink() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromNoAccountLbl() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromCreateCardBtn() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromReportAboutProblemBtn() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromContentLicensesLbl() {
+        return null;
+    }
+
     private String getLoginButtonText() {
         return btnLoginAction.state().waitForDisplayed() ? btnLoginAction.getText() : "";
     }

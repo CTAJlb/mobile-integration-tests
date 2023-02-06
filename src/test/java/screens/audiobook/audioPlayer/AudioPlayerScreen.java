@@ -67,4 +67,8 @@ public abstract class AudioPlayerScreen extends Screen {
     public abstract void stretchPlaySliderForward();
 
     public abstract void stretchPlaySliderBack();
+
+    public abstract String getTextFromBackBtn();
+
+    public abstract String getTextFromLineRemainingLbl();
 }

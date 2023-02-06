@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosSearchPdfScreen extends SearchPdfScreen {
-    private final IButton btnDone = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Done\"]"), "Apply search");
-    private final ITextBox txbSearchLine = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeTextField[@value=\"Search\"]"), "Search line");
+    private final IButton btnDone = getElementFactory().getButton(By.xpath("//XCUIElementTypeWindow/XCUIElementTypeOther[2]//XCUIElementTypeButton"), "Apply search");
+    private final ITextBox txbSearchLine = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeWindow/XCUIElementTypeOther[2]//XCUIElementTypeTextField"), "Search line");
 
     private static final String FOUND_TEXT_LOC = "//XCUIElementTypeCell/XCUIElementTypeStaticText[1]";
     private static final String FOUND_TEXT_NUMBER_LOC = "//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"%d\"]";
@@ -67,6 +67,16 @@ public class IosSearchPdfScreen extends SearchPdfScreen {
     @Override
     public boolean isSearchResultEmpty() {
         return getFoundTexts().size() == 0;
+    }
+
+    @Override
+    public String getTextFromDoneBtn() {
+        return btnDone.getText();
+    }
+
+    @Override
+    public String getTextFromSearchTxb() {
+        return txbSearchLine.getText();
     }
 
     private List<ILabel> getNumbersOfFoundTexts() {

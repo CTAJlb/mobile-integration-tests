@@ -27,4 +27,24 @@ public class AndroidSleepTimerAudiobookScreen extends SleepTimerAudiobookScreen 
     public void closeSleepTimer() {
         btnCancel.click();
     }
+
+    @Override
+    public String getTextFromSleepTimerLabel() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromOffBtn() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromEndOfChapterBtn() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromCancelBtn() {
+        return null;
+    }
 }
