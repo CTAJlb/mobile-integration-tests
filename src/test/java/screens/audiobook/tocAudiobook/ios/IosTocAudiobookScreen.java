@@ -1,6 +1,7 @@
 package screens.audiobook.tocAudiobook.ios;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.ElementType;
+import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
@@ -14,6 +15,7 @@ import java.util.List;
 @ScreenType(platform = PlatformName.IOS)
 public class IosTocAudiobookScreen extends TocAudiobookScreen {
     private final ILabel lblChapterName = getElementFactory().getLabel(By.xpath(CHAPTER_NAME_LOC), "Chapter name");
+    private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton"), "Back button");
     private static final String CHAPTER_NAME_LOC = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[1]";
 
     public IosTocAudiobookScreen() {
@@ -42,6 +44,16 @@ public class IosTocAudiobookScreen extends TocAudiobookScreen {
     public String getChapterName(int chapterNumber) {
         IElement lblChapterName = getChapters().get(chapterNumber);
         return lblChapterName.getAttribute(IosAttributes.NAME);
+    }
+
+    @Override
+    public String getTextFromBackBtn() {
+        return btnBack.getText();
+    }
+
+    @Override
+    public void clickBackBtn() {
+        btnBack.click();
     }
 
     private List<IElement> getChapters() {

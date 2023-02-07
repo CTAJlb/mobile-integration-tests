@@ -2,6 +2,7 @@ package stepdefinitions.audiobookSteps;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
+import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -22,6 +23,16 @@ public class TocAudiobookSteps {
     @Then("The first chapter is loaded")
     public void isChapterLoaded(){
         Assert.assertTrue("The first chapter is not loaded", tocAudiobookScreen.isTheFirstChapterLoaded());
+    }
+
+    @Then("Elements on TOC audiobook screen are translated correctly")
+    public void checkTranslationOnTOCAudiobookScreen(){
+        Assert.assertEquals("Back button is not translated", tocAudiobookScreen.getTextFromBackBtn(), Spanish.BACK.getDefaultLocalizedValue());
+    }
+
+    @When("Close toc audiobook screen")
+    public void closeTocAudiobookScreen(){
+        tocAudiobookScreen.clickBackBtn();
     }
 
     @When("Open random chapter on toc audiobook screen and save chapter name as {string}")

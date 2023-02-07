@@ -3,6 +3,7 @@ package screens.audiobook.playbackSpeedAudiobook.ios;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
+import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import org.openqa.selenium.By;
 import screens.audiobook.playbackSpeedAudiobook.PlaybackSpeedAudiobookScreen;
@@ -14,7 +15,8 @@ import java.util.Map;
 public class IosPlaybackSpeedAudiobookScreen extends PlaybackSpeedAudiobookScreen {
     private static final String PLAYBACK_SPEED = "//XCUIElementTypeButton[@name=\"%s\"]";
 
-    private final IButton btnCancel = AqualityServices.getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Cancel\"]"), "cancel button");
+    private final IButton btnCancel = AqualityServices.getElementFactory().getButton(By.xpath("//XCUIElementTypeWindow/XCUIElementTypeOther[2]/XCUIElementTypeOther[3]/XCUIElementTypeOther/XCUIElementTypeOther[2]//XCUIElementTypeButton"), "Cancel button");
+    private final ILabel lblPlaybackSpeed = getElementFactory().getLabel(By.xpath("//XCUIElementTypeWindow/XCUIElementTypeOther[2]/XCUIElementTypeOther[3]//XCUIElementTypeScrollView//XCUIElementTypeStaticText"), "Playback speed label");
 
     private static Map<String, String> speedName = new HashMap<String, String>() {{
         put("2.0", "Two times normal speed. Fastest.");
@@ -36,5 +38,15 @@ public class IosPlaybackSpeedAudiobookScreen extends PlaybackSpeedAudiobookScree
     @Override
     public void closePlaybackScreen() {
         btnCancel.click();
+    }
+
+    @Override
+    public String getTextFromPlaybackSpeedLbl() {
+        return lblPlaybackSpeed.getText();
+    }
+
+    @Override
+    public String getTextFromCancelBtn() {
+        return btnCancel.getText();
     }
 }

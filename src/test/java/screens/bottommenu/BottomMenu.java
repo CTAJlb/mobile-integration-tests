@@ -5,7 +5,9 @@ import aquality.appium.mobile.application.PlatformName;
 
 public enum BottomMenu {
     SETTINGS("tabSettings", "Settings"),
+    SETTINGS_ES("Configuración", "Configuración"),
     HOLDS("tabHolds", "Reservations"),
+    HOLD_ES("Reservas", "Reservas"),
     BOOKS("tabBooks", "My Books"),
     CATALOG("tabCatalog", "Catalog");
 

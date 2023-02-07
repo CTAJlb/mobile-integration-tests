@@ -12,4 +12,12 @@ public abstract class SleepTimerAudiobookScreen extends Screen {
     public abstract void setTimer(TimerKeys timerSetting);
 
     public abstract void closeSleepTimer();
+
+    public abstract String getTextFromSleepTimerLabel();
+
+    public abstract String getTextFromOffBtn();
+
+    public abstract String getTextFromEndOfChapterBtn();
+
+    public abstract String getTextFromCancelBtn();
 }

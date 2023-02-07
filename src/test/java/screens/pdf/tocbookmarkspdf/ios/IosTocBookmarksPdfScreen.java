@@ -16,10 +16,10 @@ public class IosTocBookmarksPdfScreen extends TocBookmarksPdfScreen {
     private final ThumbnailsPdfScreen thumbnailsPdfScreen;
     private final BookmarksPdfScreen bookmarksPdfScreen;
 
-    private final IButton btnResume = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Resume\"]"), "Resume button");
+    private final IButton btnResume = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeOther//XCUIElementTypeButton[1]"), "Resume button");
     private final IButton btnThumbnails = getElementFactory().getButton(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"Mission Control\"]"), "Thumbnails button");
     private final IButton btnToc = getElementFactory().getButton(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"List\"]"), "Toc button");
-    private final IButton btnBookmarks = getElementFactory().getButton(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[@name=\"Bookmark\"]"), "Bookmarks button");
+    private final IButton btnBookmarks = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[3]"), "Bookmarks button");
 
     public IosTocBookmarksPdfScreen() {
         super(By.xpath("//XCUIElementTypeButton[@name = \"Resume\"]"));
@@ -87,5 +87,10 @@ public class IosTocBookmarksPdfScreen extends TocBookmarksPdfScreen {
     @Override
     public void tapTocButton() {
         btnToc.click();
+    }
+
+    @Override
+    public String getTextFromResumeBtn() {
+        return btnResume.getText();
     }
 }

@@ -92,4 +92,9 @@ public class AndroidBookmarksEpubScreen extends BookmarksEpubScreen {
         }
         return isBookmarkPresent;
     }
+
+    @Override
+    public String getTextFromInformationLbl() {
+        return null;
+    }
 }

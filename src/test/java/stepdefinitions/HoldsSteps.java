@@ -5,6 +5,7 @@ import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import enums.EnumBookType;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
+import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -40,6 +41,19 @@ public class HoldsSteps {
     @When("I open Holds")
     public void openHolds() {
         bottomMenuForm.open(BottomMenu.HOLDS);
+    }
+
+    @When("I open Holds in Spanish")
+    public void openHoldsInSpanish(){
+        bottomMenuForm.open(BottomMenu.HOLD_ES);
+    }
+
+    @Then("Elements on Holds screen are translated correctly")
+    public void checkTranslationOnHoldsScreen(){
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(holdsScreen.getTextFromHoldsHeader()).as("Holds header is not translated").isEqualTo(Spanish.RESERVATIONS.getDefaultLocalizedValue());
+        softAssertions.assertThat(holdsScreen.getTextFromInformationLbl()).as("Information label is not translated").isEqualTo(Spanish.RESERVE_INFO.getDefaultLocalizedValue());
+        softAssertions.assertAll();
     }
 
     @Then("Holds screen is loaded")

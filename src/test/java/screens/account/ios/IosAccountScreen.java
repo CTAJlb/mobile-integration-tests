@@ -19,14 +19,20 @@ public class IosAccountScreen extends AccountScreen {
     private final IButton btnLogin = getElementFactory().getButton(By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, AccountScreenLoginStatus.SIGN_IN.getDefaultLocalizedValue())),"Log in");
     private final IButton btnLogout = getElementFactory().getButton(By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, AccountScreenLoginStatus.SIGN_OUT.getDefaultLocalizedValue())),"Log out");
     private final IButton btnApproveSignOut = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Sign out\"]"),"Log out approve");
-    private final ITextBox txbCard = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeTextField[@value]"), "Card");
-    private final ITextBox txbPin = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeSecureTextField[@value]"), "Pin");
-    private final IButton btnLicAgreement = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[contains(@name, \"User License Agreement\")]"), "User License Agreement");
+    private final ITextBox txbCard = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeTextField"), "Card");
+    private final ITextBox txbPin = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeSecureTextField"), "Pin");
+    private final IButton btnLicAgreement = getElementFactory().getButton(By.xpath("//XCUIElementTypeTable/XCUIElementTypeOther[2]/XCUIElementTypeButton"), "User License Agreement");
     private final ILabel lblCodeConduct = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"Code of Conduct\"]"), "Code of Conduct");
-    private final IButton btnContentLicenses = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"ContentLicenses\"]"), "Content Licenses");
+    private final IButton btnContentLicenses = getElementFactory().getButton(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[7]/XCUIElementTypeStaticText"), "Content Licenses");
     private final ILabel lblLibrariesAndPalaces =getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Libraries are palaces\")]"), "\tLibraries are palaces for the people");
     private final IButton btnAdvanced = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Advanced\"]"), "Advanced button");
     private final IButton btnCancel = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar//XCUIElementTypeButton[@name=\"Cancel\"]"), "Cancel button");
+    private final IButton btnLibraries = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton"), "Libraries button");
+    private final ILabel lblAccountHeader = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText"), "Account header");
+    private final ILabel lblForgetPassword = getElementFactory().getLabel(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[4]/XCUIElementTypeStaticText"), "Forget password label");
+    private final ILabel lblNoAccount = getElementFactory().getLabel(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[5]/XCUIElementTypeStaticText[2]"), "Don't have an account label");
+    private final IButton btnCreateCard = getElementFactory().getButton(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[5]/XCUIElementTypeStaticText[1]"), "Create card button");
+    private final IButton btnReportAProblem = getElementFactory().getButton((By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[5]/XCUIElementTypeStaticText")), "Report a problem");
 
     public IosAccountScreen() {
         super(By.xpath("//XCUIElementTypeNavigationBar[@name=\"Account\"]"));
@@ -121,5 +127,45 @@ public class IosAccountScreen extends AccountScreen {
     @Override
     public void closeAccountScreen() {
         btnCancel.click();
+    }
+
+    @Override
+    public String getTextFromLibrariesBtn() {
+        return btnLibraries.getText();
+    }
+
+    @Override
+    public String getTextFromAccountHeader() {
+        return lblAccountHeader.getText();
+    }
+
+    @Override
+    public String getTextFromForgetPasswordLbl() {
+        return lblForgetPassword.getText();
+    }
+
+    @Override
+    public String getTextFromLicenseAgreementLink() {
+        return btnLicAgreement.getText();
+    }
+
+    @Override
+    public String getTextFromNoAccountLbl() {
+        return lblNoAccount.getText();
+    }
+
+    @Override
+    public String getTextFromCreateCardBtn() {
+        return btnCreateCard.getText();
+    }
+
+    @Override
+    public String getTextFromReportAboutProblemBtn() {
+        return btnReportAProblem.getText();
+    }
+
+    @Override
+    public String getTextFromContentLicensesLbl() {
+        return btnContentLicenses.getText();
     }
 }

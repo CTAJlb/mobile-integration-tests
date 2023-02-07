@@ -11,6 +11,7 @@ import java.util.List;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosBookmarksPdfScreen extends BookmarksPdfScreen {
+    private final ILabel lblNoBookmarks = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[3]"),"No bookmarks label");
     private static final String BOOKMARK_LOC = "//XCUIElementTypeCell";
 
     public IosBookmarksPdfScreen() {
@@ -26,6 +27,11 @@ public class IosBookmarksPdfScreen extends BookmarksPdfScreen {
     public void openBookmark(int bookmarkNumber) {
         ILabel lblBookmarks = getListOfBookmarks().get(bookmarkNumber);
         lblBookmarks.click();
+    }
+
+    @Override
+    public String getTextFromBookmarksScreen() {
+        return lblNoBookmarks.getText();
     }
 
     private List<ILabel> getListOfBookmarks() {

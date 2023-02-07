@@ -11,13 +11,17 @@ import java.util.Locale;
 @AllArgsConstructor
 public enum EnumActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     GET("get"),
+    GET_ES("get_es"),
     READ("read"),
+    READ_ES("read_es"),
     RESERVE("reserve"),
     DELETE("delete"),
     RETURN("return"),
+    RETURN_ES("return_es"),
     CANCEL("cancel"),
     DOWNLOAD("download"),
     LISTEN("listen"),
+    LISTEN_ES("listen_es"),
     REMOVE("remove"),
     SIGN_OUT("signOut"),
     NOT_NOW("notNow"),

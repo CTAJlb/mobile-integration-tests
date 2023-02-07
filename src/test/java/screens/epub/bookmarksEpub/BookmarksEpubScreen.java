@@ -19,4 +19,6 @@ public abstract void deleteBookmark(int bookmarkNumber);
 public abstract void openBookmark(int bookmarkNumber);
 
 public abstract boolean isBookmarkPresent(String bookmarkTitle, String bookmarkDateTime);
+
+public abstract String getTextFromInformationLbl();
 }

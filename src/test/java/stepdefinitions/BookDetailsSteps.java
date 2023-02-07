@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import constants.RegEx;
 import constants.keysForContext.ScenarioContextKey;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
+import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import framework.utilities.ScreenshotUtils;
 import framework.utilities.swipe.SwipeElementUtils;
@@ -41,8 +42,8 @@ public class BookDetailsSteps {
         bookDetailsScreen.clickActionButton(actionButtonKey);
         if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
             addScreenshot();
-            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE ||
-                    actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE) {
+            if (actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.RETURN_ES ||
+                    actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.DELETE || actionButtonKey == EnumActionButtonsForBooksAndAlertsKeys.REMOVE) {
                 alertScreen.waitAndPerformAlertActionIfDisplayed(actionButtonKey);
             } else {
                 AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
@@ -90,6 +91,18 @@ public class BookDetailsSteps {
                 "actualCategories. expectedCategories - %s, actualCategories - %s", expectedCategories, actualCategories)).isTrue();
         softAssertions.assertThat(expectedDistributor.equalsIgnoreCase(actualDistributor)).as(String.format("expectedDistributor is not equal to " +
                 "actualDistributor. expectedDistributor - %s, actualDistributor - %s", expectedDistributor, actualDistributor)).isTrue();
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on Book detail view are translated correctly")
+    public void checkTranslationOfBookDetailView() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(bookDetailsScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(Spanish.BACK.getDefaultLocalizedValue());
+        softAssertions.assertThat(bookDetailsScreen.getTextFromLabelAboutAvailability()).as("Book availability info is not translated").isEqualTo(Spanish.BOOK_AVAILABILITY.getDefaultLocalizedValue());
+        softAssertions.assertThat(bookDetailsScreen.getTextFromDescriptionLbl()).as("Description label is not translated").isEqualTo(Spanish.DESCRIPTION.getDefaultLocalizedValue());
+        softAssertions.assertThat(bookDetailsScreen.getTextFromInformationLbl()).as("Information label is not translated").isEqualTo(Spanish.INFORMATION.getDefaultLocalizedValue());
+        softAssertions.assertThat(bookDetailsScreen.getTextFromPublishedLbl()).as("Published label is not translated").isEqualTo(Spanish.PUBLISHED.getDefaultLocalizedValue());
+        softAssertions.assertThat(bookDetailsScreen.getTextFromPublisherLbl()).as("Publisher label is not translated").isEqualTo(Spanish.PUBLISHER.getDefaultLocalizedValue());
         softAssertions.assertAll();
     }
 

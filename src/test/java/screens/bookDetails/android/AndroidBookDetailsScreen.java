@@ -174,6 +174,36 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
         btnMoreInRelatedBooks.click();
     }
 
+    @Override
+    public String getTextFromBackBtn() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromLabelAboutAvailability() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromDescriptionLbl() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromInformationLbl() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromPublishedLbl() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromPublisherLbl() {
+        return null;
+    }
+
     private IButton getActionButton(EnumActionButtonsForBooksAndAlertsKeys buttonKey) {
         String key = buttonKey.getDefaultLocalizedValue();
         return getElementFactory().getButton(By.xpath(String.format(BOOK_ACTION_BUTTON_LOC, key)), key);

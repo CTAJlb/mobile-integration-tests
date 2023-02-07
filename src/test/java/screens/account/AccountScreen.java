@@ -42,4 +42,20 @@ public abstract class AccountScreen extends Screen {
     public abstract void clickDelete(String button);
 
     public abstract void closeAccountScreen();
+
+    public abstract String getTextFromLibrariesBtn();
+
+    public abstract String getTextFromAccountHeader();
+
+    public abstract String getTextFromForgetPasswordLbl();
+
+    public abstract String getTextFromLicenseAgreementLink();
+
+    public abstract String getTextFromNoAccountLbl();
+
+    public abstract String getTextFromCreateCardBtn();
+
+    public abstract String getTextFromReportAboutProblemBtn();
+
+    public abstract String getTextFromContentLicensesLbl();
 }

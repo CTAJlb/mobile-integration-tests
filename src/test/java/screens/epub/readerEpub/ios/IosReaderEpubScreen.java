@@ -2,6 +2,7 @@ package screens.epub.readerEpub.ios;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import aquality.selenium.core.logging.Logger;
@@ -23,6 +24,8 @@ public class IosReaderEpubScreen extends ReaderEpubScreen {
     private final ILabel lblBookName = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "lblBookName");
     private final ILabel lblPageNumberAndChapterName = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"Page\")]"), "lblPageNumberAndChapterName");
     private final ILabel lblPage = getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "lblPage");
+    private final ILabel lblPageNumber = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[2]"), "Page number label");
+    private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Back button");
 
     public IosReaderEpubScreen() {
         super(By.xpath("//*[contains(@name,\"Page\")]"));
@@ -100,7 +103,7 @@ public class IosReaderEpubScreen extends ReaderEpubScreen {
         Set<String> contextNames = driver.getContextHandles();
         logger.info("count of contextHandles-" + contextNames.size());
 
-        contextNames.stream().forEach(contextName -> {
+        contextNames.forEach(contextName -> {
             System.out.println("context - " + contextName);
         });
 
@@ -118,6 +121,16 @@ public class IosReaderEpubScreen extends ReaderEpubScreen {
     @Override
     public String getBackgroundColor() {
         return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX_IOS);
+    }
+
+    @Override
+    public String getTextFromPageLbl() {
+        return lblPageNumber.getText();
+    }
+
+    @Override
+    public String getTextFromBackBtn() {
+        return btnBack.getText();
     }
 
     private String getReaderInfo(String regex) {

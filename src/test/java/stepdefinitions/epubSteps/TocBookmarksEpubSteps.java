@@ -3,11 +3,13 @@ package stepdefinitions.epubSteps;
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
 import enums.epub.EnumTabsTocAndBookmarksEpub;
+import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomUtils;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.epub.bookmarksEpub.BookmarksEpubScreen;
 import screens.epub.readerEpub.ReaderEpubScreen;
@@ -33,6 +35,22 @@ public class TocBookmarksEpubSteps {
         context.add(chapterNameKey, bookmarksEpubScreen.getListOfBookmarkTitles().get(randomBookmarkNumber));
         bookmarksEpubScreen.openBookmark(randomBookmarkNumber);
     }
+
+    @Then("Elements on TOC in reader epub are translated correctly")
+    public void checkTranslationOfTOCScreen(){
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(Spanish.BACK.getDefaultLocalizedValue());
+        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromTOCLabel()).as("TOC header is not translated").isEqualTo(Spanish.TOC.getDefaultLocalizedValue());
+        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromContentsBtn()).as("Contents button is not translated").isEqualTo(Spanish.CONTENTS.getDefaultLocalizedValue());
+        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromBookmarksBtn()).as("Bookmarks button is not translated").isEqualTo(Spanish.BOOKMARKS.getDefaultLocalizedValue());
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on Bookmarks epub screen are translated correctly")
+    public void checkTranslationOfBookmarksScreen() {
+        Assert.assertEquals("Info label is not translated", Spanish.INFO_BOOKMARKS.getDefaultLocalizedValue(), tocBookmarksEpubScreen.getBookmarksEpubScreen().getTextFromInformationLbl());
+    }
+
     @And("{string} chapter name is displayed on reader epub screen")
     public void checkPageInfoPageInfoIsCorrect(String chapterNameKey) {
         String expectedChapterName = context.get(chapterNameKey);
@@ -51,7 +69,7 @@ public class TocBookmarksEpubSteps {
     public void openBookmarksEpubScreen(){
         readerEpubScreen.openNavigationBar();
         readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
-        tocBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.BOOKMARKS);
+        tocBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.BOOKMARKS_ES);
     }
 
     @When("Delete bookmark on bookmarks epub screen")

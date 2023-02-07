@@ -117,6 +117,16 @@ public class AndroidReaderEpubScreen extends ReaderEpubScreen {
         return getReaderInfo(RegEx.BACKGROUND_COLOR_REGEX_ANDROID);
     }
 
+    @Override
+    public String getTextFromPageLbl() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromBackBtn() {
+        return null;
+    }
+
     private String getReaderInfo(String regex) {
         return RegExUtil.getStringFromFirstGroup(getBookSource(), regex);
     }

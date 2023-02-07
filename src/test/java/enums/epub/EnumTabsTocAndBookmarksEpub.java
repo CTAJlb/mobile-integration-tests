@@ -9,6 +9,7 @@ import lombok.Getter;
 @Getter
 public enum EnumTabsTocAndBookmarksEpub {
     BOOKMARKS("Bookmarks", "BOOKMARKS"),
+    BOOKMARKS_ES("Marcadores", "Marcadores"),
     TOC("Contents", "TABLE OF CONTENTS");
 
     private final String iosValue;

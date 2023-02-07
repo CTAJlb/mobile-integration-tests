@@ -55,4 +55,16 @@ public abstract class BookDetailsScreen extends Screen {
     public abstract boolean isMoreBtnAvailableInRelatedBooks();
 
     public abstract void tapMoreBtnInRelatedBooks();
+
+    public abstract String getTextFromBackBtn();
+
+    public abstract String getTextFromLabelAboutAvailability();
+
+    public abstract String getTextFromDescriptionLbl();
+
+    public abstract String getTextFromInformationLbl();
+
+    public abstract String getTextFromPublishedLbl();
+
+    public abstract String getTextFromPublisherLbl();
 }

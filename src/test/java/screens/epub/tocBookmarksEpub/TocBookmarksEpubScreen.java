@@ -21,4 +21,12 @@ public abstract class TocBookmarksEpubScreen extends Screen {
     public abstract TocEpubScreen getTocEpubScreen();
 
     public abstract BookmarksEpubScreen getBookmarksEpubScreen();
+
+    public abstract String getTextFromBackBtn();
+
+    public abstract String getTextFromTOCLabel();
+
+    public abstract String getTextFromContentsBtn();
+
+    public abstract String getTextFromBookmarksBtn();
 }

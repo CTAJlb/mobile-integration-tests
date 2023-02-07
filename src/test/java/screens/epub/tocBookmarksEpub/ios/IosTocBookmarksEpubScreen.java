@@ -2,6 +2,7 @@ package screens.epub.tocBookmarksEpub.ios;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import enums.epub.EnumTabsTocAndBookmarksEpub;
@@ -12,6 +13,11 @@ import screens.epub.tocEpub.TocEpubScreen;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosTocBookmarksEpubScreen extends TocBookmarksEpubScreen {
+    private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton"), "Back button");
+    private final ILabel lblTOCHeader = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText"), "TOC header");
+    private final IButton btnContents = getElementFactory().getButton(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[1]"), "Contents button");
+    private final IButton btnBookmarks = getElementFactory().getButton(By.xpath("//XCUIElementTypeSegmentedControl/XCUIElementTypeButton[2]"), "Bookmarks button");
+
     public IosTocBookmarksEpubScreen() {
         super(By.xpath("//XCUIElementTypeStaticText[@name=\"Table of Contents\"]"));
         tocEpubScreen = AqualityServices.getScreenFactory().getScreen(TocEpubScreen.class);
@@ -20,7 +26,7 @@ public class IosTocBookmarksEpubScreen extends TocBookmarksEpubScreen {
 
     @Override
     public void returnToPreviousScreen() {
-        getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Back\"]"), "btnBack").click();
+        btnBack.click();
     }
 
     @Override
@@ -38,5 +44,25 @@ public class IosTocBookmarksEpubScreen extends TocBookmarksEpubScreen {
     @Override
     public BookmarksEpubScreen getBookmarksEpubScreen() {
         return bookmarksEpubScreen;
+    }
+
+    @Override
+    public String getTextFromBackBtn() {
+        return btnBack.getText();
+    }
+
+    @Override
+    public String getTextFromTOCLabel() {
+        return lblTOCHeader.getText();
+    }
+
+    @Override
+    public String getTextFromContentsBtn() {
+        return btnContents.getText();
+    }
+
+    @Override
+    public String getTextFromBookmarksBtn() {
+        return btnBookmarks.getText();
     }
 }
