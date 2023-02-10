@@ -94,7 +94,7 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
         put("2.0", "Two times normal speed. Fastest.");
         put("0.75", "Three quarters of normal speed. Slower.");
         put("1.25", "One and one quarter faster than normal speed.");
-        put("1.50", "One and a half times faster than normal speed.");
+        put("1.5", "One and a half times faster than normal speed.");
     }};
 
     @Override
@@ -163,16 +163,16 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     public void stretchPlaySliderForward() {
         int startX = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getX();
         int startY = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getY();
-        int endX = (startX + 100);
+        int endX = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getSize().width / 2;
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
         action.press(PointOption.point(startX, startY)).moveTo(PointOption.point(endX, startY)).release().perform();
     }
 
     @Override
     public void stretchPlaySliderBack() {
-        double startX = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getX() * 8;
+        double startX = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getX();
         double startY = AqualityServices.getApplication().getDriver().findElement(btnSlider.getLocator()).getLocation().getY();
-        double endX = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getX() * 0.15;
+        double endX = AqualityServices.getApplication().getDriver().findElement(lblPlaybackProgress.getLocator()).getLocation().getX();
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
         action.longPress(PointOption.point((int) startX, (int) startY)).moveTo(PointOption.point((int) endX, (int) startY)).release().perform();
     }
