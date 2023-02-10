@@ -69,7 +69,7 @@ public class TocBookmarksEpubSteps {
     public void openBookmarksEpubScreen(){
         readerEpubScreen.openNavigationBar();
         readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
-        tocBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.BOOKMARKS_ES);
+        tocBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.BOOKMARKS);
     }
 
     @When("Delete bookmark on bookmarks epub screen")
