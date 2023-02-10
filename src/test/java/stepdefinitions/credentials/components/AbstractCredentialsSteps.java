@@ -49,6 +49,10 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
 
     public void clickLogOut() {
         accountScreen.tapLogOut();
+        accountScreen.tapApproveSignOut();
+        if(alertScreen.state().waitForDisplayed()){
+            alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.SIGN_OUT);
+        }
     }
 
     public void enterCredentialsForLibraryAccount(String libraryName) {

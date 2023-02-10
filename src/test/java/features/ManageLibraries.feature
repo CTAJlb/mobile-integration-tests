@@ -95,7 +95,6 @@ Feature: Manage Libraries
       And I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
-      And I switch to 'LYRASIS Reads' from side menu
       And I open search modal
       And I search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'eBooks' catalog tab

@@ -52,7 +52,26 @@ Feature: Distributors
       | Palace Marketplace | EBOOK     | eBooks     | READ                  |
       | Palace Marketplace | AUDIOBOOK | Audiobooks | LISTEN                |
       | Biblioboard        | EBOOK     | eBooks     | READ                  |
-      | Biblioboard        | AUDIOBOOK | Audiobooks | LISTEN                |
+
+  @logout @returnBooks @tier1
+  Scenario: LYRASIS: Biblioboard audiobooks: Getting and returning books from Book Detail View
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I open search modal
+      And I search for "Murder at the Columbarium" and save bookName as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click RETURN action button on book details screen
+    Then I check that book contains GET action button on book details screen
+    When Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+      And Wait for 3 seconds
+    Then Book 'bookInfo' with AUDIOBOOK type is present on epub or pdf or audiobook screen
 
   @logout @returnBooks @tier2
   Scenario: Overdrive: Getting and returning a book from Book Detail View
@@ -137,7 +156,20 @@ Feature: Distributors
       | Axis 360           | EBOOK     | eBooks     |
       | Axis 360           | AUDIOBOOK | Audiobooks |
       | Biblioboard        | EBOOK     | eBooks     |
-      | Biblioboard        | AUDIOBOOK | Audiobooks |
+
+  @logout @returnBooks @tier1
+  Scenario: LYRASIS: Biblioboard audiobooks: Check of canceling the downloading from book details view
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I enter credentials for 'LYRASIS Reads' account
+    Then Login is performed successfully
+    When I open Catalog
+      And I open search modal
+      And I search for "Let's Hear It For Beagles" and save bookName as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button and cancel downloading by click CANCEL button on book detail screen
+    Then I check that book contains DOWNLOAD action button on book details screen
+      And I check that book contains RETURN action button on book details screen
 
   @tier2
   Scenario: Palace: Check of canceling the downloading from book details view
