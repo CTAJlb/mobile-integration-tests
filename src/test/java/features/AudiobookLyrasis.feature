@@ -6,11 +6,11 @@ Feature: Audiobook in Lyrasis
     When I enter credentials for 'LYRASIS Reads' account
     Then Login is performed successfully
     When I open Catalog
+      And I open search modal
 
   @logout @returnBooks @tier1
   Scenario Outline: Open the audiobook at the last open chapter and check time code
-    When I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -57,14 +57,12 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario: Biblioboard: Open the audiobook at the last open chapter and check time code
-    When I switch to 'Audiobooks' catalog tab
-      And I open 'New BiblioBoard Test' category
-      And Change books visibility to show AVAILABLE_NOW
-      And Click GET action button on random book from the catalog book screen and save book as 'bookInfo'
-      And Save book name of the book 'bookInfo' as 'bookNameInfo' on catalog book screen
-    Then I check that book 'bookNameInfo' contains LISTEN action button on catalog book screen
-    When Open book with LISTEN action button and 'bookNameInfo' bookName on catalog books screen
-      And Click LISTEN action button on book details screen
+    When I search for "	Bocas : a novel" and save bookName as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Open toc audiobook screen
     Then The first chapter is loaded
@@ -100,8 +98,7 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario Outline: Navigate by Audiobook
-    When I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -129,14 +126,12 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario: Biblioboard: Navigate by Audiobook
-    When I switch to 'Audiobooks' catalog tab
-      And I open 'New BiblioBoard Test' category
-      And Change books visibility to show AVAILABLE_NOW
-      And Click GET action button on random book from the catalog book screen and save book as 'bookInfo'
-      And Save book name of the book 'bookInfo' as 'bookNameInfo' on catalog book screen
-    Then I check that book 'bookNameInfo' contains LISTEN action button on catalog book screen
-    When Open book with LISTEN action button and 'bookNameInfo' bookName on catalog books screen
-      And Click LISTEN action button on book details screen
+    When I search for "Kate & Ruby" and save bookName as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'  
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Tap play button on audio player screen
     Then Pause button is present on audio player screen
@@ -153,8 +148,7 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario Outline: Check end of chapter sleep timer
-    When I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -178,12 +172,32 @@ Feature: Audiobook in Lyrasis
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
-      | Biblioboard        |
+
+  @logout @returnBooks @tier1
+  Scenario: Biblioboard: Check end of chapter sleep timer
+    When I search for "The Columbarium" and save bookName as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+    Then Audio player screen of book 'bookInfo' is opened
+    When Open toc audiobook screen
+    Then The first chapter is loaded
+    When Open the 2 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
+      And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
+      And Select 2X playback speed on playback speed audiobook screen
+      And I stretch slider on the time tracking line forward on audio player screen
+      And Listen a chapter on audio player screen
+    Then Play button is present on audio player screen
+    When Save the name of chapter as 'nextChapter' on audio player screen
+      And Open toc audiobook screen
+    Then Chapter name next to 'chapterNumber' on toc audiobook screen is equal to 'nextChapter' saved chapter name
+
 
   @logout @returnBooks @tier1 @exclude_android
   Scenario Outline: Check of line for time remaining
-    When I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -197,12 +211,21 @@ Feature: Audiobook in Lyrasis
       | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
-      | Biblioboard        |
+
+  @logout @returnBooks @tier1 @exclude_android
+  Scenario: Biblioboard: Check of line for time remaining
+    When I search for "Two in the Bush" and save bookName as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+    Then Audio player screen of book 'bookInfo' is opened
+      And Line for time remaining is displayed on audio player screen
 
   @logout @returnBooks @tier1
   Scenario Outline: Check of switching to the next time
-    When I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -224,14 +247,12 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario: Biblioboard: Check of switching to the next time
-    When I switch to 'Audiobooks' catalog tab
-      And I open 'New BiblioBoard Test' category
-      And Change books visibility to show AVAILABLE_NOW
-      And Click GET action button on random book from the catalog book screen and save book as 'bookInfo'
-      And Save book name of the book 'bookInfo' as 'bookNameInfo' on catalog book screen
-    Then I check that book 'bookNameInfo' contains LISTEN action button on catalog book screen
-    When Open book with LISTEN action button and 'bookNameInfo' bookName on catalog books screen
-      And Click LISTEN action button on book details screen
+    When I search for "Elixir Project" and save bookName as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Open toc audiobook screen
     Then The first chapter is loaded
@@ -242,8 +263,7 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario Outline: Check playback speed and sleep timer
-    When I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -268,14 +288,12 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario: Biblioboard: Check playback speed and sleep timer
-    When I switch to 'Audiobooks' catalog tab
-      And I open 'New BiblioBoard Test' category
-      And Change books visibility to show AVAILABLE_NOW
-      And Click GET action button on random book from the catalog book screen and save book as 'bookInfo'
-      And Save book name of the book 'bookInfo' as 'bookNameInfo' on catalog book screen
-    Then I check that book 'bookNameInfo' contains LISTEN action button on catalog book screen
-    When Open book with LISTEN action button and 'bookNameInfo' bookName on catalog books screen
-      And Click LISTEN action button on book details screen
+    When I search for "Nobody Move" and save bookName as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
       And The speed by default is 1.0
     When Open playback speed on audio player screen
@@ -289,8 +307,7 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario Outline: Check time tracking line
-    When I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -318,14 +335,12 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario: Biblioboard: Check time tracking line
-    When I switch to 'Audiobooks' catalog tab
-      And I open 'New BiblioBoard Test' category
-      And Change books visibility to show AVAILABLE_NOW
-      And Click GET action button on random book from the catalog book screen and save book as 'bookInfo'
-      And Save book name of the book 'bookInfo' as 'bookNameInfo' on catalog book screen
-    Then I check that book 'bookNameInfo' contains LISTEN action button on catalog book screen
-    When Open book with LISTEN action button and 'bookNameInfo' bookName on catalog books screen
-      And Click LISTEN action button on book details screen
+    When I search for "Baby Carter" and save bookName as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Tap play button on audio player screen
     Then Pause button is present on audio player screen
@@ -342,8 +357,7 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario Outline: Check of not rewinding forward and back by tapping on time bar
-    When I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+    When  I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -372,14 +386,12 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario: BiblioBoard: Check of not rewinding forward and back by tapping on time bar
-    When I switch to 'Audiobooks' catalog tab
-      And I open 'New BiblioBoard Test' category
-      And Change books visibility to show AVAILABLE_NOW
-      And Click GET action button on random book from the catalog book screen and save book as 'bookInfo'
-      And Save book name of the book 'bookInfo' as 'bookNameInfo' on catalog book screen
-    Then I check that book 'bookNameInfo' contains LISTEN action button on catalog book screen
-    When Open book with LISTEN action button and 'bookNameInfo' bookName on catalog books screen
-      And Click LISTEN action button on book details screen
+    When I search for "Daykeeper" and save bookName as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Tap play button on audio player screen
     Then Pause button is present on audio player screen
@@ -397,8 +409,7 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario Outline: Playback speed: Check of playback speed
-    When I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+    When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -439,14 +450,12 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario Outline: Biblioboard: Playback speed: Check of playback speed
-    When I switch to 'Audiobooks' catalog tab
-      And I open 'New BiblioBoard Test' category
-      And Change books visibility to show AVAILABLE_NOW
-      And Click GET action button on random book from the catalog book screen and save book as 'bookInfo'
-      And Save book name of the book 'bookInfo' as 'bookNameInfo' on catalog book screen
-    Then I check that book 'bookNameInfo' contains LISTEN action button on catalog book screen
-    When Open book with LISTEN action button and 'bookNameInfo' bookName on catalog books screen
-      And Click LISTEN action button on book details screen
+    When I search for "Four Women" and save bookName as 'bookNameInfo'
+      And I switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then I check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Select <speed>X playback speed on playback speed audiobook screen
     Then Current playback speed value is <speed>X on audio player screen
