@@ -8,6 +8,7 @@ import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import com.google.common.collect.Ordering;
+import framework.utilities.keyboard.KeyboardUtils;
 import org.openqa.selenium.By;
 import screens.addaccount.AddAccountScreen;
 
@@ -39,7 +40,7 @@ public class AndroidAddAccountScreen extends AddAccountScreen {
     @Override
     public void enterLibraryName(String libraryName) {
         btnSearch.click();
-        AqualityServices.getApplication().getDriver().hideKeyboard();
+        KeyboardUtils.hideKeyboard();
         txbSearchField.clearAndType(libraryName);
         state().waitForDisplayed();
     }

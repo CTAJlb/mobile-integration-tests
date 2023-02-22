@@ -19,7 +19,7 @@ public class IosAddAccountScreen extends AddAccountScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeSheet[@name=\"Add Your Library\"]";
     public static final String LIBRARY_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeStaticText[contains(@name, \"%s\")]";
     private static final String LIB_NAME_LOCATOR = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[2]";
-    private final IButton btnClearText = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Clear text\"]"), "Clear text button");
+    private final IButton btnClearText = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"clear.button.text\"]"), "Clear text button");
     private final ILabel lblAddLibrary = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText"), "Add Library label");
     private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton"), "Back button");
 

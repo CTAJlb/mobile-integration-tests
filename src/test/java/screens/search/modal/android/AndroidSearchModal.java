@@ -1,13 +1,11 @@
 package screens.search.modal.android;
 
-import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import io.appium.java_client.android.AndroidDriver;
+import framework.utilities.keyboard.KeyboardUtils;
 import io.appium.java_client.android.nativekey.AndroidKey;
-import io.appium.java_client.android.nativekey.KeyEvent;
 import org.openqa.selenium.By;
 import screens.search.modal.SearchModal;
 
@@ -27,8 +25,8 @@ public class AndroidSearchModal extends SearchModal {
 
     @Override
     public void applySearch() {
-        ((AndroidDriver<?>) AqualityServices.getApplication().getDriver()).pressKey(new KeyEvent(AndroidKey.ENTER));
-        AqualityServices.getApplication().getDriver().hideKeyboard();
+        KeyboardUtils.pressKey(AndroidKey.ENTER);
+        KeyboardUtils.hideKeyboard();
     }
 
     @Override
@@ -56,7 +54,27 @@ public class AndroidSearchModal extends SearchModal {
 
     @Override
     public String getTextFromSearchField() {
-        //for ios
-        return null;
+        return txbSearch.getText();
+    }
+
+    @Override
+    public void deleteSomeData() {
+        KeyboardUtils.pressKey(AndroidKey.DEL);
+    }
+
+    @Override
+    public boolean isSearchButtonClickable() {
+        //for iOS
+        return false;
+    }
+
+    @Override
+    public boolean isSearchLineDisplayed() {
+        return txbSearch.state().waitForDisplayed();
+    }
+
+    @Override
+    public void inputSpace() {
+        KeyboardUtils.pressKey(AndroidKey.SPACE);
     }
 }

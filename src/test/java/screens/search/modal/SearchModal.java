@@ -21,4 +21,12 @@ public abstract class SearchModal extends Screen {
     public abstract String getTextFromBackButton();
 
     public abstract String getTextFromSearchField();
+
+    public abstract void deleteSomeData();
+
+    public abstract boolean isSearchButtonClickable();
+
+    public abstract boolean isSearchLineDisplayed();
+
+    public abstract void inputSpace();
 }

@@ -33,7 +33,7 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     private static final String AUTHOR_OF_THE_BOOK_BY_NUMBER_IN_THE_LIST = "//XCUIElementTypeCell[%d]//XCUIElementTypeOther//XCUIElementTypeStaticText[2]";
     private static final String BOOKS_NAME_LOCATOR = "//XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
 
-    private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"No results\")]"), "No results found");
+    private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"No Results\")]"), "No results found");
     private final ILabel lblNameOfFirstBook = AqualityServices.getElementFactory().getLabel(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "Name of first book");
 
     public IosCatalogBooksScreen() {
@@ -188,8 +188,8 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     }
 
     @Override
-    public boolean isSearchResultsEmpty() {
-        return lblNoResults.state().isDisplayed();
+    public boolean isNoResults() {
+        return lblNoResults.state().waitForDisplayed();
     }
 
     @Override
