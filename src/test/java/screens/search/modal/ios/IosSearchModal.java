@@ -13,8 +13,10 @@ public class IosSearchModal extends SearchModal {
 
     private final ITextBox txbSearch = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeSearchField"), "Search value input");
     private final IButton btnSearch = getElementFactory().getButton(By.xpath(MAIN_ELEMENT), "Search");
-    private final IButton btnClearSearch = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Clear text\"]"), "Clear text button");
+    private final IButton btnClearSearch = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"clear.button.text\"]"), "Clear text button");
     private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Back button");
+    private final IButton btnDelete = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"delete\"]"), "Delete button");
+    private final IButton btnSpace = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"space\"]"), "Space button");
 
     public IosSearchModal() {
         super(By.xpath(MAIN_ELEMENT));
@@ -53,5 +55,25 @@ public class IosSearchModal extends SearchModal {
     @Override
     public String getTextFromSearchField() {
         return txbSearch.getText();
+    }
+
+    @Override
+    public void deleteSomeData() {
+        btnDelete.click();
+    }
+
+    @Override
+    public boolean isSearchButtonClickable() {
+        return btnSearch.state().isClickable();
+    }
+
+    @Override
+    public boolean isSearchLineDisplayed() {
+        return txbSearch.state().waitForDisplayed();
+    }
+
+    @Override
+    public void inputSpace() {
+        btnSpace.click();
     }
 }

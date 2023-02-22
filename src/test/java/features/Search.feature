@@ -89,7 +89,7 @@ Feature: Search libraries and books
     When I add "Palace Bookshelf" account from welcomeScreen
       And I open search modal
       And I enter word <data> and save as 'info' on catalog books screen
-    Then Search result is empty on catalog books screen
+    Then There is no results on catalog books screen
 
     Scenarios:
     | data                                  |
@@ -99,26 +99,60 @@ Feature: Search libraries and books
     | @$                                    |
     | !                                     |
 
-   @tier2
-   Scenario: Find a book in LYRASIS
-     When I add "LYRASIS Reads" account from welcomeScreen
-     And I open search modal
-     And I search for 'Silk Road' and save bookName as 'bookNameInfo'
-     Then EBOOK book with GET action button and 'bookNameInfo' bookName is present on catalog books screen
+  @tier2
+  Scenario: Check a placeholder in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open search modal
+    Then Placeholder contains "Search" text in search field
+
+  @tier2
+  Scenario: Check the possibility of editing data in search field in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open search modal
+      And I enter book "Book" and save it as "word"
+      And I edit data by adding "hello" in search field and save it as "newWord"
+    Then Placeholder contains "newWord" text in search field
+
+  @tier2
+  Scenario: Check of empty field in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open search modal
+    Then There is no possibility to search with empty search field
+
+  @tier2
+  Scenario: Check of only spaces input in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open search modal
+      And I input only spaces in search field
+    Then There is no results on catalog books screen
+
+  @tier2
+  Scenario: Check of displaying the search field after search a book in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open search modal
+      And I search for "Book" and save bookName as 'BookNameInfo'
+    Then The search field is displayed and contains 'BookNameInfo' book
+
+  @tier2
+  Scenario: Find a book in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open search modal
+      And I search for 'Silk Road' and save bookName as 'bookNameInfo'
+    Then EBOOK book with GET action button and 'bookNameInfo' bookName is present on catalog books screen
 
   @tier2
   Scenario: Delete a book from search bar in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
-    And I open search modal
-    And I enter book 'Silk Road' and save it as 'bookNameInfo'
+      And I open search modal
+      And I enter book 'Silk Road' and save it as 'bookNameInfo'
     When Clear search field on catalog books screen
     Then Search field is empty on catalog books screen
 
   @tier2
   Scenario Outline: Check that books from search result contain one or more entered latin letters or numeric in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
-    And I open search modal
-    And I enter word <word> and save as 'info' on catalog books screen
+      And I open search modal
+      And I enter word <word> and save as 'info' on catalog books screen
     Then Books contain word 'info' on catalog books screen
 
     Scenarios:
@@ -130,8 +164,8 @@ Feature: Search libraries and books
   @tier2
   Scenario Outline: Find a book with name in different font cases in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
-    And I open search modal
-    And I enter word <word> and save as 'info' on catalog books screen
+      And I open search modal
+      And I enter word <word> and save as 'info' on catalog books screen
     Then The first book has 'info' bookName on catalog books screen
 
     Scenarios:
@@ -143,9 +177,9 @@ Feature: Search libraries and books
   @tier2
   Scenario Outline: Enter invalid data in book name in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
-    And I open search modal
-    And I enter word <data> and save as 'info' on catalog books screen
-    Then Search result is empty on catalog books screen
+      And I open search modal
+      And I enter word <data> and save as 'info' on catalog books screen
+    Then There is no results on catalog books screen
 
     Scenarios:
       | data                                  |

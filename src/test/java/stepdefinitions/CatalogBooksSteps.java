@@ -14,11 +14,13 @@ import models.android.CatalogBookModel;
 import org.junit.Assert;
 import screens.alert.AlertScreen;
 import screens.catalog.screen.books.CatalogBooksScreen;
+import screens.catalog.screen.catalog.CatalogScreen;
 
 import java.util.Random;
 
 public class CatalogBooksSteps {
     private final CatalogBooksScreen catalogBooksScreen;
+    private final CatalogScreen catalogScreen;
     private final AlertScreen alertScreen;
     private ScenarioContext context;
 
@@ -26,6 +28,7 @@ public class CatalogBooksSteps {
     public CatalogBooksSteps(ScenarioContext context) {
         this.context = context;
         catalogBooksScreen = AqualityServices.getScreenFactory().getScreen(CatalogBooksScreen.class);
+        catalogScreen = AqualityServices.getScreenFactory().getScreen(CatalogScreen.class);
         alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
     }
 
@@ -103,9 +106,14 @@ public class CatalogBooksSteps {
         Assert.assertEquals("The book " + word + " is not found", word.toLowerCase(), catalogBooksScreen.getNameOfFirstBook().toLowerCase());
     }
 
-    @Then("Search result is empty on catalog books screen")
-    public void isSearchEmpty() {
-        Assert.assertTrue("Results are not empty", catalogBooksScreen.isSearchResultsEmpty());
+    @Then("There is no results on catalog books screen")
+    public void isNoResults() {
+        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            Assert.assertTrue("Results are not empty", catalogBooksScreen.isNoResults());
+        }
+        else {
+            Assert.assertTrue("Search screen in displayed", catalogScreen.areCategoryRowsLoaded());
+        }
     }
 
     @And("Click {} action button on the first {} book on catalog books screen and save book as {string}")

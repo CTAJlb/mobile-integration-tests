@@ -1,6 +1,7 @@
 package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
+import aquality.appium.mobile.application.PlatformName;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
@@ -46,6 +47,37 @@ public class SearchSteps {
         searchModal.state().waitForDisplayed();
     }
 
+    @Then("Placeholder contains {string} text in search field")
+    public void checkTextInSearchField(String text){
+        Assert.assertTrue(String.format("Search field does not contain %s", text), searchModal.getTextFromSearchField().contains(text));
+    }
+
+    @When("I input only spaces in search field")
+    public void inputSpaces() {
+        searchModal.inputSpace();
+        searchModal.inputSpace();
+        searchModal.applySearch();
+    }
+
+    @When("I edit data by adding {string} in search field and save it as {string}")
+    public void editDataInSearchField(String textForEdit, String wordKey) {
+        context.add(wordKey, textForEdit);
+        searchModal.deleteSomeData();
+        searchModal.deleteSomeData();
+        searchModal.setSearchedText(textForEdit);
+    }
+
+    @Then("There is no possibility to search with empty search field")
+    public void checkSearchingWithEmptyField() {
+        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            Assert.assertFalse("Search button is clickable", searchModal.isSearchButtonClickable());
+        }
+        else {
+            searchModal.applySearch();
+            Assert.assertTrue("Search modal is present", catalogScreen.areCategoryRowsLoaded());
+        }
+    }
+
     @When("I return back from search modal")
     public void returnBack() {
         searchModal.closeSearchScreen();
@@ -71,6 +103,14 @@ public class SearchSteps {
         searchModal.setSearchedText(searchedText);
         searchModal.applySearch();
         Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", searchedText, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
+    }
+
+    @Then("The search field is displayed and contains {string} book")
+    public void checkTheDisplayingOfSearchField(String bookNameKey){
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(searchModal.isSearchLineDisplayed()).as("Search field is not displayed").isTrue();
+        softAssertions.assertThat(searchModal.getTextFromSearchField()).as("Book name is not displayed").isEqualTo(context.get(bookNameKey));
+        softAssertions.assertAll();
     }
 
     @When("I search several books and save them in list as {string}:")

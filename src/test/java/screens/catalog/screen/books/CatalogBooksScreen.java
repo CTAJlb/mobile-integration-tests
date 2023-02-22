@@ -28,7 +28,7 @@ public abstract class CatalogBooksScreen extends Screen {
 
     public abstract void clickActionButton(EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookName);
 
-    public abstract boolean isSearchResultsEmpty();
+    public abstract boolean isNoResults();
 
     public abstract boolean isBooksContainWord(String word);
 
