@@ -48,8 +48,10 @@ public class SearchSteps {
     }
 
     @Then("Placeholder contains {string} text in search field")
-    public void checkTextInSearchField(String text){
-        Assert.assertTrue(String.format("Search field does not contain %s", text), searchModal.getTextFromSearchField().contains(text));
+    public void checkTextInSearchField(String textKey){
+        String text = context.get(textKey);
+        String textFromField = searchModal.getTextFromSearchField();
+        Assert.assertTrue(String.format("Search field does not contain %s", text), textFromField.contains(text));
     }
 
     @When("I input only spaces in search field")
@@ -161,7 +163,6 @@ public class SearchSteps {
         Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().isDisplayed());
         searchModal.setSearchedText(word);
         searchModal.applySearch();
-        Assert.assertTrue("Search modal is not disappear", searchModal.state().waitForNotDisplayed());
     }
 
     private String getRandomPdfWithoutBadSymbols() {

@@ -17,7 +17,7 @@ public class IosSettingsScreen extends SettingsScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeNavigationBar[@name=\"Settings\"]";
 
     private  final ILabel lblSettings = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar"), "Settings");
-    private final IButton btnLibraries = getElementFactory().getButton(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[1]//XCUIElementTypeButton"), "Libraries button");
+    private final IButton btnLibraries = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Libraries\"]"), "Libraries button");
     private final IButton btnAboutPalace = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"About Palace\"]"), "About Palace");
     private final IButton btnPrivacyPolicy = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Privacy Policy\"]"), "Privacy Policy");
     private final IButton btnUserAgreement = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"User Agreement\"]"), "User Agreement");

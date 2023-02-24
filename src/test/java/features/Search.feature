@@ -109,9 +109,9 @@ Feature: Search libraries and books
   Scenario: Check the possibility of editing data in search field in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open search modal
-      And I enter book "Book" and save it as "word"
-      And I edit data by adding "hello" in search field and save it as "newWord"
-    Then Placeholder contains "newWord" text in search field
+      And I enter book "Book" and save it as 'word'
+      And I edit data by adding "hello" in search field and save it as 'newWord'
+    Then Placeholder contains 'newWord' text in search field
 
   @tier2
   Scenario: Check of empty field in LYRASIS

@@ -60,11 +60,6 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
 
     @Override
     public void addAccountFromWelcomeScreen(String libraryName) {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            while (alertScreen.state().waitForDisplayed()) {
-                alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.ALLOW);
-            }
-        }
         tutorialScreen.closeTutorial();
         welcomeScreen.tapFindLibraryButton();
         addAccountScreen.selectLibraryViaSearch(libraryName);
