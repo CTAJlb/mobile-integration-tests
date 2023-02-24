@@ -31,7 +31,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     private static final String BOOK_NAME_BY_NUMBER_IN_THE_LIST = "//android.widget.FrameLayout[%d]//android.view.ViewGroup//android.widget.TextView[1]";
     private static final String AUTHOR_OF_THE_BOOK_BY_NUMBER_IN_THE_LIST = "//android.widget.FrameLayout[%d]//android.view.ViewGroup//android.widget.TextView[2]";
     private static final String AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[2]";
-    private static final String BOOKS_LOCATOR = "//android.view.ViewGroup[contains(@resource-id, \"bookCellIdle\")]";
+    private static final String BOOK_NAME_LOCATOR = "//android.view.ViewGroup[contains(@resource-id, \"bookCellIdle\")]/android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
     private final ILabel lblNameOfFirstBook = AqualityServices.getElementFactory().getLabel(By.xpath("//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.TextView[1]"), "Name of first book");
     private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@text, \"No results\")]"), "No results found");
 
@@ -205,14 +205,11 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
 
     @Override
     public int getNumberOfBooksOnTheScreen() {
-        return getBooksList().size();
+        return getBooksName().size();
     }
 
-    private List<ILabel> getBooksList() {
-        return getElementFactory().findElements(By.xpath(BOOKS_LOCATOR), ElementType.LABEL);
-    }
     private List<String> getBooksName() {
-        List<ILabel> lblBooks = getBooksList();
+        List<ILabel> lblBooks = getElementFactory().findElements(By.xpath(BOOK_NAME_LOCATOR), ElementType.LABEL);
         List<String> booksName = new ArrayList<>();
         lblBooks.forEach(book->booksName.add(book.getText().toLowerCase()));
         return booksName;
