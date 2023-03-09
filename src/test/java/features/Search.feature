@@ -69,7 +69,7 @@ Feature: Search libraries and books
     | word          |
     | cat           |
     | a             |
-    | 1            |
+    | 3            |
 
   @tier2
   Scenario Outline: Find a book with name in different font cases in Palace

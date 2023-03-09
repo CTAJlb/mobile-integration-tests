@@ -194,7 +194,6 @@ Feature: Audiobook in Lyrasis
       And Open toc audiobook screen
     Then Chapter name next to 'chapterNumber' on toc audiobook screen is equal to 'nextChapter' saved chapter name
 
-
   @logout @returnBooks @tier1 @exclude_android
   Scenario Outline: Check of line for time remaining
     When I search 'available' book of distributor '<distributor>' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
