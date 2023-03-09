@@ -18,8 +18,8 @@ Feature: Catalog Navigation
       And Count of books in first lane is more than 1
     When I get names of books on screen and save them as 'listOfBooksOnMainPage'
       And I open categories by chain and chain starts from CategoryScreen:
-        | Fiction  |
-        | Classics |
+        | Nonfiction  |
+        | Education |
     Then Subcategory name is 'Classics'
       And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
     When I open first book in Subcategory List and save it as 'bookInfo'

@@ -9,7 +9,7 @@ import screens.epub.navigationBarEpub.NavigationBarEpubScreen;
 @ScreenType(platform = PlatformName.IOS)
 public class IosNavigationBarEpubScreen extends NavigationBarEpubScreen {
     private final IButton btnFontSettings = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Reader settings\"]"), "Font Settings");
-    private final IButton btnTOC = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[2]"), "Table of contents");
+    private final IButton btnTOC = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Table of contents and bookmarks\"]"), "Table of contents");
     private final IButton btnAddBookmark = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Add Bookmark\"]"), "Add Bookmark");
     private final IButton btnDeleteBookmark = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[@name=\"Remove Bookmark\"]"), "Delete Bookmark");
     private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "btnBack");

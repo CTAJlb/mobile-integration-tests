@@ -24,7 +24,8 @@ Feature: Check of View Sample
       And I open Catalog
       And I add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
-    When I open search modal
+    When I open Catalog
+      And I open search modal
       And I search for "The Namesake" and save bookName as 'bookNameInfo'
       And I switch to "eBooks" catalog tab
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
