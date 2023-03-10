@@ -11,6 +11,8 @@ public abstract class ReaderEpubScreen extends Screen {
         super(locator, "ReaderEpub");
     }
 
+    public abstract boolean isBookCoverDisplayed();
+
     public abstract String getBookName();
 
     public abstract NavigationBarEpubScreen getNavigationBarEpubScreen();

@@ -36,6 +36,10 @@ public class EpubSteps {
         this.context = context;
     }
 
+    @Then("Reader epub screen is opened")
+    public void isEpubReaderOpened() {
+        Assert.assertTrue("Book cover is not displayed", readerEpubScreen.isBookCoverDisplayed());
+    }
     @Then("{string} book is present on epub reader screen")
     public void isEpubBookPresent(String bookInfoKey) {
         CatalogBookModel catalogBookModel = context.get(bookInfoKey);

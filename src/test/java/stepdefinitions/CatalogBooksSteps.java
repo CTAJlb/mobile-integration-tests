@@ -108,12 +108,7 @@ public class CatalogBooksSteps {
 
     @Then("There is no results on catalog books screen")
     public void isNoResults() {
-        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            Assert.assertTrue("Results are not empty", catalogBooksScreen.isNoResults());
-        }
-        else {
-            Assert.assertTrue("Search screen in displayed", catalogScreen.areCategoryRowsLoaded());
-        }
+        Assert.assertTrue("Results are not empty", catalogBooksScreen.isNoResults());
     }
 
     @And("Click {} action button on the first {} book on catalog books screen and save book as {string}")

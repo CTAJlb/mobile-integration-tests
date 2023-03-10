@@ -165,6 +165,16 @@ public class BookDetailsSteps {
         Assert.assertTrue("Book cover is not displayed", bookDetailsScreen.isBookHasCover());
     }
 
+    @Then("Book format in Information section is displayed on book details screen")
+    public void isBookFormatDisplayed() {
+        Assert.assertTrue("Book format is not displayed", bookDetailsScreen.isBookFormatInfoExist());
+    }
+
+    @Then("Book format in Information section is {string} on book details screen")
+    public void isBookFormatCorrect(String bookFormat) {
+        Assert.assertEquals("Book format is not correct", bookFormat, bookDetailsScreen.getBookFormatInfo());
+    }
+
     @Then("Description is not empty in book details screen")
     public void isDescriptionNotEmpty() {
         Assert.assertTrue("Description section is empty", bookDetailsScreen.isDescriptionNotEmpty());
