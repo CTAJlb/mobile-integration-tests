@@ -57,7 +57,7 @@ Feature: Audiobook in Lyrasis
 
   @logout @returnBooks @tier1
   Scenario: Biblioboard: Open the audiobook at the last open chapter and check time code
-    When I search for "	Bocas : a novel" and save bookName as 'bookNameInfo'
+    When I search for "Bocas : a novel" and save bookName as 'bookNameInfo'
       And I switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
