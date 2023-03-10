@@ -23,10 +23,16 @@ public class AndroidReaderEpubScreen extends ReaderEpubScreen {
     private final ILabel lblPageNumber = getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_page\")]"), "lblPageNumber");
     private final ILabel lblPage = getElementFactory().getLabel(By.xpath("//android.webkit.WebView[1]"), "lblPage");
     private final ILabel lblChapterName = getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id,\"reader2_position_title\")]"), "lblChapterName");
+    private final ILabel lblCover = getElementFactory().getLabel(By.xpath("//android.view.View[@resource-id=\"titlepage\"]"), "Book cover");
 
     public AndroidReaderEpubScreen() {
         super(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"readerToolbar\")]"));
         navigationBarEpubScreen = AqualityServices.getScreenFactory().getScreen(NavigationBarEpubScreen.class);
+    }
+
+    @Override
+    public boolean isBookCoverDisplayed() {
+        return lblCover.state().waitForDisplayed();
     }
 
     @Override

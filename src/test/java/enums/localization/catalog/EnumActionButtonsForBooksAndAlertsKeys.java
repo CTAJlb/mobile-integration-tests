@@ -27,6 +27,7 @@ public enum EnumActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     NOT_NOW("notNow"),
     OK("ok"),
     VIEW_SAMPLE("view_sample"),
+    PLAY_SAMPLE("play_sample"),
     ALLOW("allow");
 
     private static final AbstractILocalizationProvider localizationProvider =

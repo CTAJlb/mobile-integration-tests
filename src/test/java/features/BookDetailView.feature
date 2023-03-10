@@ -35,6 +35,39 @@ Feature: Book detail view screen
       And The book cover is displayed on book details screen
 
   @tier2
+  Scenario Outline: Check of a book format in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open Catalog
+      And I open search modal
+      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
+      And I switch to '<tabName>' catalog tab
+      And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then Book 'bookInfo' is opened on book details screen
+      And Book format in Information section is displayed on book details screen
+      And Book format in Information section is '<format>' on book details screen
+    Scenarios:
+      | distributor        | bookType  | tabName    | format    |
+      | Bibliotheca        | EBOOK     | eBooks     | eBook     |
+      | Bibliotheca        | AUDIOBOOK | Audiobooks | Audiobook |
+      | Axis 360           | EBOOK     | eBooks     | eBook     |
+      | Axis 360           | AUDIOBOOK | Audiobooks | Audiobook |
+      | Palace Marketplace | EBOOK     | eBooks     | eBook     |
+      | Palace Marketplace | AUDIOBOOK | Audiobooks | AudiobooK |
+      | Biblioboard        | EBOOK     | eBooks     | PDF       |
+
+  @tier2
+  Scenario: Biblioboard audiobook: Check of a book format in LYRASIS
+    When I add "LYRASIS Reads" account from welcomeScreen
+      And I open Catalog
+      And I switch to 'Audiobooks' catalog tab
+      And I open 'New BiblioBoard Test' category
+      And I swipe catalog of books down on catalog book screen
+      And Open random book on catalog book screen and save book as 'bookInfo'
+    Then Book 'bookInfo' is opened on book details screen
+      And Book format in Information section is displayed on book details screen
+      And Book format in Information section is 'Audiobook' on book details screen
+
+  @tier2
   Scenario Outline: Check of a "More..." button in Description section in LYRASIS
     When I add "LYRASIS Reads" account from welcomeScreen
       And I open Catalog

@@ -24,9 +24,10 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
 
     private final ILabel lblErrorScreen = getElementFactory().getLabel(By.xpath("//android.widget.ScrollView"), "Error Screen");
     private final ILabel lblPublished = getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Published\")]/following-sibling::android.widget.TextView"), "lblPublished");
-    private final ILabel lblPublisher = getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Publisher\")]/following::android.widget.TextView"), "lblPublisher");
-    private final ILabel lblCategories = getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Categor\")]/following::android.widget.TextView"), "lblCategories");
-    private final ILabel lblDistributor = getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Distributor\")]/following::android.widget.TextView"), "lblDistributor");
+    private final ILabel lblBookFormat = getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[@text=\"Format\"]/following::android.widget.TextView"), "Book format label");
+    private final ILabel lblPublisher = getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Publisher\")]/following::android.widget.TextView"), "Publisher label");
+    private final ILabel lblCategories = getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Categor\")]/following::android.widget.TextView"), "Categories label");
+    private final ILabel lblDistributor = getElementFactory().getLabel(By.xpath("//android.widget.LinearLayout//android.widget.TextView[contains(@text,\"Distributor\")]/following::android.widget.TextView"), "Distributor label");
     private final ILabel lblBookTitleInfo = getElementFactory().getLabel(By.id("bookDetailTitle"), "Book title");
     private final ILabel lblProgressBar = getElementFactory().getLabel(By.xpath("//android.view.ViewGroup[contains(@resource-id,\"bookDetailStatusInProgress\")]"), "lblProgressBar");
     private final ILabel lblBookAuthorsInfo = getElementFactory().getLabel(By.id("bookDetailAuthors"), "Book Authors");
@@ -104,6 +105,16 @@ public class AndroidBookDetailsScreen extends BookDetailsScreen {
     @Override
     public String getPublishedInfo() {
         return lblPublished.getText();
+    }
+
+    @Override
+    public boolean isBookFormatInfoExist() {
+        return lblBookFormat.state().waitForDisplayed();
+    }
+
+    @Override
+    public String getBookFormatInfo() {
+        return lblBookFormat.getText();
     }
 
     @Override
