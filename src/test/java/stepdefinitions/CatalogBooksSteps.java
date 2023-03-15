@@ -58,7 +58,7 @@ public class CatalogBooksSteps {
         catalogBooksScreen.openBook(actionButtonKey, bookName);
     }
 
-    @Then("I check that book {string} contains {} action button on catalog book screen")
+    @Then("Check that book {string} contains {} action button on catalog book screen")
     public void isBookContainBtn(String bookNameKey, final EnumActionButtonsForBooksAndAlertsKeys key) {
         String bookName = context.get(bookNameKey);
         Assert.assertTrue("Button " + key + " is not displayed", catalogBooksScreen.isActionButtonDisplayed(bookName, key));

@@ -122,7 +122,7 @@ public class AccountSteps {
         addAccountScreen.enterLibraryName(word);
     }
 
-    @When("I close account screen")
+    @When("Close account screen")
     public void closeAccount(){
         accountScreen.closeAccountScreen();
     }
