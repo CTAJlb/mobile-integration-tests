@@ -24,9 +24,9 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         this.abstractApplicationSteps = stepsFactory.getSteps(AbstractApplicationSteps.class);
     }
 
-    @When("I turn on test mode in {string} library")
-    public void turnOnTestMode(String libraryName) {
-        abstractApplicationSteps.turnOnTestMode(libraryName);
+    @When("Turn on test mode")
+    public void turnOnTestMode() {
+        abstractApplicationSteps.turnOnTestMode();
     }
 
     @And("I return to previous screen for epub and pdf")
@@ -44,7 +44,7 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.addAccountFromWelcomeScreen(libraryName);
     }
 
-    @When("I add {string} account by the logo")
+    @When("Add {string} account by the logo")
     public void addAccountByTheLogo(String libraryName) {
         abstractApplicationSteps.addAccountByTheLogo(libraryName);
     }

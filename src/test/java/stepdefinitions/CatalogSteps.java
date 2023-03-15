@@ -11,6 +11,7 @@ import enums.localization.facetedsearch.FacetSortByKeys;
 import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import framework.utilities.ScreenshotUtils;
+import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -102,7 +103,8 @@ public class CatalogSteps {
 
     @When("I get names of books on screen and save them as {string}")
     public void getNamesOfBooksAndSaveThem(String booksNamesListKey) {
-        context.add(booksNamesListKey, catalogScreen.getListOfBooksNames());
+        List<String> books = catalogScreen.getListOfBooksNames();
+        context.add(booksNamesListKey, books);
     }
 
     @Then("List of books on screen is not equal to list of books saved as {string}")
@@ -118,7 +120,7 @@ public class CatalogSteps {
         catalogScreen.selectLibraryFromListOfAddedLibraries(libraryName);
     }
 
-    @And("I open Catalog")
+    @When("Open Catalog")
     public void openCatalog() {
         bottomMenuForm.open(BottomMenu.CATALOG);
         catalogScreen.state().waitForDisplayed();
@@ -140,7 +142,7 @@ public class CatalogSteps {
         Assert.assertTrue(String.format("Library %s is not present on Catalog Screen", libraryName), catalogScreen.isLibraryPresent(libraryName));
     }
 
-    @And("I open {string} category")
+    @And("Open {string} category")
     public void openCategory(String categoryName) {
         catalogScreen.state().waitForDisplayed();
         catalogScreen.openCategory(categoryName);
@@ -196,7 +198,7 @@ public class CatalogSteps {
         subcategoryScreen.openFirstBook();
     }
 
-    @When("I switch to {string} catalog tab")
+    @When("Switch to {string} catalog tab")
     public void switchToCatalogTab(String catalogTab) {
         catalogScreen.switchToCatalogTab(catalogTab);
         catalogScreen.state().waitForDisplayed();

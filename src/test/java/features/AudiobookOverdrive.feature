@@ -1,23 +1,29 @@
 Feature: Audiobooks in A1QA library
 
   Background:
-    Given I turn on test mode in "Palace Bookshelf" library
-    When Enable hidden libraries
-      And I open Catalog
-      And I add "A1QA Test Library" account by the logo
+    Given Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "Palace Bookshelf" on Add library screen
+    Then Account "Palace Bookshelf" is present on Accounts screen
+    When Turn on test mode
+      And Enable hidden libraries
+      And Open Catalog
+      And Add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
-    When I enter credentials for "A1QA Test Library" account
+    When Enter credentials for "A1QA Test Library" account
     Then Login is performed successfully
-    When I open Catalog
-      And I open search modal
+    When Open Catalog
+      And Open search modal
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Open the audiobook at the last open chapter and check time code
-    When I search for "Catching Fire" and save bookName as 'bookNameInfo'
-      And I switch to 'Audiobooks' catalog tab
+    When Search for "Catching Fire" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
-    Then I check that book contains LISTEN action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Open toc audiobook screen
@@ -42,8 +48,8 @@ Feature: Audiobooks in A1QA library
       And Tap pause button on audio player screen
     Then Play button is present on audio player screen
     When Save book play time as 'timeAhead' on audio player screen
-      And I restart app
-      And I open Books
+      And Restart app
+      And Open Books
       And Open AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
       And Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
@@ -52,11 +58,11 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Navigate by Audiobook
-    When I search for "The Hunger Games" and save bookName as 'bookNameInfo'
-      And I switch to 'Audiobooks' catalog tab
+    When Search for "The Hunger Games" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
-    Then I check that book contains LISTEN action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Tap play button on audio player screen
@@ -74,18 +80,18 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check end of chapter sleep timer
-    When I search for "Waking the Tiger" and save bookName as 'bookNameInfo'
-      And I switch to 'Audiobooks' catalog tab
+    When Search for "Waking the Tiger" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
-    Then I check that book contains LISTEN action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Open toc audiobook screen
       And Open the 1 chapter on toc audiobook screen and save the chapter name as 'chapterName' and chapter number as 'chapterNumber'
       And Set END_OF_CHAPTER sleep timer on sleep timer audiobook screen
       And Select 2X playback speed on playback speed audiobook screen
-      And I stretch slider on the time tracking line forward on audio player screen
+      And Stretch slider on the time tracking line forward on audio player screen
       And Listen a chapter on audio player screen
     Then Play button is present on audio player screen
     When Save the name of chapter as 'nextChapter' on audio player screen
@@ -94,22 +100,22 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2 @exclude_android
   Scenario: Audiobooks: Check of line for time remaining
-    When I search for "Mockingjay" and save bookName as 'bookNameInfo'
-      And I switch to 'Audiobooks' catalog tab
+    When Search for "Mockingjay" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
-    Then I check that book contains LISTEN action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
       And Line for time remaining is displayed on audio player screen
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check of switching to the next chapter
-    When I search for "The King's Taster" and save bookName as 'bookNameInfo'
-      And I switch to 'Audiobooks' catalog tab
+    When Search for "The King's Taster" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
-    Then I check that book contains LISTEN action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Open toc audiobook screen
@@ -120,11 +126,11 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check closing playback speed and sleep timer
-    When I search for "The Lost Symbol" and save bookName as 'bookNameInfo'
-      And I switch to 'Audiobooks' catalog tab
+    When Search for "The Lost Symbol" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
-    Then I check that book contains LISTEN action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
       And The speed by default is 1.0
@@ -139,11 +145,11 @@ Feature: Audiobooks in A1QA library
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check time tracking line
-    When I search for "The Art of Racing in the Rain" and save bookName as 'bookNameInfo'
-      And I switch to 'Audiobooks' catalog tab
+    When Search for "The Art of Racing in the Rain" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
-    Then I check that book contains LISTEN action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Tap play button on audio player screen
@@ -151,44 +157,44 @@ Feature: Audiobooks in A1QA library
     When Tap pause button on audio player screen
     Then Play button is present on audio player screen
     When Save book play time as 'timeInfo' on audio player screen
-      And I stretch slider on the time tracking line forward on audio player screen
+      And Stretch slider on the time tracking line forward on audio player screen
       And Wait for 5 seconds
     Then Playing time is not equal to 'timeInfo' on audio playing screen
     When Save book play time as 'timeInfo2' on audio player screen
-      And I stretch slider on the time tracking line back on audio player screen
+      And Stretch slider on the time tracking line back on audio player screen
       And Wait for 5 seconds
     Then Playing time is not equal to 'timeInfo2' on audio playing screen
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check of not rewinding forward and back by tapping on time bar
-    When I search for "Master and Commander" and save bookName as 'bookNameInfo'
-      And I switch to 'Audiobooks' catalog tab
+    When Search for "Master and Commander" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
-    Then I check that book contains LISTEN action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Tap play button on audio player screen
     Then Pause button is present on audio player screen
     When Tap pause button on audio player screen
     Then Play button is present on audio player screen
-    When I stretch slider on the time tracking line forward on audio player screen
+    When Stretch slider on the time tracking line forward on audio player screen
       And Wait for 5 seconds
       And Save book play time as 'timeBehind' on audio player screen
-      And I tap on the time bar forward on audio player screen
+      And Tap on the time bar forward on audio player screen
       And Save book play time as 'timeForward' on audio player screen
     Then Play times 'timeBehind' and 'timeForward' are equals
-    When I tap on the time bar back on audio player screen
+    When Tap on the time bar back on audio player screen
       And Save book play time as 'timeBackward' on audio player screen
     Then Play times 'timeBehind' and 'timeBackward' are equals
 
   @logout @returnBooks @tier2
   Scenario Outline: Audiobooks: Playback speed: Check of playback speed
-    When I search for "The Lightning Thief" and save bookName as 'bookNameInfo'
-      And I switch to 'Audiobooks' catalog tab
+    When Search for "The Lightning Thief" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
-    Then I check that book contains LISTEN action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
     When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Select <speed>X playback speed on playback speed audiobook screen
@@ -197,8 +203,8 @@ Feature: Audiobooks in A1QA library
       And Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
       And Current playback speed value is <speed>X on audio player screen
-    When I restart app
-      And I open Books
+    When Restart app
+      And Open Books
       And Open AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
       And Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened

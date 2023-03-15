@@ -36,10 +36,7 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
     }
 
     @Override
-    public void turnOnTestMode(String libraryName) {
-        tutorialScreen.closeTutorial();
-        welcomeScreen.tapFindLibraryButton();
-        addAccountScreen.selectLibraryViaSearch(libraryName);
+    public void turnOnTestMode() {
         bottomMenuForm.open(BottomMenu.SETTINGS);
         settingsScreen.openTestMode();
     }

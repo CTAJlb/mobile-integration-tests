@@ -47,7 +47,7 @@ public class CatalogBooksSteps {
         context.add(bookInfoKey, bookInfo);
     }
 
-    @When("I swipe catalog of books down on catalog book screen")
+    @When("Swipe catalog of books down on catalog book screen")
     public void swipeDown() {
         SwipeElementUtils.swipeByCoordinatesOfWindow();
     }

@@ -35,7 +35,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
         settingsScreen = AqualityServices.getScreenFactory().getScreen(SettingsScreen.class);
     }
 
-    public abstract void turnOnTestMode(String libraryName);
+    public abstract void turnOnTestMode();
 
     public abstract void returnToPreviousScreenForEpubAndPdf();
 
