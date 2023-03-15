@@ -46,7 +46,7 @@ public class AccountSteps {
         alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
     }
 
-    @When("I add {string} account")
+    @When("Add {string} account")
     public void addAccount(String libraryName) {
         openAccounts();
         librariesScreen.addLibrary();
@@ -63,7 +63,7 @@ public class AccountSteps {
         Assert.assertTrue("Add library button is not displayed", librariesScreen.isAddLibraryBtnDisplayed());
     }
 
-    @When("I click Add library button on libraries screen")
+    @When("Click Add library button on libraries screen")
     public void clickAddLibrary() {
         librariesScreen.addLibrary();
     }
@@ -78,7 +78,7 @@ public class AccountSteps {
         Assert.assertTrue("Libraries are not sorted in alphabetical order", addAccountScreen.isSortingOfLibrariesCorrect());
     }
 
-    @When("I add libraries through settings:")
+    @When("Add libraries through settings:")
     public void addSeveralLibraries(List<String > libraries) {
         libraries.forEach(library -> {
             openAccounts();
@@ -93,7 +93,7 @@ public class AccountSteps {
         Assert.assertTrue("Libraries are not sorted in alphabetical order", librariesScreen.isLibrariesAreSorted());
     }
 
-    @When("I click to {string} and save library name as {string} on libraries screen")
+    @When("Click to {string} and save library name as {string} on libraries screen")
     public void clickToLibrary(String libraryName, String libraryNameKay) {
         context.add(libraryNameKay, libraryName);
         librariesScreen.openLibrary(libraryName);
@@ -110,13 +110,13 @@ public class AccountSteps {
         addAccountScreen.selectLibraryViaSearch(libraryName);
     }
 
-    @When("I enter {string} library and save name as {string} on add account screen")
+    @When("Enter {string} library and save name as {string} on add account screen")
     public void enterLibName(String libraryName, String libraryNameKey) {
         context.add(libraryNameKey, libraryName);
         addAccountScreen.enterLibraryName(libraryName);
     }
 
-    @When("I enter word {} and save as {string} on add account screen")
+    @When("Enter word {} and save as {string} on add account screen")
     public void enterData(String word, String infoKey) {
         context.add(infoKey, word);
         addAccountScreen.enterLibraryName(word);
@@ -173,13 +173,13 @@ public class AccountSteps {
         Assert.assertFalse(libraryName + " is present on Accounts screen", librariesScreen.isLibraryPresent(libraryName));
     }
 
-    @When("I remove {string} account")
+    @When("Remove {string} account")
     public void removeAccount(String libraryName) {
         openAccounts();
         librariesScreen.deleteLibrary(libraryName);
     }
 
-    @When("I open account {string}")
+    @When("Open account {string}")
     public void openAccount(String libraryName) {
         openAccounts();
         librariesScreen.openLibrary(libraryName);
@@ -202,7 +202,7 @@ public class AccountSteps {
         softAssertions.assertAll();
     }
 
-    @When("I open User license agreement on account screen")
+    @When("Open User license agreement on account screen")
     public void openLicAgreement(){
         accountScreen.openLicenseAgreement();
     }
@@ -212,7 +212,7 @@ public class AccountSteps {
         Assert.assertTrue("User License Agreement is not opened", accountScreen.isLinkOpened());
     }
 
-    @When("I open Content Licenses on account screen")
+    @When("Open Content Licenses on account screen")
     public void openAccountLicenses() {
         if(AqualityServices.getApplication().getPlatformName()== PlatformName.ANDROID) {
             SwipeElementUtils.swipeByCoordinatesOfWindow();
@@ -225,7 +225,7 @@ public class AccountSteps {
         Assert.assertTrue("Content Licenses is not opened", accountScreen.isContentLicOpened());
     }
 
-    @When("I open Advanced on account screen")
+    @When("Open Advanced on account screen")
     public void openAdvanced(){
         accountScreen.openAdvanced();
     }
@@ -235,7 +235,7 @@ public class AccountSteps {
         Assert.assertTrue("Advanced screen does not contain " + buttonName + " button", accountScreen.isButtonDisplayed(buttonName));
     }
 
-    @When("I click {string} button and cancel it on Advanced screen")
+    @When("Click {string} button and cancel it on Advanced screen")
     public void clickDelete(String buttonName) {
         accountScreen.clickDelete(buttonName);
         if(alertScreen.state().waitForDisplayed()) {

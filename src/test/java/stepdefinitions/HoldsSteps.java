@@ -38,7 +38,7 @@ public class HoldsSteps {
         facetedSearchScreen = AqualityServices.getScreenFactory().getScreen(FacetedSearchScreen.class);
     }
 
-    @When("I open Holds")
+    @When("Open Holds")
     public void openHolds() {
         bottomMenuForm.open(BottomMenu.HOLDS);
     }

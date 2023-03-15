@@ -99,7 +99,7 @@ public class BooksSteps {
         Assert.assertEquals("Amount of books is not correct on books screen", expectedAmountOfBooks, booksScreen.getCountOfBooks());
     }
 
-    @When("I refresh list of books on books screen")
+    @When("Refresh list of books on books screen")
     public void refreshListOfBooks() {
         booksScreen.refreshList();
     }

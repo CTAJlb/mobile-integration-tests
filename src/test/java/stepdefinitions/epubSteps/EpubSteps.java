@@ -48,17 +48,17 @@ public class EpubSteps {
         Assert.assertTrue(String.format("Book is not present on epub reader screen. Expected bookName - '%1$s', actualName - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));
     }
 
-    @When("I click on left book corner on epub reader screen")
+    @When("Click on left book corner on epub reader screen")
     public void clickOnLeftBookCorner() {
         readerEpubScreen.clickLeftCorner();
     }
 
-    @When("I click on right book corner on epub reader screen")
+    @When("Click on right book corner on epub reader screen")
     public void clickOnRightBookCorner() {
         readerEpubScreen.clickRightCorner();
     }
 
-    @When("I save pageNumber as {string} and chapterName as {string} on epub reader screen")
+    @When("Save pageNumber as {string} and chapterName as {string} on epub reader screen")
     public void savePageNumberAndChapterName(String pageNumberKey, String chapterNameKey) {
         context.add(pageNumberKey, readerEpubScreen.getPageNumber());
         context.add(chapterNameKey, readerEpubScreen.getChapterName());
@@ -144,7 +144,7 @@ public class EpubSteps {
         Assert.assertTrue("Font and background settings epub screen is not opened", fontAndBackgroundSettingsEpubScreen.state().waitForDisplayed());
     }
 
-    @When("I save font size as {string}")
+    @When("Save font size as {string}")
     public void saveFontSize(String fontSizeKey) {
         context.add(fontSizeKey, readerEpubScreen.getFontSize());
     }
@@ -163,21 +163,21 @@ public class EpubSteps {
         Assert.assertTrue("Font size is not decreased newFontSize - " + newFontSize + ", oldFontSize - " + oldFontSize, newFontSize < oldFontSize);
     }
 
-    @When("I return to previous screen from epub")
+    @When("Return to previous screen from epub")
     public void returnToPreviousScreen() {
         readerEpubScreen.openNavigationBar();
         readerEpubScreen.getNavigationBarEpubScreen().returnToPreviousScreen();
     }
 
-    @When("I open font settings")
+    @When("Open font settings")
     public void openFontSettings() {
         readerEpubScreen.openNavigationBar();
         readerEpubScreen.getNavigationBarEpubScreen().tapFontSettingsButton();
     }
 
-    @When("I {} of text")
-    @When("I change font style to {}")
-    @When("I change contrast to {}")
+    @When("{} of text")
+    @When("Change font style to {}")
+    @When("Change contrast to {}")
     public void changeSettingsForFont(ReaderSettingKeys readerSettingKey) {
         fontAndBackgroundSettingsEpubScreen.setSetting(readerSettingKey);
     }
@@ -189,7 +189,7 @@ public class EpubSteps {
         Assert.assertTrue(String.format("PageNumber is not correct. ExpectedPageNumber-%1$s but actualPageNumber-%2$s", expectedPageNumber, actualPageNumber), AqualityServices.getConditionalWait().waitFor(() -> expectedPageNumber.equals(actualPageNumber)));
     }
 
-    @When("I scroll page forward from {int} to {int} times")
+    @When("Scroll page forward from {int} to {int} times")
     public void swipePageForward(int minValue, int maxValue) {
         int randomScrollsCount = RandomUtils.nextInt(minValue, maxValue);
         AqualityServices.getLogger().info("Scrolling " + randomScrollsCount + " times on reader epub screen");

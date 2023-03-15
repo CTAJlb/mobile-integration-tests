@@ -113,7 +113,7 @@ public class CatalogSteps {
         Assert.assertNotEquals("Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")), expectedList, catalogScreen.getListOfBooksNames());
     }
 
-    @And("I switch to {string} from side menu")
+    @And("Switch to {string} from side menu")
     public void openLibraryFromSideMenu(String libraryName) {
         bottomMenuForm.open(BottomMenu.CATALOG);
         mainCatalogToolbarForm.chooseAnotherLibrary();

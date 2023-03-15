@@ -32,7 +32,7 @@ public class BookDetailsSteps {
         alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
     }
 
-    @And("Close Book Details for IOSTab")
+    @When("Close Book Details for IOSTab")
     public void closeBookDetailsOnlyForIOSTab() {
         bookDetailsScreen.closeBookDetailsOnlyForIOSTabIfDisplayed();
     }

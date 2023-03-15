@@ -33,7 +33,7 @@ public class CredentialsSteps extends BaseSteps implements ICredentialsSteps {
         abstractCredentialsSteps.isLogoutSuccessfully();
     }
 
-    @When("I click the log out button on the account screen")
+    @When("Click the log out button on the account screen")
     public void clickLogOut() {
         abstractCredentialsSteps.clickLogOut();
     }

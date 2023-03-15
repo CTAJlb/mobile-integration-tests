@@ -79,7 +79,7 @@ public class CatalogBooksSteps {
         }
     }
 
-    @And("{} book with {} action button and {string} bookInfo is present on catalog books screen")
+    @Then("{} book with {} action button and {string} bookInfo is present on catalog books screen")
     public void isBookPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();
