@@ -34,7 +34,7 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.returnToPreviousScreenForEpubAndPdf();
     }
 
-    @When("I restart app")
+    @When("Restart app")
     public void restartApp() {
         abstractApplicationSteps.restartApp();
     }

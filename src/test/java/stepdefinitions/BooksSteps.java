@@ -35,7 +35,7 @@ public class BooksSteps {
         Assert.assertTrue("Books are present on books screen", booksScreen.isNoBooksMessagePresent());
     }
 
-    @And("I open Books")
+    @And("Open Books")
     public void openBooks() {
         bottomMenuForm.open(BottomMenu.BOOKS);
     }

@@ -161,12 +161,12 @@ public class AudioPlayerSteps {
         audioPlayerScreen.skipBehind();
     }
 
-    @When("I stretch slider on the time tracking line forward on audio player screen")
+    @When("Stretch slider on the time tracking line forward on audio player screen")
     public void stretchSliderForward() {
         audioPlayerScreen.stretchPlaySliderForward();
     }
 
-    @When("I stretch slider on the time tracking line back on audio player screen")
+    @When("Stretch slider on the time tracking line back on audio player screen")
     public void stretchSliderBack() {
         audioPlayerScreen.stretchPlaySliderBack();
     }
@@ -244,12 +244,12 @@ public class AudioPlayerSteps {
         }
     }
 
-    @When("I tap on the time bar forward on audio player screen")
+    @When("Tap on the time bar forward on audio player screen")
     public void tapForward() {
         audioPlayerScreen.tapOnPlayBarForward();
     }
 
-    @When("I tap on the time bar back on audio player screen")
+    @When("Tap on the time bar back on audio player screen")
     public void tapBackward() {
         audioPlayerScreen.tapOnPlayBarBackward();
     }

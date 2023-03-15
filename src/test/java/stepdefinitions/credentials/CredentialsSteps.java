@@ -38,7 +38,7 @@ public class CredentialsSteps extends BaseSteps implements ICredentialsSteps {
         abstractCredentialsSteps.clickLogOut();
     }
 
-    @And("I enter credentials for {string} account")
+    @And("Enter credentials for {string} account")
     public void enterCredentialsForLibraryAccount(String libraryName) {
         saveLibraryForLogOut(libraryName);
         abstractCredentialsSteps.enterCredentialsForLibraryAccount(libraryName);

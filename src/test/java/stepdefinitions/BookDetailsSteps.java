@@ -106,7 +106,7 @@ public class BookDetailsSteps {
         softAssertions.assertAll();
     }
 
-    @Then("I check that book contains {} action button on book details screen")
+    @Then("Check that book contains {} action button on book details screen")
     public void checkThatBookContainsActionButton(final EnumActionButtonsForBooksAndAlertsKeys key) {
         boolean isButtonPresent = bookDetailsScreen.isActionButtonDisplayed(key);
         addScreenshotIfErrorPresent(isButtonPresent);

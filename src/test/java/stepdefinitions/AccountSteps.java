@@ -105,6 +105,11 @@ public class AccountSteps {
         Assert.assertTrue("The screen with settings of library " + libraryName + " is not opened", librariesScreen.isLibrarySettingsOpened(libraryName));
     }
 
+    @When("Add library {string} on Add library screen")
+    public void addLibrary(String libraryName) {
+        addAccountScreen.selectLibraryViaSearch(libraryName);
+    }
+
     @When("I enter {string} library and save name as {string} on add account screen")
     public void enterLibName(String libraryName, String libraryNameKey) {
         context.add(libraryNameKey, libraryName);

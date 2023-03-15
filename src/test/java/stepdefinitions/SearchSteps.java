@@ -40,7 +40,7 @@ public class SearchSteps {
         catalogBooksScreen = AqualityServices.getScreenFactory().getScreen(CatalogBooksScreen.class);
     }
 
-    @When("I open search modal")
+    @When("Open search modal")
     public void openSearchModal() {
         catalogScreen.state().waitForDisplayed();
         mainCatalogToolbarForm.openSearchModal();
@@ -97,7 +97,7 @@ public class SearchSteps {
         Assert.assertTrue("Search modal is not loaded", searchModal.state().waitForDisplayed());
     }
 
-    @When("I search for {string} and save bookName as {string}")
+    @When("Search for {string} and save bookName as {string}")
     public void searchFor(String searchedText, String bookNameInfoKey) {
         context.add(bookNameInfoKey, searchedText);
         Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().isDisplayed());
