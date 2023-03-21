@@ -5,6 +5,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import aquality.selenium.core.elements.ElementsCount;
 import constants.applicationattributes.IosAttributes;
 import org.openqa.selenium.By;
 import screens.audiobook.tocAudiobook.TocAudiobookScreen;
@@ -16,7 +17,8 @@ import java.util.List;
 public class IosTocAudiobookScreen extends TocAudiobookScreen {
     private final ILabel lblChapterName = getElementFactory().getLabel(By.xpath(CHAPTER_NAME_LOC), "Chapter name");
     private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton"), "Back button");
-    private static final String CHAPTER_NAME_LOC = "//XCUIElementTypeTable//XCUIElementTypeCell//XCUIElementTypeStaticText[1]";
+    private static final String CHAPTER_NAME_LOC = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[1]";
+    private static final String CURRENT_CHAPTER_NAME = "//XCUIElementTypeTable/XCUIElementTypeCell[%d]/XCUIElementTypeStaticText[1]";
 
     public IosTocAudiobookScreen() {
         super(By.xpath("//XCUIElementTypeTable"));
@@ -29,9 +31,9 @@ public class IosTocAudiobookScreen extends TocAudiobookScreen {
 
     @Override
     public String openChapterAndGetChapterName(int chapterNumber) {
-        IElement lblChapterText = getChapters().get(chapterNumber);
-        String chapterText = lblChapterText.getAttribute(IosAttributes.NAME);
-        lblChapterText.click();
+        ILabel lblChapter = getElementFactory().getLabel(By.xpath(String.format(CURRENT_CHAPTER_NAME, chapterNumber)), "Chapter");
+        String chapterText = lblChapter.getAttribute(IosAttributes.NAME);
+        lblChapter.click();
         return chapterText;
     }
 
@@ -56,7 +58,7 @@ public class IosTocAudiobookScreen extends TocAudiobookScreen {
         btnBack.click();
     }
 
-    private List<IElement> getChapters() {
+    private List<ILabel> getChapters() {
         return new ArrayList<>(getElementFactory().findElements(By.xpath(CHAPTER_NAME_LOC), ElementType.LABEL));
     }
 }

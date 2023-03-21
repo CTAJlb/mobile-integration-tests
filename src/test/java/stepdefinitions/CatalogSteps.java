@@ -11,6 +11,7 @@ import enums.localization.facetedsearch.FacetSortByKeys;
 import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import framework.utilities.ScreenshotUtils;
+import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -83,7 +84,7 @@ public class CatalogSteps {
         Assert.assertTrue("More... button is not displayed on each section", catalogScreen.isMoreBtnPresent());
     }
 
-    @When("I click More button from random book section and save name of section as {string} on catalog book screen")
+    @When("Click More button from random book section and save name of section as {string} on catalog book screen")
     public void isMoreBtnClickable(String sectionNameKey) {
         context.add(sectionNameKey, catalogScreen.clickToMoreBtn());
     }
@@ -100,9 +101,10 @@ public class CatalogSteps {
         Assert.assertTrue("Subcategory rows are not loaded.", isSubcategoryRowsPresent);
     }
 
-    @When("I get names of books on screen and save them as {string}")
+    @When("Get names of books on screen and save them as {string}")
     public void getNamesOfBooksAndSaveThem(String booksNamesListKey) {
-        context.add(booksNamesListKey, catalogScreen.getListOfBooksNames());
+        List<String> books = catalogScreen.getListOfBooksNames();
+        context.add(booksNamesListKey, books);
     }
 
     @Then("List of books on screen is not equal to list of books saved as {string}")
@@ -111,14 +113,14 @@ public class CatalogSteps {
         Assert.assertNotEquals("Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")), expectedList, catalogScreen.getListOfBooksNames());
     }
 
-    @And("I switch to {string} from side menu")
+    @And("Switch to {string} from side menu")
     public void openLibraryFromSideMenu(String libraryName) {
         bottomMenuForm.open(BottomMenu.CATALOG);
         mainCatalogToolbarForm.chooseAnotherLibrary();
         catalogScreen.selectLibraryFromListOfAddedLibraries(libraryName);
     }
 
-    @And("I open Catalog")
+    @When("Open Catalog")
     public void openCatalog() {
         bottomMenuForm.open(BottomMenu.CATALOG);
         catalogScreen.state().waitForDisplayed();
@@ -140,7 +142,7 @@ public class CatalogSteps {
         Assert.assertTrue(String.format("Library %s is not present on Catalog Screen", libraryName), catalogScreen.isLibraryPresent(libraryName));
     }
 
-    @And("I open {string} category")
+    @And("Open {string} category")
     public void openCategory(String categoryName) {
         catalogScreen.state().waitForDisplayed();
         catalogScreen.openCategory(categoryName);
@@ -173,7 +175,7 @@ public class CatalogSteps {
         Assert.assertEquals("List of categories is not completely present", new HashSet<>(expectedValuesList), catalogScreen.getAllCategoriesNames());
     }
 
-    @When("I open categories by chain and chain starts from CategoryScreen:")
+    @When("Open categories by chain and chain starts from CategoryScreen:")
     public void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain) {
         categoriesChain.forEach(categoryName -> {
             if (catalogScreen.state().waitForDisplayed()) {
@@ -190,13 +192,13 @@ public class CatalogSteps {
         Assert.assertTrue("Count of books is smaller than " + countOfBooks, countOfBooks <= catalogScreen.getListOfAllBooksNamesInFirstLane().size());
     }
 
-    @When("I open first book in Subcategory List and save it as {string}")
+    @When("Open first book in Subcategory List and save it as {string}")
     public void openFirstBookInSubcategoryListAndSaveIt(String bookInfoKey) {
         context.add(bookInfoKey, subcategoryScreen.getFirstBookInfo());
         subcategoryScreen.openFirstBook();
     }
 
-    @When("I switch to {string} catalog tab")
+    @When("Switch to {string} catalog tab")
     public void switchToCatalogTab(String catalogTab) {
         catalogScreen.switchToCatalogTab(catalogTab);
         catalogScreen.state().waitForDisplayed();
@@ -207,13 +209,13 @@ public class CatalogSteps {
         Assert.assertTrue("Not all present books are audiobooks", catalogScreen.getListOfBooksNames().stream().allMatch(x -> x.toLowerCase().contains("audiobook")));
     }
 
-    @And("I sort books by {} in {string}")
+    @And("Sort books by {} in {string}")
     public void sortBooksBy(FacetSortByKeys sortingCategory, String library) {
         facetedSearchScreen.sortBy(library);
         facetedSearchScreen.changeSortByTo(sortingCategory);
     }
 
-    @When("I save list of books as {string}")
+    @When("Save list of books as {string}")
     public void saveListOfBooks(String booksInfoKey) {
         context.add(booksInfoKey, subcategoryScreen.getBooksInfo());
     }
@@ -352,14 +354,13 @@ public class CatalogSteps {
         Assert.assertEquals("Lists of authors is not sorted properly" + list.stream().map(Object::toString).collect(Collectors.joining(", ")), list.stream().sorted().collect(Collectors.toList()), list);
     }
 
-    @When("I change books visibility to show {}")
-    @And("Change books visibility to show {}")
+    @When("Change books visibility to show {}")
     public void checkThatActionButtonTextEqualToExpected(FacetAvailabilityKeys facetAvailabilityKeys) {
         facetedSearchScreen.openAvailabilityMenu();
         facetedSearchScreen.changeAvailabilityTo(facetAvailabilityKeys);
     }
 
-    @When("I tap Back button on subcategory screen")
+    @When("Tap Back button on subcategory screen")
     public void tapBackBtn() {
         subcategoryScreen.tapBack();
     }

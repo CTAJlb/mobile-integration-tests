@@ -37,7 +37,7 @@ public class SettingsSteps {
         softwareLicScreen = AqualityServices.getScreenFactory().getScreen(SoftwareLicScreen.class);
     }
 
-    @When("I open Settings")
+    @When("Open Settings")
     public void openSettings() {
         bottomMenuForm.open(BottomMenu.SETTINGS);
         bottomMenuForm.open(BottomMenu.SETTINGS);
@@ -66,18 +66,18 @@ public class SettingsSteps {
         Assert.assertTrue("Settings screen is not opened", settingsScreen.isSettingsScreenOpened());
     }
 
-    @When("I open Libraries on settings screen")
+    @When("Open Libraries on settings screen")
     public void openLibraries() {
         settingsScreen.openLibraries();
     }
 
-    @When("I open {string} library on setting screen")
+    @When("Open {string} library on setting screen")
     public void openLibrary(String libraryName) {
         settingsScreen.openLibrary(libraryName);
     }
 
 
-    @When("I open About Palace on settings screen")
+    @When("Open About Palace on settings screen")
     public void openAboutPalace() {
         settingsScreen.openAboutPalace();
     }
@@ -87,7 +87,7 @@ public class SettingsSteps {
         aboutPalaceScreen.isOpened();
     }
 
-    @When("I open Privacy Policy on settings screen")
+    @When("Open Privacy Policy on settings screen")
     public void openPrivacyPolicy() {
         settingsScreen.openPrivacyPolicy();
     }
@@ -97,7 +97,7 @@ public class SettingsSteps {
         privacyPolicyScreen.isOpened();
     }
 
-    @When("I open User Agreement on settings screen")
+    @When("Open User Agreement on settings screen")
     public void openUserAgreement () {
         settingsScreen.openUserAgreement();
     }
@@ -107,7 +107,7 @@ public class SettingsSteps {
         userAgreementScreen.isOpened();
     }
 
-    @When("I scroll page to link {string} on user agreement screen")
+    @When("Scroll page to link {string} on user agreement screen")
     public void scrollToLinkOnAgreement(String link) {
         userAgreementScreen.scrollThePage(link);
     }
@@ -117,7 +117,7 @@ public class SettingsSteps {
         Assert.assertTrue("Link is not available", userAgreementScreen.isLinkAvailable(link));
     }
 
-    @When("I open Software Licenses on settings screen")
+    @When("Open Software Licenses on settings screen")
     public void openSoftwareLic() {
         settingsScreen.openSoftwareLic();
     }
@@ -127,7 +127,7 @@ public class SettingsSteps {
         softwareLicScreen.isOpened();
     }
 
-    @When("I scroll page to link {string} on software licenses screen")
+    @When("Scroll page to link {string} on software licenses screen")
     public void scrollToLinkOnLic(String link) {
         softwareLicScreen.scrollThePage(link);
     }

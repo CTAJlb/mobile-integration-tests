@@ -24,17 +24,17 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         this.abstractApplicationSteps = stepsFactory.getSteps(AbstractApplicationSteps.class);
     }
 
-    @When("I turn on test mode in {string} library")
-    public void turnOnTestMode(String libraryName) {
-        abstractApplicationSteps.turnOnTestMode(libraryName);
+    @When("Turn on test mode")
+    public void turnOnTestMode() {
+        abstractApplicationSteps.turnOnTestMode();
     }
 
-    @And("I return to previous screen for epub and pdf")
+    @And("Return to previous screen for epub and pdf")
     public void returnToPreviousScreenForEpubAndPdf() {
         abstractApplicationSteps.returnToPreviousScreenForEpubAndPdf();
     }
 
-    @When("I restart app")
+    @When("Restart app")
     public void restartApp() {
         abstractApplicationSteps.restartApp();
     }
@@ -44,12 +44,12 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.addAccountFromWelcomeScreen(libraryName);
     }
 
-    @When("I add {string} account by the logo")
+    @When("Add {string} account by the logo")
     public void addAccountByTheLogo(String libraryName) {
         abstractApplicationSteps.addAccountByTheLogo(libraryName);
     }
 
-    @When("I tap the logo on catalog screen")
+    @When("Tap the logo on catalog screen")
     public void tapTheLogo() {
         abstractApplicationSteps.tapTheLogo();
     }
@@ -60,13 +60,13 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.checkFindYourLibScreenTranslation();
     }
 
-    @When("I add libraries by the logo:")
+    @When("Add libraries by the logo:")
     public void addSevLibraries(List<String> libraries){
         libraries.forEach(abstractApplicationSteps::addAccountByTheLogo
         );
     }
 
-    @When("I save {int} amount as {string}")
+    @When("Save {int} amount as {string}")
     public void addAmountOfLibraries(int listSize, String sizeKey) {
         context.add(sizeKey, listSize);
     }
@@ -77,12 +77,12 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         Assert.assertTrue("The list of libraries is not in alphabetical ored", abstractApplicationSteps.isSortingInAlphabetical(amount));
     }
 
-    @When("I tap cancel button on find your library screen")
+    @When("Tap cancel button on find your library screen")
     public void tapCloseBtn() {
         abstractApplicationSteps.tapCancelBtn();
     }
 
-    @When("I choose {string} library on find your library screen")
+    @When("Choose {string} library on find your library screen")
     public void chooseLibrary(String libName) {
         abstractApplicationSteps.tapToLibrary(libName);
     }

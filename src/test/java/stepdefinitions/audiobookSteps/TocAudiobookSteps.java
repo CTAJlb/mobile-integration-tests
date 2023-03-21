@@ -37,7 +37,8 @@ public class TocAudiobookSteps {
 
     @When("Open random chapter on toc audiobook screen and save chapter name as {string}")
     public void openRandomChapterOnTocAudiobookScreenAndSaveChapterName(String keyChapterName) {
-        String chapterName = tocAudiobookScreen.openChapterAndGetChapterName(RandomUtils.nextInt(1, tocAudiobookScreen.getCountOfChapters()));
+        int countOfChapters = tocAudiobookScreen.getCountOfChapters();
+        String chapterName = tocAudiobookScreen.openChapterAndGetChapterName(RandomUtils.nextInt(1, countOfChapters));
         context.add(keyChapterName, chapterName);
     }
 

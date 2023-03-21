@@ -2,7 +2,7 @@ package stepdefinitions.application.components;
 
 public interface IApplicationSteps {
 
-    void turnOnTestMode(String libraryName);
+    void turnOnTestMode();
 
     void returnToPreviousScreenForEpubAndPdf();
 

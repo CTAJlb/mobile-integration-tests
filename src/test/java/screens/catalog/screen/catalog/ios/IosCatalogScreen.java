@@ -153,6 +153,11 @@ public class IosCatalogScreen extends CatalogScreen {
     }
 
     @Override
+    public boolean isBookSectionDisplayed(String sectionName) {
+        return false;
+    }
+
+    @Override
     public String getTheNameOfBookTypeBtn(String typeOfBookNameBtn) {
         IButton btnNameOfBookType = btnBookNameTypeSection.createBtn(typeOfBookNameBtn);
         return btnNameOfBookType.getText();

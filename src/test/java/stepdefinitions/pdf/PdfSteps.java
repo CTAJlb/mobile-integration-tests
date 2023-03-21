@@ -36,7 +36,7 @@ public class PdfSteps {
         Assert.assertTrue("PDF reader is not opened", readerPdfScreen.isReaderOpened());
     }
 
-    @When("I close pdf reader by back button")
+    @When("Close pdf reader by back button")
     public void closePdfReader() {
         readerPdfScreen.getNavigationBarScreen().tapBackButton();
     }
@@ -48,7 +48,7 @@ public class PdfSteps {
         Assert.assertEquals("The book title is incorrect", expectedBookName, actualBookName);
     }
 
-    @When("I open table of contents on pdf reader screen")
+    @When("Open table of contents on pdf reader screen")
     public void openTOC() {
         readerPdfScreen.getNavigationBarScreen().tapTocBookmarksBarButton();
     }
@@ -63,12 +63,12 @@ public class PdfSteps {
         softAssertions.assertAll();
     }
 
-    @When("I open content with thumbnails on pdf toc screen")
+    @When("Open content with thumbnails on pdf toc screen")
     public void openThumbnails() {
         tocBookmarksPdfScreen.tapThumbnailsButton();
     }
 
-    @When("I open text chapter content on pdf toc screen")
+    @When("Open text chapter content on pdf toc screen")
     public void openTextContent() {
         tocBookmarksPdfScreen.tapTocButton();
     }
@@ -88,17 +88,17 @@ public class PdfSteps {
         }
     }
 
-    @When("I open random thumbnail and save the number as {string} on pdf toc screen")
+    @When("Open random thumbnail and save the number as {string} on pdf toc screen")
     public void openRandomThumbnail(String pageInfoKey) {
         context.add(pageInfoKey, tocBookmarksPdfScreen.getThumbnailsPdfScreen().openRandomThumbnail());
     }
 
-    @When("I open random chapter and save the number as {string} on pdf toc screen")
+    @When("Open random chapter and save the number as {string} on pdf toc screen")
     public void openRandomChapter(String pageInfoKey){
         context.add(pageInfoKey, tocPdfScreen.openRandomChapter());
     }
 
-    @When("I return to pdf reader screen from pdf toc screen")
+    @When("Return to pdf reader screen from pdf toc screen")
     public void returnToReaderFromTOC() {
         tocBookmarksPdfScreen.returnToReaderPdfScreen();
     }
@@ -114,12 +114,12 @@ public class PdfSteps {
         Assert.assertEquals("Page number is wrong", pageNumber, readerPdfScreen.getPageNumber());
     }
 
-    @Then("I close pdf toc screen by back button")
+    @Then("Close pdf toc screen by back button")
     public void closeTOCByBackBtn() {
         readerPdfScreen.getNavigationBarScreen().tapBackButton();
     }
 
-    @When("I open pdf settings screen on pdf reader screen")
+    @When("Open pdf settings screen on pdf reader screen")
     public void openSettings() {
         readerPdfScreen.getNavigationBarScreen().tapSettingsButton();
     }
@@ -129,17 +129,17 @@ public class PdfSteps {
         readerPdfScreen.getSettingsPdfScreen().isOpened();
     }
 
-    @When("I save the number of the last page as {string} on pdf reader screen")
+    @When("Save the number of the last page as {string} on pdf reader screen")
     public void saveLastPage(String lastPageInfoKey) {
         context.add(lastPageInfoKey, readerPdfScreen.getLastPageNumber());
     }
 
-    @When("I tap Go to last page button on pdf settings screen")
+    @When("Tap Go to last page button on pdf settings screen")
     public void tapGoToLastPage(){
         readerPdfScreen.getSettingsPdfScreen().tapGoToLastPage();
     }
 
-    @When("I tap Go to first page button on pdf settings screen")
+    @When("Tap Go to first page button on pdf settings screen")
     public void tapGoToFirstPage() {
         readerPdfScreen.getSettingsPdfScreen().tapGoToFirstPage();
     }
@@ -149,7 +149,7 @@ public class PdfSteps {
         Assert.assertEquals("The first page is not opened", 1, readerPdfScreen.getPageNumber());
     }
 
-    @When("I tap Vertical scrolling on pdf settings screen")
+    @When("Tap Vertical scrolling on pdf settings screen")
     public void tapVerticalScrolling(){
         readerPdfScreen.getSettingsPdfScreen().tapVerticalScrolling();
     }
@@ -166,17 +166,17 @@ public class PdfSteps {
         Assert.assertTrue("Even spreads is not available", readerPdfScreen.getSettingsPdfScreen().isEvenSpreadsAvailable());
     }
 
-    @When("I save page number as {string} on pdf reader screen")
+    @When("Save page number as {string} on pdf reader screen")
     public void savePageNumberOnReader(String pageInfoKey){
         context.add(pageInfoKey, readerPdfScreen.getPageNumber());
     }
 
-    @When("I scroll page down on pdf reader screen")
+    @When("Scroll page down on pdf reader screen")
     public void scrollPageDown() {
         readerPdfScreen.swipePageDown();
     }
 
-    @When("I scroll page up on pdf reader screen")
+    @When("Scroll page up on pdf reader screen")
     public void scrollPageUp(){
         readerPdfScreen.swipePageUp();
     }
@@ -187,7 +187,7 @@ public class PdfSteps {
         Assert.assertNotEquals("Page number is wrong", pageNumber, readerPdfScreen.getPageNumber());
     }
 
-    @When("I tap Horizontal scrolling on pdf settings screen")
+    @When("Tap Horizontal scrolling on pdf settings screen")
     public void tapHorizontalScrolling() {
         readerPdfScreen.getSettingsPdfScreen().tapHorizontalScrolling();
     }
@@ -204,7 +204,7 @@ public class PdfSteps {
         Assert.assertEquals("Even spreads is available", readerPdfScreen.getSettingsPdfScreen().isEvenSpreadsAvailable(), Boolean.FALSE);
     }
 
-    @When("I tap Wrapped scrolling on pdf settings screen")
+    @When("Tap Wrapped scrolling on pdf settings screen")
     public void tapWrappedScrolling(){
         readerPdfScreen.getSettingsPdfScreen().tapWrappedScrolling();
     }
@@ -219,19 +219,19 @@ public class PdfSteps {
         Assert.assertTrue("Vertical scrolling is not default", readerPdfScreen.getSettingsPdfScreen().isVerticalScrollingChosen());
     }
 
-    @When("I go to next page on reader pdf screen")
+    @When("Go to next page on reader pdf screen")
     public void goToNextPdfPage() {
         readerPdfScreen.goToNextPage();
     }
 
-    @When("I swipe pdf page forward from {int} to {int} times on reader pdf screen")
+    @When("Swipe pdf page forward from {int} to {int} times on reader pdf screen")
     public void swipePageForwardSeveralTimes(int minValue, int maxValue) {
         int swipeCount = RandomUtils.nextInt(minValue, maxValue);
         AqualityServices.getLogger().info("Swipe " + swipeCount + " times on reader pdf screen");
         IntStream.range(0, swipeCount).forEach(i -> readerPdfScreen.goToNextPage());
     }
 
-    @When("I swipe pdf page down from {int} to {int} times on reader pdf screen")
+    @When("Swipe pdf page down from {int} to {int} times on reader pdf screen")
     public void swipePageDownSeveralTimes(int minValue, int maxValue) {
         int swipeCount = RandomUtils.nextInt(minValue, maxValue);
         AqualityServices.getLogger().info("Swipe " + swipeCount + " times on reader pdf screen");
@@ -244,7 +244,7 @@ public class PdfSteps {
         Assert.assertEquals("Page number has not increased", numberBefore + 1, readerPdfScreen.getPageNumber());
     }
 
-    @When("I go to previous page on reader pdf screen")
+    @When("Go to previous page on reader pdf screen")
     public void goToPreviousPdfPage() {
         readerPdfScreen.goToPreviousPage();
     }
@@ -255,7 +255,7 @@ public class PdfSteps {
         Assert.assertEquals("Page number has not decreased", numberBefore - 1, readerPdfScreen.getPageNumber());
     }
 
-    @When("I open search pdf screen")
+    @When("Open search pdf screen")
     public void openSearchPdfScreen() {
         readerPdfScreen.getNavigationBarScreen().tapSearchButton();
     }
@@ -273,17 +273,17 @@ public class PdfSteps {
         softAssertions.assertAll();
     }
 
-    @When("I close pdf search screen")
+    @When("Close pdf search screen")
     public void closeSearchScreen() {
         readerPdfScreen.getSearchPdfScreen().closeSearchScreen();
     }
 
-    @When("I enter {string} text on search pdf screen")
+    @When("Enter {string} text on search pdf screen")
     public void enterTextOnSearchLine(String text) {
         readerPdfScreen.getSearchPdfScreen().enterText(text);
     }
 
-    @When("I delete text in search line on search pdf screen")
+    @When("Delete text in search line on search pdf screen")
     public void deleteTextFromSearchLine() {
         readerPdfScreen.getSearchPdfScreen().deleteText();
     }
@@ -301,7 +301,7 @@ public class PdfSteps {
         softAssertions.assertAll();
     }
 
-    @When("I open random found text and save page number as {string} on search pdf screen")
+    @When("Open random found text and save page number as {string} on search pdf screen")
     public void openRandomTextAndSavePageNumber(String pageNumberKey) {
         context.add(pageNumberKey, readerPdfScreen.getSearchPdfScreen().openRandomFoundText());
     }
@@ -327,7 +327,7 @@ public class PdfSteps {
                 savedPageNumber + ", currentPageNumber - " + currentPageNumber, savedPageNumber < currentPageNumber);
     }
 
-    @When("I open bookmarks pdf screen")
+    @When("Open bookmarks pdf screen")
     public void openBookmarksPdfScreen() {
         readerPdfScreen.getNavigationBarScreen().tapTocBookmarksBarButton();
         tocBookmarksPdfScreen.tapBookmarksButton();
@@ -367,7 +367,7 @@ public class PdfSteps {
         tocBookmarksPdfScreen.getBookmarksPdfScreen().openBookmark(bookmarkNumber);
     }
 
-    @When("I enter word {} and save as {string} on search pdf screen")
+    @When("Enter word {} and save as {string} on search pdf screen")
     public void enterData(String word, String infoKey) {
         readerPdfScreen.getSearchPdfScreen().enterText(word);
         context.add(infoKey, word);

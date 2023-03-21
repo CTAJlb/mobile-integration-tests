@@ -40,7 +40,7 @@ public class SearchSteps {
         catalogBooksScreen = AqualityServices.getScreenFactory().getScreen(CatalogBooksScreen.class);
     }
 
-    @When("I open search modal")
+    @When("Open search modal")
     public void openSearchModal() {
         catalogScreen.state().waitForDisplayed();
         mainCatalogToolbarForm.openSearchModal();
@@ -60,7 +60,7 @@ public class SearchSteps {
         searchModal.applySearch();
     }
 
-    @When("I edit data by adding {string} in search field and save it as {string}")
+    @When("Edit data by adding {string} in search field and save it as {string}")
     public void editDataInSearchField(String textForEdit, String wordKey) {
         context.add(wordKey, textForEdit);
         searchModal.deleteSomeData();
@@ -79,7 +79,7 @@ public class SearchSteps {
         }
     }
 
-    @When("I return back from search modal")
+    @When("Return back from search modal")
     public void returnBack() {
         searchModal.closeSearchScreen();
     }
@@ -97,7 +97,7 @@ public class SearchSteps {
         Assert.assertTrue("Search modal is not loaded", searchModal.state().waitForDisplayed());
     }
 
-    @When("I search for {string} and save bookName as {string}")
+    @When("Search for {string} and save bookName as {string}")
     public void searchFor(String searchedText, String bookNameInfoKey) {
         context.add(bookNameInfoKey, searchedText);
         Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().isDisplayed());
@@ -114,7 +114,7 @@ public class SearchSteps {
         softAssertions.assertAll();
     }
 
-    @When("I search several books and save them in list as {string}:")
+    @When("Search several books and save them in list as {string}:")
     public void searchSeveralBooks(String listKey, List<String> listOfBooks) {
         List<String> savedBooks = new ArrayList<>();
         listOfBooks.forEach(book -> {
@@ -128,7 +128,7 @@ public class SearchSteps {
         context.add(listKey, savedBooks);
     }
 
-    @When("I enter book {string} and save it as {string}")
+    @When("Enter book {string} and save it as {string}")
     public void enterTheBook(String bookName, String bookNameKey) {
         context.add(bookNameKey, bookName);
         Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().isDisplayed());
@@ -156,7 +156,7 @@ public class SearchSteps {
         searchModal.isSearchFieldEmpty();
     }
 
-    @When("I enter word {} and save as {string} on catalog books screen")
+    @When("Enter word {} and save as {string} on catalog books screen")
     public void enterInfo(String word, String wordKey) {
         context.add(wordKey, word);
         Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().isDisplayed());

@@ -35,7 +35,7 @@ public class BooksSteps {
         Assert.assertTrue("Books are present on books screen", booksScreen.isNoBooksMessagePresent());
     }
 
-    @And("I open Books")
+    @And("Open Books")
     public void openBooks() {
         bottomMenuForm.open(BottomMenu.BOOKS);
     }
@@ -99,7 +99,7 @@ public class BooksSteps {
         Assert.assertEquals("Amount of books is not correct on books screen", expectedAmountOfBooks, booksScreen.getCountOfBooks());
     }
 
-    @When("I refresh list of books on books screen")
+    @When("Refresh list of books on books screen")
     public void refreshListOfBooks() {
         booksScreen.refreshList();
     }

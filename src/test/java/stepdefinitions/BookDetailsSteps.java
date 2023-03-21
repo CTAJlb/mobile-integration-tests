@@ -32,7 +32,7 @@ public class BookDetailsSteps {
         alertScreen = AqualityServices.getScreenFactory().getScreen(AlertScreen.class);
     }
 
-    @And("I close Book Details for IOSTab")
+    @When("Close Book Details for IOSTab")
     public void closeBookDetailsOnlyForIOSTab() {
         bookDetailsScreen.closeBookDetailsOnlyForIOSTabIfDisplayed();
     }
@@ -106,7 +106,7 @@ public class BookDetailsSteps {
         softAssertions.assertAll();
     }
 
-    @Then("I check that book contains {} action button on book details screen")
+    @Then("Check that book contains {} action button on book details screen")
     public void checkThatBookContainsActionButton(final EnumActionButtonsForBooksAndAlertsKeys key) {
         boolean isButtonPresent = bookDetailsScreen.isActionButtonDisplayed(key);
         addScreenshotIfErrorPresent(isButtonPresent);

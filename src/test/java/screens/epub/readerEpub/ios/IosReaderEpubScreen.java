@@ -26,7 +26,7 @@ public class IosReaderEpubScreen extends ReaderEpubScreen {
     private final ILabel lblPage = getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "lblPage");
     private final ILabel lblPageNumber = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[2]"), "Page number label");
     private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Back button");
-    private final ILabel bookCover = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther[@name=\"Cover\"]"), "Book cover");
+    private final ILabel bookCover = getElementFactory().getLabel(By.xpath("//XCUIElementTypeSlider"), "Book cover");
 
     public IosReaderEpubScreen() {
         super(By.xpath("//*[contains(@name,\"Page\")]"));

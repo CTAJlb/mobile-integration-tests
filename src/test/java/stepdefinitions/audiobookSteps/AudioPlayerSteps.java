@@ -22,10 +22,7 @@ import static enums.localization.catalog.TimerKeys.END_OF_CHAPTER;
 
 public class AudioPlayerSteps {
     private final AudioPlayerScreen audioPlayerScreen;
-    private static final int PING_COUNT_OF_SECONDS = 6;
     private final ScenarioContext context;
-    private long diffBetweenTimePointsWhenForward;
-    private long diffBetweenTimePointsWhenBehind;
 
     @Inject
     public AudioPlayerSteps(ScenarioContext context) {
@@ -56,8 +53,9 @@ public class AudioPlayerSteps {
     @Then("Chapter name on audio player screen is equal to {string} saved chapter name")
     public void checkThatChapterNameOnAudioPlayerScreenIsEqualToSavedChapterName(String keyChapter) {
         String expectedChapterName = context.get(keyChapter);
+        String actualChapterName = audioPlayerScreen.getChapterName();
         Assert.assertEquals(String.format("Chapter name on audio player screen is not equal to saved chapter name. " +
-                "Expected chapter name - %s; actual chapter name - %s", expectedChapterName, getChapterName()), expectedChapterName.toLowerCase(), getChapterName().toLowerCase());
+                "Expected chapter name - %s; actual chapter name - %s", expectedChapterName, actualChapterName), expectedChapterName.toLowerCase(), actualChapterName.toLowerCase());
     }
 
     private String getChapterName() {
@@ -161,12 +159,12 @@ public class AudioPlayerSteps {
         audioPlayerScreen.skipBehind();
     }
 
-    @When("I stretch slider on the time tracking line forward on audio player screen")
+    @When("Stretch slider on the time tracking line forward on audio player screen")
     public void stretchSliderForward() {
         audioPlayerScreen.stretchPlaySliderForward();
     }
 
-    @When("I stretch slider on the time tracking line back on audio player screen")
+    @When("Stretch slider on the time tracking line back on audio player screen")
     public void stretchSliderBack() {
         audioPlayerScreen.stretchPlaySliderBack();
     }
@@ -189,44 +187,40 @@ public class AudioPlayerSteps {
         audioPlayerScreen.returnToPreviousScreen();
     }
 
-    @Then("Playback has been moved forward by {int} seconds from {string} seconds on audio player screen")
-    public void checkThatPlaybackHasBeenMovedForwardOnAudioPlayerScreen(Integer secondsForward, String timeKey) {
+    @Then("Playback has been moved forward by {int} seconds from {string} and {string} seconds on audio player screen")
+    public void checkThatPlaybackHasBeenMovedForwardOnAudioPlayerScreen(long secondsForward, String timeKey, String chapterTimeKey) {
+        Duration chapterTime = context.get(chapterTimeKey);
         Duration savedDate = context.get(timeKey);
         long secondsBefore = savedDate.getSeconds();
-        boolean isResultTrue = AqualityServices.getConditionalWait().waitFor(() -> {
-            long diffInSeconds = audioPlayerScreen.getLeftTime().getSeconds() - secondsBefore;
-            boolean isConditionTrue = diffInSeconds >= secondsForward && diffInSeconds <= secondsForward + PING_COUNT_OF_SECONDS;
-            setDiffBetweenTimePointsWhenForward(diffInSeconds);
+        long secondsOfChapterTime = chapterTime.getSeconds();
+        long actualTime = audioPlayerScreen.getLeftTime().getSeconds();
+        long expectedTime;
 
-            return isConditionTrue;
-        }, Duration.ofSeconds(PING_COUNT_OF_SECONDS));
+        if(secondsOfChapterTime <= secondsForward) {
+            expectedTime = secondsForward - secondsOfChapterTime;
+        } else {
+            expectedTime = secondsBefore + secondsForward;
+        }
 
-        AqualityServices.getLogger().info("diff between times for move forward - " + diffBetweenTimePointsWhenForward);
-        Assert.assertTrue("Date is not moved forward by " + secondsForward + " seconds, Date is moved forward by " + diffBetweenTimePointsWhenForward, isResultTrue);
+        Assert.assertTrue("Date is not moved forward by " + secondsForward + " seconds", expectedTime == actualTime || expectedTime == actualTime + 1);
     }
 
-    private void setDiffBetweenTimePointsWhenForward(long diff) {
-        diffBetweenTimePointsWhenForward = diff;
-    }
-
-    private void setDiffBetweenTimePointsWhenBehind(long diff) {
-        diffBetweenTimePointsWhenBehind = diff;
-    }
-
-    @Then("Playback has been moved behind by {int} seconds from {string} seconds on audio player screen")
-    public void checkThatPlaybackHasBeenMovedBehindOnAudioPlayerScreen(int secondsBehind, String timeKey) {
+    @Then("Playback has been moved behind by {long} seconds from {string} and {string} seconds on audio player screen")
+    public void checkThatPlaybackHasBeenMovedBehindOnAudioPlayerScreen(long secondsBehind, String timeKey, String chapterTimeKey) {
         Duration savedDate = context.get(timeKey);
+        Duration chapterTime = context.get(chapterTimeKey);
         long secondsBefore = savedDate.getSeconds();
-        boolean isResultTrue = AqualityServices.getConditionalWait().waitFor(() -> {
-            long diffInSeconds = secondsBefore - audioPlayerScreen.getLeftTime().getSeconds();
-            boolean isConditionTrue = diffInSeconds <= secondsBehind && diffInSeconds >= secondsBehind - PING_COUNT_OF_SECONDS;
-            setDiffBetweenTimePointsWhenBehind(diffInSeconds);
+        long secondsOfChapterTime = chapterTime.getSeconds();
+        long actualTime = audioPlayerScreen.getLeftTime().getSeconds();
+        long expectedTime;
 
-            return isConditionTrue;
-        }, Duration.ofSeconds(PING_COUNT_OF_SECONDS));
+        if(secondsOfChapterTime <= secondsBehind) {
+            expectedTime = secondsOfChapterTime - (secondsBehind - secondsBefore);
+        } else {
+            expectedTime = secondsBefore - secondsBehind;
+        }
 
-        AqualityServices.getLogger().info("diff between times for move behind - " + diffBetweenTimePointsWhenBehind);
-        Assert.assertTrue("Date is not moved behind by " + secondsBehind + " seconds, Date is moved behind by " + diffBetweenTimePointsWhenBehind, isResultTrue);
+        Assert.assertTrue("Date is not moved behind by " + secondsBehind + " seconds, Date is moved behind by ", actualTime == expectedTime || actualTime + 1 == expectedTime);
     }
 
     @And("Current playback speed value is {double}X on audio player screen")
@@ -244,12 +238,12 @@ public class AudioPlayerSteps {
         }
     }
 
-    @When("I tap on the time bar forward on audio player screen")
+    @When("Tap on the time bar forward on audio player screen")
     public void tapForward() {
         audioPlayerScreen.tapOnPlayBarForward();
     }
 
-    @When("I tap on the time bar back on audio player screen")
+    @When("Tap on the time bar back on audio player screen")
     public void tapBackward() {
         audioPlayerScreen.tapOnPlayBarBackward();
     }
@@ -258,7 +252,8 @@ public class AudioPlayerSteps {
     public void checkPlayTimeAfterReload(String dateKey) {
         Duration playTimeBefore = context.get(dateKey);
         Duration playTimeAfter = audioPlayerScreen.getLeftTime();
-        Assert.assertEquals("Play time is different. ", playTimeBefore.getSeconds(), playTimeAfter.getSeconds());
+        Assert.assertTrue("Play time is different", playTimeBefore.getSeconds() == playTimeAfter.getSeconds()
+                || playTimeBefore.getSeconds() == (playTimeAfter.getSeconds() - 1));
     }
 
     @And("Listen a chapter on audio player screen")

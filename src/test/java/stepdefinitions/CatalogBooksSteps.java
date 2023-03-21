@@ -47,7 +47,7 @@ public class CatalogBooksSteps {
         context.add(bookInfoKey, bookInfo);
     }
 
-    @When("I swipe catalog of books down on catalog book screen")
+    @When("Swipe catalog of books down on catalog book screen")
     public void swipeDown() {
         SwipeElementUtils.swipeByCoordinatesOfWindow();
     }
@@ -58,7 +58,7 @@ public class CatalogBooksSteps {
         catalogBooksScreen.openBook(actionButtonKey, bookName);
     }
 
-    @Then("I check that book {string} contains {} action button on catalog book screen")
+    @Then("Check that book {string} contains {} action button on catalog book screen")
     public void isBookContainBtn(String bookNameKey, final EnumActionButtonsForBooksAndAlertsKeys key) {
         String bookName = context.get(bookNameKey);
         Assert.assertTrue("Button " + key + " is not displayed", catalogBooksScreen.isActionButtonDisplayed(bookName, key));
@@ -79,7 +79,7 @@ public class CatalogBooksSteps {
         }
     }
 
-    @And("{} book with {} action button and {string} bookInfo is present on catalog books screen")
+    @Then("{} book with {} action button and {string} bookInfo is present on catalog books screen")
     public void isBookPresent(EnumBookType bookType, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey, String bookInfoKey) {
         CatalogBookModel bookInfo = context.get(bookInfoKey);
         String bookName = bookInfo.getTitle();

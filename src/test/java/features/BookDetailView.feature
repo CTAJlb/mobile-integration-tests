@@ -2,11 +2,16 @@ Feature: Book detail view screen
 
   @tier2
   Scenario Outline: Check of a book title and author in LYRASIS
-    When I add "LYRASIS Reads" account from welcomeScreen
-      And I open Catalog
-      And I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
-      And I switch to '<tabName>' catalog tab
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
+      And Switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Book 'bookInfo' has correct title and author name on book details screen
@@ -24,11 +29,16 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Biblioboard audiobook: Check of a book title and author in LYRASIS
-    When I add "LYRASIS Reads" account from welcomeScreen
-      And I open Catalog
-      And I switch to 'Audiobooks' catalog tab
-      And I open 'New BiblioBoard Test' category
-      And I swipe catalog of books down on catalog book screen
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Switch to 'Audiobooks' catalog tab
+      And Open 'New BiblioBoard Test' category
+      And Swipe catalog of books down on catalog book screen
       And Open random book on catalog book screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Book 'bookInfo' has correct title and author name on book details screen
@@ -36,11 +46,16 @@ Feature: Book detail view screen
 
   @tier2
   Scenario Outline: Check of a book format in LYRASIS
-    When I add "LYRASIS Reads" account from welcomeScreen
-      And I open Catalog
-      And I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
-      And I switch to '<tabName>' catalog tab
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
+      And Switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Book format in Information section is displayed on book details screen
@@ -57,11 +72,16 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Biblioboard audiobook: Check of a book format in LYRASIS
-    When I add "LYRASIS Reads" account from welcomeScreen
-      And I open Catalog
-      And I switch to 'Audiobooks' catalog tab
-      And I open 'New BiblioBoard Test' category
-      And I swipe catalog of books down on catalog book screen
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Switch to 'Audiobooks' catalog tab
+      And Open 'New BiblioBoard Test' category
+      And Swipe catalog of books down on catalog book screen
       And Open random book on catalog book screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Book format in Information section is displayed on book details screen
@@ -69,11 +89,16 @@ Feature: Book detail view screen
 
   @tier2
   Scenario Outline: Check of a "More..." button in Description section in LYRASIS
-    When I add "LYRASIS Reads" account from welcomeScreen
-      And I open Catalog
-      And I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
-      And I switch to '<tabName>' catalog tab
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
+      And Switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Description is not empty in book details screen
@@ -91,12 +116,17 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Biblioboard audiobook: Check of a "More..." button in Description section in LYRASIS
-    When I add "LYRASIS Reads" account from welcomeScreen
-      And I open Catalog
-      And I switch to 'Audiobooks' catalog tab
-      And I open 'New BiblioBoard Test' category
-      And I swipe catalog of books down on catalog book screen
-      And I swipe catalog of books down on catalog book screen
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Switch to 'Audiobooks' catalog tab
+      And Open 'New BiblioBoard Test' category
+      And Swipe catalog of books down on catalog book screen
+      And Swipe catalog of books down on catalog book screen
       And Open random book on catalog book screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Description is not empty in book details screen
@@ -104,11 +134,16 @@ Feature: Book detail view screen
 
   @tier2
   Scenario Outline: Check fields in Information section in LYRASIS
-    When I add "LYRASIS Reads" account from welcomeScreen
-      And I open Catalog
-      And I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
-      And I switch to '<tabName>' catalog tab
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
+      And Switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Publisher and Categories in Information section are displayed on book details screen
@@ -127,11 +162,16 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Biblioboard audiobook: Check fields in Information section in LYRASIS
-    When I add "LYRASIS Reads" account from welcomeScreen
-      And I open Catalog
-      And I switch to 'Audiobooks' catalog tab
-      And I open 'New BiblioBoard Test' category
-      And I swipe catalog of books down on catalog book screen
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Switch to 'Audiobooks' catalog tab
+      And Open 'New BiblioBoard Test' category
+      And Swipe catalog of books down on catalog book screen
       And Open random book on catalog book screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Publisher and Categories in Information section are displayed on book details screen
@@ -140,11 +180,16 @@ Feature: Book detail view screen
 
   @tier2
   Scenario Outline: Check related books section in LYRASIS
-    When I add "LYRASIS Reads" account from welcomeScreen
-      And I open Catalog
-      And I open search modal
-      And I search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
-      And I switch to '<tabName>' catalog tab
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search 'available' book of distributor '<distributor>' and bookType '<bookType>' from "LYRASIS Reads" and save as 'bookNameInfo'
+      And Switch to '<tabName>' catalog tab
       And Open <bookType> book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Related books section is displayed on book details screen
@@ -163,11 +208,16 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: BiblioBoard audiobook: Check related books section in LYRASIS
-    When I add "LYRASIS Reads" account from welcomeScreen
-      And I open Catalog
-      And I open search modal
-      And I search for "Kate & Ruby" and save bookName as 'bookNameInfo'
-      And I switch to 'Audiobooks' catalog tab
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "Kate & Ruby" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Related books section is displayed on book details screen
@@ -203,12 +253,17 @@ Feature: Book detail view screen
 #      | Biblioboard        | EBOOK     | eBooks     |
 #      | Biblioboard        | AUDIOBOOK | Audiobooks |
 
-  @tier3
+  @tier2
   Scenario: Check of a book title and author in Palace
-    When I add "Palace Bookshelf" account from welcomeScreen
-      And I open Catalog
-      And I open search modal
-      And I search for "Persuasion" and save bookName as 'bookNameInfo'
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "Palace Bookshelf" on Add library screen
+    Then Account "Palace Bookshelf" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "Persuasion" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Book 'bookInfo' has correct title and author name on book details screen
@@ -216,10 +271,15 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check of a "More..." button in Description section in Palace
-    When I add "Palace Bookshelf" account from welcomeScreen
-      And I open Catalog
-      And I open search modal
-      And I search for "Persuasion" and save bookName as 'bookNameInfo'
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "Palace Bookshelf" on Add library screen
+    Then Account "Palace Bookshelf" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "Persuasion" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Description is not empty in book details screen
@@ -227,20 +287,30 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check fields in Information section in Palace
-    When I add "Palace Bookshelf" account from welcomeScreen
-      And I open Catalog
-      And I open search modal
-      And I search for "Persuasion" and save bookName as 'bookNameInfo'
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "Palace Bookshelf" on Add library screen
+    Then Account "Palace Bookshelf" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "Persuasion" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Publisher and Categories in Information section are correct on book details screen
 
   @tier2
   Scenario: Check related books section in Palace
-    When I add "Palace Bookshelf" account from welcomeScreen
-      And I open Catalog
-      And I open search modal
-      And I search for "Persuasion" and save bookName as 'bookNameInfo'
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "Palace Bookshelf" on Add library screen
+    Then Account "Palace Bookshelf" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "Persuasion" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Related books section is displayed on book details screen
@@ -266,14 +336,20 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check of a book title and author in Overdrive
-    When I turn on test mode in "Palace Bookshelf" library
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "Palace Bookshelf" on Add library screen
+    Then Account "Palace Bookshelf" is present on Accounts screen
+    When Turn on test mode
       And Enable hidden libraries
-      And I open Catalog
-      And I add "A1QA Test Library" account by the logo
+      And Open Catalog
+      And Add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
-    When I open Catalog
-      And I open search modal
-      And I search for "The Woman in White" and save bookName as 'bookNameInfo'
+    When Open Catalog
+      And Open search modal
+      And Search for "The Woman in White" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Book 'bookInfo' has correct title and author name on book details screen
@@ -281,14 +357,20 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check of a "More..." button in Description section in Overdrive
-    When I turn on test mode in "Palace Bookshelf" library
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "Palace Bookshelf" on Add library screen
+    Then Account "Palace Bookshelf" is present on Accounts screen
+    When Turn on test mode
       And Enable hidden libraries
-      And I open Catalog
-      And I add "A1QA Test Library" account by the logo
+      And Open Catalog
+      And Add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
-    When I open Catalog
-      And I open search modal
-      And I search for "The Oregon Trail" and save bookName as 'bookNameInfo'
+    When Open Catalog
+      And Open search modal
+      And Search for "The Oregon Trail" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Description is not empty in book details screen
@@ -296,14 +378,20 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check fields in Information section in Overdrive
-    When I turn on test mode in "Palace Bookshelf" library
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "Palace Bookshelf" on Add library screen
+    Then Account "Palace Bookshelf" is present on Accounts screen
+    When Turn on test mode
       And Enable hidden libraries
-      And I open Catalog
-      And I add "A1QA Test Library" account by the logo
+      And Open Catalog
+      And Add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
-    When I open Catalog
-      And I open search modal
-      And I search for "The Count of Monte Cristo" and save bookName as 'bookNameInfo'
+    When Open Catalog
+      And Open search modal
+      And Search for "The Count of Monte Cristo" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Publisher and Categories in Information section are correct on book details screen
@@ -311,16 +399,53 @@ Feature: Book detail view screen
 
   @tier2
   Scenario: Check related books section in Overdrive
-    When I turn on test mode in "Palace Bookshelf" library
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "Palace Bookshelf" on Add library screen
+    Then Account "Palace Bookshelf" is present on Accounts screen
+    When Turn on test mode
       And Enable hidden libraries
-      And I open Catalog
-      And I add "A1QA Test Library" account by the logo
+      And Open Catalog
+      And Add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
-    When I open Catalog
-      And I open search modal
-      And I search for "The Woman in White" and save bookName as 'bookNameInfo'
+    When Open Catalog
+      And Open search modal
+      And Search for "The Woman in White" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
       And Related books section is displayed on book details screen
       And There is a list of related books on book details screen
       And More button in related books section is available on book details screen
+
+  @tier2
+  Scenario: Check of Get button before log in from the Settings tab in LYRASIS Reads
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "Lemon" and save bookName as 'bookNameInfo'
+      And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
+      And Click GET action button on book details screen
+    Then Sing in screen is opened
+
+  @tier2
+  Scenario: Get button: Check of availability of required interface elements
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "Libertie" and save bookName as 'bookNameInfo'
+      And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
+      And Click GET action button on book details screen
+    Then Sing in screen is opened
+      And All fields and links are displayed on Sign in Screen
