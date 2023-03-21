@@ -253,7 +253,7 @@ Feature: Book detail view screen
 #      | Biblioboard        | EBOOK     | eBooks     |
 #      | Biblioboard        | AUDIOBOOK | Audiobooks |
 
-  @tier3
+  @tier2
   Scenario: Check of a book title and author in Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -418,3 +418,34 @@ Feature: Book detail view screen
       And Related books section is displayed on book details screen
       And There is a list of related books on book details screen
       And More button in related books section is available on book details screen
+
+  @tier2
+  Scenario: Check of Get button before log in from the Settings tab in LYRASIS Reads
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "Lemon" and save bookName as 'bookNameInfo'
+      And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
+      And Click GET action button on book details screen
+    Then Sing in screen is opened
+
+  @tier2
+  Scenario: Get button: Check of availability of required interface elements
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "Libertie" and save bookName as 'bookNameInfo'
+      And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
+      And Click GET action button on book details screen
+    Then Sing in screen is opened
+      And All fields and links are displayed on Sign in Screen
