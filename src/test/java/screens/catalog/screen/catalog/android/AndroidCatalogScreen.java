@@ -140,6 +140,11 @@ public class AndroidCatalogScreen extends CatalogScreen {
     }
 
     @Override
+    public boolean isBookSectionDisplayed(String sectionName) {
+        return getElementFactory().getLabel(By.xpath(String.format(CATEGORY_LOCATOR, sectionName)), "Book name section").state().isDisplayed();
+    }
+
+    @Override
     public String getTheNameOfBookTypeBtn(String typeOfBookNameBtn) {
         IButton btnNameOfBookType = btnBookNameTypeSection.createBtn(typeOfBookNameBtn);
         return btnNameOfBookType.getText();
