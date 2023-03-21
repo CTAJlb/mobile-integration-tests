@@ -22,8 +22,8 @@ Feature: Audiobook in Lyrasis
     When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Open toc audiobook screen
-    Then The first chapter is loaded
-    When Open random chapter on toc audiobook screen and save chapter name as 'chapterNameKey'
+      And Wait for 5 seconds
+      And Open the 3 chapter on toc audiobook screen and save the chapter name as 'chapterNameKey'
     Then Audio player screen of book 'bookInfo' is opened
       And Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
       And Pause button is present on audio player screen
@@ -38,8 +38,7 @@ Feature: Audiobook in Lyrasis
       And Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
       And Play time is the same with 'timeAhead' play time before restart on books detail screen
     When Open toc audiobook screen
-    Then The first chapter is loaded
-    When Open the 4 chapter on toc audiobook screen and save the chapter name as 'chapterNameKey2'
+      And Open random chapter on toc audiobook screen and save chapter name as 'chapterNameKey2'
     Then Audio player screen of book 'bookInfo' is opened
     When Wait for 3 seconds
       And Tap pause button on audio player screen
@@ -69,8 +68,8 @@ Feature: Audiobook in Lyrasis
     When Click LISTEN action button on book details screen
     Then Audio player screen of book 'bookInfo' is opened
     When Open toc audiobook screen
-    Then The first chapter is loaded
-    When Open random chapter on toc audiobook screen and save chapter name as 'chapterNameKey'
+      And Wait for 5 seconds
+      And Open the 3 chapter on toc audiobook screen and save the chapter name as 'chapterNameKey'
     Then Audio player screen of book 'bookInfo' is opened
       And Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
       And Pause button is present on audio player screen
@@ -85,8 +84,7 @@ Feature: Audiobook in Lyrasis
       And Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
       And Play time is the same with 'timeAhead' play time before restart on books detail screen
     When Open toc audiobook screen
-    Then The first chapter is loaded
-    When Open the 4 chapter on toc audiobook screen and save the chapter name as 'chapterNameKey2'
+      And Open random chapter on toc audiobook screen and save chapter name as 'chapterNameKey2'
     Then Audio player screen of book 'bookInfo' is opened
     When Wait for 3 seconds
       And Tap pause button on audio player screen

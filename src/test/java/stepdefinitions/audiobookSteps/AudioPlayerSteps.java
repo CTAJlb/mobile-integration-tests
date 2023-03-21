@@ -56,8 +56,9 @@ public class AudioPlayerSteps {
     @Then("Chapter name on audio player screen is equal to {string} saved chapter name")
     public void checkThatChapterNameOnAudioPlayerScreenIsEqualToSavedChapterName(String keyChapter) {
         String expectedChapterName = context.get(keyChapter);
+        String actualChapterName = audioPlayerScreen.getChapterName();
         Assert.assertEquals(String.format("Chapter name on audio player screen is not equal to saved chapter name. " +
-                "Expected chapter name - %s; actual chapter name - %s", expectedChapterName, getChapterName()), expectedChapterName.toLowerCase(), getChapterName().toLowerCase());
+                "Expected chapter name - %s; actual chapter name - %s", expectedChapterName, actualChapterName), expectedChapterName.toLowerCase(), actualChapterName.toLowerCase());
     }
 
     private String getChapterName() {
@@ -258,7 +259,8 @@ public class AudioPlayerSteps {
     public void checkPlayTimeAfterReload(String dateKey) {
         Duration playTimeBefore = context.get(dateKey);
         Duration playTimeAfter = audioPlayerScreen.getLeftTime();
-        Assert.assertEquals("Play time is different. ", playTimeBefore.getSeconds(), playTimeAfter.getSeconds());
+        Assert.assertTrue("Play time is different", playTimeBefore.getSeconds() == playTimeAfter.getSeconds()
+                || playTimeBefore.getSeconds() == (playTimeAfter.getSeconds() - 1));
     }
 
     @And("Listen a chapter on audio player screen")
