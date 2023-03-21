@@ -1,12 +1,15 @@
 package screens.signIn.android;
 
+import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ICheckBox;
 import aquality.appium.mobile.elements.interfaces.ILink;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
+import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import org.openqa.selenium.By;
 import screens.signIn.SignInScreen;
 
+@ScreenType(platform = PlatformName.ANDROID)
 public class AndroidSignInScreen extends SignInScreen {
     private final ITextBox txbLibraryCard = getElementFactory().getTextBox(By.xpath("//android.widget.EditText[@text=\"Library Card\"]"), "Library card");
     private final ITextBox txbPassword = getElementFactory().getTextBox(By.xpath("//android.widget.EditText[@text=\"Password\"]"), "Password");
