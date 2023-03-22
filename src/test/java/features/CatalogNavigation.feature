@@ -8,7 +8,7 @@ Feature: Catalog Navigation
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Account "Palace Bookshelf" is present on Accounts screen
-    When I add 'LYRASIS Reads' account
+    When Add 'LYRASIS Reads' account
     Then Category rows are loaded
     When Restart app
       And Close account screen

@@ -80,7 +80,7 @@ public class AndroidAddAccountScreen extends AddAccountScreen {
 
     @Override
     public boolean isAddLibScreenOpened() {
-        return lblAddLibrary.state().isDisplayed();
+        return lblAddLibrary.state().waitForDisplayed();
     }
 
     @Override

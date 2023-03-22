@@ -96,7 +96,7 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     @Override
     public void checkWelcomeScreenIsOpened() {
-        Assert.assertTrue("Welcome screen is not opened", welcomeScreen.state().isDisplayed());
+        Assert.assertTrue("Welcome screen is not opened", welcomeScreen.state().waitForDisplayed());
     }
 
     @Override

@@ -449,3 +449,87 @@ Feature: Book detail view screen
       And Click GET action button on book details screen
     Then Sing in screen is opened
       And All fields and links are displayed on Sign in Screen
+
+  @tier2 @exclude_android
+  Scenario: Get button: check of Library Card field
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "The Hobbit" and save bookName as 'bookNameInfo'
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then Sing in screen is opened
+      And There is a placeholder Library Card in the Library Card field on Sign in screen
+
+  @tier2 @exclude_android
+  Scenario: Get button: check of Password field
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "The Hidden" and save bookName as 'bookNameInfo'
+      And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
+      And Click GET action button on book details screen
+    Then Sing in screen is opened
+      And There is a placeholder "Password" in the Password field on Sign in screen
+
+  @tier2
+  Scenario: Get: Sign in: Check of loging in with leaving the Library Card field empty
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "Brain" and save bookName as 'bookNameInfo'
+      And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
+      And Click GET action button on book details screen
+    Then Sing in screen is opened
+    When Enter a Password "Test123" on Sign in screen
+    Then Sign in button is disabled on Sign in screen
+
+  @tier2
+  Scenario: Get: Sign in: Check of loging in with leaving the Password field empty
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "Above World" and save bookName as 'bookNameInfo'
+      And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
+    And Click GET action button on book details screen
+    Then Sing in screen is opened
+    When Enter a Library card "01230000000098" on Sign in screen
+    Then Sign in button is disabled on Sign in screen
+
+  @tier2
+  Scenario: Get: Sign in: Library card: Check that the field allows you to edit the data
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "Big Fish" and save bookName as 'bookNameInfo'
+      And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
+      And Click GET action button on book details screen
+    Then Sing in screen is opened
+    When Enter a Library card "01230000000015" and save it as 'libraryCard' on Sign in screen
+      And Edit data by adding "2209" in Library card field and save it as 'newLibraryCard' on sign in screen
+    Then There is a placeholder 'newLibraryCard' in the Library Card field on Sign in screen
