@@ -1,8 +1,6 @@
 package hooks.logout.components.impl;
 
-import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
-import enums.timeouts.AuthorizationTimeouts;
 import enums.keysforcontext.ContextLibrariesKeys;
 import enums.localization.account.AccountScreenLoginStatus;
 import factories.steps.StepsType;
@@ -10,8 +8,6 @@ import framework.utilities.ScenarioContext;
 import hooks.logout.components.AbstractLogoutHooks;
 import screens.bottommenu.BottomMenu;
 
-import java.time.Duration;
-import java.util.Collections;
 import java.util.List;
 
 @StepsType(platform = PlatformName.ANDROID)
@@ -37,13 +33,14 @@ public class AndroidLogoutHooks extends AbstractLogoutHooks {
                 final String cardTextBeforeLogout = accountScreen.getTextFromCardTxb();
                 final String pinTextBeforeLogout = accountScreen.getTextFromPinTxb();
                 accountScreen.tapLogOut();
-                AqualityServices.getConditionalWait().waitFor(() ->
-                        accountScreen.getTextFromLogInButton().equals(AccountScreenLoginStatus.SIGN_IN.getDefaultLocalizedValue())
-                            && !accountScreen.getTextFromCardTxb().equals(cardTextBeforeLogout)
-                            && !accountScreen.getTextFromPinTxb().equals(pinTextBeforeLogout),
-                        Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getTimeoutMillis()),
-                        Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getPollingMillis()),
-                        Collections.singletonList(NoSuchMethodException.class));
+
+                do {
+                    if(accountScreen.isLogOutErrorDisplayed()) {
+                        accountScreen.tapLogOut();
+                    }
+                } while (!accountScreen.getTextFromLogInButton().equals(AccountScreenLoginStatus.SIGN_IN.getDefaultLocalizedValue())
+                        && accountScreen.getTextFromCardTxb().equals(cardTextBeforeLogout)
+                        && accountScreen.getTextFromPinTxb().equals(pinTextBeforeLogout));
             }
         }
     }

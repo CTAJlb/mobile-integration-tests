@@ -168,4 +168,10 @@ public class IosAccountScreen extends AccountScreen {
     public String getTextFromContentLicensesLbl() {
         return btnContentLicenses.getText();
     }
+
+    @Override
+    public boolean isLogOutErrorDisplayed() {
+        //only for android
+        return false;
+    }
 }

@@ -167,6 +167,11 @@ public class AndroidAccountScreen extends AccountScreen {
         return null;
     }
 
+    @Override
+    public boolean isLogOutErrorDisplayed() {
+        return btnLogInError.state().waitForDisplayed();
+    }
+
     private String getLoginButtonText() {
         return btnLoginAction.state().waitForDisplayed() ? btnLoginAction.getText() : "";
     }
