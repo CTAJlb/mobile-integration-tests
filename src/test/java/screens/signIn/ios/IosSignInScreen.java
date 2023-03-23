@@ -75,4 +75,16 @@ public class IosSignInScreen extends SignInScreen {
         txbLibraryCard.sendKeys(text);
     }
 
+    @Override
+    public void tapSignIn() {
+        btnSignIn.click();
+    }
+
+    @Override
+    public String getErrorMessage() {
+        //for android
+        return null;
+    }
+
+
 }
