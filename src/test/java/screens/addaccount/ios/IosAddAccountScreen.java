@@ -80,7 +80,7 @@ public class IosAddAccountScreen extends AddAccountScreen {
 
     @Override
     public boolean isAddLibScreenOpened() {
-        return lblAddLibrary.state().isDisplayed();
+        return lblAddLibrary.state().waitForDisplayed();
     }
 
     @Override

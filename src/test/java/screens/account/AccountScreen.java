@@ -58,4 +58,6 @@ public abstract class AccountScreen extends Screen {
     public abstract String getTextFromReportAboutProblemBtn();
 
     public abstract String getTextFromContentLicensesLbl();
+
+    public abstract boolean isLogOutErrorDisplayed();
 }

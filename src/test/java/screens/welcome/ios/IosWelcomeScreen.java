@@ -11,7 +11,7 @@ public class IosWelcomeScreen extends WelcomeScreen {
     private final IButton btnFindLibrary = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Find Your Library\"]"), "Find your library button");
 
     public IosWelcomeScreen() {
-        super(By.xpath("//XCUIElementTypeButton"));
+        super(By.xpath("//XCUIElementTypeButton[@name=\"Find Your Library\"]"));
     }
 
     @Override

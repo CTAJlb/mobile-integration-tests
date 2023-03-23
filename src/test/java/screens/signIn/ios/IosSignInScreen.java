@@ -10,10 +10,11 @@ import screens.signIn.SignInScreen;
 
 @ScreenType(platform = PlatformName.IOS)
 public class IosSignInScreen extends SignInScreen {
-    private final ITextBox txbLibraryCard = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeTextField[@value=\"Library Card\"]"), "Library card");
+    private final ITextBox txbLibraryCard = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeTextField"), "Library card");
     private final ITextBox txbPassword = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeSecureTextField[@value=\"Password\"]"), "Password");
     private final IButton btnSignIn = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Sign in\"]"), "Sign in button");
     private final ILink linkLicAgreement = getElementFactory().getLink(By.xpath("//XCUIElementTypeButton[contains(@name, \"User License Agreement\")]"), "License Agreement link");
+    private final IButton btnDelete = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"delete\"]"), "Delete button");
 
     public IosSignInScreen() {
         super(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeStaticText[@name=\"Sign in\"]"));
@@ -38,4 +39,40 @@ public class IosSignInScreen extends SignInScreen {
     public boolean isLinkToTheLicenseAgreementDisplayed() {
         return linkLicAgreement.state().waitForDisplayed();
     }
+
+    @Override
+    public String getTextFromLibraryCard() {
+        return txbLibraryCard.getText();
+    }
+
+    @Override
+    public String getTextFromPassword() {
+        return txbPassword.getText();
+    }
+
+    @Override
+    public void enterPassword(String password) {
+        txbPassword.clearAndType(password);
+    }
+
+    @Override
+    public void enterLibraryCard(String libCard) {
+        txbLibraryCard.clearAndType(libCard);
+    }
+
+    @Override
+    public void tapSignInBtn() {
+        btnSignIn.click();
+    }
+
+    @Override
+    public void deleteSomeDataInLibCard() {
+        btnDelete.click();
+    }
+
+    @Override
+    public void setTextInLibCard(String text) {
+        txbLibraryCard.sendKeys(text);
+    }
+
 }
