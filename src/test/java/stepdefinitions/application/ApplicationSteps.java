@@ -39,11 +39,6 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.restartApp();
     }
 
-    @Given("I add {string} account from welcomeScreen")
-    public void addAccountFromWelcomeScreen(String libraryName) {
-        abstractApplicationSteps.addAccountFromWelcomeScreen(libraryName);
-    }
-
     @When("Add {string} account by the logo")
     public void addAccountByTheLogo(String libraryName) {
         abstractApplicationSteps.addAccountByTheLogo(libraryName);
@@ -105,10 +100,22 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.closeWelcomeScreen();
     }
 
+    @When("Close welcome screen in Spanish")
+    @Override
+    public void closeWelcomeScreenInSpanish() {
+        abstractApplicationSteps.closeWelcomeScreenInSpanish();
+    }
+
     @Then("Welcome screen is opened")
     @Override
     public void checkWelcomeScreenIsOpened() {
         abstractApplicationSteps.checkWelcomeScreenIsOpened();
+    }
+
+    @Then("Welcome screen is opened in Spanish")
+    @Override
+    public void isWelcomeScreenOpenedInSpanish() {
+        abstractApplicationSteps.isWelcomeScreenOpenedInSpanish();
     }
 
     @Then("Elements on welcome screen are translated correctly")

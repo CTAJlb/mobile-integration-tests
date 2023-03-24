@@ -2,12 +2,14 @@ package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import enums.EnumBookType;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import framework.utilities.feedXMLUtil.GettingBookUtil;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import screens.catalog.form.MainCatalogToolbarForm;
@@ -19,6 +21,7 @@ import screens.subcategory.SubcategoryScreen;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -104,6 +107,25 @@ public class SearchSteps {
         searchModal.setSearchedText(searchedText);
         searchModal.applySearch();
         Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", searchedText, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
+    }
+
+    @When("Search for a {} book from {string} and save as {string}")
+    public void searchFromTheList(EnumBookType bookType, String listOfBooksKey, String bookKey) {
+        List<String> books = context.get(listOfBooksKey);
+        Assert.assertTrue("Search modal is not present. Error (if present) - " + subcategoryScreen.getErrorMessage(), searchModal.state().isDisplayed());
+
+        Random random = new Random();
+        int bookIndex = random.nextInt(books.size());
+        String bookName = books.get(bookIndex);
+
+        if(bookType == EnumBookType.AUDIOBOOK) {
+            bookName = StringUtils.substringBefore(bookName, ". Audiobook.");
+        }
+
+        searchModal.setSearchedText(bookName);
+        searchModal.applySearch();
+        Assert.assertTrue(String.format("Search results page for value '%s' is not present. Error (if present) - %s", bookName, subcategoryScreen.getErrorMessage()), subcategoryScreen.state().waitForDisplayed());
+        context.add(bookKey, bookName);
     }
 
     @Then("The search field is displayed and contains {string} book")

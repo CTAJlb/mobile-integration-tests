@@ -142,13 +142,13 @@ public class CatalogSteps {
         Assert.assertTrue(String.format("Library %s is not present on Catalog Screen", libraryName), catalogScreen.isLibraryPresent(libraryName));
     }
 
-    @And("Open {string} category")
+    @When("Open {string} category")
     public void openCategory(String categoryName) {
         catalogScreen.state().waitForDisplayed();
         catalogScreen.openCategory(categoryName);
     }
 
-    @And("I open {string} subcategory")
+    @When("I open {string} subcategory")
     public void openSubcategory(String subCategoryName) {
         subcategoryScreen.state().waitForDisplayed();
         subcategoryScreen.openCategory(subCategoryName);
@@ -177,6 +177,7 @@ public class CatalogSteps {
 
     @When("Open categories by chain and chain starts from CategoryScreen:")
     public void openCategoriesByChainAndChainStartsFromCategoryScreen(List<String> categoriesChain) {
+        SwipeElementUtils.swipeUp();
         categoriesChain.forEach(categoryName -> {
             if (catalogScreen.state().waitForDisplayed()) {
                 catalogScreen.openCategory(categoryName);
@@ -240,7 +241,7 @@ public class CatalogSteps {
         Assert.assertNotEquals("Lists of books are equal" + expectedList.stream().map(Object::toString).collect(Collectors.joining(", ")), expectedList, subcategoryScreen.getBooksInfo());
     }
 
-    @When("I open Sort by on catalog screen")
+    @When("Open Sort by on catalog screen")
     public void openSortBy(){
         facetedSearchScreen.openSortBy();
     }
@@ -280,7 +281,7 @@ public class CatalogSteps {
         softAssertions.assertAll();
     }
 
-    @When("I open Availability on catalog screen")
+    @When("Open Availability on catalog screen")
     public void openAvailability() {
         facetedSearchScreen.openAvailabilityMenu();
     }
@@ -310,7 +311,7 @@ public class CatalogSteps {
         softAssertions.assertAll();
     }
 
-    @When("I open Collection on catalog screen")
+    @When("Open Collection on catalog screen")
     public void openCollection(){
         facetedSearchScreen.openCollection();
     }

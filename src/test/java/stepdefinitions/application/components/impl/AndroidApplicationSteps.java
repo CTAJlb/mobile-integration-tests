@@ -21,14 +21,6 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
     }
 
     @Override
-    public void addAccountFromWelcomeScreen(String libraryName) {
-        tutorialScreen.closeTutorial();
-        welcomeScreen.state().waitForDisplayed();
-        welcomeScreen.tapFindLibraryButton();
-        addAccountScreen.selectLibraryViaSearch(libraryName);
-    }
-
-    @Override
     public void addAccountByTheLogo(String libraryName) {
         catalogScreen.tapTheLogo();
         findYourLibScreen.tapAddLibrary();

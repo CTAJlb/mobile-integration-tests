@@ -39,8 +39,6 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     public abstract void returnToPreviousScreenForEpubAndPdf();
 
-    public abstract void addAccountFromWelcomeScreen(String libraryName);
-
     public abstract void addAccountByTheLogo(String libraryName);
 
     public abstract void tapTheLogo();
@@ -91,12 +89,22 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     @Override
     public void checkTranslationOnWelcomeScreen(){
-        Assert.assertEquals("Find your library button is not translated", Spanish.FIND_YOUR_LIBRARY.getDefaultLocalizedValue(), welcomeScreen.getTextFromButtonFindYourLibrary());
+        Assert.assertEquals("Find your library button is not translated", Spanish.FIND_YOUR_LIBRARY.getDefaultLocalizedValue(), welcomeScreen.getTextFromButtonFindYourLibraryES());
     }
 
     @Override
     public void checkWelcomeScreenIsOpened() {
         Assert.assertTrue("Welcome screen is not opened", welcomeScreen.state().waitForDisplayed());
+    }
+
+    @Override
+    public void isWelcomeScreenOpenedInSpanish(){
+        Assert.assertTrue("Welcome screen is not opened", welcomeScreen.isOpenedInSpanish());
+    }
+
+    @Override
+    public void closeWelcomeScreenInSpanish() {
+        welcomeScreen.tapFindLibraryButtonInSpanish();
     }
 
     @Override

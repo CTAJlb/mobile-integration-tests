@@ -78,6 +78,7 @@ public class IosBookDetailsScreen extends BookDetailsScreen {
         if (buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.GET || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.REMOVE
                 || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.DELETE || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.RETURN
                 || buttonKeys == EnumActionButtonsForBooksAndAlertsKeys.RESERVE) {
+            AqualityServices.getConditionalWait().waitFor(() -> !isActionButtonDisplayed(EnumActionButtonsForBooksAndAlertsKeys.GET), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
             AqualityServices.getConditionalWait().waitFor(() -> !isProgressBarDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         }
     }

@@ -10,4 +10,6 @@ public abstract class AlertScreen extends Screen {
     }
 
     public abstract void waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys actionButtonNamesAlertKeys);
+
+    public abstract String getTextFromAlertHeader();
 }
