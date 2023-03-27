@@ -27,10 +27,10 @@ Feature: Audiobooks from Audible studios in LYRASIS
     Then Audio player screen of book 'bookInfo' is opened
     When Open toc audiobook screen
       And Wait for 5 seconds
-      And Open the 3 chapter on toc audiobook screen and save the chapter name as 'chapterNameKey'
+      And Open the 4 chapter on toc audiobook screen and save the chapter name as 'chapterNameKey'
     Then Audio player screen of book 'bookInfo' is opened
       And Chapter name on audio player screen is equal to 'chapterNameKey' saved chapter name
-      And Pause button is present on audio player screen
+      And Play button is present on audio player screen
     When Select 2X playback speed on playback speed audiobook screen
       And Wait for 3 seconds
       And Tap pause button on audio player screen

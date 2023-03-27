@@ -18,6 +18,7 @@ public class IosSettingsScreen extends SettingsScreen {
 
     private  final ILabel lblSettings = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar"), "Settings");
     private final IButton btnLibraries = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Libraries\"]"), "Libraries button");
+    private final IButton btnLibrariesES = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Bibliotecas\"]"), "Libraries button");
     private final IButton btnAboutPalace = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"About Palace\"]"), "About Palace");
     private final IButton btnPrivacyPolicy = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Privacy Policy\"]"), "Privacy Policy");
     private final IButton btnUserAgreement = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"User Agreement\"]"), "User Agreement");
@@ -34,6 +35,11 @@ public class IosSettingsScreen extends SettingsScreen {
     @Override
     public void openLibraries() {
         btnLibraries.click();
+    }
+
+    @Override
+    public void openLibrariesES() {
+        btnLibrariesES.click();
     }
 
     @Override

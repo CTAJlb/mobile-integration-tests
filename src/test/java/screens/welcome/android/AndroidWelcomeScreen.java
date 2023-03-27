@@ -20,8 +20,18 @@ public class AndroidWelcomeScreen extends WelcomeScreen {
     }
 
     @Override
-    public String getTextFromButtonFindYourLibrary() {
+    public void tapFindLibraryButtonInSpanish() {
         //for ios
-        return null;
+    }
+
+    @Override
+    public String getTextFromButtonFindYourLibraryES() {
+        return btnFindLibrary.getText();
+    }
+
+    @Override
+    public boolean isOpenedInSpanish() {
+        //for ios
+        return false;
     }
 }

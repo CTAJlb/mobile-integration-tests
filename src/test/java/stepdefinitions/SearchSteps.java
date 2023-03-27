@@ -2,9 +2,9 @@ package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import constants.localization.spanish.SpanishIos;
 import enums.EnumBookType;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
-import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import framework.utilities.feedXMLUtil.GettingBookUtil;
 import io.cucumber.java.en.Then;
@@ -90,8 +90,8 @@ public class SearchSteps {
     @Then("Elements on Search screen are translated correctly")
     public void checkTranslationOnSearchScreen(){
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(searchModal.getTextFromBackButton()).as("Back button is not translated").isEqualTo(Spanish.BACK.getDefaultLocalizedValue());
-        softAssertions.assertThat(searchModal.getTextFromSearchField()).as("Search field is not translated").isEqualTo(Spanish.SEARCH.getDefaultLocalizedValue());
+        softAssertions.assertThat(searchModal.getTextFromBackButton()).as("Back button is not translated").isEqualTo(SpanishIos.BACK);
+        softAssertions.assertThat(searchModal.getTextFromSearchField()).as("Search field is not translated").isEqualTo(SpanishIos.SEARCH);
         softAssertions.assertAll();
     }
 

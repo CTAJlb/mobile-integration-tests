@@ -3,7 +3,6 @@ package stepdefinitions.application;
 import com.google.inject.Inject;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.assertj.core.api.SoftAssertions;

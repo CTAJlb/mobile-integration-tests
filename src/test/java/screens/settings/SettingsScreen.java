@@ -9,6 +9,7 @@ public abstract class SettingsScreen extends Screen {
     }
 
     public abstract void openLibraries();
+    public abstract void openLibrariesES();
 
     public abstract void openAboutPalace();
 

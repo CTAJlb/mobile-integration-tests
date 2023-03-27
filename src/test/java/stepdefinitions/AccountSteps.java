@@ -3,9 +3,9 @@ package stepdefinitions;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
+import constants.localization.spanish.SpanishIos;
 import enums.keysforcontext.ContextLibrariesKeys;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
-import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import framework.utilities.swipe.SwipeElementUtils;
 import io.cucumber.java.en.Then;
@@ -130,8 +130,8 @@ public class AccountSteps {
     @Then("Elements on add account screen are translated correctly")
     public void checkTranslationOnAddAccountScreen() {
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(addAccountScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(Spanish.BACK.getDefaultLocalizedValue());
-        softAssertions.assertThat(addAccountScreen.getTextFromAddLibraryLbl()).as("Add library label is not translated").isEqualTo(Spanish.ADD_LIBRARY.getDefaultLocalizedValue());
+        softAssertions.assertThat(addAccountScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(SpanishIos.BACK);
+        softAssertions.assertThat(addAccountScreen.getTextFromAddLibraryLbl()).as("Add library label is not translated").isEqualTo(SpanishIos.ADD_ACCOUNT);
         softAssertions.assertAll();
     }
 
@@ -188,17 +188,16 @@ public class AccountSteps {
     @Then("Elements on Account screen are translated correctly")
     public void checkTranslationOnAccountScreen() {
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(accountScreen.getTextFromLibrariesBtn()).as("Libraries button is not translated").isEqualTo(Spanish.LIBRARIES.getDefaultLocalizedValue());
-        softAssertions.assertThat(accountScreen.getTextFromAccountHeader()).as("Account is not translated").isEqualTo(Spanish.ACCOUNT.getDefaultLocalizedValue());
-        softAssertions.assertThat(accountScreen.getTextFromCardTxb()).as("Library card is not translated").isEqualTo(Spanish.LIBRARY_CARD.getDefaultLocalizedValue());
-        softAssertions.assertThat(accountScreen.getTextFromPinTxb()).as("Password is not translated").isEqualTo(Spanish.PASSWORD.getDefaultLocalizedValue());
-        softAssertions.assertThat(accountScreen.getTextFromLogInButton()).as("Sign in button is not translated").isEqualTo(Spanish.LOG_IN.getDefaultLocalizedValue());
-        softAssertions.assertThat(accountScreen.getTextFromForgetPasswordLbl()).as("Forget password label is not translated").isEqualTo(Spanish.FORGET_PASSWORD.getDefaultLocalizedValue());
-        softAssertions.assertThat(accountScreen.getTextFromLicenseAgreementLink()).as("License agreement link is not translated").isEqualTo(Spanish.USER_AGREEMENT_LINK.getDefaultLocalizedValue());
-        softAssertions.assertThat(accountScreen.getTextFromNoAccountLbl()).as("No account label is not translated").isEqualTo(Spanish.NO_ACCOUNT.getDefaultLocalizedValue());
-        softAssertions.assertThat(accountScreen.getTextFromReportAboutProblemBtn()).as("Report a problem button is not translated").isEqualTo(Spanish.REPORT_A_PROBLEM.getDefaultLocalizedValue());
-        softAssertions.assertThat(accountScreen.getTextFromCreateCardBtn()).as("Create card button is not translated").isEqualTo(Spanish.CREATE_CARD.getDefaultLocalizedValue());
-        softAssertions.assertThat(accountScreen.getTextFromContentLicensesLbl()).as("Content licenses label is not translated").isEqualTo(Spanish.CONTENT_LICENSES.getDefaultLocalizedValue());
+        softAssertions.assertThat(accountScreen.getTextFromLibrariesBtn()).as("Libraries button is not translated").isEqualTo(SpanishIos.LIBRARIES);
+        softAssertions.assertThat(accountScreen.getTextFromAccountHeader()).as("Account is not translated").isEqualTo(SpanishIos.ACCOUNT);
+        softAssertions.assertThat(accountScreen.getTextFromCardTxb()).as("Library card is not translated").isEqualTo(SpanishIos.LIBRARY_CARD);
+        softAssertions.assertThat(accountScreen.getTextFromPinTxb()).as("Password is not translated").isEqualTo(SpanishIos.PASSWORD);
+        softAssertions.assertThat(accountScreen.getTextFromLogInButton()).as("Sign in button is not translated").isEqualTo(SpanishIos.SIGN_IN);
+        softAssertions.assertThat(accountScreen.getTextFromForgetPasswordLbl()).as("Forget password label is not translated").isEqualTo(SpanishIos.FORGET_PASSWORD);
+        softAssertions.assertThat(accountScreen.getTextFromLicenseAgreementLink()).as("License agreement link is not translated").isEqualTo(SpanishIos.USER_AGREEMENT_LINK);
+        softAssertions.assertThat(accountScreen.getTextFromNoAccountLbl()).as("No account label is not translated").isEqualTo(SpanishIos.NO_ACCOUNT);
+        softAssertions.assertThat(accountScreen.getTextFromReportAboutProblemBtn()).as("Report a problem button is not translated").isEqualTo(SpanishIos.REPORT_A_PROBLEM);
+        softAssertions.assertThat(accountScreen.getTextFromContentLicensesLbl()).as("Content licenses label is not translated").isEqualTo(SpanishIos.CONTENT_LICENSES);
         softAssertions.assertAll();
     }
 

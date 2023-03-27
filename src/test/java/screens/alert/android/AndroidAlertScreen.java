@@ -19,6 +19,11 @@ public class AndroidAlertScreen extends AlertScreen {
     }
 
     @Override
+    public void performAlertActionIfDisplayedInSpanish(String actionBtnKey) {
+        //for ios
+    }
+
+    @Override
     public String getTextFromAlertHeader() {
         //for android
         return null;

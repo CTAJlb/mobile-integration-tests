@@ -11,5 +11,7 @@ public abstract class AlertScreen extends Screen {
 
     public abstract void waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys actionButtonNamesAlertKeys);
 
+    public abstract void performAlertActionIfDisplayedInSpanish(String actionBtnKey);
+
     public abstract String getTextFromAlertHeader();
 }

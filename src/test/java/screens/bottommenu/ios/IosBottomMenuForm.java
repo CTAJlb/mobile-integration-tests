@@ -4,6 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import constants.applicationattributes.IosAttributes;
 import org.openqa.selenium.By;
 import screens.bottommenu.BottomMenu;
 import screens.bottommenu.BottomMenuForm;
@@ -41,7 +42,7 @@ public class IosBottomMenuForm extends BottomMenuForm {
 
     @Override
     public String getTextFromCatalogBtn() {
-        return btnCatalog.getText();
+        return btnCatalog.getAttribute(IosAttributes.NAME);
     }
 
     @Override
