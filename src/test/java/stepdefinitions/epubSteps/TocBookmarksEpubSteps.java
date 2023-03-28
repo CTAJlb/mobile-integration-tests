@@ -49,7 +49,7 @@ public class TocBookmarksEpubSteps {
 
     @Then("Elements on Bookmarks epub screen are translated correctly")
     public void checkTranslationOfBookmarksScreen() {
-        Assert.assertEquals("Info label is not translated", Spanish.INFO_BOOKMARKS.getDefaultLocalizedValue(), tocBookmarksEpubScreen.getBookmarksEpubScreen().getTextFromInformationLbl());
+        Assert.assertEquals("Info label is not translated", SpanishIos.BOOKMARKS_INFO, tocBookmarksEpubScreen.getBookmarksEpubScreen().getTextFromInformationLbl());
     }
 
     @And("{string} chapter name is displayed on reader epub screen")

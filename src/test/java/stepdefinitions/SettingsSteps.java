@@ -43,7 +43,7 @@ public class SettingsSteps {
         bottomMenuForm.open(BottomMenu.SETTINGS);
     }
 
-    @When("I open Settings in Spanish")
+    @When("Open Settings in Spanish")
     public void openSettingsInSpanish() {
         bottomMenuForm.open(BottomMenu.SETTINGS_ES);
         bottomMenuForm.open(BottomMenu.SETTINGS_ES);

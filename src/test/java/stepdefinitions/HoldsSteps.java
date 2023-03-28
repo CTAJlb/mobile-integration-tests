@@ -43,7 +43,7 @@ public class HoldsSteps {
         bottomMenuForm.open(BottomMenu.HOLDS);
     }
 
-    @When("I open Holds in Spanish")
+    @When("Open Holds in Spanish")
     public void openHoldsInSpanish(){
         bottomMenuForm.open(BottomMenu.HOLD_ES);
     }

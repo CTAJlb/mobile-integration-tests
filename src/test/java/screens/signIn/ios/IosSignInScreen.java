@@ -12,7 +12,7 @@ import screens.signIn.SignInScreen;
 public class IosSignInScreen extends SignInScreen {
     private final ITextBox txbLibraryCard = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeTextField"), "Library card");
     private final ITextBox txbPassword = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeSecureTextField[@value=\"Password\"]"), "Password");
-    private final IButton btnSignIn = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[@name=\"Sign in\"]"), "Sign in button");
+    private final IButton btnSignIn = getElementFactory().getButton(By.xpath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name=\"Sign in\"]"), "Sign in button");
     private final ILink linkLicAgreement = getElementFactory().getLink(By.xpath("//XCUIElementTypeButton[contains(@name, \"User License Agreement\")]"), "License Agreement link");
     private final IButton btnDelete = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"delete\"]"), "Delete button");
 

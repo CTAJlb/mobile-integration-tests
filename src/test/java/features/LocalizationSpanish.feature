@@ -127,32 +127,28 @@ Feature: Localization testing in Spanish
       And Open toc epub screen
     Then Elements on TOC in reader epub are translated correctly
 
-#  @tier3 @returnBooks
-#  Scenario: Spanish: epub: Bookmarks
-#    When I add "LYRASIS Reads" account from welcomeScreen
-#      And I enter credentials for "LYRASIS Reads" account
-#    Then Login is performed successfully
-#    When I open Catalog
-#    Then Category rows are loaded
-#    When I open search modal
-#      And I search for "Libertie" and save bookName as 'bookNameInfo'
-#      And I open first book in Subcategory List and save it as 'bookInfo'
-#      And Click GET_ES action button on book details screen
-#    Then I check that book contains READ_ES action button on book details screen
-#    When Click READ_ES action button on book details screen
-#      And Open bookmarks epub screen
-#    Then Elements on Bookmarks epub screen are translated correctly
-#    When Close toc epub screen
-#      And I return to previous screen from epub
-#      And Click RETURN_ES action button on book details screen
-#    Then I check that book contains GET_ES action button on book details screen
+  @tier3 @returnBooks @logoutES
+  Scenario: Spanish: epub: Bookmarks
+    When Close tutorial screen
+      And Close welcome screen in Spanish
+      And Add library "LYRASIS Reads" on Add library screen
+      And Enter credentials for "LYRASIS Reads" account in Spanish
+      And Open Catalog in Spanish
+      And Open search modal
+      And Search for "Libertie" and save bookName as 'bookNameInfo'
+      And Open first book in Subcategory List and save it as 'bookInfo'
+      And Click GET_ES action button on book details screen
+    Then Check that book contains READ_ES action button on book details screen
+    When Click READ_ES action button on book details screen
+      And Open bookmarks epub screen
+    Then Elements on Bookmarks epub screen are translated correctly
 #
   @tier3
   Scenario: Spanish: Settings screen
     When Close tutorial screen
       And Close welcome screen in Spanish
       And Add library "LYRASIS Reads" on Add library screen
-      And I open Settings in Spanish
+      And Open Settings in Spanish
     Then Elements on Settings screen are translated correctly
 
   @tier3
@@ -160,7 +156,7 @@ Feature: Localization testing in Spanish
     When Close tutorial screen
       And Close welcome screen in Spanish
       And Add library "LYRASIS Reads" on Add library screen
-      And I open Holds in Spanish
+      And Open Holds in Spanish
     Then Elements on Holds screen are translated correctly
 
   @tier3
@@ -168,31 +164,27 @@ Feature: Localization testing in Spanish
     When Close tutorial screen
       And Close welcome screen in Spanish
       And Add library "LYRASIS Reads" on Add library screen
-      And I open Settings in Spanish
+      And Open Settings in Spanish
       And Open Libraries on settings screen
       And Open "LYRASIS Reads" library on setting screen
     Then Elements on Account screen are translated correctly
 
-#  @tier3 @returnBooks
-#  Scenario: Spanish: pdf: search screen
-#    When I add "LYRASIS Reads" account from welcomeScreen
-#      And I enter credentials for "LYRASIS Reads" account
-#    Then Login is performed successfully
-#    When I open Catalog
-#    Then Category rows are loaded
-#    When I open search modal
-#      And I search for "Helping Injured Animals" and save bookName as 'bookNameInfo'
-#      And I open first book in Subcategory List and save it as 'bookInfo'
-#      And Click GET_ES action button on book details screen
-#    Then I check that book contains READ_ES action button on book details screen
-#    When Click READ_ES action button on book details screen
-#    Then Reader pdf screen is opened
-#    When I open search pdf screen
-#    Then Elements on pdf search screen are translated correctly
-#    When I close pdf search screen
-#      And I return to previous screen for epub and pdf
-#      And Click RETURN_ES action button on book details screen
-#    Then I check that book contains GET_ES action button on book details screen
+  @tier3 @returnBooks @logoutES
+  Scenario: Spanish: pdf: search screen
+    When Close tutorial screen
+      And Close welcome screen in Spanish
+      And Add library "LYRASIS Reads" on Add library screen
+      And Enter credentials for "LYRASIS Reads" account in Spanish
+      And Open Catalog in Spanish
+      And Open search modal
+      And Search for "Helping Injured Animals" and save bookName as 'bookNameInfo'
+      And Open first book in Subcategory List and save it as 'bookInfo'
+      And Click GET_ES action button on book details screen
+    Then Check that book contains READ_ES action button on book details screen
+    When Click READ_ES action button on book details screen
+    Then Reader pdf screen is opened
+    When Open search pdf screen
+    Then Elements on pdf search screen are translated correctly
 
 #  @tier3 @returnBooks
 #  Scenario: Spanish: pdf: Bookmarks screen

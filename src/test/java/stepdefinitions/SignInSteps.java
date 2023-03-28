@@ -76,7 +76,7 @@ public class SignInSteps {
         context.add(libraryCardKey, libraryCard);
     }
 
-    @When("Enter a Library card with {int} latin letters and save it as 'libraryCard' on Sign in screen")
+    @When("Enter a Library card with {int} latin letters and save it as {string} on Sign in screen")
     public void enterLatinLettersInLibCard(int cardLength, String libraryCardKey) {
         String libraryCard = RandomStringUtils.randomAlphabetic(cardLength);
         signInScreen.enterLibraryCard(libraryCard);
@@ -98,11 +98,6 @@ public class SignInSteps {
 
     @When("Tap the Sign in button on Sign in screen")
     public void tapSignIn() {
-        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
-            do {
-                signInScreen.tapSignIn();
-            } while (!alertScreen.state().isDisplayed());
-        }else
             signInScreen.tapSignIn();
     }
 
