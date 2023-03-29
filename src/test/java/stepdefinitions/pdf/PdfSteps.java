@@ -3,7 +3,7 @@ package stepdefinitions.pdf;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
-import enums.localization.translation.Spanish;
+import constants.localization.spanish.SpanishIos;
 import framework.utilities.ScenarioContext;
 import framework.utilities.swipe.directions.EntireScreenDragDirection;
 import io.cucumber.java.en.Then;
@@ -268,8 +268,8 @@ public class PdfSteps {
     @Then("Elements on pdf search screen are translated correctly")
     public void checkTranslationOfSearchPDFScreen() {
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(readerPdfScreen.getSearchPdfScreen().getTextFromDoneBtn()).as("Done button is not translated").isEqualTo(Spanish.DONE.getDefaultLocalizedValue());
-        softAssertions.assertThat(readerPdfScreen.getSearchPdfScreen().getTextFromSearchTxb()).as("Search field is not translated").isEqualTo(Spanish.SEARCH_PDF.getDefaultLocalizedValue());
+        softAssertions.assertThat(readerPdfScreen.getSearchPdfScreen().getTextFromDoneBtn()).as("Done button is not translated").isEqualTo(SpanishIos.DONE);
+        softAssertions.assertThat(readerPdfScreen.getSearchPdfScreen().getTextFromSearchTxb()).as("Search field is not translated").isEqualTo(SpanishIos.SEARCH_PDF);
         softAssertions.assertAll();
     }
 
@@ -341,8 +341,8 @@ public class PdfSteps {
     @Then("Elements on pdf bookmarks screen are translated correctly")
     public void checkTranslationOnPDFBookmarksScreen() {
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(tocBookmarksPdfScreen.getTextFromResumeBtn()).as("Resume button is not translated").isEqualTo(Spanish.RESUME.getDefaultLocalizedValue());
-        softAssertions.assertThat(tocBookmarksPdfScreen.getBookmarksPdfScreen().getTextFromBookmarksScreen()).as("No bookmarks text is not translated").isEqualTo(Spanish.NO_BOOKMARKS.getDefaultLocalizedValue());
+        softAssertions.assertThat(tocBookmarksPdfScreen.getTextFromResumeBtn()).as("Resume button is not translated").isEqualTo(SpanishIos.RESUME);
+        softAssertions.assertThat(tocBookmarksPdfScreen.getBookmarksPdfScreen().getTextFromBookmarksScreen()).as("No bookmarks text is not translated").isEqualTo(SpanishIos.NO_BOOKMARKS);
         softAssertions.assertAll();
     }
 

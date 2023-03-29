@@ -186,105 +186,82 @@ Feature: Localization testing in Spanish
     When Open search pdf screen
     Then Elements on pdf search screen are translated correctly
 
-#  @tier3 @returnBooks
-#  Scenario: Spanish: pdf: Bookmarks screen
-#    When I add "LYRASIS Reads" account from welcomeScreen
-#      And I enter credentials for "LYRASIS Reads" account
-#    Then Login is performed successfully
-#    When I open Catalog
-#    Then Category rows are loaded
-#    When I open search modal
-#      And I search for "Helping Injured Animals" and save bookName as 'bookNameInfo'
-#      And I open first book in Subcategory List and save it as 'bookInfo'
-#      And Click GET_ES action button on book details screen
-#    Then I check that book contains READ_ES action button on book details screen
-#    When Click READ_ES action button on book details screen
-#    Then Reader pdf screen is opened
-#    When I open bookmarks pdf screen
-#    Then Elements on pdf bookmarks screen are translated correctly
-#    When I return to pdf reader screen from pdf toc screen
-#      And I return to previous screen for epub and pdf
-#      And Click RETURN_ES action button on book details screen
-#    Then I check that book contains GET_ES action button on book details screen
+  @tier3 @returnBooks @logoutES
+  Scenario: Spanish: pdf: Bookmarks screen
+    When Close tutorial screen
+      And Close welcome screen in Spanish
+      And Add library "LYRASIS Reads" on Add library screen
+      And Enter credentials for "LYRASIS Reads" account in Spanish
+      And Open Catalog in Spanish
+      And Open search modal
+      And Search for "Helping Injured Animals" and save bookName as 'bookNameInfo'
+      And Open first book in Subcategory List and save it as 'bookInfo'
+      And Click GET_ES action button on book details screen
+    Then Check that book contains READ_ES action button on book details screen
+    When Click READ_ES action button on book details screen
+    Then Reader pdf screen is opened
+    When Open bookmarks pdf screen
+    Then Elements on pdf bookmarks screen are translated correctly
 
-#  @tier3 @returnBooks
-#  Scenario: Spanish: Audiobooks: player screen
-#    When I add "LYRASIS Reads" account from welcomeScreen
-#      And I enter credentials for "LYRASIS Reads" account
-#    Then Login is performed successfully
-#    When I open Catalog
-#    Then Category rows are loaded
-#    When I open search modal
-#      And I search for "L.A. Weather" and save bookName as 'bookNameInfo'
-#      And I open first book in Subcategory List and save it as 'bookInfo'
-#      And Click GET_ES action button on book details screen
-#    Then I check that book contains LISTEN_ES action button on book details screen
-#    When Click LISTEN_ES action button on book details screen
-#    Then Audio player screen of book 'bookNameInfo' is opened
-#      And Elements on Audio Player screen are translated correctly
-#    When Return to previous screen from audio player screen
-#      And Click RETURN_ES action button on book details screen
-#    Then I check that book contains GET_ES action button on book details screen
+  @tier3 @returnBooks @logoutES
+  Scenario: Spanish: Audiobooks: player screen
+    When Close tutorial screen
+      And Close welcome screen in Spanish
+      And Add library "LYRASIS Reads" on Add library screen
+      And Enter credentials for "LYRASIS Reads" account in Spanish
+      And Open Catalog in Spanish
+      And Open search modal
+      And Search for "Fault Lines" and save bookName as 'bookNameInfo'
+      And Open first book in Subcategory List and save it as 'bookInfo'
+      And Click GET_ES action button on book details screen
+    Then Check that book contains LISTEN_ES action button on book details screen
+    When Click LISTEN_ES action button on book details screen
+    Then Elements on Audio Player screen are translated correctly
 
-#  @tier3 @returnBooks
-#  Scenario: Spanish: Audiobooks: playback screen
-#    When I add "LYRASIS Reads" account from welcomeScreen
-#      And I enter credentials for "LYRASIS Reads" account
-#    Then Login is performed successfully
-#    When I open Catalog
-#    Then Category rows are loaded
-#    When I open search modal
-#    And I search for "L.A. Weather" and save bookName as 'bookNameInfo'
-#    And I open first book in Subcategory List and save it as 'bookInfo'
-#    And Click GET_ES action button on book details screen
-#    Then I check that book contains LISTEN_ES action button on book details screen
-#    When Click LISTEN_ES action button on book details screen
-#    Then Audio player screen of book 'bookNameInfo' is opened
-#    When Open playback speed on audio player screen
-#    Then Elements on Playback speed are translated correctly
-#    When Close playback speed screen
-#      And Return to previous screen from audio player screen
-#      And Click RETURN_ES action button on book details screen
-#    Then I check that book contains GET_ES action button on book details screen
+  @tier3 @returnBooks @logoutES
+  Scenario: Spanish: Audiobooks: playback screen
+    When Close tutorial screen
+      And Close welcome screen in Spanish
+      And Add library "LYRASIS Reads" on Add library screen
+      And Enter credentials for "LYRASIS Reads" account in Spanish
+      And Open Catalog in Spanish
+      And Open search modal
+      And Search for "The Secret Garden" and save bookName as 'bookNameInfo'
+      And Open first book in Subcategory List and save it as 'bookInfo'
+      And Click GET_ES action button on book details screen
+    Then Check that book contains LISTEN_ES action button on book details screen
+    When Click LISTEN_ES action button on book details screen
+      And Open playback speed on audio player screen
+    Then Elements on Playback speed are translated correctly
 
-#  @tier3 @returnBooks
-#  Scenario: Spanish: Audiobooks: sleep timer screen
-#    When I add "LYRASIS Reads" account from welcomeScreen
-#      And I enter credentials for "LYRASIS Reads" account
-#    Then Login is performed successfully
-#    When I open Catalog
-#    Then Category rows are loaded
-#    When I open search modal
-#      And I search for "L.A. Weather" and save bookName as 'bookNameInfo'
-#      And I open first book in Subcategory List and save it as 'bookInfo'
-#      And Click GET_ES action button on book details screen
-#    Then I check that book contains LISTEN_ES action button on book details screen
-#    When Click LISTEN_ES action button on book details screen
-#    Then Audio player screen of book 'bookNameInfo' is opened
-#    When Open sleep timer on audio player screen
-#    Then Elements on Sleep timer screen are translated correctly
-#    When Close sleep timer screen
-#      And Return to previous screen from audio player screen
-#      And Click RETURN_ES action button on book details screen
-#    Then I check that book contains GET_ES action button on book details screen
+  @tier3 @returnBooks @logoutES
+  Scenario: Spanish: Audiobooks: sleep timer screen
+    When Close tutorial screen
+      And Close welcome screen in Spanish
+      And Add library "LYRASIS Reads" on Add library screen
+      And Enter credentials for "LYRASIS Reads" account in Spanish
+      And Open Catalog in Spanish
+      And Open search modal
+      And Search for "The Sentence" and save bookName as 'bookNameInfo'
+      And Open first book in Subcategory List and save it as 'bookInfo'
+      And Click GET_ES action button on book details screen
+    Then Check that book contains LISTEN_ES action button on book details screen
+    When Click LISTEN_ES action button on book details screen
+      And Open sleep timer on audio player screen
+    Then Elements on Sleep timer screen are translated correctly
 
-#  @tier3 @returnBooks
-#  Scenario: Spanish: Audiobooks: table of contents screen
-#    When I add "LYRASIS Reads" account from welcomeScreen
-#      And I enter credentials for "LYRASIS Reads" account
-#    Then Login is performed successfully
-#    When I open Catalog
-#    Then Category rows are loaded
-#    When I open search modal
-#      And I search for "L.A. Weather" and save bookName as 'bookNameInfo'
-#      And I open first book in Subcategory List and save it as 'bookInfo'
-#      And Click GET_ES action button on book details screen
-#    Then I check that book contains LISTEN_ES action button on book details screen
-#    When Click LISTEN_ES action button on book details screen
-#    Then Audio player screen of book 'bookNameInfo' is opened
-#    When Open toc audiobook screen
-#    Then Elements on TOC audiobook screen are translated correctly
-#    When Close toc audiobook screen
-#      And Return to previous screen from audio player screen
-#      And Click RETURN_ES action button on book details screen
-#    Then I check that book contains GET_ES action button on book details screen
+  @tier3 @returnBooks @logoutES
+  Scenario: Spanish: Audiobooks: table of contents screen
+    When Close tutorial screen
+      And Close welcome screen in Spanish
+      And Add library "LYRASIS Reads" on Add library screen
+      And Enter credentials for "LYRASIS Reads" account in Spanish
+      And Open Catalog in Spanish
+      And Open search modal
+      And Search for "L.A. Weather" and save bookName as 'bookNameInfo'
+      And Open first book in Subcategory List and save it as 'bookInfo'
+      And Click GET_ES action button on book details screen
+    Then Check that book contains LISTEN_ES action button on book details screen
+    When Click LISTEN_ES action button on book details screen
+      And Open toc audiobook screen
+    Then Elements on TOC audiobook screen are translated correctly
