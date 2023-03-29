@@ -9,7 +9,8 @@ public enum BottomMenu {
     HOLDS("tabHolds", "Reservations"),
     HOLD_ES("Reservas", "Reservas"),
     BOOKS("tabBooks", "My Books"),
-    CATALOG("tabCatalog", "Catalog");
+    CATALOG("tabCatalog", "Catalog"),
+    CATALOG_ES("Catálogo", "Catálogo");
 
     private static final PlatformName platformName = AqualityServices.getApplication().getPlatformName();
 

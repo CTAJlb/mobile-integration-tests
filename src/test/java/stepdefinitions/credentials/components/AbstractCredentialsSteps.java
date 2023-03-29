@@ -74,10 +74,35 @@ public abstract class AbstractCredentialsSteps extends BaseSteps implements ICre
         }
     }
 
+    public void enterCredentialsSpanish(String libraryName) {
+        openAccountsSpanish();
+        librariesScreen.openLibrary(libraryName);
+        Credentials credentials = Configuration.getCredentials(libraryName);
+        storeCredentials(credentials);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            AqualityServices.getApplication().getDriver().switchTo().alert().dismiss();
+            AqualityServices.getLogger().info("Alert appears and dismiss alert");
+        }
+        accountScreen.enterCredentialsAndLoginES(credentials);
+        if (AqualityServices.getApplication().getPlatformName() == PlatformName.IOS && alertScreen.state().waitForDisplayed()) {
+            alertScreen.waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys.NOT_NOW);
+        }
+        boolean isLoginPerformedSuccessfully = AqualityServices.getConditionalWait().waitFor(() -> accountScreen.isLoginSuccessfulES() || catalogScreen.state().isDisplayed());
+        if (!isLoginPerformedSuccessfully) {
+            throw new RuntimeException("Login is not completed");
+        }
+    }
+
     private void openAccounts() {
         bottomMenuForm.open(BottomMenu.SETTINGS);
         bottomMenuForm.open(BottomMenu.SETTINGS);
         settingsScreen.openLibraries();
+    }
+
+    private void openAccountsSpanish() {
+        bottomMenuForm.open(BottomMenu.SETTINGS_ES);
+        bottomMenuForm.open(BottomMenu.SETTINGS_ES);
+        settingsScreen.openLibrariesES();
     }
 
     private void storeCredentials(Credentials credentials) {

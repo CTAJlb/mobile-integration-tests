@@ -2,11 +2,11 @@ package stepdefinitions.epubSteps;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
+import constants.localization.spanish.SpanishIos;
 import enums.epub.EnumTabsTocAndBookmarksEpub;
 import enums.localization.reader.BackgroundColorKeys;
 import enums.localization.reader.FontNameKeys;
 import enums.localization.reader.ReaderSettingKeys;
-import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -68,8 +68,8 @@ public class EpubSteps {
     public void checkTranslationOnReaderScreen() {
         readerEpubScreen.openNavigationBar();
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(readerEpubScreen.getTextFromPageLbl().contains(Spanish.PAGE.getDefaultLocalizedValue())).as("Page label is not translated").isTrue();
-        softAssertions.assertThat(readerEpubScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(Spanish.BACK.getDefaultLocalizedValue());
+        softAssertions.assertThat(readerEpubScreen.getTextFromPageLblES().contains(SpanishIos.PAGE)).as("Page label is not translated").isTrue();
+        softAssertions.assertThat(readerEpubScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(SpanishIos.BACK);
         softAssertions.assertAll();
     }
 

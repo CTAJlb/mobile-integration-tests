@@ -2,6 +2,7 @@ package stepdefinitions.epubSteps;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
+import constants.localization.spanish.SpanishIos;
 import enums.epub.EnumTabsTocAndBookmarksEpub;
 import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
@@ -39,16 +40,16 @@ public class TocBookmarksEpubSteps {
     @Then("Elements on TOC in reader epub are translated correctly")
     public void checkTranslationOfTOCScreen(){
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(Spanish.BACK.getDefaultLocalizedValue());
-        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromTOCLabel()).as("TOC header is not translated").isEqualTo(Spanish.TOC.getDefaultLocalizedValue());
-        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromContentsBtn()).as("Contents button is not translated").isEqualTo(Spanish.CONTENTS.getDefaultLocalizedValue());
-        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromBookmarksBtn()).as("Bookmarks button is not translated").isEqualTo(Spanish.BOOKMARKS.getDefaultLocalizedValue());
+        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(SpanishIos.BACK);
+        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromTOCLabel()).as("TOC header is not translated").isEqualTo(SpanishIos.TOC);
+        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromContentsBtn()).as("Contents button is not translated").isEqualTo(SpanishIos.CONTENTS);
+        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromBookmarksBtn()).as("Bookmarks button is not translated").isEqualTo(SpanishIos.BOOKMARKS);
         softAssertions.assertAll();
     }
 
     @Then("Elements on Bookmarks epub screen are translated correctly")
     public void checkTranslationOfBookmarksScreen() {
-        Assert.assertEquals("Info label is not translated", Spanish.INFO_BOOKMARKS.getDefaultLocalizedValue(), tocBookmarksEpubScreen.getBookmarksEpubScreen().getTextFromInformationLbl());
+        Assert.assertEquals("Info label is not translated", SpanishIos.BOOKMARKS_INFO, tocBookmarksEpubScreen.getBookmarksEpubScreen().getTextFromInformationLbl());
     }
 
     @And("{string} chapter name is displayed on reader epub screen")

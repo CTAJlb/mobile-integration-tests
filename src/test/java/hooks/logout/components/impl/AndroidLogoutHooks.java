@@ -44,4 +44,9 @@ public class AndroidLogoutHooks extends AbstractLogoutHooks {
             }
         }
     }
+
+    @Override
+    public void logoutES() {
+        //for ios
+    }
 }

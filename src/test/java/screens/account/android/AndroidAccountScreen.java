@@ -41,12 +41,23 @@ public class AndroidAccountScreen extends AccountScreen {
     }
 
     @Override
+    public void enterCredentialsAndLoginES(Credentials credentials) {
+        //for ios
+    }
+
+    @Override
     public boolean isLoginSuccessful() {
         lblLoading.state().waitForDisplayed();
         lblLoading.state().waitForNotDisplayed();
         AqualityServices.getConditionalWait().waitFor(() ->
                 btnLogout.state().isDisplayed() || btnLogInError.state().isDisplayed(), Duration.ofMillis(BooksTimeouts.TIMEOUT_BOOK_CHANGES_STATUS.getTimeoutMillis()));
         return getLoginButtonText().equals(AccountScreenLoginStatus.SIGN_OUT.getDefaultLocalizedValue());
+    }
+
+    @Override
+    public boolean isLoginSuccessfulES() {
+        //for ios
+        return false;
     }
 
     @Override
@@ -58,6 +69,11 @@ public class AndroidAccountScreen extends AccountScreen {
     @Override
     public void tapLogOut() {
         btnLogout.click();
+    }
+
+    @Override
+    public void tapLogOutES() {
+        //for ios
     }
 
     @Override
@@ -76,13 +92,30 @@ public class AndroidAccountScreen extends AccountScreen {
     }
 
     @Override
+    public String getTextFromLogInButtonES() {
+        //for iOS
+        return null;
+    }
+
+    @Override
     public void tapApproveSignOut() {
         //only for ios
     }
 
     @Override
+    public void tapApproveSignOutES() {
+        //for ios
+    }
+
+    @Override
     public boolean isLogoutRequired() {
         return btnLogout.state().isDisplayed();
+    }
+
+    @Override
+    public boolean isLogoutRequiredES() {
+        //for ios
+        return false;
     }
 
     @Override

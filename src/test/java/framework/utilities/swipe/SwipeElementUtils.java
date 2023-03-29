@@ -87,4 +87,11 @@ public final class SwipeElementUtils {
         double toY = AqualityServices.getApplication().getDriver().manage().window().getSize().getHeight() * 0.15;
         AqualityServices.getTouchActions().swipe(new Point((int) x, (int) fromY), new Point((int) x, (int) toY));
     }
+
+    public static void swipeUp() {
+        double x = AqualityServices.getApplication().getDriver().manage().window().getSize().getWidth() * 0.5;
+        double fromY = 260;
+        double toY = AqualityServices.getApplication().getDriver().manage().window().getSize().getHeight() * 0.8;
+        AqualityServices.getTouchActions().swipe(new Point((int) x, (int) fromY), new Point((int) x, (int) toY));
+    }
 }

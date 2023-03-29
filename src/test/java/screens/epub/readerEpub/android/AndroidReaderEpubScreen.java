@@ -124,7 +124,7 @@ public class AndroidReaderEpubScreen extends ReaderEpubScreen {
     }
 
     @Override
-    public String getTextFromPageLbl() {
+    public String getTextFromPageLblES() {
         return null;
     }
 

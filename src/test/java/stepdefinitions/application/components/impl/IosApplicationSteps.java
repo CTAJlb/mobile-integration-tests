@@ -2,7 +2,6 @@ package stepdefinitions.application.components.impl;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
-import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import factories.steps.StepsType;
 import screens.alert.AlertScreen;
 import screens.bottommenu.BottomMenu;
@@ -53,14 +52,6 @@ public class IosApplicationSteps extends AbstractApplicationSteps {
                 readerPdfScreen.getNavigationBarScreen().tapBackButton();
             }
         }
-    }
-
-    @Override
-    public void addAccountFromWelcomeScreen(String libraryName) {
-        tutorialScreen.closeTutorial();
-        welcomeScreen.tapFindLibraryButton();
-        addAccountScreen.selectLibraryViaSearch(libraryName);
-        catalogScreen.state().waitForDisplayed();
     }
 
     @Override

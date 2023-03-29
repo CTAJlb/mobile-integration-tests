@@ -29,4 +29,8 @@ public abstract class SignInScreen extends Screen {
     public abstract void deleteSomeDataInLibCard();
 
     public abstract void setTextInLibCard(String text);
+
+    public abstract void tapSignIn();
+
+    public abstract String getErrorMessage();
 }

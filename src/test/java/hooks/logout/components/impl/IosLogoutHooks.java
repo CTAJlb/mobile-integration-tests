@@ -2,6 +2,7 @@ package hooks.logout.components.impl;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import constants.localization.spanish.SpanishIos;
 import enums.timeouts.AuthorizationTimeouts;
 import enums.keysforcontext.ContextLibrariesKeys;
 import enums.localization.account.AccountScreenLoginStatus;
@@ -50,6 +51,37 @@ public class IosLogoutHooks extends AbstractLogoutHooks {
                         accountScreen.getTextFromLogInButton().equals(AccountScreenLoginStatus.SIGN_IN.getDefaultLocalizedValue())
                             && !accountScreen.getTextFromCardTxb().equals(cardTextBeforeLogout)
                             && !accountScreen.getTextFromPinTxb().equals(pinTextBeforeLogout),
+                        Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getTimeoutMillis()),
+                        Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getPollingMillis()),
+                        Collections.singletonList(NoSuchElementException.class));
+            }
+        }
+    }
+
+    @Override
+    public void logoutES() {
+        restartApp();
+        List<String> listOfLibraries = context.get(ContextLibrariesKeys.LOG_OUT.getKey());
+        if (listOfLibraries.size() == 0) {
+            throw new RuntimeException("There are not libraries for logout");
+        }
+        for (String library: listOfLibraries) {
+            bottomMenuForm.open(BottomMenu.SETTINGS_ES);
+            bottomMenuForm.open(BottomMenu.SETTINGS_ES);
+            settingsScreen.openLibrariesES();
+            librariesScreen.openLibrary(library);
+            if (accountScreen.isLogoutRequiredES()) {
+                final String cardTextBeforeLogout = accountScreen.getTextFromCardTxb();
+                final String pinTextBeforeLogout = accountScreen.getTextFromPinTxb();
+                accountScreen.tapLogOutES();
+                accountScreen.tapApproveSignOutES();
+                if(alertScreen.state().waitForDisplayed()){
+                    alertScreen.performAlertActionIfDisplayedInSpanish(SpanishIos.SIGN_OUT);
+                }
+                AqualityServices.getConditionalWait().waitFor(() ->
+                                accountScreen.getTextFromLogInButtonES().equals(SpanishIos.SIGN_IN)
+                                        && !accountScreen.getTextFromCardTxb().equals(cardTextBeforeLogout)
+                                        && !accountScreen.getTextFromPinTxb().equals(pinTextBeforeLogout),
                         Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getTimeoutMillis()),
                         Duration.ofMillis(AuthorizationTimeouts.USER_LOGGED_OUT.getPollingMillis()),
                         Collections.singletonList(NoSuchElementException.class));

@@ -1,4 +1,4 @@
-Feature: Audiobook in Lyrasis
+Feature: Audiobook in LYRASIS
 
   Background:
     Given Close tutorial screen

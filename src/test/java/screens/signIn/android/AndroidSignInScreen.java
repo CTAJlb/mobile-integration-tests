@@ -1,10 +1,7 @@
 package screens.signIn.android;
 
 import aquality.appium.mobile.application.PlatformName;
-import aquality.appium.mobile.elements.interfaces.IButton;
-import aquality.appium.mobile.elements.interfaces.ICheckBox;
-import aquality.appium.mobile.elements.interfaces.ILink;
-import aquality.appium.mobile.elements.interfaces.ITextBox;
+import aquality.appium.mobile.elements.interfaces.*;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import framework.utilities.keyboard.KeyboardUtils;
 import io.appium.java_client.android.nativekey.AndroidKey;
@@ -18,6 +15,7 @@ public class AndroidSignInScreen extends SignInScreen {
     private final ICheckBox cbxShowPassword = getElementFactory().getCheckBox(By.xpath("//android.widget.CheckBox[@text=\"Show Password\"]"), "Show password checkbox");
     private final IButton btnSignIn = getElementFactory().getButton(By.xpath("//android.widget.Button[@text=\"Sign in\"]"), "Sign in button");
     private final ILink linkLicAgreement = getElementFactory().getLink(By.xpath("//android.widget.TextView[contains(@text, \"User License Agreement\")]"), "License Agreement link");
+    private final ILabel lblErrorMessage = getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@resource-id, \"accountLoginProgressText\")]"), "Error message");
 
 
     public AndroidSignInScreen() {
@@ -78,5 +76,14 @@ public class AndroidSignInScreen extends SignInScreen {
         txbLibraryCard.sendKeys(text);
     }
 
+    @Override
+    public void tapSignIn() {
+        btnSignIn.click();
+    }
+
+    @Override
+    public String getErrorMessage() {
+        return lblErrorMessage.getText();
+    }
 
 }

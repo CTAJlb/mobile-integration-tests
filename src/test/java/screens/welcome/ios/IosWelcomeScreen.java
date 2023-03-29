@@ -9,6 +9,7 @@ import screens.welcome.WelcomeScreen;
 @ScreenType(platform = PlatformName.IOS)
 public class IosWelcomeScreen extends WelcomeScreen {
     private final IButton btnFindLibrary = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Find Your Library\"]"), "Find your library button");
+    private final IButton btnFindLibrarySpanish = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Encuentra tu biblioteca\"]"), "Find your library button in Spanish");
 
     public IosWelcomeScreen() {
         super(By.xpath("//XCUIElementTypeButton[@name=\"Find Your Library\"]"));
@@ -20,7 +21,17 @@ public class IosWelcomeScreen extends WelcomeScreen {
     }
 
     @Override
-    public String getTextFromButtonFindYourLibrary() {
-        return btnFindLibrary.getText();
+    public void tapFindLibraryButtonInSpanish() {
+        btnFindLibrarySpanish.click();
+    }
+
+    @Override
+    public String getTextFromButtonFindYourLibraryES() {
+        return btnFindLibrarySpanish.getText();
+    }
+
+    @Override
+    public boolean isOpenedInSpanish() {
+        return btnFindLibrarySpanish.state().waitForDisplayed();
     }
 }

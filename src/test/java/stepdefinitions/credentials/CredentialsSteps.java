@@ -38,10 +38,16 @@ public class CredentialsSteps extends BaseSteps implements ICredentialsSteps {
         abstractCredentialsSteps.clickLogOut();
     }
 
-    @And("Enter credentials for {string} account")
+    @When("Enter credentials for {string} account")
     public void enterCredentialsForLibraryAccount(String libraryName) {
         saveLibraryForLogOut(libraryName);
         abstractCredentialsSteps.enterCredentialsForLibraryAccount(libraryName);
+    }
+
+    @When("Enter credentials for {string} account in Spanish")
+    public void enterCredentialsInSpanish(String libraryName) {
+        saveLibraryForLogOut(libraryName);
+        abstractCredentialsSteps.enterCredentialsSpanish(libraryName);
     }
 
     private void saveLibraryForLogOut(String libraryName) {

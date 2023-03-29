@@ -1,7 +1,7 @@
 package stepdefinitions.application.components;
 
 import aquality.appium.mobile.application.AqualityServices;
-import enums.localization.translation.Spanish;
+import constants.localization.spanish.SpanishIos;
 import enums.timeouts.RestartAppTimeouts;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
@@ -38,8 +38,6 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     public abstract void turnOnTestMode();
 
     public abstract void returnToPreviousScreenForEpubAndPdf();
-
-    public abstract void addAccountFromWelcomeScreen(String libraryName);
 
     public abstract void addAccountByTheLogo(String libraryName);
 
@@ -91,12 +89,22 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     @Override
     public void checkTranslationOnWelcomeScreen(){
-        Assert.assertEquals("Find your library button is not translated", Spanish.FIND_YOUR_LIBRARY.getDefaultLocalizedValue(), welcomeScreen.getTextFromButtonFindYourLibrary());
+        Assert.assertEquals("Find your library button is not translated", SpanishIos.FIND_YOUR_LIBRARY, welcomeScreen.getTextFromButtonFindYourLibraryES());
     }
 
     @Override
     public void checkWelcomeScreenIsOpened() {
         Assert.assertTrue("Welcome screen is not opened", welcomeScreen.state().waitForDisplayed());
+    }
+
+    @Override
+    public void isWelcomeScreenOpenedInSpanish(){
+        Assert.assertTrue("Welcome screen is not opened", welcomeScreen.isOpenedInSpanish());
+    }
+
+    @Override
+    public void closeWelcomeScreenInSpanish() {
+        welcomeScreen.tapFindLibraryButtonInSpanish();
     }
 
     @Override
@@ -111,9 +119,9 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
 
     public void checkFindYourLibScreenTranslation() {
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(findYourLibScreen.getTextFromFindYourLibraryLbl()).as("Find your library label is not translated").isEqualTo(Spanish.FIND_YOUR_LIBRARY);
-        softAssertions.assertThat(findYourLibScreen.getTextFromAddLibraryBtn()).as("Add library button is not translated").isEqualTo(Spanish.ADD_LIBRARY);
-        softAssertions.assertThat(findYourLibScreen.getTextFromCancelBtn()).as("Cancel button is not translated").isEqualTo(Spanish.CANCEL);
+        softAssertions.assertThat(findYourLibScreen.getTextFromFindYourLibraryLbl()).as("Find your library label is not translated").isEqualTo(SpanishIos.FIND_YOUR_LIBRARY);
+        softAssertions.assertThat(findYourLibScreen.getTextFromAddLibraryBtn()).as("Add library button is not translated").isEqualTo(SpanishIos.ADD_ACCOUNT);
+        softAssertions.assertThat(findYourLibScreen.getTextFromCancelBtn()).as("Cancel button is not translated").isEqualTo(SpanishIos.CANCEL);
         softAssertions.assertAll();
     }
 }

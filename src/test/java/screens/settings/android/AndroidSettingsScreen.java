@@ -33,6 +33,11 @@ public class AndroidSettingsScreen extends SettingsScreen {
     }
 
     @Override
+    public void openLibrariesES() {
+        //for ios
+    }
+
+    @Override
     public void openAboutPalace() {
         //only for iOS
     }

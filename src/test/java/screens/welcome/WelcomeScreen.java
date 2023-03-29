@@ -10,5 +10,9 @@ public abstract class WelcomeScreen extends Screen {
 
     public abstract void tapFindLibraryButton();
 
-    public abstract String getTextFromButtonFindYourLibrary();
+    public abstract void tapFindLibraryButtonInSpanish();
+
+    public abstract String getTextFromButtonFindYourLibraryES();
+
+    public abstract boolean isOpenedInSpanish();
 }

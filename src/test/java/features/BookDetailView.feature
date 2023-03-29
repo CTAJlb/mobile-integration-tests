@@ -496,7 +496,7 @@ Feature: Book detail view screen
       And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
       And Click GET action button on book details screen
     Then Sing in screen is opened
-    When Enter a Password "Test123" on Sign in screen
+    When Enter a valid Password for "LYRASIS Reads" library on Sign in screen
     Then Sign in button is disabled on Sign in screen
 
   @tier2
@@ -513,7 +513,7 @@ Feature: Book detail view screen
       And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
     And Click GET action button on book details screen
     Then Sing in screen is opened
-    When Enter a Library card "01230000000098" on Sign in screen
+    When Enter a valid Library card "01230000000098" on Sign in screen
     Then Sign in button is disabled on Sign in screen
 
   @tier2
@@ -530,6 +530,49 @@ Feature: Book detail view screen
       And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
       And Click GET action button on book details screen
     Then Sing in screen is opened
-    When Enter a Library card "01230000000015" and save it as 'libraryCard' on Sign in screen
-      And Edit data by adding "2209" in Library card field and save it as 'newLibraryCard' on sign in screen
+    When Enter a Library card with 14 numbers and save it as 'libraryCard' on Sign in screen
+      And Edit data by adding "22" in Library card field and save it as 'newLibraryCard' on sign in screen
     Then There is a placeholder 'newLibraryCard' in the Library Card field on Sign in screen
+
+  @tier2
+  Scenario Outline: Get: Sign in: Library card: Check of less than minimum allowed or more than maximum characters
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "As the Crows Fly" and save bookName as 'bookNameInfo'
+      And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
+      And Click GET action button on book details screen
+    Then Sing in screen is opened
+    When Enter a Library card with <numbers> numbers and save it as 'libraryCard' on Sign in screen
+      And Enter a valid Password for "LYRASIS Reads" library on Sign in screen
+      And Tap the Sign in button on Sign in screen
+    Then There is an alert "Invalid credentials" on Sign in screen
+
+    Scenarios:
+    | numbers |
+    | 13      |
+    | 15      |
+
+  @tier2
+  Scenario: Get: Log in: Library card: Check that the field doesn't allow characters except numbers
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+    Then Account "LYRASIS Reads" is present on Accounts screen
+    When Open Catalog
+      And Open search modal
+      And Search for "The Last Goodnight" and save bookName as 'bookNameInfo'
+      And Open book with GET action button and 'bookNameInfo' bookName on catalog books screen
+      And Click GET action button on book details screen
+    Then Sing in screen is opened
+    When Enter a Library card with 14 latin letters and save it as 'libraryCard' on Sign in screen
+      And Enter a valid Password for "LYRASIS Reads" library on Sign in screen
+      And Tap the Sign in button on Sign in screen
+    Then There is an alert "Invalid credentials" on Sign in screen

@@ -8,11 +8,11 @@ public interface IApplicationSteps {
 
     void restartApp();
 
-    void addAccountFromWelcomeScreen(String libraryName);
-
     void checkThatTutorialScreenIsOpened();
 
     void checkWelcomeScreenIsOpened();
+
+    void isWelcomeScreenOpenedInSpanish();
 
     void checkTranslationOnWelcomeScreen();
 
@@ -23,6 +23,8 @@ public interface IApplicationSteps {
     void closeTutorialScreen();
 
     void closeWelcomeScreen();
+
+    void closeWelcomeScreenInSpanish();
 
     void checkFindYourLibScreenTranslation();
 }

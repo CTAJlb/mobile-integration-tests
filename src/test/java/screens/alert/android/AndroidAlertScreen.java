@@ -17,4 +17,15 @@ public class AndroidAlertScreen extends AlertScreen {
     public void waitAndPerformAlertActionIfDisplayed(EnumActionButtonsForBooksAndAlertsKeys actionButtonNamesAlertKeys) {
         //only ios
     }
+
+    @Override
+    public void performAlertActionIfDisplayedInSpanish(String actionBtnKey) {
+        //for ios
+    }
+
+    @Override
+    public String getTextFromAlertHeader() {
+        //for android
+        return null;
+    }
 }

@@ -3,7 +3,6 @@ package stepdefinitions.application;
 import com.google.inject.Inject;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.assertj.core.api.SoftAssertions;
@@ -37,11 +36,6 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
     @When("Restart app")
     public void restartApp() {
         abstractApplicationSteps.restartApp();
-    }
-
-    @Given("I add {string} account from welcomeScreen")
-    public void addAccountFromWelcomeScreen(String libraryName) {
-        abstractApplicationSteps.addAccountFromWelcomeScreen(libraryName);
     }
 
     @When("Add {string} account by the logo")
@@ -105,10 +99,22 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.closeWelcomeScreen();
     }
 
+    @When("Close welcome screen in Spanish")
+    @Override
+    public void closeWelcomeScreenInSpanish() {
+        abstractApplicationSteps.closeWelcomeScreenInSpanish();
+    }
+
     @Then("Welcome screen is opened")
     @Override
     public void checkWelcomeScreenIsOpened() {
         abstractApplicationSteps.checkWelcomeScreenIsOpened();
+    }
+
+    @Then("Welcome screen is opened in Spanish")
+    @Override
+    public void isWelcomeScreenOpenedInSpanish() {
+        abstractApplicationSteps.isWelcomeScreenOpenedInSpanish();
     }
 
     @Then("Elements on welcome screen are translated correctly")

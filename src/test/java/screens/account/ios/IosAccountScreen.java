@@ -6,6 +6,7 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.elements.interfaces.ITextBox;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
+import constants.localization.spanish.SpanishIos;
 import enums.localization.account.AccountScreenLoginStatus;
 import framework.configuration.Credentials;
 import org.openqa.selenium.By;
@@ -17,8 +18,11 @@ public class IosAccountScreen extends AccountScreen {
     private static final String BUTTON_LOCATOR = "//XCUIElementTypeStaticText[@name=\"%s\"]";
 
     private final IButton btnLogin = getElementFactory().getButton(By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, AccountScreenLoginStatus.SIGN_IN.getDefaultLocalizedValue())),"Log in");
+    private final IButton btnSignInES = getElementFactory().getButton(By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, SpanishIos.SIGN_IN)), "Sign in button in Spanish");
     private final IButton btnLogout = getElementFactory().getButton(By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, AccountScreenLoginStatus.SIGN_OUT.getDefaultLocalizedValue())),"Log out");
+    private final IButton btnSignOutES = getElementFactory().getButton(By.xpath(String.format(LOGIN_BTN_LOC_PATTERN, SpanishIos.SIGN_OUT)), "Sign out in Spanish");
     private final IButton btnApproveSignOut = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Sign out\"]"),"Log out approve");
+    private final IButton btnApproveSignOutES = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Cerrar sesión\"]"),"Log out approve in Spanish");
     private final ITextBox txbCard = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeTextField"), "Card");
     private final ITextBox txbPin = getElementFactory().getTextBox(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeSecureTextField"), "Pin");
     private final IButton btnLicAgreement = getElementFactory().getButton(By.xpath("//XCUIElementTypeTable/XCUIElementTypeOther[2]/XCUIElementTypeButton"), "User License Agreement");
@@ -50,8 +54,24 @@ public class IosAccountScreen extends AccountScreen {
     }
 
     @Override
+    public void enterCredentialsAndLoginES(Credentials credentials) {
+        AqualityServices.getConditionalWait().waitFor(() -> btnSignInES.state().isDisplayed() || btnSignOutES.state().isDisplayed());
+        if(!btnSignOutES.state().isDisplayed()) {
+            txbCard.click();
+            txbCard.clearAndType(credentials.getBarcode());
+            txbPin.clearAndType(credentials.getPin());
+            btnSignInES.click();
+        }
+    }
+
+    @Override
     public boolean isLoginSuccessful() {
         return btnLogout.state().isDisplayed();
+    }
+
+    @Override
+    public boolean isLoginSuccessfulES() {
+        return btnSignOutES.state().isDisplayed();
     }
 
     @Override
@@ -62,6 +82,11 @@ public class IosAccountScreen extends AccountScreen {
     @Override
     public void tapLogOut() {
         btnLogout.click();
+    }
+
+    @Override
+    public void tapLogOutES() {
+        btnSignOutES.click();
     }
 
     @Override
@@ -80,13 +105,28 @@ public class IosAccountScreen extends AccountScreen {
     }
 
     @Override
+    public String getTextFromLogInButtonES() {
+        return btnSignInES.getText();
+    }
+
+    @Override
     public void tapApproveSignOut() {
         btnApproveSignOut.click();
     }
 
     @Override
+    public void tapApproveSignOutES() {
+        btnApproveSignOutES.click();
+    }
+
+    @Override
     public boolean isLogoutRequired() {
         return btnLogout.state().isDisplayed();
+    }
+
+    @Override
+    public boolean isLogoutRequiredES() {
+        return btnSignOutES.state().isDisplayed();
     }
 
     @Override
