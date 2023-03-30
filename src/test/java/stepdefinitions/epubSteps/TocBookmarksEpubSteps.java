@@ -4,7 +4,6 @@ import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
 import constants.localization.spanish.SpanishIos;
 import enums.epub.EnumTabsTocAndBookmarksEpub;
-import enums.localization.translation.Spanish;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
@@ -56,7 +55,7 @@ public class TocBookmarksEpubSteps {
     public void checkPageInfoPageInfoIsCorrect(String chapterNameKey) {
         String expectedChapterName = context.get(chapterNameKey);
         String actualChapterName = readerEpubScreen.getChapterName();
-        Assert.assertTrue(String.format("'%s Chapter name is not displayed. Actual chapter name-%s", expectedChapterName, actualChapterName), expectedChapterName.toLowerCase().equals(actualChapterName.toLowerCase()));
+        Assert.assertEquals(String.format("'%s Chapter name is not displayed. Actual chapter name-%s", expectedChapterName, actualChapterName), expectedChapterName.toLowerCase(), actualChapterName.toLowerCase());
     }
 
 

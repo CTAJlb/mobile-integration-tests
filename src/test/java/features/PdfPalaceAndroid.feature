@@ -9,7 +9,7 @@ Feature: Read PDF in Palace Bookshelf on Android
     Then Account "Palace Bookshelf" is present on Accounts screen
     When Open Catalog
       And Open search modal
-      And Search for 'Deep into Pharo' and save bookName as 'bookNameInfo'
+      And Search for 'Pharo by Example 5.0' and save bookName as 'bookNameInfo'
 
   @tier2 @exclude_ios
   Scenario: Check of book title and back button Palace
