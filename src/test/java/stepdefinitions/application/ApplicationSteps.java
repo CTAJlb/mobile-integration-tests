@@ -54,10 +54,15 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.checkFindYourLibScreenTranslation();
     }
 
+    @Then("Elements on Find your library screen are translated correctly in Italian")
+    @Override
+    public void checkFindYourLibScreenTranslationItalian(){
+        abstractApplicationSteps.checkFindYourLibScreenTranslationItalian();
+    }
+
     @When("Add libraries by the logo:")
     public void addSevLibraries(List<String> libraries){
-        libraries.forEach(abstractApplicationSteps::addAccountByTheLogo
-        );
+        libraries.forEach(abstractApplicationSteps::addAccountByTheLogo);
     }
 
     @When("Save {int} amount as {string}")
@@ -105,6 +110,12 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.closeWelcomeScreenInSpanish();
     }
 
+    @When("Close welcome screen in Italian")
+    @Override
+    public void closeWelcomeScreenInItalian() {
+        abstractApplicationSteps.closeWelcomeScreenInItalian();
+    }
+
     @Then("Welcome screen is opened")
     @Override
     public void checkWelcomeScreenIsOpened() {
@@ -121,6 +132,12 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
     @Override
     public void checkTranslationOnWelcomeScreen(){
         abstractApplicationSteps.checkTranslationOnWelcomeScreen();
+    }
+
+    @Then("Elements on welcome screen are translated correctly in Italian")
+    @Override
+    public void checkTranslationOnWelcomeScreenItalian() {
+        abstractApplicationSteps.checkTranslationOnWelcomeScreenItalian();
     }
 
     @And("Wait for {int} seconds")

@@ -38,6 +38,11 @@ public class AndroidSettingsScreen extends SettingsScreen {
     }
 
     @Override
+    public void openLibrariesIT() {
+        //for ios
+    }
+
+    @Override
     public void openAboutPalace() {
         //only for iOS
     }
@@ -86,22 +91,52 @@ public class AndroidSettingsScreen extends SettingsScreen {
     }
 
     @Override
-    public String getTextFromAboutAppBtn() {
+    public String getTextFromLibrariesBtnES() {
         return null;
     }
 
     @Override
-    public String getTextFromPrivacyPolicyBtn() {
+    public String getTextFromLibrariesBtnIT() {
         return null;
     }
 
     @Override
-    public String getTextFromUserAgreementBtn() {
+    public String getTextFromAboutAppBtnES() {
         return null;
     }
 
     @Override
-    public String getTextFromSoftwareLicensesBtn() {
+    public String getTextFromAboutAppBtnIT() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromPrivacyPolicyBtnES() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromPrivacyPolicyBtnIT() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromUserAgreementBtnES() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromUserAgreementBtnIT() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromSoftwareLicensesBtnES() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromSoftwareLicensesBtnIT() {
         return null;
     }
 }

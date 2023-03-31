@@ -2,6 +2,7 @@ package stepdefinitions.epubSteps;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
+import constants.localization.italian.ItalianIos;
 import constants.localization.spanish.SpanishIos;
 import enums.epub.EnumTabsTocAndBookmarksEpub;
 import framework.utilities.ScenarioContext;
@@ -46,9 +47,24 @@ public class TocBookmarksEpubSteps {
         softAssertions.assertAll();
     }
 
+    @Then("Elements on TOC in reader epub are translated correctly in Italian")
+    public void checkTranslationOfTOCScreenIT(){
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(ItalianIos.BACK);
+        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromTOCLabel()).as("TOC header is not translated").isEqualTo(ItalianIos.TOC);
+        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromContentsBtn()).as("Contents button is not translated").isEqualTo(ItalianIos.CONTENTS);
+        softAssertions.assertThat(tocBookmarksEpubScreen.getTextFromBookmarksBtn()).as("Bookmarks button is not translated").isEqualTo(ItalianIos.BOOKMARKS);
+        softAssertions.assertAll();
+    }
+
     @Then("Elements on Bookmarks epub screen are translated correctly")
     public void checkTranslationOfBookmarksScreen() {
         Assert.assertEquals("Info label is not translated", SpanishIos.BOOKMARKS_INFO, tocBookmarksEpubScreen.getBookmarksEpubScreen().getTextFromInformationLbl());
+    }
+
+    @Then("Elements on Bookmarks epub screen are translated correctly in Italian")
+    public void checkTranslationOfBookmarksScreenIT() {
+        Assert.assertEquals("Info label is not translated", ItalianIos.BOOKMARKS_INFO, tocBookmarksEpubScreen.getBookmarksEpubScreen().getTextFromInformationLbl());
     }
 
     @And("{string} chapter name is displayed on reader epub screen")
@@ -70,6 +86,20 @@ public class TocBookmarksEpubSteps {
         readerEpubScreen.openNavigationBar();
         readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
         tocBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.BOOKMARKS);
+    }
+
+    @When("Open bookmarks epub screen in Spanish")
+    public void openBookmarksEpubScreenES(){
+        readerEpubScreen.openNavigationBar();
+        readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
+        tocBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.BOOKMARKS_ES);
+    }
+
+    @When("Open bookmarks epub screen in Italian")
+    public void openBookmarksEpubScreenIT(){
+        readerEpubScreen.openNavigationBar();
+        readerEpubScreen.getNavigationBarEpubScreen().tapTOCBookmarksButton();
+        tocBookmarksEpubScreen.openTab(EnumTabsTocAndBookmarksEpub.BOOKMARKS_IT);
     }
 
     @When("Delete bookmark on bookmarks epub screen")

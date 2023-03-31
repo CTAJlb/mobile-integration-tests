@@ -10,6 +10,7 @@ import screens.welcome.WelcomeScreen;
 public class IosWelcomeScreen extends WelcomeScreen {
     private final IButton btnFindLibrary = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Find Your Library\"]"), "Find your library button");
     private final IButton btnFindLibrarySpanish = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Encuentra tu biblioteca\"]"), "Find your library button in Spanish");
+    private final IButton btnFindLibraryItalian = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Trova la tua biblioteca\"]"), "Find your library button in Spanish");
 
     public IosWelcomeScreen() {
         super(By.xpath("//XCUIElementTypeButton[@name=\"Find Your Library\"]"));
@@ -26,8 +27,18 @@ public class IosWelcomeScreen extends WelcomeScreen {
     }
 
     @Override
+    public void tapFindLibraryButtonInItalian() {
+        btnFindLibraryItalian.click();
+    }
+
+    @Override
     public String getTextFromButtonFindYourLibraryES() {
         return btnFindLibrarySpanish.getText();
+    }
+
+    @Override
+    public String getTextFromButtonFindYourLibraryIT() {
+        return btnFindLibraryItalian.getText();
     }
 
     @Override

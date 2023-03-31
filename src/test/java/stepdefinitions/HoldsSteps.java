@@ -3,6 +3,7 @@ package stepdefinitions;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
+import constants.localization.italian.ItalianIos;
 import constants.localization.spanish.SpanishIos;
 import enums.EnumBookType;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
@@ -48,11 +49,24 @@ public class HoldsSteps {
         bottomMenuForm.open(BottomMenu.HOLD_ES);
     }
 
+    @When("Open Holds in Italian")
+    public void openHoldsInItalian(){
+        bottomMenuForm.open(BottomMenu.HOLD_IT);
+    }
+
     @Then("Elements on Holds screen are translated correctly")
     public void checkTranslationOnHoldsScreen(){
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(holdsScreen.getTextFromHoldsHeader()).as("Holds header is not translated").isEqualTo(SpanishIos.RESERVATIONS);
         softAssertions.assertThat(holdsScreen.getTextFromInformationLbl()).as("Information label is not translated").isEqualTo(SpanishIos.RESERVE_INFO);
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on Holds screen are translated correctly in Italian")
+    public void checkTranslationOnHoldsScreenIT(){
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(holdsScreen.getTextFromHoldsHeader()).as("Holds header is not translated").isEqualTo(ItalianIos.RESERVATIONS);
+        softAssertions.assertThat(holdsScreen.getTextFromInformationLbl()).as("Information label is not translated").isEqualTo(ItalianIos.RESERVE_INFO);
         softAssertions.assertAll();
     }
 

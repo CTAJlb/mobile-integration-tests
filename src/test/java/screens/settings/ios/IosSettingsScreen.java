@@ -18,11 +18,20 @@ public class IosSettingsScreen extends SettingsScreen {
 
     private  final ILabel lblSettings = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar"), "Settings");
     private final IButton btnLibraries = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Libraries\"]"), "Libraries button");
-    private final IButton btnLibrariesES = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Bibliotecas\"]"), "Libraries button");
+    private final IButton btnLibrariesES = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Bibliotecas\"]"), "Libraries button in Spanish");
+    private final IButton btnLibrariesIT = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Biblioteche\"]"), "Libraries button in Italian");
     private final IButton btnAboutPalace = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"About Palace\"]"), "About Palace");
+    private final IButton btnAboutPalaceES = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Acerca de la aplicación\"]"), "About Palace in Spanish");
+    private final IButton btnAboutPalaceIT = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Informazioni sull’app\"]"), "About Palace in Italian");
     private final IButton btnPrivacyPolicy = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Privacy Policy\"]"), "Privacy Policy");
+    private final IButton btnPrivacyPolicyES = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Política de privacidad\"]"), "Privacy Policy in Spanish");
+    private final IButton btnPrivacyPolicyIT = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Politica sulla privacy\"]"), "Privacy Policy in Italian");
     private final IButton btnUserAgreement = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"User Agreement\"]"), "User Agreement");
+    private final IButton btnUserAgreementES = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Contrato de usuario\"]"), "User Agreement in Spanish");
+    private final IButton btnUserAgreementIT = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Accordo per gli utenti\"]"), "User Agreement in Italian");
     private final IButton btnSoftwareLic = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Software Licenses\"]"), "Software Licenses");
+    private final IButton btnSoftwareLicES = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Licencias de software\"]"), "Software Licenses in Spanish");
+    private final IButton btnSoftwareLicIT = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Licenze software\"]"), "Software Licenses in Italian");
     private final IButton lblPalaceVersion = getElementFactory().getButton(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"Palace version\")]"), "Palace version");
     private final IButton btnTesting = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Testing\"]"), "Testing button");
 
@@ -40,6 +49,11 @@ public class IosSettingsScreen extends SettingsScreen {
     @Override
     public void openLibrariesES() {
         btnLibrariesES.click();
+    }
+
+    @Override
+    public void openLibrariesIT() {
+        btnLibrariesIT.click();
     }
 
     @Override
@@ -91,22 +105,52 @@ public class IosSettingsScreen extends SettingsScreen {
     }
 
     @Override
-    public String getTextFromAboutAppBtn() {
-        return btnAboutPalace.getText();
+    public String getTextFromLibrariesBtnES() {
+        return btnLibrariesES.getText();
     }
 
     @Override
-    public String getTextFromPrivacyPolicyBtn() {
-        return btnPrivacyPolicy.getText();
+    public String getTextFromLibrariesBtnIT() {
+        return btnLibrariesIT.getText();
     }
 
     @Override
-    public String getTextFromUserAgreementBtn() {
-        return btnUserAgreement.getText();
+    public String getTextFromAboutAppBtnES() {
+        return btnAboutPalaceES.getText();
     }
 
     @Override
-    public String getTextFromSoftwareLicensesBtn() {
-        return btnSoftwareLic.getText();
+    public String getTextFromAboutAppBtnIT() {
+        return btnAboutPalaceIT.getText();
+    }
+
+    @Override
+    public String getTextFromPrivacyPolicyBtnES() {
+        return btnPrivacyPolicyES.getText();
+    }
+
+    @Override
+    public String getTextFromPrivacyPolicyBtnIT() {
+        return btnPrivacyPolicyIT.getText();
+    }
+
+    @Override
+    public String getTextFromUserAgreementBtnES() {
+        return btnUserAgreementES.getText();
+    }
+
+    @Override
+    public String getTextFromUserAgreementBtnIT() {
+        return btnUserAgreementIT.getText();
+    }
+
+    @Override
+    public String getTextFromSoftwareLicensesBtnES() {
+        return btnSoftwareLicES.getText();
+    }
+
+    @Override
+    public String getTextFromSoftwareLicensesBtnIT() {
+        return btnSoftwareLicIT.getText();
     }
 }

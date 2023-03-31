@@ -10,6 +10,7 @@ public abstract class SettingsScreen extends Screen {
 
     public abstract void openLibraries();
     public abstract void openLibrariesES();
+    public abstract void openLibrariesIT();
 
     public abstract void openAboutPalace();
 
@@ -29,11 +30,23 @@ public abstract class SettingsScreen extends Screen {
 
     public abstract String getTextFromLibrariesBtn();
 
-    public abstract String getTextFromAboutAppBtn();
+    public abstract String getTextFromLibrariesBtnES();
 
-    public abstract String getTextFromPrivacyPolicyBtn();
+    public abstract String getTextFromLibrariesBtnIT();
 
-    public abstract String getTextFromUserAgreementBtn();
+    public abstract String getTextFromAboutAppBtnES();
 
-    public abstract String getTextFromSoftwareLicensesBtn();
+    public abstract String getTextFromAboutAppBtnIT();
+
+    public abstract String getTextFromPrivacyPolicyBtnES();
+
+    public abstract String getTextFromPrivacyPolicyBtnIT();
+
+    public abstract String getTextFromUserAgreementBtnES();
+
+    public abstract String getTextFromUserAgreementBtnIT();
+
+    public abstract String getTextFromSoftwareLicensesBtnES();
+
+    public abstract String getTextFromSoftwareLicensesBtnIT();
 }

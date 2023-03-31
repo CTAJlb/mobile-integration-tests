@@ -24,7 +24,8 @@ public class IosReaderEpubScreen extends ReaderEpubScreen {
     private final ILabel lblBookName = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "lblBookName");
     private final ILabel lblPageNumberAndChapterName = getElementFactory().getLabel(By.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[contains(@name, \"Page\")]"), "lblPageNumberAndChapterName");
     private final ILabel lblPage = getElementFactory().getLabel(By.xpath("//XCUIElementTypeWebView"), "lblPage");
-    private final ILabel lblPageNumberES = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"Página\"]"), "Page number label");
+    private final ILabel lblPageNumberES = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"Página\"]"), "Page number label in Spanish");
+    private final ILabel lblPageNumberIT = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[@name=\"Pagina\"]"), "Page number label in Italian");
     private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Back button");
     private final ILabel bookCover = getElementFactory().getLabel(By.xpath("//XCUIElementTypeSlider"), "Book cover");
 
@@ -132,6 +133,11 @@ public class IosReaderEpubScreen extends ReaderEpubScreen {
     @Override
     public String getTextFromPageLblES() {
         return lblPageNumberES.getText();
+    }
+
+    @Override
+    public String getTextFromPageLblIT() {
+        return lblPageNumberIT.getText();
     }
 
     @Override

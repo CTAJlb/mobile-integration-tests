@@ -16,11 +16,14 @@ public class IosFindYourLibScreen extends FindYourLibScreen {
 
     private final IButton btnAddLib = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"Add Library\"]"), "Add library btn");
     private final IButton btnAddLibSpanish = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"Añadir biblioteca\"]"), "Add library btn in Spanish");
+    private final IButton btnAddLibItalian = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"Aggiungi biblioteca\"]"), "Add library btn in Italian");
     private final CreatingLibraryLocator libraryLocator = (index ->
             getElementFactory().getLabel(By.xpath(String.format("//XCUIElementTypeSheet//XCUIElementTypeScrollView[2]/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther[%d]/XCUIElementTypeButton", index)), "Library"));
     private final IButton btnCancel = getElementFactory().getButton(By.xpath("//XCUIElementTypeSheet//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"Cancel\"]"), "Close button");
     private final IButton btnCancelSpanish = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"Cancelar\"]"), "Cancel btn in Spanish");
+    private final IButton btnCancelItalian = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"Annulla\"]"), "Cancel btn in Italian");
     private final ILabel lblFindYourLibSpanish = getElementFactory().getLabel(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeStaticText[@name=\"Encuentra tu biblioteca\"]"), "Find your library lbl in Spanish");
+    private final ILabel lblFindYourLibItalian = getElementFactory().getLabel(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeStaticText[@name=\"Trova la tua biblioteca\"]"), "Find your library lbl in Italian");
     private static final String LIBRARY_NAME = "//XCUIElementTypeSheet//XCUIElementTypeScrollView//XCUIElementTypeButton[@name=\"%s\"]";
 
     public IosFindYourLibScreen() {
@@ -55,13 +58,28 @@ public class IosFindYourLibScreen extends FindYourLibScreen {
     }
 
     @Override
+    public String getTextFromFindYourLibraryLblIT() {
+        return lblFindYourLibItalian.getText();
+    }
+
+    @Override
     public String getTextFromAddLibraryBtn() {
         return btnAddLibSpanish.getText();
     }
 
     @Override
+    public String getTextFromAddLibraryBtnIT() {
+        return btnAddLibItalian.getText();
+    }
+
+    @Override
     public String getTextFromCancelBtn() {
         return btnCancelSpanish.getText();
+    }
+
+    @Override
+    public String getTextFromCancelBtnIT() {
+        return btnCancelItalian.getText();
     }
 
     private List<String > getListOfLibraries(int listSize) {

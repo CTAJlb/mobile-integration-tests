@@ -29,18 +29,14 @@ public class AndroidSleepTimerAudiobookScreen extends SleepTimerAudiobookScreen 
     }
 
     @Override
-    public String getTextFromSleepTimerLabel() {
-        return null;
-    }
-
-    @Override
     public String getTextFromSleepTimerLabelES() {
         //for ios
         return null;
     }
 
     @Override
-    public String getTextFromOffBtn() {
+    public String getTextFromSleepTimerLabelIT() {
+        //for ios
         return null;
     }
 
@@ -51,12 +47,19 @@ public class AndroidSleepTimerAudiobookScreen extends SleepTimerAudiobookScreen 
     }
 
     @Override
-    public String getTextFromEndOfChapterBtn() {
+    public String getTextFromOffBtnIT() {
+        //for ios
         return null;
     }
 
     @Override
     public String getTextFromEndOfChapterBtnES() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromEndOfChapterBtnIT() {
         //for ios
         return null;
     }
@@ -68,6 +71,12 @@ public class AndroidSleepTimerAudiobookScreen extends SleepTimerAudiobookScreen 
 
     @Override
     public String getTextFromCancelBtnES() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromCancelBtnIT() {
         //for ios
         return null;
     }

@@ -11,14 +11,17 @@ public abstract class AccountScreen extends Screen {
 
     public abstract void enterCredentialsAndLogin(Credentials credentials);
     public abstract void enterCredentialsAndLoginES(Credentials credentials);
+    public abstract void enterCredentialsAndLoginIT(Credentials credentials);
 
     public abstract boolean isLoginSuccessful();
     public abstract boolean isLoginSuccessfulES();
+    public abstract boolean isLoginSuccessfulIT();
 
     public abstract boolean isLogoutSuccessful();
 
     public abstract void tapLogOut();
     public abstract void tapLogOutES();
+    public abstract void tapLogOutIT();
 
     public abstract String getTextFromPinTxb();
 
@@ -26,12 +29,15 @@ public abstract class AccountScreen extends Screen {
 
     public abstract String getTextFromLogInButton();
     public abstract String getTextFromLogInButtonES();
+    public abstract String getTextFromLogInButtonIT();
 
     public abstract void tapApproveSignOut();
     public abstract void tapApproveSignOutES();
+    public abstract void tapApproveSignOutIT();
 
     public abstract boolean isLogoutRequired();
     public abstract boolean isLogoutRequiredES();
+    public abstract boolean isLogoutRequiredIT();
 
     public abstract void openLicenseAgreement();
 

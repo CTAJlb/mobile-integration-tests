@@ -50,6 +50,12 @@ public class CredentialsSteps extends BaseSteps implements ICredentialsSteps {
         abstractCredentialsSteps.enterCredentialsSpanish(libraryName);
     }
 
+    @When("Enter credentials for {string} account in Italian")
+    public void enterCredentialsInSpanishIT(String libraryName) {
+        saveLibraryForLogOut(libraryName);
+        abstractCredentialsSteps.enterCredentialsItalian(libraryName);
+    }
+
     private void saveLibraryForLogOut(String libraryName) {
         saveLibraryInContext(ContextLibrariesKeys.LOG_OUT.getKey(), libraryName);
     }

@@ -4,6 +4,7 @@ import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.RegEx;
+import constants.localization.italian.ItalianIos;
 import constants.localization.spanish.SpanishIos;
 import framework.utilities.RegExUtil;
 import framework.utilities.ScenarioContext;
@@ -42,6 +43,14 @@ public class AudioPlayerSteps {
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(audioPlayerScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(SpanishIos.BACK);
         softAssertions.assertThat(audioPlayerScreen.getTextFromLineRemainingLbl()).as("Time remaining label is not translated").contains(SpanishIos.LINE_REMAINING);
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on Audio Player screen are translated correctly in Italian")
+    public void checkTranslationOnAudioPlayerScreenIT() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(audioPlayerScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(ItalianIos.BACK);
+        softAssertions.assertThat(audioPlayerScreen.getTextFromLineRemainingLbl()).as("Time remaining label is not translated").contains(ItalianIos.LINE_REMAINING);
         softAssertions.assertAll();
     }
 
@@ -112,6 +121,14 @@ public class AudioPlayerSteps {
         softAssertions.assertAll();
     }
 
+    @Then("Elements on Playback speed are translated correctly in Italian")
+    public void checkTranslationOnPlaybackSpeedScreenIT(){
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(audioPlayerScreen.getPlaybackSpeedAudiobookScreen().getTextFromPlaybackSpeedLbl()).as("Playback speed is not translated").isEqualTo(ItalianIos.PLAYBACK_SPEED);
+        softAssertions.assertThat(audioPlayerScreen.getPlaybackSpeedAudiobookScreen().getTextFromCancelBtn()).as("Cancel button is not translated").isEqualTo(ItalianIos.CANCEL);
+        softAssertions.assertAll();
+    }
+
     @When("Open sleep timer on audio player screen")
     public void openSleepTimer() {
         audioPlayerScreen.openSleepTimer();
@@ -124,6 +141,16 @@ public class AudioPlayerSteps {
         softAssertions.assertThat(audioPlayerScreen.getSleepTimerAudiobookScreen().getTextFromOffBtnES()).as("Off button is not translated").isEqualTo(SpanishIos.OFF);
         softAssertions.assertThat(audioPlayerScreen.getSleepTimerAudiobookScreen().getTextFromEndOfChapterBtnES()).as("End of chapter is not translated").isEqualTo(SpanishIos.END_OF_CHAPTER);
         softAssertions.assertThat(audioPlayerScreen.getSleepTimerAudiobookScreen().getTextFromCancelBtnES()).as("Cancel button is not translated").isEqualTo(SpanishIos.CANCEL);
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on Sleep timer screen are translated correctly in Italian")
+    public void checkTranslationOnSleepTimerScreenIT() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(audioPlayerScreen.getSleepTimerAudiobookScreen().getTextFromSleepTimerLabelIT()).as("Sleep timer label is not translated").isEqualTo(ItalianIos.SLEEP_TIMER);
+        softAssertions.assertThat(audioPlayerScreen.getSleepTimerAudiobookScreen().getTextFromOffBtnIT()).as("Off button is not translated").isEqualTo(ItalianIos.OFF);
+        softAssertions.assertThat(audioPlayerScreen.getSleepTimerAudiobookScreen().getTextFromEndOfChapterBtnIT()).as("End of chapter is not translated").isEqualTo(ItalianIos.END_OF_CHAPTER);
+        softAssertions.assertThat(audioPlayerScreen.getSleepTimerAudiobookScreen().getTextFromCancelBtnIT()).as("Cancel button is not translated").isEqualTo(ItalianIos.CANCEL);
         softAssertions.assertAll();
     }
 

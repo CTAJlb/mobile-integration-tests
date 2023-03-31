@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import constants.RegEx;
 import constants.keysForContext.ScenarioContextKey;
 import constants.localization.catalog.BookActionButtonNames;
+import constants.localization.italian.ItalianIos;
 import constants.localization.spanish.SpanishIos;
 import enums.localization.facetedsearch.FacetAvailabilityKeys;
 import enums.localization.facetedsearch.FacetSortByKeys;
@@ -69,6 +70,16 @@ public class CatalogSteps {
         softAssertions.assertAll();
     }
 
+    @Then("Elements on Bottom menu are translated correctly in Italian")
+    public void checkTranslationOnBottomMenuIT() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(bottomMenuForm.getTextFromCatalogBtn()).as("Catalog button is not translated").isEqualTo(ItalianIos.CATALOG);
+        softAssertions.assertThat(bottomMenuForm.getTextFromMyBooksBtn()).as("My Books button is not translated").isEqualTo(ItalianIos.MY_BOOKS);
+        softAssertions.assertThat(bottomMenuForm.getTextFromReservationsBtn()).as("Reservations button is not translated").isEqualTo(ItalianIos.RESERVATIONS);
+        softAssertions.assertThat(bottomMenuForm.getTextFromSettingsBtn()).as("Settings button is not translated").isEqualTo(ItalianIos.SETTINGS);
+        softAssertions.assertAll();
+    }
+
     @Then("Elements on subcategory screen are translated correctly")
     public void checkTranslationOnSubcategoryScreen() {
         SoftAssertions softAssertions = new SoftAssertions();
@@ -76,6 +87,16 @@ public class CatalogSteps {
         softAssertions.assertThat(subcategoryScreen.getTextFromSortByTab()).as("Sort by tab is not translated").isEqualTo(SpanishIos.SORT_BY);
         softAssertions.assertThat(subcategoryScreen.getTextFromAvailabilityTab()).as("Availability tab is not translated").isEqualTo(SpanishIos.AVAILABILITY);
         softAssertions.assertThat(subcategoryScreen.getTextFromCollectionTab()).as("Collection tab is not translated").isEqualTo(SpanishIos.COLLECTION);
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on subcategory screen are translated correctly in Italian")
+    public void checkTranslationOnSubcategoryScreenIT() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(subcategoryScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(ItalianIos.BACK);
+        softAssertions.assertThat(subcategoryScreen.getTextFromSortByTab()).as("Sort by tab is not translated").isEqualTo(ItalianIos.SORT_BY);
+        softAssertions.assertThat(subcategoryScreen.getTextFromAvailabilityTab()).as("Availability tab is not translated").isEqualTo(ItalianIos.AVAILABILITY);
+        softAssertions.assertThat(subcategoryScreen.getTextFromCollectionTab()).as("Collection tab is not translated").isEqualTo(ItalianIos.COLLECTION);
         softAssertions.assertAll();
     }
 
@@ -132,6 +153,12 @@ public class CatalogSteps {
         catalogScreen.state().waitForDisplayed();
     }
 
+    @When("Open Catalog in Italian")
+    public void openCatalogIT() {
+        bottomMenuForm.open(BottomMenu.CATALOG_IT);
+        catalogScreen.state().waitForDisplayed();
+    }
+
     @Then("Elements on Catalog screen are translated correctly")
     public void checkTranslationOnCatalogScreen() {
         SoftAssertions softAssertions = new SoftAssertions();
@@ -140,6 +167,17 @@ public class CatalogSteps {
         softAssertions.assertThat(catalogScreen.getTextFromAllTab()).as("All tab is not translated").isEqualTo(SpanishIos.ALL);
         softAssertions.assertThat(catalogScreen.getTextFromEpubTab()).as("EBooks tab is not translated").isEqualTo(SpanishIos.EBOOKS);
         softAssertions.assertThat(catalogScreen.getTextFromAudiobooksTab()).as("Audiobooks tab is not translated").isEqualTo(SpanishIos.AUDIOBOOKS);
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on Catalog screen are translated correctly in Italian")
+    public void checkTranslationOnCatalogScreenIT() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(catalogScreen.getTextFromCatalogLbl()).as("Catalog label is not translated").isEqualTo(ItalianIos.CATALOG);
+        softAssertions.assertThat(catalogScreen.getTextFromMoreBtn()).as("More... button is not translated").isEqualTo(ItalianIos.MORE);
+        softAssertions.assertThat(catalogScreen.getTextFromAllTab()).as("All tab is not translated").isEqualTo(ItalianIos.ALL);
+        softAssertions.assertThat(catalogScreen.getTextFromEpubTab()).as("EBooks tab is not translated").isEqualTo(ItalianIos.EBOOKS);
+        softAssertions.assertThat(catalogScreen.getTextFromAudiobooksTab()).as("Audiobooks tab is not translated").isEqualTo(ItalianIos.AUDIOBOOKS);
         softAssertions.assertAll();
     }
 
@@ -252,6 +290,16 @@ public class CatalogSteps {
         facetedSearchScreen.openSortBy();
     }
 
+    @Then("Elements on Sort by tab are translated correctly in Italian")
+    public void checkTranslationOnSortByTabIT() {
+        List<String> options = facetedSearchScreen.getOptionsInTabs();
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(options.get(0)).as("Title is not translated").isEqualTo(ItalianIos.TITLE);
+        softAssertions.assertThat(options.get(1)).as("Recently added is not translated").isEqualTo(ItalianIos.RECENTLY_ADDED);
+        softAssertions.assertThat(options.get(2)).as("Author is not translated").isEqualTo(ItalianIos.AUTHOR);
+        softAssertions.assertAll();
+    }
+
     @Then("Elements on Sort by tab are translated correctly")
     public void checkTranslationOnSortByTab() {
         List<String> options = facetedSearchScreen.getOptionsInTabs();
@@ -296,6 +344,16 @@ public class CatalogSteps {
     public void checkTranslationOnAvailabilityTab() {
         List<String> options = facetedSearchScreen.getOptionsInTabs();
         SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(options.get(0)).as("Available now is not translated").isEqualTo(ItalianIos.AVAILABLE_NOW);
+        softAssertions.assertThat(options.get(1)).as("Yours to keep is not translated").isEqualTo(ItalianIos.YOURS_TO_KEEP);
+        softAssertions.assertThat(options.get(2)).as("All is not translated").isEqualTo(ItalianIos.ALL);
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on Availability tab are translated correctly in Italian")
+    public void checkTranslationOnAvailabilityTabIT() {
+        List<String> options = facetedSearchScreen.getOptionsInTabs();
+        SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(options.get(0)).as("Available now is not translated").isEqualTo(SpanishIos.AVAILABLE_NOW);
         softAssertions.assertThat(options.get(1)).as("Yours to keep is not translated").isEqualTo(SpanishIos.YOURS_TO_KEEP);
         softAssertions.assertThat(options.get(2)).as("All is not translated").isEqualTo(SpanishIos.ALL);
@@ -328,6 +386,15 @@ public class CatalogSteps {
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(options.get(0)).as("Popular Books is not translated").isEqualTo(SpanishIos.POPULAR_BOOKS);
         softAssertions.assertThat(options.get(1)).as("Everything is not translated").isEqualTo(SpanishIos.EVERYTHING);
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on Collection tab are translated correctly in Italian")
+    public void checkTranslationOnCollectionTabIT() {
+        List<String> options = facetedSearchScreen.getOptionsInTabs();
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(options.get(0)).as("Popular Books is not translated").isEqualTo(ItalianIos.POPULAR_BOOKS);
+        softAssertions.assertThat(options.get(1)).as("Everything is not translated").isEqualTo(ItalianIos.EVERYTHING);
         softAssertions.assertAll();
     }
 

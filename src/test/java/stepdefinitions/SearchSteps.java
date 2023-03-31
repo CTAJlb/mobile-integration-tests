@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
+import constants.localization.italian.ItalianIos;
 import constants.localization.spanish.SpanishIos;
 import enums.EnumBookType;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
@@ -92,6 +93,14 @@ public class SearchSteps {
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(searchModal.getTextFromBackButton()).as("Back button is not translated").isEqualTo(SpanishIos.BACK);
         softAssertions.assertThat(searchModal.getTextFromSearchField()).as("Search field is not translated").isEqualTo(SpanishIos.SEARCH);
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on Search screen are translated correctly in Italian")
+    public void checkTranslationOnSearchScreenIT(){
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(searchModal.getTextFromBackButton()).as("Back button is not translated").isEqualTo(ItalianIos.BACK);
+        softAssertions.assertThat(searchModal.getTextFromSearchField()).as("Search field is not translated").isEqualTo(ItalianIos.SEARCH);
         softAssertions.assertAll();
     }
 
