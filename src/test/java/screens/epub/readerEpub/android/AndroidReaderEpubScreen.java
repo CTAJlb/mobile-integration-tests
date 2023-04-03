@@ -129,6 +129,12 @@ public class AndroidReaderEpubScreen extends ReaderEpubScreen {
     }
 
     @Override
+    public String getTextFromPageLblIT() {
+        //for ios
+        return null;
+    }
+
+    @Override
     public String getTextFromBackBtn() {
         return null;
     }

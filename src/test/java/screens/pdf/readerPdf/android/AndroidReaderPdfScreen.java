@@ -18,17 +18,11 @@ import screens.pdf.settingspdf.SettingsPdfScreen;
 public class AndroidReaderPdfScreen extends ReaderPdfScreen {
     private final NavigationBarPdfScreen navigationBarPdfScreen;
     private final SettingsPdfScreen settingsPdfScreen;
-    private final ILabel lblViewer =
-            getElementFactory().getLabel(By.xpath("//android.view.View[@resource-id=\"viewerContainer\"]"), "Content viewer");
-    private final ILabel lblBookName =
-            getElementFactory().getLabel(By.xpath("//android.view.ViewGroup/android.widget.TextView"), "Book name");
-    private final ILabel lblPageNumber =
-            getElementFactory().getLabel(By.xpath("//android.widget.EditText[@resource-id=\"pageNumber\"]"), "Page number");
-    private final ILabel lblLastPageNumber =
-            getElementFactory().getLabel(By.xpath("//android.widget.TextView[@resource-id=\"numPages\"]"), "Last page number");
+    private final ILabel lblViewer = getElementFactory().getLabel(By.xpath("//android.view.View[@resource-id=\"viewerContainer\"]"), "Content viewer");
+    private final ILabel lblBookName = getElementFactory().getLabel(By.xpath("//android.view.ViewGroup/android.widget.TextView"), "Book name");
+    private final ILabel lblPageNumber = getElementFactory().getLabel(By.xpath("//android.widget.TextView[@resource-id=\"numPages\"]"), "Last page number");
 
-    private final ILabel lblPage =
-            getElementFactory().getLabel(By.xpath("//android.widget.FrameLayout"), "lblPage");
+    private final ILabel lblPage = getElementFactory().getLabel(By.xpath("//android.view.View[@resource-id=\"mainContainer\"]/android.view.View"), "lblPage");
 
     public AndroidReaderPdfScreen() {
         super(By.xpath("//android.view.View[@resource-id=\"viewerContainer\"]"));
@@ -53,12 +47,12 @@ public class AndroidReaderPdfScreen extends ReaderPdfScreen {
 
     @Override
     public int getPageNumber() {
-        return Integer.parseInt(StringUtils.getDigits(lblPageNumber.getText()));
+        return Integer.parseInt(StringUtils.substringBetween(lblPageNumber.getText(), "(", " of"));
     }
 
     @Override
     public int getLastPageNumber() {
-        return Integer.parseInt(StringUtils.getDigits(lblLastPageNumber.getText()));
+        return Integer.parseInt(StringUtils.substringBetween(lblPageNumber.getText(), "of ", ")"));
     }
 
     @Override

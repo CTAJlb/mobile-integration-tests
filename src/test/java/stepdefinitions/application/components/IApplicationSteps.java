@@ -15,6 +15,7 @@ public interface IApplicationSteps {
     void isWelcomeScreenOpenedInSpanish();
 
     void checkTranslationOnWelcomeScreen();
+    void checkTranslationOnWelcomeScreenItalian();
 
     void waitSeveralSeconds(Integer secondsCount);
 
@@ -26,5 +27,8 @@ public interface IApplicationSteps {
 
     void closeWelcomeScreenInSpanish();
 
+    void closeWelcomeScreenInItalian();
+
     void checkFindYourLibScreenTranslation();
+    void checkFindYourLibScreenTranslationItalian();
 }

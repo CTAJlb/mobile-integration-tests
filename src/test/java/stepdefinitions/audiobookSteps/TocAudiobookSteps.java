@@ -2,6 +2,7 @@ package stepdefinitions.audiobookSteps;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
+import constants.localization.italian.ItalianIos;
 import constants.localization.spanish.SpanishIos;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
@@ -28,6 +29,11 @@ public class TocAudiobookSteps {
     @Then("Elements on TOC audiobook screen are translated correctly")
     public void checkTranslationOnTOCAudiobookScreen(){
         Assert.assertEquals("Back button is not translated", tocAudiobookScreen.getTextFromBackBtn(), SpanishIos.BACK);
+    }
+
+    @Then("Elements on TOC audiobook screen are translated correctly in Italian")
+    public void checkTranslationOnTOCAudiobookScreenIT(){
+        Assert.assertEquals("Back button is not translated", tocAudiobookScreen.getTextFromBackBtn(), ItalianIos.BACK);
     }
 
     @When("Close toc audiobook screen")

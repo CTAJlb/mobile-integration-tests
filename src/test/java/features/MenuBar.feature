@@ -47,8 +47,12 @@ Feature: Menu Bar
 
   @tier2
   Scenario: Check of the tabs in LYRASIS
-    When I add 'LYRASIS Reads' account from welcomeScreen
-    And Open Catalog
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+      And Open Catalog
     Then Category rows are loaded
     When Open Books
     Then Books screen is loaded

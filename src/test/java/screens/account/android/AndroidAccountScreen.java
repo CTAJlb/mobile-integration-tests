@@ -46,6 +46,11 @@ public class AndroidAccountScreen extends AccountScreen {
     }
 
     @Override
+    public void enterCredentialsAndLoginIT(Credentials credentials) {
+        //for ios
+    }
+
+    @Override
     public boolean isLoginSuccessful() {
         lblLoading.state().waitForDisplayed();
         lblLoading.state().waitForNotDisplayed();
@@ -56,6 +61,12 @@ public class AndroidAccountScreen extends AccountScreen {
 
     @Override
     public boolean isLoginSuccessfulES() {
+        //for ios
+        return false;
+    }
+
+    @Override
+    public boolean isLoginSuccessfulIT() {
         //for ios
         return false;
     }
@@ -73,6 +84,11 @@ public class AndroidAccountScreen extends AccountScreen {
 
     @Override
     public void tapLogOutES() {
+        //for ios
+    }
+
+    @Override
+    public void tapLogOutIT() {
         //for ios
     }
 
@@ -98,6 +114,12 @@ public class AndroidAccountScreen extends AccountScreen {
     }
 
     @Override
+    public String getTextFromLogInButtonIT() {
+        //for ios
+        return null;
+    }
+
+    @Override
     public void tapApproveSignOut() {
         //only for ios
     }
@@ -108,12 +130,23 @@ public class AndroidAccountScreen extends AccountScreen {
     }
 
     @Override
+    public void tapApproveSignOutIT() {
+        //for ios
+    }
+
+    @Override
     public boolean isLogoutRequired() {
         return btnLogout.state().isDisplayed();
     }
 
     @Override
     public boolean isLogoutRequiredES() {
+        //for ios
+        return false;
+    }
+
+    @Override
+    public boolean isLogoutRequiredIT() {
         //for ios
         return false;
     }

@@ -5,6 +5,7 @@ import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
 import constants.RegEx;
 import constants.keysForContext.ScenarioContextKey;
+import constants.localization.italian.ItalianIos;
 import constants.localization.spanish.SpanishIos;
 import enums.localization.catalog.EnumActionButtonsForBooksAndAlertsKeys;
 import framework.utilities.ScenarioContext;
@@ -102,6 +103,18 @@ public class BookDetailsSteps {
         softAssertions.assertThat(bookDetailsScreen.getTextFromInformationLbl()).as("Information label is not translated").isEqualTo(SpanishIos.INFORMATION);
         softAssertions.assertThat(bookDetailsScreen.getTextFromPublishedLbl()).as("Published label is not translated").isEqualTo(SpanishIos.PUBLISHED);
         softAssertions.assertThat(bookDetailsScreen.getTextFromPublisherLbl()).as("Publisher label is not translated").isEqualTo(SpanishIos.PUBLISHER);
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on Book detail view are translated correctly in Italian")
+    public void checkTranslationOfBookDetailViewIT() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(bookDetailsScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(ItalianIos.BACK);
+        softAssertions.assertThat(bookDetailsScreen.getTextFromLabelAboutAvailability()).as("Book availability info is not translated").isEqualTo(ItalianIos.BOOK_AVAILABILITY);
+        softAssertions.assertThat(bookDetailsScreen.getTextFromDescriptionLbl()).as("Description label is not translated").isEqualTo(ItalianIos.DESCRIPTION);
+        softAssertions.assertThat(bookDetailsScreen.getTextFromInformationLbl()).as("Information label is not translated").isEqualTo(ItalianIos.INFORMATION);
+        softAssertions.assertThat(bookDetailsScreen.getTextFromPublishedLbl()).as("Published label is not translated").isEqualTo(ItalianIos.PUBLISHED);
+        softAssertions.assertThat(bookDetailsScreen.getTextFromPublisherLbl()).as("Publisher label is not translated").isEqualTo(ItalianIos.PUBLISHER);
         softAssertions.assertAll();
     }
 

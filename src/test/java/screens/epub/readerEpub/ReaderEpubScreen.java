@@ -36,6 +36,7 @@ public abstract class ReaderEpubScreen extends Screen {
     public abstract String getBackgroundColor();
 
     public abstract String getTextFromPageLblES();
+    public abstract String getTextFromPageLblIT();
 
     public abstract String getTextFromBackBtn();
 }

@@ -70,13 +70,17 @@ Feature: Audiobooks in A1QA library
     When Tap pause button on audio player screen
     Then Play button is present on audio player screen
       And Book is not playing on audio player screen
-    When Tap play button on audio player screen
-      And Save book play time as 'timeAhead' on audio player screen
+    When Save book play time as 'timeAhead' on audio player screen
+      And Save chapter time as 'chapterTimeKey' on audio player screen
       And Skip ahead 15 seconds on audio player screen
-    Then Playback has been moved forward by 15 seconds from 'timeAhead' seconds on audio player screen
+      And Tap pause button on audio player screen
+    Then Play button is present on audio player screen
+      And Playback has been moved forward by 15 seconds from 'timeAhead' and 'chapterTimeKey' seconds on audio player screen
     When Save book play time as 'timeBehind' on audio player screen
       And Skip behind 15 seconds on audio player screen
-    Then Playback has been moved behind by 15 seconds from 'timeBehind' seconds on audio player screen
+      And Tap pause button on audio player screen
+    Then Play button is present on audio player screen
+    And Playback has been moved behind by 15 seconds from 'timeBehind' and 'chapterTimeKey' seconds on audio player screen
 
   @logout @returnBooks @tier2
   Scenario: Audiobooks: Check end of chapter sleep timer
@@ -211,8 +215,9 @@ Feature: Audiobooks in A1QA library
       And Current playback speed value is <speed>X on audio player screen
     When Tap play button on audio player screen
       And Save book play time as 'timeAhead' on audio player screen
+      And Save chapter time as 'chapterTimeKey' on audio player screen
       And Wait for <secondsForWaiting> seconds
-    Then Playback has been moved forward by <moveForwardSeconds> seconds from 'timeAhead' seconds on audio player screen
+    Then Playback has been moved forward by <moveForwardSeconds> seconds from 'timeAhead' and 'chapterTimeKey' seconds on audio player screen
 
     Scenarios:
       | speed | secondsForWaiting | moveForwardSeconds |

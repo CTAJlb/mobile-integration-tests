@@ -36,6 +36,14 @@ public class IosAlertScreen extends AlertScreen {
     }
 
     @Override
+    public void performAlertActionIfDisplayedInItalian(String actionBtnKey) {
+        IButton actionBtn = getElementFactory().getButton(By.xpath(String.format(ACTION_BUTTON_LOC, actionBtnKey)), String.format("%s action alert button", actionBtnKey));
+        if(actionBtn.state().waitForDisplayed()){
+            actionBtn.click();
+        }
+    }
+
+    @Override
     public String getTextFromAlertHeader() {
         return lblAlertMessage.getText();
     }

@@ -12,8 +12,10 @@ import java.util.Locale;
 public enum EnumActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     GET("get"),
     GET_ES("get_es"),
+    GET_IT("get_it"),
     READ("read"),
     READ_ES("read_es"),
+    READ_IT("read_it"),
     RESERVE("reserve"),
     DELETE("delete"),
     RETURN("return"),
@@ -22,6 +24,7 @@ public enum EnumActionButtonsForBooksAndAlertsKeys implements LocalizedValue {
     DOWNLOAD("download"),
     LISTEN("listen"),
     LISTEN_ES("listen_es"),
+    LISTEN_IT("listen_it"),
     REMOVE("remove"),
     SIGN_OUT("signOut"),
     NOT_NOW("notNow"),

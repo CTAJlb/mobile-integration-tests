@@ -2,6 +2,7 @@ package stepdefinitions.epubSteps;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
+import constants.localization.italian.ItalianIos;
 import constants.localization.spanish.SpanishIos;
 import enums.epub.EnumTabsTocAndBookmarksEpub;
 import enums.localization.reader.BackgroundColorKeys;
@@ -70,6 +71,15 @@ public class EpubSteps {
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(readerEpubScreen.getTextFromPageLblES().contains(SpanishIos.PAGE)).as("Page label is not translated").isTrue();
         softAssertions.assertThat(readerEpubScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(SpanishIos.BACK);
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on Reader epub screen are translated correctly in Italian")
+    public void checkTranslationOnReaderScreenIT() {
+        readerEpubScreen.openNavigationBar();
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(readerEpubScreen.getTextFromPageLblIT().contains(ItalianIos.PAGE)).as("Page label is not translated").isTrue();
+        softAssertions.assertThat(readerEpubScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(ItalianIos.BACK);
         softAssertions.assertAll();
     }
 

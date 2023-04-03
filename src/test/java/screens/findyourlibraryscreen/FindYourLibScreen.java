@@ -18,8 +18,11 @@ public abstract class FindYourLibScreen extends Screen {
     public abstract void tapCancelBtn();
 
     public abstract String getTextFromFindYourLibraryLbl();
+    public abstract String getTextFromFindYourLibraryLblIT();
 
     public abstract String getTextFromAddLibraryBtn();
+    public abstract String getTextFromAddLibraryBtnIT();
 
     public abstract String getTextFromCancelBtn();
+    public abstract String getTextFromCancelBtnIT();
 }

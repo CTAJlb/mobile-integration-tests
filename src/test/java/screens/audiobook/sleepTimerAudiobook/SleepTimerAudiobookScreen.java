@@ -13,15 +13,21 @@ public abstract class SleepTimerAudiobookScreen extends Screen {
 
     public abstract void closeSleepTimer();
 
-    public abstract String getTextFromSleepTimerLabel();
     public abstract String getTextFromSleepTimerLabelES();
 
-    public abstract String getTextFromOffBtn();
+    public abstract String getTextFromSleepTimerLabelIT();
+
     public abstract String getTextFromOffBtnES();
 
-    public abstract String getTextFromEndOfChapterBtn();
+    public abstract String getTextFromOffBtnIT();
+
     public abstract String getTextFromEndOfChapterBtnES();
 
+    public abstract String getTextFromEndOfChapterBtnIT();
+
     public abstract String getTextFromCancelBtn();
+
     public abstract String getTextFromCancelBtnES();
+
+    public abstract String getTextFromCancelBtnIT();
 }

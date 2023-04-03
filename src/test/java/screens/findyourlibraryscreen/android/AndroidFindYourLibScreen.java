@@ -53,13 +53,31 @@ public class AndroidFindYourLibScreen extends FindYourLibScreen {
     }
 
     @Override
+    public String getTextFromFindYourLibraryLblIT() {
+        //for ios
+        return null;
+    }
+
+    @Override
     public String getTextFromAddLibraryBtn() {
         //for ios
         return null;
     }
 
     @Override
+    public String getTextFromAddLibraryBtnIT() {
+        //for ios
+        return null;
+    }
+
+    @Override
     public String getTextFromCancelBtn() {
+        //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromCancelBtnIT() {
         //for ios
         return null;
     }

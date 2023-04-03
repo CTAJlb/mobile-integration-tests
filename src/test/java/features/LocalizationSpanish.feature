@@ -109,7 +109,7 @@ Feature: Localization testing in Spanish
       And Click GET_ES action button on book details screen
     Then Check that book contains READ_ES action button on book details screen
     When Click READ_ES action button on book details screen
-      Then Elements on Reader epub screen are translated correctly
+    Then Elements on Reader epub screen are translated correctly
 
   @tier3 @returnBooks @logoutES
   Scenario: Spanish: epub: Table of contents
@@ -140,7 +140,7 @@ Feature: Localization testing in Spanish
       And Click GET_ES action button on book details screen
     Then Check that book contains READ_ES action button on book details screen
     When Click READ_ES action button on book details screen
-      And Open bookmarks epub screen
+      And Open bookmarks epub screen in Spanish
     Then Elements on Bookmarks epub screen are translated correctly
 #
   @tier3

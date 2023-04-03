@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import aquality.appium.mobile.application.AqualityServices;
 import com.google.inject.Inject;
+import constants.localization.italian.ItalianIos;
 import constants.localization.spanish.SpanishIos;
 import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
@@ -49,15 +50,33 @@ public class SettingsSteps {
         bottomMenuForm.open(BottomMenu.SETTINGS_ES);
     }
 
+    @When("Open Settings in Italian")
+    public void openSettingsInItalian() {
+        bottomMenuForm.open(BottomMenu.SETTINGS_IT);
+        bottomMenuForm.open(BottomMenu.SETTINGS_IT);
+    }
+
     @Then("Elements on Settings screen are translated correctly")
     public void checkTranslationInSettingsScreen() {
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(settingsScreen.getTextFromSettingsHeader()).as("Settings header is not translated").isEqualTo(SpanishIos.SETTINGS);
-        softAssertions.assertThat(settingsScreen.getTextFromLibrariesBtn()).as("Libraries button is not translated").isEqualTo(SpanishIos.LIBRARIES);
-        softAssertions.assertThat(settingsScreen.getTextFromAboutAppBtn()).as("About palace button is not translated").isEqualTo(SpanishIos.ABOUT_PALACE);
-        softAssertions.assertThat(settingsScreen.getTextFromPrivacyPolicyBtn()).as("Privacy policy button is not translated").isEqualTo(SpanishIos.PRIVACY_POLICY);
-        softAssertions.assertThat(settingsScreen.getTextFromUserAgreementBtn()).as("User agreement button is not translated").isEqualTo(SpanishIos.USER_AGREEMENT);
-        softAssertions.assertThat(settingsScreen.getTextFromSoftwareLicensesBtn()).as("Software licenses button is not translated").isEqualTo(SpanishIos.SOFTWARE_LICENSES);
+        softAssertions.assertThat(settingsScreen.getTextFromLibrariesBtnES()).as("Libraries button is not translated").isEqualTo(SpanishIos.LIBRARIES);
+        softAssertions.assertThat(settingsScreen.getTextFromAboutAppBtnES()).as("About palace button is not translated").isEqualTo(SpanishIos.ABOUT_PALACE);
+        softAssertions.assertThat(settingsScreen.getTextFromPrivacyPolicyBtnES()).as("Privacy policy button is not translated").isEqualTo(SpanishIos.PRIVACY_POLICY);
+        softAssertions.assertThat(settingsScreen.getTextFromUserAgreementBtnES()).as("User agreement button is not translated").isEqualTo(SpanishIos.USER_AGREEMENT);
+        softAssertions.assertThat(settingsScreen.getTextFromSoftwareLicensesBtnES()).as("Software licenses button is not translated").isEqualTo(SpanishIos.SOFTWARE_LICENSES);
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on Settings screen are translated correctly in Italian")
+    public void checkTranslationInSettingsScreenIT() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(settingsScreen.getTextFromSettingsHeader()).as("Settings header is not translated").isEqualTo(ItalianIos.SETTINGS);
+        softAssertions.assertThat(settingsScreen.getTextFromLibrariesBtnIT()).as("Libraries button is not translated").isEqualTo(ItalianIos.LIBRARIES);
+        softAssertions.assertThat(settingsScreen.getTextFromAboutAppBtnIT()).as("About palace button is not translated").isEqualTo(ItalianIos.ABOUT_PALACE);
+        softAssertions.assertThat(settingsScreen.getTextFromPrivacyPolicyBtnIT()).as("Privacy policy button is not translated").isEqualTo(ItalianIos.PRIVACY_POLICY);
+        softAssertions.assertThat(settingsScreen.getTextFromUserAgreementBtnIT()).as("User agreement button is not translated").isEqualTo(ItalianIos.USER_AGREEMENT);
+        softAssertions.assertThat(settingsScreen.getTextFromSoftwareLicensesBtnIT()).as("Software licenses button is not translated").isEqualTo(ItalianIos.SOFTWARE_LICENSES);
         softAssertions.assertAll();
     }
 
