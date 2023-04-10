@@ -32,12 +32,23 @@ public class IosCatalogBooksScreen extends CatalogBooksScreen implements IWorkin
     private static final String AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::XCUIElementTypeOther[2]/XCUIElementTypeStaticText[2]";
     private static final String AUTHOR_OF_THE_BOOK_BY_NUMBER_IN_THE_LIST = "//XCUIElementTypeCell[%d]//XCUIElementTypeOther//XCUIElementTypeStaticText[2]";
     private static final String BOOKS_NAME_LOCATOR = "//XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[1]";
+    private static final String CATEGORY_NAME_LOCATOR = "//XCUIElementTypeStaticText[@name=\"%s\"]";
 
     private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"No Results\")]"), "No results found");
     private final ILabel lblNameOfFirstBook = AqualityServices.getElementFactory().getLabel(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]"), "Name of first book");
 
     public IosCatalogBooksScreen() {
         super(By.xpath("//XCUIElementTypeCollectionView"));
+    }
+
+    @Override
+    public boolean isCategoryOpened(String categoryName) {
+        return getElementFactory().getLabel(By.xpath(String.format(CATEGORY_NAME_LOCATOR, categoryName)), String.format("Category %s", categoryName)).state().waitForDisplayed();
+    }
+
+    @Override
+    public boolean areBooksListDisplayed() {
+        return getElementFactory().getLabel(By.xpath(BOOKS_NAME_LOCATOR), "Book").state().waitForDisplayed();
     }
 
     @Override

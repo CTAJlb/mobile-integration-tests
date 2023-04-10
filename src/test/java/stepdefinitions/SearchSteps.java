@@ -52,9 +52,10 @@ public class SearchSteps {
     }
 
     @Then("Placeholder contains {string} text in search field")
-    public void checkTextInSearchField(String text){
-        String textFromField = searchModal.getTextFromSearchField();
-        Assert.assertTrue(String.format("Search field does not contain %s", text), textFromField.contains(text));
+    public void checkTextInSearchField(String textKey){
+        String actualText = searchModal.getTextFromSearchField();
+        String expectedText = context.get(textKey);
+        Assert.assertTrue(String.format("Search field does not contain %s", expectedText), actualText.contains(expectedText));
     }
 
     @When("I input only spaces in search field")
@@ -66,10 +67,20 @@ public class SearchSteps {
 
     @When("Edit data by adding {string} in search field and save it as {string}")
     public void editDataInSearchField(String textForEdit, String wordKey) {
-        context.add(wordKey, textForEdit);
         searchModal.deleteSomeData();
         searchModal.deleteSomeData();
         searchModal.setSearchedText(textForEdit);
+        context.add(wordKey, searchModal.getTextFromSearchField());
+    }
+
+    @When("Edit data by adding characters in search field and save it as {string}")
+    public void addCharacters(String wordKey) {
+        searchModal.deleteSomeData();
+        searchModal.deleteSomeData();
+        searchModal.inputCharacterK();
+        searchModal.inputCharacterK();
+        searchModal.inputCharacterK();
+        context.add(wordKey, searchModal.getTextFromSearchField());
     }
 
     @Then("There is no possibility to search with empty search field")

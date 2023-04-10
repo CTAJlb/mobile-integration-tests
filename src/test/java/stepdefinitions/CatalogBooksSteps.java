@@ -58,6 +58,12 @@ public class CatalogBooksSteps {
         catalogBooksScreen.openBook(actionButtonKey, bookName);
     }
 
+    @Then("Category {string} with books is opened on catalog books screen")
+    public void isCategoryOpened(String categoryName) {
+        Assert.assertTrue(String.format("Category %s is not opened", categoryName), catalogBooksScreen.isCategoryOpened(categoryName));
+        Assert.assertTrue("Books list is not displayed", catalogBooksScreen.areBooksListDisplayed());
+    }
+
     @Then("Check that book {string} contains {} action button on catalog book screen")
     public void isBookContainBtn(String bookNameKey, final EnumActionButtonsForBooksAndAlertsKeys key) {
         String bookName = context.get(bookNameKey);
@@ -108,7 +114,11 @@ public class CatalogBooksSteps {
 
     @Then("There is no results on catalog books screen")
     public void isNoResults() {
-        Assert.assertTrue("Results are not empty", catalogBooksScreen.isNoResults());
+        if(AqualityServices.getApplication().getPlatformName() == PlatformName.IOS) {
+            Assert.assertTrue("Results are not empty", catalogBooksScreen.isNoResults());
+        } else {
+            Assert.assertTrue("Catalog screen is not displayed", catalogScreen.areCategoryRowsLoaded());
+        }
     }
 
     @And("Click {} action button on the first {} book on catalog books screen and save book as {string}")

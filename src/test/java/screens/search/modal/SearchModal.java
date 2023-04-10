@@ -10,6 +10,8 @@ public abstract class SearchModal extends Screen {
 
     public abstract void setSearchedText(String text);
 
+    public abstract void inputCharacterK();
+
     public abstract void applySearch();
 
     public abstract void clearSearchField();

@@ -24,6 +24,11 @@ public class AndroidSearchModal extends SearchModal {
     }
 
     @Override
+    public void inputCharacterK() {
+        KeyboardUtils.pressKey(AndroidKey.K);
+    }
+
+    @Override
     public void applySearch() {
         KeyboardUtils.pressKey(AndroidKey.ENTER);
         KeyboardUtils.hideKeyboard();

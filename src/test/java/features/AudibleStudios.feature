@@ -15,7 +15,8 @@ Feature: Audiobooks from Audible studios in LYRASIS
   Scenario: Open the audiobook at the last open chapter and check time code
     When Open categories by chain and chain starts from CategoryScreen:
       | Audible Studios |
-      And Get names of books on screen and save them as 'listOfBooks'
+    Then Category "Audible Studios" with books is opened on catalog books screen
+    When Get names of books on screen and save them as 'listOfBooks'
       And Open Catalog
       And Open search modal
       And Search for a AUDIOBOOK book from 'listOfBooks' and save as 'bookNameInfo'
@@ -60,7 +61,8 @@ Feature: Audiobooks from Audible studios in LYRASIS
   Scenario: Navigate by Audiobook
     When Open categories by chain and chain starts from CategoryScreen:
       | Audible Studios |
-      And Get names of books on screen and save them as 'listOfBooks'
+    Then Category "Audible Studios" with books is opened on catalog books screen
+    When Get names of books on screen and save them as 'listOfBooks'
       And Open Catalog
       And Open search modal
       And Search for a AUDIOBOOK book from 'listOfBooks' and save as 'bookNameInfo'
@@ -91,7 +93,8 @@ Feature: Audiobooks from Audible studios in LYRASIS
   Scenario: Check end of chapter sleep timer
     When Open categories by chain and chain starts from CategoryScreen:
       | Audible Studios |
-      And Get names of books on screen and save them as 'listOfBooks'
+    Then Category "Audible Studios" with books is opened on catalog books screen
+    When Get names of books on screen and save them as 'listOfBooks'
       And Open Catalog
       And Open search modal
       And Search for a AUDIOBOOK book from 'listOfBooks' and save as 'bookNameInfo'
@@ -117,7 +120,8 @@ Feature: Audiobooks from Audible studios in LYRASIS
   Scenario: Check of line for time remaining
     When Open categories by chain and chain starts from CategoryScreen:
       | Audible Studios |
-      And Get names of books on screen and save them as 'listOfBooks'
+    Then Category "Audible Studios" with books is opened on catalog books screen
+    When Get names of books on screen and save them as 'listOfBooks'
       And Open Catalog
       And Open search modal
       And Search for a AUDIOBOOK book from 'listOfBooks' and save as 'bookNameInfo'
@@ -133,7 +137,8 @@ Feature: Audiobooks from Audible studios in LYRASIS
   Scenario: Check of switching to the next time
     When Open categories by chain and chain starts from CategoryScreen:
       | Audible Studios |
-      And Get names of books on screen and save them as 'listOfBooks'
+    Then Category "Audible Studios" with books is opened on catalog books screen
+    When Get names of books on screen and save them as 'listOfBooks'
       And Open Catalog
       And Open search modal
       And Search for a AUDIOBOOK book from 'listOfBooks' and save as 'bookNameInfo'
@@ -154,7 +159,8 @@ Feature: Audiobooks from Audible studios in LYRASIS
   Scenario: Check playback speed and sleep timer
     When Open categories by chain and chain starts from CategoryScreen:
       | Audible Studios |
-      And Get names of books on screen and save them as 'listOfBooks'
+    Then Category "Audible Studios" with books is opened on catalog books screen
+    When Get names of books on screen and save them as 'listOfBooks'
       And Open Catalog
       And Open search modal
       And Search for a AUDIOBOOK book from 'listOfBooks' and save as 'bookNameInfo'
@@ -178,7 +184,8 @@ Feature: Audiobooks from Audible studios in LYRASIS
   Scenario: Check time tracking line
     When Open categories by chain and chain starts from CategoryScreen:
       | Audible Studios |
-      And Get names of books on screen and save them as 'listOfBooks'
+    Then Category "Audible Studios" with books is opened on catalog books screen
+    When Get names of books on screen and save them as 'listOfBooks'
       And Open Catalog
       And Open search modal
       And Search for a AUDIOBOOK book from 'listOfBooks' and save as 'bookNameInfo'
@@ -205,7 +212,8 @@ Feature: Audiobooks from Audible studios in LYRASIS
   Scenario: Check of not rewinding forward and back by tapping on time bar
     When Open categories by chain and chain starts from CategoryScreen:
       | Audible Studios |
-      And Get names of books on screen and save them as 'listOfBooks'
+    Then Category "Audible Studios" with books is opened on catalog books screen
+    When Get names of books on screen and save them as 'listOfBooks'
       And Open Catalog
       And Open search modal
       And Search for a AUDIOBOOK book from 'listOfBooks' and save as 'bookNameInfo'
@@ -233,7 +241,8 @@ Feature: Audiobooks from Audible studios in LYRASIS
   Scenario Outline: Playback speed: Check of playback speed
     When Open categories by chain and chain starts from CategoryScreen:
       | Audible Studios |
-      And Get names of books on screen and save them as 'listOfBooks'
+    Then Category "Audible Studios" with books is opened on catalog books screen
+    When Get names of books on screen and save them as 'listOfBooks'
       And Open Catalog
       And Open search modal
       And Search for a AUDIOBOOK book from 'listOfBooks' and save as 'bookNameInfo'

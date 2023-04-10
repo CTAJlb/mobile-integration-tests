@@ -38,7 +38,8 @@ Feature: Manage Libraries
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Account "Palace Bookshelf" is present on Accounts screen
-    When Get names of books on screen and save them as 'nameOfBooks'
+    When Open Catalog
+      And Get names of books on screen and save them as 'nameOfBooks'
       And Add 'LYRASIS Reads' account
     Then Category rows are loaded
       And List of books on screen is not equal to list of books saved as 'nameOfBooks'
@@ -50,7 +51,7 @@ Feature: Manage Libraries
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Account "Palce bookshelf" is present on Accounts screen
+    Then Account "Palace bookshelf" is present on Accounts screen
     When Add libraries through settings:
         | LYRASIS Reads            |
         | Plumas County Library    |
@@ -172,8 +173,8 @@ Feature: Manage Libraries
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Account "Palace Bookshelf" is present on Accounts screen
-    Then Category rows are loaded
-    When Add 'LYRASIS Reads' account by the logo
+    When Open Catalog
+      And Add 'LYRASIS Reads' account by the logo
     Then Category rows are loaded
 
   @tier2
@@ -184,7 +185,8 @@ Feature: Manage Libraries
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Account "Palace Bookshelf" is present on Accounts screen
-    When Add libraries by the logo:
+    When Open Catalog
+      And Add libraries by the logo:
         | LYRASIS Reads            |
         | Plumas County Library    |
         | Escondido Public Library |
@@ -204,8 +206,8 @@ Feature: Manage Libraries
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Account "Palace Bookshelf" is present on Accounts screen
-    Then Category rows are loaded
-    When Add libraries by the logo:
+    When Open Catalog
+      And Add libraries by the logo:
       | LYRASIS Reads            |
       | Plumas County Library    |
       | Escondido Public Library |

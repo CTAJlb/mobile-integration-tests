@@ -32,11 +32,22 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     private static final String AUTHOR_OF_THE_BOOK_BY_NUMBER_IN_THE_LIST = "//android.widget.FrameLayout[%d]//android.view.ViewGroup//android.widget.TextView[2]";
     private static final String AUTHOR_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC = ACTION_BUTTON_ON_THE_FIRST_BOOK_BY_BOOK_NAME_AND_BUTTON_NAME_LOC + "/ancestor::android.view.ViewGroup/android.widget.TextView[2]";
     private static final String BOOK_NAME_LOCATOR = "//android.view.ViewGroup[contains(@resource-id, \"bookCellIdle\")]/android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
+    private static final String CATEGORY_NAME_LOCATOR = "//android.widget.TextView[@text=\"%s\"]";
     private final ILabel lblNameOfFirstBook = AqualityServices.getElementFactory().getLabel(By.xpath("//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.TextView[1]"), "Name of first book");
     private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@text, \"No results\")]"), "No results found");
 
     public AndroidCatalogBooksScreen() {
         super(By.id("feedWithGroups"));
+    }
+
+    @Override
+    public boolean isCategoryOpened(String categoryName) {
+        return getElementFactory().getLabel(By.xpath(String.format(CATEGORY_NAME_LOCATOR, categoryName)), String.format("Category %s", categoryName)).state().waitForDisplayed();
+    }
+
+    @Override
+    public boolean areBooksListDisplayed() {
+        return getElementFactory().getLabel(By.xpath(BOOK_NAME_LOCATOR), "Book").state().waitForDisplayed();
     }
 
     @Override

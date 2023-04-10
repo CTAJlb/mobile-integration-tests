@@ -129,8 +129,8 @@ Feature: Search libraries and books
       And Open search modal
     Then Placeholder contains "Search" text in search field
 
-  @tier2
-  Scenario: Check the possibility of editing data in search field in LYRASIS
+  @tier2 @exclude_android
+  Scenario: Check the possibility of editing data in search field in LYRASIS IOS
     When Close tutorial screen
     Then Welcome screen is opened
     When Close welcome screen
@@ -139,6 +139,18 @@ Feature: Search libraries and books
       And Open search modal
       And Enter book "Book" and save it as 'word'
       And Edit data by adding "hello" in search field and save it as 'newWord'
+    Then Placeholder contains 'newWord' text in search field
+
+  @tier2 @exclude_ios
+  Scenario: Check the possibility of editing data in search field in LYRASIS ANDROID
+    When Close tutorial screen
+    Then Welcome screen is opened
+    When Close welcome screen
+    Then Add library screen is opened
+    When Add library "LYRASIS Reads" on Add library screen
+      And Open search modal
+      And Enter book "Book" and save it as 'word'
+      And Edit data by adding characters in search field and save it as 'newWord'
     Then Placeholder contains 'newWord' text in search field
 
   @tier2

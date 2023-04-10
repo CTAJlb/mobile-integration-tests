@@ -11,6 +11,10 @@ public abstract class CatalogBooksScreen extends Screen {
         super(locator, "Catalog Books");
     }
 
+    public abstract boolean isCategoryOpened(String categoryName);
+
+    public abstract boolean areBooksListDisplayed();
+
     public abstract CatalogBookModel clickActionButtonAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
 
     public abstract CatalogBookModel openBookAndGetBookInfo(EnumBookType bookType, String bookName, EnumActionButtonsForBooksAndAlertsKeys actionButtonKey);
