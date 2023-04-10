@@ -17,6 +17,7 @@ public class IosSearchModal extends SearchModal {
     private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton[1]"), "Back button");
     private final IButton btnDelete = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"delete\"]"), "Delete button");
     private final IButton btnSpace = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"space\"]"), "Space button");
+    private final IButton btnK = getElementFactory().getButton(By.xpath("//XCUIElementTypeKey[@name=\"K\"]"), "K button");
 
     public IosSearchModal() {
         super(By.xpath(MAIN_ELEMENT));
@@ -25,6 +26,11 @@ public class IosSearchModal extends SearchModal {
     @Override
     public void setSearchedText(String text) {
         txbSearch.sendKeys(text);
+    }
+
+    @Override
+    public void inputCharacterK() {
+        btnK.click();
     }
 
     @Override
