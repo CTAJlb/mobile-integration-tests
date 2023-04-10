@@ -8,7 +8,8 @@ Feature: My books module
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Account "Palace Bookshelf" is present on Accounts screen
-    When Open search modal
+    When Open Catalog
+      And Open search modal
       And Search several books and save them in list as 'listOfBooks':
         | One Way     |
         | Jane Eyre   |
@@ -26,7 +27,8 @@ Feature: My books module
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Account "Palace Bookshelf" is present on Accounts screen
-    When Open search modal
+    When Open Catalog
+      And Open search modal
       And Search several books and save them in list as 'listOfBooks':
         | One Way     |
         | Jane Eyre   |
