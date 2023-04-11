@@ -389,13 +389,35 @@ Feature: Audiobook in LYRASIS
 
     Scenarios:
       | distributor        |
-      | Bibliotheca        |
       | Palace Marketplace |
       | Axis 360           |
 
   @logout @returnBooks @tier1
   Scenario: BiblioBoard: Check of not rewinding forward and back by tapping on time bar
     When Search for "Daykeeper" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+    Then Audio player screen of book 'bookInfo' is opened
+    When Tap play button on audio player screen
+    Then Pause button is present on audio player screen
+    When Tap pause button on audio player screen
+    Then Play button is present on audio player screen
+    When Stretch slider on the time tracking line forward on audio player screen
+      And Wait for 5 seconds
+      And Save book play time as 'timeBehind' on audio player screen
+      And Tap on the time bar forward on audio player screen
+      And Save book play time as 'timeForward' on audio player screen
+    Then Play times 'timeBehind' and 'timeForward' are equals
+    When Tap on the time bar back on audio player screen
+      And Save book play time as 'timeBackward' on audio player screen
+    Then Play times 'timeBehind' and 'timeBackward' are equals
+
+  @logout @returnBooks @tier1
+  Scenario: Bibliotheca: Check of not rewinding forward and back by tapping on time bar
+    When Search for "Down the Hatch" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -445,10 +467,6 @@ Feature: Audiobook in LYRASIS
 
     Scenarios:
       | distributor        | speed | secondsForWaiting | moveForwardSeconds |
-      | Bibliotheca        | 0.75  | 8                 | 6                  |
-      | Bibliotheca        | 1.25  | 8                 | 10                 |
-      | Bibliotheca        | 1.50  | 6                 | 9                  |
-      | Bibliotheca        | 2     | 5                 | 10                 |
       | Palace Marketplace | 0.75  | 8                 | 6                  |
       | Palace Marketplace | 1.25  | 8                 | 10                 |
       | Palace Marketplace | 1.50  | 6                 | 9                  |
@@ -461,6 +479,40 @@ Feature: Audiobook in LYRASIS
   @logout @returnBooks @tier1
   Scenario Outline: Biblioboard: Playback speed: Check of playback speed
     When Search for "Four Women" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+    Then Audio player screen of book 'bookInfo' is opened
+    When Select <speed>X playback speed on playback speed audiobook screen
+    Then Current playback speed value is <speed>X on audio player screen
+    When Return to previous screen from audio player screen
+      And Click LISTEN action button on book details screen
+    Then Audio player screen of book 'bookInfo' is opened
+      And Current playback speed value is <speed>X on audio player screen
+    When Restart app
+      And Open Books
+      And Open AUDIOBOOK book with LISTEN action button and 'bookInfo' bookInfo on books screen
+      And Click LISTEN action button on book details screen
+    Then Audio player screen of book 'bookInfo' is opened
+      And Current playback speed value is <speed>X on audio player screen
+    When Tap play button on audio player screen
+      And Save book play time as 'timeAhead' on audio player screen
+      And Save chapter time as 'chapterTimeKey' on audio player screen
+      And Wait for <secondsForWaiting> seconds
+    Then Playback has been moved forward by <moveForwardSeconds> seconds from 'timeAhead' and 'chapterTimeKey' seconds on audio player screen
+
+    Scenarios:
+      | speed | secondsForWaiting | moveForwardSeconds |
+      | 0.75  | 8                 | 6                  |
+      | 1.25  | 8                 | 10                 |
+      | 1.50  | 6                 | 9                  |
+      | 2     | 5                 | 10                 |
+
+  @logout @returnBooks @tier1
+  Scenario Outline: Bibliotheca: Playback speed: Check of playback speed
+    When Search for "The Sentence" and save bookName as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
       And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen

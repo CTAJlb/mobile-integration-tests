@@ -30,6 +30,16 @@ public class AndroidWelcomeScreen extends WelcomeScreen {
     }
 
     @Override
+    public void tapFindLibraryButtonInFrench() {
+        //for ios
+    }
+
+    @Override
+    public void tapFindLibraryButtonInGerman() {
+        //for ios
+    }
+
+    @Override
     public String getTextFromButtonFindYourLibraryES() {
         return btnFindLibrary.getText();
     }
@@ -40,7 +50,31 @@ public class AndroidWelcomeScreen extends WelcomeScreen {
     }
 
     @Override
+    public String getTextFromButtonFindYourLibraryFR() {
+        //for ios
+        return null;
+    }
+
+    @Override
     public boolean isOpenedInSpanish() {
+        //for ios
+        return false;
+    }
+
+    @Override
+    public boolean isOpenedInItalian() {
+        //for ios
+        return false;
+    }
+
+    @Override
+    public boolean isOpenedInFrench() {
+        //for ios
+        return false;
+    }
+
+    @Override
+    public boolean isOpenedInGerman() {
         //for ios
         return false;
     }

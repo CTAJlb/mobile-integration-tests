@@ -59,6 +59,16 @@ public class AndroidFindYourLibScreen extends FindYourLibScreen {
     }
 
     @Override
+    public String getTextFromFindYourLibraryLblFR() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromFindYourLibraryLblGR() {
+        return null;
+    }
+
+    @Override
     public String getTextFromAddLibraryBtn() {
         //for ios
         return null;
@@ -71,6 +81,16 @@ public class AndroidFindYourLibScreen extends FindYourLibScreen {
     }
 
     @Override
+    public String getTextFromAddLibraryBtnFR() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromAddLibraryBtnGR() {
+        return null;
+    }
+
+    @Override
     public String getTextFromCancelBtn() {
         //for ios
         return null;
@@ -79,6 +99,16 @@ public class AndroidFindYourLibScreen extends FindYourLibScreen {
     @Override
     public String getTextFromCancelBtnIT() {
         //for ios
+        return null;
+    }
+
+    @Override
+    public String getTextFromCancelBtnFR() {
+        return null;
+    }
+
+    @Override
+    public String getTextFromCancelBtnGR() {
         return null;
     }
 

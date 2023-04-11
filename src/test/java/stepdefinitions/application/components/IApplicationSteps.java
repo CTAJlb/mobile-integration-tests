@@ -14,8 +14,17 @@ public interface IApplicationSteps {
 
     void isWelcomeScreenOpenedInSpanish();
 
+    void isWelcomeScreenOpenedInItalian();
+
+    void isWelcomeScreenOpenedInFrench();
+
+    void isWelcomeScreenOpenedInGerman();
+
     void checkTranslationOnWelcomeScreen();
+
     void checkTranslationOnWelcomeScreenItalian();
+
+    void checkTranslationOnWelcomeScreenFrench();
 
     void waitSeveralSeconds(Integer secondsCount);
 
@@ -29,6 +38,15 @@ public interface IApplicationSteps {
 
     void closeWelcomeScreenInItalian();
 
+    void closeWelcomeScreenInFrench();
+
+    void closeWelcomeScreenInGerman();
+
     void checkFindYourLibScreenTranslation();
+
     void checkFindYourLibScreenTranslationItalian();
+
+    void checkFindYourLibScreenTranslationFrench();
+
+    void checkFindYourLibScreenTranslationGerman();
 }
