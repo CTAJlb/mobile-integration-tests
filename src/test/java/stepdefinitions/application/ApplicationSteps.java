@@ -60,6 +60,18 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.checkFindYourLibScreenTranslationItalian();
     }
 
+    @Then("Elements on Find your library screen are translated correctly in French")
+    @Override
+    public void checkFindYourLibScreenTranslationFrench(){
+        abstractApplicationSteps.checkFindYourLibScreenTranslationFrench();
+    }
+
+    @Then("Elements on Find your library screen are translated correctly in German")
+    @Override
+    public void checkFindYourLibScreenTranslationGerman(){
+        abstractApplicationSteps.checkFindYourLibScreenTranslationGerman();
+    }
+
     @When("Add libraries by the logo:")
     public void addSevLibraries(List<String> libraries){
         libraries.forEach(abstractApplicationSteps::addAccountByTheLogo);
@@ -116,6 +128,18 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.closeWelcomeScreenInItalian();
     }
 
+    @When("Close welcome screen in French")
+    @Override
+    public void closeWelcomeScreenInFrench() {
+        abstractApplicationSteps.closeWelcomeScreenInFrench();
+    }
+
+    @When("Close welcome screen in German")
+    @Override
+    public void closeWelcomeScreenInGerman() {
+        abstractApplicationSteps.closeWelcomeScreenInGerman();
+    }
+
     @Then("Welcome screen is opened")
     @Override
     public void checkWelcomeScreenIsOpened() {
@@ -128,6 +152,24 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
         abstractApplicationSteps.isWelcomeScreenOpenedInSpanish();
     }
 
+    @Then("Welcome screen is opened in Italian")
+    @Override
+    public void isWelcomeScreenOpenedInItalian() {
+        abstractApplicationSteps.isWelcomeScreenOpenedInItalian();
+    }
+
+    @Then("Welcome screen is opened in French")
+    @Override
+    public void isWelcomeScreenOpenedInFrench() {
+        abstractApplicationSteps.isWelcomeScreenOpenedInFrench();
+    }
+
+    @Then("Welcome screen is opened in German")
+    @Override
+    public void isWelcomeScreenOpenedInGerman() {
+        abstractApplicationSteps.isWelcomeScreenOpenedInGerman();
+    }
+
     @Then("Elements on welcome screen are translated correctly")
     @Override
     public void checkTranslationOnWelcomeScreen(){
@@ -138,6 +180,12 @@ public class ApplicationSteps extends BaseSteps implements IApplicationSteps {
     @Override
     public void checkTranslationOnWelcomeScreenItalian() {
         abstractApplicationSteps.checkTranslationOnWelcomeScreenItalian();
+    }
+
+    @Then("Elements on welcome screen are translated correctly in French")
+    @Override
+    public void checkTranslationOnWelcomeScreenFrench() {
+        abstractApplicationSteps.checkTranslationOnWelcomeScreenFrench();
     }
 
     @And("Wait for {int} seconds")

@@ -3,7 +3,7 @@ Feature: Localization testing in Italian
   @tier4
   Scenario: Italian: Tutorial and Welcome screen
     When Close tutorial screen
-    Then Welcome screen is opened
+    Then Welcome screen is opened in Italian
       And Elements on welcome screen are translated correctly in Italian
 
   @tier4

@@ -3,6 +3,7 @@ package stepdefinitions;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
+import constants.localization.french.FrenchIos;
 import constants.localization.italian.ItalianIos;
 import constants.localization.spanish.SpanishIos;
 import enums.keysforcontext.ContextLibrariesKeys;
@@ -141,6 +142,14 @@ public class AccountSteps {
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(addAccountScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(ItalianIos.BACK);
         softAssertions.assertThat(addAccountScreen.getTextFromAddLibraryLbl()).as("Add library label is not translated").isEqualTo(ItalianIos.ADD_ACCOUNT);
+        softAssertions.assertAll();
+    }
+
+    @Then("Elements on add account screen are translated correctly in French")
+    public void checkTranslationOnAddAccountScreenFR() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(addAccountScreen.getTextFromBackBtn()).as("Back button is not translated").isEqualTo(FrenchIos.BACK);
+        softAssertions.assertThat(addAccountScreen.getTextFromAddLibraryLbl()).as("Add library label is not translated").isEqualTo(FrenchIos.ADD_ACCOUNT);
         softAssertions.assertAll();
     }
 

@@ -49,14 +49,19 @@ public class EpubSteps {
         Assert.assertTrue(String.format("Book is not present on epub reader screen. Expected bookName - '%1$s', actualName - '%2$s'", expectedBookName, actualBookName), actualBookName.contains(expectedBookName));
     }
 
+    @When("Click on right book corner on epub reader screen")
+    public void clickOnRightBookCorner() {
+        readerEpubScreen.clickRightCorner();
+    }
+
     @When("Click on left book corner on epub reader screen")
     public void clickOnLeftBookCorner() {
         readerEpubScreen.clickLeftCorner();
     }
 
-    @When("Click on right book corner on epub reader screen")
-    public void clickOnRightBookCorner() {
-        readerEpubScreen.clickRightCorner();
+    @When("Open navigation bar on reader epub screen")
+    public void openNavigationBar() {
+        readerEpubScreen.openNavigationBar();
     }
 
     @When("Save pageNumber as {string} and chapterName as {string} on epub reader screen")

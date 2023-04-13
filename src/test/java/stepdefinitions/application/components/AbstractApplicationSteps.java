@@ -1,6 +1,7 @@
 package stepdefinitions.application.components;
 
 import aquality.appium.mobile.application.AqualityServices;
+import constants.localization.french.FrenchIos;
 import constants.localization.italian.ItalianIos;
 import constants.localization.spanish.SpanishIos;
 import enums.timeouts.RestartAppTimeouts;
@@ -99,6 +100,11 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     }
 
     @Override
+    public void checkTranslationOnWelcomeScreenFrench(){
+        Assert.assertEquals("Find your library button is not translated", FrenchIos.FIND_YOUR_LIBRARY, welcomeScreen.getTextFromButtonFindYourLibraryFR());
+    }
+
+    @Override
     public void checkWelcomeScreenIsOpened() {
         Assert.assertTrue("Welcome screen is not opened", welcomeScreen.state().waitForDisplayed());
     }
@@ -109,6 +115,21 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     }
 
     @Override
+    public void isWelcomeScreenOpenedInItalian(){
+        Assert.assertTrue("Welcome screen is not opened", welcomeScreen.isOpenedInItalian());
+    }
+
+    @Override
+    public void isWelcomeScreenOpenedInFrench(){
+        Assert.assertTrue("Welcome screen is not opened", welcomeScreen.isOpenedInFrench());
+    }
+
+    @Override
+    public void isWelcomeScreenOpenedInGerman(){
+        Assert.assertTrue("Welcome screen is not opened", welcomeScreen.isOpenedInGerman());
+    }
+
+    @Override
     public void closeWelcomeScreenInSpanish() {
         welcomeScreen.tapFindLibraryButtonInSpanish();
     }
@@ -116,6 +137,16 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     @Override
     public void closeWelcomeScreenInItalian() {
         welcomeScreen.tapFindLibraryButtonInItalian();
+    }
+
+    @Override
+    public void closeWelcomeScreenInFrench() {
+        welcomeScreen.tapFindLibraryButtonInFrench();
+    }
+
+    @Override
+    public void closeWelcomeScreenInGerman() {
+        welcomeScreen.tapFindLibraryButtonInGerman();
     }
 
     @Override
@@ -137,6 +168,22 @@ public abstract class AbstractApplicationSteps extends BaseSteps implements IApp
     }
 
     public void checkFindYourLibScreenTranslationItalian() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(findYourLibScreen.getTextFromFindYourLibraryLblIT()).as("Find your library label is not translated").isEqualTo(ItalianIos.FIND_YOUR_LIBRARY);
+        softAssertions.assertThat(findYourLibScreen.getTextFromAddLibraryBtnIT()).as("Add library button is not translated").isEqualTo(ItalianIos.ADD_ACCOUNT);
+        softAssertions.assertThat(findYourLibScreen.getTextFromCancelBtnIT()).as("Cancel button is not translated").isEqualTo(ItalianIos.CANCEL);
+        softAssertions.assertAll();
+    }
+
+    public void checkFindYourLibScreenTranslationFrench() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(findYourLibScreen.getTextFromFindYourLibraryLblFR()).as("Find your library label is not translated").isEqualTo(FrenchIos.FIND_YOUR_LIBRARY);
+        softAssertions.assertThat(findYourLibScreen.getTextFromAddLibraryBtnFR()).as("Add library button is not translated").isEqualTo(FrenchIos.ADD_ACCOUNT);
+        softAssertions.assertThat(findYourLibScreen.getTextFromCancelBtnFR()).as("Cancel button is not translated").isEqualTo(FrenchIos.CANCEL);
+        softAssertions.assertAll();
+    }
+
+    public void checkFindYourLibScreenTranslationGerman() {
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(findYourLibScreen.getTextFromFindYourLibraryLblIT()).as("Find your library label is not translated").isEqualTo(ItalianIos.FIND_YOUR_LIBRARY);
         softAssertions.assertThat(findYourLibScreen.getTextFromAddLibraryBtnIT()).as("Add library button is not translated").isEqualTo(ItalianIos.ADD_ACCOUNT);

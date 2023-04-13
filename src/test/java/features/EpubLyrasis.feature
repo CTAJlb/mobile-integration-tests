@@ -181,9 +181,10 @@ Feature: Read EPUB in Lyrasis
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on epub reader screen
-    When Click on right book corner on epub reader screen
+    When Scroll page forward from 7 to 10 times
+      And Open navigation bar on reader epub screen
       And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
-      And Click on right book corner on epub reader screen
+    And Open navigation bar on reader epub screen
     Then Next page is opened and old page has 'pageNumberKey' pageNumber and 'chapterNameKey' chapterName on epub reader screen
     When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Click on left book corner on epub reader screen
@@ -201,7 +202,7 @@ Feature: Read EPUB in Lyrasis
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
-      And Click on right book corner on epub reader screen
+      And Open navigation bar on reader epub screen
       And Add bookmark on reader epub screen
     Then Bookmark is displayed on reader epub screen
     When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
@@ -210,7 +211,7 @@ Feature: Read EPUB in Lyrasis
       And Add bookmark on reader epub screen
       And Save pageNumber as 'pageNumberKey2' and chapterName as 'chapterNameKey2' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey2'
-      And Click on right book corner on epub reader screen
+      And Open navigation bar on reader epub screen
       And Open bookmarks epub screen
     Then Bookmark with 'chapterNameKey' and 'deviceTimeDateKey' is displayed on bookmarks epub screen
       And Bookmark with 'chapterNameKey2' and 'deviceTimeDateKey2' is displayed on bookmarks epub screen
@@ -229,7 +230,7 @@ Feature: Read EPUB in Lyrasis
       And Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
-      And Click on right book corner on epub reader screen
+      And Open navigation bar on reader epub screen
       And Add bookmark on reader epub screen
       And Delete bookmark on reader epub screen
     Then Bookmark is not displayed on reader epub screen
@@ -237,7 +238,7 @@ Feature: Read EPUB in Lyrasis
       And Add bookmark on reader epub screen
       And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey'
-      And Click on right book corner on epub reader screen
+      And Open navigation bar on reader epub screen
       And Open bookmarks epub screen
       And Delete bookmark on bookmarks epub screen
     Then Bookmark with 'chapterNameKey' and 'deviceTimeDateKey' is not displayed on bookmarks epub screen
