@@ -22,8 +22,6 @@ public abstract class FacetedSearchScreen extends Screen {
 
     public abstract List<String> getOptionsInTabs();
 
-    public abstract void sortBy(String library);
-
     public abstract void changeSortByTo(FacetSortByKeys key);
 
     public abstract String getTypeVariantsOfBtn (String type);

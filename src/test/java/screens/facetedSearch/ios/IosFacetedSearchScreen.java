@@ -18,7 +18,6 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
     private static final String MAIN_ELEMENT = "//XCUIElementTypeCollectionView/preceding-sibling::XCUIElementTypeOther";
     private static final String FACET_SEARCH_SELECTION = "//XCUIElementTypeButton[@name=\"%1$s\"]";
     private static final String OPTIONS_IN_TABS_LOCATOR = "//XCUIElementTypeWindow/XCUIElementTypeOther[2]//XCUIElementTypeScrollView//XCUIElementTypeButton";
-    private final IButton btnSorting = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[1]"), "Sort by button");
     private final IButton btnAvailability = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[2]"), "Availability button");
     private final IButton btnSortBy = getElementFactory().getButton(By.xpath(String.format("(%1$s//XCUIElementTypeButton)[1]", MAIN_ELEMENT)), "Sort by");
     private final IButton btnCollection = getElementFactory().getButton(By.xpath("//XCUIElementTypeScrollView//XCUIElementTypeButton[3]"), "Collection button");
@@ -48,7 +47,7 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
 
     @Override
     public void openSortBy() {
-        btnSorting.click();
+        btnSortBy.click();
     }
 
     @Override
@@ -56,11 +55,6 @@ public class IosFacetedSearchScreen extends FacetedSearchScreen {
         List<String> options = new ArrayList<>();
         getElementFactory().findElements(By.xpath(OPTIONS_IN_TABS_LOCATOR), ElementType.BUTTON).forEach(option -> options.add(option.getText()));
         return options;
-    }
-
-    @Override
-    public void sortBy(String library) {
-        btnSortBy.click();
     }
 
     @Override

@@ -276,9 +276,9 @@ public class CatalogSteps {
         Assert.assertTrue("Not all present books are audiobooks", catalogScreen.getListOfBooksNames().stream().allMatch(x -> x.toLowerCase().contains("audiobook")));
     }
 
-    @And("Sort books by {} in {string}")
-    public void sortBooksBy(FacetSortByKeys sortingCategory, String library) {
-        facetedSearchScreen.sortBy(library);
+    @And("Sort books by {}")
+    public void sortBooksBy(FacetSortByKeys sortingCategory) {
+        facetedSearchScreen.openSortBy();
         facetedSearchScreen.changeSortByTo(sortingCategory);
     }
 
@@ -357,9 +357,9 @@ public class CatalogSteps {
         Assert.assertEquals("Books are not sorted by default", "Author", subcategoryScreen.getNameOfSorting(libraryName));
     }
 
-    @Then("There are sorting by {string}, {string} and {string} in {string} on subcategory screen")
-    public void checkTypeOfSorting(String type1, String type2, String type3, String library) {
-        facetedSearchScreen.sortBy(library);
+    @Then("There are sorting by {string}, {string} and {string} on subcategory screen")
+    public void checkTypeOfSorting(String type1, String type2, String type3) {
+        facetedSearchScreen.openSortBy();
         SoftAssertions softAssertions = new SoftAssertions();
         softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(type1)).as("There is no sorting type by " + type1).isEqualTo(type1);
         softAssertions.assertThat(facetedSearchScreen.getTypeVariantsOfBtn(type2)).as("There is no sorting type by " + type2).isEqualTo(type2);
