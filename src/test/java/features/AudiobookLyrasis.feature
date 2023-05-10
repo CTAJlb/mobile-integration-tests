@@ -543,3 +543,19 @@ Feature: Audiobook in LYRASIS
       | 1.25  | 8                 | 10                 |
       | 1.50  | 6                 | 9                  |
       | 2     | 5                 | 10                 |
+
+  @logout @returnBooks @tier1
+  Scenario: TOC: Check of table of contents
+    When Search for "Down the Hatch" and save bookName as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click GET action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
+    Then Audio player screen of book 'bookInfo' is opened
+    When Open toc audiobook screen
+    Then There are two tabs Content and Bookmarks on toc audiobook screen
+    When Open Bookmarks on toc audiobook screen
+    Then Bookmarks screen is opened
+    When Open Chapters on toc audiobook screen
+    Then Chapters screen is opened

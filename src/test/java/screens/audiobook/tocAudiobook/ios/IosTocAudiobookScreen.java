@@ -5,7 +5,6 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.IElement;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
-import aquality.selenium.core.elements.ElementsCount;
 import constants.applicationattributes.IosAttributes;
 import org.openqa.selenium.By;
 import screens.audiobook.tocAudiobook.TocAudiobookScreen;
@@ -17,6 +16,9 @@ import java.util.List;
 public class IosTocAudiobookScreen extends TocAudiobookScreen {
     private final ILabel lblChapterName = getElementFactory().getLabel(By.xpath(CHAPTER_NAME_LOC), "Chapter name");
     private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton"), "Back button");
+    private final IButton btnChapters = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Chapters\"]"), "Chapters tab");
+    private final IButton btnBookmarks = getElementFactory().getButton(By.xpath("//android.widget.LinearLayout[@name=\"Bookmarks\"]"), "Bookmarks tab");
+
     private static final String CHAPTER_NAME_LOC = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[1]";
     private static final String CURRENT_CHAPTER_NAME = "//XCUIElementTypeTable/XCUIElementTypeCell[%d]/XCUIElementTypeStaticText[1]";
 
@@ -56,6 +58,31 @@ public class IosTocAudiobookScreen extends TocAudiobookScreen {
     @Override
     public void clickBackBtn() {
         btnBack.click();
+    }
+
+    @Override
+    public boolean isContentTabDisplayed() {
+        return btnChapters.state().waitForDisplayed();
+    }
+
+    @Override
+    public boolean isBookmarksTabDisplayed() {
+        return btnBookmarks.state().waitForDisplayed();
+    }
+
+    @Override
+    public void openBookmarks() {
+        btnBookmarks.click();
+    }
+
+    @Override
+    public void openChapters() {
+        btnChapters.click();
+    }
+
+    @Override
+    public boolean isChaptersSelected() {
+        return lblChapterName.state().waitForDisplayed();
     }
 
     private List<ILabel> getChapters() {
