@@ -34,7 +34,7 @@ public class AndroidCatalogBooksScreen extends CatalogBooksScreen implements IWo
     private static final String BOOK_NAME_LOCATOR = "//android.view.ViewGroup[contains(@resource-id, \"bookCellIdle\")]/android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
     private static final String CATEGORY_NAME_LOCATOR = "//android.widget.TextView[@text=\"%s\"]";
     private final ILabel lblNameOfFirstBook = AqualityServices.getElementFactory().getLabel(By.xpath("//androidx.recyclerview.widget.RecyclerView/android.widget.FrameLayout[1]/android.view.ViewGroup/android.widget.TextView[1]"), "Name of first book");
-    private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(By.xpath("//android.widget.TextView[contains(@text, \"No results\")]"), "No results found");
+    private final ILabel lblNoResults = AqualityServices.getElementFactory().getLabel(By.id("feedEmptyMessage"), "No results found");
 
     public AndroidCatalogBooksScreen() {
         super(By.id("feedWithGroups"));
