@@ -53,9 +53,8 @@ public class SearchSteps {
     }
 
     @Then("Placeholder contains {string} text in search field")
-    public void checkTextInSearchField(String textKey){
+    public void checkTextInSearchField(String expectedText){
         String actualText = searchModal.getTextFromSearchField();
-        String expectedText = context.get(textKey);
         Assert.assertTrue(String.format("Search field does not contain %s", expectedText), actualText.contains(expectedText));
     }
 

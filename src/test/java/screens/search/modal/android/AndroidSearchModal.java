@@ -11,7 +11,7 @@ import screens.search.modal.SearchModal;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidSearchModal extends SearchModal {
-    private final ITextBox txbSearch = getElementFactory().getTextBox(By.xpath("//*[contains(@resource-id,\"search_src_text\")]"), "Search value input");
+    private final ITextBox txbSearch = getElementFactory().getTextBox(By.xpath("//android.widget.AutoCompleteTextView[contains(@resource-id,\"search_src_text\")]"), "Search value input");
     private final IButton btnClearSearchField = getElementFactory().getButton(By.xpath("//android.widget.ImageView[contains(@resource-id,\"search_close_btn\")]"), "Clear search field btn");
 
     public AndroidSearchModal() {

@@ -76,7 +76,7 @@ Feature: Catalog Navigation
     When Open categories by chain and chain starts from CategoryScreen:
       | Our Picks |
     Then Books are sorted by Author by default on subcategory screen in 'Palace Bookshelf'
-      And There are sorting by '<type1>', '<type2>' and '<type3>' in 'Palace Bookshelf' on subcategory screen
+      And There are sorting by '<type1>', '<type2>' and '<type3>' on subcategory screen
 
     Scenarios:
     | type1  | type2          | type3 |
@@ -95,14 +95,14 @@ Feature: Catalog Navigation
     When Open categories by chain and chain starts from CategoryScreen:
       | Our Picks |
     Then Subcategory screen is present
-    When Sort books by AUTHOR in 'Palace Bookshelf'
+    When Sort books by AUTHOR
     Then Subcategory screen is present
       And Books are sorted by Author ascending
-    When Sort books by TITLE in 'Palace Bookshelf'
+    When Sort books by TITLE
     Then Subcategory screen is present
       And Books are sorted by Title ascending
     When Save list of books as 'listOfBooks'
-      And Sort books by RECENTLY_ADDED in 'Palace Bookshelf'
+      And Sort books by RECENTLY_ADDED
     Then Subcategory screen is present
       And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
 
@@ -168,7 +168,7 @@ Feature: Catalog Navigation
     When Open categories by chain and chain starts from CategoryScreen:
       | Baker & Taylor Axis360 Test |
     Then Books are sorted by Author by default on subcategory screen in 'LYRASIS Reads'
-    And There are sorting by '<type1>', '<type2>' and '<type3>' in 'LYRASIS Reads' on subcategory screen
+    And There are sorting by '<type1>', '<type2>' and '<type3>' on subcategory screen
 
     Scenarios:
       | type1  | type2          | type3 |
@@ -187,14 +187,14 @@ Feature: Catalog Navigation
     When Open categories by chain and chain starts from CategoryScreen:
       | Baker & Taylor Axis360 Test |
     Then Subcategory screen is present
-    When Sort books by AUTHOR in 'LYRASIS Reads'
+    When Sort books by AUTHOR
     Then Subcategory screen is present
       And Books are sorted by Author ascending
-    When Sort books by TITLE in 'LYRASIS Reads'
+    When Sort books by TITLE
     Then Subcategory screen is present
       And Books are sorted by Title ascending
     When Save list of books as 'listOfBooks'
-      And Sort books by RECENTLY_ADDED in 'LYRASIS Reads'
+      And Sort books by RECENTLY_ADDED
     Then Subcategory screen is present
       And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
 

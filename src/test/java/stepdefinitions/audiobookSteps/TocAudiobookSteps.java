@@ -8,22 +8,54 @@ import framework.utilities.ScenarioContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomUtils;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
+import screens.audiobook.bookmarksaudiobook.BookmarksAudiobookScreen;
 import screens.audiobook.tocAudiobook.TocAudiobookScreen;
 
 public class TocAudiobookSteps {
     private final ScenarioContext context;
     private final TocAudiobookScreen tocAudiobookScreen;
+    private final BookmarksAudiobookScreen bookmarksAudiobookScreen;
 
     @Inject
     public TocAudiobookSteps(ScenarioContext context) {
         tocAudiobookScreen = AqualityServices.getScreenFactory().getScreen(TocAudiobookScreen.class);
+        bookmarksAudiobookScreen = AqualityServices.getScreenFactory().getScreen(BookmarksAudiobookScreen.class);
         this.context = context;
     }
 
     @Then("The first chapter is loaded")
     public void isChapterLoaded(){
         Assert.assertTrue("The first chapter is not loaded", tocAudiobookScreen.isTheFirstChapterLoaded());
+    }
+
+    @Then("There are two tabs Content and Bookmarks on toc audiobook screen")
+    public void checkTabsContentAndBookmarks() {
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(tocAudiobookScreen.isContentTabDisplayed()).as("Content tab is not displayed").isTrue();
+        softAssertions.assertThat(tocAudiobookScreen.isBookmarksTabDisplayed()).as("Bookmarks tab is not displayed").isTrue();
+        softAssertions.assertAll();
+    }
+
+    @When("Open Bookmarks on toc audiobook screen")
+    public void openBookmarks() {
+        tocAudiobookScreen.openBookmarks();
+    }
+
+    @Then("Bookmarks screen is opened")
+    public void isBookmarksScreenOpened() {
+        Assert.assertTrue("Bookmarks screen is not displayed", bookmarksAudiobookScreen.isBookmarksScreenSelected());
+    }
+
+    @When("Open Chapters on toc audiobook screen")
+    public void openChapters() {
+        tocAudiobookScreen.openChapters();
+    }
+
+    @Then("Chapters screen is opened")
+    public void isChaptersOpened() {
+        Assert.assertTrue(tocAudiobookScreen.isChaptersSelected());
     }
 
     @Then("Elements on TOC audiobook screen are translated correctly")
