@@ -6,14 +6,18 @@ import aquality.appium.mobile.elements.interfaces.IButton;
 import aquality.appium.mobile.elements.interfaces.ILabel;
 import aquality.appium.mobile.screens.screenfactory.ScreenType;
 import io.appium.java_client.TouchAction;
+import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.offset.ElementOption;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import screens.settings.SettingsScreen;
 
+import java.time.Duration;
+
 @ScreenType(platform = PlatformName.IOS)
 public class IosSettingsScreen extends SettingsScreen {
-    private static final int NUMBER_OF_CLICKS_FOR_OPENING_TEST_MODE = 7;
+    private static final int DURATION_FOR_LONG_PRESS_FOR_OPENING_TEST_MODE = 9;
     private static final String MAIN_ELEMENT = "//XCUIElementTypeNavigationBar[@name=\"Settings\"]";
 
     private  final ILabel lblSettings = getElementFactory().getLabel(By.xpath("//XCUIElementTypeNavigationBar"), "Settings");
@@ -89,8 +93,11 @@ public class IosSettingsScreen extends SettingsScreen {
     @Override
     public void openTestMode() {
         TouchAction action = new TouchAction(AqualityServices.getApplication().getDriver());
-        action.tap(TapOptions.tapOptions().withTapsCount(NUMBER_OF_CLICKS_FOR_OPENING_TEST_MODE).withElement(ElementOption.element(lblPalaceVersion.getElement()))).
-                perform();
+        action.longPress(LongPressOptions.longPressOptions()
+                .withElement(ElementOption.element(lblPalaceVersion.getElement()))
+                .withDuration(Duration.ofSeconds(DURATION_FOR_LONG_PRESS_FOR_OPENING_TEST_MODE)))
+                .release()
+                .perform();
         btnTesting.click();
     }
 
