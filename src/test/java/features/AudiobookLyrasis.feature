@@ -557,5 +557,6 @@ Feature: Audiobook in LYRASIS
     Then There are two tabs Content and Bookmarks on toc audiobook screen
     When Open Bookmarks on toc audiobook screen
     Then Bookmarks screen is opened
+      And There is no bookmarks message on Bookmarks screen
     When Open Chapters on toc audiobook screen
     Then Chapters screen is opened

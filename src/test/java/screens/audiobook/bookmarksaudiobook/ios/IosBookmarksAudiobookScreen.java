@@ -19,4 +19,9 @@ public class IosBookmarksAudiobookScreen extends BookmarksAudiobookScreen {
     public boolean isBookmarksScreenSelected() {
         return lblNoBookmarks.state().waitForDisplayed();
     }
+
+    @Override
+    public boolean isNoBookmarksMessageDisplayed() {
+        return lblNoBookmarks.state().waitForDisplayed();
+    }
 }

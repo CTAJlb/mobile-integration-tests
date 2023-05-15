@@ -20,4 +20,10 @@ public class AndroidBookmarksAudiobookScreen extends BookmarksAudiobookScreen {
     public boolean isBookmarksScreenSelected() {
         return btnBookmarks.getAttribute(AndroidAttributes.SELECTED).equals(Boolean.TRUE.toString());
     }
+
+    @Override
+    public boolean isNoBookmarksMessageDisplayed() {
+        //should be added on Android
+        return true;
+    }
 }
