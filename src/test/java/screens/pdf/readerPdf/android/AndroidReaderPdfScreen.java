@@ -20,7 +20,8 @@ public class AndroidReaderPdfScreen extends ReaderPdfScreen {
     private final SettingsPdfScreen settingsPdfScreen;
     private final ILabel lblViewer = getElementFactory().getLabel(By.xpath("//android.view.View[@resource-id=\"viewerContainer\"]"), "Content viewer");
     private final ILabel lblBookName = getElementFactory().getLabel(By.xpath("//android.view.ViewGroup/android.widget.TextView"), "Book name");
-    private final ILabel lblPageNumber = getElementFactory().getLabel(By.xpath("//android.widget.TextView[@resource-id=\"numPages\"]"), "Last page number");
+    private final ILabel lblNumberOfPages = getElementFactory().getLabel(By.xpath("//android.widget.TextView[@resource-id=\"numPages\"]"), "Last page number");
+    private final ILabel lblCurrentPage = getElementFactory().getLabel(By.xpath("//android.widget.EditText[@resource-id=\"pageNumber\"]"), "Current page number");
 
     private final ILabel lblPage = getElementFactory().getLabel(By.xpath("//android.view.View[@resource-id=\"mainContainer\"]/android.view.View"), "lblPage");
 
@@ -47,12 +48,12 @@ public class AndroidReaderPdfScreen extends ReaderPdfScreen {
 
     @Override
     public int getPageNumber() {
-        return Integer.parseInt(StringUtils.substringBetween(lblPageNumber.getText(), "(", " of"));
+        return Integer.parseInt(StringUtils.substringBefore(lblCurrentPage.getText(), ","));
     }
 
     @Override
     public int getLastPageNumber() {
-        return Integer.parseInt(StringUtils.substringBetween(lblPageNumber.getText(), "of ", ")"));
+        return Integer.parseInt(StringUtils.substringBetween(lblNumberOfPages.getText(), "of ", ")"));
     }
 
     @Override

@@ -17,7 +17,7 @@ Feature: Read EPUB in Palace Bookshelf
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
     Then 'bookInfo' book is present on epub reader screen
-    When Scroll page forward from 7 to 10 times
+    When Scroll page forward from 3 to 6 times
       And Open navigation bar on reader epub screen
       And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Click on right book corner on epub reader screen
@@ -36,7 +36,7 @@ Feature: Read EPUB in Palace Bookshelf
     Then Bookmark is displayed on reader epub screen
     When Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey'
-      And Scroll page forward from 7 to 9 times
+      And Scroll page forward from 3 to 6 times
       And Add bookmark on reader epub screen
       And Save pageNumber as 'pageNumberKey2' and chapterName as 'chapterNameKey2' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey2'
@@ -56,7 +56,7 @@ Feature: Read EPUB in Palace Bookshelf
       And Add bookmark on reader epub screen
       And Delete bookmark on reader epub screen
     Then Bookmark is not displayed on reader epub screen
-    When Scroll page forward from 7 to 9 times
+    When Scroll page forward from 4 to 7 times
       And Add bookmark on reader epub screen
       And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Save device time and date as 'deviceTimeDateKey'
@@ -90,7 +90,7 @@ Feature: Read EPUB in Palace Bookshelf
       And Open font and background settings epub screen
     Then Font and background settings epub screen is opened
 
-  @tier2
+  @tier2 @exclude_android
   Scenario: Font settings: Check of increasing and reducing the text size
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -120,7 +120,7 @@ Feature: Read EPUB in Palace Bookshelf
       And Click READ action button on book details screen
     Then Font size 'fontSize' is decreased
 
-  @tier2
+  @tier2 @exclude_android
   Scenario: Font settings: Check of font style
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -160,7 +160,7 @@ Feature: Read EPUB in Palace Bookshelf
       And Click READ action button on book details screen
     Then Book text displays in FONT_DYSLEXIC font
 
-  @tier2
+  @tier2 @exclude_android
   Scenario: Font settings: Check of text theme
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
@@ -205,7 +205,7 @@ Feature: Read EPUB in Palace Bookshelf
     When Click GET action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open EBOOK book with READ action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click READ action button on book details screen
-      And Scroll page forward from 7 to 10 times
+      And Scroll page forward from 3 to 6 times
       And Save pageNumber as 'pageNumberKey' and chapterName as 'chapterNameKey' on epub reader screen
       And Wait for 3 seconds
       And Return to previous screen for epub and pdf

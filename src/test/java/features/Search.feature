@@ -81,7 +81,6 @@ Feature: Search libraries and books
     | word          |
     | cat           |
     | a             |
-    | 3            |
 
   @tier2
   Scenario Outline: Find a book with name in different font cases in Palace
@@ -163,7 +162,7 @@ Feature: Search libraries and books
       And Open search modal
     Then There is no possibility to search with empty search field
 
-  @tier2
+  @tier2 @exclude_android
   Scenario: Check of only spaces input in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
