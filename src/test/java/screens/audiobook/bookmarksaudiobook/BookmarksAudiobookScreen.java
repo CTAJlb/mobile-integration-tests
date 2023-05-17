@@ -10,4 +10,6 @@ public abstract class BookmarksAudiobookScreen extends Screen {
     }
 
     public abstract boolean isBookmarksScreenSelected();
+
+    public abstract boolean isNoBookmarksMessageDisplayed();
 }

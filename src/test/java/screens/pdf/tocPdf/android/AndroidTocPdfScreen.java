@@ -13,8 +13,8 @@ import java.util.List;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidTocPdfScreen extends TocPdfScreen {
-    private static final String CHAPTER_LOC = "//android.view.View[contains(@content-desc, \"Chapter\")]";
-    private static final String CHAPTER_NUMBER_LOC = "//android.view.View[contains(@content-desc, \"Chapter %d\")]";
+    private static final String CHAPTER_LOC = "//android.view.View[contains(@resource-id, \"outlineView\")]/android.view.View";
+    private static final String CHAPTER_NUMBER_LOC = "//android.view.View[contains(@resource-id, \"outlineView\")]/android.view.View[%d]/android.view.View";
 
     public AndroidTocPdfScreen() {
         super(By.xpath("//android.view.View[@resource-id=\"sidebarContainer\"]"));

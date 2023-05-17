@@ -48,6 +48,11 @@ public class TocAudiobookSteps {
         Assert.assertTrue("Bookmarks screen is not displayed", bookmarksAudiobookScreen.isBookmarksScreenSelected());
     }
 
+    @Then("There is no bookmarks message on Bookmarks screen")
+    public void checkNoBookmarksMessage() {
+        Assert.assertTrue("There is \"No bookmarks\" message on the screen", bookmarksAudiobookScreen.isNoBookmarksMessageDisplayed());
+    }
+
     @When("Open Chapters on toc audiobook screen")
     public void openChapters() {
         tocAudiobookScreen.openChapters();

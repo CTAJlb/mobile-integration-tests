@@ -14,16 +14,16 @@ Feature: Reservation of book in LYRASIS
       And Open search modal
       And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
-      And Click RESERVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on catalog books screen
+      And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on catalog books screen
     When Close Book Details for IOSTab
       And Open Holds
-    Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
-    When Open EBOOK book with REMOVE action button and 'bookInfo' bookInfo on holds screen
+    Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
+    When Open AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo on holds screen
       And Click REMOVE action button on book details screen
       And Open Holds
       And Wait for 7 seconds
-    Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is not present on holds screen
+    Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is not present on holds screen
 
   @logout @returnBooks @tier1
   Scenario: Hold from Subcategory List View and Remove a Reserved Book from Subcategory List View
@@ -39,9 +39,9 @@ Feature: Reservation of book in LYRASIS
       And Open search modal
       And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
-      And Click RESERVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click REMOVE action button on EBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-    Then EBOOK book with RESERVE action button and 'bookInfo' bookInfo is present on catalog books screen
+      And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Click REMOVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    Then AUDIOBOOK book with RESERVE action button and 'bookInfo' bookInfo is present on catalog books screen
 
   @logout @returnBooks @tier1
   Scenario: Hold from Book Detail View and and Remove a Reserved Book from Holds
@@ -58,17 +58,17 @@ Feature: Reservation of book in LYRASIS
       And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
     Then Subcategory screen is present
-    When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
     When Click RESERVE action button on book details screen
       And Close Book Details for IOSTab
       And Open Holds
-    Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
-    When Open EBOOK book with REMOVE action button and 'bookInfo' bookInfo on holds screen
+    Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
+    When Open AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo on holds screen
       And Click REMOVE action button on book details screen
       And Open Holds
       And Wait for 7 seconds
-    Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is not present on holds screen
+    Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is not present on holds screen
 
   @logout @returnBooks @tier1
   Scenario: Hold from Book Detail View and Remove a Reserved Book from Book Detail View
@@ -85,7 +85,7 @@ Feature: Reservation of book in LYRASIS
       And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Switch to 'Audiobooks' catalog tab
     Then Subcategory screen is present
-    When Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+    When Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
     When Click RESERVE action button on book details screen
       And Click REMOVE action button on book details screen
@@ -103,9 +103,9 @@ Feature: Reservation of book in LYRASIS
     Then Login is performed successfully
     When Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'EBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
-      And Switch to 'eBooks' catalog tab
-      And Open EBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+      And Switch to 'Audiobooks' catalog tab
+      And Open AUDIOBOOK book with RESERVE action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
     When Click RESERVE action button on book details screen
     Then Check that book contains REMOVE action button on book details screen
@@ -113,7 +113,7 @@ Feature: Reservation of book in LYRASIS
     Then Check that book contains REMOVE action button on book details screen
     When Close Book Details for IOSTab
       And Open Holds
-    Then EBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
+    Then AUDIOBOOK book with REMOVE action button and 'bookInfo' bookInfo is present on holds screen
 
   @logout @returnBooks @tier1 @exclude_ios
     Scenario: Check books sorting in Reservations
@@ -127,7 +127,7 @@ Feature: Reservation of book in LYRASIS
     Then Login is performed successfully
     When Open Catalog
       And Open search modal
-      And Search 'unavailable' book of distributor 'Bibliotheca' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
+      And Search 'unavailable' book of distributor 'Palace Marketplace' and bookType 'AUDIOBOOK' from "LYRASIS Reads" and save as 'bookNameInfo'
       And Click RESERVE action button on AUDIOBOOK book with 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Open Catalog
       And Open search modal
@@ -168,11 +168,5 @@ Feature: Reservation of book in LYRASIS
 
     Scenarios:
       | distributor        | bookType  | tabName    |
-      | Bibliotheca        | EBOOK     | eBooks     |
       | Bibliotheca        | AUDIOBOOK | Audiobooks |
-      | Axis 360           | EBOOK     | eBooks     |
-      | Axis 360           | AUDIOBOOK | Audiobooks |
-      | Palace Marketplace | EBOOK     | eBooks     |
       | Palace Marketplace | AUDIOBOOK | Audiobooks |
-      | Biblioboard        | EBOOK     | eBooks     |
-      | Biblioboard        | AUDIOBOOK | Audiobooks |
