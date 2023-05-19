@@ -27,7 +27,8 @@ Feature: Feed
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
     Then Account "Palace Bookshelf" is present on Accounts screen
-    When Open categories by chain and chain starts from CategoryScreen:
+    When Open Catalog
+      And Open categories by chain and chain starts from CategoryScreen:
         | Fiction            |
         | Historical Fiction |
       And Click GET action button on the first EBOOK book on catalog books screen and save book as 'bookInfo'
