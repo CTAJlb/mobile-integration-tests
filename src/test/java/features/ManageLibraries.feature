@@ -51,7 +51,7 @@ Feature: Manage Libraries
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Account "Palace bookshelf" is present on Accounts screen
+    Then Account "Palace Bookshelf" is present on Accounts screen
     When Add libraries through settings:
         | LYRASIS Reads            |
         | Plumas County Library    |
@@ -89,8 +89,7 @@ Feature: Manage Libraries
       And Open Catalog
       And Switch to 'Palace Bookshelf' from side menu
       And Open categories by chain and chain starts from CategoryScreen:
-        | Fiction            |
-        | Historical Fiction |
+        | Summer Reading |
       And Click GET action button on the first EBOOK book on catalog books screen and save book as 'bookInfo'
       And Open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen

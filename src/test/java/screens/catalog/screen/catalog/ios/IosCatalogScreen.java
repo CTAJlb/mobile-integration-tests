@@ -30,7 +30,7 @@ public class IosCatalogScreen extends CatalogScreen {
     private static final String CATEGORY_LOCATOR = UNIQUE_ELEMENT + "/parent::XCUIElementTypeNavigationBar/following-sibling::XCUIElementTypeOther//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final String CURRENT_CATEGORY_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[contains(@name, \"%s\")]";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN = "//XCUIElementTypeButton[@name=\"%1$s\"]";
-    private static final String BOOKS_LOCATOR = "//XCUIElementTypeCollectionView/XCUIElementTypeCell/XCUIElementTypeOther/XCUIElementTypeStaticText[@name][1]";
+    private static final String BOOKS_LOCATOR = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeButton[@name]";
     private static final String CATEGORY_XPATH_PATTERN = "//XCUIElementTypeTable/XCUIElementTypeOther/XCUIElementTypeButton[1]";
     private static final String BUTTON_MORE_LOCATOR = "//XCUIElementTypeButton/XCUIElementTypeStaticText[@name=\"More…\"]";
     private static final String BOOK_SECTION_LOCATOR_IN_CATALOG = "//XCUIElementTypeTable/XCUIElementTypeOther[%d]/XCUIElementTypeButton[1]";

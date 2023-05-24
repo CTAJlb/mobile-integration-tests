@@ -32,7 +32,7 @@ public class AndroidCatalogScreen extends CatalogScreen {
     private static final String BOOK_SECTION_LOCATOR_IN_CATALOG = "//androidx.recyclerview.widget.RecyclerView/android.widget.LinearLayout[%d]/android.widget.LinearLayout/android.widget.TextView[1]";
     private static final String SECTION_TITLE = "//android.view.ViewGroup/android.widget.TextView[@text=\"%s\"]";
     private static final String CATALOG_TAB = "//android.widget.RadioButton[@text=\"%s\"]";
-    private static final String BOOK_NAME_LOC = "//android.view.ViewGroup/android.widget.TextView[contains(@resource-id, \"bookCellIdleTitle\")]";
+    private static final String BOOK_NAME_LOC = "//androidx.recyclerview.widget.RecyclerView[contains(@resource-id,\"feedLaneCoversScroll\")]/android.widget.LinearLayout";
 
     private final ILabel lblFirstLaneName = getElementFactory().getLabel(By.xpath(FEED_LANE_TITLES_LOC), "First lane name");
     private final ILabel lblScreen = getElementFactory().getLabel(By.id("mainFragmentHolder"), "Screen to swipe");
@@ -48,7 +48,7 @@ public class AndroidCatalogScreen extends CatalogScreen {
     @Override
     public List<String> getListOfBooksNames() {
         List<ILabel> listOfBooks = getElementFactory().findElements(By.xpath(BOOK_NAME_LOC), ElementType.LABEL);
-        return listOfBooks.stream().map(IElement::getText).collect(Collectors.toList());
+        return listOfBooks.stream().map(book -> book.getAttribute(AndroidAttributes.CONTENT_DESC)).collect(Collectors.toList());
     }
 
     @Override
