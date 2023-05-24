@@ -35,7 +35,7 @@ public class AndroidApplicationSteps extends AbstractApplicationSteps {
 
     @Override
     public void tapToLibrary(String libName) {
-
+        findYourLibScreen.tapToLibrary(libName);
     }
 
     @Override

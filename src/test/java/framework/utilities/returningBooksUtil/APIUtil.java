@@ -97,7 +97,7 @@ public class APIUtil {
 
         if (booksForReturning.size() != 0) {
             for (String bookUrl : booksForReturning) {
-                String path = bookUrl.replace(propertyUtils.getProperty("base_url") + "/", "");
+                String path = bookUrl.replace(propertyUtils.getProperty("base_url"), "");
                 try {
                     getBooksAPIMethods.returnBooks(authHeader, path).execute();
                 } catch (IOException e) {

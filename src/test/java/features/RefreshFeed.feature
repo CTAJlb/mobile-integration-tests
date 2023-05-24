@@ -7,10 +7,8 @@ Feature: Feed
     When Close welcome screen
     Then Add library screen is opened
     When Add library "Palace Bookshelf" on Add library screen
-    Then Account "Palace Bookshelf" is present on Accounts screen
-    When Open categories by chain and chain starts from CategoryScreen:
-        | Fiction            |
-        | Historical Fiction |
+      And Open categories by chain and chain starts from CategoryScreen:
+        | Summer Reading          |
       And Click GET action button on the first EBOOK book on catalog books screen and save book as 'bookInfo'
       And Open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
@@ -29,8 +27,7 @@ Feature: Feed
     Then Account "Palace Bookshelf" is present on Accounts screen
     When Open Catalog
       And Open categories by chain and chain starts from CategoryScreen:
-        | Fiction            |
-        | Historical Fiction |
+        | Summer Reading            |
       And Click GET action button on the first EBOOK book on catalog books screen and save book as 'bookInfo'
       And Open Books
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
