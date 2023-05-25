@@ -12,4 +12,8 @@ public abstract class BookmarksAudiobookScreen extends Screen {
     public abstract boolean isBookmarksScreenSelected();
 
     public abstract boolean isNoBookmarksMessageDisplayed();
+
+    public abstract String getChapterName();
+
+    public abstract String getChapterTime();
 }

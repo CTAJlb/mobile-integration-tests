@@ -106,4 +106,14 @@ public class TocAudiobookSteps {
         String cutChapterName = chapterNameFromScreen.substring(0, chapterNameFromScreen.indexOf('(') - 1);
         Assert.assertEquals("Chapter does not change to next. ", cutChapterName, chapterNameFromToc);
     }
+
+    @Then("Bookmark for the chapter {string} with the time {string} is saved on Bookmarks screen")
+    public void checkIfBookmarkedSaved(String chapterNameKey, String chapterTimeKey) {
+        String expectedChapterName = context.get(chapterNameKey);
+        String expectedChapterTime = context.get(chapterTimeKey).toString();
+        String actualChapterName = bookmarksAudiobookScreen.getChapterName();
+        String actualChapterTime = bookmarksAudiobookScreen.getChapterTime();
+        Assert.assertEquals("There is no correct chapter name", expectedChapterName, actualChapterName);
+        Assert.assertEquals("There is no correct chapter time", expectedChapterTime, actualChapterTime);
+    }
 }

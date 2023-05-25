@@ -71,4 +71,8 @@ public abstract class AudioPlayerScreen extends Screen {
     public abstract String getTextFromBackBtn();
 
     public abstract String getTextFromLineRemainingLbl();
+
+    public abstract void tapBookmarkIcon();
+
+    public abstract boolean isBookmarkAddedMessageDisplayed();
 }
