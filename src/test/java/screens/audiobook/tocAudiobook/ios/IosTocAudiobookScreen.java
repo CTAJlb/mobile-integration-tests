@@ -17,7 +17,7 @@ public class IosTocAudiobookScreen extends TocAudiobookScreen {
     private final ILabel lblChapterName = getElementFactory().getLabel(By.xpath(CHAPTER_NAME_LOC), "Chapter name");
     private final IButton btnBack = getElementFactory().getButton(By.xpath("//XCUIElementTypeNavigationBar/XCUIElementTypeButton"), "Back button");
     private final IButton btnChapters = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[@name=\"Chapters\"]"), "Chapters tab");
-    private final IButton btnBookmarks = getElementFactory().getButton(By.xpath("//android.widget.LinearLayout[@name=\"Bookmarks\"]"), "Bookmarks tab");
+    private final IButton btnBookmarks = getElementFactory().getButton(By.name("Bookmarks"), "Bookmarks tab");
 
     private static final String CHAPTER_NAME_LOC = "//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[1]";
     private static final String CURRENT_CHAPTER_NAME = "//XCUIElementTypeTable/XCUIElementTypeCell[%d]/XCUIElementTypeStaticText[1]";

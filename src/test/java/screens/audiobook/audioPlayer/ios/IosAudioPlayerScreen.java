@@ -42,6 +42,8 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     private final ILabel lblLineRemaining = getElementFactory().getLabel(By.xpath("//XCUIElementTypeStaticText[contains(@name, \"hours\")]"), "Line remaining");
     private final IButton btnPlaySpeed = getElementFactory().getButton(By.xpath("//XCUIElementTypeButton[contains(@name, \"speed\")]"), "Button play speed");
     private final IButton btnSlider = getElementFactory().getButton(By.xpath("//XCUIElementTypeOther[@name=\"progress_grip\"]"), "Slider");
+    private final IButton btnBookmark = getElementFactory().getButton(By.name("Add Bookmark"), "Bookmark icon");
+    private final ILabel lblBookmarkAdded = getElementFactory().getLabel(By.name("Bookmark added"), "Bookmark added message");
 
 
     public IosAudioPlayerScreen() {
@@ -185,6 +187,16 @@ public class IosAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public String getTextFromLineRemainingLbl() {
         return lblLineRemaining.getText();
+    }
+
+    @Override
+    public void tapBookmarkIcon() {
+        btnBookmark.click();
+    }
+
+    @Override
+    public boolean isBookmarkAddedMessageDisplayed() {
+        return lblBookmarkAdded.state().waitForDisplayed();
     }
 
     @Override

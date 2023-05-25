@@ -71,7 +71,7 @@ public class AudioPlayerSteps {
         return RegExUtil.getStringFromFirstGroup(audioPlayerScreen.getChapterName(), RegEx.AUDIO_BOOK_CURRENT_CHAPTER_TEXT_REGEX);
     }
 
-    @And("Tap play button on audio player screen")
+    @When("Tap play button on audio player screen")
     public void tapPlayButtonOnAudioPlayerScreen() {
         audioPlayerScreen.tapPlayBtn();
     }
@@ -79,6 +79,16 @@ public class AudioPlayerSteps {
     @When("Tap pause button on audio player screen")
     public void tapPauseButtonOnAudioPlayerScreen() {
         audioPlayerScreen.tapPauseBtn();
+    }
+
+    @When("Tap bookmark icon on audio player screen")
+    public void tapBookmarkIcon() {
+        audioPlayerScreen.tapBookmarkIcon();
+    }
+
+    @Then("The message Bookmark added appears on audio player screen")
+    public void checkBookmarkMessageAppears() {
+        Assert.assertTrue("Bookmark added message is not displayed", audioPlayerScreen.isBookmarkAddedMessageDisplayed());
     }
 
     @Then("Pause button is present on audio player screen")
@@ -154,7 +164,7 @@ public class AudioPlayerSteps {
         softAssertions.assertAll();
     }
 
-    @And("Book is not playing on audio player screen")
+    @Then("Book is not playing on audio player screen")
     public void checkThatBookIsNotPlayingOnAudioPlayerScreen() {
         Duration firstTiming = audioPlayerScreen.getLeftTime();
         //todo tread sleep
@@ -166,22 +176,22 @@ public class AudioPlayerSteps {
         Assert.assertEquals("Book is playing on audio player screen", firstTiming, audioPlayerScreen.getLeftTime());
     }
 
-    @And("Save book play time as {string} on audio player screen")
+    @When("Save book play time as {string} on audio player screen")
     public void saveBookPlayTimeOnAudioPlayerScreen(String dateKey) {
         context.add(dateKey, audioPlayerScreen.getLeftTime());
     }
 
-    @And("Save chapter time as {string} on audio player screen")
+    @When("Save chapter time as {string} on audio player screen")
     public void saveChapterTime(String chapterTimeKey) {
         context.add(chapterTimeKey, audioPlayerScreen.getRightTime());
     }
 
-    @And("Skip ahead 15 seconds on audio player screen")
+    @When("Skip ahead 15 seconds on audio player screen")
     public void skipAheadOnAudioPlayerScreen() {
         audioPlayerScreen.skipAhead();
     }
 
-    @And("Skip behind 15 seconds on audio player screen")
+    @When("Skip behind 15 seconds on audio player screen")
     public void skipBehindOnAudioPlayerScreen() {
         audioPlayerScreen.skipBehind();
     }
@@ -209,7 +219,7 @@ public class AudioPlayerSteps {
         Assert.assertEquals("Time is changed", timeBehind.getSeconds(), timeAhead.getSeconds());
     }
 
-    @And("Return to previous screen from audio player screen")
+    @When("Return to previous screen from audio player screen")
     public void returnToPreviousScreenFromAudioPlayerScreen() {
         audioPlayerScreen.returnToPreviousScreen();
     }
@@ -250,7 +260,7 @@ public class AudioPlayerSteps {
         Assert.assertTrue("Date is not moved behind by " + secondsBehind + " seconds, Date is moved behind by ", actualTime == expectedTime || actualTime + 1 == expectedTime);
     }
 
-    @And("Current playback speed value is {double}X on audio player screen")
+    @Then("Current playback speed value is {double}X on audio player screen")
     public void checkCurrentPlaybackSpeedValueIsCorrectOnAudioPlayerScreen(Double playbackSpeedDouble) {
         String playbackSpeed = String.valueOf(playbackSpeedDouble);
         Assert.assertTrue("Current playback speed value is not correct on audio player screen", audioPlayerScreen.isPlaybackSpeedPresent(playbackSpeed));
@@ -283,7 +293,7 @@ public class AudioPlayerSteps {
                 || playTimeBefore.getSeconds() == (playTimeAfter.getSeconds() - 1));
     }
 
-    @And("Listen a chapter on audio player screen")
+    @When("Listen a chapter on audio player screen")
     public void waitTheEndOfChapter() {
         audioPlayerScreen.stretchPlaySliderForward();
         AqualityServices.getConditionalWait().waitFor(()-> {

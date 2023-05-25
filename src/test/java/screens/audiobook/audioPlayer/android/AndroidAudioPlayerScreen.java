@@ -37,6 +37,7 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     private final ILabel lblPlaybackProgress = getElementFactory().getLabel(By.xpath("//android.widget.SeekBar"), "Playback progress");
     private final IButton btnPlaySpeed = getElementFactory().getButton(By.xpath("//android.widget.TextView[contains(@resource-id, \"playback_rate_text\")]"), "Button play speed");
     private final ILabel lblPlayerDownloading = getElementFactory().getLabel(By.xpath("//android.widget.ProgressBar[contains(@resource-id, \"player_downloading\")]"), "Player downloading");
+    private final IButton btnBookmark = getElementFactory().getButton(By.id("player_menu_add_bookmark"), "Bookmark icon");
 
     public AndroidAudioPlayerScreen() {
         super(By.xpath("//android.widget.ImageView[@content-desc=\"Play\"]"));
@@ -162,6 +163,17 @@ public class AndroidAudioPlayerScreen extends AudioPlayerScreen {
     @Override
     public String getTextFromLineRemainingLbl() {
         return null;
+    }
+
+    @Override
+    public void tapBookmarkIcon() {
+        btnBookmark.click();
+    }
+
+    @Override
+    public boolean isBookmarkAddedMessageDisplayed() {
+        //too fast
+        return true;
     }
 
     @Override

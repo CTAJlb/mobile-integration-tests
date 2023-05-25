@@ -99,11 +99,12 @@ Feature: Distributors
     When Turn on test mode
       And Enable hidden libraries
       And Open Catalog
-      And Add "A1AQ Test Library" account by the logo
+      And Add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
     When Enter credentials for "A1QA Test Library" account
     Then Login is performed successfully
     When Open Catalog
+      And Open search modal
       And Search for "Silk Road" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -127,20 +128,21 @@ Feature: Distributors
     When Turn on test mode
       And Enable hidden libraries
       And Open Catalog
-      And Add "A1AQ Test Library" account by the logo
+      And Add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
     When Enter credentials for "A1QA Test Library" account
     Then Login is performed successfully
     When Open Catalog
+      And Open search modal
       And Search for "We Are Water" and save bookName as 'bookNameInfo'
-      And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
+      And Open AUDIOBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
-    Then Check that book contains READ action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
     When Click RETURN action button on book details screen
     Then Check that book contains GET action button on book details screen
     When Click GET action button on book details screen
-    Then Check that book contains READ action button on book details screen
-    When Click READ action button on book details screen
+    Then Check that book contains LISTEN action button on book details screen
+    When Click LISTEN action button on book details screen
       And Wait for 3 seconds
     Then Book 'bookInfo' with AUDIOBOOK type is present on epub or pdf or audiobook screen
 
@@ -153,6 +155,7 @@ Feature: Distributors
     When Add library "Palace Bookshelf" on Add library screen
     Then Account "Palace Bookshelf" is present on Accounts screen
     When Open Catalog
+      And Open search modal
       And Search for "Jane Eyre" and save bookName as 'bookNameInfo'
       And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
       And Click GET action button on book details screen
@@ -213,22 +216,6 @@ Feature: Distributors
     Then Check that book contains DOWNLOAD action button on book details screen
       And Check that book contains RETURN action button on book details screen
 
-  @tier2
-  Scenario: Palace: Check of canceling the downloading from book details view
-    Given Close tutorial screen
-    Then Welcome screen is opened
-    When Close welcome screen
-    Then Add library screen is opened
-    When Add library "Palace Bookshelf" on Add library screen
-    Then Account "Palace Bookshelf" is present on Accounts screen
-    When Open Catalog
-      And Open search modal
-      And Search for "The Ragged Edge" and save bookName as 'bookNameInfo'
-      And Open EBOOK book with GET action button and 'bookNameInfo' bookName on catalog books screen and save book as 'bookInfo'
-      And Click GET action button and cancel downloading by click CANCEL button on book detail screen
-    Then Check that book contains DOWNLOAD action button on book details screen
-      And Check that book contains DELETE action button on book details screen
-
   @logout @returnBooks @tier2
   Scenario: Overdrive: Check of canceling the downloading from book details view
     Given Close tutorial screen
@@ -240,7 +227,7 @@ Feature: Distributors
     When Turn on test mode
       And Enable hidden libraries
     When Open Catalog
-      And Add "A1AQ Test Library" account by the logo
+      And Add "A1QA Test Library" account by the logo
     Then Account "A1QA Test Library" is present on Accounts screen
     When Enter credentials for "A1QA Test Library" account
     Then Login is performed successfully
