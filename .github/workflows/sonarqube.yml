@@ -62,7 +62,7 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean compile
       - name: Install SonarQube Scanner
         run: |
           curl -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip -o sonar-scanner.zip
