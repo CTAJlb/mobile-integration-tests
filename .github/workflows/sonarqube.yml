@@ -61,8 +61,7 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-      - name: Build with Maven
-        run: mvn clean compile
+  
       - name: Install SonarQube Scanner
         run: |
           curl -L https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip -o sonar-scanner.zip
@@ -76,6 +75,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: sonar-scanner -Dsonar.projectKey=Lyrasis -Dsonar.projectName='Lyrasis' -Dsonar.sources='src' -Dsonar.language='java' -Dsonar.java.binaries='target/classes' -Dsonar.java.test.binaries='target/test-classes'
+        run: sonar-scanner -Dsonar.projectKey=Lyrasis -Dsonar.projectName='Lyrasis' -Dsonar.sources='src' -Dsonar.language='java' -Dsonar.java.binaries='src' -Dsonar.java.test.binaries='src'
 
        
