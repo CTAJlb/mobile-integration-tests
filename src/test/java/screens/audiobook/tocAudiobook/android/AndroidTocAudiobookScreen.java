@@ -22,7 +22,7 @@ public class AndroidTocAudiobookScreen extends TocAudiobookScreen {
     private final IButton btnBack = getElementFactory().getButton(By.xpath("//android.widget.ImageButton[@content-desc=\"Back\"]"), "Back button");
     private final IButton btnChapters = getElementFactory().getButton(By.xpath("//android.widget.LinearLayout[@content-desc=\"Chapters\"]"), "Chapters tab");
     private final IButton btnBookmarks = getElementFactory().getButton(By.xpath("//android.widget.LinearLayout[@content-desc=\"Bookmarks\"]"), "Bookmarks tab");
-    private static final String CHAPTERS_LOC = "//android.widget.LinearLayout//*[contains(@resource-id, \"player_toc_item_view_title\")]";
+    private static final String CHAPTERS_LOC = "//android.widget.LinearLayout//android.widget.TextView[contains(@resource-id, \"player_toc_chapter_item_view_title\")]";
     private static final String DOWNLOADING_PROGRESS_LOC = "//androidx.recyclerview.widget.RecyclerView//android.widget.RelativeLayout[%d]//android.view.View";
 
     public AndroidTocAudiobookScreen() {

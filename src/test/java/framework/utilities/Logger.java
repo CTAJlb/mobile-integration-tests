@@ -20,6 +20,10 @@ public class Logger {
         return instance.get();
     }
 
+    public void upload() {
+        instance.remove();
+    }
+
 
     public void createAppender(String name) {
         PatternLayout layout = new PatternLayout("%d{yyyy-MM-dd HH:mm:ss} %-5p - %m%n");

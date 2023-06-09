@@ -30,7 +30,7 @@ Feature: Catalog Navigation
       And Open categories by chain and chain starts from CategoryScreen:
         | Nonfiction  |
         | Education |
-    Then Subcategory name is 'Classics'
+    Then Subcategory name is 'Education'
       And List of books on screen is not equal to list of books saved as 'listOfBooksOnMainPage'
     When Open first book in Subcategory List and save it as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen

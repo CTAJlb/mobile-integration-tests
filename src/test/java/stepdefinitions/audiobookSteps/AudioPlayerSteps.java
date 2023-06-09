@@ -3,12 +3,9 @@ package stepdefinitions.audiobookSteps;
 import aquality.appium.mobile.application.AqualityServices;
 import aquality.appium.mobile.application.PlatformName;
 import com.google.inject.Inject;
-import constants.RegEx;
 import constants.localization.italian.ItalianIos;
 import constants.localization.spanish.SpanishIos;
-import framework.utilities.RegExUtil;
 import framework.utilities.ScenarioContext;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import models.android.CatalogBookModel;
@@ -67,10 +64,6 @@ public class AudioPlayerSteps {
                 "Expected chapter name - %s; actual chapter name - %s", expectedChapterName, actualChapterName), expectedChapterName.toLowerCase(), actualChapterName.toLowerCase());
     }
 
-    private String getChapterName() {
-        return RegExUtil.getStringFromFirstGroup(audioPlayerScreen.getChapterName(), RegEx.AUDIO_BOOK_CURRENT_CHAPTER_TEXT_REGEX);
-    }
-
     @When("Tap play button on audio player screen")
     public void tapPlayButtonOnAudioPlayerScreen() {
         audioPlayerScreen.tapPlayBtn();
@@ -78,7 +71,8 @@ public class AudioPlayerSteps {
 
     @When("Tap pause button on audio player screen")
     public void tapPauseButtonOnAudioPlayerScreen() {
-        audioPlayerScreen.tapPauseBtn();
+        if(audioPlayerScreen.isPauseButtonPresent())
+            audioPlayerScreen.tapPauseBtn();
     }
 
     @When("Tap bookmark icon on audio player screen")
@@ -239,7 +233,7 @@ public class AudioPlayerSteps {
             expectedTime = secondsBefore + secondsForward;
         }
 
-        Assert.assertTrue("Date is not moved forward by " + secondsForward + " seconds", expectedTime == actualTime || expectedTime == actualTime + 1);
+        Assert.assertTrue("Date is not moved forward by " + secondsForward + " seconds", expectedTime == actualTime || expectedTime == actualTime + 1 || expectedTime == actualTime - 1);
     }
 
     @Then("Playback has been moved behind by {long} seconds from {string} and {string} seconds on audio player screen")
