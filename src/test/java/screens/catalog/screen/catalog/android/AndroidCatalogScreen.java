@@ -21,11 +21,11 @@ import java.util.stream.Collectors;
 
 @ScreenType(platform = PlatformName.ANDROID)
 public class AndroidCatalogScreen extends CatalogScreen {
-    private static final String CATEGORY_LOCATOR = "//*[contains(@resource-id, \"feedLaneTitle\") and @text=\"%1$s\"]";
+    private static final String CATEGORY_LOCATOR = "//android.widget.TextView[contains(@resource-id, \"feedLaneTitle\") and @text=\"%1$s\"]";
     private static final String LANE_BY_NAME_LOCATOR_PART = CATEGORY_LOCATOR + "/following-sibling::*[contains(@resource-id,\"feedLaneCoversScroll\")]";
     private static final String BOOK_COVER_IN_LANE_LOCATOR = "/android.widget.LinearLayout";
     private static final String LIBRARY_BUTTON_LOCATOR_PATTERN = "//android.widget.TextView[contains(@resource-id,\"accountTitle\") and @text=\"%s\"]";
-    private static final String FEED_LANE_TITLES_LOC = "//*[contains(@resource-id,\"feedLaneTitle\")]";
+    private static final String FEED_LANE_TITLES_LOC = "//android.widget.LinearLayout/android.widget.TextView[contains(@resource-id,\"feedLaneTitle\")]";
     private static final String CATEGORY_NAME_XPATH_LOCATOR = "//androidx.recyclerview.widget.RecyclerView//android.widget.LinearLayout/android.widget.TextView[1]";
     private static final String LIBRARY_NAME_LOC = "//android.widget.TextView[@text=\"%s\" and contains(@resource-id,\"feedLibraryText\")]";
     private static final String BUTTON_MORE_LOCATOR = "//android.widget.LinearLayout/android.widget.TextView[@text=\"More…\"]";
@@ -66,7 +66,9 @@ public class AndroidCatalogScreen extends CatalogScreen {
     @Override
     public void openCategory(String categoryName) {
         IButton categoryButton = getCategoryButton(categoryName);
-        categoryButton.getTouchActions().scrollToElement(SwipeDirection.DOWN);
+        while (!categoryButton.state().waitForDisplayed()) {
+            SwipeElementUtils.swipeByCoordinatesOfWindow();
+        }
         categoryButton.click();
     }
 

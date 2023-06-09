@@ -17,7 +17,7 @@ public class StepsFactory implements IStepsFactory {
 
     private static final String[] STEPS_LOCATION = new String[]{"stepdefinitions", "hooks"};
 
-    private static volatile ThreadLocal<StepsFactory> stepsFactory = ThreadLocal.withInitial(StepsFactory::new);
+    private static ThreadLocal<StepsFactory> stepsFactory = ThreadLocal.withInitial(StepsFactory::new);
 
     private StepsFactory() {
     }
@@ -63,5 +63,9 @@ public class StepsFactory implements IStepsFactory {
 
     private String[] getPackageWithSteps() {
         return STEPS_LOCATION;
+    }
+
+    public void upload() {
+        stepsFactory.remove();
     }
 }

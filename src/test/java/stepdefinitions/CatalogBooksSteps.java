@@ -20,6 +20,7 @@ import java.util.Random;
 public class CatalogBooksSteps {
     private final CatalogBooksScreen catalogBooksScreen;
     private final AlertScreen alertScreen;
+    private final Random random = new Random();
     private ScenarioContext context;
 
     @Inject
@@ -38,7 +39,6 @@ public class CatalogBooksSteps {
 
     @When("Open random book on catalog book screen and save book as {string}")
     public void openRandomBookAndSaveBookInfo(String bookInfoKey) {
-        Random random = new Random();
         int bookNumber = random.nextInt(catalogBooksScreen.getNumberOfBooksOnTheScreen() - 4) + 4;
         CatalogBookModel bookInfo = catalogBooksScreen.openBookAndGetBookInfo(bookNumber);
         context.add(bookInfoKey, bookInfo);

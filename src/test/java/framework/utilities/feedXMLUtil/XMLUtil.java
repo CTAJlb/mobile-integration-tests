@@ -191,7 +191,7 @@ public class XMLUtil {
                 hashMap = hashMapUnavailableAudiobooks;
             }
         }
-        if (!hashMap.containsKey(distributor.toLowerCase())) {
+        if (!Objects.requireNonNull(hashMap).containsKey(distributor.toLowerCase())) {
             throw new RuntimeException("There are not any type books for distributor: " + distributor);
         }
 
@@ -225,6 +225,7 @@ public class XMLUtil {
                     Thread.sleep(threadSleepTime);
                 } catch (InterruptedException e) {
                     AqualityServices.getLogger().error(e + e.getMessage());
+                    Thread.currentThread().interrupt();
                 }
             } else {
                 break;
