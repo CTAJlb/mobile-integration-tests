@@ -1,6 +1,6 @@
 Feature: My books module
 
-  @tier2
+  @tier3
   Scenario: Check of added books in Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -19,7 +19,7 @@ Feature: My books module
       And Open Books
     Then Added books from 'listOfBooks' are displayed on books screen
 
-  @tier2
+  @tier3
   Scenario: Check of sorting in Palace
     When Close tutorial screen
     Then Welcome screen is opened

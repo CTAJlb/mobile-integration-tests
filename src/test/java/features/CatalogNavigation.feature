@@ -1,6 +1,6 @@
 Feature: Catalog Navigation
 
-  @tier2
+  @tier3
   Scenario: Return to last library catalog
     When Close tutorial screen
     Then Welcome screen is opened
@@ -15,7 +15,7 @@ Feature: Catalog Navigation
     Then Category rows are loaded
       And Library 'LYRASIS Reads' is present on Catalog Screen
 
-  @tier2
+  @tier3
   Scenario: Browse Categories in Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -35,7 +35,7 @@ Feature: Catalog Navigation
     When Open first book in Subcategory List and save it as 'bookInfo'
     Then Book 'bookInfo' is opened on book details screen
 
-  @tier2
+  @tier3
   Scenario: Check of the titles of books sections in Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -47,7 +47,7 @@ Feature: Catalog Navigation
     Then Category rows are loaded
       And Category names are correct on catalog book screen
 
-  @tier2
+  @tier3
   Scenario: Check of "More" button in books sections in Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -63,7 +63,7 @@ Feature: Catalog Navigation
     When Tap Back button on subcategory screen
     Then Category rows are loaded
 
-  @tier2
+  @tier3
   Scenario Outline: Check of books sorting in Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -82,7 +82,7 @@ Feature: Catalog Navigation
     | type1  | type2          | type3 |
     | Author | Recently Added | Title |
 
-  @tier2
+  @tier3
   Scenario: Sort Lists in Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -106,7 +106,7 @@ Feature: Catalog Navigation
     Then Subcategory screen is present
       And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
 
-  @tier2
+  @tier3
   Scenario Outline: Check of tabs at the top of the screen in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -127,7 +127,7 @@ Feature: Catalog Navigation
     | type1 | type2  | type3      |
     | All   | eBooks | Audiobooks |
 
-  @tier2
+  @tier3
   Scenario: Check of the titles of books sections in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -139,7 +139,7 @@ Feature: Catalog Navigation
     Then Category rows are loaded
     And Category names are correct on catalog book screen
 
-  @tier2
+  @tier3
   Scenario: Check of "More" button in books sections in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -155,7 +155,7 @@ Feature: Catalog Navigation
     When Tap Back button on subcategory screen
     Then Category rows are loaded
 
-  @tier2
+  @tier3
   Scenario Outline: Check of books sorting in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -174,7 +174,7 @@ Feature: Catalog Navigation
       | type1  | type2          | type3 |
       | Author | Recently Added | Title |
 
-  @tier2
+  @tier3
   Scenario: Sort Lists in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -199,7 +199,7 @@ Feature: Catalog Navigation
       And List of books on subcategory screen is not equal to list of books saved as 'listOfBooks'
 
 
-  @tier2
+  @tier3
   Scenario Outline: Check of books availability in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -219,7 +219,7 @@ Feature: Catalog Navigation
       | type1 | type2         | type3         |
       | All   | Available now | Yours to keep |
 
-  @tier2
+  @tier3
   Scenario: Check all types of availability
     When Close tutorial screen
     Then Welcome screen is opened
@@ -239,7 +239,7 @@ Feature: Catalog Navigation
     When Change books visibility to show YOURS_TO_KEEP
     Then All books can be downloaded
 
-  @tier2 @exclude_android
+  @tier3 @exclude_android
   Scenario Outline: Check of books collections
     When Close tutorial screen
     Then Welcome screen is opened

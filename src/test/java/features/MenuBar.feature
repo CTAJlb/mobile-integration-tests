@@ -1,6 +1,6 @@
 Feature: Menu Bar
 
-  @tier2
+  @tier3
   Scenario Outline: Check of menu bar in Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -15,7 +15,7 @@ Feature: Menu Bar
       | tab1    | tab2     | tab3     |
       | Catalog | My Books | Settings |
 
-  @tier2
+  @tier3
   Scenario: Check of the tabs in Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -30,7 +30,7 @@ Feature: Menu Bar
     When Open Settings
     Then Settings screen is opened
 
-  @tier2
+  @tier3
   Scenario Outline: Check of menu bar in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -45,7 +45,7 @@ Feature: Menu Bar
       | tab1    | tab2     | tab3         | tab4     |
       | Catalog | My Books | Reservations | Settings |
 
-  @tier2
+  @tier3
   Scenario: Check of the tabs in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened

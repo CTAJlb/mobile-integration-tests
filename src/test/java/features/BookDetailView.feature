@@ -1,6 +1,6 @@
 Feature: Book detail view screen
 
-  @tier2
+  @tier3
   Scenario Outline: Check of a book title and author in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -27,7 +27,7 @@ Feature: Book detail view screen
       | Palace Marketplace | AUDIOBOOK | Audiobooks |
       | Biblioboard        | EBOOK     | eBooks     |
 
-  @tier2
+  @tier3
   Scenario: Biblioboard audiobook: Check of a book title and author in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -44,7 +44,7 @@ Feature: Book detail view screen
       And Book 'bookInfo' has correct title and author name on book details screen
       And The book cover is displayed on book details screen
 
-  @tier2
+  @tier3
   Scenario Outline: Check of a book format in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -70,7 +70,7 @@ Feature: Book detail view screen
       | Palace Marketplace | AUDIOBOOK | Audiobooks | AudiobooK |
       | Biblioboard        | EBOOK     | eBooks     | PDF       |
 
-  @tier2
+  @tier3
   Scenario: Biblioboard audiobook: Check of a book format in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -87,7 +87,7 @@ Feature: Book detail view screen
       And Book format in Information section is displayed on book details screen
       And Book format in Information section is 'Audiobook' on book details screen
 
-  @tier2
+  @tier3
   Scenario Outline: Check of a "More..." button in Description section in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -114,7 +114,7 @@ Feature: Book detail view screen
       | Palace Marketplace | AUDIOBOOK | Audiobooks |
       | Biblioboard        | EBOOK     | eBooks     |
 
-  @tier2
+  @tier3
   Scenario: Biblioboard audiobook: Check of a "More..." button in Description section in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -132,7 +132,7 @@ Feature: Book detail view screen
       And Description is not empty in book details screen
       And Button More in Description is available on book details screen
 
-  @tier2
+  @tier3
   Scenario Outline: Check fields in Information section in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -160,7 +160,7 @@ Feature: Book detail view screen
       | Palace Marketplace | AUDIOBOOK | Audiobooks |
       | Biblioboard        | EBOOK     | eBooks     |
 
-  @tier2
+  @tier3
   Scenario: Biblioboard audiobook: Check fields in Information section in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -178,7 +178,7 @@ Feature: Book detail view screen
       And Publisher and Categories in Information section are correct on book details screen
       And Distributor is equal to 'Biblioboard' on book details screen
 
-  @tier2
+  @tier3
   Scenario Outline: Check related books section in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -206,7 +206,7 @@ Feature: Book detail view screen
       | Palace Marketplace | AUDIOBOOK | Audiobooks |
       | Biblioboard        | EBOOK     | eBooks     |
 
-  @tier2
+  @tier3
   Scenario: BiblioBoard audiobook: Check related books section in LYRASIS
     When Close tutorial screen
     Then Welcome screen is opened
@@ -253,7 +253,7 @@ Feature: Book detail view screen
 #      | Biblioboard        | EBOOK     | eBooks     |
 #      | Biblioboard        | AUDIOBOOK | Audiobooks |
 
-  @tier2
+  @tier3
   Scenario: Check of a book title and author in Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -269,7 +269,7 @@ Feature: Book detail view screen
       And Book 'bookInfo' has correct title and author name on book details screen
       And The book cover is displayed on book details screen
 
-  @tier2
+  @tier3
   Scenario: Check of a "More..." button in Description section in Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -285,7 +285,7 @@ Feature: Book detail view screen
       And Description is not empty in book details screen
       And Button More in Description is available on book details screen
 
-  @tier2
+  @tier3
   Scenario: Check fields in Information section in Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -300,7 +300,7 @@ Feature: Book detail view screen
     Then Book 'bookInfo' is opened on book details screen
       And Publisher and Categories in Information section are correct on book details screen
 
-  @tier2
+  @tier3
   Scenario: Check related books section in Palace
     When Close tutorial screen
     Then Welcome screen is opened
@@ -419,7 +419,7 @@ Feature: Book detail view screen
       And There is a list of related books on book details screen
       And More button in related books section is available on book details screen
 
-  @tier2
+  @tier3
   Scenario: Check of Get button before log in from the Settings tab in LYRASIS Reads
     When Close tutorial screen
     Then Welcome screen is opened
@@ -434,7 +434,7 @@ Feature: Book detail view screen
       And Click GET action button on book details screen
     Then Sing in screen is opened
 
-  @tier2
+  @tier3
   Scenario: Get button: Check of availability of required interface elements
     When Close tutorial screen
     Then Welcome screen is opened
@@ -450,7 +450,7 @@ Feature: Book detail view screen
     Then Sing in screen is opened
       And All fields and links are displayed on Sign in Screen
 
-  @tier2 @exclude_android
+  @tier3 @exclude_android
   Scenario: Get button: check of Library Card field
     When Close tutorial screen
     Then Welcome screen is opened
@@ -466,7 +466,7 @@ Feature: Book detail view screen
     Then Sing in screen is opened
       And There is a placeholder Library Card in the Library Card field on Sign in screen
 
-  @tier2 @exclude_android
+  @tier3 @exclude_android
   Scenario: Get button: check of Password field
     When Close tutorial screen
     Then Welcome screen is opened
@@ -482,7 +482,7 @@ Feature: Book detail view screen
     Then Sing in screen is opened
       And There is a placeholder "Password" in the Password field on Sign in screen
 
-  @tier2
+  @tier3
   Scenario: Get: Sign in: Check of loging in with leaving the Library Card field empty
     When Close tutorial screen
     Then Welcome screen is opened
@@ -499,7 +499,7 @@ Feature: Book detail view screen
     When Enter a valid Password for "LYRASIS Reads" library on Sign in screen
     Then Sign in button is disabled on Sign in screen
 
-  @tier2
+  @tier3
   Scenario: Get: Sign in: Check of loging in with leaving the Password field empty
     When Close tutorial screen
     Then Welcome screen is opened
@@ -516,7 +516,7 @@ Feature: Book detail view screen
     When Enter a valid Library card "01230000000098" on Sign in screen
     Then Sign in button is disabled on Sign in screen
 
-  @tier2
+  @tier3
   Scenario: Get: Sign in: Library card: Check that the field allows you to edit the data
     When Close tutorial screen
     Then Welcome screen is opened
@@ -534,7 +534,7 @@ Feature: Book detail view screen
       And Edit data by adding "22" in Library card field and save it as 'newLibraryCard' on sign in screen
     Then There is a placeholder 'newLibraryCard' in the Library Card field on Sign in screen
 
-  @tier2
+  @tier3
   Scenario Outline: Get: Sign in: Library card: Check of less than minimum allowed or more than maximum characters
     When Close tutorial screen
     Then Welcome screen is opened
@@ -558,7 +558,7 @@ Feature: Book detail view screen
     | 13      |
     | 15      |
 
-  @tier2
+  @tier3
   Scenario: Get: Log in: Library card: Check that the field doesn't allow characters except numbers
     When Close tutorial screen
     Then Welcome screen is opened

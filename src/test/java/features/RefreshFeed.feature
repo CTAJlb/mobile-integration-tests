@@ -1,6 +1,6 @@
 Feature: Feed
 
-  @tier2 @exclude_ios
+  @tier3 @exclude_ios
   Scenario: Update Bookshelf List (ANDROID)
     When Close tutorial screen
     Then Welcome screen is opened
@@ -17,7 +17,7 @@ Feature: Feed
     Then EBOOK book with READ action button and 'bookInfo' bookInfo is present on books screen
       And Amount of books is equal to 1 on books screen
 
-  @tier2 @exclude_android
+  @tier3 @exclude_android
   Scenario: Update Bookshelf List (IOS)
     When Close tutorial screen
     Then Welcome screen is opened

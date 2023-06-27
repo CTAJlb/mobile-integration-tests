@@ -146,7 +146,7 @@ Feature: Distributors
       And Wait for 3 seconds
     Then Book 'bookInfo' with AUDIOBOOK type is present on epub or pdf or audiobook screen
 
-  @tier2
+  @tier3
   Scenario: Palace Bookshelf: Getting and returning a book from Book Detail View
     Given Close tutorial screen
     Then Welcome screen is opened
